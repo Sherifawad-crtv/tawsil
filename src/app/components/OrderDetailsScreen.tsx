@@ -338,12 +338,12 @@ function CancelModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: (
   const matches = val.trim() === ORDER.id;
   return (
     <div
-      className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center"
+      className="fixed inset-0 z-[70] flex items-end justify-center"
       style={{ backgroundColor: "rgba(4,0,51,0.55)", backdropFilter: "blur(8px)" }}
       onClick={onClose}
     >
       <div
-        className="w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl p-6"
+        className="w-full rounded-t-3xl p-6"
         style={{ backgroundColor: "#F5F5F3", animation: "slideIn 0.4s cubic-bezier(0.16,1,0.3,1)" }}
         onClick={(e) => e.stopPropagation()}
       >

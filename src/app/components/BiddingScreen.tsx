@@ -34,12 +34,10 @@ const RECOMMENDED_PRICE = 310;
 export default function BiddingScreen({
   onAccept,
   onCancel,
-  isMobile,
   initialOffer,
 }: {
   onAccept: (offer: Offer) => void;
   onCancel: () => void;
-  isMobile: boolean;
   initialOffer?: number;
 }) {
   const [offers, setOffers] = useState<Offer[]>([SEED_OFFERS[0]]);
@@ -148,7 +146,7 @@ export default function BiddingScreen({
 
       {/* Section header */}
       <div className="flex items-center justify-between px-4 pt-5 pb-3 flex-shrink-0">
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: isMobile ? "16px" : "18px", color: "#040033" }}>
+        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>
           Offers Coming In
         </span>
         <span
@@ -401,12 +399,12 @@ function CounterOfferModal({
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center"
+      className="fixed inset-0 z-[60] flex items-end justify-center"
       style={{ backgroundColor: "rgba(4,0,51,0.5)", backdropFilter: "blur(8px)" }}
       onClick={onClose}
     >
       <div
-        className="w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl p-6"
+        className="w-full rounded-t-3xl p-6"
         style={{
           backgroundColor: "#F5F5F3",
           animation: "slideIn 0.4s cubic-bezier(0.16,1,0.3,1)",

@@ -8,13 +8,20 @@ import ActivityScreen from "./components/ActivityScreen";
 import InsightsScreen from "./components/InsightsScreen";
 import ProfileScreen from "./components/ProfileScreen";
 import OrderDetailsScreen from "./components/OrderDetailsScreen";
+import MobileOnlyGate from "./components/MobileOnlyGate";
+import { useIsMobileViewport } from "./hooks/useIsMobileViewport";
 
 export default function App() {
   const [navOpen, setNavOpen] = useState(false);
   const [screen, setScreen] = useState<NavScreen | "booking" | "order-details">("booking");
+  const isMobileViewport = useIsMobileViewport();
 
   const handleStartBooking = () => setScreen("booking");
   const handleNavigate = (s: NavScreen) => setScreen(s);
+
+  if (!isMobileViewport) {
+    return <MobileOnlyGate />;
+  }
 
   return (
     <div className="min-h-screen w-full relative" style={{ backgroundColor: "#F5F5F3" }}>

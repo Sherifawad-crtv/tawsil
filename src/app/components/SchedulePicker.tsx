@@ -201,7 +201,7 @@ export function ScheduleModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
+      className="fixed inset-0 z-50 flex items-end justify-center"
       style={{
         backgroundColor: entered ? "rgba(4,0,51,0.5)" : "rgba(4,0,51,0)",
         backdropFilter: entered ? "blur(8px)" : "blur(0px)",
@@ -210,7 +210,7 @@ export function ScheduleModal({
       onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
     >
       <div
-        className="w-full sm:max-w-[400px] flex flex-col"
+        className="w-full flex flex-col"
         style={{
           backgroundColor: "#F5F5F3",
           borderRadius: "24px 24px 0 0",

@@ -66,16 +66,6 @@ function LeafletMap() {
   return <div ref={mapRef} style={{ width: "100%", height: "100%" }} />;
 }
 
-function useIsMobile() {
-  const [v, setV] = useState(window.innerWidth < 768);
-  useEffect(() => {
-    const h = () => setV(window.innerWidth < 768);
-    window.addEventListener("resize", h);
-    return () => window.removeEventListener("resize", h);
-  }, []);
-  return v;
-}
-
 /* ───────────────────────────────────────────────
    DRAGGABLE BOTTOM SHEET
    ───────────────────────────────────────────── */
@@ -229,7 +219,7 @@ function TopBar({ onBack }: { onBack?: () => void }) {
 function LocationFAB({ bottomOffset }: { bottomOffset: string }) {
   return (
     <div className="absolute z-10" style={{ right: "16px", bottom: bottomOffset, transition: "bottom 0.35s cubic-bezier(0.4,0,0.2,1)" }}>
-      <button className="w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: "white", boxShadow: "0 2px 14px rgba(0,0,0,0.1)" }}>
+      <button className="w-11 h-11 rounded-full flex items-center justify-center" style={{ backgroundColor: "white", boxShadow: "0 2px 14px rgba(0,0,0,0.1)" }}>
         <NavigationRounded sx={{ fontSize: 20, color: "#1253FA" }} />
       </button>
     </div>
@@ -356,7 +346,6 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
   const [clientOffer, setClientOffer] = useState<number | null>(null);
   const [showScheduleModal, setShowScheduleModal] = useState(false);
   const [bookingType, setBookingType] = useState<BookingTypeState>(INITIAL_BOOKING_STATE);
-  const isMobile = useIsMobile();
   const { snapFraction, sheetEl, onPointerDown, onPointerMove, onPointerUp, expandTo } = useBottomSheet();
 
   const currentStep = STEP_TITLES[step - 1];
@@ -365,7 +354,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
     setPrevStep(step);
     setStep(s);
     // auto-expand sheet when going to steps with more content
-    if (isMobile && s >= 2 && snapFraction < SNAP_MID) {
+    if (s >= 2 && snapFraction < SNAP_MID) {
       expandTo(SNAP_MID);
     }
   };
@@ -423,20 +412,14 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
             </div>
 
             {/* ── Truck Selection ── */}
-            {isMobile ? (
-              <div className="flex-shrink-0">
-                <div
-                  className="flex gap-[9px] py-3 overflow-x-auto"
-                  style={{ scrollSnapType: "x mandatory", paddingBottom: "8px", WebkitOverflowScrolling: "touch" }}
-                >
-                  <VehicleCarouselSelectable selected={selected} onSelect={setSelected} />
-                </div>
-              </div>
-            ) : (
-              <div className="grid gap-[9px] py-3" style={{ gridTemplateColumns: "1fr 1fr" }}>
+            <div className="flex-shrink-0">
+              <div
+                className="flex gap-[9px] py-3 overflow-x-auto"
+                style={{ scrollSnapType: "x mandatory", paddingBottom: "8px", WebkitOverflowScrolling: "touch" }}
+              >
                 <VehicleCarouselSelectable selected={selected} onSelect={setSelected} />
               </div>
-            )}
+            </div>
 
             {/* ── Section divider ── */}
             <div className="flex items-center gap-3 my-4 flex-shrink-0">
@@ -575,7 +558,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
           className="flex-shrink-0"
           style={{
             fontFamily: "'Archivo Black', sans-serif",
-            fontSize: isMobile ? "20px" : "26px",
+            fontSize: "20px",
             color: "#040033",
             lineHeight: "1.15",
             marginBottom: "4px",
@@ -588,7 +571,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
           style={{
             fontFamily: "'Courier Prime', monospace",
             color: "#9CA3AF",
-            fontSize: isMobile ? "12px" : "13px",
+            fontSize: "12px",
             marginBottom: "16px",
           }}
         >
@@ -598,81 +581,6 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
     );
   };
 
-  /* ═════════════ DESKTOP / TABLET ═════════════ */
-  if (!isMobile) {
-    return (
-      <div className="relative w-full overflow-hidden" style={{ height: "100dvh", backgroundColor: "#F5F5F3" }}>
-        <div className="absolute inset-0 z-0"><LeafletMap /></div>
-        <TopBar onBack={onBack} />
-        <LocationFAB bottomOffset="32px" />
-
-        {/* Side panel */}
-        <div
-          className="absolute top-0 left-0 bottom-0 z-20 flex flex-col"
-          style={{
-            width: "min(420px, 35vw)", minWidth: "340px",
-            backgroundColor: "rgba(245,245,243,0.95)", backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)",
-            boxShadow: "4px 0 30px rgba(0,0,0,0.06)", padding: "24px",
-            paddingTop: "max(env(safe-area-inset-top, 24px), 80px)",
-          }}
-        >
-          {step > 1 && <BackButton onClick={onBackClick} />}
-
-          <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
-            <StepTransition stepKey={step}>
-              {renderStepHeader()}
-              {step === 1 && (
-                <>
-                  <StepIndicator step={step} />
-                  <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033", lineHeight: "1.15" }} className="flex-shrink-0">{currentStep.title}</h1>
-                  <p className="mt-1 flex-shrink-0 mb-4" style={{ fontFamily: "'Courier Prime', monospace", color: "#9CA3AF", fontSize: "13px" }}>{currentStep.subtitle}</p>
-                  <div className="flex-shrink-0" style={{ height: "1px", backgroundColor: "#E8E8E5", marginBottom: "12px" }} />
-                </>
-              )}
-              {renderStepContent()}
-            </StepTransition>
-          </div>
-
-          <div className="flex-shrink-0 pt-3 pb-2">
-            <CTAButton label={ctaLabel} onClick={onCTA} />
-          </div>
-        </div>
-
-        {showScheduleModal && (
-          <ScheduleModal
-            value={{ date: schedule.date, time: schedule.time }}
-            onConfirm={({ date, time }) => {
-              setSchedule({ mode: "schedule", date, time });
-              setShowScheduleModal(false);
-            }}
-            onClose={() => setShowScheduleModal(false)}
-          />
-        )}
-
-        {showBidding && (
-          <BiddingScreen
-            isMobile={isMobile}
-            initialOffer={clientOffer ?? undefined}
-            onCancel={() => setShowBidding(false)}
-            onAccept={(offer) => {
-              setAcceptedOffer(offer);
-              setShowBidding(false);
-              setShowConfirmation(true);
-            }}
-          />
-        )}
-
-        {showConfirmation && (
-          <ConfirmationOverlay
-            offer={acceptedOffer}
-            onDone={() => { setShowConfirmation(false); setAcceptedOffer(null); goTo(1); }}
-          />
-        )}
-      </div>
-    );
-  }
-
-  /* ═════════════ MOBILE ═════════════ */
   const fabBottom = `calc(${snapFraction * 100}dvh + 16px)`;
 
   return (
@@ -749,7 +657,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
 
       {showBidding && (
         <BiddingScreen
-          isMobile={isMobile}
+          initialOffer={clientOffer ?? undefined}
           onCancel={() => setShowBidding(false)}
           onAccept={(offer) => {
             setAcceptedOffer(offer);

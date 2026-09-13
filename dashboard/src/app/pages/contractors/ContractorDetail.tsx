@@ -75,7 +75,7 @@ export default function ContractorDetail() {
           ) : (
             <div className="flex flex-col gap-2.5">
               {contractorDrivers.map((driver) => (
-                <div key={driver.id} className="rounded-2xl bg-white border border-border p-4">
+                <div key={driver.id} className="rounded-2xl bg-tile p-4">
                   <button
                     onClick={() => setExpandedDriver(expandedDriver === driver.id ? null : driver.id)}
                     className="w-full flex items-center justify-between gap-4 cursor-pointer text-left"
@@ -111,7 +111,7 @@ export default function ContractorDetail() {
           ) : (
             <div className="flex flex-col gap-2.5">
               {contractorVehicles.map((vehicle) => (
-                <div key={vehicle.id} className="rounded-2xl bg-white border border-border p-4">
+                <div key={vehicle.id} className="rounded-2xl bg-tile p-4">
                   <button
                     onClick={() => setExpandedVehicle(expandedVehicle === vehicle.id ? null : vehicle.id)}
                     className="w-full flex items-center justify-between gap-4 cursor-pointer text-left"
@@ -131,7 +131,7 @@ export default function ContractorDetail() {
       )}
 
       {tab === "Orders" && (
-        <div className="rounded-2xl bg-white border border-border overflow-hidden">
+        <div className="rounded-2xl bg-tile overflow-hidden">
           {contractorOrders.length === 0 ? (
             <EmptyState icon={BoxIcon} title="No orders yet" />
           ) : (

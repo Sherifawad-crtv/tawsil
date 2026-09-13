@@ -40,7 +40,7 @@ export default function ClientsList() {
               <Link
                 key={client.id}
                 to={`/clients/${client.id}`}
-                className="rounded-2xl bg-white border border-border p-4 hover:border-blue/40 transition-colors"
+                className="rounded-2xl bg-tile p-4 hover:shadow-sm transition-shadow"
               >
                 <div className="flex items-start justify-between gap-2 mb-3">
                   <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>{client.name}</h3>

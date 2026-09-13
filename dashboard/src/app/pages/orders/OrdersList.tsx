@@ -109,7 +109,7 @@ export default function OrdersList() {
         </select>
       </div>
 
-      <div className="rounded-2xl bg-white border border-border overflow-hidden shadow-xs">
+      <div className="rounded-2xl bg-tile overflow-hidden">
         {filtered.length === 0 ? (
           <EmptyState icon={BoxIcon} title="No orders match your filters" />
         ) : (

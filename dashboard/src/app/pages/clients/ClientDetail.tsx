@@ -54,7 +54,7 @@ export default function ClientDetail() {
       <Tabs tabs={TABS} active={tab} onChange={setTab} />
 
       {tab === "Orders" && (
-        <div className="rounded-2xl bg-white border border-border overflow-hidden">
+        <div className="rounded-2xl bg-tile overflow-hidden">
           {clientOrders.length === 0 ? (
             <EmptyState icon={BoxIcon} title="No orders yet" />
           ) : (
@@ -75,7 +75,7 @@ export default function ClientDetail() {
           ) : (
             <div className="grid sm:grid-cols-2 gap-3">
               {clientLocations.map((loc) => (
-                <div key={loc.id} className="rounded-2xl bg-white border border-border p-4">
+                <div key={loc.id} className="rounded-2xl bg-tile p-4">
                   <div className="flex items-start gap-2">
                     <MapPointIcon size={15} className="text-blue mt-0.5 flex-shrink-0" />
                     <div className="min-w-0">

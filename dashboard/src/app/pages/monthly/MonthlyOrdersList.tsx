@@ -38,7 +38,7 @@ export default function MonthlyOrdersList() {
               <Link
                 key={contract.id}
                 to={`/monthly-orders/${contract.id}`}
-                className="rounded-2xl bg-white border border-border p-4 hover:border-blue/40 transition-colors"
+                className="rounded-2xl bg-tile p-4 hover:shadow-sm transition-shadow"
               >
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>

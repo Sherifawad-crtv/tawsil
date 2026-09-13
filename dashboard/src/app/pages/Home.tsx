@@ -152,7 +152,7 @@ export default function Home() {
           <h2 className="text-caption-1-semibold text-navy mb-2 uppercase tracking-wide" style={{ fontFamily: "var(--font-sub)" }}>
             {role === "Supply" ? "Pending Allocation" : role === "Operations" ? "Needs Follow-up" : "Needs Attention"}
           </h2>
-          <div className="rounded-2xl bg-white border border-border overflow-hidden shadow-xs">
+          <div className="rounded-2xl bg-tile overflow-hidden">
             {attentionOrders.length === 0 ? (
               <div className="px-5 py-10 text-center text-body-regular text-muted">Nothing needs attention right now.</div>
             ) : (

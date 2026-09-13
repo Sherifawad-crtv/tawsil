@@ -72,7 +72,7 @@ export default function Resources() {
               const contractor = byId(contractors, driver.contractorId);
               const currentOrder = getCurrentOrderForDriver(orders, driver.id);
               return (
-                <div key={driver.id} className="rounded-2xl bg-white border border-border p-4">
+                <div key={driver.id} className="rounded-2xl bg-tile p-4">
                   <button onClick={() => setExpanded(expanded === driver.id ? null : driver.id)} className="w-full flex items-center justify-between gap-4 cursor-pointer text-left">
                     <div className="min-w-0">
                       <div className="text-body-semibold text-navy">{driver.name}</div>
@@ -106,7 +106,7 @@ export default function Resources() {
               const contractor = byId(contractors, vehicle.contractorId);
               const currentOrder = getCurrentOrderForVehicle(orders, vehicle.id);
               return (
-                <div key={vehicle.id} className="rounded-2xl bg-white border border-border p-4">
+                <div key={vehicle.id} className="rounded-2xl bg-tile p-4">
                   <button onClick={() => setExpanded(expanded === vehicle.id ? null : vehicle.id)} className="w-full flex items-center justify-between gap-4 cursor-pointer text-left">
                     <div className="min-w-0">
                       <div className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>{vehicle.plateNumber}</div>

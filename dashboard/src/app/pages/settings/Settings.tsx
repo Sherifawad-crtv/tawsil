@@ -42,7 +42,7 @@ export default function Settings() {
         </div>
       )}
 
-      <div className="rounded-2xl bg-white border border-border overflow-hidden">
+      <div className="rounded-2xl bg-tile overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-body-2-regular">
             <thead>
@@ -107,7 +107,7 @@ export default function Settings() {
         </div>
       </div>
 
-      <div className="rounded-2xl bg-white border border-border p-4">
+      <div className="rounded-2xl bg-tile p-4">
         <h3 className="text-body-semibold text-navy mb-3" style={{ fontFamily: "var(--font-sub)" }}>Cargo Type Taxonomy</h3>
         <p className="text-caption-1-regular text-muted mb-3">
           {CARGO_TYPES.length} cargo types. This list drives the Cargo Type field in Order creation, filtered per truck type's allowed types.

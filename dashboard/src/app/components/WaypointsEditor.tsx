@@ -91,10 +91,16 @@ export default function WaypointsEditor({
 
           <div className="grid sm:grid-cols-2 gap-3">
             <TextField label="Name" required value={wp.name} onChange={(e) => update(wp.id, { name: e.target.value })} />
-            <SelectField label="Type" required value={wp.type} onChange={(e) => update(wp.id, { type: e.target.value as "Pickup" | "Dropoff" })}>
-              <option value="Pickup">Pickup</option>
-              <option value="Dropoff">Dropoff</option>
-            </SelectField>
+            <SelectField
+              label="Type"
+              required
+              value={wp.type}
+              onChange={(v) => update(wp.id, { type: v as "Pickup" | "Dropoff" })}
+              options={[
+                { value: "Pickup", label: "Pickup" },
+                { value: "Dropoff", label: "Dropoff" },
+              ]}
+            />
             <div className="sm:col-span-2">
               <TextField label="Address" required value={wp.address} onChange={(e) => update(wp.id, { address: e.target.value })} />
             </div>

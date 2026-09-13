@@ -48,41 +48,43 @@ export default function AssignDriverModal({ order, onClose }: { order: Order; on
           label="Contractor"
           required
           value={contractorId}
-          onChange={(e) => {
-            setContractorId(e.target.value);
+          onChange={(next) => {
+            setContractorId(next);
             setDriverId("");
             setVehicleId("");
           }}
-        >
-          <option value="">— Select a contractor —</option>
-          {contractors.filter((c) => c.active).map((c) => (
-            <option key={c.id} value={c.id}>{c.name}</option>
-          ))}
-        </SelectField>
-
+          placeholder="— Select a contractor —"
+          options={contractors.filter((c) => c.active).map((c) => ({ value: c.id, label: c.name }))}
+        />
         {contractorId && (
           <>
             <div>
-              <SelectField label="Driver" required value={driverId} onChange={(e) => setDriverId(e.target.value)}>
-                <option value="">— Select a driver —</option>
-                {contractorDrivers.map((d) => (
-                  <option key={d.id} value={d.id}>
-                    {d.name} — {getActiveOrderCountForDriver(orders, d.id)} active order(s)
-                  </option>
-                ))}
-              </SelectField>
+              <SelectField
+                label="Driver"
+                required
+                value={driverId}
+                onChange={setDriverId}
+                placeholder="— Select a driver —"
+                options={contractorDrivers.map((d) => ({
+                  value: d.id,
+                  label: `${d.name} — ${getActiveOrderCountForDriver(orders, d.id)} active order(s)`,
+                }))}
+              />
               {contractorDrivers.length === 0 && <p className="mt-1.5 text-caption-1-regular text-status-cancelled">No active drivers for this contractor.</p>}
             </div>
 
             <div>
-              <SelectField label="Vehicle" required value={vehicleId} onChange={(e) => setVehicleId(e.target.value)}>
-                <option value="">— Select a vehicle —</option>
-                {contractorVehicles.map((v) => (
-                  <option key={v.id} value={v.id}>
-                    {v.plateNumber} — {truckTypeLabel(getTruckType(v.truckTypeId))}
-                  </option>
-                ))}
-              </SelectField>
+              <SelectField
+                label="Vehicle"
+                required
+                value={vehicleId}
+                onChange={setVehicleId}
+                placeholder="— Select a vehicle —"
+                options={contractorVehicles.map((v) => ({
+                  value: v.id,
+                  label: `${v.plateNumber} — ${truckTypeLabel(getTruckType(v.truckTypeId))}`,
+                }))}
+              />
               {contractorVehicles.length === 0 && <p className="mt-1.5 text-caption-1-regular text-status-cancelled">No active vehicles for this contractor.</p>}
             </div>
 

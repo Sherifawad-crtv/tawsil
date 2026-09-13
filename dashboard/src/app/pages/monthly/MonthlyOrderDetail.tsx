@@ -1,10 +1,13 @@
 import { useParams, useNavigate, Link } from "react-router";
+import { Calendar } from "react-aria-components";
+import { parseDate } from "@internationalized/date";
 import { ArrowLeftIcon, ClockCircleIcon, CalendarDateIcon, BoxIcon } from "@solar-icons/react/linear";
 import EmptyState from "../../components/EmptyState";
 import OrderRow from "../../components/OrderRow";
+import { MonthPanel } from "../../components/date-picker/shared";
 import { useDataStore } from "../../lib/store";
 import { byId } from "../../lib/selectors";
-import { formatEGP, formatDate } from "../../lib/format";
+import { formatEGP } from "../../lib/format";
 
 export default function MonthlyOrderDetail() {
   const { contractId } = useParams();
@@ -57,24 +60,33 @@ export default function MonthlyOrderDetail() {
         <div className="h-2 rounded-full bg-grey-light overflow-hidden mb-4">
           <div className="h-full bg-blue rounded-full" style={{ width: `${pct}%` }} />
         </div>
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex items-center gap-2 mb-3">
           <CalendarDateIcon size={14} className="text-muted" />
           <span className="text-caption-1-regular text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>Execution Calendar</span>
         </div>
-        <div className="flex flex-wrap gap-1.5">
-          {contract.dates.map((date, i) => (
-            <div
-              key={date}
-              title={`${formatDate(date)} — ${executed.has(date) ? "Executed" : "Pending"}`}
-              className={`w-7 h-7 rounded-lg flex items-center justify-center text-caption-2-semibold ${
-                executed.has(date) ? "bg-status-completed text-white" : "bg-grey-light text-muted"
-              }`}
-              style={{ fontFamily: "var(--font-mono)" }}
-            >
-              {i + 1}
-            </div>
-          ))}
-        </div>
+        <Calendar
+          aria-label="Execution calendar"
+          isReadOnly
+          value={null}
+          defaultFocusedValue={parseDate(contract.dates[0])}
+          className="inline-flex flex-col gap-3"
+        >
+          <MonthPanel
+            offset={0}
+            showPrev
+            showNext
+            selectedDates={new Set(contract.dates)}
+            edgeClassNameFor={(iso) => (executed.has(iso) ? "bg-status-completed/35" : "bg-blue-soft")}
+          />
+          <div className="flex items-center gap-4 text-caption-1-regular text-muted">
+            <span className="flex items-center gap-1.5">
+              <span className="w-3 h-3 rounded-sm bg-status-completed/35" /> Executed
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-3 h-3 rounded-sm bg-blue-soft" /> Pending
+            </span>
+          </div>
+        </Calendar>
       </div>
 
       <div className="rounded-2xl bg-tile p-4">

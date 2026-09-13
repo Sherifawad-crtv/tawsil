@@ -9,6 +9,7 @@ import ContractorPicker from "../ContractorPicker";
 import CargoTypeSelect from "../CargoTypeSelect";
 import WaypointsEditor from "../WaypointsEditor";
 import Toggle from "../Toggle";
+import SegmentedControl from "../SegmentedControl";
 import ClientStepPicker, { EMPTY_CLIENT_SELECTION, type ClientSelection } from "../ClientStepPicker";
 import StatusBadge from "../StatusBadge";
 import { getTruckType, byId } from "../../lib/selectors";
@@ -193,21 +194,15 @@ export default function OrderFormModal({
             <label className="block text-body-2-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
               Trip Type <span className="text-status-cancelled">*</span>
             </label>
-            <div className="inline-flex rounded-2lg border border-border p-1 bg-grey-light">
-              {(["On Demand", "Daily"] as TripType[]).map((t) => (
-                <button
-                  key={t}
-                  type="button"
-                  onClick={() => setForm((f) => ({ ...f, tripType: t }))}
-                  className={`px-4 py-1.5 rounded-lg text-body-medium cursor-pointer transition-colors ${
-                    form.tripType === t ? "bg-white text-navy shadow-xs" : "text-muted"
-                  }`}
-                  style={{ fontFamily: "var(--font-sub)" }}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
+            <SegmentedControl
+              aria-label="Trip type"
+              value={form.tripType}
+              onChange={(tripType) => setForm((f) => ({ ...f, tripType: tripType as TripType }))}
+              options={[
+                { value: "On Demand", label: "On Demand" },
+                { value: "Daily", label: "Daily" },
+              ]}
+            />
           </div>
 
           <div>

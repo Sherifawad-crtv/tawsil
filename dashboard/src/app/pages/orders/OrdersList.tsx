@@ -6,7 +6,7 @@ import EmptyState from "../../components/EmptyState";
 import OrderRow from "../../components/OrderRow";
 import OrderFormModal from "../../components/orders/OrderFormModal";
 import { Button } from "../../components/Button";
-import { selectClass } from "../../lib/selectClass";
+import { Select } from "../../components/Select";
 import { useDataStore } from "../../lib/store";
 import { useRole } from "../../lib/RoleContext";
 import { byId, getOrdersForRole, canCreateOrders } from "../../lib/selectors";
@@ -77,36 +77,28 @@ export default function OrdersList() {
       <div className="flex flex-wrap items-center gap-3">
         <SearchInput value={search} onChange={setSearch} placeholder="Search by Order ID, client, or contractor…" />
         {statusOptions.length > 1 && (
-          <select
+          <Select
+            aria-label="Filter by status"
             value={status}
-            onChange={(e) => setStatus(e.target.value as OrderStatus | "All")}
-            className={selectClass}
-            style={{ fontFamily: "var(--font-sub)" }}
-          >
-            {statusOptions.map((s) => (
-              <option key={s} value={s}>{s === "All" ? "All Statuses" : s}</option>
-            ))}
-          </select>
+            onChange={(v) => setStatus(v as OrderStatus | "All")}
+            options={statusOptions.map((s) => ({ value: s, label: s === "All" ? "All Statuses" : s }))}
+          />
         )}
-        <select
+        <Select
+          aria-label="Filter by trip type"
           value={tripType}
-          onChange={(e) => setTripType(e.target.value as TripType | "All")}
-          className={selectClass}
-          style={{ fontFamily: "var(--font-sub)" }}
-        >
-          {TRIP_OPTIONS.map((t) => (
-            <option key={t} value={t}>{t === "All" ? "All Trip Types" : t}</option>
-          ))}
-        </select>
-        <select
+          onChange={(v) => setTripType(v as TripType | "All")}
+          options={TRIP_OPTIONS.map((t) => ({ value: t, label: t === "All" ? "All Trip Types" : t }))}
+        />
+        <Select
+          aria-label="Sort orders"
           value={sortBy}
-          onChange={(e) => setSortBy(e.target.value as "pickup" | "status")}
-          className={selectClass}
-          style={{ fontFamily: "var(--font-sub)" }}
-        >
-          <option value="pickup">Sort: Pickup Date</option>
-          <option value="status">Sort: Status</option>
-        </select>
+          onChange={(v) => setSortBy(v as "pickup" | "status")}
+          options={[
+            { value: "pickup", label: "Sort: Pickup Date" },
+            { value: "status", label: "Sort: Status" },
+          ]}
+        />
       </div>
 
       <div className="rounded-2xl bg-tile overflow-hidden">

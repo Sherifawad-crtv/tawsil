@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { MapPointSearchIcon } from "@solar-icons/react/linear";
 import EmptyState from "./EmptyState";
 import CsvExportButton from "./CsvExportButton";
+import SegmentedControl from "./SegmentedControl";
 import { waypointAnalytics } from "../lib/selectors";
 import { formatDate } from "../lib/format";
 import type { Order } from "../lib/types";
@@ -25,20 +26,12 @@ export default function WaypointAnalyticsTable({ orders, filenamePrefix }: { ord
   return (
     <div>
       <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
-        <div className="inline-flex rounded-2lg border border-border p-1 bg-grey-light">
-          {(Object.keys(RANGE_LABELS) as RangeKey[]).map((key) => (
-            <button
-              key={key}
-              onClick={() => setRange(key)}
-              className={`px-3 py-1.5 rounded-lg text-caption-1-medium cursor-pointer transition-colors ${
-                range === key ? "bg-white text-navy shadow-xs" : "text-muted"
-              }`}
-              style={{ fontFamily: "var(--font-sub)" }}
-            >
-              {RANGE_LABELS[key]}
-            </button>
-          ))}
-        </div>
+        <SegmentedControl
+          aria-label="Date range"
+          value={range}
+          onChange={setRange}
+          options={(Object.keys(RANGE_LABELS) as RangeKey[]).map((key) => ({ value: key, label: RANGE_LABELS[key] }))}
+        />
         <CsvExportButton
           filename={`${filenamePrefix}-waypoint-analytics.csv`}
           headers={["Rank", "Location", "Visits", "Last Visited", "Type"]}

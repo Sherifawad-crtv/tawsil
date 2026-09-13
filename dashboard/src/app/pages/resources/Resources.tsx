@@ -9,7 +9,7 @@ import VehicleDetailPanel from "../../components/VehicleDetailPanel";
 import { useDataStore } from "../../lib/store";
 import { byId, getTruckType, getCurrentOrderForDriver, getCurrentOrderForVehicle } from "../../lib/selectors";
 import { truckTypeLabel } from "../../lib/constants";
-import { selectClass } from "../../lib/selectClass";
+import { Select } from "../../components/Select";
 
 const TABS = ["Drivers", "Vehicles"];
 type StatusFilter = "All" | "Active" | "Inactive";
@@ -50,17 +50,22 @@ export default function Resources() {
       <Tabs tabs={TABS} active={tab} onChange={(t) => { setTab(t); setExpanded(null); }} />
 
       <div className="flex items-center gap-3 flex-wrap">
-        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as StatusFilter)} className={selectClass} style={{ fontFamily: "var(--font-sub)" }}>
-          <option value="All">All Status</option>
-          <option value="Active">Active</option>
-          <option value="Inactive">Inactive</option>
-        </select>
-        <select value={contractorFilter} onChange={(e) => setContractorFilter(e.target.value)} className={selectClass} style={{ fontFamily: "var(--font-sub)" }}>
-          <option value="All">All Contractors</option>
-          {contractors.map((c) => (
-            <option key={c.id} value={c.id}>{c.name}</option>
-          ))}
-        </select>
+        <Select
+          aria-label="Filter by status"
+          value={statusFilter}
+          onChange={(v) => setStatusFilter(v as StatusFilter)}
+          options={[
+            { value: "All", label: "All Status" },
+            { value: "Active", label: "Active" },
+            { value: "Inactive", label: "Inactive" },
+          ]}
+        />
+        <Select
+          aria-label="Filter by contractor"
+          value={contractorFilter}
+          onChange={setContractorFilter}
+          options={[{ value: "All", label: "All Contractors" }, ...contractors.map((c) => ({ value: c.id, label: c.name }))]}
+        />
       </div>
 
       {tab === "Drivers" &&

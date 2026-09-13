@@ -65,16 +65,20 @@ export default function TruckTypeFormModal({ existing, onClose }: { existing?: T
     >
       <div className="flex flex-col gap-4">
         <div className="grid sm:grid-cols-2 gap-3">
-          <SelectField label="Truck Type" required value={form.baseClass} onChange={(e) => setForm((f) => ({ ...f, baseClass: e.target.value as TruckBaseClass }))}>
-            {BASE_CLASSES.map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </SelectField>
-          <SelectField label="Configuration" required value={form.config} onChange={(e) => handleConfigChange(e.target.value as TruckConfig)}>
-            {CONFIGS.map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </SelectField>
+          <SelectField
+            label="Truck Type"
+            required
+            value={form.baseClass}
+            onChange={(v) => setForm((f) => ({ ...f, baseClass: v as TruckBaseClass }))}
+            options={BASE_CLASSES.map((c) => ({ value: c, label: c }))}
+          />
+          <SelectField
+            label="Configuration"
+            required
+            value={form.config}
+            onChange={(v) => handleConfigChange(v as TruckConfig)}
+            options={CONFIGS.map((c) => ({ value: c, label: c }))}
+          />
         </div>
 
         <div className="flex items-center justify-between p-4 rounded-2lg border border-border bg-grey-light/40">

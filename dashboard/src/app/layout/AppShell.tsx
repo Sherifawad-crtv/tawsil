@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Outlet } from "react-router";
-import { HamburgerMenuIcon, AltArrowDownIcon } from "@solar-icons/react/linear";
+import { HamburgerMenuIcon } from "@solar-icons/react/linear";
 import Sidebar from "./Sidebar";
+import { Select } from "../components/Select";
 import { useRole, ROLES } from "../lib/RoleContext";
 
 export default function AppShell() {
@@ -24,25 +25,12 @@ export default function AppShell() {
 
           <div className="flex-1" />
 
-          <div className="relative">
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value as typeof role)}
-              className="appearance-none h-9 pl-3 pr-8 rounded-2lg bg-tile text-body-2-medium text-navy cursor-pointer ring-2 ring-inset ring-transparent focus:outline-none focus:ring-blue transition-shadow"
-              style={{ fontFamily: "var(--font-sub)" }}
-              aria-label="Viewing as role"
-            >
-              {ROLES.map((r) => (
-                <option key={r} value={r}>
-                  Viewing as: {r}
-                </option>
-              ))}
-            </select>
-            <AltArrowDownIcon
-              size={14}
-              className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-muted"
-            />
-          </div>
+          <Select
+            aria-label="Viewing as role"
+            value={role}
+            onChange={(v) => setRole(v as typeof role)}
+            options={ROLES.map((r) => ({ value: r, label: `Viewing as: ${r}` }))}
+          />
         </header>
 
         <main className="flex-1 px-3.5 md:px-0 py-4 md:py-0 max-w-[1400px] w-full mx-auto">

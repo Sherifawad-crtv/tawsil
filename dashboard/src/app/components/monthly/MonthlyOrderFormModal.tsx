@@ -154,12 +154,14 @@ export default function MonthlyOrderFormModal({ onClose }: { onClose: () => void
 
       {step === 1 && (
         <div className="flex flex-col gap-4">
-          <SelectField label="Client" required value={form.clientId} onChange={(e) => setForm((f) => ({ ...f, clientId: e.target.value }))}>
-            <option value="">— Select a client —</option>
-            {clients.filter((c) => c.active).map((c) => (
-              <option key={c.id} value={c.id}>{c.name}</option>
-            ))}
-          </SelectField>
+          <SelectField
+            label="Client"
+            required
+            value={form.clientId}
+            onChange={(clientId) => setForm((f) => ({ ...f, clientId }))}
+            placeholder="— Select a client —"
+            options={clients.filter((c) => c.active).map((c) => ({ value: c.id, label: c.name }))}
+          />
           <ContractorPicker value={form.contractorId} onChange={(contractorId) => setForm((f) => ({ ...f, contractorId }))} />
         </div>
       )}

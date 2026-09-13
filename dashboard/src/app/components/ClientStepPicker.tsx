@@ -1,5 +1,6 @@
 import { CLIENTS } from "../lib/entities";
 import { SelectField } from "./FormField";
+import SegmentedControl from "./SegmentedControl";
 import ClientForm, { EMPTY_CLIENT_FORM, type ClientFormValue } from "./ClientForm";
 
 export interface ClientSelection {
@@ -17,36 +18,26 @@ export const EMPTY_CLIENT_SELECTION: ClientSelection = {
 export default function ClientStepPicker({ value, onChange }: { value: ClientSelection; onChange: (value: ClientSelection) => void }) {
   return (
     <div className="flex flex-col gap-4">
-      <div className="inline-flex rounded-2lg border border-border p-1 bg-grey-light w-fit">
-        {(["existing", "new"] as const).map((mode) => (
-          <button
-            key={mode}
-            type="button"
-            onClick={() => onChange({ ...value, mode })}
-            className={`px-4 py-1.5 rounded-lg text-body-medium cursor-pointer transition-colors ${
-              value.mode === mode ? "bg-white text-navy shadow-xs" : "text-muted"
-            }`}
-            style={{ fontFamily: "var(--font-sub)" }}
-          >
-            {mode === "existing" ? "Existing Client" : "New Client"}
-          </button>
-        ))}
-      </div>
+      <SegmentedControl
+        aria-label="Client mode"
+        className="w-fit"
+        value={value.mode}
+        onChange={(mode) => onChange({ ...value, mode })}
+        options={[
+          { value: "existing", label: "Existing Client" },
+          { value: "new", label: "New Client" },
+        ]}
+      />
 
       {value.mode === "existing" ? (
         <SelectField
           label="Client"
           required
           value={value.existingClientId}
-          onChange={(e) => onChange({ ...value, existingClientId: e.target.value })}
-        >
-          <option value="">— Select a client —</option>
-          {CLIENTS.filter((c) => c.active).map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.name}
-            </option>
-          ))}
-        </SelectField>
+          onChange={(existingClientId) => onChange({ ...value, existingClientId })}
+          placeholder="— Select a client —"
+          options={CLIENTS.filter((c) => c.active).map((c) => ({ value: c.id, label: c.name }))}
+        />
       ) : (
         <ClientForm value={value.newClient} onChange={(newClient) => onChange({ ...value, newClient })} />
       )}

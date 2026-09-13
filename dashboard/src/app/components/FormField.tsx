@@ -1,4 +1,5 @@
-import type { InputHTMLAttributes, SelectHTMLAttributes, TextareaHTMLAttributes, ReactNode } from "react";
+import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
+import { Select, type SelectOption } from "./Select";
 
 const labelClass = "block text-body-2-semibold text-navy mb-1.5";
 const controlClass =
@@ -49,19 +50,38 @@ export function TextareaField({
   );
 }
 
+/** Label + BoardUI's Select (react-aria), replacing the native <select>. */
 export function SelectField({
   label,
   required,
   badge,
-  children,
-  ...rest
-}: { label: string; required?: boolean; badge?: string; children: ReactNode } & SelectHTMLAttributes<HTMLSelectElement>) {
+  value,
+  onChange,
+  options,
+  placeholder,
+  disabled,
+}: {
+  label: string;
+  required?: boolean;
+  badge?: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: readonly SelectOption[];
+  placeholder?: string;
+  disabled?: boolean;
+}) {
   return (
     <div>
       <FieldLabel label={label} required={required} badge={badge} />
-      <select {...rest} className={`${controlClass} cursor-pointer`} style={{ fontFamily: "var(--font-sub)" }}>
-        {children}
-      </select>
+      <Select
+        aria-label={label}
+        value={value}
+        onChange={onChange}
+        options={options}
+        placeholder={placeholder}
+        isDisabled={disabled}
+        triggerClassName="h-9"
+      />
     </div>
   );
 }

@@ -41,12 +41,14 @@ export default function AddVehicleModal({ contractorId, onClose }: { contractorI
     >
       <div className="grid sm:grid-cols-2 gap-3">
         <div className="sm:col-span-2">
-          <SelectField label="Truck Type" required value={form.truckTypeId} onChange={(e) => setForm((f) => ({ ...f, truckTypeId: e.target.value }))}>
-            <option value="">— Select a truck type —</option>
-            {TRUCK_TYPES.map((t) => (
-              <option key={t.id} value={t.id}>{truckTypeLabel(t)}</option>
-            ))}
-          </SelectField>
+          <SelectField
+            label="Truck Type"
+            required
+            value={form.truckTypeId}
+            onChange={(truckTypeId) => setForm((f) => ({ ...f, truckTypeId }))}
+            placeholder="— Select a truck type —"
+            options={TRUCK_TYPES.map((t) => ({ value: t.id, label: truckTypeLabel(t) }))}
+          />
         </div>
         <TextField label="Plate Number" required value={form.plateNumber} onChange={(e) => setForm((f) => ({ ...f, plateNumber: e.target.value }))} />
         <TextField label="License Expiry" required type="date" value={form.licenseExpiry} onChange={(e) => setForm((f) => ({ ...f, licenseExpiry: e.target.value }))} />

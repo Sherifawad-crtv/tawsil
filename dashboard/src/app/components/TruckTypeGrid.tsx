@@ -51,7 +51,7 @@ export default function TruckTypeGrid({ value, onChange }: { value: string; onCh
                 </div>
               )}
               <img src={BASE_CLASS_IMAGES[cls]} alt={cls} className="w-full h-14 object-contain" />
-              <span className="text-[12px] font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
+              <span className="text-caption-1-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
                 {cls}
               </span>
             </button>
@@ -72,11 +72,11 @@ export default function TruckTypeGrid({ value, onChange }: { value: string; onCh
                   selected ? "border-blue bg-blue-soft" : "border-border bg-white hover:border-blue/40"
                 }`}
               >
-                <div className="flex items-center gap-1.5 text-[13px] font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
+                <div className="flex items-center gap-1.5 text-body-2-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
                   {t.config}
                   {t.requiresTempControl && <SnowflakeIcon size={12} className="text-blue" />}
                 </div>
-                <div className="text-[11px] text-muted" style={{ fontFamily: "var(--font-mono)" }}>
+                <div className="text-caption-2-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>
                   {t.capacityMinT}–{t.capacityMaxT}t
                 </div>
               </button>

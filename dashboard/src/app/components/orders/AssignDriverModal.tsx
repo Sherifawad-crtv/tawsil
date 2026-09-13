@@ -71,7 +71,7 @@ export default function AssignDriverModal({ order, onClose }: { order: Order; on
                   </option>
                 ))}
               </SelectField>
-              {contractorDrivers.length === 0 && <p className="mt-1.5 text-xs text-status-cancelled">No active drivers for this contractor.</p>}
+              {contractorDrivers.length === 0 && <p className="mt-1.5 text-caption-1-regular text-status-cancelled">No active drivers for this contractor.</p>}
             </div>
 
             <div>
@@ -83,11 +83,11 @@ export default function AssignDriverModal({ order, onClose }: { order: Order; on
                   </option>
                 ))}
               </SelectField>
-              {contractorVehicles.length === 0 && <p className="mt-1.5 text-xs text-status-cancelled">No active vehicles for this contractor.</p>}
+              {contractorVehicles.length === 0 && <p className="mt-1.5 text-caption-1-regular text-status-cancelled">No active vehicles for this contractor.</p>}
             </div>
 
             {driverId && (
-              <div className="rounded-2lg bg-blue-soft px-4 py-2 text-sm text-navy">
+              <div className="rounded-2lg bg-blue-soft px-4 py-2 text-body-2-regular text-navy">
                 {byId(drivers, driverId)?.name} currently has{" "}
                 <strong>{getActiveOrderCountForDriver(orders, driverId)} active order(s)</strong>.
               </div>
@@ -98,7 +98,7 @@ export default function AssignDriverModal({ order, onClose }: { order: Order; on
         <button
           type="button"
           onClick={() => setManualMode((v) => !v)}
-          className="flex items-center gap-2 text-xs font-semibold text-muted hover:text-navy cursor-pointer w-fit"
+          className="flex items-center gap-2 text-caption-1-semibold text-muted hover:text-navy cursor-pointer w-fit"
           style={{ fontFamily: "var(--font-sub)" }}
         >
           <PhoneCallingIcon size={13} />

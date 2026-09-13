@@ -167,14 +167,14 @@ export default function MonthlyOrderFormModal({ onClose }: { onClose: () => void
       {step === 2 && (
         <div className="flex flex-col gap-5">
           <div>
-            <label className="block text-xs font-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
+            <label className="block text-body-2-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
               Truck Type <span className="text-status-cancelled">*</span>
             </label>
             <TruckTypeGrid value={form.truckTypeId} onChange={(truckTypeId) => setForm((f) => ({ ...f, truckTypeId, cargoTypes: [] }))} />
           </div>
           <TextField label="Daily Pickup Time" required type="time" value={form.dailyPickupTime} onChange={(e) => setForm((f) => ({ ...f, dailyPickupTime: e.target.value }))} />
           <div>
-            <label className="block text-xs font-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
+            <label className="block text-body-2-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
               Execution Dates <span className="text-status-cancelled">*</span>
             </label>
             <MultiDateCalendar value={form.dates} onChange={(dates) => setForm((f) => ({ ...f, dates }))} />
@@ -187,7 +187,7 @@ export default function MonthlyOrderFormModal({ onClose }: { onClose: () => void
           {truckType ? (
             <CargoTypeSelect allowed={truckType.allowedCargoTypes} value={form.cargoTypes} onChange={(cargoTypes) => setForm((f) => ({ ...f, cargoTypes }))} />
           ) : (
-            <p className="text-sm text-muted">Select a truck type in the previous step to see allowed cargo types.</p>
+            <p className="text-body-2-regular text-muted">Select a truck type in the previous step to see allowed cargo types.</p>
           )}
           <div className="grid sm:grid-cols-3 gap-3">
             <TextField label="Weight (kg)" type="number" value={form.weightKg} onChange={(e) => setForm((f) => ({ ...f, weightKg: e.target.value }))} />
@@ -195,7 +195,7 @@ export default function MonthlyOrderFormModal({ onClose }: { onClose: () => void
             <TextField label="Distance (km)" required type="number" value={form.distanceKm} onChange={(e) => setForm((f) => ({ ...f, distanceKm: e.target.value }))} />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
+            <label className="block text-body-2-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
               Waypoints <span className="text-muted font-normal">(optional — applies to every spawned order)</span>
             </label>
             <WaypointsEditor value={form.waypoints} onChange={(waypoints) => setForm((f) => ({ ...f, waypoints }))} clientId={form.clientId} required={false} />
@@ -206,19 +206,19 @@ export default function MonthlyOrderFormModal({ onClose }: { onClose: () => void
       {step === 4 && (
         <div className="flex flex-col gap-5">
           <div className="rounded-2lg border border-border p-4">
-            <div className="text-xs font-semibold uppercase tracking-wide text-muted mb-2" style={{ fontFamily: "var(--font-mono)" }}>Schedule</div>
-            <div className="text-sm text-navy">{form.dates.length} execution day(s) · {form.dailyPickupTime} daily</div>
+            <div className="text-caption-1-semibold uppercase tracking-wide text-muted mb-2" style={{ fontFamily: "var(--font-mono)" }}>Schedule</div>
+            <div className="text-body-2-regular text-navy">{form.dates.length} execution day(s) · {form.dailyPickupTime} daily</div>
           </div>
           <div className="rounded-2lg border border-border p-4">
-            <div className="text-xs font-semibold uppercase tracking-wide text-muted mb-3" style={{ fontFamily: "var(--font-mono)" }}>Pricing Summary</div>
-            <div className="grid sm:grid-cols-2 gap-3 text-sm">
+            <div className="text-caption-1-semibold uppercase tracking-wide text-muted mb-3" style={{ fontFamily: "var(--font-mono)" }}>Pricing Summary</div>
+            <div className="grid sm:grid-cols-2 gap-3 text-body-2-regular">
               <div className="flex justify-between"><span className="text-muted">Client Price (gross, /day)</span><span className="text-navy font-semibold">{formatEGP(clientPricePerDay)}</span></div>
               <div className="flex justify-between"><span className="text-muted">Contractor Price (net, /day)</span><span className="text-navy font-semibold">{formatEGP(contractorPricePerDay)}</span></div>
               <div className="flex justify-between"><span className="text-muted">Company Margin (/day)</span><span className="text-navy font-semibold">{formatEGP(margin)}</span></div>
               <div className="flex justify-between"><span className="text-muted">VAT</span><span className="text-navy font-semibold">{vatPercent}%</span></div>
             </div>
           </div>
-          <p className="text-xs text-muted">
+          <p className="text-caption-1-regular text-muted">
             "Save & Exit" keeps this as a Draft. "Review Monthly Order" commits it and generates {form.dates.length} individual orders, one per execution date.
           </p>
         </div>

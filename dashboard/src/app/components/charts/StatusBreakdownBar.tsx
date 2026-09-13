@@ -27,7 +27,7 @@ export default function StatusBreakdownBar({ data }: { data: { status: OrderStat
       </div>
       <div className="grid grid-cols-2 gap-x-3 gap-y-2">
         {data.map((d) => (
-          <div key={d.status} className="flex items-center gap-1.5 text-xs text-navy min-w-0">
+          <div key={d.status} className="flex items-center gap-1.5 text-caption-1-regular text-navy min-w-0">
             <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: STATUS_COLORS[d.status] }} />
             <span className="truncate flex-1" style={{ fontFamily: "var(--font-sub)" }}>{d.status}</span>
             <span className="text-muted flex-shrink-0" style={{ fontFamily: "var(--font-mono)" }}>{d.count}</span>

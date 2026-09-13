@@ -13,7 +13,7 @@ export default function CargoTypeSelect({
 
   return (
     <div>
-      <label className="block text-xs font-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
+      <label className="block text-body-2-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
         Cargo Type <span className="text-status-cancelled">*</span>
       </label>
       <div className="flex flex-wrap gap-2">
@@ -24,7 +24,7 @@ export default function CargoTypeSelect({
               key={type}
               type="button"
               onClick={() => toggle(type)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer border transition-colors ${
+              className={`px-3 py-1.5 rounded-full text-caption-1-medium cursor-pointer border transition-colors ${
                 selected ? "bg-blue text-white border-blue" : "bg-white text-navy border-border hover:border-blue/40"
               }`}
               style={{ fontFamily: "var(--font-sub)" }}

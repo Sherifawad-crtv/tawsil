@@ -37,7 +37,7 @@ export default function MultiDateCalendar({ value, onChange }: { value: string[]
         <button type="button" onClick={() => changeMonth(-1)} className="p-1.5 rounded-lg hover:bg-grey-light cursor-pointer">
           <AltArrowLeftIcon size={16} />
         </button>
-        <span className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
+        <span className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
           {new Date(viewYear, viewMonth).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
         </span>
         <button type="button" onClick={() => changeMonth(1)} className="p-1.5 rounded-lg hover:bg-grey-light cursor-pointer">
@@ -46,7 +46,7 @@ export default function MultiDateCalendar({ value, onChange }: { value: string[]
       </div>
       <div className="grid grid-cols-7 gap-1 mb-1">
         {WEEKDAYS.map((d, i) => (
-          <div key={i} className="text-center text-[10px] text-muted uppercase py-1" style={{ fontFamily: "var(--font-mono)" }}>{d}</div>
+          <div key={i} className="text-center text-caption-2-regular text-muted uppercase py-1" style={{ fontFamily: "var(--font-mono)" }}>{d}</div>
         ))}
       </div>
       <div className="grid grid-cols-7 gap-1">
@@ -59,7 +59,7 @@ export default function MultiDateCalendar({ value, onChange }: { value: string[]
               type="button"
               key={i}
               onClick={() => toggle(iso)}
-              className={`aspect-square rounded-lg text-xs font-medium cursor-pointer transition-colors ${
+              className={`aspect-square rounded-lg text-caption-1-medium cursor-pointer transition-colors ${
                 isSelected ? "bg-blue text-white" : "text-navy hover:bg-grey-light"
               }`}
             >
@@ -68,7 +68,7 @@ export default function MultiDateCalendar({ value, onChange }: { value: string[]
           );
         })}
       </div>
-      <div className="mt-3 pt-3 border-t border-border text-xs text-muted" style={{ fontFamily: "var(--font-mono)" }}>
+      <div className="mt-3 pt-3 border-t border-border text-caption-1-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>
         {value.length} date{value.length === 1 ? "" : "s"} selected
       </div>
     </div>

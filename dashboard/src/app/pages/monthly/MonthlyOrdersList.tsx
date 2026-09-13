@@ -42,16 +42,16 @@ export default function MonthlyOrdersList() {
               >
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>
-                    <div className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>{contract.id}</div>
-                    <div className="text-sm text-navy/80 mt-1">{client?.name ?? "—"}</div>
-                    <div className="text-xs text-muted mt-0.5">{contractor?.name ?? "Unassigned"}</div>
+                    <div className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>{contract.id}</div>
+                    <div className="text-body-regular text-navy/80 mt-1">{client?.name ?? "—"}</div>
+                    <div className="text-caption-1-regular text-muted mt-0.5">{contractor?.name ?? "Unassigned"}</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-xs text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>
+                    <div className="text-caption-1-regular text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>
                       {executed} / {total} days
                     </div>
                     <div
-                      className={`mt-1 px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase inline-block ${
+                      className={`mt-1 px-2 py-0.5 rounded-md text-caption-2-semibold uppercase inline-block ${
                         contract.status === "Active" ? "bg-blue-soft text-blue" : contract.status === "Draft" ? "bg-grey-light text-muted" : "bg-[#E7F6EC] text-status-completed"
                       }`}
                       style={{ fontFamily: "var(--font-mono)" }}

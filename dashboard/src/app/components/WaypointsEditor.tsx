@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AddIcon, TrashBinTrashIcon, AltArrowUpIcon, AltArrowDownIcon, MapPointIcon, BookmarkIcon } from "@solar-icons/react/linear";
 import { TextField, SelectField } from "./FormField";
+import { Button } from "./Button";
 import { SAVED_LOCATIONS } from "../lib/entities";
 import type { Waypoint } from "../lib/types";
 
@@ -60,10 +61,10 @@ export default function WaypointsEditor({
   return (
     <div className="flex flex-col gap-3">
       {required && !hasPickup && (
-        <div className="text-xs text-status-cancelled px-3 py-2 rounded-lg bg-[#FDECEC]">At least one Pickup waypoint is required.</div>
+        <div className="text-caption-1-regular text-status-cancelled px-3 py-2 rounded-lg bg-[#FDECEC]">At least one Pickup waypoint is required.</div>
       )}
       {required && !hasDropoff && (
-        <div className="text-xs text-status-cancelled px-3 py-2 rounded-lg bg-[#FDECEC]">At least one Dropoff waypoint is required.</div>
+        <div className="text-caption-1-regular text-status-cancelled px-3 py-2 rounded-lg bg-[#FDECEC]">At least one Dropoff waypoint is required.</div>
       )}
 
       {value.map((wp, i) => (
@@ -71,7 +72,7 @@ export default function WaypointsEditor({
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-1.5">
               <MapPointIcon size={14} className={wp.type === "Pickup" ? "text-navy" : "text-blue"} />
-              <span className="text-xs font-semibold uppercase tracking-wide text-muted" style={{ fontFamily: "var(--font-mono)" }}>
+              <span className="text-caption-1-semibold uppercase tracking-wide text-muted" style={{ fontFamily: "var(--font-mono)" }}>
                 Waypoint {i + 1}
               </span>
             </div>
@@ -114,7 +115,7 @@ export default function WaypointsEditor({
               </div>
               <button
                 type="button"
-                className="px-3 py-1.5 rounded-2lg border border-border bg-white text-xs font-semibold text-navy cursor-pointer hover:border-blue/40 flex-shrink-0"
+                className="px-3 py-1.5 rounded-2lg border border-border bg-white text-caption-1-semibold text-navy cursor-pointer hover:border-blue/40 flex-shrink-0"
                 title="Pick on Map (coming soon)"
               >
                 Pick on Map
@@ -130,23 +131,18 @@ export default function WaypointsEditor({
       ))}
 
       <div className="flex items-center gap-2 flex-wrap relative">
-        <button
-          type="button"
+        <Button
+          size="small"
+          leadingIcon={AddIcon}
           onClick={() => onChange([...value, newWaypoint(hasPickup ? "Dropoff" : "Pickup")])}
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-2lg bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal"
-          style={{ fontFamily: "var(--font-sub)" }}
+          className="bg-navy hover:bg-royal"
         >
-          <AddIcon size={14} /> Add Waypoint
-        </button>
+          Add Waypoint
+        </Button>
         {bookmarks.length > 0 && (
-          <button
-            type="button"
-            onClick={() => setBookmarksOpen((v) => !v)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-2lg border border-border bg-white text-xs font-semibold text-navy cursor-pointer hover:border-blue/40"
-            style={{ fontFamily: "var(--font-sub)" }}
-          >
-            <BookmarkIcon size={14} /> Load from Bookmarks
-          </button>
+          <Button size="small" variant="secondary" leadingIcon={BookmarkIcon} onClick={() => setBookmarksOpen((v) => !v)}>
+            Load from Bookmarks
+          </Button>
         )}
         {bookmarksOpen && (
           <div className="absolute top-full left-0 mt-1 w-72 rounded-2lg border border-border bg-white shadow-lg z-10 max-h-60 overflow-y-auto">
@@ -157,8 +153,8 @@ export default function WaypointsEditor({
                 onClick={() => addBookmark(loc.id)}
                 className="w-full text-left px-3.5 py-2.5 hover:bg-grey-light cursor-pointer border-b border-border last:border-b-0"
               >
-                <div className="text-sm font-medium text-navy">{loc.name}</div>
-                <div className="text-xs text-muted truncate">{loc.address}</div>
+                <div className="text-body-medium text-navy">{loc.name}</div>
+                <div className="text-caption-1-regular text-muted truncate">{loc.address}</div>
               </button>
             ))}
           </div>

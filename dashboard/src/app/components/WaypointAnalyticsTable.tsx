@@ -50,9 +50,9 @@ export default function WaypointAnalyticsTable({ orders, filenamePrefix }: { ord
         <EmptyState icon={MapPointSearchIcon} title="No waypoint data in this range" />
       ) : (
         <div className="overflow-x-auto rounded-2lg border border-border">
-          <table className="w-full text-sm">
+          <table className="w-full text-body-2-regular">
             <thead>
-              <tr className="bg-grey-light text-left text-xs text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>
+              <tr className="bg-grey-light text-left text-caption-1-regular text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>
                 <th className="px-4 py-2.5 font-medium">Rank</th>
                 <th className="px-4 py-2.5 font-medium">Location</th>
                 <th className="px-4 py-2.5 font-medium">Visits</th>

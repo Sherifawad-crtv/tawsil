@@ -14,7 +14,7 @@ export default function MonthlyOrderDetail() {
   const contract = monthlyOrders.find((m) => m.id === contractId);
   if (!contract) {
     return (
-      <div className="text-center py-20 text-sm text-muted">
+      <div className="text-center py-20 text-body-regular text-muted">
         Monthly contract not found. <Link to="/monthly-orders" className="text-blue font-semibold">Back to Monthly Orders</Link>
       </div>
     );
@@ -33,13 +33,13 @@ export default function MonthlyOrderDetail() {
 
   return (
     <div className="flex flex-col gap-6">
-      <button onClick={() => navigate("/monthly-orders")} className="flex items-center gap-1.5 text-sm text-muted hover:text-navy cursor-pointer w-fit">
+      <button onClick={() => navigate("/monthly-orders")} className="flex items-center gap-1.5 text-body-2-regular text-muted hover:text-navy cursor-pointer w-fit">
         <ArrowLeftIcon size={15} /> Back to Monthly Orders
       </button>
 
       <div>
-        <h1 className="text-xl text-navy" style={{ fontFamily: "var(--font-heading)" }}>{contract.id}</h1>
-        <p className="mt-1.5 text-sm text-muted">{client?.name ?? "—"} · {contractor?.name ?? "Unassigned"}</p>
+        <h1 className="text-title-1-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>{contract.id}</h1>
+        <p className="mt-1.5 text-body-2-regular text-muted">{client?.name ?? "—"} · {contractor?.name ?? "Unassigned"}</p>
       </div>
 
       <div className="grid sm:grid-cols-4 gap-4">
@@ -51,22 +51,22 @@ export default function MonthlyOrderDetail() {
 
       <div className="rounded-2xl bg-white border border-border p-4">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Progress</h3>
-          <span className="text-xs text-muted" style={{ fontFamily: "var(--font-mono)" }}>{pct}%</span>
+          <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Progress</h3>
+          <span className="text-caption-1-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>{pct}%</span>
         </div>
         <div className="h-2 rounded-full bg-grey-light overflow-hidden mb-4">
           <div className="h-full bg-blue rounded-full" style={{ width: `${pct}%` }} />
         </div>
         <div className="flex items-center gap-2 mb-2">
           <CalendarDateIcon size={14} className="text-muted" />
-          <span className="text-xs text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>Execution Calendar</span>
+          <span className="text-caption-1-regular text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>Execution Calendar</span>
         </div>
         <div className="flex flex-wrap gap-1.5">
           {contract.dates.map((date, i) => (
             <div
               key={date}
               title={`${formatDate(date)} — ${executed.has(date) ? "Executed" : "Pending"}`}
-              className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-semibold ${
+              className={`w-7 h-7 rounded-lg flex items-center justify-center text-caption-2-semibold ${
                 executed.has(date) ? "bg-status-completed text-white" : "bg-grey-light text-muted"
               }`}
               style={{ fontFamily: "var(--font-mono)" }}
@@ -78,8 +78,8 @@ export default function MonthlyOrderDetail() {
       </div>
 
       <div className="rounded-2xl bg-white border border-border p-4">
-        <h3 className="text-sm font-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Pricing Breakdown</h3>
-        <div className="grid sm:grid-cols-2 gap-3 text-sm">
+        <h3 className="text-body-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Pricing Breakdown</h3>
+        <div className="grid sm:grid-cols-2 gap-3 text-body-2-regular">
           <PriceRow label="Client Price (gross, /day)" value={formatEGP(contract.clientPricePerDayEGP)} />
           <PriceRow label="Contractor Price (net, /day)" value={formatEGP(contract.contractorPricePerDayEGP)} />
           <PriceRow label="Company Margin (/day)" value={formatEGP(margin)} />
@@ -88,7 +88,7 @@ export default function MonthlyOrderDetail() {
       </div>
 
       <div>
-        <h3 className="text-sm font-semibold text-navy mb-3" style={{ fontFamily: "var(--font-sub)" }}>Spawned Orders</h3>
+        <h3 className="text-body-semibold text-navy mb-3" style={{ fontFamily: "var(--font-sub)" }}>Spawned Orders</h3>
         <div className="rounded-2xl bg-white border border-border overflow-hidden">
           {spawnedOrders.length === 0 ? (
             <EmptyState icon={BoxIcon} title="No orders generated yet" note="This contract is still a Draft." />
@@ -104,12 +104,12 @@ export default function MonthlyOrderDetail() {
 function StatTile({ icon: Icon, label, value, accent }: { icon?: React.ElementType; label: string; value: string; accent?: "green" | "amber" }) {
   return (
     <div className="rounded-2xl bg-white border border-border p-4">
-      <div className="flex items-center gap-1.5 text-xs text-muted uppercase tracking-wide mb-1.5" style={{ fontFamily: "var(--font-mono)" }}>
+      <div className="flex items-center gap-1.5 text-caption-1-regular text-muted uppercase tracking-wide mb-1.5" style={{ fontFamily: "var(--font-mono)" }}>
         {Icon && <Icon size={12} />}
         {label}
       </div>
       <div
-        className="text-xl"
+        className="text-title-2-medium"
         style={{
           fontFamily: "var(--font-heading)",
           color: accent === "green" ? "#16803C" : accent === "amber" ? "#D97706" : "#040033",
@@ -125,7 +125,7 @@ function PriceRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between">
       <span className="text-muted">{label}</span>
-      <span className="text-navy font-semibold">{value}</span>
+      <span className="text-navy text-body-2-semibold">{value}</span>
     </div>
   );
 }

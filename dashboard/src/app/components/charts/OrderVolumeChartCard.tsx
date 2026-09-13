@@ -48,20 +48,20 @@ export default function OrderVolumeChartCard({ data }: { data: VolumePoint[] }) 
     <section className="flex h-[280px] min-w-0 flex-col gap-4 rounded-2xl bg-tile p-4">
       <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex min-w-0 flex-col gap-0.5">
-          <p className="text-[13px] font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
+          <p className="text-body-2-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
             {point ? point.label : "Order Volume"}
           </p>
           <div className="flex items-center gap-2 flex-wrap">
-            <p className="text-lg leading-none text-navy whitespace-nowrap" style={{ fontFamily: "var(--font-heading)" }}>
+            <p className="text-title-3-medium leading-none text-navy whitespace-nowrap" style={{ fontFamily: "var(--font-heading)" }}>
               {display}
             </p>
             <Chip color={delta.color}>{delta.label}</Chip>
           </div>
-          <p className="text-[11px] text-muted" style={{ fontFamily: "var(--font-mono)" }}>
+          <p className="text-caption-2-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>
             {comparison} {point ? "same day last week" : "last week"}
           </p>
         </div>
-        <dl className="flex shrink-0 items-center gap-3 text-[11px] text-muted">
+        <dl className="flex shrink-0 items-center gap-3 text-caption-2-regular text-muted">
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-blue" />
             <dt style={{ fontFamily: "var(--font-sub)" }}>This week</dt>

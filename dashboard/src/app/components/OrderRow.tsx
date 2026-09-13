@@ -25,27 +25,27 @@ export default function OrderRow({ order }: { order: Order }) {
 
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[13px] font-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>
+          <span className="text-body-2-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>
             {order.id}
           </span>
           <StatusBadge status={order.status} />
           {order.tripType === "Monthly" && (
             <span
-              className="px-2 py-0.5 rounded-md text-[10px] font-semibold text-royal bg-[#EEEAFB] uppercase tracking-wide"
+              className="px-2 py-0.5 rounded-md text-caption-2-semibold text-royal bg-[#EEEAFB] uppercase tracking-wide"
               style={{ fontFamily: "var(--font-mono)" }}
             >
               Monthly{order.dayLabel ? ` · Day ${order.dayLabel}` : ""}
             </span>
           )}
         </div>
-        <div className="mt-0.5 text-[13px] text-navy/80 truncate">{client?.name ?? "—"}</div>
-        <div className="mt-0.5 text-xs text-muted truncate">
+        <div className="mt-0.5 text-body-2-regular text-navy/80 truncate">{client?.name ?? "—"}</div>
+        <div className="mt-0.5 text-caption-1-regular text-muted truncate">
           {contractor?.name ?? "Unassigned"} · {truckTypeLabel(truckType)}
         </div>
       </div>
 
       <div className="flex-shrink-0 text-left sm:text-right">
-        <div className="text-xs text-muted" style={{ fontFamily: "var(--font-mono)" }}>
+        <div className="text-caption-1-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>
           {formatDateTime(order.pickupAt)}
         </div>
       </div>

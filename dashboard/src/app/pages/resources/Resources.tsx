@@ -75,15 +75,15 @@ export default function Resources() {
                 <div key={driver.id} className="rounded-2xl bg-white border border-border p-4">
                   <button onClick={() => setExpanded(expanded === driver.id ? null : driver.id)} className="w-full flex items-center justify-between gap-4 cursor-pointer text-left">
                     <div className="min-w-0">
-                      <div className="text-sm font-semibold text-navy">{driver.name}</div>
-                      <div className="text-xs text-muted mt-0.5">{contractor?.name ?? "—"}</div>
+                      <div className="text-body-semibold text-navy">{driver.name}</div>
+                      <div className="text-caption-1-regular text-muted mt-0.5">{contractor?.name ?? "—"}</div>
                     </div>
                     <div className="flex items-center gap-3 flex-shrink-0">
-                      <span className="flex items-center gap-1 text-xs text-navy" style={{ fontFamily: "var(--font-mono)" }}>
+                      <span className="flex items-center gap-1 text-caption-1-regular text-navy" style={{ fontFamily: "var(--font-mono)" }}>
                         <StarIcon size={12} className="text-status-pending" /> {driver.rating.toFixed(2)}
                       </span>
                       {currentOrder && (
-                        <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold text-blue bg-blue-soft" style={{ fontFamily: "var(--font-mono)" }}>
+                        <span className="px-2 py-0.5 rounded-md text-caption-2-semibold text-blue bg-blue-soft" style={{ fontFamily: "var(--font-mono)" }}>
                           On {currentOrder.id}
                         </span>
                       )}
@@ -109,12 +109,12 @@ export default function Resources() {
                 <div key={vehicle.id} className="rounded-2xl bg-white border border-border p-4">
                   <button onClick={() => setExpanded(expanded === vehicle.id ? null : vehicle.id)} className="w-full flex items-center justify-between gap-4 cursor-pointer text-left">
                     <div className="min-w-0">
-                      <div className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>{vehicle.plateNumber}</div>
-                      <div className="text-xs text-muted mt-0.5">{truckTypeLabel(getTruckType(vehicle.truckTypeId))} · {contractor?.name ?? "—"}</div>
+                      <div className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>{vehicle.plateNumber}</div>
+                      <div className="text-caption-1-regular text-muted mt-0.5">{truckTypeLabel(getTruckType(vehicle.truckTypeId))} · {contractor?.name ?? "—"}</div>
                     </div>
                     <div className="flex items-center gap-3 flex-shrink-0">
                       {currentOrder && (
-                        <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold text-blue bg-blue-soft" style={{ fontFamily: "var(--font-mono)" }}>
+                        <span className="px-2 py-0.5 rounded-md text-caption-2-semibold text-blue bg-blue-soft" style={{ fontFamily: "var(--font-mono)" }}>
                           On {currentOrder.id}
                         </span>
                       )}

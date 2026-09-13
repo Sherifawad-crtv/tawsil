@@ -78,7 +78,7 @@ export default function TruckTypeFormModal({ existing, onClose }: { existing?: T
         </div>
 
         <div className="flex items-center justify-between p-4 rounded-2lg border border-border bg-grey-light/40">
-          <span className="text-sm font-medium text-navy">Requires Temperature Control</span>
+          <span className="text-body-medium text-navy">Requires Temperature Control</span>
           <Toggle checked={form.requiresTempControl} onChange={(v) => setForm((f) => ({ ...f, requiresTempControl: v }))} />
         </div>
 

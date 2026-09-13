@@ -25,7 +25,7 @@ export default function OrderDetail() {
   const order = orders.find((o) => o.id === orderId);
   if (!order) {
     return (
-      <div className="text-center py-20 text-sm text-muted">
+      <div className="text-center py-20 text-body-regular text-muted">
         Order not found. <Link to="/orders" className="text-blue font-semibold">Back to Orders</Link>
       </div>
     );
@@ -48,7 +48,7 @@ export default function OrderDetail() {
     <div className="flex flex-col gap-6">
       <button
         onClick={() => navigate("/orders")}
-        className="flex items-center gap-1.5 text-sm text-muted hover:text-navy cursor-pointer w-fit"
+        className="flex items-center gap-1.5 text-body-2-regular text-muted hover:text-navy cursor-pointer w-fit"
       >
         <ArrowLeftIcon size={15} /> Back to Orders
       </button>
@@ -56,10 +56,10 @@ export default function OrderDetail() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-xl text-navy" style={{ fontFamily: "var(--font-heading)" }}>{order.id}</h1>
+            <h1 className="text-title-1-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>{order.id}</h1>
             <StatusBadge status={order.status} />
           </div>
-          <p className="mt-1.5 text-sm text-muted">
+          <p className="mt-1.5 text-body-2-regular text-muted">
             {client?.name ?? "—"} · {contractor?.name ?? "Not Assigned"}
           </p>
         </div>
@@ -97,28 +97,28 @@ export default function OrderDetail() {
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Driver & Vehicle */}
           <div className="rounded-2xl bg-white border border-border p-4">
-            <h3 className="text-sm font-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Driver & Vehicle Information</h3>
+            <h3 className="text-body-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Driver & Vehicle Information</h3>
             {driver && vehicle ? (
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-navy text-white flex items-center justify-center flex-shrink-0" style={{ fontFamily: "var(--font-heading)" }}>
                   {driver.name.split(" ").map((p) => p[0]).join("").slice(0, 2)}
                 </div>
                 <div className="min-w-0">
-                  <div className="text-sm font-semibold text-navy">{driver.name}</div>
-                  <div className="text-xs text-muted mt-0.5">{vehicle.plateNumber} · {truckTypeLabel(getTruckType(vehicle.truckTypeId))}</div>
+                  <div className="text-body-semibold text-navy">{driver.name}</div>
+                  <div className="text-caption-1-regular text-muted mt-0.5">{vehicle.plateNumber} · {truckTypeLabel(getTruckType(vehicle.truckTypeId))}</div>
                 </div>
               </div>
             ) : (
               <div className="flex items-center gap-3 px-4 py-2 rounded-2lg bg-grey-light/60">
                 <UserIcon size={16} className="text-muted" />
-                <span className="text-sm text-muted font-medium">Not Assigned</span>
+                <span className="text-body-medium text-muted">Not Assigned</span>
               </div>
             )}
           </div>
 
           {/* Trip & cargo */}
           <div className="rounded-2xl bg-white border border-border p-4">
-            <h3 className="text-sm font-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Trip & Cargo</h3>
+            <h3 className="text-body-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Trip & Cargo</h3>
             <div className="grid sm:grid-cols-2 gap-4">
               <DetailField label="Trip Type" value={order.tripType} />
               <DetailField label="Truck Type" value={truckTypeLabel(truckType)} />
@@ -138,8 +138,8 @@ export default function OrderDetail() {
           {/* Delivery */}
           <div className="rounded-2xl bg-white border border-border p-4">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Delivery</h3>
-              <div className="flex items-center gap-1.5 text-xs text-muted">
+              <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Delivery</h3>
+              <div className="flex items-center gap-1.5 text-caption-1-regular text-muted">
                 <CameraIcon size={13} />
                 POD {order.podRequired ? (order.podUploaded ? "uploaded" : "required — pending") : "not required"}
               </div>
@@ -149,10 +149,10 @@ export default function OrderDetail() {
                 <div key={wp.id} className="flex items-start gap-3">
                   <MapPointIcon size={14} className={`mt-0.5 flex-shrink-0 ${wp.type === "Pickup" ? "text-navy" : "text-blue"}`} />
                   <div className="min-w-0">
-                    <div className="text-sm text-navy">
+                    <div className="text-body-regular text-navy">
                       <span className="font-semibold">{wp.type}</span> · {wp.name}
                     </div>
-                    <div className="text-xs text-muted truncate">{wp.address}</div>
+                    <div className="text-caption-1-regular text-muted truncate">{wp.address}</div>
                   </div>
                 </div>
               ))}
@@ -177,11 +177,11 @@ export default function OrderDetail() {
 function DetailField({ label, value, badge }: { label: string; value: string; badge?: string }) {
   return (
     <div>
-      <div className="flex items-center gap-1.5 text-xs text-muted uppercase tracking-wide mb-1" style={{ fontFamily: "var(--font-mono)" }}>
+      <div className="flex items-center gap-1.5 text-caption-1-regular text-muted uppercase tracking-wide mb-1" style={{ fontFamily: "var(--font-mono)" }}>
         {label}
-        {badge && <span className="px-1.5 py-0.5 rounded bg-[#EEEAFB] text-royal text-[10px] normal-case">{badge}</span>}
+        {badge && <span className="px-1.5 py-0.5 rounded-md bg-[#EEEAFB] text-royal text-caption-2-semibold normal-case">{badge}</span>}
       </div>
-      <div className="text-sm text-navy">{value}</div>
+      <div className="text-body-regular text-navy">{value}</div>
     </div>
   );
 }

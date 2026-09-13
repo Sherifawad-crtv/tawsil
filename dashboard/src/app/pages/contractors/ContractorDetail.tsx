@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
 import { ArrowLeftIcon, LetterIcon, PhoneIcon, AddIcon, StarIcon, UsersGroupRoundedIcon, BusIcon, BoxIcon } from "@solar-icons/react/linear";
 import Tabs from "../../components/Tabs";
+import { Button } from "../../components/Button";
 import ActiveBadge from "../../components/ActiveBadge";
 import EmptyState from "../../components/EmptyState";
 import OrderRow from "../../components/OrderRow";
@@ -29,7 +30,7 @@ export default function ContractorDetail() {
   const contractor = contractors.find((c) => c.id === contractorId);
   if (!contractor) {
     return (
-      <div className="text-center py-20 text-sm text-muted">
+      <div className="text-center py-20 text-body-regular text-muted">
         Contractor not found. <Link to="/contractors" className="text-blue font-semibold">Back to Contractors</Link>
       </div>
     );
@@ -41,19 +42,19 @@ export default function ContractorDetail() {
 
   return (
     <div className="flex flex-col gap-6">
-      <button onClick={() => navigate("/contractors")} className="flex items-center gap-1.5 text-sm text-muted hover:text-navy cursor-pointer w-fit">
+      <button onClick={() => navigate("/contractors")} className="flex items-center gap-1.5 text-body-2-regular text-muted hover:text-navy cursor-pointer w-fit">
         <ArrowLeftIcon size={15} /> Back to Contractors
       </button>
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-xl text-navy" style={{ fontFamily: "var(--font-heading)" }}>{contractor.name}</h1>
+            <h1 className="text-title-1-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>{contractor.name}</h1>
             <button onClick={() => toggleContractorActive(contractor.id)} className="cursor-pointer">
               <ActiveBadge active={contractor.active} />
             </button>
           </div>
-          <div className="flex items-center gap-4 mt-1.5 text-sm text-muted flex-wrap">
+          <div className="flex items-center gap-4 mt-1.5 text-body-2-regular text-muted flex-wrap">
             <span className="flex items-center gap-1.5"><LetterIcon size={13} /> {contractor.email}</span>
             <span className="flex items-center gap-1.5"><PhoneIcon size={13} /> {contractor.phone}</span>
           </div>
@@ -65,9 +66,9 @@ export default function ContractorDetail() {
       {tab === "Drivers" && (
         <div>
           <div className="flex justify-end mb-3">
-            <button onClick={() => setShowAddDriver(true)} className="flex items-center gap-2 px-3.5 py-2 rounded-2lg bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
-              <AddIcon size={14} /> Add Driver
-            </button>
+            <Button size="small" leadingIcon={AddIcon} onClick={() => setShowAddDriver(true)} className="bg-navy hover:bg-royal">
+              Add Driver
+            </Button>
           </div>
           {contractorDrivers.length === 0 ? (
             <EmptyState icon={UsersGroupRoundedIcon} title="No drivers yet" />
@@ -80,11 +81,11 @@ export default function ContractorDetail() {
                     className="w-full flex items-center justify-between gap-4 cursor-pointer text-left"
                   >
                     <div className="min-w-0">
-                      <div className="text-sm font-semibold text-navy">{driver.name}</div>
-                      <div className="text-xs text-muted mt-0.5">{driver.email} · {driver.phone}</div>
+                      <div className="text-body-semibold text-navy">{driver.name}</div>
+                      <div className="text-caption-1-regular text-muted mt-0.5">{driver.email} · {driver.phone}</div>
                     </div>
                     <div className="flex items-center gap-3 flex-shrink-0">
-                      <span className="flex items-center gap-1 text-xs text-navy" style={{ fontFamily: "var(--font-mono)" }}>
+                      <span className="flex items-center gap-1 text-caption-1-regular text-navy" style={{ fontFamily: "var(--font-mono)" }}>
                         <StarIcon size={12} className="text-status-pending" /> {driver.rating.toFixed(2)}
                       </span>
                       <ActiveBadge active={driver.active} />
@@ -101,9 +102,9 @@ export default function ContractorDetail() {
       {tab === "Vehicles" && (
         <div>
           <div className="flex justify-end mb-3">
-            <button onClick={() => setShowAddVehicle(true)} className="flex items-center gap-2 px-3.5 py-2 rounded-2lg bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
-              <AddIcon size={14} /> Add Vehicle
-            </button>
+            <Button size="small" leadingIcon={AddIcon} onClick={() => setShowAddVehicle(true)} className="bg-navy hover:bg-royal">
+              Add Vehicle
+            </Button>
           </div>
           {contractorVehicles.length === 0 ? (
             <EmptyState icon={BusIcon} title="No vehicles yet" />
@@ -116,8 +117,8 @@ export default function ContractorDetail() {
                     className="w-full flex items-center justify-between gap-4 cursor-pointer text-left"
                   >
                     <div className="min-w-0">
-                      <div className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>{vehicle.plateNumber}</div>
-                      <div className="text-xs text-muted mt-0.5">{truckTypeLabel(getTruckType(vehicle.truckTypeId))}</div>
+                      <div className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>{vehicle.plateNumber}</div>
+                      <div className="text-caption-1-regular text-muted mt-0.5">{truckTypeLabel(getTruckType(vehicle.truckTypeId))}</div>
                     </div>
                     <ActiveBadge active={vehicle.active} />
                   </button>

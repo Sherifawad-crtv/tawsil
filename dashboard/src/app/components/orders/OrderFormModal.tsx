@@ -190,7 +190,7 @@ export default function OrderFormModal({
       {step === 2 && (
         <div className="flex flex-col gap-5">
           <div>
-            <label className="block text-xs font-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
+            <label className="block text-body-2-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
               Trip Type <span className="text-status-cancelled">*</span>
             </label>
             <div className="inline-flex rounded-2lg border border-border p-1 bg-grey-light">
@@ -211,7 +211,7 @@ export default function OrderFormModal({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
+            <label className="block text-body-2-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
               Truck Type <span className="text-status-cancelled">*</span>
             </label>
             <TruckTypeGrid
@@ -232,7 +232,7 @@ export default function OrderFormModal({
           {truckType ? (
             <CargoTypeSelect allowed={truckType.allowedCargoTypes} value={form.cargoTypes} onChange={(cargoTypes) => setForm((f) => ({ ...f, cargoTypes }))} />
           ) : (
-            <p className="text-sm text-muted">Select a truck type in the previous step to see allowed cargo types.</p>
+            <p className="text-body-2-regular text-muted">Select a truck type in the previous step to see allowed cargo types.</p>
           )}
           <div className="grid sm:grid-cols-2 gap-3">
             <TextField label="Weight (kg)" type="number" value={form.weightKg} onChange={(e) => setForm((f) => ({ ...f, weightKg: e.target.value }))} />
@@ -247,8 +247,8 @@ export default function OrderFormModal({
         <div className="flex flex-col gap-5">
           <div className="flex items-center justify-between p-4 rounded-2lg border border-border bg-grey-light/40">
             <div>
-              <div className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Proof of Delivery Required</div>
-              <div className="text-xs text-muted mt-0.5">Require photo confirmation at drop-off.</div>
+              <div className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Proof of Delivery Required</div>
+              <div className="text-caption-1-regular text-muted mt-0.5">Require photo confirmation at drop-off.</div>
             </div>
             <Toggle checked={form.podRequired} onChange={(podRequired) => setForm((f) => ({ ...f, podRequired }))} label="Proof of Delivery Required" />
           </div>
@@ -259,27 +259,27 @@ export default function OrderFormModal({
       {step === 5 && (
         <div className="flex flex-col gap-5">
           <ReviewRow label="Client" onEdit={() => goTo(1)}>
-            <div className="text-sm text-navy">{clientDisplayName}</div>
-            {form.contractorId && <div className="text-xs text-muted mt-0.5">Contractor pre-selected</div>}
+            <div className="text-body-2-regular text-navy">{clientDisplayName}</div>
+            {form.contractorId && <div className="text-caption-1-regular text-muted mt-0.5">Contractor pre-selected</div>}
           </ReviewRow>
           <ReviewRow label="Trip Basics" onEdit={() => goTo(2)}>
-            <div className="text-sm text-navy">
+            <div className="text-body-2-regular text-navy">
               {form.tripType} · {truckType ? truckTypeLabel(truckType) : "—"}
             </div>
-            <div className="text-xs text-muted mt-0.5">{form.pickupDate} at {form.pickupTime}</div>
+            <div className="text-caption-1-regular text-muted mt-0.5">{form.pickupDate} at {form.pickupTime}</div>
           </ReviewRow>
           <ReviewRow label="Cargo Details" onEdit={() => goTo(3)}>
-            <div className="text-sm text-navy">{form.cargoTypes.join(", ") || "—"}</div>
-            <div className="text-xs text-muted mt-0.5">
+            <div className="text-body-2-regular text-navy">{form.cargoTypes.join(", ") || "—"}</div>
+            <div className="text-caption-1-regular text-muted mt-0.5">
               {form.weightKg ? `${form.weightKg} kg` : "No weight"} · {form.hours ? `${form.hours}h` : "No hours"}
             </div>
           </ReviewRow>
           <ReviewRow label="Delivery & Waypoints" onEdit={() => goTo(4)}>
-            <div className="text-sm text-navy">POD Required: {form.podRequired ? "Yes" : "No"}</div>
-            <div className="text-xs text-muted mt-0.5">{form.waypoints.length} waypoint(s)</div>
+            <div className="text-body-2-regular text-navy">POD Required: {form.podRequired ? "Yes" : "No"}</div>
+            <div className="text-caption-1-regular text-muted mt-0.5">{form.waypoints.length} waypoint(s)</div>
           </ReviewRow>
           {truckType && (
-            <div className="text-xs text-muted px-1" style={{ fontFamily: "var(--font-mono)" }}>
+            <div className="text-caption-1-regular text-muted px-1" style={{ fontFamily: "var(--font-mono)" }}>
               Est. base rate: {formatEGP(truckType.dailyRentEGP)} / day · {formatEGP(truckType.pricePerKmEGP)} / km
             </div>
           )}
@@ -293,12 +293,12 @@ function ReviewRow({ label, children, onEdit }: { label: string; children: React
   return (
     <div className="rounded-2lg border border-border p-4 flex items-start justify-between gap-4">
       <div className="min-w-0">
-        <div className="text-xs font-semibold uppercase tracking-wide text-muted mb-1" style={{ fontFamily: "var(--font-mono)" }}>
+        <div className="text-caption-1-semibold uppercase tracking-wide text-muted mb-1" style={{ fontFamily: "var(--font-mono)" }}>
           {label}
         </div>
         {children}
       </div>
-      <button onClick={onEdit} className="text-xs font-semibold text-blue cursor-pointer flex-shrink-0" style={{ fontFamily: "var(--font-sub)" }}>
+      <button onClick={onEdit} className="text-caption-1-semibold text-blue cursor-pointer flex-shrink-0" style={{ fontFamily: "var(--font-sub)" }}>
         Edit
       </button>
     </div>

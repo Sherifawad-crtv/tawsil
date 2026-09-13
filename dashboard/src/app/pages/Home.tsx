@@ -40,20 +40,20 @@ function AttentionRow({ order }: { order: AttentionOrder }) {
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span
-              className="text-[13px] font-semibold text-navy"
+              className="text-body-2-semibold text-navy"
               style={{ fontFamily: "var(--font-mono)" }}
             >
               {order.id}
             </span>
             <StatusBadge status={order.status} />
           </div>
-          <div className="mt-0.5 text-[13px] text-navy/80 truncate">{order.clientName}</div>
-          <div className="mt-0.5 text-xs text-muted truncate">{order.detail}</div>
+          <div className="mt-0.5 text-body-2-regular text-navy/80 truncate">{order.clientName}</div>
+          <div className="mt-0.5 text-caption-1-regular text-muted truncate">{order.detail}</div>
         </div>
       </div>
 
       <div className="flex items-center justify-between sm:justify-end gap-3 flex-shrink-0">
-        <div className="flex items-center gap-1.5 text-xs text-muted" style={{ fontFamily: "var(--font-mono)" }}>
+        <div className="flex items-center gap-1.5 text-caption-1-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>
           <ClockCircleIcon size={12} />
           {formatDuration(order.minutesInStatus)}
         </div>
@@ -95,10 +95,10 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-xl text-navy" style={{ fontFamily: "var(--font-heading)" }}>
+        <h1 className="text-title-1-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>
           Home
         </h1>
-        <p className="mt-0.5 text-[13px] text-muted">{subtitle}</p>
+        <p className="mt-0.5 text-body-2-regular text-muted">{subtitle}</p>
       </div>
 
       {/* Metrics strip */}
@@ -130,7 +130,7 @@ export default function Home() {
         <div className="grid lg:grid-cols-2 gap-3">
           <InsightCard title="When Problems Happen" subtitle="Open issues by time of day">
             {totalProblems === 0 ? (
-              <div className="py-6 text-center text-xs text-muted">No open problems right now.</div>
+              <div className="py-6 text-center text-body-2-regular text-muted">No open problems right now.</div>
             ) : (
               <ProblemsHourlyChart data={hourlyProblems} />
             )}
@@ -138,7 +138,7 @@ export default function Home() {
 
           <InsightCard title="Where Problems Happen" subtitle="Top pickup locations with open issues">
             {locationProblems.length === 0 ? (
-              <div className="py-6 text-center text-xs text-muted">No open problems right now.</div>
+              <div className="py-6 text-center text-body-2-regular text-muted">No open problems right now.</div>
             ) : (
               <LocationBarList data={locationProblems} />
             )}
@@ -149,12 +149,12 @@ export default function Home() {
       {/* Attention-needed list - not shown to Sales, which only tracks orders */}
       {showAttention && (
         <div>
-          <h2 className="text-xs font-semibold text-navy mb-2 uppercase tracking-wide" style={{ fontFamily: "var(--font-sub)" }}>
+          <h2 className="text-caption-1-semibold text-navy mb-2 uppercase tracking-wide" style={{ fontFamily: "var(--font-sub)" }}>
             {role === "Supply" ? "Pending Allocation" : role === "Operations" ? "Needs Follow-up" : "Needs Attention"}
           </h2>
           <div className="rounded-2xl bg-white border border-border overflow-hidden shadow-xs">
             {attentionOrders.length === 0 ? (
-              <div className="px-5 py-10 text-center text-sm text-muted">Nothing needs attention right now.</div>
+              <div className="px-5 py-10 text-center text-body-regular text-muted">Nothing needs attention right now.</div>
             ) : (
               attentionOrders.map((order) => <AttentionRow key={order.id} order={order} />)
             )}
@@ -165,7 +165,7 @@ export default function Home() {
       {/* Quick actions - order creation is Sales' job */}
       {showQuickActions && (
         <div>
-          <h2 className="text-xs font-semibold text-navy mb-2 uppercase tracking-wide" style={{ fontFamily: "var(--font-sub)" }}>
+          <h2 className="text-caption-1-semibold text-navy mb-2 uppercase tracking-wide" style={{ fontFamily: "var(--font-sub)" }}>
             Quick Actions
           </h2>
           <div className="flex flex-wrap gap-2">

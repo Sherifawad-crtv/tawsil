@@ -36,7 +36,7 @@ export default function Settings() {
       />
 
       {!isAdmin && (
-        <div className="flex items-center gap-2 px-4 py-2 rounded-2lg bg-grey-light text-sm text-muted">
+        <div className="flex items-center gap-2 px-4 py-2 rounded-2lg bg-grey-light text-body-2-regular text-muted">
           <LockKeyholeIcon size={14} />
           Viewing only — switch to <strong className="text-navy">Admin</strong> in the top-right role switcher to edit the rate card.
         </div>
@@ -44,9 +44,9 @@ export default function Settings() {
 
       <div className="rounded-2xl bg-white border border-border overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full text-body-2-regular">
             <thead>
-              <tr className="bg-grey-light text-left text-xs text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>
+              <tr className="bg-grey-light text-left text-caption-1-regular text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>
                 <th className="px-4 py-2.5 font-medium">Truck Type</th>
                 <th className="px-4 py-2.5 font-medium">Config</th>
                 <th className="px-4 py-2.5 font-medium">Daily Rent (EGP)</th>
@@ -92,7 +92,7 @@ export default function Settings() {
                     <tr>
                       <td colSpan={isAdmin ? 6 : 5} className="px-4 pb-3 pt-0">
                         {types.filter((t) => t.flagged).map((t) => (
-                          <div key={t.id} className="flex items-start gap-2 text-xs text-status-pending bg-[#FFF9EC] rounded-lg px-3 py-2">
+                          <div key={t.id} className="flex items-start gap-2 text-caption-1-regular text-status-pending bg-[#FFF9EC] rounded-lg px-3 py-2">
                             <DangerTriangleIcon size={13} className="mt-0.5 flex-shrink-0" />
                             <span>{t.flagNote}</span>
                           </div>
@@ -108,13 +108,13 @@ export default function Settings() {
       </div>
 
       <div className="rounded-2xl bg-white border border-border p-4">
-        <h3 className="text-sm font-semibold text-navy mb-3" style={{ fontFamily: "var(--font-sub)" }}>Cargo Type Taxonomy</h3>
-        <p className="text-xs text-muted mb-3">
+        <h3 className="text-body-semibold text-navy mb-3" style={{ fontFamily: "var(--font-sub)" }}>Cargo Type Taxonomy</h3>
+        <p className="text-caption-1-regular text-muted mb-3">
           {CARGO_TYPES.length} cargo types. This list drives the Cargo Type field in Order creation, filtered per truck type's allowed types.
         </p>
         <div className="flex flex-wrap gap-1.5">
           {CARGO_TYPES.map((type) => (
-            <span key={type} className="px-2.5 py-1 rounded-full text-xs text-navy bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
+            <span key={type} className="px-2.5 py-1 rounded-full text-caption-1-regular text-navy bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
               {type}
             </span>
           ))}

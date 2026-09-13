@@ -14,14 +14,14 @@ export default function FileUploadField({
 
   return (
     <div>
-      <label className="block text-xs font-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
+      <label className="block text-body-2-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
         {label}
         {required && <span className="text-status-cancelled"> *</span>}
       </label>
       {fileName ? (
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-2lg border border-border bg-grey-light">
           <FileTextIcon size={16} className="text-blue flex-shrink-0" />
-          <span className="text-sm text-navy truncate flex-1" style={{ fontFamily: "var(--font-mono)" }}>
+          <span className="text-body-regular text-navy truncate flex-1" style={{ fontFamily: "var(--font-mono)" }}>
             {fileName}
           </span>
           <button
@@ -38,7 +38,7 @@ export default function FileUploadField({
       ) : (
         <label className="flex items-center gap-2 px-3 py-1.5 rounded-2lg border border-dashed border-border bg-grey-light cursor-pointer hover:border-blue/40 transition-colors">
           <CloudUploadIcon size={16} className="text-muted flex-shrink-0" />
-          <span className="text-sm text-muted">Upload PDF</span>
+          <span className="text-body-regular text-muted">Upload PDF</span>
           <input
             type="file"
             accept="application/pdf"

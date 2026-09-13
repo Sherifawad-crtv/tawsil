@@ -1,11 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { ClockCircleIcon, BusIcon, CheckCircleIcon, AddSquareIcon, CalendarAddIcon, DangerTriangleIcon } from "@solar-icons/react/linear";
+import { ClockCircleIcon, BusIcon, CheckCircleIcon, AddIcon, CalendarAddIcon, DangerTriangleIcon } from "@solar-icons/react/linear";
 import MetricCard from "../components/MetricCard";
 import StatusBadge from "../components/StatusBadge";
+import InsightCard from "../components/InsightCard";
+import SparkAreaChart from "../components/charts/SparkAreaChart";
+import StatusBreakdownBar from "../components/charts/StatusBreakdownBar";
+import HourlyBarChart from "../components/charts/HourlyBarChart";
+import LocationBarList from "../components/charts/LocationBarList";
 import OrderFormModal from "../components/orders/OrderFormModal";
 import MonthlyOrderFormModal from "../components/monthly/MonthlyOrderFormModal";
-import { getHomeMetrics, getAttentionOrders, getAttentionOrdersForRole, canCreateOrders } from "../lib/selectors";
+import {
+  getHomeMetrics,
+  getAttentionOrders,
+  getAttentionOrdersForRole,
+  canCreateOrders,
+  getOrderVolumeByDay,
+  getOrdersByStatus,
+  getProblemsByHour,
+  getProblemsByLocation,
+} from "../lib/selectors";
 import { formatDuration } from "../lib/format";
 import { useDataStore } from "../lib/store";
 import { useRole } from "../lib/RoleContext";
@@ -63,6 +77,14 @@ export default function Home() {
   const showAttention = role !== "Sales";
   const showQuickActions = canCreateOrders(role);
 
+  const volumeData = getOrderVolumeByDay(orders, 14);
+  const volumeTotal = volumeData.reduce((sum, d) => sum + d.count, 0);
+  const statusData = getOrdersByStatus(orders);
+
+  const hourlyProblems = showAttention ? getProblemsByHour(orders, role) : [];
+  const locationProblems = showAttention ? getProblemsByLocation(orders, role) : [];
+  const totalProblems = hourlyProblems.reduce((sum, d) => sum + d.count, 0);
+
   const subtitle =
     role === "Sales"
       ? "Your orders at a glance."
@@ -89,6 +111,52 @@ export default function Home() {
         <MetricCard label="Completed Today" value={metrics.completedToday} icon={CheckCircleIcon} accent="green" />
       </div>
 
+      {/* Volume trend + status mix */}
+      <div className="grid lg:grid-cols-2 gap-3">
+        <InsightCard title="Order Volume" subtitle="Last 14 days">
+          <div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl leading-none text-navy" style={{ fontFamily: "var(--font-heading)" }}>
+                {volumeTotal}
+              </span>
+              <span className="text-xs text-muted">orders</span>
+            </div>
+            <div className="mt-2">
+              <SparkAreaChart data={volumeData} />
+            </div>
+            <div className="flex justify-between text-[10px] text-muted mt-1" style={{ fontFamily: "var(--font-mono)" }}>
+              <span>{volumeData[0]?.label}</span>
+              <span>{volumeData[volumeData.length - 1]?.label}</span>
+            </div>
+          </div>
+        </InsightCard>
+
+        <InsightCard title="Orders by Status" subtitle={`${orders.length} total orders`}>
+          <StatusBreakdownBar data={statusData} />
+        </InsightCard>
+      </div>
+
+      {/* Problem hotspots - when and where issues cluster, not shown to Sales */}
+      {showAttention && (
+        <div className="grid lg:grid-cols-2 gap-3">
+          <InsightCard title="When Problems Happen" subtitle="Open issues by time of day">
+            {totalProblems === 0 ? (
+              <div className="py-6 text-center text-xs text-muted">No open problems right now.</div>
+            ) : (
+              <HourlyBarChart data={hourlyProblems} />
+            )}
+          </InsightCard>
+
+          <InsightCard title="Where Problems Happen" subtitle="Top pickup locations with open issues">
+            {locationProblems.length === 0 ? (
+              <div className="py-6 text-center text-xs text-muted">No open problems right now.</div>
+            ) : (
+              <LocationBarList data={locationProblems} />
+            )}
+          </InsightCard>
+        </div>
+      )}
+
       {/* Attention-needed list - not shown to Sales, which only tracks orders */}
       {showAttention && (
         <div>
@@ -111,31 +179,21 @@ export default function Home() {
           <h2 className="text-xs font-semibold text-navy mb-2 uppercase tracking-wide" style={{ fontFamily: "var(--font-sub)" }}>
             Quick Actions
           </h2>
-          <div className="grid sm:grid-cols-2 gap-3">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setShowOrderModal(true)}
-              className="flex items-center gap-3 rounded-[var(--radius-card)] bg-blue text-white p-3.5 text-left cursor-pointer active:scale-[0.98] transition-transform shadow-[0_4px_20px_rgba(18,83,250,0.25)] hover:brightness-110"
+              className="flex items-center gap-1.5 pl-2.5 pr-3 py-[7px] rounded-[var(--radius-control)] bg-blue text-white text-xs font-semibold cursor-pointer active:scale-95 transition-transform hover:brightness-110"
+              style={{ fontFamily: "var(--font-sub)" }}
             >
-              <div className="w-9 h-9 rounded-[var(--radius-control)] bg-white/15 flex items-center justify-center flex-shrink-0">
-                <AddSquareIcon size={18} />
-              </div>
-              <div>
-                <div className="text-sm" style={{ fontFamily: "var(--font-heading)" }}>New Order</div>
-                <div className="text-xs text-white/80 mt-0.5">Start the multi-step order creation flow</div>
-              </div>
+              <AddIcon size={14} /> New Order
             </button>
 
             <button
               onClick={() => setShowMonthlyModal(true)}
-              className="flex items-center gap-3 rounded-[var(--radius-card)] bg-white border border-border p-3.5 text-left cursor-pointer active:scale-[0.98] transition-transform hover:border-blue/40"
+              className="flex items-center gap-1.5 pl-2.5 pr-3 py-[7px] rounded-[var(--radius-control)] bg-white border border-border text-xs font-semibold text-navy cursor-pointer active:scale-95 transition-transform hover:border-blue/40"
+              style={{ fontFamily: "var(--font-sub)" }}
             >
-              <div className="w-9 h-9 rounded-[var(--radius-control)] bg-blue-soft text-blue flex items-center justify-center flex-shrink-0">
-                <CalendarAddIcon size={18} />
-              </div>
-              <div>
-                <div className="text-sm text-navy" style={{ fontFamily: "var(--font-heading)" }}>New Monthly Order</div>
-                <div className="text-xs text-muted mt-0.5">Set up a recurring contract</div>
-              </div>
+              <CalendarAddIcon size={14} /> New Monthly Order
             </button>
           </div>
         </div>

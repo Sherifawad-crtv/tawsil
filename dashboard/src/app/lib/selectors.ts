@@ -1,5 +1,5 @@
 import { TRUCK_TYPES } from "./constants";
-import type { AttentionOrder, Client, Contractor, Driver, HomeMetrics, MonthlyOrder, Order, Role, Vehicle } from "./types";
+import type { AttentionOrder, Client, Contractor, Driver, HomeMetrics, MonthlyOrder, Order, OrderStatus, Role, Vehicle } from "./types";
 
 export function getTruckType(id: string) {
   return TRUCK_TYPES.find((t) => t.id === id)!;
@@ -129,6 +129,82 @@ export function canCreateOrders(role: Role) {
 
 export function canAssignDrivers(role: Role) {
   return role === "Supply" || role === "Admin";
+}
+
+/** Order count per day for the trailing `days` window, oldest first - feeds the Home volume chart. */
+export function getOrderVolumeByDay(orders: Order[], days = 14) {
+  const buckets: { key: string; label: string; count: number }[] = [];
+  const today = new Date();
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    buckets.push({ key: d.toDateString(), label: d.toLocaleDateString("en-US", { day: "numeric", month: "short" }), count: 0 });
+  }
+  const byKey = new Map(buckets.map((b) => [b.key, b]));
+  for (const order of orders) {
+    const bucket = byKey.get(new Date(order.createdAt).toDateString());
+    if (bucket) bucket.count += 1;
+  }
+  return buckets;
+}
+
+const STATUS_ORDER: OrderStatus[] = ["Pending", "Assigned", "In Progress", "Completed", "Cancelled"];
+
+/** Order count per status - feeds the Home status-breakdown bar. */
+export function getOrdersByStatus(orders: Order[]): { status: OrderStatus; count: number }[] {
+  return STATUS_ORDER.map((status) => ({ status, count: orders.filter((o) => o.status === status).length }));
+}
+
+const PROBLEM_HOUR_BUCKETS = [
+  { label: "12–4am", start: 0, end: 4 },
+  { label: "4–8am", start: 4, end: 8 },
+  { label: "8am–12pm", start: 8, end: 12 },
+  { label: "12–4pm", start: 12, end: 16 },
+  { label: "4–8pm", start: 16, end: 20 },
+  { label: "8pm–12am", start: 20, end: 24 },
+];
+
+function isProblemOrder(order: Order): "stalled-pending" | "pod-missing" | null {
+  const minutes = minutesInCurrentStatus(order);
+  if (order.status === "Pending" && minutes >= PENDING_STALL_THRESHOLD_MIN) return "stalled-pending";
+  if (order.status === "In Progress" && order.podRequired && !order.podUploaded && minutes >= POD_OVERDUE_THRESHOLD_MIN) return "pod-missing";
+  return null;
+}
+
+function isProblemVisibleToRole(reason: "stalled-pending" | "pod-missing", role: Role) {
+  if (role === "Supply") return reason === "stalled-pending";
+  if (role === "Operations") return reason === "pod-missing";
+  return true; // Admin (Sales never renders this section)
+}
+
+/** Buckets open problem orders (stalled-pending / POD overdue) by time-of-day they entered that state - answers "when". */
+export function getProblemsByHour(orders: Order[], role: Role) {
+  const buckets = PROBLEM_HOUR_BUCKETS.map((b) => ({ ...b, count: 0 }));
+  for (const order of orders) {
+    const reason = isProblemOrder(order);
+    if (!reason || !isProblemVisibleToRole(reason, role)) continue;
+    const lastEntry = order.statusHistory[order.statusHistory.length - 1];
+    const hour = new Date(lastEntry.timestamp).getHours();
+    const bucket = buckets.find((b) => hour >= b.start && hour < b.end);
+    if (bucket) bucket.count += 1;
+  }
+  return buckets;
+}
+
+/** Ranks pickup locations by open-problem count - answers "where". */
+export function getProblemsByLocation(orders: Order[], role: Role, limit = 6) {
+  const counts = new Map<string, number>();
+  for (const order of orders) {
+    const reason = isProblemOrder(order);
+    if (!reason || !isProblemVisibleToRole(reason, role)) continue;
+    const pickup = order.waypoints.find((w) => w.type === "Pickup");
+    const name = pickup?.name ?? "Unknown location";
+    counts.set(name, (counts.get(name) ?? 0) + 1);
+  }
+  return Array.from(counts.entries())
+    .map(([location, count]) => ({ location, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, limit);
 }
 
 export function getOrdersForClient(orders: Order[], clientId: string) {

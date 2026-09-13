@@ -20,10 +20,13 @@ import {
   SettingsIcon as SettingsBoldIcon,
 } from "@solar-icons/react/bold";
 import { cx } from "../lib/cx";
+import { useDataStore } from "../lib/store";
+import { useRole } from "../lib/RoleContext";
+import { getOrdersForRole } from "../lib/selectors";
 
 const NAV_ITEMS = [
   { to: "/", label: "Home", iconOutline: Widget2LinearIcon, iconFilled: Widget2BoldIcon, end: true },
-  { to: "/orders", label: "Orders", iconOutline: BoxLinearIcon, iconFilled: BoxBoldIcon },
+  { to: "/orders", label: "Orders", iconOutline: BoxLinearIcon, iconFilled: BoxBoldIcon, showOrderCount: true },
   { to: "/contractors", label: "Contractors", iconOutline: BusLinearIcon, iconFilled: BusBoldIcon },
   { to: "/clients", label: "Clients", iconOutline: Buildings2LinearIcon, iconFilled: Buildings2BoldIcon },
   { to: "/resources", label: "Resources", iconOutline: UsersGroupRoundedLinearIcon, iconFilled: UsersGroupRoundedBoldIcon },
@@ -64,6 +67,9 @@ export default function Sidebar({
   const [query, setQuery] = useState("");
   const searchRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const { orders } = useDataStore();
+  const { role } = useRole();
+  const orderCount = getOrdersForRole(orders, role).length;
 
   const normalizedQuery = query.trim().toLocaleLowerCase();
   const filteredItems = normalizedQuery
@@ -188,7 +194,7 @@ export default function Sidebar({
           {filteredItems.length === 0 ? (
             <p className="px-2 py-3 text-body-2-regular text-muted">No results</p>
           ) : (
-            filteredItems.map(({ to, label, iconOutline: IconOutline, iconFilled: IconFilled, end }) => (
+            filteredItems.map(({ to, label, iconOutline: IconOutline, iconFilled: IconFilled, end, showOrderCount }) => (
               <NavLink
                 key={to}
                 to={to}
@@ -197,26 +203,38 @@ export default function Sidebar({
                 title={collapsed ? label : undefined}
                 className={({ isActive }) =>
                   cx(
-                    "flex items-center gap-2 rounded-2lg p-2 text-body-medium cursor-pointer transition-colors overflow-hidden w-full",
+                    "flex items-center justify-between rounded-2lg p-2 text-body-medium cursor-pointer transition-colors overflow-hidden w-full",
                     collapsed && "md:w-9",
                     isActive ? "bg-linear-to-b from-blue to-royal shadow-nav-selected text-white" : "text-navy hover:bg-grey-light",
                   )
                 }
                 style={{ fontFamily: "var(--font-sub)" }}
               >
-                {({ isActive }) =>
-                  isActive ? (
-                    <>
-                      <IconFilled size={20} color="#ffffff" className="flex-shrink-0" />
+                {({ isActive }) => (
+                  <>
+                    <span className="flex min-w-0 items-center gap-2">
+                      {isActive ? (
+                        <IconFilled size={20} color="#ffffff" className="flex-shrink-0" />
+                      ) : (
+                        <IconOutline size={20} strokeWidth={2} color="#6B7280" className="flex-shrink-0" />
+                      )}
                       <Collapsible collapsed={collapsed}>{label}</Collapsible>
-                    </>
-                  ) : (
-                    <>
-                      <IconOutline size={20} strokeWidth={2} color="#6B7280" className="flex-shrink-0" />
-                      <Collapsible collapsed={collapsed}>{label}</Collapsible>
-                    </>
-                  )
-                }
+                    </span>
+                    {showOrderCount && orderCount > 0 && (
+                      <Collapsible collapsed={collapsed}>
+                        <span
+                          className={cx(
+                            "inline-flex items-center justify-center rounded-sm px-1 py-px text-caption-1-semibold",
+                            isActive ? "bg-white/25 text-white" : "bg-grey-light text-muted",
+                          )}
+                          style={{ fontFamily: "var(--font-mono)" }}
+                        >
+                          {orderCount}
+                        </span>
+                      </Collapsible>
+                    )}
+                  </>
+                )}
               </NavLink>
             ))
           )}
@@ -231,7 +249,7 @@ export default function Sidebar({
             )}
           >
             <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-navy">
-              <span className="text-white text-caption-1-semibold" style={{ fontFamily: "var(--font-heading)" }}>AK</span>
+              <span className="text-white text-headline-semibold" style={{ fontFamily: "var(--font-heading)" }}>AK</span>
             </div>
             <Collapsible collapsed={collapsed} className="flex-1">
               <div className="min-w-0">

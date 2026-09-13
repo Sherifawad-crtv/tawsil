@@ -1,33 +1,24 @@
+import { cx } from "../lib/cx";
+
+/** BoardUI's Switch recipe (md/pill), our colors: h-6 w-[42px] track, gradient-fill on state. */
 export default function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label?: string }) {
   return (
     <button
+      type="button"
       role="switch"
       aria-checked={checked}
       aria-label={label}
       onClick={() => onChange(!checked)}
-      className="relative flex-shrink-0 cursor-pointer"
-      style={{
-        width: "34px",
-        height: "20px",
-        borderRadius: "10px",
-        backgroundColor: checked ? "var(--color-blue)" : "var(--color-grey)",
-        transition: "background-color 0.2s ease",
-        border: "none",
-        padding: 0,
-      }}
+      className={cx(
+        "relative flex-shrink-0 cursor-pointer h-6 w-[42px] rounded-full transition-colors duration-200 ease",
+        checked ? "bg-linear-to-b from-blue to-royal shadow-[inset_0_1.5px_0_0_rgb(255_255_255/0.25)]" : "bg-grey",
+      )}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: "2px",
-          left: checked ? "16px" : "2px",
-          width: "16px",
-          height: "16px",
-          borderRadius: "8px",
-          backgroundColor: "white",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.25)",
-          transition: "left 0.2s ease",
-        }}
+      <span
+        className={cx(
+          "absolute left-[3px] top-[3px] size-[18px] rounded-full bg-white shadow-[0_3px_3px_0_rgb(0_0_0/0.08),0_0.75px_0_0_rgb(0_0_0/0.05)] transition-transform duration-200 ease",
+          checked && "translate-x-[18px]",
+        )}
       />
     </button>
   );

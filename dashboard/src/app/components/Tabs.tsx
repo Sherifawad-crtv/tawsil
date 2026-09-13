@@ -13,8 +13,8 @@ export default function Tabs({
         <button
           key={tab}
           onClick={() => onChange(tab)}
-          className={`px-2.5 py-2 text-body-medium whitespace-nowrap cursor-pointer border-b-2 transition-colors ${
-            active === tab ? "border-blue text-blue" : "border-transparent text-navy hover:text-blue"
+          className={`px-2.5 py-2 whitespace-nowrap cursor-pointer border-b-2 transition-colors ${
+            active === tab ? "border-blue text-blue text-body-medium" : "border-transparent text-navy hover:text-blue text-body-regular"
           }`}
           style={{ fontFamily: "var(--font-sub)" }}
         >

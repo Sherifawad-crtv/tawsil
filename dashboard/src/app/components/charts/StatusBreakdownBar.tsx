@@ -13,7 +13,7 @@ export default function StatusBreakdownBar({ data }: { data: { status: OrderStat
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-grey-light">
+      <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-white">
         {data.map(
           (d) =>
             d.count > 0 && (

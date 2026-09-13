@@ -19,19 +19,27 @@ function minutesInCurrentStatus(order: Order) {
 }
 
 export function getHomeMetrics(orders: Order[], drivers: Driver[]): HomeMetrics {
-  const today = new Date().toDateString();
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const todayKey = today.toDateString();
+  const yesterdayKey = yesterday.toDateString();
+  const completedOn = (dateKey: string) =>
+    orders.filter(
+      (o) =>
+        o.status === "Completed" &&
+        o.statusHistory[o.statusHistory.length - 1] &&
+        new Date(o.statusHistory[o.statusHistory.length - 1].timestamp).toDateString() === dateKey
+    ).length;
+
   return {
     pendingOrders: orders.filter((o) => o.status === "Pending").length,
     activeOrders: orders.filter((o) => o.status === "In Progress").length,
     availableDrivers: drivers.filter(
       (d) => d.active && !orders.some((o) => o.driverId === d.id && (o.status === "Assigned" || o.status === "In Progress"))
     ).length,
-    completedToday: orders.filter(
-      (o) =>
-        o.status === "Completed" &&
-        o.statusHistory[o.statusHistory.length - 1] &&
-        new Date(o.statusHistory[o.statusHistory.length - 1].timestamp).toDateString() === today
-    ).length,
+    completedToday: completedOn(todayKey),
+    completedYesterday: completedOn(yesterdayKey),
   };
 }
 
@@ -146,6 +154,20 @@ export function getOrderVolumeByDay(orders: Order[], days = 14) {
     if (bucket) bucket.count += 1;
   }
   return buckets;
+}
+
+const WEEKDAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+/** This week vs last week, day-aligned - feeds the Home volume chart's current/previous comparison. */
+export function getOrderVolumeWeekOverWeek(orders: Order[]) {
+  const days = getOrderVolumeByDay(orders, 14);
+  const previous = days.slice(0, 7);
+  const current = days.slice(7, 14);
+  return current.map((d, i) => ({
+    label: WEEKDAY_LABELS[new Date(d.key).getDay()],
+    current: d.count,
+    previous: previous[i].count,
+  }));
 }
 
 const STATUS_ORDER: OrderStatus[] = ["Pending", "Assigned", "In Progress", "Completed", "Cancelled"];

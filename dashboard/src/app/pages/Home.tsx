@@ -4,9 +4,9 @@ import { ClockCircleIcon, BusIcon, CheckCircleIcon, AddIcon, CalendarAddIcon, Da
 import MetricCard from "../components/MetricCard";
 import StatusBadge from "../components/StatusBadge";
 import InsightCard from "../components/InsightCard";
-import SparkAreaChart from "../components/charts/SparkAreaChart";
+import OrderVolumeChartCard from "../components/charts/OrderVolumeChartCard";
 import StatusBreakdownBar from "../components/charts/StatusBreakdownBar";
-import HourlyBarChart from "../components/charts/HourlyBarChart";
+import ProblemsHourlyChart from "../components/charts/ProblemsHourlyChart";
 import LocationBarList from "../components/charts/LocationBarList";
 import OrderFormModal from "../components/orders/OrderFormModal";
 import MonthlyOrderFormModal from "../components/monthly/MonthlyOrderFormModal";
@@ -15,7 +15,7 @@ import {
   getAttentionOrders,
   getAttentionOrdersForRole,
   canCreateOrders,
-  getOrderVolumeByDay,
+  getOrderVolumeWeekOverWeek,
   getOrdersByStatus,
   getProblemsByHour,
   getProblemsByLocation,
@@ -77,9 +77,9 @@ export default function Home() {
   const showAttention = role !== "Sales";
   const showQuickActions = canCreateOrders(role);
 
-  const volumeData = getOrderVolumeByDay(orders, 14);
-  const volumeTotal = volumeData.reduce((sum, d) => sum + d.count, 0);
+  const volumeData = getOrderVolumeWeekOverWeek(orders);
   const statusData = getOrdersByStatus(orders);
+  const completedDelta = metrics.completedToday - metrics.completedYesterday;
 
   const hourlyProblems = showAttention ? getProblemsByHour(orders, role) : [];
   const locationProblems = showAttention ? getProblemsByLocation(orders, role) : [];
@@ -108,28 +108,19 @@ export default function Home() {
         <MetricCard label="Pending Orders" value={metrics.pendingOrders} icon={ClockCircleIcon} accent="amber" />
         <MetricCard label="Active Orders" value={metrics.activeOrders} icon={BusIcon} accent="navy" />
         <MetricCard label="Available Drivers" value={metrics.availableDrivers} icon={BusIcon} accent="blue" />
-        <MetricCard label="Completed Today" value={metrics.completedToday} icon={CheckCircleIcon} accent="green" />
+        <MetricCard
+          label="Completed Today"
+          value={metrics.completedToday}
+          icon={CheckCircleIcon}
+          accent="green"
+          delta={`${completedDelta >= 0 ? "+" : ""}${completedDelta} vs yesterday`}
+          deltaColor={completedDelta > 0 ? "positive" : completedDelta < 0 ? "negative" : "neutral"}
+        />
       </div>
 
       {/* Volume trend + status mix */}
       <div className="grid lg:grid-cols-2 gap-3">
-        <InsightCard title="Order Volume" subtitle="Last 14 days">
-          <div>
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-2xl leading-none text-navy" style={{ fontFamily: "var(--font-heading)" }}>
-                {volumeTotal}
-              </span>
-              <span className="text-xs text-muted">orders</span>
-            </div>
-            <div className="mt-2">
-              <SparkAreaChart data={volumeData} />
-            </div>
-            <div className="flex justify-between text-[10px] text-muted mt-1" style={{ fontFamily: "var(--font-mono)" }}>
-              <span>{volumeData[0]?.label}</span>
-              <span>{volumeData[volumeData.length - 1]?.label}</span>
-            </div>
-          </div>
-        </InsightCard>
+        <OrderVolumeChartCard data={volumeData} />
 
         <InsightCard title="Orders by Status" subtitle={`${orders.length} total orders`}>
           <StatusBreakdownBar data={statusData} />
@@ -143,7 +134,7 @@ export default function Home() {
             {totalProblems === 0 ? (
               <div className="py-6 text-center text-xs text-muted">No open problems right now.</div>
             ) : (
-              <HourlyBarChart data={hourlyProblems} />
+              <ProblemsHourlyChart data={hourlyProblems} />
             )}
           </InsightCard>
 

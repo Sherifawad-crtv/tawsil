@@ -178,4 +178,5 @@ export interface HomeMetrics {
   activeOrders: number;
   availableDrivers: number;
   completedToday: number;
+  completedYesterday: number;
 }

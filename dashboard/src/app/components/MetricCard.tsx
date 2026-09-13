@@ -1,42 +1,45 @@
 import type { Icon as SolarIcon } from "@solar-icons/react/lib/types";
+import { Chip } from "./Chip";
+
+const ACCENT_ICON: Record<string, string> = {
+  blue: "text-blue",
+  navy: "text-royal",
+  amber: "text-status-pending",
+  green: "text-status-completed",
+};
 
 export default function MetricCard({
   label,
   value,
   icon: Icon,
   accent = "blue",
+  delta,
+  deltaColor,
 }: {
   label: string;
   value: number | string;
   icon: SolarIcon;
   accent?: "blue" | "navy" | "amber" | "green";
+  /** Comparison readout ("+2 vs yesterday") - omit when there's no honest baseline to compare against. */
+  delta?: string;
+  deltaColor?: "positive" | "negative" | "neutral";
 }) {
-  const accentBg: Record<string, string> = {
-    blue: "bg-blue-soft text-blue",
-    navy: "bg-[#EEEAFB] text-royal",
-    amber: "bg-[#FEF3E2] text-status-pending",
-    green: "bg-[#E7F6EC] text-status-completed",
-  };
-
   return (
-    <div className="rounded-[var(--radius-card)] bg-white border border-border p-4 flex items-center gap-3 shadow-[0_2px_12px_rgba(4,0,51,0.04)]">
-      <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${accentBg[accent]}`}>
-        <Icon size={17} strokeWidth={2.25} />
-      </div>
-      <div className="min-w-0">
-        <div
-          className="text-xl leading-none text-navy"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          {value}
-        </div>
-        <div
-          className="mt-1 text-[11px] text-muted uppercase tracking-wide leading-snug"
-          style={{ fontFamily: "var(--font-mono)" }}
-        >
+    <section className="flex flex-col items-start justify-between gap-3 rounded-2xl bg-tile p-3.5 min-w-0">
+      <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-white flex-shrink-0">
+        <Icon size={16} strokeWidth={2.25} className={ACCENT_ICON[accent]} />
+      </span>
+      <div className="flex flex-col gap-0.5 w-full min-w-0">
+        <p className="text-[12px] text-muted truncate" style={{ fontFamily: "var(--font-sub)" }}>
           {label}
+        </p>
+        <div className="flex items-center gap-2 flex-wrap">
+          <p className="text-lg leading-none text-navy whitespace-nowrap" style={{ fontFamily: "var(--font-heading)" }}>
+            {value}
+          </p>
+          {delta && <Chip color={deltaColor ?? "neutral"}>{delta}</Chip>}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { MagnifierIcon } from "@solar-icons/react/linear";
 
 export default function SearchInput({
   value,
@@ -11,7 +11,7 @@ export default function SearchInput({
 }) {
   return (
     <div className="relative flex-1 min-w-[180px]">
-      <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
+      <MagnifierIcon size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}

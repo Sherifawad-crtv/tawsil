@@ -1,4 +1,4 @@
-import { Star, Phone, Mail, IdCard, Ban, CheckCircle2 } from "lucide-react";
+import { StarIcon, PhoneIcon, LetterIcon, UserIdIcon, ForbiddenIcon, CheckCircleIcon } from "@solar-icons/react/linear";
 import { useDataStore } from "../lib/store";
 import { getActiveOrderCountForDriver } from "../lib/selectors";
 import { formatDate } from "../lib/format";
@@ -13,17 +13,17 @@ export default function DriverDetailPanel({ driver, onClose }: { driver: Driver;
       <div className="grid sm:grid-cols-3 gap-4">
         <div>
           <div className="text-xs text-muted uppercase tracking-wide mb-1.5" style={{ fontFamily: "var(--font-mono)" }}>Contact</div>
-          <div className="flex items-center gap-1.5 text-sm text-navy mb-1"><Mail size={13} className="text-muted" /> {driver.email}</div>
-          <div className="flex items-center gap-1.5 text-sm text-navy"><Phone size={13} className="text-muted" /> {driver.phone}</div>
+          <div className="flex items-center gap-1.5 text-sm text-navy mb-1"><LetterIcon size={13} className="text-muted" /> {driver.email}</div>
+          <div className="flex items-center gap-1.5 text-sm text-navy"><PhoneIcon size={13} className="text-muted" /> {driver.phone}</div>
         </div>
         <div>
           <div className="text-xs text-muted uppercase tracking-wide mb-1.5" style={{ fontFamily: "var(--font-mono)" }}>License Info</div>
-          <div className="flex items-center gap-1.5 text-sm text-navy mb-1"><IdCard size={13} className="text-muted" /> {driver.licenseNumber}</div>
+          <div className="flex items-center gap-1.5 text-sm text-navy mb-1"><UserIdIcon size={13} className="text-muted" /> {driver.licenseNumber}</div>
           <div className="text-sm text-muted">Expires {formatDate(driver.licenseExpiry)}</div>
         </div>
         <div>
           <div className="text-xs text-muted uppercase tracking-wide mb-1.5" style={{ fontFamily: "var(--font-mono)" }}>Statistics</div>
-          <div className="flex items-center gap-1.5 text-sm text-navy mb-1"><Star size={13} className="text-status-pending" /> {driver.rating.toFixed(2)} rating</div>
+          <div className="flex items-center gap-1.5 text-sm text-navy mb-1"><StarIcon size={13} className="text-status-pending" /> {driver.rating.toFixed(2)} rating</div>
           <div className="text-sm text-muted">{driver.totalTrips.toLocaleString()} trips · {activeOrders} active order(s)</div>
         </div>
       </div>
@@ -38,7 +38,7 @@ export default function DriverDetailPanel({ driver, onClose }: { driver: Driver;
           }`}
           style={{ fontFamily: "var(--font-sub)" }}
         >
-          {driver.active ? <><Ban size={13} /> Deactivate</> : <><CheckCircle2 size={13} /> Reactivate</>}
+          {driver.active ? <><ForbiddenIcon size={13} /> Deactivate</> : <><CheckCircleIcon size={13} /> Reactivate</>}
         </button>
       </div>
     </div>

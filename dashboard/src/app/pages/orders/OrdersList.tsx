@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Plus, Package } from "lucide-react";
+import { AddIcon, BoxIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import SearchInput from "../../components/SearchInput";
 import EmptyState from "../../components/EmptyState";
@@ -70,7 +70,7 @@ export default function OrdersList() {
               className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
               style={{ fontFamily: "var(--font-sub)" }}
             >
-              <Plus size={16} /> New Order
+              <AddIcon size={16} /> New Order
             </button>
           ) : undefined
         }
@@ -113,7 +113,7 @@ export default function OrdersList() {
 
       <div className="rounded-[var(--radius-card)] bg-white border border-border overflow-hidden shadow-[0_2px_12px_rgba(4,0,51,0.04)]">
         {filtered.length === 0 ? (
-          <EmptyState icon={Package} title="No orders match your filters" />
+          <EmptyState icon={BoxIcon} title="No orders match your filters" />
         ) : (
           filtered.map((order) => <OrderRow key={order.id} order={order} />)
         )}

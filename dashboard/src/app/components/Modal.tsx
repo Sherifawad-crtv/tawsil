@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { CloseIcon } from "@solar-icons/react/linear";
 import type { ReactNode } from "react";
 
 export default function Modal({
@@ -39,7 +39,7 @@ export default function Modal({
             className="p-1 rounded-lg hover:bg-grey-light cursor-pointer flex-shrink-0"
             aria-label="Close"
           >
-            <X size={16} className="text-navy" />
+            <CloseIcon size={16} className="text-navy" />
           </button>
         </div>
 

@@ -1,23 +1,21 @@
 import { NavLink } from "react-router";
-import {
-  LayoutGrid,
-  Package,
-  Truck,
-  Building2,
-  Users,
-  CalendarClock,
-  Settings,
-  X,
-} from "lucide-react";
+import { Widget2Icon } from "@solar-icons/react/linear";
+import { BoxIcon } from "@solar-icons/react/linear";
+import { BusIcon } from "@solar-icons/react/linear";
+import { Buildings2Icon } from "@solar-icons/react/linear";
+import { UsersGroupRoundedIcon } from "@solar-icons/react/linear";
+import { CalendarMarkIcon } from "@solar-icons/react/linear";
+import { SettingsIcon } from "@solar-icons/react/linear";
+import { CloseIcon } from "@solar-icons/react/linear";
 
 const NAV_ITEMS = [
-  { to: "/", label: "Home", icon: LayoutGrid, end: true },
-  { to: "/orders", label: "Orders", icon: Package },
-  { to: "/contractors", label: "Contractors", icon: Truck },
-  { to: "/clients", label: "Clients", icon: Building2 },
-  { to: "/resources", label: "Resources", icon: Users },
-  { to: "/monthly-orders", label: "Monthly Orders", icon: CalendarClock },
-  { to: "/settings", label: "Settings", icon: Settings },
+  { to: "/", label: "Home", icon: Widget2Icon, end: true },
+  { to: "/orders", label: "Orders", icon: BoxIcon },
+  { to: "/contractors", label: "Contractors", icon: BusIcon },
+  { to: "/clients", label: "Clients", icon: Buildings2Icon },
+  { to: "/resources", label: "Resources", icon: UsersGroupRoundedIcon },
+  { to: "/monthly-orders", label: "Monthly Orders", icon: CalendarMarkIcon },
+  { to: "/settings", label: "Settings", icon: SettingsIcon },
 ];
 
 export default function Sidebar({
@@ -52,7 +50,7 @@ export default function Sidebar({
             onClick={onClose}
             aria-label="Close menu"
           >
-            <X size={14} className="text-navy" />
+            <CloseIcon size={14} className="text-navy" />
           </button>
         </div>
 

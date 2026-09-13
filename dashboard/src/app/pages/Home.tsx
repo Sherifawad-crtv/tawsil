@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { Clock3, Truck, PackageCheck, PackagePlus, CalendarPlus, AlertTriangle } from "lucide-react";
+import { ClockCircleIcon, BusIcon, CheckCircleIcon, AddSquareIcon, CalendarAddIcon, DangerTriangleIcon } from "@solar-icons/react/linear";
 import MetricCard from "../components/MetricCard";
 import StatusBadge from "../components/StatusBadge";
 import OrderFormModal from "../components/orders/OrderFormModal";
@@ -21,7 +21,7 @@ function AttentionRow({ order }: { order: AttentionOrder }) {
       onClick={() => navigate(target)}
     >
       <div className="flex items-center gap-2.5 min-w-0 flex-1">
-        {flagged && <AlertTriangle size={15} className="text-status-pending flex-shrink-0" />}
+        {flagged && <DangerTriangleIcon size={15} className="text-status-pending flex-shrink-0" />}
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span
@@ -39,7 +39,7 @@ function AttentionRow({ order }: { order: AttentionOrder }) {
 
       <div className="flex items-center justify-between sm:justify-end gap-3 flex-shrink-0">
         <div className="flex items-center gap-1.5 text-xs text-muted" style={{ fontFamily: "var(--font-mono)" }}>
-          <Clock3 size={12} />
+          <ClockCircleIcon size={12} />
           {formatDuration(order.minutesInStatus)}
         </div>
         <button
@@ -83,10 +83,10 @@ export default function Home() {
 
       {/* Metrics strip */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <MetricCard label="Pending Orders" value={metrics.pendingOrders} icon={Clock3} accent="amber" />
-        <MetricCard label="Active Orders" value={metrics.activeOrders} icon={Truck} accent="navy" />
-        <MetricCard label="Available Drivers" value={metrics.availableDrivers} icon={Truck} accent="blue" />
-        <MetricCard label="Completed Today" value={metrics.completedToday} icon={PackageCheck} accent="green" />
+        <MetricCard label="Pending Orders" value={metrics.pendingOrders} icon={ClockCircleIcon} accent="amber" />
+        <MetricCard label="Active Orders" value={metrics.activeOrders} icon={BusIcon} accent="navy" />
+        <MetricCard label="Available Drivers" value={metrics.availableDrivers} icon={BusIcon} accent="blue" />
+        <MetricCard label="Completed Today" value={metrics.completedToday} icon={CheckCircleIcon} accent="green" />
       </div>
 
       {/* Attention-needed list - not shown to Sales, which only tracks orders */}
@@ -117,7 +117,7 @@ export default function Home() {
               className="flex items-center gap-3 rounded-[var(--radius-card)] bg-blue text-white p-3.5 text-left cursor-pointer active:scale-[0.98] transition-transform shadow-[0_4px_20px_rgba(18,83,250,0.25)] hover:brightness-110"
             >
               <div className="w-9 h-9 rounded-[var(--radius-control)] bg-white/15 flex items-center justify-center flex-shrink-0">
-                <PackagePlus size={18} />
+                <AddSquareIcon size={18} />
               </div>
               <div>
                 <div className="text-sm" style={{ fontFamily: "var(--font-heading)" }}>New Order</div>
@@ -130,7 +130,7 @@ export default function Home() {
               className="flex items-center gap-3 rounded-[var(--radius-card)] bg-white border border-border p-3.5 text-left cursor-pointer active:scale-[0.98] transition-transform hover:border-blue/40"
             >
               <div className="w-9 h-9 rounded-[var(--radius-control)] bg-blue-soft text-blue flex items-center justify-center flex-shrink-0">
-                <CalendarPlus size={18} />
+                <CalendarAddIcon size={18} />
               </div>
               <div>
                 <div className="text-sm text-navy" style={{ fontFamily: "var(--font-heading)" }}>New Monthly Order</div>

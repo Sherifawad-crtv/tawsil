@@ -1,4 +1,4 @@
-import { Ban, CheckCircle2, Calendar } from "lucide-react";
+import { ForbiddenIcon, CheckCircleIcon, CalendarIcon } from "@solar-icons/react/linear";
 import { useDataStore } from "../lib/store";
 import { getTruckType } from "../lib/selectors";
 import { truckTypeLabel } from "../lib/constants";
@@ -25,7 +25,7 @@ export default function VehicleDetailPanel({ vehicle, onClose }: { vehicle: Vehi
         </div>
         <div>
           <div className="text-xs text-muted uppercase tracking-wide mb-1.5" style={{ fontFamily: "var(--font-mono)" }}>License Expiry</div>
-          <div className="flex items-center gap-1.5 text-sm text-navy"><Calendar size={13} className="text-muted" /> {formatDate(vehicle.licenseExpiry)}</div>
+          <div className="flex items-center gap-1.5 text-sm text-navy"><CalendarIcon size={13} className="text-muted" /> {formatDate(vehicle.licenseExpiry)}</div>
         </div>
       </div>
       <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
@@ -39,7 +39,7 @@ export default function VehicleDetailPanel({ vehicle, onClose }: { vehicle: Vehi
           }`}
           style={{ fontFamily: "var(--font-sub)" }}
         >
-          {vehicle.active ? <><Ban size={13} /> Deactivate</> : <><CheckCircle2 size={13} /> Reactivate</>}
+          {vehicle.active ? <><ForbiddenIcon size={13} /> Deactivate</> : <><CheckCircleIcon size={13} /> Reactivate</>}
         </button>
       </div>
     </div>

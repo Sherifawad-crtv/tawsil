@@ -8,9 +8,9 @@ importers:
 
   .:
     dependencies:
-      lucide-react:
-        specifier: 0.487.0
-        version: 0.487.0(react@18.3.1)
+      '@solar-icons/react':
+        specifier: ^2.1.0
+        version: 2.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -452,6 +452,13 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@solar-icons/react@2.1.0':
+    resolution: {integrity: sha512-vwCmOYgcfmFk4VRtwztzIfB/HBRASsDhPj8eZPgeniJbY5ocuwiIVMasdubg4MxyB60TcXUbQRzpLEOjoIn4SA==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      react: '>= 16.8'
+      react-dom: '>= 16.8'
+
   '@tailwindcss/node@4.1.12':
     resolution: {integrity: sha512-3hm9brwvQkZFe++SBt+oLjo4OLDtkvlE8q2WalaD/7QWaeM7KEJbAiY/LJZUaCs7Xa8aUu4xy3uoyX4q54UVdQ==}
 
@@ -744,11 +751,6 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
-
-  lucide-react@0.487.0:
-    resolution: {integrity: sha512-aKqhOQ+YmFnwq8dWgGjOuLc8V1R9/c/yOd+zDY4+ohsR2Jo05lSGc3WsstYPIzcTpeosN7LoCkLReUUITvaIvw==}
-    peerDependencies:
-      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -1194,6 +1196,11 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.63.2':
     optional: true
 
+  '@solar-icons/react@2.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
   '@tailwindcss/node@4.1.12':
     dependencies:
       '@jridgewell/remapping': 2.3.5
@@ -1446,10 +1453,6 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
-
-  lucide-react@0.487.0(react@18.3.1):
-    dependencies:
-      react: 18.3.1
 
   magic-string@0.30.21:
     dependencies:

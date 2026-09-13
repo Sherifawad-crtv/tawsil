@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router";
-import { Plus, Truck, Users } from "lucide-react";
+import { AddIcon, BusIcon, UsersGroupRoundedIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import SearchInput from "../../components/SearchInput";
 import EmptyState from "../../components/EmptyState";
@@ -28,7 +28,7 @@ export default function ContractorsList() {
             className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
             style={{ fontFamily: "var(--font-sub)" }}
           >
-            <Plus size={16} /> Add Contractor
+            <AddIcon size={16} /> Add Contractor
           </button>
         }
       />
@@ -36,7 +36,7 @@ export default function ContractorsList() {
       <SearchInput value={search} onChange={setSearch} placeholder="Search contractors…" />
 
       {filtered.length === 0 ? (
-        <EmptyState icon={Truck} title="No contractors match your search" />
+        <EmptyState icon={BusIcon} title="No contractors match your search" />
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map(({ contractor, driverCount, vehicleCount }) => (
@@ -50,8 +50,8 @@ export default function ContractorsList() {
                 <ActiveBadge active={contractor.active} />
               </div>
               <div className="flex items-center gap-4 text-xs text-muted">
-                <span className="flex items-center gap-1.5"><Users size={13} /> {driverCount} drivers</span>
-                <span className="flex items-center gap-1.5"><Truck size={13} /> {vehicleCount} vehicles</span>
+                <span className="flex items-center gap-1.5"><UsersGroupRoundedIcon size={13} /> {driverCount} drivers</span>
+                <span className="flex items-center gap-1.5"><BusIcon size={13} /> {vehicleCount} vehicles</span>
               </div>
             </Link>
           ))}

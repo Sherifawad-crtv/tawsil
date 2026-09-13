@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PhoneCall } from "lucide-react";
+import { PhoneCallingIcon } from "@solar-icons/react/linear";
 import Modal from "../Modal";
 import { SelectField, TextareaField } from "../FormField";
 import { useDataStore } from "../../lib/store";
@@ -105,7 +105,7 @@ export default function AssignDriverModal({ order, onClose }: { order: Order; on
           className="flex items-center gap-2 text-xs font-semibold text-muted hover:text-navy cursor-pointer w-fit"
           style={{ fontFamily: "var(--font-sub)" }}
         >
-          <PhoneCall size={13} />
+          <PhoneCallingIcon size={13} />
           {manualMode ? "Cancel manual assignment" : "Manual assignment (phone-coordinated)"}
         </button>
 

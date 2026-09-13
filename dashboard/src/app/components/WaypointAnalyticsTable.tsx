@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { MapPinned } from "lucide-react";
+import { MapPointSearchIcon } from "@solar-icons/react/linear";
 import EmptyState from "./EmptyState";
 import CsvExportButton from "./CsvExportButton";
 import { waypointAnalytics } from "../lib/selectors";
@@ -47,7 +47,7 @@ export default function WaypointAnalyticsTable({ orders, filenamePrefix }: { ord
       </div>
 
       {rows.length === 0 ? (
-        <EmptyState icon={MapPinned} title="No waypoint data in this range" />
+        <EmptyState icon={MapPointSearchIcon} title="No waypoint data in this range" />
       ) : (
         <div className="overflow-x-auto rounded-[var(--radius-control)] border border-border">
           <table className="w-full text-sm">

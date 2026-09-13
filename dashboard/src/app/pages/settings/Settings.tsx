@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Plus, Pencil, AlertTriangle, Lock, Snowflake } from "lucide-react";
+import { AddIcon, Pen2Icon, DangerTriangleIcon, LockKeyholeIcon, SnowflakeIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import TruckTypeFormModal from "../../components/settings/TruckTypeFormModal";
 import { useDataStore } from "../../lib/store";
@@ -32,7 +32,7 @@ export default function Settings() {
               className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
               style={{ fontFamily: "var(--font-sub)" }}
             >
-              <Plus size={16} /> Add Truck Type
+              <AddIcon size={16} /> Add Truck Type
             </button>
           ) : undefined
         }
@@ -40,7 +40,7 @@ export default function Settings() {
 
       {!isAdmin && (
         <div className="flex items-center gap-2 px-4 py-2 rounded-[var(--radius-control)] bg-grey-light text-sm text-muted">
-          <Lock size={14} />
+          <LockKeyholeIcon size={14} />
           Viewing only — switch to <strong className="text-navy">Admin</strong> in the top-right role switcher to edit the rate card.
         </div>
       )}
@@ -67,7 +67,7 @@ export default function Settings() {
                       <td className="px-4 py-2.5 text-navy">
                         <span className="inline-flex items-center gap-1.5">
                           {t.config}
-                          {t.requiresTempControl && <Snowflake size={12} className="text-blue" />}
+                          {t.requiresTempControl && <SnowflakeIcon size={12} className="text-blue" />}
                         </span>
                       </td>
                       <td className="px-4 py-2.5 text-navy" style={{ fontFamily: "var(--font-mono)" }}>
@@ -75,7 +75,7 @@ export default function Settings() {
                           {formatEGP(t.dailyRentEGP)}
                           {t.flagged && (
                             <span title={t.flagNote}>
-                              <AlertTriangle size={13} className="text-status-pending" />
+                              <DangerTriangleIcon size={13} className="text-status-pending" />
                             </span>
                           )}
                         </span>
@@ -85,7 +85,7 @@ export default function Settings() {
                       {isAdmin && (
                         <td className="px-4 py-2.5">
                           <button onClick={() => setEditing(t)} className="p-1.5 rounded-lg hover:bg-grey-light cursor-pointer text-muted hover:text-navy">
-                            <Pencil size={14} />
+                            <Pen2Icon size={14} />
                           </button>
                         </td>
                       )}
@@ -96,7 +96,7 @@ export default function Settings() {
                       <td colSpan={isAdmin ? 6 : 5} className="px-4 pb-3 pt-0">
                         {types.filter((t) => t.flagged).map((t) => (
                           <div key={t.id} className="flex items-start gap-2 text-xs text-status-pending bg-[#FFF9EC] rounded-lg px-3 py-2">
-                            <AlertTriangle size={13} className="mt-0.5 flex-shrink-0" />
+                            <DangerTriangleIcon size={13} className="mt-0.5 flex-shrink-0" />
                             <span>{t.flagNote}</span>
                           </div>
                         ))}

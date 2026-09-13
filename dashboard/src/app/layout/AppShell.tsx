@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router";
-import { Menu, ChevronDown } from "lucide-react";
+import { HamburgerMenuIcon, AltArrowDownIcon } from "@solar-icons/react/linear";
 import Sidebar from "./Sidebar";
 import { useRole, ROLES } from "../lib/RoleContext";
 
@@ -19,7 +19,7 @@ export default function AppShell() {
             onClick={() => setNavOpen(true)}
             aria-label="Open menu"
           >
-            <Menu size={18} className="text-navy" />
+            <HamburgerMenuIcon size={18} className="text-navy" />
           </button>
 
           <div className="flex-1" />
@@ -38,7 +38,7 @@ export default function AppShell() {
                 </option>
               ))}
             </select>
-            <ChevronDown
+            <AltArrowDownIcon
               size={12}
               className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-muted"
             />

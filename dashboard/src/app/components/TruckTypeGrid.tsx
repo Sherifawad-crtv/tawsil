@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Snowflake, Check } from "lucide-react";
+import { SnowflakeIcon, CheckCircleIcon } from "@solar-icons/react/linear";
 import { TRUCK_TYPES } from "../lib/constants";
 import type { TruckBaseClass } from "../lib/types";
 import imgDababa from "../../assets/truck-dababa.png";
@@ -46,8 +46,8 @@ export default function TruckTypeGrid({ value, onChange }: { value: string; onCh
               }`}
             >
               {isActive && (
-                <div className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-blue flex items-center justify-center">
-                  <Check size={10} className="text-white" strokeWidth={3} />
+                <div className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-white flex items-center justify-center">
+                  <CheckCircleIcon size={16} className="text-blue" />
                 </div>
               )}
               <img src={BASE_CLASS_IMAGES[cls]} alt={cls} className="w-full h-14 object-contain" />
@@ -74,7 +74,7 @@ export default function TruckTypeGrid({ value, onChange }: { value: string; onCh
               >
                 <div className="flex items-center gap-1.5 text-[13px] font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
                   {t.config}
-                  {t.requiresTempControl && <Snowflake size={12} className="text-blue" />}
+                  {t.requiresTempControl && <SnowflakeIcon size={12} className="text-blue" />}
                 </div>
                 <div className="text-[11px] text-muted" style={{ fontFamily: "var(--font-mono)" }}>
                   {t.capacityMinT}–{t.capacityMaxT}t

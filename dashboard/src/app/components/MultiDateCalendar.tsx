@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AltArrowLeftIcon, AltArrowRightIcon } from "@solar-icons/react/linear";
 
 const WEEKDAYS = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -35,13 +35,13 @@ export default function MultiDateCalendar({ value, onChange }: { value: string[]
     <div className="rounded-[var(--radius-control)] border border-border p-4">
       <div className="flex items-center justify-between mb-3">
         <button type="button" onClick={() => changeMonth(-1)} className="p-1.5 rounded-lg hover:bg-grey-light cursor-pointer">
-          <ChevronLeft size={16} />
+          <AltArrowLeftIcon size={16} />
         </button>
         <span className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
           {new Date(viewYear, viewMonth).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
         </span>
         <button type="button" onClick={() => changeMonth(1)} className="p-1.5 rounded-lg hover:bg-grey-light cursor-pointer">
-          <ChevronRight size={16} />
+          <AltArrowRightIcon size={16} />
         </button>
       </div>
       <div className="grid grid-cols-7 gap-1 mb-1">

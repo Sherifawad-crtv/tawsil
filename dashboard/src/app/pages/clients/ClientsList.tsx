@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { Plus, Building2 } from "lucide-react";
+import { AddIcon, Buildings2Icon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import SearchInput from "../../components/SearchInput";
 import EmptyState from "../../components/EmptyState";
@@ -26,7 +26,7 @@ export default function ClientsList() {
             className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
             style={{ fontFamily: "var(--font-sub)" }}
           >
-            <Plus size={16} /> Add Client
+            <AddIcon size={16} /> Add Client
           </button>
         }
       />
@@ -34,7 +34,7 @@ export default function ClientsList() {
       <SearchInput value={search} onChange={setSearch} placeholder="Search clients…" />
 
       {filtered.length === 0 ? (
-        <EmptyState icon={Building2} title="No clients match your search" />
+        <EmptyState icon={Buildings2Icon} title="No clients match your search" />
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((client) => {

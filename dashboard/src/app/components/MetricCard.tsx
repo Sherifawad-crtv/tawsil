@@ -1,4 +1,4 @@
-import type { LucideIcon } from "lucide-react";
+import type { Icon as SolarIcon } from "@solar-icons/react/lib/types";
 
 export default function MetricCard({
   label,
@@ -8,7 +8,7 @@ export default function MetricCard({
 }: {
   label: string;
   value: number | string;
-  icon: LucideIcon;
+  icon: SolarIcon;
   accent?: "blue" | "navy" | "amber" | "green";
 }) {
   const accentBg: Record<string, string> = {

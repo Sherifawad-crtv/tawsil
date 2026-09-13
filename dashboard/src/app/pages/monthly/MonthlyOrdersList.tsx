@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { Plus, CalendarClock } from "lucide-react";
+import { AddIcon, CalendarMarkIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import EmptyState from "../../components/EmptyState";
 import MonthlyOrderFormModal from "../../components/monthly/MonthlyOrderFormModal";
@@ -22,13 +22,13 @@ export default function MonthlyOrdersList() {
             className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
             style={{ fontFamily: "var(--font-sub)" }}
           >
-            <Plus size={16} /> New Monthly Order
+            <AddIcon size={16} /> New Monthly Order
           </button>
         }
       />
 
       {monthlyOrders.length === 0 ? (
-        <EmptyState icon={CalendarClock} title="No monthly contracts yet" />
+        <EmptyState icon={CalendarMarkIcon} title="No monthly contracts yet" />
       ) : (
         <div className="flex flex-col gap-3">
           {monthlyOrders.map((contract) => {

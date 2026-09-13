@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
-import { ArrowLeft, User, Truck as TruckIcon, MapPin, Camera, PackagePlus, Pencil, Ban, Navigation, RotateCcw } from "lucide-react";
+import { ArrowLeftIcon, UserIcon, MapPointIcon, CameraIcon, UserPlusRoundedIcon, Pen2Icon, ForbiddenIcon, RoutingIcon, RestartIcon } from "@solar-icons/react/linear";
 import StatusBadge from "../../components/StatusBadge";
 import StatusHistoryList from "../../components/orders/StatusHistoryList";
 import BiddingWidget from "../../components/orders/BiddingWidget";
@@ -49,7 +49,7 @@ export default function OrderDetail() {
         onClick={() => navigate("/orders")}
         className="flex items-center gap-1.5 text-sm text-muted hover:text-navy cursor-pointer w-fit"
       >
-        <ArrowLeft size={15} /> Back to Orders
+        <ArrowLeftIcon size={15} /> Back to Orders
       </button>
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -70,26 +70,26 @@ export default function OrderDetail() {
               className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110 shadow-[0_4px_16px_rgba(18,83,250,0.25)]"
               style={{ fontFamily: "var(--font-sub)" }}
             >
-              <PackagePlus size={16} /> Assign Driver
+              <UserPlusRoundedIcon size={16} /> Assign Driver
             </button>
           )}
           {canEditCancel && (
             <>
               <button onClick={() => setShowEdit(true)} className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
-                <Pencil size={14} /> Edit
+                <Pen2Icon size={14} /> Edit
               </button>
               <button onClick={handleCancel} className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-status-cancelled cursor-pointer hover:bg-[#FDECEC]" style={{ fontFamily: "var(--font-sub)" }}>
-                <Ban size={14} /> Cancel
+                <ForbiddenIcon size={14} /> Cancel
               </button>
             </>
           )}
           {order.status === "Completed" && (
             <>
               <button className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
-                <Navigation size={14} /> Track Order
+                <RoutingIcon size={14} /> Track Order
               </button>
               <button onClick={() => setShowReorder(true)} className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-navy text-white text-sm font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
-                <RotateCcw size={14} /> Reorder
+                <RestartIcon size={14} /> Reorder
               </button>
             </>
           )}
@@ -113,7 +113,7 @@ export default function OrderDetail() {
               </div>
             ) : (
               <div className="flex items-center gap-3 px-4 py-2 rounded-[var(--radius-control)] bg-grey-light/60">
-                <User size={16} className="text-muted" />
+                <UserIcon size={16} className="text-muted" />
                 <span className="text-sm text-muted font-medium">Not Assigned</span>
               </div>
             )}
@@ -143,14 +143,14 @@ export default function OrderDetail() {
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Delivery</h3>
               <div className="flex items-center gap-1.5 text-xs text-muted">
-                <Camera size={13} />
+                <CameraIcon size={13} />
                 POD {order.podRequired ? (order.podUploaded ? "uploaded" : "required — pending") : "not required"}
               </div>
             </div>
             <div className="flex flex-col gap-2.5">
               {order.waypoints.map((wp) => (
                 <div key={wp.id} className="flex items-start gap-3">
-                  <MapPin size={14} className={`mt-0.5 flex-shrink-0 ${wp.type === "Pickup" ? "text-navy" : "text-blue"}`} />
+                  <MapPointIcon size={14} className={`mt-0.5 flex-shrink-0 ${wp.type === "Pickup" ? "text-navy" : "text-blue"}`} />
                   <div className="min-w-0">
                     <div className="text-sm text-navy">
                       <span className="font-semibold">{wp.type}</span> · {wp.name}

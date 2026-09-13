@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router";
-import { ArrowLeft, Clock, CalendarDays, Package } from "lucide-react";
+import { ArrowLeftIcon, ClockCircleIcon, CalendarDateIcon, BoxIcon } from "@solar-icons/react/linear";
 import EmptyState from "../../components/EmptyState";
 import OrderRow from "../../components/OrderRow";
 import { useDataStore } from "../../lib/store";
@@ -34,7 +34,7 @@ export default function MonthlyOrderDetail() {
   return (
     <div className="flex flex-col gap-6">
       <button onClick={() => navigate("/monthly-orders")} className="flex items-center gap-1.5 text-sm text-muted hover:text-navy cursor-pointer w-fit">
-        <ArrowLeft size={15} /> Back to Monthly Orders
+        <ArrowLeftIcon size={15} /> Back to Monthly Orders
       </button>
 
       <div>
@@ -43,7 +43,7 @@ export default function MonthlyOrderDetail() {
       </div>
 
       <div className="grid sm:grid-cols-4 gap-4">
-        <StatTile icon={Clock} label="Daily Time" value={contract.dailyPickupTime} />
+        <StatTile icon={ClockCircleIcon} label="Daily Time" value={contract.dailyPickupTime} />
         <StatTile label="Total Days" value={String(total)} />
         <StatTile label="Executed" value={String(executedCount)} accent="green" />
         <StatTile label="Remaining" value={String(remaining)} accent={remaining <= 2 ? "amber" : undefined} />
@@ -58,7 +58,7 @@ export default function MonthlyOrderDetail() {
           <div className="h-full bg-blue rounded-full" style={{ width: `${pct}%` }} />
         </div>
         <div className="flex items-center gap-2 mb-2">
-          <CalendarDays size={14} className="text-muted" />
+          <CalendarDateIcon size={14} className="text-muted" />
           <span className="text-xs text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>Execution Calendar</span>
         </div>
         <div className="flex flex-wrap gap-1.5">
@@ -91,7 +91,7 @@ export default function MonthlyOrderDetail() {
         <h3 className="text-sm font-semibold text-navy mb-3" style={{ fontFamily: "var(--font-sub)" }}>Spawned Orders</h3>
         <div className="rounded-[var(--radius-card)] bg-white border border-border overflow-hidden">
           {spawnedOrders.length === 0 ? (
-            <EmptyState icon={Package} title="No orders generated yet" note="This contract is still a Draft." />
+            <EmptyState icon={BoxIcon} title="No orders generated yet" note="This contract is still a Draft." />
           ) : (
             spawnedOrders.map((order) => <OrderRow key={order.id} order={order} />)
           )}

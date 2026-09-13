@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
-import { ArrowLeft, Mail, Phone, Plus, Star, Users, Truck, Package } from "lucide-react";
+import { ArrowLeftIcon, LetterIcon, PhoneIcon, AddIcon, StarIcon, UsersGroupRoundedIcon, BusIcon, BoxIcon } from "@solar-icons/react/linear";
 import Tabs from "../../components/Tabs";
 import ActiveBadge from "../../components/ActiveBadge";
 import EmptyState from "../../components/EmptyState";
@@ -42,7 +42,7 @@ export default function ContractorDetail() {
   return (
     <div className="flex flex-col gap-6">
       <button onClick={() => navigate("/contractors")} className="flex items-center gap-1.5 text-sm text-muted hover:text-navy cursor-pointer w-fit">
-        <ArrowLeft size={15} /> Back to Contractors
+        <ArrowLeftIcon size={15} /> Back to Contractors
       </button>
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -54,8 +54,8 @@ export default function ContractorDetail() {
             </button>
           </div>
           <div className="flex items-center gap-4 mt-1.5 text-sm text-muted flex-wrap">
-            <span className="flex items-center gap-1.5"><Mail size={13} /> {contractor.email}</span>
-            <span className="flex items-center gap-1.5"><Phone size={13} /> {contractor.phone}</span>
+            <span className="flex items-center gap-1.5"><LetterIcon size={13} /> {contractor.email}</span>
+            <span className="flex items-center gap-1.5"><PhoneIcon size={13} /> {contractor.phone}</span>
           </div>
         </div>
       </div>
@@ -66,11 +66,11 @@ export default function ContractorDetail() {
         <div>
           <div className="flex justify-end mb-3">
             <button onClick={() => setShowAddDriver(true)} className="flex items-center gap-2 px-3.5 py-2 rounded-[var(--radius-control)] bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
-              <Plus size={14} /> Add Driver
+              <AddIcon size={14} /> Add Driver
             </button>
           </div>
           {contractorDrivers.length === 0 ? (
-            <EmptyState icon={Users} title="No drivers yet" />
+            <EmptyState icon={UsersGroupRoundedIcon} title="No drivers yet" />
           ) : (
             <div className="flex flex-col gap-2.5">
               {contractorDrivers.map((driver) => (
@@ -85,7 +85,7 @@ export default function ContractorDetail() {
                     </div>
                     <div className="flex items-center gap-3 flex-shrink-0">
                       <span className="flex items-center gap-1 text-xs text-navy" style={{ fontFamily: "var(--font-mono)" }}>
-                        <Star size={12} className="text-status-pending" /> {driver.rating.toFixed(2)}
+                        <StarIcon size={12} className="text-status-pending" /> {driver.rating.toFixed(2)}
                       </span>
                       <ActiveBadge active={driver.active} />
                     </div>
@@ -102,11 +102,11 @@ export default function ContractorDetail() {
         <div>
           <div className="flex justify-end mb-3">
             <button onClick={() => setShowAddVehicle(true)} className="flex items-center gap-2 px-3.5 py-2 rounded-[var(--radius-control)] bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
-              <Plus size={14} /> Add Vehicle
+              <AddIcon size={14} /> Add Vehicle
             </button>
           </div>
           {contractorVehicles.length === 0 ? (
-            <EmptyState icon={Truck} title="No vehicles yet" />
+            <EmptyState icon={BusIcon} title="No vehicles yet" />
           ) : (
             <div className="flex flex-col gap-2.5">
               {contractorVehicles.map((vehicle) => (
@@ -132,7 +132,7 @@ export default function ContractorDetail() {
       {tab === "Orders" && (
         <div className="rounded-[var(--radius-card)] bg-white border border-border overflow-hidden">
           {contractorOrders.length === 0 ? (
-            <EmptyState icon={Package} title="No orders yet" />
+            <EmptyState icon={BoxIcon} title="No orders yet" />
           ) : (
             contractorOrders.map((order) => <OrderRow key={order.id} order={order} />)
           )}

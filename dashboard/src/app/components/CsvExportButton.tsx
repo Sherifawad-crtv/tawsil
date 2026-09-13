@@ -1,4 +1,4 @@
-import { Download } from "lucide-react";
+import { DownloadIcon } from "@solar-icons/react/linear";
 
 export default function CsvExportButton({ filename, rows, headers }: { filename: string; rows: (string | number)[][]; headers: string[] }) {
   function handleExport() {
@@ -22,7 +22,7 @@ export default function CsvExportButton({ filename, rows, headers }: { filename:
       className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-[12px] font-semibold text-navy cursor-pointer hover:border-blue/40 transition-colors"
       style={{ fontFamily: "var(--font-sub)" }}
     >
-      <Download size={13} />
+      <DownloadIcon size={13} />
       Export CSV
     </button>
   );

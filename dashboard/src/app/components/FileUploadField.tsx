@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UploadCloud, FileText, X } from "lucide-react";
+import { CloudUploadIcon, FileTextIcon, CloseIcon } from "@solar-icons/react/linear";
 
 export default function FileUploadField({
   label,
@@ -20,7 +20,7 @@ export default function FileUploadField({
       </label>
       {fileName ? (
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-grey-light">
-          <FileText size={16} className="text-blue flex-shrink-0" />
+          <FileTextIcon size={16} className="text-blue flex-shrink-0" />
           <span className="text-sm text-navy truncate flex-1" style={{ fontFamily: "var(--font-mono)" }}>
             {fileName}
           </span>
@@ -32,12 +32,12 @@ export default function FileUploadField({
             }}
             className="p-1 rounded hover:bg-white cursor-pointer flex-shrink-0"
           >
-            <X size={14} className="text-muted" />
+            <CloseIcon size={14} className="text-muted" />
           </button>
         </div>
       ) : (
         <label className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-control)] border border-dashed border-border bg-grey-light cursor-pointer hover:border-blue/40 transition-colors">
-          <UploadCloud size={16} className="text-muted flex-shrink-0" />
+          <CloudUploadIcon size={16} className="text-muted flex-shrink-0" />
           <span className="text-sm text-muted">Upload PDF</span>
           <input
             type="file"

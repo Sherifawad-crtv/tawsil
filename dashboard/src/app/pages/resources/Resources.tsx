@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Star, Users, Truck } from "lucide-react";
+import { StarIcon, UsersGroupRoundedIcon, BusIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import Tabs from "../../components/Tabs";
 import ActiveBadge from "../../components/ActiveBadge";
@@ -64,7 +64,7 @@ export default function Resources() {
 
       {tab === "Drivers" &&
         (filteredDrivers.length === 0 ? (
-          <EmptyState icon={Users} title="No drivers match your filters" />
+          <EmptyState icon={UsersGroupRoundedIcon} title="No drivers match your filters" />
         ) : (
           <div className="flex flex-col gap-2.5">
             {filteredDrivers.map((driver) => {
@@ -79,7 +79,7 @@ export default function Resources() {
                     </div>
                     <div className="flex items-center gap-3 flex-shrink-0">
                       <span className="flex items-center gap-1 text-xs text-navy" style={{ fontFamily: "var(--font-mono)" }}>
-                        <Star size={12} className="text-status-pending" /> {driver.rating.toFixed(2)}
+                        <StarIcon size={12} className="text-status-pending" /> {driver.rating.toFixed(2)}
                       </span>
                       {currentOrder && (
                         <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold text-blue bg-blue-soft" style={{ fontFamily: "var(--font-mono)" }}>
@@ -98,7 +98,7 @@ export default function Resources() {
 
       {tab === "Vehicles" &&
         (filteredVehicles.length === 0 ? (
-          <EmptyState icon={Truck} title="No vehicles match your filters" />
+          <EmptyState icon={BusIcon} title="No vehicles match your filters" />
         ) : (
           <div className="flex flex-col gap-2.5">
             {filteredVehicles.map((vehicle) => {

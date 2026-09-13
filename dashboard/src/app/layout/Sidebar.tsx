@@ -1,21 +1,32 @@
 import { NavLink } from "react-router";
-import { Widget2Icon } from "@solar-icons/react/linear";
-import { BoxIcon } from "@solar-icons/react/linear";
-import { BusIcon } from "@solar-icons/react/linear";
-import { Buildings2Icon } from "@solar-icons/react/linear";
-import { UsersGroupRoundedIcon } from "@solar-icons/react/linear";
-import { CalendarMarkIcon } from "@solar-icons/react/linear";
-import { SettingsIcon } from "@solar-icons/react/linear";
 import { CloseIcon } from "@solar-icons/react/linear";
+import {
+  Widget2Icon as Widget2LinearIcon,
+  BoxIcon as BoxLinearIcon,
+  BusIcon as BusLinearIcon,
+  Buildings2Icon as Buildings2LinearIcon,
+  UsersGroupRoundedIcon as UsersGroupRoundedLinearIcon,
+  CalendarMarkIcon as CalendarMarkLinearIcon,
+  SettingsIcon as SettingsLinearIcon,
+} from "@solar-icons/react/linear";
+import {
+  Widget2Icon as Widget2BoldIcon,
+  BoxIcon as BoxBoldIcon,
+  BusIcon as BusBoldIcon,
+  Buildings2Icon as Buildings2BoldIcon,
+  UsersGroupRoundedIcon as UsersGroupRoundedBoldIcon,
+  CalendarMarkIcon as CalendarMarkBoldIcon,
+  SettingsIcon as SettingsBoldIcon,
+} from "@solar-icons/react/bold";
 
 const NAV_ITEMS = [
-  { to: "/", label: "Home", icon: Widget2Icon, end: true },
-  { to: "/orders", label: "Orders", icon: BoxIcon },
-  { to: "/contractors", label: "Contractors", icon: BusIcon },
-  { to: "/clients", label: "Clients", icon: Buildings2Icon },
-  { to: "/resources", label: "Resources", icon: UsersGroupRoundedIcon },
-  { to: "/monthly-orders", label: "Monthly Orders", icon: CalendarMarkIcon },
-  { to: "/settings", label: "Settings", icon: SettingsIcon },
+  { to: "/", label: "Home", iconOutline: Widget2LinearIcon, iconFilled: Widget2BoldIcon, end: true },
+  { to: "/orders", label: "Orders", iconOutline: BoxLinearIcon, iconFilled: BoxBoldIcon },
+  { to: "/contractors", label: "Contractors", iconOutline: BusLinearIcon, iconFilled: BusBoldIcon },
+  { to: "/clients", label: "Clients", iconOutline: Buildings2LinearIcon, iconFilled: Buildings2BoldIcon },
+  { to: "/resources", label: "Resources", iconOutline: UsersGroupRoundedLinearIcon, iconFilled: UsersGroupRoundedBoldIcon },
+  { to: "/monthly-orders", label: "Monthly Orders", iconOutline: CalendarMarkLinearIcon, iconFilled: CalendarMarkBoldIcon },
+  { to: "/settings", label: "Settings", iconOutline: SettingsLinearIcon, iconFilled: SettingsBoldIcon },
 ];
 
 export default function Sidebar({
@@ -55,7 +66,7 @@ export default function Sidebar({
         </div>
 
         <nav className="flex-1 px-2 py-1.5 flex flex-col gap-px overflow-y-auto">
-          {NAV_ITEMS.map(({ to, label, icon: Icon, end }) => (
+          {NAV_ITEMS.map(({ to, label, iconOutline: IconOutline, iconFilled: IconFilled, end }) => (
             <NavLink
               key={to}
               to={to}
@@ -71,12 +82,19 @@ export default function Sidebar({
                 fontFamily: "var(--font-sub)",
               })}
             >
-              {({ isActive }) => (
-                <>
-                  <Icon size={15} strokeWidth={2} color={isActive ? "#1253FA" : "#6B7280"} className="flex-shrink-0" />
-                  {label}
-                </>
-              )}
+              {({ isActive }) =>
+                isActive ? (
+                  <>
+                    <IconFilled size={15} color="#1253FA" className="flex-shrink-0" />
+                    {label}
+                  </>
+                ) : (
+                  <>
+                    <IconOutline size={15} strokeWidth={2} color="#6B7280" className="flex-shrink-0" />
+                    {label}
+                  </>
+                )
+              }
             </NavLink>
           ))}
         </nav>

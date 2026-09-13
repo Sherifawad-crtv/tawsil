@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
-import { ArrowLeftIcon, LetterIcon, PhoneIcon, AddIcon, MapPointIcon, BoxIcon, BookmarkIcon } from "@solar-icons/react/linear";
+import { ArrowLeftIcon, LetterIcon, PhoneIcon, AddIcon, MapPointIcon, BookmarkIcon } from "@solar-icons/react/linear";
 import Tabs from "../../components/Tabs";
 import { Button } from "../../components/Button";
 import ActiveBadge from "../../components/ActiveBadge";
 import EmptyState from "../../components/EmptyState";
-import OrderRow from "../../components/OrderRow";
+import OrdersTable from "../../components/OrdersTable";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "../../components/Table";
 import AddLocationModal from "../../components/AddLocationModal";
 import WaypointAnalyticsTable from "../../components/WaypointAnalyticsTable";
 import { useDataStore } from "../../lib/store";
@@ -54,13 +55,7 @@ export default function ClientDetail() {
       <Tabs tabs={TABS} active={tab} onChange={setTab} />
 
       {tab === "Orders" && (
-        <div className="rounded-2xl bg-tile overflow-hidden">
-          {clientOrders.length === 0 ? (
-            <EmptyState icon={BoxIcon} title="No orders yet" />
-          ) : (
-            clientOrders.map((order) => <OrderRow key={order.id} order={order} />)
-          )}
-        </div>
+        <OrdersTable orders={clientOrders} />
       )}
 
       {tab === "Saved Locations" && (
@@ -70,31 +65,41 @@ export default function ClientDetail() {
               Add Location
             </Button>
           </div>
-          {clientLocations.length === 0 ? (
-            <EmptyState icon={BookmarkIcon} title="No saved locations yet" />
-          ) : (
-            <div className="grid sm:grid-cols-2 gap-3">
+          <Table aria-label="Saved locations">
+            <TableHeader>
+              <TableColumn isRowHeader>Location</TableColumn>
+              <TableColumn>Address</TableColumn>
+              <TableColumn>Tags</TableColumn>
+              <TableColumn>Contact</TableColumn>
+            </TableHeader>
+            <TableBody renderEmptyState={() => <EmptyState icon={BookmarkIcon} title="No saved locations yet" />}>
               {clientLocations.map((loc) => (
-                <div key={loc.id} className="rounded-2xl bg-tile p-4">
-                  <div className="flex items-start gap-2">
-                    <MapPointIcon size={15} className="text-blue mt-0.5 flex-shrink-0" />
-                    <div className="min-w-0">
-                      <div className="text-body-semibold text-navy">{loc.name}</div>
-                      <div className="text-caption-1-regular text-muted mt-0.5">{loc.address}</div>
-                      {loc.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 mt-2">
-                          {loc.tags.map((tag) => (
-                            <span key={tag} className="px-2 py-0.5 rounded-md text-caption-2-semibold text-royal bg-[#EEEAFB]" style={{ fontFamily: "var(--font-mono)" }}>{tag}</span>
-                          ))}
-                        </div>
-                      )}
-                      {loc.contactName && <div className="text-caption-1-regular text-muted mt-2">{loc.contactName} · {loc.contactPhone}</div>}
-                    </div>
-                  </div>
-                </div>
+                <TableRow key={loc.id} id={loc.id}>
+                  <TableCell>
+                    <span className="flex items-center gap-2">
+                      <MapPointIcon size={15} className="text-blue flex-shrink-0" />
+                      <span className="text-body-semibold text-navy">{loc.name}</span>
+                    </span>
+                  </TableCell>
+                  <TableCell className="text-muted">{loc.address}</TableCell>
+                  <TableCell>
+                    {loc.tags.length > 0 ? (
+                      <span className="flex flex-wrap gap-1.5">
+                        {loc.tags.map((tag) => (
+                          <span key={tag} className="px-2 py-0.5 rounded-md text-caption-2-semibold text-royal bg-[#EEEAFB]" style={{ fontFamily: "var(--font-mono)" }}>{tag}</span>
+                        ))}
+                      </span>
+                    ) : (
+                      <span className="text-muted">—</span>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-muted">
+                    {loc.contactName ? `${loc.contactName} · ${loc.contactPhone}` : "—"}
+                  </TableCell>
+                </TableRow>
               ))}
-            </div>
-          )}
+            </TableBody>
+          </Table>
         </div>
       )}
 

@@ -1,9 +1,8 @@
 import { useMemo, useState } from "react";
-import { AddIcon, BoxIcon } from "@solar-icons/react/linear";
+import { AddIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import SearchInput from "../../components/SearchInput";
-import EmptyState from "../../components/EmptyState";
-import OrderRow from "../../components/OrderRow";
+import OrdersTable from "../../components/OrdersTable";
 import OrderFormModal from "../../components/orders/OrderFormModal";
 import { Button } from "../../components/Button";
 import { Select } from "../../components/Select";
@@ -101,13 +100,7 @@ export default function OrdersList() {
         />
       </div>
 
-      <div className="rounded-2xl bg-tile overflow-hidden">
-        {filtered.length === 0 ? (
-          <EmptyState icon={BoxIcon} title="No orders match your filters" />
-        ) : (
-          filtered.map((order) => <OrderRow key={order.id} order={order} />)
-        )}
-      </div>
+      <OrdersTable orders={filtered} emptyTitle="No orders match your filters" />
 
       {showCreate && <OrderFormModal mode="create" onClose={() => setShowCreate(false)} />}
     </div>

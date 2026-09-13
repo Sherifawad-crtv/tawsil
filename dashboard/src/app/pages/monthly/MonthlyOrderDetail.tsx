@@ -1,9 +1,8 @@
 import { useParams, useNavigate, Link } from "react-router";
 import { Calendar } from "react-aria-components";
 import { parseDate } from "@internationalized/date";
-import { ArrowLeftIcon, ClockCircleIcon, CalendarDateIcon, BoxIcon } from "@solar-icons/react/linear";
-import EmptyState from "../../components/EmptyState";
-import OrderRow from "../../components/OrderRow";
+import { ArrowLeftIcon, ClockCircleIcon, CalendarDateIcon } from "@solar-icons/react/linear";
+import OrdersTable from "../../components/OrdersTable";
 import { MonthPanel } from "../../components/date-picker/shared";
 import { useMediaQuery } from "../../lib/useMediaQuery";
 import { useDataStore } from "../../lib/store";
@@ -116,13 +115,11 @@ export default function MonthlyOrderDetail() {
 
       <div>
         <h3 className="text-body-semibold text-navy mb-3" style={{ fontFamily: "var(--font-sub)" }}>Spawned Orders</h3>
-        <div className="rounded-2xl bg-tile overflow-hidden">
-          {spawnedOrders.length === 0 ? (
-            <EmptyState icon={BoxIcon} title="No orders generated yet" note="This contract is still a Draft." />
-          ) : (
-            spawnedOrders.map((order) => <OrderRow key={order.id} order={order} />)
-          )}
-        </div>
+        <OrdersTable
+          orders={spawnedOrders}
+          emptyTitle="No orders generated yet"
+          emptyNote="This contract is still a Draft."
+        />
       </div>
     </div>
   );

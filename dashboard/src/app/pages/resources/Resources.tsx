@@ -1,25 +1,19 @@
 import { useMemo, useState } from "react";
-import { StarIcon, UsersGroupRoundedIcon, BusIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import Tabs from "../../components/Tabs";
-import ActiveBadge from "../../components/ActiveBadge";
-import EmptyState from "../../components/EmptyState";
-import DriverDetailPanel from "../../components/DriverDetailPanel";
-import VehicleDetailPanel from "../../components/VehicleDetailPanel";
+import DriversTable from "../../components/DriversTable";
+import VehiclesTable from "../../components/VehiclesTable";
 import { useDataStore } from "../../lib/store";
-import { byId, getTruckType, getCurrentOrderForDriver, getCurrentOrderForVehicle } from "../../lib/selectors";
-import { truckTypeLabel } from "../../lib/constants";
 import { Select } from "../../components/Select";
 
 const TABS = ["Drivers", "Vehicles"];
 type StatusFilter = "All" | "Active" | "Inactive";
 
 export default function Resources() {
-  const { drivers, vehicles, contractors, orders } = useDataStore();
+  const { drivers, vehicles, contractors } = useDataStore();
   const [tab, setTab] = useState("Drivers");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
   const [contractorFilter, setContractorFilter] = useState("All");
-  const [expanded, setExpanded] = useState<string | null>(null);
 
   const filteredDrivers = useMemo(
     () =>
@@ -47,7 +41,7 @@ export default function Resources() {
     <div className="flex flex-col gap-6">
       <PageHeader title="Resources" subtitle={`${drivers.length} drivers · ${vehicles.length} vehicles fleet-wide`} />
 
-      <Tabs tabs={TABS} active={tab} onChange={(t) => { setTab(t); setExpanded(null); }} />
+      <Tabs tabs={TABS} active={tab} onChange={setTab} />
 
       <div className="flex items-center gap-3 flex-wrap">
         <Select
@@ -68,70 +62,10 @@ export default function Resources() {
         />
       </div>
 
-      {tab === "Drivers" &&
-        (filteredDrivers.length === 0 ? (
-          <EmptyState icon={UsersGroupRoundedIcon} title="No drivers match your filters" />
-        ) : (
-          <div className="flex flex-col gap-2.5">
-            {filteredDrivers.map((driver) => {
-              const contractor = byId(contractors, driver.contractorId);
-              const currentOrder = getCurrentOrderForDriver(orders, driver.id);
-              return (
-                <div key={driver.id} className="rounded-2xl bg-tile p-4">
-                  <button onClick={() => setExpanded(expanded === driver.id ? null : driver.id)} className="w-full flex items-center justify-between gap-4 cursor-pointer text-left">
-                    <div className="min-w-0">
-                      <div className="text-body-semibold text-navy">{driver.name}</div>
-                      <div className="text-caption-1-regular text-muted mt-0.5">{contractor?.name ?? "—"}</div>
-                    </div>
-                    <div className="flex items-center gap-3 flex-shrink-0">
-                      <span className="flex items-center gap-1 text-caption-1-regular text-navy" style={{ fontFamily: "var(--font-mono)" }}>
-                        <StarIcon size={12} className="text-status-pending" /> {driver.rating.toFixed(2)}
-                      </span>
-                      {currentOrder && (
-                        <span className="px-2 py-0.5 rounded-md text-caption-2-semibold text-blue bg-blue-soft" style={{ fontFamily: "var(--font-mono)" }}>
-                          On {currentOrder.id}
-                        </span>
-                      )}
-                      <ActiveBadge active={driver.active} />
-                    </div>
-                  </button>
-                  {expanded === driver.id && <DriverDetailPanel driver={driver} onClose={() => setExpanded(null)} />}
-                </div>
-              );
-            })}
-          </div>
-        ))}
+      {tab === "Drivers" && <DriversTable drivers={filteredDrivers} emptyTitle="No drivers match your filters" />}
 
-      {tab === "Vehicles" &&
-        (filteredVehicles.length === 0 ? (
-          <EmptyState icon={BusIcon} title="No vehicles match your filters" />
-        ) : (
-          <div className="flex flex-col gap-2.5">
-            {filteredVehicles.map((vehicle) => {
-              const contractor = byId(contractors, vehicle.contractorId);
-              const currentOrder = getCurrentOrderForVehicle(orders, vehicle.id);
-              return (
-                <div key={vehicle.id} className="rounded-2xl bg-tile p-4">
-                  <button onClick={() => setExpanded(expanded === vehicle.id ? null : vehicle.id)} className="w-full flex items-center justify-between gap-4 cursor-pointer text-left">
-                    <div className="min-w-0">
-                      <div className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>{vehicle.plateNumber}</div>
-                      <div className="text-caption-1-regular text-muted mt-0.5">{truckTypeLabel(getTruckType(vehicle.truckTypeId))} · {contractor?.name ?? "—"}</div>
-                    </div>
-                    <div className="flex items-center gap-3 flex-shrink-0">
-                      {currentOrder && (
-                        <span className="px-2 py-0.5 rounded-md text-caption-2-semibold text-blue bg-blue-soft" style={{ fontFamily: "var(--font-mono)" }}>
-                          On {currentOrder.id}
-                        </span>
-                      )}
-                      <ActiveBadge active={vehicle.active} />
-                    </div>
-                  </button>
-                  {expanded === vehicle.id && <VehicleDetailPanel vehicle={vehicle} onClose={() => setExpanded(null)} />}
-                </div>
-              );
-            })}
-          </div>
-        ))}
+      {tab === "Vehicles" && <VehiclesTable vehicles={filteredVehicles} emptyTitle="No vehicles match your filters" />}
+
     </div>
   );
 }

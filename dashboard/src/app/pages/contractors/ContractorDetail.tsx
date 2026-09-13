@@ -1,19 +1,17 @@
 import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
-import { ArrowLeftIcon, LetterIcon, PhoneIcon, AddIcon, StarIcon, UsersGroupRoundedIcon, BusIcon, BoxIcon } from "@solar-icons/react/linear";
+import { ArrowLeftIcon, LetterIcon, PhoneIcon, AddIcon } from "@solar-icons/react/linear";
 import Tabs from "../../components/Tabs";
 import { Button } from "../../components/Button";
 import ActiveBadge from "../../components/ActiveBadge";
-import EmptyState from "../../components/EmptyState";
-import OrderRow from "../../components/OrderRow";
-import DriverDetailPanel from "../../components/DriverDetailPanel";
-import VehicleDetailPanel from "../../components/VehicleDetailPanel";
+import OrdersTable from "../../components/OrdersTable";
+import DriversTable from "../../components/DriversTable";
+import VehiclesTable from "../../components/VehiclesTable";
 import AddDriverModal from "../../components/AddDriverModal";
 import AddVehicleModal from "../../components/AddVehicleModal";
 import WaypointAnalyticsTable from "../../components/WaypointAnalyticsTable";
 import { useDataStore } from "../../lib/store";
-import { getDriversForContractor, getVehiclesForContractor, getOrdersForContractor, getTruckType } from "../../lib/selectors";
-import { truckTypeLabel } from "../../lib/constants";
+import { getDriversForContractor, getVehiclesForContractor, getOrdersForContractor } from "../../lib/selectors";
 
 const TABS = ["Drivers", "Vehicles", "Orders", "Analytics"];
 
@@ -22,8 +20,6 @@ export default function ContractorDetail() {
   const navigate = useNavigate();
   const { contractors, drivers, vehicles, orders, toggleContractorActive } = useDataStore();
   const [tab, setTab] = useState("Drivers");
-  const [expandedDriver, setExpandedDriver] = useState<string | null>(null);
-  const [expandedVehicle, setExpandedVehicle] = useState<string | null>(null);
   const [showAddDriver, setShowAddDriver] = useState(false);
   const [showAddVehicle, setShowAddVehicle] = useState(false);
 
@@ -70,32 +66,7 @@ export default function ContractorDetail() {
               Add Driver
             </Button>
           </div>
-          {contractorDrivers.length === 0 ? (
-            <EmptyState icon={UsersGroupRoundedIcon} title="No drivers yet" />
-          ) : (
-            <div className="flex flex-col gap-2.5">
-              {contractorDrivers.map((driver) => (
-                <div key={driver.id} className="rounded-2xl bg-tile p-4">
-                  <button
-                    onClick={() => setExpandedDriver(expandedDriver === driver.id ? null : driver.id)}
-                    className="w-full flex items-center justify-between gap-4 cursor-pointer text-left"
-                  >
-                    <div className="min-w-0">
-                      <div className="text-body-semibold text-navy">{driver.name}</div>
-                      <div className="text-caption-1-regular text-muted mt-0.5">{driver.email} · {driver.phone}</div>
-                    </div>
-                    <div className="flex items-center gap-3 flex-shrink-0">
-                      <span className="flex items-center gap-1 text-caption-1-regular text-navy" style={{ fontFamily: "var(--font-mono)" }}>
-                        <StarIcon size={12} className="text-status-pending" /> {driver.rating.toFixed(2)}
-                      </span>
-                      <ActiveBadge active={driver.active} />
-                    </div>
-                  </button>
-                  {expandedDriver === driver.id && <DriverDetailPanel driver={driver} onClose={() => setExpandedDriver(null)} />}
-                </div>
-              ))}
-            </div>
-          )}
+          <DriversTable drivers={contractorDrivers} showContractor={false} />
         </div>
       )}
 
@@ -106,38 +77,12 @@ export default function ContractorDetail() {
               Add Vehicle
             </Button>
           </div>
-          {contractorVehicles.length === 0 ? (
-            <EmptyState icon={BusIcon} title="No vehicles yet" />
-          ) : (
-            <div className="flex flex-col gap-2.5">
-              {contractorVehicles.map((vehicle) => (
-                <div key={vehicle.id} className="rounded-2xl bg-tile p-4">
-                  <button
-                    onClick={() => setExpandedVehicle(expandedVehicle === vehicle.id ? null : vehicle.id)}
-                    className="w-full flex items-center justify-between gap-4 cursor-pointer text-left"
-                  >
-                    <div className="min-w-0">
-                      <div className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>{vehicle.plateNumber}</div>
-                      <div className="text-caption-1-regular text-muted mt-0.5">{truckTypeLabel(getTruckType(vehicle.truckTypeId))}</div>
-                    </div>
-                    <ActiveBadge active={vehicle.active} />
-                  </button>
-                  {expandedVehicle === vehicle.id && <VehicleDetailPanel vehicle={vehicle} onClose={() => setExpandedVehicle(null)} />}
-                </div>
-              ))}
-            </div>
-          )}
+          <VehiclesTable vehicles={contractorVehicles} showContractor={false} />
         </div>
       )}
 
       {tab === "Orders" && (
-        <div className="rounded-2xl bg-tile overflow-hidden">
-          {contractorOrders.length === 0 ? (
-            <EmptyState icon={BoxIcon} title="No orders yet" />
-          ) : (
-            contractorOrders.map((order) => <OrderRow key={order.id} order={order} />)
-          )}
-        </div>
+        <OrdersTable orders={contractorOrders} />
       )}
 
       {tab === "Analytics" && <WaypointAnalyticsTable orders={contractorOrders} filenamePrefix={contractor.name.toLowerCase().replace(/\s+/g, "-")} />}

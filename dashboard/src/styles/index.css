@@ -186,3 +186,44 @@ body {
   font-family: var(--font-sub);
   -webkit-font-smoothing: antialiased;
 }
+
+/* ---------------------------------------------------------------------------
+ * Table primitive (BoardUI components/base/table)
+ *
+ * react-aria's collection components (Column/Row/Cell/…) can't be wrapped in
+ * custom components without losing collection behaviour, so the primitive
+ * re-exports them untouched and styling lives here, scoped to `.bui-table`.
+ * react-aria renders real <table>/<thead>/<th>/<tr>/<td> elements.
+ * --------------------------------------------------------------------------- */
+.bui-table {
+  @apply w-full border-collapse text-left;
+}
+/* Header background + border-y live on the cells: with border-collapse the
+ * browser doesn't paint backgrounds/borders set on the <thead> row group. */
+.bui-table th {
+  @apply px-3 py-2.5 text-left align-middle text-body-medium text-muted whitespace-nowrap outline-none;
+  background-color: var(--color-tile);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.bui-table td {
+  @apply px-3 py-2.5 align-middle text-body-medium text-navy outline-none;
+}
+.bui-table tbody tr {
+  @apply transition-colors duration-150;
+  border-bottom: 1px solid var(--color-border);
+}
+.bui-table tbody tr[data-hovered] {
+  background-color: var(--color-grey-light);
+}
+.bui-table tbody tr[data-focus-visible] {
+  @apply ring-2 ring-inset ring-blue;
+}
+.bui-table tbody tr[data-href],
+.bui-table tbody tr[data-pressed] {
+  @apply cursor-pointer;
+}
+.bui-table.bui-table-sm th,
+.bui-table.bui-table-sm td {
+  @apply px-2.5 py-1.5 text-body-2-medium;
+}

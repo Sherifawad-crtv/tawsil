@@ -3,6 +3,7 @@ import { MapPointSearchIcon } from "@solar-icons/react/linear";
 import EmptyState from "./EmptyState";
 import CsvExportButton from "./CsvExportButton";
 import SegmentedControl from "./SegmentedControl";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "./Table";
 import { waypointAnalytics } from "../lib/selectors";
 import { formatDate } from "../lib/format";
 import type { Order } from "../lib/types";
@@ -39,36 +40,26 @@ export default function WaypointAnalyticsTable({ orders, filenamePrefix }: { ord
         />
       </div>
 
-      {rows.length === 0 ? (
-        <EmptyState icon={MapPointSearchIcon} title="No waypoint data in this range" />
-      ) : (
-        <div className="rounded-2xl bg-tile overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-body-medium">
-              <thead>
-                <tr className="text-left text-body-medium text-muted border-b border-border">
-                  <th className="px-4 py-2.5 font-medium">Rank</th>
-                  <th className="px-4 py-2.5 font-medium">Location</th>
-                  <th className="px-4 py-2.5 font-medium">Visits</th>
-                  <th className="px-4 py-2.5 font-medium">Last Visited</th>
-                  <th className="px-4 py-2.5 font-medium">Type</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((r, i) => (
-                  <tr key={r.location} className="border-b border-border last:border-b-0">
-                    <td className="px-4 py-2.5 text-navy">{i + 1}</td>
-                    <td className="px-4 py-2.5 text-navy">{r.location}</td>
-                    <td className="px-4 py-2.5 text-navy">{r.visits}</td>
-                    <td className="px-4 py-2.5 text-muted" style={{ fontFamily: "var(--font-mono)" }}>{formatDate(r.lastVisited)}</td>
-                    <td className="px-4 py-2.5 text-navy">{r.type}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
+      <Table aria-label="Waypoint analytics">
+        <TableHeader>
+          <TableColumn isRowHeader>Rank</TableColumn>
+          <TableColumn>Location</TableColumn>
+          <TableColumn>Visits</TableColumn>
+          <TableColumn>Last Visited</TableColumn>
+          <TableColumn>Type</TableColumn>
+        </TableHeader>
+        <TableBody renderEmptyState={() => <EmptyState icon={MapPointSearchIcon} title="No waypoint data in this range" />}>
+          {rows.map((r, i) => (
+            <TableRow key={r.location} id={r.location}>
+              <TableCell style={{ fontFamily: "var(--font-mono)" }}>{i + 1}</TableCell>
+              <TableCell>{r.location}</TableCell>
+              <TableCell style={{ fontFamily: "var(--font-mono)" }}>{r.visits}</TableCell>
+              <TableCell className="text-muted" style={{ fontFamily: "var(--font-mono)" }}>{formatDate(r.lastVisited)}</TableCell>
+              <TableCell className="text-muted">{r.type}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 }

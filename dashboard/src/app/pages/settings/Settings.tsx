@@ -1,8 +1,9 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { AddIcon, Pen2Icon, DangerTriangleIcon, LockKeyholeIcon, SnowflakeIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import TruckTypeFormModal from "../../components/settings/TruckTypeFormModal";
 import { Button } from "../../components/Button";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "../../components/Table";
 import { useDataStore } from "../../lib/store";
 import { useRole } from "../../lib/RoleContext";
 import { CARGO_TYPES } from "../../lib/constants";
@@ -42,70 +43,66 @@ export default function Settings() {
         </div>
       )}
 
-      <div className="rounded-2xl bg-tile overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-body-medium">
-            <thead>
-              <tr className="text-left text-body-medium text-muted border-b border-border">
-                <th className="px-4 py-2.5 font-medium">Truck Type</th>
-                <th className="px-4 py-2.5 font-medium">Config</th>
-                <th className="px-4 py-2.5 font-medium">Daily Rent (EGP)</th>
-                <th className="px-4 py-2.5 font-medium">Price/km (EGP)</th>
-                <th className="px-4 py-2.5 font-medium">Payload (t)</th>
-                {isAdmin && <th className="px-4 py-2.5 font-medium"></th>}
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(grouped).map(([baseClass, types]) => (
-                <Fragment key={baseClass}>
-                  {types.map((t, i) => (
-                    <tr key={t.id} className={`border-b border-border last:border-b-0 ${t.flagged ? "bg-[#FFF9EC]" : ""}`}>
-                      <td className="px-4 py-2.5 text-navy font-medium">{i === 0 ? baseClass : ""}</td>
-                      <td className="px-4 py-2.5 text-navy">
-                        <span className="inline-flex items-center gap-1.5">
-                          {t.config}
-                          {t.requiresTempControl && <SnowflakeIcon size={12} className="text-blue" />}
-                        </span>
-                      </td>
-                      <td className="px-4 py-2.5 text-navy" style={{ fontFamily: "var(--font-mono)" }}>
-                        <span className="inline-flex items-center gap-1.5">
-                          {formatEGP(t.dailyRentEGP)}
-                          {t.flagged && (
-                            <span title={t.flagNote}>
-                              <DangerTriangleIcon size={13} className="text-status-pending" />
-                            </span>
-                          )}
-                        </span>
-                      </td>
-                      <td className="px-4 py-2.5 text-navy" style={{ fontFamily: "var(--font-mono)" }}>{formatEGP(t.pricePerKmEGP)}</td>
-                      <td className="px-4 py-2.5 text-navy" style={{ fontFamily: "var(--font-mono)" }}>{t.capacityMinT}–{t.capacityMaxT}</td>
-                      {isAdmin && (
-                        <td className="px-4 py-2.5">
-                          <button onClick={() => setEditing(t)} className="p-1.5 rounded-lg hover:bg-grey-light cursor-pointer text-muted hover:text-navy">
-                            <Pen2Icon size={14} />
-                          </button>
-                        </td>
-                      )}
-                    </tr>
-                  ))}
-                  {types.some((t) => t.flagged) && (
-                    <tr>
-                      <td colSpan={isAdmin ? 6 : 5} className="px-4 pb-3 pt-0">
-                        {types.filter((t) => t.flagged).map((t) => (
-                          <div key={t.id} className="flex items-start gap-2 text-caption-1-regular text-status-pending bg-[#FFF9EC] rounded-lg px-3 py-2">
-                            <DangerTriangleIcon size={13} className="mt-0.5 flex-shrink-0" />
-                            <span>{t.flagNote}</span>
-                          </div>
-                        ))}
-                      </td>
-                    </tr>
-                  )}
-                </Fragment>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <Table aria-label="Truck types and rate card">
+        <TableHeader>
+          <TableColumn isRowHeader>Truck Type</TableColumn>
+          <TableColumn>Config</TableColumn>
+          <TableColumn>Daily Rent (EGP)</TableColumn>
+          <TableColumn>Price/km (EGP)</TableColumn>
+          <TableColumn>Payload (t)</TableColumn>
+          {isAdmin ? <TableColumn>{""}</TableColumn> : null}
+        </TableHeader>
+        <TableBody>
+          {Object.entries(grouped).flatMap(([baseClass, types]) => {
+            const rows = types.map((t, i) => (
+              <TableRow key={t.id} id={t.id} className={t.flagged ? "bg-[#FFF9EC]" : undefined}>
+                <TableCell><span className="font-medium">{i === 0 ? baseClass : ""}</span></TableCell>
+                <TableCell>
+                  <span className="inline-flex items-center gap-1.5">
+                    {t.config}
+                    {t.requiresTempControl && <SnowflakeIcon size={12} className="text-blue" />}
+                  </span>
+                </TableCell>
+                <TableCell style={{ fontFamily: "var(--font-mono)" }}>
+                  <span className="inline-flex items-center gap-1.5">
+                    {formatEGP(t.dailyRentEGP)}
+                    {t.flagged && (
+                      <span title={t.flagNote}>
+                        <DangerTriangleIcon size={13} className="text-status-pending" />
+                      </span>
+                    )}
+                  </span>
+                </TableCell>
+                <TableCell style={{ fontFamily: "var(--font-mono)" }}>{formatEGP(t.pricePerKmEGP)}</TableCell>
+                <TableCell style={{ fontFamily: "var(--font-mono)" }}>{t.capacityMinT}–{t.capacityMaxT}</TableCell>
+                {isAdmin ? (
+                  <TableCell>
+                    <button onClick={() => setEditing(t)} className="p-1.5 rounded-lg hover:bg-grey-light cursor-pointer text-muted hover:text-navy">
+                      <Pen2Icon size={14} />
+                    </button>
+                  </TableCell>
+                ) : null}
+              </TableRow>
+            ));
+            const flagged = types.filter((t) => t.flagged);
+            if (flagged.length > 0) {
+              rows.push(
+                <TableRow key={`${baseClass}-flags`} id={`${baseClass}-flags`}>
+                  <TableCell colSpan={isAdmin ? 6 : 5} className="pt-0 pb-3">
+                    {flagged.map((t) => (
+                      <div key={t.id} className="flex items-start gap-2 text-caption-1-regular text-status-pending bg-[#FFF9EC] rounded-lg px-3 py-2">
+                        <DangerTriangleIcon size={13} className="mt-0.5 flex-shrink-0" />
+                        <span>{t.flagNote}</span>
+                      </div>
+                    ))}
+                  </TableCell>
+                </TableRow>,
+              );
+            }
+            return rows;
+          })}
+        </TableBody>
+      </Table>
 
       <div className="rounded-2xl bg-tile p-4">
         <h3 className="text-body-semibold text-navy mb-3" style={{ fontFamily: "var(--font-sub)" }}>Cargo Type Taxonomy</h3>

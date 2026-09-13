@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import { AddIcon, Buildings2Icon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import SearchInput from "../../components/SearchInput";
@@ -7,10 +7,12 @@ import EmptyState from "../../components/EmptyState";
 import ActiveBadge from "../../components/ActiveBadge";
 import AddClientModal from "../../components/AddClientModal";
 import { Button } from "../../components/Button";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "../../components/Table";
 import { useDataStore } from "../../lib/store";
 
 export default function ClientsList() {
   const { clients, orders } = useDataStore();
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [showAdd, setShowAdd] = useState(false);
 
@@ -30,28 +32,28 @@ export default function ClientsList() {
 
       <SearchInput value={search} onChange={setSearch} placeholder="Search clients…" />
 
-      {filtered.length === 0 ? (
-        <EmptyState icon={Buildings2Icon} title="No clients match your search" />
-      ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.map((client) => {
-            const orderCount = orders.filter((o) => o.clientId === client.id).length;
-            return (
-              <Link
-                key={client.id}
-                to={`/clients/${client.id}`}
-                className="rounded-2xl bg-tile p-4 hover:shadow-sm transition-shadow"
-              >
-                <div className="flex items-start justify-between gap-2 mb-3">
-                  <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>{client.name}</h3>
-                  <ActiveBadge active={client.active} />
-                </div>
-                <div className="text-caption-1-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>{orderCount} orders</div>
-              </Link>
-            );
-          })}
-        </div>
-      )}
+      <Table aria-label="Clients" onRowAction={(key) => navigate(`/clients/${key}`)}>
+        <TableHeader>
+          <TableColumn isRowHeader>Client</TableColumn>
+          <TableColumn>Email</TableColumn>
+          <TableColumn>Phone</TableColumn>
+          <TableColumn>Orders</TableColumn>
+          <TableColumn>Status</TableColumn>
+        </TableHeader>
+        <TableBody renderEmptyState={() => <EmptyState icon={Buildings2Icon} title="No clients match your search" />}>
+          {filtered.map((client) => (
+            <TableRow key={client.id} id={client.id}>
+              <TableCell><span className="text-body-semibold text-navy">{client.name}</span></TableCell>
+              <TableCell className="text-muted">{client.email}</TableCell>
+              <TableCell className="text-muted">{client.phone}</TableCell>
+              <TableCell style={{ fontFamily: "var(--font-mono)" }}>
+                {orders.filter((o) => o.clientId === client.id).length}
+              </TableCell>
+              <TableCell><ActiveBadge active={client.active} /></TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
 
       {showAdd && <AddClientModal onClose={() => setShowAdd(false)} />}
     </div>

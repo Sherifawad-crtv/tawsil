@@ -94,7 +94,7 @@ export function DayCell(props: DayCellProps) {
   const extendRight = isRange && isSelected && !isSelectionEnd && dayOfWeek !== 6;
 
   return (
-    <div className="relative size-8">
+    <div className="relative size-8 mx-auto">
       <span
         aria-hidden
         className={cx(
@@ -139,6 +139,7 @@ export function MonthPanel({
   showNext,
   bare = false,
   hideHeader = false,
+  fluid = false,
   selectedDates,
   edgeClassNameFor,
 }: {
@@ -149,6 +150,10 @@ export function MonthPanel({
   bare?: boolean;
   /** Skip the title + prev/next row when the caller renders its own. */
   hideHeader?: boolean;
+  /** Fill the available width instead of BoardUI's fixed 326px popover panel,
+   *  spreading the day columns evenly. For calendars embedded in a layout
+   *  (a modal form field, a detail card) rather than a dropdown. */
+  fluid?: boolean;
   /** Multi-select mode: ISO (YYYY-MM-DD) days to paint as selected. */
   selectedDates?: Set<string>;
   /** Per-day pill fill, for calendars that mark more than one kind of day. */
@@ -166,7 +171,12 @@ export function MonthPanel({
     : "";
 
   return (
-    <div className={bare ? "w-[296px] shrink-0" : "w-[326px] shrink-0 rounded-2xl bg-white p-[15px] shadow-xs"}>
+    <div
+      className={cx(
+        bare ? "w-[296px] shrink-0" : "w-[326px] shrink-0 rounded-2xl bg-white p-[15px] shadow-xs",
+        fluid && "w-auto min-w-0 flex-1",
+      )}
+    >
       <div className="flex flex-col gap-5">
         {!hideHeader && (
           <div className="flex items-center justify-between">
@@ -196,7 +206,7 @@ export function MonthPanel({
         <CalendarGrid
           offset={{ months: offset }}
           weekdayStyle="short"
-          className="-m-3 self-start border-separate outline-none"
+          className={cx("-m-3 border-separate outline-none", fluid ? "w-[calc(100%+24px)]" : "self-start")}
           style={{ borderSpacing: "12px 12px" }}
         >
           <CalendarGridHeader>

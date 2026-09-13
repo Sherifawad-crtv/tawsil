@@ -5,6 +5,7 @@ import { ArrowLeftIcon, ClockCircleIcon, CalendarDateIcon, BoxIcon } from "@sola
 import EmptyState from "../../components/EmptyState";
 import OrderRow from "../../components/OrderRow";
 import { MonthPanel } from "../../components/date-picker/shared";
+import { useMediaQuery } from "../../lib/useMediaQuery";
 import { useDataStore } from "../../lib/store";
 import { byId } from "../../lib/selectors";
 import { formatEGP } from "../../lib/format";
@@ -13,6 +14,7 @@ export default function MonthlyOrderDetail() {
   const { contractId } = useParams();
   const navigate = useNavigate();
   const { monthlyOrders, clients, contractors, orders } = useDataStore();
+  const twoUp = useMediaQuery("(min-width: 768px)");
 
   const contract = monthlyOrders.find((m) => m.id === contractId);
   if (!contract) {
@@ -69,15 +71,28 @@ export default function MonthlyOrderDetail() {
           isReadOnly
           value={null}
           defaultFocusedValue={parseDate(contract.dates[0])}
-          className="inline-flex flex-col gap-3"
+          visibleDuration={{ months: twoUp ? 2 : 1 }}
+          className="flex w-full flex-col gap-3"
         >
-          <MonthPanel
-            offset={0}
-            showPrev
-            showNext
-            selectedDates={new Set(contract.dates)}
-            edgeClassNameFor={(iso) => (executed.has(iso) ? "bg-status-completed/35" : "bg-blue-soft")}
-          />
+          <div className="flex w-full gap-2">
+            <MonthPanel
+              offset={0}
+              showPrev
+              showNext={!twoUp}
+              fluid
+              selectedDates={new Set(contract.dates)}
+              edgeClassNameFor={(iso) => (executed.has(iso) ? "bg-status-completed/35" : "bg-blue-soft")}
+            />
+            {twoUp && (
+              <MonthPanel
+                offset={1}
+                showNext
+                fluid
+                selectedDates={new Set(contract.dates)}
+                edgeClassNameFor={(iso) => (executed.has(iso) ? "bg-status-completed/35" : "bg-blue-soft")}
+              />
+            )}
+          </div>
           <div className="flex items-center gap-4 text-caption-1-regular text-muted">
             <span className="flex items-center gap-1.5">
               <span className="w-3 h-3 rounded-sm bg-status-completed/35" /> Executed

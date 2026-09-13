@@ -1,5 +1,5 @@
 import { TRUCK_TYPES } from "./constants";
-import type { AttentionOrder, Client, Contractor, Driver, HomeMetrics, MonthlyOrder, Order, Vehicle } from "./types";
+import type { AttentionOrder, Client, Contractor, Driver, HomeMetrics, MonthlyOrder, Order, Role, Vehicle } from "./types";
 
 export function getTruckType(id: string) {
   return TRUCK_TYPES.find((t) => t.id === id)!;
@@ -83,6 +83,52 @@ export function getAttentionOrders(orders: Order[], monthlyOrders: MonthlyOrder[
   }
 
   return items.sort((a, b) => b.minutesInStatus - a.minutesInStatus).slice(0, 8);
+}
+
+/**
+ * Role-based visibility for the order workflow (Sales creates -> Supply
+ * allocates the pending queue -> Operations follows up on what's already
+ * moving -> Admin sees everything). Applied as a hard scope on top of the
+ * ordinary filters, not just a UI suggestion.
+ */
+export function getOrdersForRole(orders: Order[], role: Role): Order[] {
+  switch (role) {
+    case "Supply":
+      // Supply's job is allocating unassigned orders - by construction a
+      // Pending order has no contractor/driver/vehicle yet.
+      return orders.filter((o) => o.status === "Pending");
+    case "Operations":
+      // Operations follows up on orders already in motion, not the intake
+      // queue (Supply's job) or the full historical catalog.
+      return orders.filter((o) => o.status === "Assigned" || o.status === "In Progress");
+    case "Sales":
+    case "Admin":
+    default:
+      return orders;
+  }
+}
+
+export function getAttentionOrdersForRole(items: AttentionOrder[], role: Role): AttentionOrder[] {
+  switch (role) {
+    case "Sales":
+      // Sales creates and tracks orders - follow-up/allocation nudges aren't theirs.
+      return [];
+    case "Supply":
+      return items.filter((i) => i.reason === "stalled-pending");
+    case "Operations":
+      return items.filter((i) => i.reason === "pod-missing" || i.reason === "monthly-renewal");
+    case "Admin":
+    default:
+      return items;
+  }
+}
+
+export function canCreateOrders(role: Role) {
+  return role === "Sales" || role === "Admin";
+}
+
+export function canAssignDrivers(role: Role) {
+  return role === "Supply" || role === "Admin";
 }
 
 export function getOrdersForClient(orders: Order[], clientId: string) {

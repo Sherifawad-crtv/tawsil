@@ -6,23 +6,33 @@ import EmptyState from "../../components/EmptyState";
 import OrderRow from "../../components/OrderRow";
 import OrderFormModal from "../../components/orders/OrderFormModal";
 import { useDataStore } from "../../lib/store";
-import { byId } from "../../lib/selectors";
+import { useRole } from "../../lib/RoleContext";
+import { byId, getOrdersForRole, canCreateOrders } from "../../lib/selectors";
 import type { OrderStatus, TripType } from "../../lib/types";
 
-const STATUS_OPTIONS: (OrderStatus | "All")[] = ["All", "Pending", "Assigned", "In Progress", "Completed", "Cancelled"];
+const STATUS_OPTIONS_BY_ROLE: Record<string, (OrderStatus | "All")[]> = {
+  Supply: ["Pending"],
+  Operations: ["All", "Assigned", "In Progress"],
+  Sales: ["All", "Pending", "Assigned", "In Progress", "Completed", "Cancelled"],
+  Admin: ["All", "Pending", "Assigned", "In Progress", "Completed", "Cancelled"],
+};
 const TRIP_OPTIONS: (TripType | "All")[] = ["All", "On Demand", "Daily", "Monthly"];
 
 export default function OrdersList() {
   const { orders, clients, contractors } = useDataStore();
+  const { role } = useRole();
+  const statusOptions = STATUS_OPTIONS_BY_ROLE[role];
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState<OrderStatus | "All">("All");
+  const [status, setStatus] = useState<OrderStatus | "All">(statusOptions[0]);
   const [tripType, setTripType] = useState<TripType | "All">("All");
   const [sortBy, setSortBy] = useState<"pickup" | "status">("pickup");
   const [showCreate, setShowCreate] = useState(false);
 
+  const roleOrders = useMemo(() => getOrdersForRole(orders, role), [orders, role]);
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    let list = orders.filter((o) => {
+    let list = roleOrders.filter((o) => {
       if (status !== "All" && o.status !== status) return false;
       if (tripType !== "All" && o.tripType !== tripType) return false;
       if (q) {
@@ -39,36 +49,47 @@ export default function OrdersList() {
         : a.status.localeCompare(b.status)
     );
     return list;
-  }, [orders, clients, contractors, search, status, tripType, sortBy]);
+  }, [roleOrders, clients, contractors, search, status, tripType, sortBy]);
+
+  const subtitle =
+    role === "Supply"
+      ? `${roleOrders.length} orders awaiting allocation`
+      : role === "Operations"
+        ? `${roleOrders.length} orders in progress`
+        : `${roleOrders.length} total orders`;
 
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
         title="Orders"
-        subtitle={`${orders.length} total orders`}
+        subtitle={subtitle}
         action={
-          <button
-            onClick={() => setShowCreate(true)}
-            className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
-            style={{ fontFamily: "var(--font-sub)" }}
-          >
-            <Plus size={16} /> New Order
-          </button>
+          canCreateOrders(role) ? (
+            <button
+              onClick={() => setShowCreate(true)}
+              className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
+              style={{ fontFamily: "var(--font-sub)" }}
+            >
+              <Plus size={16} /> New Order
+            </button>
+          ) : undefined
         }
       />
 
       <div className="flex flex-wrap items-center gap-3">
         <SearchInput value={search} onChange={setSearch} placeholder="Search by Order ID, client, or contractor…" />
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value as OrderStatus | "All")}
-          className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer"
-          style={{ fontFamily: "var(--font-sub)" }}
-        >
-          {STATUS_OPTIONS.map((s) => (
-            <option key={s} value={s}>{s === "All" ? "All Statuses" : s}</option>
-          ))}
-        </select>
+        {statusOptions.length > 1 && (
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value as OrderStatus | "All")}
+            className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer"
+            style={{ fontFamily: "var(--font-sub)" }}
+          >
+            {statusOptions.map((s) => (
+              <option key={s} value={s}>{s === "All" ? "All Statuses" : s}</option>
+            ))}
+          </select>
+        )}
         <select
           value={tripType}
           onChange={(e) => setTripType(e.target.value as TripType | "All")}

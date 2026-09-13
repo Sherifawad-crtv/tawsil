@@ -7,7 +7,8 @@ import BiddingWidget from "../../components/orders/BiddingWidget";
 import AssignDriverModal from "../../components/orders/AssignDriverModal";
 import OrderFormModal from "../../components/orders/OrderFormModal";
 import { useDataStore } from "../../lib/store";
-import { byId, getTruckType } from "../../lib/selectors";
+import { useRole } from "../../lib/RoleContext";
+import { byId, getTruckType, canAssignDrivers } from "../../lib/selectors";
 import { truckTypeLabel } from "../../lib/constants";
 import { formatDateTime } from "../../lib/format";
 
@@ -15,6 +16,7 @@ export default function OrderDetail() {
   const { orderId } = useParams();
   const navigate = useNavigate();
   const { orders, clients, contractors, drivers, vehicles, appendStatusHistory } = useDataStore();
+  const { role } = useRole();
   const [showAssign, setShowAssign] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showReorder, setShowReorder] = useState(false);
@@ -35,7 +37,7 @@ export default function OrderDetail() {
   const truckType = getTruckType(order.truckTypeId);
 
   const canEditCancel = order.status !== "Completed" && order.status !== "Cancelled";
-  const needsAssignment = order.status === "Pending";
+  const needsAssignment = order.status === "Pending" && canAssignDrivers(role);
 
   function handleCancel() {
     appendStatusHistory(order!.id, { timestamp: new Date().toISOString(), fromStatus: order!.status, toStatus: "Cancelled", note: "Cancelled from Order Detail", actor: "Operations" }, "Cancelled");

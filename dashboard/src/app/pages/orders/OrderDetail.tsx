@@ -93,29 +93,10 @@ export default function OrderDetail() {
         </div>
       </div>
 
+      <StatusHistoryList history={order.statusHistory} />
+
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 flex flex-col gap-6">
-          {/* Driver & Vehicle */}
-          <div className="rounded-2xl bg-tile p-4">
-            <h3 className="text-body-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Driver & Vehicle Information</h3>
-            {driver && vehicle ? (
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-navy text-white flex items-center justify-center flex-shrink-0" style={{ fontFamily: "var(--font-heading)" }}>
-                  {driver.name.split(" ").map((p) => p[0]).join("").slice(0, 2)}
-                </div>
-                <div className="min-w-0">
-                  <div className="text-body-semibold text-navy">{driver.name}</div>
-                  <div className="text-caption-1-regular text-muted mt-0.5">{vehicle.plateNumber} · {truckTypeLabel(getTruckType(vehicle.truckTypeId))}</div>
-                </div>
-              </div>
-            ) : (
-              <div className="flex items-center gap-3 px-4 py-2 rounded-2lg bg-grey-light/60">
-                <UserIcon size={16} className="text-muted" />
-                <span className="text-body-medium text-muted">Not Assigned</span>
-              </div>
-            )}
-          </div>
-
           {/* Trip & cargo */}
           <div className="rounded-2xl bg-tile p-4">
             <h3 className="text-body-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Trip & Cargo</h3>
@@ -163,7 +144,26 @@ export default function OrderDetail() {
         </div>
 
         <div className="flex flex-col gap-6">
-          <StatusHistoryList history={order.statusHistory} />
+          {/* Driver & Vehicle */}
+          <div className="rounded-2xl bg-tile p-4">
+            <h3 className="text-body-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Driver & Vehicle Information</h3>
+            {driver && vehicle ? (
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-navy text-white flex items-center justify-center flex-shrink-0" style={{ fontFamily: "var(--font-heading)" }}>
+                  {driver.name.split(" ").map((p) => p[0]).join("").slice(0, 2)}
+                </div>
+                <div className="min-w-0">
+                  <div className="text-body-semibold text-navy">{driver.name}</div>
+                  <div className="text-caption-1-regular text-muted mt-0.5">{vehicle.plateNumber} · {truckTypeLabel(getTruckType(vehicle.truckTypeId))}</div>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center gap-3 px-4 py-2 rounded-2lg bg-grey-light/60">
+                <UserIcon size={16} className="text-muted" />
+                <span className="text-body-medium text-muted">Not Assigned</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

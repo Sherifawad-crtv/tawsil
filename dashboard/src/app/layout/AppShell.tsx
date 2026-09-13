@@ -13,7 +13,7 @@ export default function AppShell() {
       <Sidebar open={navOpen} onClose={() => setNavOpen(false)} />
 
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-16 flex-shrink-0 flex items-center justify-between gap-4 px-4 md:px-8 border-b border-border bg-white">
+        <header className="h-14 flex-shrink-0 flex items-center justify-between gap-4 px-4 md:px-8 border-b border-border bg-white">
           <button
             className="md:hidden p-2 -ml-2 rounded-lg hover:bg-grey-light cursor-pointer"
             onClick={() => setNavOpen(true)}
@@ -28,7 +28,7 @@ export default function AppShell() {
             <select
               value={role}
               onChange={(e) => setRole(e.target.value as typeof role)}
-              className="appearance-none pl-3 pr-8 py-2 rounded-[var(--radius-control)] border border-border bg-grey-light text-sm font-medium text-navy cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue/30"
+              className="appearance-none pl-3 pr-8 py-1.5 rounded-[var(--radius-control)] border border-border bg-grey-light text-xs font-medium text-navy cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue/30"
               style={{ fontFamily: "var(--font-sub)" }}
               aria-label="Viewing as role"
             >

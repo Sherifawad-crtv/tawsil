@@ -11,6 +11,7 @@ import {
 import type { ListBoxItemProps as AriaListBoxItemProps, Key } from "react-aria-components";
 import { cx } from "../lib/cx";
 import { useDismissOnOutsidePress, useTriggerToggle } from "../lib/useDismissOnOutsidePress";
+import { MENU_ITEM, MENU_ITEM_ACTIVE, MENU_ITEMS_CONTAINER, MENU_POPOVER_SURFACE } from "./menuStyles";
 
 /**
  * BoardUI's base/select on react-aria, our tokens. Replaces the native
@@ -21,20 +22,6 @@ import { useDismissOnOutsidePress, useTriggerToggle } from "../lib/useDismissOnO
  * chevron that flips when open. Popover: radius/2xl panel, shadow-dropdown,
  * 150ms fade/scale/blur, radius/2lg rows.
  */
-
-const MENU_POPOVER_SURFACE = [
-  "max-w-[calc(100vw-32px)] overflow-y-auto",
-  "rounded-2xl border border-border bg-white p-2 shadow-dropdown",
-  "transition duration-150 ease-out",
-  "data-[entering]:opacity-0 data-[entering]:scale-95 data-[entering]:blur-[2px]",
-  "data-[exiting]:opacity-0 data-[exiting]:scale-95 data-[exiting]:blur-[2px]",
-  "data-[placement=bottom]:origin-top-left data-[placement=top]:origin-bottom-left",
-].join(" ");
-
-const MENU_ITEM = [
-  "flex w-full cursor-pointer items-center gap-2 rounded-2lg p-2 text-left",
-  "text-navy outline-none transition-colors text-body-medium",
-].join(" ");
 
 function ChevronDownSmall({ className }: { className?: string }) {
   return (
@@ -113,7 +100,7 @@ export function Select({
             />
           </AriaButton>
           <AriaPopover ref={popoverRef} isNonModal offset={4} className={MENU_POPOVER_SURFACE}>
-            <AriaListBox className="flex w-full flex-col gap-1 outline-none max-h-[240px] overflow-auto">
+            <AriaListBox className={cx(MENU_ITEMS_CONTAINER, "max-h-[240px] overflow-auto")}>
               {options.map((option) => (
                 <SelectItem key={option.value} id={option.value} textValue={option.label}>
                   {option.label}
@@ -138,7 +125,7 @@ export function SelectItem({ className, children, ...props }: SelectItemProps) {
       className={(state) =>
         cx(
           MENU_ITEM,
-          (state.isFocused || state.isSelected) && "bg-grey-light",
+          (state.isFocused || state.isSelected) && MENU_ITEM_ACTIVE,
           state.isDisabled && "cursor-not-allowed text-muted",
           typeof className === "function" ? className(state) : className,
         )

@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router";
 import { BoxIcon } from "@solar-icons/react/linear";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "./Table";
 import StatusBadge from "./StatusBadge";
 import EmptyState from "./EmptyState";
+import OrderRowMenu from "./orders/OrderRowMenu";
 import { byId, getTruckType } from "../lib/selectors";
 import { useDataStore } from "../lib/store";
 import { truckTypeLabel } from "../lib/constants";
@@ -14,14 +14,10 @@ export default function OrdersTable({ orders, emptyTitle = "No orders yet", empt
   emptyTitle?: string;
   emptyNote?: string;
 }) {
-  const navigate = useNavigate();
   const { clients, contractors } = useDataStore();
 
   return (
-    <Table
-      aria-label="Orders"
-      onRowAction={(key) => navigate(`/orders/${key}`)}
-    >
+    <Table aria-label="Orders">
       <TableHeader>
         <TableColumn isRowHeader>Order ID</TableColumn>
         <TableColumn>Status</TableColumn>
@@ -29,6 +25,7 @@ export default function OrdersTable({ orders, emptyTitle = "No orders yet", empt
         <TableColumn>Contractor</TableColumn>
         <TableColumn>Truck</TableColumn>
         <TableColumn>Pickup</TableColumn>
+        <TableColumn>{""}</TableColumn>
       </TableHeader>
       <TableBody renderEmptyState={() => <EmptyState icon={BoxIcon} title={emptyTitle} note={emptyNote} />}>
         {orders.map((order) => {
@@ -56,6 +53,7 @@ export default function OrdersTable({ orders, emptyTitle = "No orders yet", empt
               <TableCell className="text-muted whitespace-nowrap" style={{ fontFamily: "var(--font-mono)" }}>
                 {formatDateTime(order.pickupAt)}
               </TableCell>
+              <TableCell className="w-px"><OrderRowMenu order={order} /></TableCell>
             </TableRow>
           );
         })}

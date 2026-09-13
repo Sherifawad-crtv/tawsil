@@ -11,7 +11,7 @@ export default function TruckTypeGrid({ value, onChange }: { value: string; onCh
             type="button"
             key={t.id}
             onClick={() => onChange(t.id)}
-            className={`text-left px-4 py-3 rounded-[var(--radius-control)] border cursor-pointer transition-colors ${
+            className={`text-left px-4 py-2 rounded-[var(--radius-control)] border cursor-pointer transition-colors ${
               selected ? "border-blue bg-blue-soft" : "border-border bg-white hover:border-blue/40"
             }`}
           >

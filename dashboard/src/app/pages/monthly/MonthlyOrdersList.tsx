@@ -19,7 +19,7 @@ export default function MonthlyOrdersList() {
         action={
           <button
             onClick={() => setShowCreate(true)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
+            className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
             style={{ fontFamily: "var(--font-sub)" }}
           >
             <Plus size={16} /> New Monthly Order
@@ -41,7 +41,7 @@ export default function MonthlyOrdersList() {
               <Link
                 key={contract.id}
                 to={`/monthly-orders/${contract.id}`}
-                className="rounded-[var(--radius-card)] bg-white border border-border p-5 hover:border-blue/40 transition-colors"
+                className="rounded-[var(--radius-card)] bg-white border border-border p-4 hover:border-blue/40 transition-colors"
               >
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>

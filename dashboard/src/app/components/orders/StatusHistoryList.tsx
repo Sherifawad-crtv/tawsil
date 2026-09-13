@@ -4,7 +4,7 @@ import type { StatusHistoryEntry } from "../../lib/types";
 
 export default function StatusHistoryList({ history }: { history: StatusHistoryEntry[] }) {
   return (
-    <div className="rounded-[var(--radius-card)] bg-white border border-border p-5">
+    <div className="rounded-[var(--radius-card)] bg-white border border-border p-4">
       <div className="flex items-center gap-2 mb-4">
         <History size={16} className="text-muted" />
         <h3 className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Status History</h3>

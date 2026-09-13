@@ -114,7 +114,7 @@ export default function WaypointsEditor({
               </div>
               <button
                 type="button"
-                className="px-3 py-2.5 rounded-[var(--radius-control)] border border-border bg-white text-xs font-semibold text-navy cursor-pointer hover:border-blue/40 flex-shrink-0"
+                className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-xs font-semibold text-navy cursor-pointer hover:border-blue/40 flex-shrink-0"
                 title="Pick on Map (coming soon)"
               >
                 Pick on Map

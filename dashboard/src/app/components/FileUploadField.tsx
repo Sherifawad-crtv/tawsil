@@ -19,7 +19,7 @@ export default function FileUploadField({
         {required && <span className="text-status-cancelled"> *</span>}
       </label>
       {fileName ? (
-        <div className="flex items-center gap-2 px-3 py-2.5 rounded-[var(--radius-control)] border border-border bg-grey-light">
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-grey-light">
           <FileText size={16} className="text-blue flex-shrink-0" />
           <span className="text-sm text-navy truncate flex-1" style={{ fontFamily: "var(--font-mono)" }}>
             {fileName}
@@ -36,7 +36,7 @@ export default function FileUploadField({
           </button>
         </div>
       ) : (
-        <label className="flex items-center gap-2 px-3 py-2.5 rounded-[var(--radius-control)] border border-dashed border-border bg-grey-light cursor-pointer hover:border-blue/40 transition-colors">
+        <label className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-control)] border border-dashed border-border bg-grey-light cursor-pointer hover:border-blue/40 transition-colors">
           <UploadCloud size={16} className="text-muted flex-shrink-0" />
           <span className="text-sm text-muted">Upload PDF</span>
           <input

@@ -38,7 +38,7 @@ export default function MonthlyOrderDetail() {
       </button>
 
       <div>
-        <h1 className="text-2xl md:text-3xl text-navy" style={{ fontFamily: "var(--font-heading)" }}>{contract.id}</h1>
+        <h1 className="text-xl text-navy" style={{ fontFamily: "var(--font-heading)" }}>{contract.id}</h1>
         <p className="mt-1.5 text-sm text-muted">{client?.name ?? "—"} · {contractor?.name ?? "Unassigned"}</p>
       </div>
 
@@ -49,7 +49,7 @@ export default function MonthlyOrderDetail() {
         <StatTile label="Remaining" value={String(remaining)} accent={remaining <= 2 ? "amber" : undefined} />
       </div>
 
-      <div className="rounded-[var(--radius-card)] bg-white border border-border p-5">
+      <div className="rounded-[var(--radius-card)] bg-white border border-border p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Progress</h3>
           <span className="text-xs text-muted" style={{ fontFamily: "var(--font-mono)" }}>{pct}%</span>
@@ -77,7 +77,7 @@ export default function MonthlyOrderDetail() {
         </div>
       </div>
 
-      <div className="rounded-[var(--radius-card)] bg-white border border-border p-5">
+      <div className="rounded-[var(--radius-card)] bg-white border border-border p-4">
         <h3 className="text-sm font-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Pricing Breakdown</h3>
         <div className="grid sm:grid-cols-2 gap-3 text-sm">
           <PriceRow label="Client Price (gross, /day)" value={formatEGP(contract.clientPricePerDayEGP)} />

@@ -49,12 +49,12 @@ export default function Resources() {
       <Tabs tabs={TABS} active={tab} onChange={(t) => { setTab(t); setExpanded(null); }} />
 
       <div className="flex items-center gap-3 flex-wrap">
-        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as StatusFilter)} className="px-3 py-2.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer" style={{ fontFamily: "var(--font-sub)" }}>
+        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as StatusFilter)} className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer" style={{ fontFamily: "var(--font-sub)" }}>
           <option value="All">All Status</option>
           <option value="Active">Active</option>
           <option value="Inactive">Inactive</option>
         </select>
-        <select value={contractorFilter} onChange={(e) => setContractorFilter(e.target.value)} className="px-3 py-2.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer" style={{ fontFamily: "var(--font-sub)" }}>
+        <select value={contractorFilter} onChange={(e) => setContractorFilter(e.target.value)} className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer" style={{ fontFamily: "var(--font-sub)" }}>
           <option value="All">All Contractors</option>
           {contractors.map((c) => (
             <option key={c.id} value={c.id}>{c.name}</option>

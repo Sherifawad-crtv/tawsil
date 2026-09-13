@@ -39,7 +39,7 @@ export default function ClientDetail() {
 
       <div>
         <div className="flex items-center gap-3 flex-wrap">
-          <h1 className="text-2xl md:text-3xl text-navy" style={{ fontFamily: "var(--font-heading)" }}>{client.name}</h1>
+          <h1 className="text-xl text-navy" style={{ fontFamily: "var(--font-heading)" }}>{client.name}</h1>
           <button onClick={() => toggleClientActive(client.id)} className="cursor-pointer">
             <ActiveBadge active={client.active} />
           </button>

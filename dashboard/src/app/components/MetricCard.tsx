@@ -19,19 +19,19 @@ export default function MetricCard({
   };
 
   return (
-    <div className="rounded-[var(--radius-card)] bg-white border border-border p-5 flex items-center gap-4 shadow-[0_2px_12px_rgba(4,0,51,0.04)]">
-      <div className={`w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 ${accentBg[accent]}`}>
-        <Icon size={20} strokeWidth={2.25} />
+    <div className="rounded-[var(--radius-card)] bg-white border border-border p-4 flex items-center gap-3 shadow-[0_2px_12px_rgba(4,0,51,0.04)]">
+      <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${accentBg[accent]}`}>
+        <Icon size={17} strokeWidth={2.25} />
       </div>
       <div className="min-w-0">
         <div
-          className="text-2xl leading-none text-navy"
+          className="text-xl leading-none text-navy"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           {value}
         </div>
         <div
-          className="mt-1.5 text-xs text-muted uppercase tracking-wide leading-snug"
+          className="mt-1 text-[11px] text-muted uppercase tracking-wide leading-snug"
           style={{ fontFamily: "var(--font-mono)" }}
         >
           {label}

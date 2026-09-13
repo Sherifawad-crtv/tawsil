@@ -17,15 +17,15 @@ export default function OrderRow({ order }: { order: Order }) {
   return (
     <div
       onClick={() => navigate(`/orders/${order.id}`)}
-      className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 px-4 sm:px-5 py-4 border-b border-border last:border-b-0 cursor-pointer hover:bg-grey-light/60 transition-colors"
+      className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-2.5 border-b border-border last:border-b-0 cursor-pointer hover:bg-grey-light/60 transition-colors"
     >
-      <div className="w-9 h-9 rounded-xl bg-blue-soft text-blue flex items-center justify-center flex-shrink-0 hidden sm:flex">
-        <Package size={16} />
+      <div className="w-7 h-7 rounded-[var(--radius-xs)] bg-blue-soft text-blue flex items-center justify-center flex-shrink-0 hidden sm:flex">
+        <Package size={14} />
       </div>
 
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>
+          <span className="text-[13px] font-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>
             {order.id}
           </span>
           <StatusBadge status={order.status} />
@@ -38,7 +38,7 @@ export default function OrderRow({ order }: { order: Order }) {
             </span>
           )}
         </div>
-        <div className="mt-1 text-sm text-navy/80 truncate">{client?.name ?? "—"}</div>
+        <div className="mt-0.5 text-[13px] text-navy/80 truncate">{client?.name ?? "—"}</div>
         <div className="mt-0.5 text-xs text-muted truncate">
           {contractor?.name ?? "Unassigned"} · {truckTypeLabel(truckType)}
         </div>

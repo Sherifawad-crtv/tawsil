@@ -13,13 +13,13 @@ export default function AppShell() {
       <Sidebar open={navOpen} onClose={() => setNavOpen(false)} />
 
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-14 flex-shrink-0 flex items-center justify-between gap-4 px-4 md:px-8 border-b border-border bg-white">
+        <header className="h-11 flex-shrink-0 flex items-center justify-between gap-4 px-3.5 md:px-6 border-b border-border bg-white">
           <button
-            className="md:hidden p-2 -ml-2 rounded-lg hover:bg-grey-light cursor-pointer"
+            className="md:hidden p-1.5 -ml-1.5 rounded-md hover:bg-grey-light cursor-pointer"
             onClick={() => setNavOpen(true)}
             aria-label="Open menu"
           >
-            <Menu size={20} className="text-navy" />
+            <Menu size={18} className="text-navy" />
           </button>
 
           <div className="flex-1" />
@@ -28,7 +28,7 @@ export default function AppShell() {
             <select
               value={role}
               onChange={(e) => setRole(e.target.value as typeof role)}
-              className="appearance-none pl-3 pr-8 py-1.5 rounded-[var(--radius-control)] border border-border bg-grey-light text-xs font-medium text-navy cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue/30"
+              className="appearance-none pl-2.5 pr-7 py-1 rounded-[var(--radius-control)] border border-border bg-grey-light text-[12px] font-medium text-navy cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue/30"
               style={{ fontFamily: "var(--font-sub)" }}
               aria-label="Viewing as role"
             >
@@ -39,13 +39,13 @@ export default function AppShell() {
               ))}
             </select>
             <ChevronDown
-              size={14}
-              className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-muted"
+              size={12}
+              className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-muted"
             />
           </div>
         </header>
 
-        <main className="flex-1 px-4 md:px-8 py-6 md:py-8 max-w-[1400px] w-full mx-auto">
+        <main className="flex-1 px-3.5 md:px-6 py-4 md:py-5 max-w-[1400px] w-full mx-auto">
           <Outlet />
         </main>
       </div>

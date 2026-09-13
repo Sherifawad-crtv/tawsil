@@ -7,9 +7,9 @@ export default function Toggle({ checked, onChange, label }: { checked: boolean;
       onClick={() => onChange(!checked)}
       className="relative flex-shrink-0 cursor-pointer"
       style={{
-        width: "48px",
-        height: "28px",
-        borderRadius: "14px",
+        width: "34px",
+        height: "20px",
+        borderRadius: "10px",
         backgroundColor: checked ? "var(--color-blue)" : "var(--color-grey)",
         transition: "background-color 0.2s ease",
         border: "none",
@@ -19,13 +19,13 @@ export default function Toggle({ checked, onChange, label }: { checked: boolean;
       <div
         style={{
           position: "absolute",
-          top: "3px",
-          left: checked ? "23px" : "3px",
-          width: "22px",
-          height: "22px",
-          borderRadius: "11px",
+          top: "2px",
+          left: checked ? "16px" : "2px",
+          width: "16px",
+          height: "16px",
+          borderRadius: "8px",
           backgroundColor: "white",
-          boxShadow: "0 1px 4px rgba(0,0,0,0.2)",
+          boxShadow: "0 1px 3px rgba(0,0,0,0.25)",
           transition: "left 0.2s ease",
         }}
       />

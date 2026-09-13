@@ -25,7 +25,7 @@ export default function ContractorsList() {
         action={
           <button
             onClick={() => setShowAdd(true)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
+            className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
             style={{ fontFamily: "var(--font-sub)" }}
           >
             <Plus size={16} /> Add Contractor
@@ -43,7 +43,7 @@ export default function ContractorsList() {
             <Link
               key={contractor.id}
               to={`/contractors/${contractor.id}`}
-              className="rounded-[var(--radius-card)] bg-white border border-border p-5 hover:border-blue/40 transition-colors"
+              className="rounded-[var(--radius-card)] bg-white border border-border p-4 hover:border-blue/40 transition-colors"
             >
               <div className="flex items-start justify-between gap-2 mb-3">
                 <h3 className="text-base font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>{contractor.name}</h3>

@@ -19,10 +19,10 @@ export default function CsvExportButton({ filename, rows, headers }: { filename:
   return (
     <button
       onClick={handleExport}
-      className="flex items-center gap-2 px-3.5 py-2 rounded-[var(--radius-control)] border border-border bg-white text-xs font-semibold text-navy cursor-pointer hover:border-blue/40 transition-colors"
+      className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-[12px] font-semibold text-navy cursor-pointer hover:border-blue/40 transition-colors"
       style={{ fontFamily: "var(--font-sub)" }}
     >
-      <Download size={14} />
+      <Download size={13} />
       Export CSV
     </button>
   );

@@ -24,8 +24,12 @@
   --color-status-completed: #16803c;
   --color-status-cancelled: #dc2626;
 
-  --radius-card: 18px;
-  --radius-control: 14px;
+  /* macOS HIG-scaled corner radii: small chips/badges, standard controls
+     (buttons, inputs), and cards/sheets/modals - each tier proportional
+     to its element size rather than one flat "app" radius. */
+  --radius-xs: 5px;
+  --radius-control: 7px;
+  --radius-card: 10px;
 }
 
 html, body, #root {

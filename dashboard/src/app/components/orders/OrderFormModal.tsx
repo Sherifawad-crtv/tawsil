@@ -166,7 +166,7 @@ export default function OrderFormModal({
         <div className="flex items-center justify-between">
           <button
             onClick={() => (step === 1 ? onClose() : goTo(step - 1))}
-            className="px-4 py-2.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light"
+            className="px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light"
             style={{ fontFamily: "var(--font-sub)" }}
           >
             {step === 1 ? "Cancel" : "Back"}
@@ -175,7 +175,7 @@ export default function OrderFormModal({
             <button
               onClick={() => goTo(step + 1)}
               disabled={!canGoNext}
-              className="px-5 py-2.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-110"
+              className="px-5 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-110"
               style={{ fontFamily: "var(--font-sub)" }}
             >
               Next
@@ -183,7 +183,7 @@ export default function OrderFormModal({
           ) : (
             <button
               onClick={handleSubmit}
-              className="px-5 py-2.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
+              className="px-5 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
               style={{ fontFamily: "var(--font-sub)" }}
             >
               {mode === "create" ? "Create Order" : "Save Changes"}

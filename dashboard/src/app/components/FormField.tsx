@@ -1,8 +1,8 @@
 import type { InputHTMLAttributes, SelectHTMLAttributes, TextareaHTMLAttributes, ReactNode } from "react";
 
-const labelClass = "block text-xs font-semibold text-navy mb-1.5";
+const labelClass = "block text-xs font-semibold text-navy mb-1";
 const controlClass =
-  "w-full px-3 py-2.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-blue/30";
+  "w-full px-3 py-2 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-blue/30";
 
 function FieldLabel({ label, required, badge }: { label: string; required?: boolean; badge?: string }) {
   return (

@@ -131,24 +131,24 @@ export default function MonthlyOrderFormModal({ onClose }: { onClose: () => void
       size="lg"
       footer={
         <div className="flex items-center justify-between">
-          <button onClick={() => (step === 1 ? onClose() : goTo(step - 1))} className="px-4 py-2.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
+          <button onClick={() => (step === 1 ? onClose() : goTo(step - 1))} className="px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
             {step === 1 ? "Cancel" : "Back"}
           </button>
           {step < TOTAL_STEPS ? (
             <button
               onClick={() => goTo(step + 1)}
               disabled={!canGoNext}
-              className="px-5 py-2.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-110"
+              className="px-5 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-110"
               style={{ fontFamily: "var(--font-sub)" }}
             >
               Next
             </button>
           ) : (
             <div className="flex items-center gap-2">
-              <button onClick={() => buildContract("Draft")} className="px-4 py-2.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
+              <button onClick={() => buildContract("Draft")} className="px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
                 Save & Exit (Draft)
               </button>
-              <button onClick={() => buildContract("Active")} className="px-5 py-2.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110" style={{ fontFamily: "var(--font-sub)" }}>
+              <button onClick={() => buildContract("Active")} className="px-5 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110" style={{ fontFamily: "var(--font-sub)" }}>
                 Review Monthly Order
               </button>
             </div>

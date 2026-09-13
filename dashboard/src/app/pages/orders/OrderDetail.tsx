@@ -53,7 +53,7 @@ export default function OrderDetail() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-2xl md:text-3xl text-navy" style={{ fontFamily: "var(--font-heading)" }}>{order.id}</h1>
+            <h1 className="text-xl text-navy" style={{ fontFamily: "var(--font-heading)" }}>{order.id}</h1>
             <StatusBadge status={order.status} />
           </div>
           <p className="mt-1.5 text-sm text-muted">
@@ -65,7 +65,7 @@ export default function OrderDetail() {
           {needsAssignment && (
             <button
               onClick={() => setShowAssign(true)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110 shadow-[0_4px_16px_rgba(18,83,250,0.25)]"
+              className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110 shadow-[0_4px_16px_rgba(18,83,250,0.25)]"
               style={{ fontFamily: "var(--font-sub)" }}
             >
               <PackagePlus size={16} /> Assign Driver
@@ -73,20 +73,20 @@ export default function OrderDetail() {
           )}
           {canEditCancel && (
             <>
-              <button onClick={() => setShowEdit(true)} className="flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
+              <button onClick={() => setShowEdit(true)} className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
                 <Pencil size={14} /> Edit
               </button>
-              <button onClick={handleCancel} className="flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-status-cancelled cursor-pointer hover:bg-[#FDECEC]" style={{ fontFamily: "var(--font-sub)" }}>
+              <button onClick={handleCancel} className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-status-cancelled cursor-pointer hover:bg-[#FDECEC]" style={{ fontFamily: "var(--font-sub)" }}>
                 <Ban size={14} /> Cancel
               </button>
             </>
           )}
           {order.status === "Completed" && (
             <>
-              <button className="flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
+              <button className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
                 <Navigation size={14} /> Track Order
               </button>
-              <button onClick={() => setShowReorder(true)} className="flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-control)] bg-navy text-white text-sm font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
+              <button onClick={() => setShowReorder(true)} className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-navy text-white text-sm font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
                 <RotateCcw size={14} /> Reorder
               </button>
             </>
@@ -97,7 +97,7 @@ export default function OrderDetail() {
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Driver & Vehicle */}
-          <div className="rounded-[var(--radius-card)] bg-white border border-border p-5">
+          <div className="rounded-[var(--radius-card)] bg-white border border-border p-4">
             <h3 className="text-sm font-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Driver & Vehicle Information</h3>
             {driver && vehicle ? (
               <div className="flex items-center gap-4">
@@ -110,7 +110,7 @@ export default function OrderDetail() {
                 </div>
               </div>
             ) : (
-              <div className="flex items-center gap-3 px-4 py-3 rounded-[var(--radius-control)] bg-grey-light/60">
+              <div className="flex items-center gap-3 px-4 py-2 rounded-[var(--radius-control)] bg-grey-light/60">
                 <User size={16} className="text-muted" />
                 <span className="text-sm text-muted font-medium">Not Assigned</span>
               </div>
@@ -118,7 +118,7 @@ export default function OrderDetail() {
           </div>
 
           {/* Trip & cargo */}
-          <div className="rounded-[var(--radius-card)] bg-white border border-border p-5">
+          <div className="rounded-[var(--radius-card)] bg-white border border-border p-4">
             <h3 className="text-sm font-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Trip & Cargo</h3>
             <div className="grid sm:grid-cols-2 gap-4">
               <DetailField label="Trip Type" value={order.tripType} />
@@ -137,7 +137,7 @@ export default function OrderDetail() {
           </div>
 
           {/* Delivery */}
-          <div className="rounded-[var(--radius-card)] bg-white border border-border p-5">
+          <div className="rounded-[var(--radius-card)] bg-white border border-border p-4">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Delivery</h3>
               <div className="flex items-center gap-1.5 text-xs text-muted">

@@ -49,7 +49,7 @@ export default function OrdersList() {
         action={
           <button
             onClick={() => setShowCreate(true)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
+            className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
             style={{ fontFamily: "var(--font-sub)" }}
           >
             <Plus size={16} /> New Order
@@ -62,7 +62,7 @@ export default function OrdersList() {
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value as OrderStatus | "All")}
-          className="px-3 py-2.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer"
+          className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer"
           style={{ fontFamily: "var(--font-sub)" }}
         >
           {STATUS_OPTIONS.map((s) => (
@@ -72,7 +72,7 @@ export default function OrdersList() {
         <select
           value={tripType}
           onChange={(e) => setTripType(e.target.value as TripType | "All")}
-          className="px-3 py-2.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer"
+          className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer"
           style={{ fontFamily: "var(--font-sub)" }}
         >
           {TRIP_OPTIONS.map((t) => (
@@ -82,7 +82,7 @@ export default function OrdersList() {
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value as "pickup" | "status")}
-          className="px-3 py-2.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer"
+          className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer"
           style={{ fontFamily: "var(--font-sub)" }}
         >
           <option value="pickup">Sort: Pickup Date</option>

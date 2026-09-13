@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PhoneCallingIcon } from "@solar-icons/react/linear";
+import { Button } from "../Button";
 import Modal from "../Modal";
 import { SelectField, TextareaField } from "../FormField";
 import { useDataStore } from "../../lib/store";
@@ -33,17 +34,12 @@ export default function AssignDriverModal({ order, onClose }: { order: Order; on
       onClose={onClose}
       footer={
         <div className="flex items-center justify-between">
-          <button onClick={onClose} className="px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
+          <Button variant="secondary" onClick={onClose}>
             Cancel
-          </button>
-          <button
-            onClick={handleConfirm}
-            disabled={!canConfirm}
-            className="px-5 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-110"
-            style={{ fontFamily: "var(--font-sub)" }}
-          >
+          </Button>
+          <Button onClick={handleConfirm} disabled={!canConfirm}>
             Confirm Assignment
-          </button>
+          </Button>
         </div>
       }
     >
@@ -91,7 +87,7 @@ export default function AssignDriverModal({ order, onClose }: { order: Order; on
             </div>
 
             {driverId && (
-              <div className="rounded-[var(--radius-control)] bg-blue-soft px-4 py-2 text-sm text-navy">
+              <div className="rounded-2lg bg-blue-soft px-4 py-2 text-sm text-navy">
                 {byId(drivers, driverId)?.name} currently has{" "}
                 <strong>{getActiveOrderCountForDriver(orders, driverId)} active order(s)</strong>.
               </div>

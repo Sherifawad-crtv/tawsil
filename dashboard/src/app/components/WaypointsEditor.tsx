@@ -67,7 +67,7 @@ export default function WaypointsEditor({
       )}
 
       {value.map((wp, i) => (
-        <div key={wp.id} className="rounded-[var(--radius-control)] border border-border p-4 bg-grey-light/40">
+        <div key={wp.id} className="rounded-2lg border border-border p-4 bg-grey-light/40">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-1.5">
               <MapPointIcon size={14} className={wp.type === "Pickup" ? "text-navy" : "text-blue"} />
@@ -114,7 +114,7 @@ export default function WaypointsEditor({
               </div>
               <button
                 type="button"
-                className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-xs font-semibold text-navy cursor-pointer hover:border-blue/40 flex-shrink-0"
+                className="px-3 py-1.5 rounded-2lg border border-border bg-white text-xs font-semibold text-navy cursor-pointer hover:border-blue/40 flex-shrink-0"
                 title="Pick on Map (coming soon)"
               >
                 Pick on Map
@@ -133,7 +133,7 @@ export default function WaypointsEditor({
         <button
           type="button"
           onClick={() => onChange([...value, newWaypoint(hasPickup ? "Dropoff" : "Pickup")])}
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-[var(--radius-control)] bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-2lg bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal"
           style={{ fontFamily: "var(--font-sub)" }}
         >
           <AddIcon size={14} /> Add Waypoint
@@ -142,14 +142,14 @@ export default function WaypointsEditor({
           <button
             type="button"
             onClick={() => setBookmarksOpen((v) => !v)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-[var(--radius-control)] border border-border bg-white text-xs font-semibold text-navy cursor-pointer hover:border-blue/40"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-2lg border border-border bg-white text-xs font-semibold text-navy cursor-pointer hover:border-blue/40"
             style={{ fontFamily: "var(--font-sub)" }}
           >
             <BookmarkIcon size={14} /> Load from Bookmarks
           </button>
         )}
         {bookmarksOpen && (
-          <div className="absolute top-full left-0 mt-1 w-72 rounded-[var(--radius-control)] border border-border bg-white shadow-lg z-10 max-h-60 overflow-y-auto">
+          <div className="absolute top-full left-0 mt-1 w-72 rounded-2lg border border-border bg-white shadow-lg z-10 max-h-60 overflow-y-auto">
             {bookmarks.map((loc) => (
               <button
                 key={loc.id}

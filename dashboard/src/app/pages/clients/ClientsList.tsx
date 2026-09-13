@@ -6,6 +6,7 @@ import SearchInput from "../../components/SearchInput";
 import EmptyState from "../../components/EmptyState";
 import ActiveBadge from "../../components/ActiveBadge";
 import AddClientModal from "../../components/AddClientModal";
+import { Button } from "../../components/Button";
 import { useDataStore } from "../../lib/store";
 
 export default function ClientsList() {
@@ -21,13 +22,9 @@ export default function ClientsList() {
         title="Clients"
         subtitle={`${clients.length} clients`}
         action={
-          <button
-            onClick={() => setShowAdd(true)}
-            className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
-            style={{ fontFamily: "var(--font-sub)" }}
-          >
-            <AddIcon size={16} /> Add Client
-          </button>
+          <Button leadingIcon={AddIcon} onClick={() => setShowAdd(true)}>
+            Add Client
+          </Button>
         }
       />
 
@@ -43,13 +40,13 @@ export default function ClientsList() {
               <Link
                 key={client.id}
                 to={`/clients/${client.id}`}
-                className="rounded-[var(--radius-card)] bg-white border border-border p-4 hover:border-blue/40 transition-colors"
+                className="rounded-2xl bg-white border border-border p-4 hover:border-blue/40 transition-colors"
               >
                 <div className="flex items-start justify-between gap-2 mb-3">
-                  <h3 className="text-base font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>{client.name}</h3>
+                  <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>{client.name}</h3>
                   <ActiveBadge active={client.active} />
                 </div>
-                <div className="text-xs text-muted" style={{ fontFamily: "var(--font-mono)" }}>{orderCount} orders</div>
+                <div className="text-caption-1-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>{orderCount} orders</div>
               </Link>
             );
           })}

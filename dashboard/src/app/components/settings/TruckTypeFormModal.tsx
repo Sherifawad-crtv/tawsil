@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "../Button";
 import Modal from "../Modal";
 import { TextField, SelectField } from "../FormField";
 import Toggle from "../Toggle";
@@ -53,17 +54,12 @@ export default function TruckTypeFormModal({ existing, onClose }: { existing?: T
       size="lg"
       footer={
         <div className="flex items-center justify-end gap-3">
-          <button onClick={onClose} className="px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
+          <Button variant="secondary" onClick={onClose}>
             Cancel
-          </button>
-          <button
-            onClick={handleSubmit}
-            disabled={!canSubmit}
-            className="px-5 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-110"
-            style={{ fontFamily: "var(--font-sub)" }}
-          >
+          </Button>
+          <Button onClick={handleSubmit} disabled={!canSubmit}>
             {existing ? "Save Changes" : "Add Truck Type"}
-          </button>
+          </Button>
         </div>
       }
     >
@@ -81,7 +77,7 @@ export default function TruckTypeFormModal({ existing, onClose }: { existing?: T
           </SelectField>
         </div>
 
-        <div className="flex items-center justify-between p-4 rounded-[var(--radius-control)] border border-border bg-grey-light/40">
+        <div className="flex items-center justify-between p-4 rounded-2lg border border-border bg-grey-light/40">
           <span className="text-sm font-medium text-navy">Requires Temperature Control</span>
           <Toggle checked={form.requiresTempControl} onChange={(v) => setForm((f) => ({ ...f, requiresTempControl: v }))} />
         </div>

@@ -2,6 +2,11 @@
 @import 'tailwindcss' source(none);
 @source '../**/*.{js,ts,jsx,tsx}';
 
+/* ---------------------------------------------------------------------------
+ * Design system: structure, scale, radii, shadows and type ramp adopted from
+ * BoardUI (github.com/BoardUI/boardui) - our own fonts and colors underneath.
+ * --------------------------------------------------------------------------- */
+
 @theme {
   --font-heading: 'Archivo Black', sans-serif;
   --font-sub: 'Archivo', sans-serif;
@@ -24,12 +29,147 @@
   --color-status-completed: #16803c;
   --color-status-cancelled: #dc2626;
 
-  /* macOS HIG-scaled corner radii: small chips/badges, standard controls
-     (buttons, inputs), and cards/sheets/modals - each tier proportional
-     to its element size rather than one flat "app" radius. */
-  --radius-xs: 5px;
-  --radius-control: 7px;
-  --radius-card: 10px;
+  /* ----- Radii -----------------------------------------------------------
+   * BoardUI's scale: rounded-md/lg/xl are Tailwind defaults (6/8/12px);
+   * 2lg is BoardUI's extra step between lg and xl, used by medium controls
+   * (buttons, inputs). Cards/sheets/modals sit on rounded-2xl/3xl.
+   * ------------------------------------------------------------------------*/
+  --radius-2lg: 10px;
+
+  /* ----- Shadows -----------------------------------------------------------
+   * BoardUI's recipe (Figma 6%/10%), softer than Tailwind's defaults.
+   * ------------------------------------------------------------------------*/
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.06);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.06), 0 1px 3px 0 rgb(0 0 0 / 0.10);
+  --shadow-md: 0 2px 4px -1px rgb(0 0 0 / 0.06), 0 4px 6px -1px rgb(0 0 0 / 0.10);
+  --shadow-lg: 0 4px 6px -2px rgb(0 0 0 / 0.05), 0 10px 15px -3px rgb(0 0 0 / 0.10);
+  --shadow-xl: 0 10px 10px -5px rgb(0 0 0 / 0.04), 0 20px 25px -5px rgb(0 0 0 / 0.10);
+  /* 1px contact shadow for a white surface sitting on a tinted card. */
+  --shadow-card: 0 1px 1px 0 rgb(0 0 0 / 0.05);
+  /* Floating menu/dropdown/modal panel. */
+  --shadow-dropdown: 0 1px 1px 0 rgb(0 0 0 / 0.04), 0 4px 4px 0 rgb(0 0 0 / 0.02);
+  /* Sidebar's floating-panel elevation. */
+  --shadow-sidebar: 0 1px 0 0 rgb(0 0 0 / 0.0196), 0 1px 12px 0 rgb(0 0 0 / 0.0588), 0 0 1px 0 rgb(0 0 0 / 0.3216);
+  /* Selected sidebar nav row: 1px blue edge + inner top highlight. */
+  --shadow-nav-selected: 0 0 0 1px var(--color-blue), inset 0 1px 0 0 rgb(255 255 255 / 0.25);
+
+  /* ----- Typography --------------------------------------------------------
+   * Composite text-{family}-{weight} utilities (size + line-height + tracking
+   * + weight in one class) - BoardUI's exact type scale, set in Archivo
+   * instead of Inter. Weight mapping: regular 400, medium 500, semibold 600,
+   * bold 700.
+   * ------------------------------------------------------------------------*/
+  --text-title-1-regular: 1.5rem;
+  --text-title-1-regular--line-height: 2.125rem;
+  --text-title-1-regular--font-weight: 400;
+  --text-title-1-medium: 1.5rem;
+  --text-title-1-medium--line-height: 2.125rem;
+  --text-title-1-medium--font-weight: 500;
+  --text-title-1-semibold: 1.5rem;
+  --text-title-1-semibold--line-height: 2.125rem;
+  --text-title-1-semibold--font-weight: 600;
+  --text-title-1-bold: 1.5rem;
+  --text-title-1-bold--line-height: 2.125rem;
+  --text-title-1-bold--font-weight: 700;
+
+  --text-title-2-regular: 1.25rem;
+  --text-title-2-regular--line-height: 1.625rem;
+  --text-title-2-regular--font-weight: 400;
+  --text-title-2-medium: 1.25rem;
+  --text-title-2-medium--line-height: 1.625rem;
+  --text-title-2-medium--font-weight: 500;
+  --text-title-2-semibold: 1.25rem;
+  --text-title-2-semibold--line-height: 1.625rem;
+  --text-title-2-semibold--font-weight: 600;
+  --text-title-2-bold: 1.25rem;
+  --text-title-2-bold--line-height: 1.625rem;
+  --text-title-2-bold--font-weight: 700;
+
+  --text-title-3-regular: 1.125rem;
+  --text-title-3-regular--line-height: 1.625rem;
+  --text-title-3-regular--font-weight: 400;
+  --text-title-3-medium: 1.125rem;
+  --text-title-3-medium--line-height: 1.625rem;
+  --text-title-3-medium--font-weight: 500;
+  --text-title-3-semibold: 1.125rem;
+  --text-title-3-semibold--line-height: 1.625rem;
+  --text-title-3-semibold--font-weight: 600;
+  --text-title-3-bold: 1.125rem;
+  --text-title-3-bold--line-height: 1.625rem;
+  --text-title-3-bold--font-weight: 700;
+
+  --text-headline-regular: 1rem;
+  --text-headline-regular--line-height: 1.375rem;
+  --text-headline-regular--font-weight: 400;
+  --text-headline-medium: 1rem;
+  --text-headline-medium--line-height: 1.375rem;
+  --text-headline-medium--font-weight: 500;
+  --text-headline-semibold: 1rem;
+  --text-headline-semibold--line-height: 1.375rem;
+  --text-headline-semibold--font-weight: 600;
+  --text-headline-bold: 1rem;
+  --text-headline-bold--line-height: 1.375rem;
+  --text-headline-bold--font-weight: 700;
+
+  --text-body-regular: 0.875rem;
+  --text-body-regular--line-height: 1.25rem;
+  --text-body-regular--font-weight: 400;
+  --text-body-medium: 0.875rem;
+  --text-body-medium--line-height: 1.25rem;
+  --text-body-medium--font-weight: 500;
+  --text-body-semibold: 0.875rem;
+  --text-body-semibold--line-height: 1.25rem;
+  --text-body-semibold--font-weight: 600;
+  --text-body-bold: 0.875rem;
+  --text-body-bold--line-height: 1.25rem;
+  --text-body-bold--font-weight: 700;
+
+  --text-body-2-regular: 0.8125rem;
+  --text-body-2-regular--line-height: 1.125rem;
+  --text-body-2-regular--font-weight: 400;
+  --text-body-2-medium: 0.8125rem;
+  --text-body-2-medium--line-height: 1.125rem;
+  --text-body-2-medium--font-weight: 500;
+  --text-body-2-semibold: 0.8125rem;
+  --text-body-2-semibold--line-height: 1.125rem;
+  --text-body-2-semibold--font-weight: 600;
+  --text-body-2-bold: 0.8125rem;
+  --text-body-2-bold--line-height: 1.125rem;
+  --text-body-2-bold--font-weight: 700;
+
+  --text-caption-1-regular: 0.75rem;
+  --text-caption-1-regular--line-height: 1rem;
+  --text-caption-1-regular--letter-spacing: 0.15px;
+  --text-caption-1-regular--font-weight: 400;
+  --text-caption-1-medium: 0.75rem;
+  --text-caption-1-medium--line-height: 1rem;
+  --text-caption-1-medium--letter-spacing: 0.15px;
+  --text-caption-1-medium--font-weight: 500;
+  --text-caption-1-semibold: 0.75rem;
+  --text-caption-1-semibold--line-height: 1rem;
+  --text-caption-1-semibold--letter-spacing: 0.15px;
+  --text-caption-1-semibold--font-weight: 600;
+  --text-caption-1-bold: 0.75rem;
+  --text-caption-1-bold--line-height: 1rem;
+  --text-caption-1-bold--letter-spacing: 0.15px;
+  --text-caption-1-bold--font-weight: 700;
+
+  --text-caption-2-regular: 0.6875rem;
+  --text-caption-2-regular--line-height: 0.9375rem;
+  --text-caption-2-regular--letter-spacing: 0.2px;
+  --text-caption-2-regular--font-weight: 400;
+  --text-caption-2-medium: 0.6875rem;
+  --text-caption-2-medium--line-height: 0.9375rem;
+  --text-caption-2-medium--letter-spacing: 0.2px;
+  --text-caption-2-medium--font-weight: 500;
+  --text-caption-2-semibold: 0.6875rem;
+  --text-caption-2-semibold--line-height: 0.9375rem;
+  --text-caption-2-semibold--letter-spacing: 0.2px;
+  --text-caption-2-semibold--font-weight: 600;
+  --text-caption-2-bold: 0.6875rem;
+  --text-caption-2-bold--line-height: 0.9375rem;
+  --text-caption-2-bold--letter-spacing: 0.2px;
+  --text-caption-2-bold--font-weight: 700;
 }
 
 html, body, #root {

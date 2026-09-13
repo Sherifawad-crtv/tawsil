@@ -6,6 +6,7 @@ import SearchInput from "../../components/SearchInput";
 import EmptyState from "../../components/EmptyState";
 import ActiveBadge from "../../components/ActiveBadge";
 import AddContractorModal from "../../components/AddContractorModal";
+import { Button } from "../../components/Button";
 import { useDataStore } from "../../lib/store";
 import { getContractorStats } from "../../lib/selectors";
 
@@ -23,13 +24,9 @@ export default function ContractorsList() {
         title="Contractors"
         subtitle={`${contractors.length} contractors`}
         action={
-          <button
-            onClick={() => setShowAdd(true)}
-            className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
-            style={{ fontFamily: "var(--font-sub)" }}
-          >
-            <AddIcon size={16} /> Add Contractor
-          </button>
+          <Button leadingIcon={AddIcon} onClick={() => setShowAdd(true)}>
+            Add Contractor
+          </Button>
         }
       />
 
@@ -43,13 +40,13 @@ export default function ContractorsList() {
             <Link
               key={contractor.id}
               to={`/contractors/${contractor.id}`}
-              className="rounded-[var(--radius-card)] bg-white border border-border p-4 hover:border-blue/40 transition-colors"
+              className="rounded-2xl bg-white border border-border p-4 hover:border-blue/40 transition-colors"
             >
               <div className="flex items-start justify-between gap-2 mb-3">
-                <h3 className="text-base font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>{contractor.name}</h3>
+                <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>{contractor.name}</h3>
                 <ActiveBadge active={contractor.active} />
               </div>
-              <div className="flex items-center gap-4 text-xs text-muted">
+              <div className="flex items-center gap-4 text-caption-1-regular text-muted">
                 <span className="flex items-center gap-1.5"><UsersGroupRoundedIcon size={13} /> {driverCount} drivers</span>
                 <span className="flex items-center gap-1.5"><BusIcon size={13} /> {vehicleCount} vehicles</span>
               </div>

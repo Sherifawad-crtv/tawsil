@@ -17,14 +17,14 @@ export const EMPTY_CLIENT_SELECTION: ClientSelection = {
 export default function ClientStepPicker({ value, onChange }: { value: ClientSelection; onChange: (value: ClientSelection) => void }) {
   return (
     <div className="flex flex-col gap-4">
-      <div className="inline-flex rounded-[var(--radius-control)] border border-border p-1 bg-grey-light w-fit">
+      <div className="inline-flex rounded-2lg border border-border p-1 bg-grey-light w-fit">
         {(["existing", "new"] as const).map((mode) => (
           <button
             key={mode}
             type="button"
             onClick={() => onChange({ ...value, mode })}
-            className={`px-4 py-1.5 rounded-[10px] text-sm font-medium cursor-pointer transition-colors ${
-              value.mode === mode ? "bg-white text-navy shadow-sm" : "text-muted"
+            className={`px-4 py-1.5 rounded-lg text-body-medium cursor-pointer transition-colors ${
+              value.mode === mode ? "bg-white text-navy shadow-xs" : "text-muted"
             }`}
             style={{ fontFamily: "var(--font-sub)" }}
           >

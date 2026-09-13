@@ -48,24 +48,24 @@ export default function Sidebar({
       )}
 
       <aside
-        className={`fixed md:sticky top-0 left-0 z-40 md:z-0 h-screen w-60 md:w-52 flex-shrink-0 flex flex-col bg-nav-bg border-r border-border transition-transform duration-300 md:translate-x-0 ${
+        className={`fixed md:sticky top-0 md:top-3 left-0 z-40 md:z-0 h-screen md:h-[calc(100vh-24px)] w-64 flex-shrink-0 flex flex-col bg-white md:rounded-3xl border-r md:border border-border md:shadow-sidebar transition-transform duration-300 md:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between flex-shrink-0 px-3.5 h-11">
-          <h2 className="text-[13px] tracking-tight text-navy" style={{ fontFamily: "var(--font-heading)" }}>
+        <div className="flex items-center justify-between flex-shrink-0 px-4 h-14">
+          <h2 className="text-title-3-semibold tracking-tight text-navy" style={{ fontFamily: "var(--font-heading)" }}>
             TAWSIL
           </h2>
           <button
-            className="md:hidden w-7 h-7 rounded-md flex items-center justify-center cursor-pointer active:scale-90 transition-transform bg-tile"
+            className="md:hidden w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer active:scale-90 transition-transform bg-tile"
             onClick={onClose}
             aria-label="Close menu"
           >
-            <CloseIcon size={14} className="text-navy" />
+            <CloseIcon size={16} className="text-navy" />
           </button>
         </div>
 
-        <nav className="flex-1 px-2 py-1.5 flex flex-col gap-px overflow-y-auto">
+        <nav className="flex-1 px-3 py-1 flex flex-col gap-1 overflow-y-auto">
           {NAV_ITEMS.map(({ to, label, iconOutline: IconOutline, iconFilled: IconFilled, end }) => (
             <NavLink
               key={to}
@@ -73,24 +73,21 @@ export default function Sidebar({
               end={end}
               onClick={onClose}
               className={({ isActive }) =>
-                `flex items-center gap-2 px-2 py-[5px] rounded-[var(--radius-xs)] text-[13px] cursor-pointer transition-colors ${
-                  isActive ? "font-semibold text-blue" : "font-medium text-navy"
+                `flex items-center gap-2.5 p-2 rounded-2lg text-body-medium cursor-pointer transition-colors ${
+                  isActive ? "bg-linear-to-b from-blue to-royal shadow-nav-selected text-white" : "text-navy hover:bg-grey-light"
                 }`
               }
-              style={({ isActive }) => ({
-                backgroundColor: isActive ? "rgba(18,83,250,0.1)" : "transparent",
-                fontFamily: "var(--font-sub)",
-              })}
+              style={{ fontFamily: "var(--font-sub)" }}
             >
               {({ isActive }) =>
                 isActive ? (
                   <>
-                    <IconFilled size={15} color="#1253FA" className="flex-shrink-0" />
+                    <IconFilled size={18} color="#ffffff" className="flex-shrink-0" />
                     {label}
                   </>
                 ) : (
                   <>
-                    <IconOutline size={15} strokeWidth={2} color="#6B7280" className="flex-shrink-0" />
+                    <IconOutline size={18} strokeWidth={2} color="#6B7280" className="flex-shrink-0" />
                     {label}
                   </>
                 )
@@ -99,15 +96,15 @@ export default function Sidebar({
           ))}
         </nav>
 
-        <div className="flex-shrink-0 px-3.5 pb-3">
-          <div className="h-px bg-border mb-2.5" />
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 bg-navy">
-              <span className="text-white text-[10px]" style={{ fontFamily: "var(--font-heading)" }}>AK</span>
+        <div className="flex-shrink-0 px-3 pb-3">
+          <div className="h-px bg-border mb-3" />
+          <div className="flex items-center gap-2.5 p-2 rounded-2lg hover:bg-grey-light transition-colors">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-navy">
+              <span className="text-white text-caption-1-semibold" style={{ fontFamily: "var(--font-heading)" }}>AK</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="truncate text-navy text-[12px] font-semibold" style={{ fontFamily: "var(--font-sub)" }}>Ahmed Khan</p>
-              <p className="truncate text-muted text-[10px]" style={{ fontFamily: "var(--font-mono)" }}>ahmed@tawsil.com</p>
+              <p className="truncate text-navy text-body-2-semibold" style={{ fontFamily: "var(--font-sub)" }}>Ahmed Khan</p>
+              <p className="truncate text-muted text-caption-2-regular" style={{ fontFamily: "var(--font-mono)" }}>ahmed@tawsil.com</p>
             </div>
           </div>
         </div>

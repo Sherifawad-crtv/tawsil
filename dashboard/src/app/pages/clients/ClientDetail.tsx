@@ -53,7 +53,7 @@ export default function ClientDetail() {
       <Tabs tabs={TABS} active={tab} onChange={setTab} />
 
       {tab === "Orders" && (
-        <div className="rounded-[var(--radius-card)] bg-white border border-border overflow-hidden">
+        <div className="rounded-2xl bg-white border border-border overflow-hidden">
           {clientOrders.length === 0 ? (
             <EmptyState icon={BoxIcon} title="No orders yet" />
           ) : (
@@ -65,7 +65,7 @@ export default function ClientDetail() {
       {tab === "Saved Locations" && (
         <div>
           <div className="flex justify-end mb-3">
-            <button onClick={() => setShowAddLocation(true)} className="flex items-center gap-2 px-3.5 py-2 rounded-[var(--radius-control)] bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
+            <button onClick={() => setShowAddLocation(true)} className="flex items-center gap-2 px-3.5 py-2 rounded-2lg bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
               <AddIcon size={14} /> Add Location
             </button>
           </div>
@@ -74,7 +74,7 @@ export default function ClientDetail() {
           ) : (
             <div className="grid sm:grid-cols-2 gap-3">
               {clientLocations.map((loc) => (
-                <div key={loc.id} className="rounded-[var(--radius-card)] bg-white border border-border p-4">
+                <div key={loc.id} className="rounded-2xl bg-white border border-border p-4">
                   <div className="flex items-start gap-2">
                     <MapPointIcon size={15} className="text-blue mt-0.5 flex-shrink-0" />
                     <div className="min-w-0">

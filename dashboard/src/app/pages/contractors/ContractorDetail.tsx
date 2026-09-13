@@ -65,7 +65,7 @@ export default function ContractorDetail() {
       {tab === "Drivers" && (
         <div>
           <div className="flex justify-end mb-3">
-            <button onClick={() => setShowAddDriver(true)} className="flex items-center gap-2 px-3.5 py-2 rounded-[var(--radius-control)] bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
+            <button onClick={() => setShowAddDriver(true)} className="flex items-center gap-2 px-3.5 py-2 rounded-2lg bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
               <AddIcon size={14} /> Add Driver
             </button>
           </div>
@@ -74,7 +74,7 @@ export default function ContractorDetail() {
           ) : (
             <div className="flex flex-col gap-2.5">
               {contractorDrivers.map((driver) => (
-                <div key={driver.id} className="rounded-[var(--radius-card)] bg-white border border-border p-4">
+                <div key={driver.id} className="rounded-2xl bg-white border border-border p-4">
                   <button
                     onClick={() => setExpandedDriver(expandedDriver === driver.id ? null : driver.id)}
                     className="w-full flex items-center justify-between gap-4 cursor-pointer text-left"
@@ -101,7 +101,7 @@ export default function ContractorDetail() {
       {tab === "Vehicles" && (
         <div>
           <div className="flex justify-end mb-3">
-            <button onClick={() => setShowAddVehicle(true)} className="flex items-center gap-2 px-3.5 py-2 rounded-[var(--radius-control)] bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
+            <button onClick={() => setShowAddVehicle(true)} className="flex items-center gap-2 px-3.5 py-2 rounded-2lg bg-navy text-white text-xs font-semibold cursor-pointer hover:bg-royal" style={{ fontFamily: "var(--font-sub)" }}>
               <AddIcon size={14} /> Add Vehicle
             </button>
           </div>
@@ -110,7 +110,7 @@ export default function ContractorDetail() {
           ) : (
             <div className="flex flex-col gap-2.5">
               {contractorVehicles.map((vehicle) => (
-                <div key={vehicle.id} className="rounded-[var(--radius-card)] bg-white border border-border p-4">
+                <div key={vehicle.id} className="rounded-2xl bg-white border border-border p-4">
                   <button
                     onClick={() => setExpandedVehicle(expandedVehicle === vehicle.id ? null : vehicle.id)}
                     className="w-full flex items-center justify-between gap-4 cursor-pointer text-left"
@@ -130,7 +130,7 @@ export default function ContractorDetail() {
       )}
 
       {tab === "Orders" && (
-        <div className="rounded-[var(--radius-card)] bg-white border border-border overflow-hidden">
+        <div className="rounded-2xl bg-white border border-border overflow-hidden">
           {contractorOrders.length === 0 ? (
             <EmptyState icon={BoxIcon} title="No orders yet" />
           ) : (

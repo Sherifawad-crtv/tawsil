@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "./Button";
 import Modal from "./Modal";
 import { TextField } from "./FormField";
 import { useDataStore } from "../lib/store";
@@ -35,17 +36,12 @@ export default function AddLocationModal({ clientId, onClose }: { clientId: stri
       onClose={onClose}
       footer={
         <div className="flex items-center justify-end gap-3">
-          <button onClick={onClose} className="px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
+          <Button variant="secondary" onClick={onClose}>
             Cancel
-          </button>
-          <button
-            onClick={handleSubmit}
-            disabled={!canSubmit}
-            className="px-5 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-110"
-            style={{ fontFamily: "var(--font-sub)" }}
-          >
+          </Button>
+          <Button onClick={handleSubmit} disabled={!canSubmit}>
             Add Location
-          </button>
+          </Button>
         </div>
       }
     >

@@ -9,7 +9,7 @@ export default function DriverDetailPanel({ driver, onClose }: { driver: Driver;
   const activeOrders = getActiveOrderCountForDriver(orders, driver.id);
 
   return (
-    <div className="rounded-[var(--radius-control)] border border-border bg-grey-light/40 p-4 mt-2">
+    <div className="rounded-2lg border border-border bg-grey-light/40 p-4 mt-2">
       <div className="grid sm:grid-cols-3 gap-4">
         <div>
           <div className="text-xs text-muted uppercase tracking-wide mb-1.5" style={{ fontFamily: "var(--font-mono)" }}>Contact</div>
@@ -33,7 +33,7 @@ export default function DriverDetailPanel({ driver, onClose }: { driver: Driver;
         </button>
         <button
           onClick={() => toggleDriverActive(driver.id)}
-          className={`flex items-center gap-1.5 px-3.5 py-2 rounded-[var(--radius-control)] text-xs font-semibold cursor-pointer ${
+          className={`flex items-center gap-1.5 px-3.5 py-2 rounded-2lg text-xs font-semibold cursor-pointer ${
             driver.active ? "text-status-cancelled hover:bg-[#FDECEC]" : "text-status-completed hover:bg-[#E7F6EC]"
           }`}
           style={{ fontFamily: "var(--font-sub)" }}

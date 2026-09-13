@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Modal from "../Modal";
+import { Button } from "../Button";
 import Stepper from "../Stepper";
 import { TextField, SelectField } from "../FormField";
 import TruckTypeGrid from "../TruckTypeGrid";
@@ -131,26 +132,19 @@ export default function MonthlyOrderFormModal({ onClose }: { onClose: () => void
       size="lg"
       footer={
         <div className="flex items-center justify-between">
-          <button onClick={() => (step === 1 ? onClose() : goTo(step - 1))} className="px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
+          <Button variant="secondary" onClick={() => (step === 1 ? onClose() : goTo(step - 1))}>
             {step === 1 ? "Cancel" : "Back"}
-          </button>
+          </Button>
           {step < TOTAL_STEPS ? (
-            <button
-              onClick={() => goTo(step + 1)}
-              disabled={!canGoNext}
-              className="px-5 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-110"
-              style={{ fontFamily: "var(--font-sub)" }}
-            >
+            <Button onClick={() => goTo(step + 1)} disabled={!canGoNext}>
               Next
-            </button>
+            </Button>
           ) : (
             <div className="flex items-center gap-2">
-              <button onClick={() => buildContract("Draft")} className="px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
+              <Button variant="secondary" onClick={() => buildContract("Draft")}>
                 Save & Exit (Draft)
-              </button>
-              <button onClick={() => buildContract("Active")} className="px-5 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110" style={{ fontFamily: "var(--font-sub)" }}>
-                Review Monthly Order
-              </button>
+              </Button>
+              <Button onClick={() => buildContract("Active")}>Review Monthly Order</Button>
             </div>
           )}
         </div>
@@ -211,11 +205,11 @@ export default function MonthlyOrderFormModal({ onClose }: { onClose: () => void
 
       {step === 4 && (
         <div className="flex flex-col gap-5">
-          <div className="rounded-[var(--radius-control)] border border-border p-4">
+          <div className="rounded-2lg border border-border p-4">
             <div className="text-xs font-semibold uppercase tracking-wide text-muted mb-2" style={{ fontFamily: "var(--font-mono)" }}>Schedule</div>
             <div className="text-sm text-navy">{form.dates.length} execution day(s) · {form.dailyPickupTime} daily</div>
           </div>
-          <div className="rounded-[var(--radius-control)] border border-border p-4">
+          <div className="rounded-2lg border border-border p-4">
             <div className="text-xs font-semibold uppercase tracking-wide text-muted mb-3" style={{ fontFamily: "var(--font-mono)" }}>Pricing Summary</div>
             <div className="grid sm:grid-cols-2 gap-3 text-sm">
               <div className="flex justify-between"><span className="text-muted">Client Price (gross, /day)</span><span className="text-navy font-semibold">{formatEGP(clientPricePerDay)}</span></div>

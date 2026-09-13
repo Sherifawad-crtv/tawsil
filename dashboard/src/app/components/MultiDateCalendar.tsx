@@ -32,7 +32,7 @@ export default function MultiDateCalendar({ value, onChange }: { value: string[]
   const cells: (number | null)[] = [...Array(firstDay).fill(null), ...Array.from({ length: daysInMonth }, (_, i) => i + 1)];
 
   return (
-    <div className="rounded-[var(--radius-control)] border border-border p-4">
+    <div className="rounded-2lg border border-border p-4">
       <div className="flex items-center justify-between mb-3">
         <button type="button" onClick={() => changeMonth(-1)} className="p-1.5 rounded-lg hover:bg-grey-light cursor-pointer">
           <AltArrowLeftIcon size={16} />

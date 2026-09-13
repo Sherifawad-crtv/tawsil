@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { AddIcon, Pen2Icon, DangerTriangleIcon, LockKeyholeIcon, SnowflakeIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import TruckTypeFormModal from "../../components/settings/TruckTypeFormModal";
+import { Button } from "../../components/Button";
 import { useDataStore } from "../../lib/store";
 import { useRole } from "../../lib/RoleContext";
 import { CARGO_TYPES } from "../../lib/constants";
@@ -27,25 +28,21 @@ export default function Settings() {
         subtitle="Truck Types & Rate Card"
         action={
           isAdmin ? (
-            <button
-              onClick={() => setShowAdd(true)}
-              className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
-              style={{ fontFamily: "var(--font-sub)" }}
-            >
-              <AddIcon size={16} /> Add Truck Type
-            </button>
+            <Button leadingIcon={AddIcon} onClick={() => setShowAdd(true)}>
+              Add Truck Type
+            </Button>
           ) : undefined
         }
       />
 
       {!isAdmin && (
-        <div className="flex items-center gap-2 px-4 py-2 rounded-[var(--radius-control)] bg-grey-light text-sm text-muted">
+        <div className="flex items-center gap-2 px-4 py-2 rounded-2lg bg-grey-light text-sm text-muted">
           <LockKeyholeIcon size={14} />
           Viewing only — switch to <strong className="text-navy">Admin</strong> in the top-right role switcher to edit the rate card.
         </div>
       )}
 
-      <div className="rounded-[var(--radius-card)] bg-white border border-border overflow-hidden">
+      <div className="rounded-2xl bg-white border border-border overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -110,7 +107,7 @@ export default function Settings() {
         </div>
       </div>
 
-      <div className="rounded-[var(--radius-card)] bg-white border border-border p-4">
+      <div className="rounded-2xl bg-white border border-border p-4">
         <h3 className="text-sm font-semibold text-navy mb-3" style={{ fontFamily: "var(--font-sub)" }}>Cargo Type Taxonomy</h3>
         <p className="text-xs text-muted mb-3">
           {CARGO_TYPES.length} cargo types. This list drives the Cargo Type field in Order creation, filtered per truck type's allowed types.

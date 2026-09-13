@@ -22,7 +22,7 @@ export function Chip({
   return (
     <span
       className={cx(
-        "inline-flex items-center justify-center rounded-md px-1.5 py-0.5 text-[11px] font-semibold whitespace-nowrap",
+        "inline-flex items-center justify-center rounded-md px-1.5 py-0.5 text-body-2-semibold whitespace-nowrap",
         COLOR_STYLES[color],
         className
       )}

@@ -4,6 +4,7 @@ import { AddIcon, CalendarMarkIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import EmptyState from "../../components/EmptyState";
 import MonthlyOrderFormModal from "../../components/monthly/MonthlyOrderFormModal";
+import { Button } from "../../components/Button";
 import { useDataStore } from "../../lib/store";
 import { byId } from "../../lib/selectors";
 
@@ -17,13 +18,9 @@ export default function MonthlyOrdersList() {
         title="Monthly Orders"
         subtitle={`${monthlyOrders.length} contracts`}
         action={
-          <button
-            onClick={() => setShowCreate(true)}
-            className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
-            style={{ fontFamily: "var(--font-sub)" }}
-          >
-            <AddIcon size={16} /> New Monthly Order
-          </button>
+          <Button leadingIcon={AddIcon} onClick={() => setShowCreate(true)}>
+            New Monthly Order
+          </Button>
         }
       />
 
@@ -41,7 +38,7 @@ export default function MonthlyOrdersList() {
               <Link
                 key={contract.id}
                 to={`/monthly-orders/${contract.id}`}
-                className="rounded-[var(--radius-card)] bg-white border border-border p-4 hover:border-blue/40 transition-colors"
+                className="rounded-2xl bg-white border border-border p-4 hover:border-blue/40 transition-colors"
               >
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>

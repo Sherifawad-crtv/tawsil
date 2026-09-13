@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { ClockCircleIcon, BusIcon, CheckCircleIcon, AddIcon, CalendarAddIcon, DangerTriangleIcon } from "@solar-icons/react/linear";
 import MetricCard from "../components/MetricCard";
 import StatusBadge from "../components/StatusBadge";
+import { Button } from "../components/Button";
 import InsightCard from "../components/InsightCard";
 import OrderVolumeChartCard from "../components/charts/OrderVolumeChartCard";
 import StatusBreakdownBar from "../components/charts/StatusBreakdownBar";
@@ -56,12 +57,9 @@ function AttentionRow({ order }: { order: AttentionOrder }) {
           <ClockCircleIcon size={12} />
           {formatDuration(order.minutesInStatus)}
         </div>
-        <button
-          className="px-3 py-1.5 rounded-[var(--radius-control)] bg-navy text-white text-[12px] font-semibold cursor-pointer active:scale-95 transition-transform hover:bg-royal"
-          style={{ fontFamily: "var(--font-sub)" }}
-        >
+        <Button size="small" className="bg-navy hover:bg-royal">
           {order.action}
-        </button>
+        </Button>
       </div>
     </div>
   );
@@ -154,7 +152,7 @@ export default function Home() {
           <h2 className="text-xs font-semibold text-navy mb-2 uppercase tracking-wide" style={{ fontFamily: "var(--font-sub)" }}>
             {role === "Supply" ? "Pending Allocation" : role === "Operations" ? "Needs Follow-up" : "Needs Attention"}
           </h2>
-          <div className="rounded-[var(--radius-card)] bg-white border border-border overflow-hidden shadow-[0_2px_12px_rgba(4,0,51,0.04)]">
+          <div className="rounded-2xl bg-white border border-border overflow-hidden shadow-xs">
             {attentionOrders.length === 0 ? (
               <div className="px-5 py-10 text-center text-sm text-muted">Nothing needs attention right now.</div>
             ) : (
@@ -171,21 +169,13 @@ export default function Home() {
             Quick Actions
           </h2>
           <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => setShowOrderModal(true)}
-              className="flex items-center gap-1.5 pl-2.5 pr-3 py-[7px] rounded-[var(--radius-control)] bg-blue text-white text-xs font-semibold cursor-pointer active:scale-95 transition-transform hover:brightness-110"
-              style={{ fontFamily: "var(--font-sub)" }}
-            >
-              <AddIcon size={14} /> New Order
-            </button>
+            <Button size="small" leadingIcon={AddIcon} onClick={() => setShowOrderModal(true)}>
+              New Order
+            </Button>
 
-            <button
-              onClick={() => setShowMonthlyModal(true)}
-              className="flex items-center gap-1.5 pl-2.5 pr-3 py-[7px] rounded-[var(--radius-control)] bg-white border border-border text-xs font-semibold text-navy cursor-pointer active:scale-95 transition-transform hover:border-blue/40"
-              style={{ fontFamily: "var(--font-sub)" }}
-            >
-              <CalendarAddIcon size={14} /> New Monthly Order
-            </button>
+            <Button size="small" variant="secondary" leadingIcon={CalendarAddIcon} onClick={() => setShowMonthlyModal(true)}>
+              New Monthly Order
+            </Button>
           </div>
         </div>
       )}

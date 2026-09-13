@@ -41,7 +41,7 @@ export default function TruckTypeGrid({ value, onChange }: { value: string; onCh
               type="button"
               key={cls}
               onClick={() => selectBaseClass(cls)}
-              className={`relative flex flex-col items-center gap-1 p-2 rounded-[var(--radius-card)] border cursor-pointer transition-colors ${
+              className={`relative flex flex-col items-center gap-1 p-2 rounded-2xl border cursor-pointer transition-colors ${
                 isActive ? "border-blue bg-blue-soft" : "border-border bg-white hover:border-blue/40"
               }`}
             >
@@ -68,7 +68,7 @@ export default function TruckTypeGrid({ value, onChange }: { value: string; onCh
                 type="button"
                 key={t.id}
                 onClick={() => onChange(t.id)}
-                className={`text-left px-3 py-1.5 rounded-[var(--radius-control)] border cursor-pointer transition-colors ${
+                className={`text-left px-3 py-1.5 rounded-2lg border cursor-pointer transition-colors ${
                   selected ? "border-blue bg-blue-soft" : "border-border bg-white hover:border-blue/40"
                 }`}
               >

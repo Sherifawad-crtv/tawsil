@@ -9,6 +9,7 @@ import VehicleDetailPanel from "../../components/VehicleDetailPanel";
 import { useDataStore } from "../../lib/store";
 import { byId, getTruckType, getCurrentOrderForDriver, getCurrentOrderForVehicle } from "../../lib/selectors";
 import { truckTypeLabel } from "../../lib/constants";
+import { selectClass } from "../../lib/selectClass";
 
 const TABS = ["Drivers", "Vehicles"];
 type StatusFilter = "All" | "Active" | "Inactive";
@@ -49,12 +50,12 @@ export default function Resources() {
       <Tabs tabs={TABS} active={tab} onChange={(t) => { setTab(t); setExpanded(null); }} />
 
       <div className="flex items-center gap-3 flex-wrap">
-        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as StatusFilter)} className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer" style={{ fontFamily: "var(--font-sub)" }}>
+        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as StatusFilter)} className={selectClass} style={{ fontFamily: "var(--font-sub)" }}>
           <option value="All">All Status</option>
           <option value="Active">Active</option>
           <option value="Inactive">Inactive</option>
         </select>
-        <select value={contractorFilter} onChange={(e) => setContractorFilter(e.target.value)} className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer" style={{ fontFamily: "var(--font-sub)" }}>
+        <select value={contractorFilter} onChange={(e) => setContractorFilter(e.target.value)} className={selectClass} style={{ fontFamily: "var(--font-sub)" }}>
           <option value="All">All Contractors</option>
           {contractors.map((c) => (
             <option key={c.id} value={c.id}>{c.name}</option>
@@ -71,7 +72,7 @@ export default function Resources() {
               const contractor = byId(contractors, driver.contractorId);
               const currentOrder = getCurrentOrderForDriver(orders, driver.id);
               return (
-                <div key={driver.id} className="rounded-[var(--radius-card)] bg-white border border-border p-4">
+                <div key={driver.id} className="rounded-2xl bg-white border border-border p-4">
                   <button onClick={() => setExpanded(expanded === driver.id ? null : driver.id)} className="w-full flex items-center justify-between gap-4 cursor-pointer text-left">
                     <div className="min-w-0">
                       <div className="text-sm font-semibold text-navy">{driver.name}</div>
@@ -105,7 +106,7 @@ export default function Resources() {
               const contractor = byId(contractors, vehicle.contractorId);
               const currentOrder = getCurrentOrderForVehicle(orders, vehicle.id);
               return (
-                <div key={vehicle.id} className="rounded-[var(--radius-card)] bg-white border border-border p-4">
+                <div key={vehicle.id} className="rounded-2xl bg-white border border-border p-4">
                   <button onClick={() => setExpanded(expanded === vehicle.id ? null : vehicle.id)} className="w-full flex items-center justify-between gap-4 cursor-pointer text-left">
                     <div className="min-w-0">
                       <div className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>{vehicle.plateNumber}</div>

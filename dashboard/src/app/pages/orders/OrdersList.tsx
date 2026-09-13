@@ -5,6 +5,8 @@ import SearchInput from "../../components/SearchInput";
 import EmptyState from "../../components/EmptyState";
 import OrderRow from "../../components/OrderRow";
 import OrderFormModal from "../../components/orders/OrderFormModal";
+import { Button } from "../../components/Button";
+import { selectClass } from "../../lib/selectClass";
 import { useDataStore } from "../../lib/store";
 import { useRole } from "../../lib/RoleContext";
 import { byId, getOrdersForRole, canCreateOrders } from "../../lib/selectors";
@@ -65,13 +67,9 @@ export default function OrdersList() {
         subtitle={subtitle}
         action={
           canCreateOrders(role) ? (
-            <button
-              onClick={() => setShowCreate(true)}
-              className="flex items-center gap-2 px-4 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
-              style={{ fontFamily: "var(--font-sub)" }}
-            >
-              <AddIcon size={16} /> New Order
-            </button>
+            <Button leadingIcon={AddIcon} onClick={() => setShowCreate(true)}>
+              New Order
+            </Button>
           ) : undefined
         }
       />
@@ -82,7 +80,7 @@ export default function OrdersList() {
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value as OrderStatus | "All")}
-            className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer"
+            className={selectClass}
             style={{ fontFamily: "var(--font-sub)" }}
           >
             {statusOptions.map((s) => (
@@ -93,7 +91,7 @@ export default function OrdersList() {
         <select
           value={tripType}
           onChange={(e) => setTripType(e.target.value as TripType | "All")}
-          className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer"
+          className={selectClass}
           style={{ fontFamily: "var(--font-sub)" }}
         >
           {TRIP_OPTIONS.map((t) => (
@@ -103,7 +101,7 @@ export default function OrdersList() {
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value as "pickup" | "status")}
-          className="px-3 py-1.5 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy cursor-pointer"
+          className={selectClass}
           style={{ fontFamily: "var(--font-sub)" }}
         >
           <option value="pickup">Sort: Pickup Date</option>
@@ -111,7 +109,7 @@ export default function OrdersList() {
         </select>
       </div>
 
-      <div className="rounded-[var(--radius-card)] bg-white border border-border overflow-hidden shadow-[0_2px_12px_rgba(4,0,51,0.04)]">
+      <div className="rounded-2xl bg-white border border-border overflow-hidden shadow-xs">
         {filtered.length === 0 ? (
           <EmptyState icon={BoxIcon} title="No orders match your filters" />
         ) : (

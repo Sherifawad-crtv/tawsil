@@ -5,7 +5,7 @@ import type { BiddingInfo } from "../../lib/types";
 
 export default function BiddingWidget({ bidding }: { bidding?: BiddingInfo }) {
   return (
-    <div className="rounded-[var(--radius-card)] bg-white border border-border p-4">
+    <div className="rounded-2xl bg-white border border-border p-4">
       <div className="flex items-center gap-2 mb-4">
         <SledgehammerIcon size={16} className="text-muted" />
         <h3 className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Bidding</h3>
@@ -34,7 +34,7 @@ export default function BiddingWidget({ bidding }: { bidding?: BiddingInfo }) {
 
           <div className="flex flex-col gap-2">
             {bidding.bids.map((bid) => (
-              <div key={bid.id} className="flex items-center justify-between px-3.5 py-1.5 rounded-[var(--radius-control)] bg-grey-light/60">
+              <div key={bid.id} className="flex items-center justify-between px-3.5 py-1.5 rounded-2lg bg-grey-light/60">
                 <div>
                   <div className="text-sm font-medium text-navy">{bid.driverName}</div>
                   <div className="text-xs text-muted" style={{ fontFamily: "var(--font-mono)" }}>{formatDateTime(bid.submittedAt)}</div>

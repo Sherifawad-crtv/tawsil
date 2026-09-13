@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Modal from "../Modal";
+import { Button } from "../Button";
 import Stepper from "../Stepper";
 import { TextField, TextareaField, SelectField } from "../FormField";
 import TruckTypeGrid from "../TruckTypeGrid";
@@ -164,30 +165,15 @@ export default function OrderFormModal({
       size="lg"
       footer={
         <div className="flex items-center justify-between">
-          <button
-            onClick={() => (step === 1 ? onClose() : goTo(step - 1))}
-            className="px-4 py-1.5 rounded-[var(--radius-control)] border border-border text-sm font-semibold text-navy cursor-pointer hover:bg-grey-light"
-            style={{ fontFamily: "var(--font-sub)" }}
-          >
+          <Button variant="secondary" onClick={() => (step === 1 ? onClose() : goTo(step - 1))}>
             {step === 1 ? "Cancel" : "Back"}
-          </button>
+          </Button>
           {step < TOTAL_STEPS ? (
-            <button
-              onClick={() => goTo(step + 1)}
-              disabled={!canGoNext}
-              className="px-5 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-110"
-              style={{ fontFamily: "var(--font-sub)" }}
-            >
+            <Button onClick={() => goTo(step + 1)} disabled={!canGoNext}>
               Next
-            </button>
+            </Button>
           ) : (
-            <button
-              onClick={handleSubmit}
-              className="px-5 py-1.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
-              style={{ fontFamily: "var(--font-sub)" }}
-            >
-              {mode === "create" ? "Create Order" : "Save Changes"}
-            </button>
+            <Button onClick={handleSubmit}>{mode === "create" ? "Create Order" : "Save Changes"}</Button>
           )}
         </div>
       }
@@ -207,14 +193,14 @@ export default function OrderFormModal({
             <label className="block text-xs font-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
               Trip Type <span className="text-status-cancelled">*</span>
             </label>
-            <div className="inline-flex rounded-[var(--radius-control)] border border-border p-1 bg-grey-light">
+            <div className="inline-flex rounded-2lg border border-border p-1 bg-grey-light">
               {(["On Demand", "Daily"] as TripType[]).map((t) => (
                 <button
                   key={t}
                   type="button"
                   onClick={() => setForm((f) => ({ ...f, tripType: t }))}
-                  className={`px-4 py-1.5 rounded-[10px] text-sm font-medium cursor-pointer transition-colors ${
-                    form.tripType === t ? "bg-white text-navy shadow-sm" : "text-muted"
+                  className={`px-4 py-1.5 rounded-lg text-body-medium cursor-pointer transition-colors ${
+                    form.tripType === t ? "bg-white text-navy shadow-xs" : "text-muted"
                   }`}
                   style={{ fontFamily: "var(--font-sub)" }}
                 >
@@ -259,7 +245,7 @@ export default function OrderFormModal({
 
       {step === 4 && (
         <div className="flex flex-col gap-5">
-          <div className="flex items-center justify-between p-4 rounded-[var(--radius-control)] border border-border bg-grey-light/40">
+          <div className="flex items-center justify-between p-4 rounded-2lg border border-border bg-grey-light/40">
             <div>
               <div className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Proof of Delivery Required</div>
               <div className="text-xs text-muted mt-0.5">Require photo confirmation at drop-off.</div>
@@ -305,7 +291,7 @@ export default function OrderFormModal({
 
 function ReviewRow({ label, children, onEdit }: { label: string; children: React.ReactNode; onEdit: () => void }) {
   return (
-    <div className="rounded-[var(--radius-control)] border border-border p-4 flex items-start justify-between gap-4">
+    <div className="rounded-2lg border border-border p-4 flex items-start justify-between gap-4">
       <div className="min-w-0">
         <div className="text-xs font-semibold uppercase tracking-wide text-muted mb-1" style={{ fontFamily: "var(--font-mono)" }}>
           {label}

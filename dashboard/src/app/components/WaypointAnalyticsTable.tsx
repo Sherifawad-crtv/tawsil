@@ -25,13 +25,13 @@ export default function WaypointAnalyticsTable({ orders, filenamePrefix }: { ord
   return (
     <div>
       <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
-        <div className="inline-flex rounded-[var(--radius-control)] border border-border p-1 bg-grey-light">
+        <div className="inline-flex rounded-2lg border border-border p-1 bg-grey-light">
           {(Object.keys(RANGE_LABELS) as RangeKey[]).map((key) => (
             <button
               key={key}
               onClick={() => setRange(key)}
-              className={`px-3 py-1.5 rounded-[10px] text-xs font-medium cursor-pointer transition-colors ${
-                range === key ? "bg-white text-navy shadow-sm" : "text-muted"
+              className={`px-3 py-1.5 rounded-lg text-caption-1-medium cursor-pointer transition-colors ${
+                range === key ? "bg-white text-navy shadow-xs" : "text-muted"
               }`}
               style={{ fontFamily: "var(--font-sub)" }}
             >
@@ -49,7 +49,7 @@ export default function WaypointAnalyticsTable({ orders, filenamePrefix }: { ord
       {rows.length === 0 ? (
         <EmptyState icon={MapPointSearchIcon} title="No waypoint data in this range" />
       ) : (
-        <div className="overflow-x-auto rounded-[var(--radius-control)] border border-border">
+        <div className="overflow-x-auto rounded-2lg border border-border">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-grey-light text-left text-xs text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>

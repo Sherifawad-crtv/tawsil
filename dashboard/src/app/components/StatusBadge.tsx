@@ -11,7 +11,7 @@ const STATUS_STYLES: Record<OrderStatus, string> = {
 export default function StatusBadge({ status }: { status: OrderStatus }) {
   return (
     <span
-      className={`inline-flex items-center px-2 py-0.5 rounded-[var(--radius-xs)] text-[11px] font-semibold ${STATUS_STYLES[status]}`}
+      className={`inline-flex items-center px-2 py-1 rounded-md text-caption-1-semibold ${STATUS_STYLES[status]}`}
       style={{ fontFamily: "var(--font-sub)" }}
     >
       {status}

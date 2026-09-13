@@ -10,13 +10,13 @@ export default function SearchInput({
   placeholder?: string;
 }) {
   return (
-    <div className="relative flex-1 min-w-[180px]">
-      <MagnifierIcon size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
+    <div className="relative flex-1 min-w-[200px]">
+      <MagnifierIcon size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full pl-8 pr-3 py-2 rounded-[var(--radius-control)] border border-border bg-white text-sm text-navy placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-blue/30"
+        className="w-full h-9 pl-9 pr-3 rounded-2lg bg-grey-light text-body-regular text-navy placeholder:text-muted ring-2 ring-inset ring-transparent transition-[background-color,box-shadow] duration-150 ease focus:outline-none focus:ring-blue focus:bg-white"
         style={{ fontFamily: "var(--font-sub)" }}
       />
     </div>

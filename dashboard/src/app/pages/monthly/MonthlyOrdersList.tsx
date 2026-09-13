@@ -1,0 +1,78 @@
+import { useState } from "react";
+import { Link } from "react-router";
+import { Plus, CalendarClock } from "lucide-react";
+import PageHeader from "../../components/PageHeader";
+import EmptyState from "../../components/EmptyState";
+import MonthlyOrderFormModal from "../../components/monthly/MonthlyOrderFormModal";
+import { useDataStore } from "../../lib/store";
+import { byId } from "../../lib/selectors";
+
+export default function MonthlyOrdersList() {
+  const { monthlyOrders, clients, contractors } = useDataStore();
+  const [showCreate, setShowCreate] = useState(false);
+
+  return (
+    <div className="flex flex-col gap-6">
+      <PageHeader
+        title="Monthly Orders"
+        subtitle={`${monthlyOrders.length} contracts`}
+        action={
+          <button
+            onClick={() => setShowCreate(true)}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-control)] bg-blue text-white text-sm font-semibold cursor-pointer hover:brightness-110"
+            style={{ fontFamily: "var(--font-sub)" }}
+          >
+            <Plus size={16} /> New Monthly Order
+          </button>
+        }
+      />
+
+      {monthlyOrders.length === 0 ? (
+        <EmptyState icon={CalendarClock} title="No monthly contracts yet" />
+      ) : (
+        <div className="flex flex-col gap-3">
+          {monthlyOrders.map((contract) => {
+            const client = byId(clients, contract.clientId);
+            const contractor = byId(contractors, contract.contractorId);
+            const executed = contract.executedDates.length;
+            const total = contract.dates.length;
+            const pct = total > 0 ? Math.round((executed / total) * 100) : 0;
+            return (
+              <Link
+                key={contract.id}
+                to={`/monthly-orders/${contract.id}`}
+                className="rounded-[var(--radius-card)] bg-white border border-border p-5 hover:border-blue/40 transition-colors"
+              >
+                <div className="flex items-start justify-between gap-4 flex-wrap">
+                  <div>
+                    <div className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-mono)" }}>{contract.id}</div>
+                    <div className="text-sm text-navy/80 mt-1">{client?.name ?? "—"}</div>
+                    <div className="text-xs text-muted mt-0.5">{contractor?.name ?? "Unassigned"}</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xs text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>
+                      {executed} / {total} days
+                    </div>
+                    <div
+                      className={`mt-1 px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase inline-block ${
+                        contract.status === "Active" ? "bg-blue-soft text-blue" : contract.status === "Draft" ? "bg-grey-light text-muted" : "bg-[#E7F6EC] text-status-completed"
+                      }`}
+                      style={{ fontFamily: "var(--font-mono)" }}
+                    >
+                      {contract.status}
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-3 h-1.5 rounded-full bg-grey-light overflow-hidden">
+                  <div className="h-full bg-blue rounded-full" style={{ width: `${pct}%` }} />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      )}
+
+      {showCreate && <MonthlyOrderFormModal onClose={() => setShowCreate(false)} />}
+    </div>
+  );
+}

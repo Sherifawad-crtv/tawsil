@@ -1,0 +1,56 @@
+import { useState } from "react";
+import { UploadCloud, FileText, X } from "lucide-react";
+
+export default function FileUploadField({
+  label,
+  required,
+  onChange,
+}: {
+  label: string;
+  required?: boolean;
+  onChange?: (file: File | null) => void;
+}) {
+  const [fileName, setFileName] = useState<string | null>(null);
+
+  return (
+    <div>
+      <label className="block text-xs font-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
+        {label}
+        {required && <span className="text-status-cancelled"> *</span>}
+      </label>
+      {fileName ? (
+        <div className="flex items-center gap-2 px-3 py-2.5 rounded-[var(--radius-control)] border border-border bg-grey-light">
+          <FileText size={16} className="text-blue flex-shrink-0" />
+          <span className="text-sm text-navy truncate flex-1" style={{ fontFamily: "var(--font-mono)" }}>
+            {fileName}
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              setFileName(null);
+              onChange?.(null);
+            }}
+            className="p-1 rounded hover:bg-white cursor-pointer flex-shrink-0"
+          >
+            <X size={14} className="text-muted" />
+          </button>
+        </div>
+      ) : (
+        <label className="flex items-center gap-2 px-3 py-2.5 rounded-[var(--radius-control)] border border-dashed border-border bg-grey-light cursor-pointer hover:border-blue/40 transition-colors">
+          <UploadCloud size={16} className="text-muted flex-shrink-0" />
+          <span className="text-sm text-muted">Upload PDF</span>
+          <input
+            type="file"
+            accept="application/pdf"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0] ?? null;
+              setFileName(file?.name ?? null);
+              onChange?.(file);
+            }}
+          />
+        </label>
+      )}
+    </div>
+  );
+}

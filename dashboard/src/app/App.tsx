@@ -1,23 +1,39 @@
 import { Routes, Route } from "react-router";
 import AppShell from "./layout/AppShell";
 import { RoleProvider } from "./lib/RoleContext";
+import { DataStoreProvider } from "./lib/store";
 import Home from "./pages/Home";
-import Placeholder from "./pages/Placeholder";
+import OrdersList from "./pages/orders/OrdersList";
+import OrderDetail from "./pages/orders/OrderDetail";
+import ContractorsList from "./pages/contractors/ContractorsList";
+import ContractorDetail from "./pages/contractors/ContractorDetail";
+import ClientsList from "./pages/clients/ClientsList";
+import ClientDetail from "./pages/clients/ClientDetail";
+import Resources from "./pages/resources/Resources";
+import MonthlyOrdersList from "./pages/monthly/MonthlyOrdersList";
+import MonthlyOrderDetail from "./pages/monthly/MonthlyOrderDetail";
+import Settings from "./pages/settings/Settings";
 
 export default function App() {
   return (
-    <RoleProvider>
-      <Routes>
-        <Route element={<AppShell />}>
-          <Route index element={<Home />} />
-          <Route path="orders" element={<Placeholder title="Orders" section="Section 2" />} />
-          <Route path="contractors" element={<Placeholder title="Contractors" section="Section 3" />} />
-          <Route path="clients" element={<Placeholder title="Clients" section="Section 4" />} />
-          <Route path="resources" element={<Placeholder title="Resources" section="Section 5" />} />
-          <Route path="monthly-orders" element={<Placeholder title="Monthly Orders" section="Section 6" />} />
-          <Route path="settings" element={<Placeholder title="Settings" section="Section 7" />} />
-        </Route>
-      </Routes>
-    </RoleProvider>
+    <DataStoreProvider>
+      <RoleProvider>
+        <Routes>
+          <Route element={<AppShell />}>
+            <Route index element={<Home />} />
+            <Route path="orders" element={<OrdersList />} />
+            <Route path="orders/:orderId" element={<OrderDetail />} />
+            <Route path="contractors" element={<ContractorsList />} />
+            <Route path="contractors/:contractorId" element={<ContractorDetail />} />
+            <Route path="clients" element={<ClientsList />} />
+            <Route path="clients/:clientId" element={<ClientDetail />} />
+            <Route path="resources" element={<Resources />} />
+            <Route path="monthly-orders" element={<MonthlyOrdersList />} />
+            <Route path="monthly-orders/:contractId" element={<MonthlyOrderDetail />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+        </Routes>
+      </RoleProvider>
+    </DataStoreProvider>
   );
 }

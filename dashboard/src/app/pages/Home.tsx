@@ -1,23 +1,24 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { Clock3, Truck, PackageCheck, PackagePlus, CalendarPlus, AlertTriangle } from "lucide-react";
 import MetricCard from "../components/MetricCard";
 import StatusBadge from "../components/StatusBadge";
-import StubModal from "../components/StubModal";
-import { HOME_METRICS, ATTENTION_ORDERS } from "../lib/mockData";
+import OrderFormModal from "../components/orders/OrderFormModal";
+import MonthlyOrderFormModal from "../components/monthly/MonthlyOrderFormModal";
+import { getHomeMetrics, getAttentionOrders } from "../lib/selectors";
+import { formatDuration } from "../lib/format";
+import { useDataStore } from "../lib/store";
 import type { AttentionOrder } from "../lib/types";
 
-function formatDuration(minutes: number) {
-  if (minutes <= 0) return "—";
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-  if (h === 0) return `${m}m`;
-  return `${h}h ${m}m`;
-}
-
 function AttentionRow({ order }: { order: AttentionOrder }) {
+  const navigate = useNavigate();
   const flagged = order.reason === "stalled-pending" && order.minutesInStatus >= 120;
+  const target = order.reason === "monthly-renewal" ? `/monthly-orders/${order.id}` : `/orders/${order.id}`;
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 px-4 sm:px-5 py-4 border-b border-border last:border-b-0">
+    <div
+      className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 px-4 sm:px-5 py-4 border-b border-border last:border-b-0 cursor-pointer hover:bg-grey-light/60 transition-colors"
+      onClick={() => navigate(target)}
+    >
       <div className="flex items-center gap-3 min-w-0 flex-1">
         {flagged && <AlertTriangle size={16} className="text-status-pending flex-shrink-0" />}
         <div className="min-w-0">
@@ -52,7 +53,11 @@ function AttentionRow({ order }: { order: AttentionOrder }) {
 }
 
 export default function Home() {
-  const [stub, setStub] = useState<null | "order" | "monthly">(null);
+  const [showOrderModal, setShowOrderModal] = useState(false);
+  const [showMonthlyModal, setShowMonthlyModal] = useState(false);
+  const { orders, clients, drivers, monthlyOrders } = useDataStore();
+  const metrics = getHomeMetrics(orders, drivers);
+  const attentionOrders = getAttentionOrders(orders, monthlyOrders, clients);
 
   return (
     <div className="flex flex-col gap-8">
@@ -67,10 +72,10 @@ export default function Home() {
 
       {/* Metrics strip */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <MetricCard label="Pending Orders" value={HOME_METRICS.pendingOrders} icon={Clock3} accent="amber" />
-        <MetricCard label="Active Orders" value={HOME_METRICS.activeOrders} icon={Truck} accent="navy" />
-        <MetricCard label="Available Drivers" value={HOME_METRICS.availableDrivers} icon={Truck} accent="blue" />
-        <MetricCard label="Completed Today" value={HOME_METRICS.completedToday} icon={PackageCheck} accent="green" />
+        <MetricCard label="Pending Orders" value={metrics.pendingOrders} icon={Clock3} accent="amber" />
+        <MetricCard label="Active Orders" value={metrics.activeOrders} icon={Truck} accent="navy" />
+        <MetricCard label="Available Drivers" value={metrics.availableDrivers} icon={Truck} accent="blue" />
+        <MetricCard label="Completed Today" value={metrics.completedToday} icon={PackageCheck} accent="green" />
       </div>
 
       {/* Attention-needed list */}
@@ -79,10 +84,10 @@ export default function Home() {
           Needs Attention
         </h2>
         <div className="rounded-[var(--radius-card)] bg-white border border-border overflow-hidden shadow-[0_2px_12px_rgba(4,0,51,0.04)]">
-          {ATTENTION_ORDERS.length === 0 ? (
+          {attentionOrders.length === 0 ? (
             <div className="px-5 py-10 text-center text-sm text-muted">Nothing needs attention right now.</div>
           ) : (
-            ATTENTION_ORDERS.map((order) => <AttentionRow key={order.id} order={order} />)
+            attentionOrders.map((order) => <AttentionRow key={order.id} order={order} />)
           )}
         </div>
       </div>
@@ -94,7 +99,7 @@ export default function Home() {
         </h2>
         <div className="grid sm:grid-cols-2 gap-4">
           <button
-            onClick={() => setStub("order")}
+            onClick={() => setShowOrderModal(true)}
             className="flex items-center gap-4 rounded-[var(--radius-card)] bg-blue text-white p-5 text-left cursor-pointer active:scale-[0.98] transition-transform shadow-[0_4px_20px_rgba(18,83,250,0.25)] hover:brightness-110"
           >
             <div className="w-11 h-11 rounded-2xl bg-white/15 flex items-center justify-center flex-shrink-0">
@@ -107,7 +112,7 @@ export default function Home() {
           </button>
 
           <button
-            onClick={() => setStub("monthly")}
+            onClick={() => setShowMonthlyModal(true)}
             className="flex items-center gap-4 rounded-[var(--radius-card)] bg-white border border-border p-5 text-left cursor-pointer active:scale-[0.98] transition-transform hover:border-blue/40"
           >
             <div className="w-11 h-11 rounded-2xl bg-blue-soft text-blue flex items-center justify-center flex-shrink-0">
@@ -121,17 +126,8 @@ export default function Home() {
         </div>
       </div>
 
-      {stub && (
-        <StubModal
-          title={stub === "order" ? "New Order" : "New Monthly Order"}
-          note={
-            stub === "order"
-              ? "The 5-step order creation modal (Client → Trip basics → Cargo → Waypoints → Review) is built in Section 2."
-              : "The 4-step monthly contract flow (Parties → Schedule → Cargo & route → Review) is built in Section 6."
-          }
-          onClose={() => setStub(null)}
-        />
-      )}
+      {showOrderModal && <OrderFormModal mode="create" onClose={() => setShowOrderModal(false)} />}
+      {showMonthlyModal && <MonthlyOrderFormModal onClose={() => setShowMonthlyModal(false)} />}
     </div>
   );
 }

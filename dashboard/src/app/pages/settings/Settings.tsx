@@ -44,9 +44,9 @@ export default function Settings() {
 
       <div className="rounded-2xl bg-tile overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-body-2-regular">
+          <table className="w-full text-body-medium">
             <thead>
-              <tr className="bg-grey-light text-left text-caption-1-regular text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>
+              <tr className="text-left text-body-medium text-muted border-b border-border">
                 <th className="px-4 py-2.5 font-medium">Truck Type</th>
                 <th className="px-4 py-2.5 font-medium">Config</th>
                 <th className="px-4 py-2.5 font-medium">Daily Rent (EGP)</th>
@@ -59,7 +59,7 @@ export default function Settings() {
               {Object.entries(grouped).map(([baseClass, types]) => (
                 <Fragment key={baseClass}>
                   {types.map((t, i) => (
-                    <tr key={t.id} className={`border-t border-border ${t.flagged ? "bg-[#FFF9EC]" : ""}`}>
+                    <tr key={t.id} className={`border-b border-border last:border-b-0 ${t.flagged ? "bg-[#FFF9EC]" : ""}`}>
                       <td className="px-4 py-2.5 text-navy font-medium">{i === 0 ? baseClass : ""}</td>
                       <td className="px-4 py-2.5 text-navy">
                         <span className="inline-flex items-center gap-1.5">

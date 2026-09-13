@@ -49,29 +49,31 @@ export default function WaypointAnalyticsTable({ orders, filenamePrefix }: { ord
       {rows.length === 0 ? (
         <EmptyState icon={MapPointSearchIcon} title="No waypoint data in this range" />
       ) : (
-        <div className="overflow-x-auto rounded-2lg border border-border">
-          <table className="w-full text-body-2-regular">
-            <thead>
-              <tr className="bg-grey-light text-left text-caption-1-regular text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>
-                <th className="px-4 py-2.5 font-medium">Rank</th>
-                <th className="px-4 py-2.5 font-medium">Location</th>
-                <th className="px-4 py-2.5 font-medium">Visits</th>
-                <th className="px-4 py-2.5 font-medium">Last Visited</th>
-                <th className="px-4 py-2.5 font-medium">Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((r, i) => (
-                <tr key={r.location} className="border-t border-border">
-                  <td className="px-4 py-2.5 text-navy">{i + 1}</td>
-                  <td className="px-4 py-2.5 text-navy">{r.location}</td>
-                  <td className="px-4 py-2.5 text-navy">{r.visits}</td>
-                  <td className="px-4 py-2.5 text-muted" style={{ fontFamily: "var(--font-mono)" }}>{formatDate(r.lastVisited)}</td>
-                  <td className="px-4 py-2.5 text-navy">{r.type}</td>
+        <div className="rounded-2xl bg-tile overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-body-medium">
+              <thead>
+                <tr className="text-left text-body-medium text-muted border-b border-border">
+                  <th className="px-4 py-2.5 font-medium">Rank</th>
+                  <th className="px-4 py-2.5 font-medium">Location</th>
+                  <th className="px-4 py-2.5 font-medium">Visits</th>
+                  <th className="px-4 py-2.5 font-medium">Last Visited</th>
+                  <th className="px-4 py-2.5 font-medium">Type</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {rows.map((r, i) => (
+                  <tr key={r.location} className="border-b border-border last:border-b-0">
+                    <td className="px-4 py-2.5 text-navy">{i + 1}</td>
+                    <td className="px-4 py-2.5 text-navy">{r.location}</td>
+                    <td className="px-4 py-2.5 text-navy">{r.visits}</td>
+                    <td className="px-4 py-2.5 text-muted" style={{ fontFamily: "var(--font-mono)" }}>{formatDate(r.lastVisited)}</td>
+                    <td className="px-4 py-2.5 text-navy">{r.type}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

@@ -23,14 +23,14 @@ export default function AddClientModal({ onClose }: { onClose: () => void }) {
       title="Add Client"
       onClose={onClose}
       footer={
-        <div className="flex items-center justify-end gap-3">
+        <>
           <Button variant="secondary" onClick={onClose}>
             Cancel
           </Button>
           <Button onClick={handleSubmit} disabled={!canSubmit}>
             Add Client
           </Button>
-        </div>
+        </>
       }
     >
       <ClientForm value={form} onChange={setForm} />

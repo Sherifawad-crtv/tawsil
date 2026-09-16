@@ -33,14 +33,14 @@ export default function AssignDriverModal({ order, onClose }: { order: Order; on
       subtitle={`${order.id} — select a contractor, driver, and vehicle`}
       onClose={onClose}
       footer={
-        <div className="flex items-center justify-between">
+        <>
           <Button variant="secondary" onClick={onClose}>
             Cancel
           </Button>
           <Button onClick={handleConfirm} disabled={!canConfirm}>
             Confirm Assignment
           </Button>
-        </div>
+        </>
       }
     >
       <div className="flex flex-col gap-4">

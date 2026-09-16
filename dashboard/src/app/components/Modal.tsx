@@ -1,12 +1,20 @@
 import { CloseIcon } from "@solar-icons/react/linear";
 import type { ReactNode } from "react";
+import { cx } from "../lib/cx";
 
+/**
+ * The one modal shell. Footer buttons are passed bare — the shell lays them
+ * out, so spacing can't drift between modals: `end` (the default) for a
+ * single-step form's Cancel/Confirm pair, `between` for a wizard that splits
+ * Back from Next.
+ */
 export default function Modal({
   title,
   subtitle,
   onClose,
   children,
   footer,
+  footerLayout = "end",
   size = "md",
 }: {
   title: string;
@@ -14,6 +22,7 @@ export default function Modal({
   onClose: () => void;
   children: ReactNode;
   footer?: ReactNode;
+  footerLayout?: "end" | "between";
   size?: "sm" | "md" | "lg";
 }) {
   const maxWidth = size === "sm" ? "max-w-md" : size === "lg" ? "max-w-3xl" : "max-w-xl";
@@ -45,7 +54,16 @@ export default function Modal({
 
         <div className="flex-1 overflow-y-auto px-6 py-5">{children}</div>
 
-        {footer && <div className="px-6 py-4 border-t border-border flex-shrink-0">{footer}</div>}
+        {footer && (
+          <div
+            className={cx(
+              "px-6 py-4 border-t border-border flex-shrink-0 flex items-center gap-3",
+              footerLayout === "between" ? "justify-between" : "justify-end",
+            )}
+          >
+            {footer}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -29,17 +29,17 @@ export default function AddVehicleModal({ contractorId, onClose }: { contractorI
       title="Add Vehicle"
       onClose={onClose}
       footer={
-        <div className="flex items-center justify-end gap-3">
+        <>
           <Button variant="secondary" onClick={onClose}>
             Cancel
           </Button>
           <Button onClick={handleSubmit} disabled={!canSubmit}>
             Add Vehicle
           </Button>
-        </div>
+        </>
       }
     >
-      <div className="grid sm:grid-cols-2 gap-3">
+      <div className="grid sm:grid-cols-2 gap-4">
         <div className="sm:col-span-2">
           <SelectField
             label="Truck Type"

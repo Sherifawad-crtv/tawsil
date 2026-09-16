@@ -27,17 +27,17 @@ export default function AddDriverModal({ contractorId, onClose }: { contractorId
       title="Add Driver"
       onClose={onClose}
       footer={
-        <div className="flex items-center justify-end gap-3">
+        <>
           <Button variant="secondary" onClick={onClose}>
             Cancel
           </Button>
           <Button onClick={handleSubmit} disabled={!canSubmit}>
             Add Driver
           </Button>
-        </div>
+        </>
       }
     >
-      <div className="grid sm:grid-cols-2 gap-3">
+      <div className="grid sm:grid-cols-2 gap-4">
         <div className="sm:col-span-2">
           <TextField label="Name" required value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
         </div>

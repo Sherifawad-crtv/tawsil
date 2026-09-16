@@ -51,20 +51,19 @@ export default function TruckTypeFormModal({ existing, onClose }: { existing?: T
     <Modal
       title={existing ? "Edit Truck Type" : "Add Truck Type"}
       onClose={onClose}
-      size="lg"
       footer={
-        <div className="flex items-center justify-end gap-3">
+        <>
           <Button variant="secondary" onClick={onClose}>
             Cancel
           </Button>
           <Button onClick={handleSubmit} disabled={!canSubmit}>
             {existing ? "Save Changes" : "Add Truck Type"}
           </Button>
-        </div>
+        </>
       }
     >
       <div className="flex flex-col gap-4">
-        <div className="grid sm:grid-cols-2 gap-3">
+        <div className="grid sm:grid-cols-2 gap-4">
           <SelectField
             label="Truck Type"
             required
@@ -86,14 +85,14 @@ export default function TruckTypeFormModal({ existing, onClose }: { existing?: T
           <Toggle checked={form.requiresTempControl} onChange={(v) => setForm((f) => ({ ...f, requiresTempControl: v }))} />
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-3">
+        <div className="grid sm:grid-cols-2 gap-4">
           <TextField label="Capacity Min (t)" required type="number" step="0.01" value={form.capacityMinT} onChange={(e) => setForm((f) => ({ ...f, capacityMinT: e.target.value }))} />
           <TextField label="Capacity Max (t)" required type="number" step="0.01" value={form.capacityMaxT} onChange={(e) => setForm((f) => ({ ...f, capacityMaxT: e.target.value }))} />
         </div>
 
         <CargoTypeSelect allowed={CARGO_TYPES} value={form.allowedCargoTypes} onChange={(allowedCargoTypes) => setForm((f) => ({ ...f, allowedCargoTypes }))} />
 
-        <div className="grid sm:grid-cols-2 gap-3">
+        <div className="grid sm:grid-cols-2 gap-4">
           <TextField label="Daily Rent (EGP)" required type="number" step="0.01" value={form.dailyRentEGP} onChange={(e) => setForm((f) => ({ ...f, dailyRentEGP: e.target.value }))} />
           <TextField label="Price/km (EGP)" required type="number" step="0.01" value={form.pricePerKmEGP} onChange={(e) => setForm((f) => ({ ...f, pricePerKmEGP: e.target.value }))} />
         </div>

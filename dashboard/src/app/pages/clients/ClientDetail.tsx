@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
 import { ArrowLeftIcon, LetterIcon, PhoneIcon, AddIcon, MapPointIcon, BookmarkIcon } from "@solar-icons/react/linear";
 import Tabs from "../../components/Tabs";
+import PageHeader from "../../components/PageHeader";
 import { Button } from "../../components/Button";
 import ActiveBadge from "../../components/ActiveBadge";
 import EmptyState from "../../components/EmptyState";
@@ -39,25 +40,27 @@ export default function ClientDetail() {
         <ArrowLeftIcon size={15} /> Back to Clients
       </button>
 
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-title-1-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>{client.name}</h1>
-            <button onClick={() => toggleClientActive(client.id)} className="cursor-pointer">
-              <ActiveBadge active={client.active} />
-            </button>
-          </div>
-          <div className="flex items-center gap-4 mt-1.5 text-body-2-regular text-muted flex-wrap">
+      <PageHeader
+        title={client.name}
+        badge={
+          <button onClick={() => toggleClientActive(client.id)} className="cursor-pointer">
+            <ActiveBadge active={client.active} />
+          </button>
+        }
+        subtitle={
+          <span className="flex items-center gap-4 flex-wrap">
             <span className="flex items-center gap-1.5"><LetterIcon size={13} /> {client.email}</span>
             <span className="flex items-center gap-1.5"><PhoneIcon size={13} /> {client.phone}</span>
-          </div>
-        </div>
-        {tab === "Saved Locations" && (
-          <Button leadingIcon={AddIcon} onClick={() => setShowAddLocation(true)}>
-            Add Location
-          </Button>
-        )}
-      </div>
+          </span>
+        }
+        action={
+          tab === "Saved Locations" ? (
+            <Button leadingIcon={AddIcon} onClick={() => setShowAddLocation(true)}>
+              Add Location
+            </Button>
+          ) : undefined
+        }
+      />
 
       <Tabs tabs={TABS} active={tab} onChange={setTab} />
 

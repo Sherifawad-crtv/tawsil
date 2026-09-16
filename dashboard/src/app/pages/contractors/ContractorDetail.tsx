@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
 import { ArrowLeftIcon, LetterIcon, PhoneIcon, AddIcon } from "@solar-icons/react/linear";
 import Tabs from "../../components/Tabs";
+import PageHeader from "../../components/PageHeader";
 import { Button } from "../../components/Button";
 import ActiveBadge from "../../components/ActiveBadge";
 import OrdersTable from "../../components/OrdersTable";
@@ -42,30 +43,34 @@ export default function ContractorDetail() {
         <ArrowLeftIcon size={15} /> Back to Contractors
       </button>
 
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-title-1-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>{contractor.name}</h1>
-            <button onClick={() => toggleContractorActive(contractor.id)} className="cursor-pointer">
-              <ActiveBadge active={contractor.active} />
-            </button>
-          </div>
-          <div className="flex items-center gap-4 mt-1.5 text-body-2-regular text-muted flex-wrap">
+      <PageHeader
+        title={contractor.name}
+        badge={
+          <button onClick={() => toggleContractorActive(contractor.id)} className="cursor-pointer">
+            <ActiveBadge active={contractor.active} />
+          </button>
+        }
+        subtitle={
+          <span className="flex items-center gap-4 flex-wrap">
             <span className="flex items-center gap-1.5"><LetterIcon size={13} /> {contractor.email}</span>
             <span className="flex items-center gap-1.5"><PhoneIcon size={13} /> {contractor.phone}</span>
-          </div>
-        </div>
-        {tab === "Drivers" && (
-          <Button leadingIcon={AddIcon} onClick={() => setShowAddDriver(true)}>
-            Add Driver
-          </Button>
-        )}
-        {tab === "Vehicles" && (
-          <Button leadingIcon={AddIcon} onClick={() => setShowAddVehicle(true)}>
-            Add Vehicle
-          </Button>
-        )}
-      </div>
+          </span>
+        }
+        action={
+          <>
+            {tab === "Drivers" && (
+              <Button leadingIcon={AddIcon} onClick={() => setShowAddDriver(true)}>
+                Add Driver
+              </Button>
+            )}
+            {tab === "Vehicles" && (
+              <Button leadingIcon={AddIcon} onClick={() => setShowAddVehicle(true)}>
+                Add Vehicle
+              </Button>
+            )}
+          </>
+        }
+      />
 
       <Tabs tabs={TABS} active={tab} onChange={setTab} />
 

@@ -10,6 +10,7 @@ import { useDataStore } from "../../lib/store";
 import { useRole } from "../../lib/RoleContext";
 import { byId, getTruckType, canAssignDrivers } from "../../lib/selectors";
 import { Button } from "../../components/Button";
+import PageHeader from "../../components/PageHeader";
 import { truckTypeLabel } from "../../lib/constants";
 import { formatDateTime } from "../../lib/format";
 
@@ -53,45 +54,40 @@ export default function OrderDetail() {
         <ArrowLeftIcon size={15} /> Back to Orders
       </button>
 
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-title-1-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>{order.id}</h1>
-            <StatusBadge status={order.status} />
-          </div>
-          <p className="mt-1.5 text-body-2-regular text-muted">
-            {client?.name ?? "—"} · {contractor?.name ?? "Not Assigned"}
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2 flex-wrap">
-          {needsAssignment && (
-            <Button leadingIcon={UserPlusRoundedIcon} onClick={() => setShowAssign(true)} className="shadow-md">
-              Assign Driver
-            </Button>
-          )}
-          {canEditCancel && (
-            <>
-              <Button variant="secondary" leadingIcon={Pen2Icon} onClick={() => setShowEdit(true)}>
-                Edit
+      <PageHeader
+        title={order.id}
+        badge={<StatusBadge status={order.status} />}
+        subtitle={`${client?.name ?? "—"} · ${contractor?.name ?? "Not Assigned"}`}
+        action={
+          <>
+            {needsAssignment && (
+              <Button leadingIcon={UserPlusRoundedIcon} onClick={() => setShowAssign(true)}>
+                Assign Driver
               </Button>
-              <Button variant="danger" leadingIcon={ForbiddenIcon} onClick={handleCancel}>
-                Cancel
-              </Button>
-            </>
-          )}
-          {order.status === "Completed" && (
-            <>
-              <Button variant="secondary" leadingIcon={RoutingIcon}>
-                Track Order
-              </Button>
-              <Button leadingIcon={RestartIcon} onClick={() => setShowReorder(true)}>
-                Reorder
-              </Button>
-            </>
-          )}
-        </div>
-      </div>
+            )}
+            {canEditCancel && (
+              <>
+                <Button variant="secondary" leadingIcon={Pen2Icon} onClick={() => setShowEdit(true)}>
+                  Edit
+                </Button>
+                <Button variant="danger" leadingIcon={ForbiddenIcon} onClick={handleCancel}>
+                  Cancel
+                </Button>
+              </>
+            )}
+            {order.status === "Completed" && (
+              <>
+                <Button variant="secondary" leadingIcon={RoutingIcon}>
+                  Track Order
+                </Button>
+                <Button leadingIcon={RestartIcon} onClick={() => setShowReorder(true)}>
+                  Reorder
+                </Button>
+              </>
+            )}
+          </>
+        }
+      />
 
       <StatusHistoryList history={order.statusHistory} />
 

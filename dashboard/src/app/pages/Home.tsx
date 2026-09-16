@@ -58,7 +58,7 @@ function AttentionRow({ order }: { order: AttentionOrder }) {
           <ClockCircleIcon size={12} />
           {formatDuration(order.minutesInStatus)}
         </div>
-        <Button size="small" className="bg-navy hover:bg-royal">
+        <Button size="small">
           {order.action}
         </Button>
       </div>
@@ -101,10 +101,10 @@ export default function Home() {
         action={
           showQuickActions ? (
             <div className="flex flex-wrap gap-2">
-              <Button size="small" leadingIcon={AddIcon} onClick={() => setShowOrderModal(true)}>
+              <Button leadingIcon={AddIcon} onClick={() => setShowOrderModal(true)}>
                 New Order
               </Button>
-              <Button size="small" variant="secondary" leadingIcon={CalendarAddIcon} onClick={() => setShowMonthlyModal(true)}>
+              <Button variant="secondary" leadingIcon={CalendarAddIcon} onClick={() => setShowMonthlyModal(true)}>
                 New Monthly Order
               </Button>
             </div>

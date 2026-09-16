@@ -3,6 +3,7 @@ import { Calendar } from "react-aria-components";
 import { parseDate } from "@internationalized/date";
 import { ArrowLeftIcon, ClockCircleIcon, CalendarDateIcon } from "@solar-icons/react/linear";
 import OrdersTable from "../../components/OrdersTable";
+import PageHeader from "../../components/PageHeader";
 import { MonthPanel } from "../../components/date-picker/shared";
 import { useMediaQuery } from "../../lib/useMediaQuery";
 import { useDataStore } from "../../lib/store";
@@ -41,10 +42,7 @@ export default function MonthlyOrderDetail() {
         <ArrowLeftIcon size={15} /> Back to Monthly Orders
       </button>
 
-      <div>
-        <h1 className="text-title-1-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>{contract.id}</h1>
-        <p className="mt-1.5 text-body-2-regular text-muted">{client?.name ?? "—"} · {contractor?.name ?? "Unassigned"}</p>
-      </div>
+      <PageHeader title={contract.id} subtitle={`${client?.name ?? "—"} · ${contractor?.name ?? "Unassigned"}`} />
 
       <div className="grid sm:grid-cols-4 gap-4">
         <StatTile icon={ClockCircleIcon} label="Daily Time" value={contract.dailyPickupTime} />

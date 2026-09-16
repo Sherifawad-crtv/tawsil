@@ -39,17 +39,24 @@ export default function ClientDetail() {
         <ArrowLeftIcon size={15} /> Back to Clients
       </button>
 
-      <div>
-        <div className="flex items-center gap-3 flex-wrap">
-          <h1 className="text-title-1-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>{client.name}</h1>
-          <button onClick={() => toggleClientActive(client.id)} className="cursor-pointer">
-            <ActiveBadge active={client.active} />
-          </button>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-3 flex-wrap">
+            <h1 className="text-title-1-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>{client.name}</h1>
+            <button onClick={() => toggleClientActive(client.id)} className="cursor-pointer">
+              <ActiveBadge active={client.active} />
+            </button>
+          </div>
+          <div className="flex items-center gap-4 mt-1.5 text-body-2-regular text-muted flex-wrap">
+            <span className="flex items-center gap-1.5"><LetterIcon size={13} /> {client.email}</span>
+            <span className="flex items-center gap-1.5"><PhoneIcon size={13} /> {client.phone}</span>
+          </div>
         </div>
-        <div className="flex items-center gap-4 mt-1.5 text-body-2-regular text-muted flex-wrap">
-          <span className="flex items-center gap-1.5"><LetterIcon size={13} /> {client.email}</span>
-          <span className="flex items-center gap-1.5"><PhoneIcon size={13} /> {client.phone}</span>
-        </div>
+        {tab === "Saved Locations" && (
+          <Button leadingIcon={AddIcon} onClick={() => setShowAddLocation(true)}>
+            Add Location
+          </Button>
+        )}
       </div>
 
       <Tabs tabs={TABS} active={tab} onChange={setTab} />
@@ -60,11 +67,6 @@ export default function ClientDetail() {
 
       {tab === "Saved Locations" && (
         <div>
-          <div className="flex justify-end mb-3">
-            <Button size="small" leadingIcon={AddIcon} onClick={() => setShowAddLocation(true)} className="bg-navy hover:bg-royal">
-              Add Location
-            </Button>
-          </div>
           <Table aria-label="Saved locations">
             <TableHeader>
               <TableColumn isRowHeader>Location</TableColumn>

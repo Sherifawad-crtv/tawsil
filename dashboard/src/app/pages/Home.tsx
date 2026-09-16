@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { ClockCircleIcon, BusIcon, CheckCircleIcon, AddIcon, CalendarAddIcon, DangerTriangleIcon } from "@solar-icons/react/linear";
 import MetricCard from "../components/MetricCard";
+import PageHeader from "../components/PageHeader";
 import StatusBadge from "../components/StatusBadge";
 import { Button } from "../components/Button";
 import InsightCard from "../components/InsightCard";
@@ -94,12 +95,22 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="text-title-1-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>
-          Home
-        </h1>
-        <p className="mt-0.5 text-body-2-regular text-muted">{subtitle}</p>
-      </div>
+      <PageHeader
+        title="Home"
+        subtitle={subtitle}
+        action={
+          showQuickActions ? (
+            <div className="flex flex-wrap gap-2">
+              <Button size="small" leadingIcon={AddIcon} onClick={() => setShowOrderModal(true)}>
+                New Order
+              </Button>
+              <Button size="small" variant="secondary" leadingIcon={CalendarAddIcon} onClick={() => setShowMonthlyModal(true)}>
+                New Monthly Order
+              </Button>
+            </div>
+          ) : undefined
+        }
+      />
 
       {/* Metrics strip */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -158,24 +169,6 @@ export default function Home() {
             ) : (
               attentionOrders.map((order) => <AttentionRow key={order.id} order={order} />)
             )}
-          </div>
-        </div>
-      )}
-
-      {/* Quick actions - order creation is Sales' job */}
-      {showQuickActions && (
-        <div>
-          <h2 className="text-caption-1-semibold text-navy mb-2 uppercase tracking-wide" style={{ fontFamily: "var(--font-sub)" }}>
-            Quick Actions
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            <Button size="small" leadingIcon={AddIcon} onClick={() => setShowOrderModal(true)}>
-              New Order
-            </Button>
-
-            <Button size="small" variant="secondary" leadingIcon={CalendarAddIcon} onClick={() => setShowMonthlyModal(true)}>
-              New Monthly Order
-            </Button>
           </div>
         </div>
       )}

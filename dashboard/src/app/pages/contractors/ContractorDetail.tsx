@@ -55,31 +55,23 @@ export default function ContractorDetail() {
             <span className="flex items-center gap-1.5"><PhoneIcon size={13} /> {contractor.phone}</span>
           </div>
         </div>
+        {tab === "Drivers" && (
+          <Button leadingIcon={AddIcon} onClick={() => setShowAddDriver(true)}>
+            Add Driver
+          </Button>
+        )}
+        {tab === "Vehicles" && (
+          <Button leadingIcon={AddIcon} onClick={() => setShowAddVehicle(true)}>
+            Add Vehicle
+          </Button>
+        )}
       </div>
 
       <Tabs tabs={TABS} active={tab} onChange={setTab} />
 
-      {tab === "Drivers" && (
-        <div>
-          <div className="flex justify-end mb-3">
-            <Button size="small" leadingIcon={AddIcon} onClick={() => setShowAddDriver(true)} className="bg-navy hover:bg-royal">
-              Add Driver
-            </Button>
-          </div>
-          <DriversTable drivers={contractorDrivers} showContractor={false} />
-        </div>
-      )}
+      {tab === "Drivers" && <DriversTable drivers={contractorDrivers} showContractor={false} />}
 
-      {tab === "Vehicles" && (
-        <div>
-          <div className="flex justify-end mb-3">
-            <Button size="small" leadingIcon={AddIcon} onClick={() => setShowAddVehicle(true)} className="bg-navy hover:bg-royal">
-              Add Vehicle
-            </Button>
-          </div>
-          <VehiclesTable vehicles={contractorVehicles} showContractor={false} />
-        </div>
-      )}
+      {tab === "Vehicles" && <VehiclesTable vehicles={contractorVehicles} showContractor={false} />}
 
       {tab === "Orders" && (
         <OrdersTable orders={contractorOrders} />

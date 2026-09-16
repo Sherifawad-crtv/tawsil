@@ -241,7 +241,7 @@ export default function OrderFormModal({
 
       {step === 4 && (
         <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-between p-4 rounded-2lg border border-border bg-grey-light/40">
+          <div className="flex items-center justify-between p-4 rounded-2lg border border-border bg-grey-light">
             <div>
               <div className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Proof of Delivery Required</div>
               <div className="text-caption-1-regular text-muted mt-0.5">Require photo confirmation at drop-off.</div>

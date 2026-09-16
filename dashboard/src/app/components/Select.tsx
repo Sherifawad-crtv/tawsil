@@ -11,6 +11,7 @@ import {
 import type { ListBoxItemProps as AriaListBoxItemProps, Key } from "react-aria-components";
 import { cx } from "../lib/cx";
 import { useDismissOnOutsidePress, useTriggerToggle } from "../lib/useDismissOnOutsidePress";
+import { FIELD_BASE } from "../lib/fieldClass";
 import { MENU_ITEM, MENU_ITEM_ACTIVE, MENU_ITEMS_CONTAINER, MENU_POPOVER_SURFACE } from "./menuStyles";
 
 /**
@@ -18,9 +19,14 @@ import { MENU_ITEM, MENU_ITEM_ACTIVE, MENU_ITEMS_CONTAINER, MENU_POPOVER_SURFACE
  * <select> elements we were using, which rendered the OS control and ignored
  * the design system entirely.
  *
- * Trigger: white, 1px border, shadow-xs, radius/2lg, Body 1/Medium, 16px
- * chevron that flips when open. Popover: radius/2xl panel, shadow-dropdown,
- * 150ms fade/scale/blur, radius/2lg rows.
+ * Two triggers, because BoardUI styles these contexts differently and mixing
+ * them inside one form looks like a bug:
+ *   trigger (default) — white, 1px border, shadow-xs. For filters and
+ *     toolbars, where it sits beside buttons.
+ *   field — the shared input recipe, so a Select in a form matches the
+ *     TextField next to it.
+ * Popover is the same either way: radius/2xl panel, shadow-dropdown, 150ms
+ * fade/scale/blur, radius/2lg rows.
  */
 
 function ChevronDownSmall({ className }: { className?: string }) {
@@ -49,6 +55,7 @@ export function Select({
   className,
   triggerClassName,
   isDisabled,
+  variant = "trigger",
   "aria-label": ariaLabel,
 }: {
   value: string;
@@ -58,6 +65,7 @@ export function Select({
   className?: string;
   triggerClassName?: string;
   isDisabled?: boolean;
+  variant?: "trigger" | "field";
   "aria-label"?: string;
 }) {
   // Non-modal popover: react-aria's modal scroll lock puts overflow:hidden on
@@ -84,11 +92,16 @@ export function Select({
           <AriaButton
             ref={triggerRef}
             className={cx(
-              "flex w-full cursor-pointer items-center justify-between rounded-2lg gap-1.5 px-2.5 py-2 text-body-medium",
-              "border border-border bg-white shadow-xs text-navy",
-              "transition-[background-color,border-color,box-shadow] duration-200 ease",
-              "hover:bg-grey-light hover:border-grey",
-              "outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue",
+              "flex w-full cursor-pointer items-center justify-between gap-1.5 outline-none",
+              variant === "field"
+                ? cx(FIELD_BASE, "px-3 text-body-regular data-[focused]:ring-blue data-[focused]:bg-white")
+                : cx(
+                    "h-9 rounded-2lg px-2.5 text-body-medium",
+                    "border border-border bg-white shadow-xs text-navy",
+                    "transition-[background-color,border-color,box-shadow] duration-200 ease",
+                    "hover:bg-grey-light hover:border-grey",
+                    "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue",
+                  ),
               "disabled:cursor-not-allowed disabled:text-muted disabled:shadow-none",
               triggerClassName,
             )}

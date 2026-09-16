@@ -68,7 +68,7 @@ export default function WaypointsEditor({
       )}
 
       {value.map((wp, i) => (
-        <div key={wp.id} className="rounded-2lg border border-border p-4 bg-grey-light/40">
+        <div key={wp.id} className="rounded-2lg border border-border p-4 bg-grey-light">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-1.5">
               <MapPointIcon size={14} className={wp.type === "Pickup" ? "text-navy" : "text-blue"} />
@@ -119,13 +119,9 @@ export default function WaypointsEditor({
               <div className="flex-1">
                 <TextField label="Longitude" required type="number" step="0.0001" value={wp.lng || ""} onChange={(e) => update(wp.id, { lng: parseFloat(e.target.value) || 0 })} />
               </div>
-              <button
-                type="button"
-                className="px-3 py-1.5 rounded-2lg border border-border bg-white text-caption-1-semibold text-navy cursor-pointer hover:border-blue/40 flex-shrink-0"
-                title="Pick on Map (coming soon)"
-              >
+              <Button variant="secondary" size="small" className="flex-shrink-0" title="Pick on Map (coming soon)">
                 Pick on Map
-              </button>
+              </Button>
             </div>
             <TextField label="Contact Name" value={wp.contactName ?? ""} onChange={(e) => update(wp.id, { contactName: e.target.value })} />
             <TextField label="Contact Phone" value={wp.contactPhone ?? ""} onChange={(e) => update(wp.id, { contactPhone: e.target.value })} />
@@ -141,7 +137,6 @@ export default function WaypointsEditor({
           size="small"
           leadingIcon={AddIcon}
           onClick={() => onChange([...value, newWaypoint(hasPickup ? "Dropoff" : "Pickup")])}
-          className="bg-navy hover:bg-royal"
         >
           Add Waypoint
         </Button>

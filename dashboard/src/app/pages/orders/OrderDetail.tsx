@@ -154,7 +154,7 @@ export default function OrderDetail() {
                 </div>
               </div>
             ) : (
-              <div className="flex items-center gap-3 px-4 py-2 rounded-2lg bg-grey-light/60">
+              <div className="flex items-center gap-3 px-4 py-2 rounded-2lg bg-grey-light">
                 <UserIcon size={16} className="text-muted" />
                 <span className="text-body-medium text-muted">Not Assigned</span>
               </div>

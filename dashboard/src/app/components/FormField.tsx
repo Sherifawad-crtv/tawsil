@@ -1,9 +1,9 @@
 import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
 import { Select, type SelectOption } from "./Select";
+import { FIELD_CLASS, FIELD_LABEL_CLASS } from "../lib/fieldClass";
 
-const labelClass = "block text-body-2-semibold text-navy mb-1.5";
-const controlClass =
-  "w-full h-9 px-3 rounded-2lg bg-grey-light text-body-regular text-navy placeholder:text-muted ring-2 ring-inset ring-transparent transition-[background-color,box-shadow] duration-150 ease focus:outline-none focus:ring-blue focus:bg-white";
+const labelClass = FIELD_LABEL_CLASS;
+const controlClass = FIELD_CLASS;
 
 function FieldLabel({ label, required, badge }: { label: string; required?: boolean; badge?: string }) {
   return (
@@ -80,7 +80,7 @@ export function SelectField({
         options={options}
         placeholder={placeholder}
         isDisabled={disabled}
-        triggerClassName="h-9"
+        variant="field"
       />
     </div>
   );

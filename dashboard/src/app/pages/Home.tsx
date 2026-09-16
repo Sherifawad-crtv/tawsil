@@ -33,7 +33,7 @@ function AttentionRow({ order }: { order: AttentionOrder }) {
   const target = order.reason === "monthly-renewal" ? `/monthly-orders/${order.id}` : `/orders/${order.id}`;
   return (
     <div
-      className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 px-4 py-2.5 border-b border-border last:border-b-0 cursor-pointer hover:bg-grey-light/60 transition-colors"
+      className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 px-4 py-2.5 border-b border-border last:border-b-0 cursor-pointer hover:bg-grey-light transition-colors"
       onClick={() => navigate(target)}
     >
       <div className="flex items-center gap-2.5 min-w-0 flex-1">

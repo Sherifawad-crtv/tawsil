@@ -1,4 +1,6 @@
 import { MagnifierIcon } from "@solar-icons/react/linear";
+import { cx } from "../lib/cx";
+import { FIELD_BASE } from "../lib/fieldClass";
 
 export default function SearchInput({
   value,
@@ -16,7 +18,7 @@ export default function SearchInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full h-9 pl-9 pr-3 rounded-2lg bg-grey-light text-body-regular text-navy placeholder:text-muted ring-2 ring-inset ring-transparent transition-[background-color,box-shadow] duration-150 ease focus:outline-none focus:ring-blue focus:bg-white"
+        className={cx(FIELD_BASE, "pl-9 pr-3 placeholder:text-muted")}
         style={{ fontFamily: "var(--font-sub)" }}
       />
     </div>

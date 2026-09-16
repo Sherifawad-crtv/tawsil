@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CloudUploadIcon, FileTextIcon, CloseIcon } from "@solar-icons/react/linear";
+import { FIELD_LABEL_CLASS } from "../lib/fieldClass";
 
 export default function FileUploadField({
   label,
@@ -14,12 +15,12 @@ export default function FileUploadField({
 
   return (
     <div>
-      <label className="block text-body-2-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
+      <label className={FIELD_LABEL_CLASS} style={{ fontFamily: "var(--font-sub)" }}>
         {label}
         {required && <span className="text-status-cancelled"> *</span>}
       </label>
       {fileName ? (
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-2lg border border-border bg-grey-light">
+        <div className="flex items-center gap-2 h-9 px-3 rounded-2lg bg-grey-light">
           <FileTextIcon size={16} className="text-blue flex-shrink-0" />
           <span className="text-body-regular text-navy truncate flex-1" style={{ fontFamily: "var(--font-mono)" }}>
             {fileName}
@@ -36,7 +37,7 @@ export default function FileUploadField({
           </button>
         </div>
       ) : (
-        <label className="flex items-center gap-2 px-3 py-1.5 rounded-2lg border border-dashed border-border bg-grey-light cursor-pointer hover:border-blue/40 transition-colors">
+        <label className="flex items-center gap-2 h-9 px-3 rounded-2lg bg-grey-light text-body-regular cursor-pointer ring-2 ring-inset ring-transparent hover:ring-blue/40 transition-shadow">
           <CloudUploadIcon size={16} className="text-muted flex-shrink-0" />
           <span className="text-body-regular text-muted">Upload PDF</span>
           <input

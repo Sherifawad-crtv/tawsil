@@ -34,7 +34,7 @@ export default function BiddingWidget({ bidding }: { bidding?: BiddingInfo }) {
 
           <div className="flex flex-col gap-2">
             {bidding.bids.map((bid) => (
-              <div key={bid.id} className="flex items-center justify-between px-3.5 py-1.5 rounded-2lg bg-grey-light/60">
+              <div key={bid.id} className="flex items-center justify-between px-3.5 py-1.5 rounded-2lg bg-grey-light">
                 <div>
                   <div className="text-body-medium text-navy">{bid.driverName}</div>
                   <div className="text-caption-1-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>{formatDateTime(bid.submittedAt)}</div>

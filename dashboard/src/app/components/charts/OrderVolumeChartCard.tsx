@@ -45,7 +45,7 @@ export default function OrderVolumeChartCard({ data }: { data: VolumePoint[] }) 
   const display = useCountUp(headlineValue);
 
   return (
-    <section className="flex h-[280px] min-w-0 flex-col gap-4 rounded-2xl bg-tile p-4">
+    <section className="flex h-[280px] min-w-0 flex-col gap-4 rounded-2xl bg-white border border-border p-4">
       <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex min-w-0 flex-col gap-0.5">
           <p className="text-body-2-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>

@@ -25,8 +25,8 @@ export default function MetricCard({
   deltaColor?: "positive" | "negative" | "neutral";
 }) {
   return (
-    <section className="flex flex-col items-start justify-between gap-3 rounded-2xl bg-tile p-4 min-w-0">
-      <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-white flex-shrink-0">
+    <section className="flex flex-col items-start justify-between gap-3 rounded-2xl bg-white border border-border p-4 min-w-0">
+      <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-grey-light flex-shrink-0">
         <Icon size={18} strokeWidth={2.25} className={ACCENT_ICON[accent]} />
       </span>
       <div className="flex flex-col gap-0.5 w-full min-w-0">

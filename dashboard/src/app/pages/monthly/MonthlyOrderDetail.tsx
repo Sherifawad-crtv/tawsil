@@ -51,7 +51,7 @@ export default function MonthlyOrderDetail() {
         <StatTile label="Remaining" value={String(remaining)} accent={remaining <= 2 ? "amber" : undefined} />
       </div>
 
-      <div className="rounded-2xl bg-tile p-4">
+      <div className="rounded-2xl bg-white border border-border p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Progress</h3>
           <span className="text-caption-1-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>{pct}%</span>
@@ -101,7 +101,7 @@ export default function MonthlyOrderDetail() {
         </Calendar>
       </div>
 
-      <div className="rounded-2xl bg-tile p-4">
+      <div className="rounded-2xl bg-white border border-border p-4">
         <h3 className="text-body-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Pricing Breakdown</h3>
         <div className="grid sm:grid-cols-2 gap-3 text-body-2-regular">
           <PriceRow label="Client Price (gross, /day)" value={formatEGP(contract.clientPricePerDayEGP)} />
@@ -125,7 +125,7 @@ export default function MonthlyOrderDetail() {
 
 function StatTile({ icon: Icon, label, value, accent }: { icon?: React.ElementType; label: string; value: string; accent?: "green" | "amber" }) {
   return (
-    <div className="rounded-2xl bg-tile p-4">
+    <div className="rounded-2xl bg-white border border-border p-4">
       <div className="flex items-center gap-1.5 text-caption-1-regular text-muted uppercase tracking-wide mb-1.5" style={{ fontFamily: "var(--font-mono)" }}>
         {Icon && <Icon size={12} />}
         {label}

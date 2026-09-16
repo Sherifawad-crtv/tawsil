@@ -6,7 +6,7 @@ type ChipColor = "positive" | "negative" | "neutral" | "pending" | "completed" |
 const COLOR_STYLES: Record<ChipColor, string> = {
   positive: "bg-[#E7F6EC] text-status-completed",
   negative: "bg-[#FDECEC] text-status-cancelled",
-  neutral: "bg-white text-muted",
+  neutral: "bg-grey-light text-muted",
   pending: "bg-[#FEF3E2] text-status-pending",
   completed: "bg-[#E7F6EC] text-status-completed",
   cancelled: "bg-[#FDECEC] text-status-cancelled",

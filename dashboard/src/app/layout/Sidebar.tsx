@@ -144,7 +144,7 @@ export default function Sidebar({
             <SidebarMinimalisticIcon size={18} className={cx("transition-transform duration-300 ease-in-out", !collapsed && "-scale-x-100")} />
           </button>
           <button
-            className="md:hidden w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer active:scale-90 transition-transform bg-tile flex-shrink-0"
+            className="md:hidden w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer active:scale-90 transition-transform bg-grey-light flex-shrink-0"
             onClick={onClose}
             aria-label="Close menu"
           >

@@ -10,7 +10,7 @@ export default function VehicleDetailPanel({ vehicle, onClose }: { vehicle: Vehi
   const truckType = getTruckType(vehicle.truckTypeId);
 
   return (
-    <div className="rounded-2lg bg-white shadow-card p-4 mt-2">
+    <div className="rounded-2lg bg-grey-light p-4 mt-2">
       <div className="grid sm:grid-cols-3 gap-4">
         <div>
           <div className="text-caption-1-regular text-muted uppercase tracking-wide mb-1.5" style={{ fontFamily: "var(--font-mono)" }}>Plate & Type</div>

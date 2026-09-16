@@ -13,7 +13,7 @@ export default function InsightCard({
   children: ReactNode;
 }) {
   return (
-    <div className="rounded-2xl bg-tile p-4 flex flex-col gap-3">
+    <div className="rounded-2xl bg-white border border-border p-4 flex flex-col gap-3">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>

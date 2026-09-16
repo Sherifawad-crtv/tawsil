@@ -5,7 +5,7 @@ import type { BiddingInfo } from "../../lib/types";
 
 export default function BiddingWidget({ bidding }: { bidding?: BiddingInfo }) {
   return (
-    <div className="rounded-2xl bg-tile p-4">
+    <div className="rounded-2xl bg-white border border-border p-4">
       <div className="flex items-center gap-2 mb-4">
         <SledgehammerIcon size={16} className="text-muted" />
         <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Bidding</h3>

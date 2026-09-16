@@ -33,7 +33,7 @@ export default function MultiDateCalendar({ value, onChange }: { value: string[]
       visibleDuration={{ months: twoUp ? 2 : 1 }}
       className="flex w-full flex-col gap-3"
     >
-      <div className="flex w-full gap-2 rounded-3xl bg-tile p-3">
+      <div className="flex w-full gap-2 rounded-3xl bg-grey-light p-3">
         <MonthPanel offset={0} showPrev showNext={!twoUp} fluid selectedDates={selected} />
         {twoUp && <MonthPanel offset={1} showNext fluid selectedDates={selected} />}
       </div>

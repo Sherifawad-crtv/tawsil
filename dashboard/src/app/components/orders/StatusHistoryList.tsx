@@ -21,7 +21,7 @@ export default function StatusHistoryList({ history }: { history: StatusHistoryE
   }, [history.length]);
 
   return (
-    <div className="rounded-2xl bg-tile p-4">
+    <div className="rounded-2xl bg-white border border-border p-4">
       <div className="flex items-center gap-2 mb-4">
         <HistoryIcon size={16} className="text-muted" />
         <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Status History</h3>

@@ -94,7 +94,7 @@ export default function OrderDetail() {
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Trip & cargo */}
-          <div className="rounded-2xl bg-tile p-4">
+          <div className="rounded-2xl bg-white border border-border p-4">
             <h3 className="text-body-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Trip & Cargo</h3>
             <div className="grid sm:grid-cols-2 gap-4">
               <DetailField label="Trip Type" value={order.tripType} />
@@ -113,7 +113,7 @@ export default function OrderDetail() {
           </div>
 
           {/* Delivery */}
-          <div className="rounded-2xl bg-tile p-4">
+          <div className="rounded-2xl bg-white border border-border p-4">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Delivery</h3>
               <div className="flex items-center gap-1.5 text-caption-1-regular text-muted">
@@ -141,7 +141,7 @@ export default function OrderDetail() {
 
         <div className="flex flex-col gap-6">
           {/* Driver & Vehicle */}
-          <div className="rounded-2xl bg-tile p-4">
+          <div className="rounded-2xl bg-white border border-border p-4">
             <h3 className="text-body-semibold text-navy mb-4" style={{ fontFamily: "var(--font-sub)" }}>Driver & Vehicle Information</h3>
             {driver && vehicle ? (
               <div className="flex items-center gap-4">

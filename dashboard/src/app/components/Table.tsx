@@ -36,7 +36,7 @@ export interface TableProps extends Omit<AriaTableProps, "className"> {
 
 export function Table({ size = "md", className, containerClassName, ref, ...props }: TableProps) {
   return (
-    <div className={cx("w-full overflow-x-auto rounded-2xl bg-tile", containerClassName)}>
+    <div className={cx("w-full overflow-x-auto rounded-2xl bg-white border border-border", containerClassName)}>
       <AriaTable
         ref={ref}
         {...props}

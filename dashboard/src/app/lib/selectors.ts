@@ -118,15 +118,15 @@ export function getOrdersForRole(orders: Order[], role: Role): Order[] {
 
 export function getAttentionOrdersForRole(items: AttentionOrder[], role: Role): AttentionOrder[] {
   switch (role) {
-    case "Sales":
-      // Sales creates and tracks orders - follow-up/allocation nudges aren't theirs.
-      return [];
     case "Supply":
       return items.filter((i) => i.reason === "stalled-pending");
     case "Operations":
       return items.filter((i) => i.reason === "pod-missing" || i.reason === "monthly-renewal");
+    case "Sales":
     case "Admin":
     default:
+      // Sales sees the whole picture, like Admin - it just can't assign,
+      // which canAssignDrivers already handles.
       return items;
   }
 }
@@ -196,7 +196,7 @@ function isProblemOrder(order: Order): "stalled-pending" | "pod-missing" | null 
 function isProblemVisibleToRole(reason: "stalled-pending" | "pod-missing", role: Role) {
   if (role === "Supply") return reason === "stalled-pending";
   if (role === "Operations") return reason === "pod-missing";
-  return true; // Admin (Sales never renders this section)
+  return true; // Sales and Admin see every problem
 }
 
 /** Buckets open problem orders (stalled-pending / POD overdue) by time-of-day they entered that state - answers "when". */

@@ -73,15 +73,14 @@ export default function Home() {
   const { role } = useRole();
   const metrics = getHomeMetrics(orders, drivers);
   const attentionOrders = getAttentionOrdersForRole(getAttentionOrders(orders, monthlyOrders, clients), role);
-  const showAttention = role !== "Sales";
   const showQuickActions = canCreateOrders(role);
 
   const volumeData = getOrderVolumeWeekOverWeek(orders);
   const statusData = getOrdersByStatus(orders);
   const completedDelta = metrics.completedToday - metrics.completedYesterday;
 
-  const hourlyProblems = showAttention ? getProblemsByHour(orders, role) : [];
-  const locationProblems = showAttention ? getProblemsByLocation(orders, role) : [];
+  const hourlyProblems = getProblemsByHour(orders, role);
+  const locationProblems = getProblemsByLocation(orders, role);
   const totalProblems = hourlyProblems.reduce((sum, d) => sum + d.count, 0);
 
   const subtitle =
@@ -136,42 +135,38 @@ export default function Home() {
         </InsightCard>
       </div>
 
-      {/* Problem hotspots - when and where issues cluster, not shown to Sales */}
-      {showAttention && (
-        <div className="grid lg:grid-cols-2 gap-3">
-          <InsightCard title="When Problems Happen" subtitle="Open issues by time of day">
-            {totalProblems === 0 ? (
-              <div className="py-6 text-center text-body-2-regular text-muted">No open problems right now.</div>
-            ) : (
-              <ProblemsHourlyChart data={hourlyProblems} />
-            )}
-          </InsightCard>
+      {/* Problem hotspots - when and where issues cluster */}
+      <div className="grid lg:grid-cols-2 gap-3">
+        <InsightCard title="When Problems Happen" subtitle="Open issues by time of day">
+          {totalProblems === 0 ? (
+            <div className="py-6 text-center text-body-2-regular text-muted">No open problems right now.</div>
+          ) : (
+            <ProblemsHourlyChart data={hourlyProblems} />
+          )}
+        </InsightCard>
 
-          <InsightCard title="Where Problems Happen" subtitle="Top pickup locations with open issues">
-            {locationProblems.length === 0 ? (
-              <div className="py-6 text-center text-body-2-regular text-muted">No open problems right now.</div>
-            ) : (
-              <LocationBarList data={locationProblems} />
-            )}
-          </InsightCard>
-        </div>
-      )}
+        <InsightCard title="Where Problems Happen" subtitle="Top pickup locations with open issues">
+          {locationProblems.length === 0 ? (
+            <div className="py-6 text-center text-body-2-regular text-muted">No open problems right now.</div>
+          ) : (
+            <LocationBarList data={locationProblems} />
+          )}
+        </InsightCard>
+      </div>
 
-      {/* Attention-needed list - not shown to Sales, which only tracks orders */}
-      {showAttention && (
-        <div>
-          <h2 className="text-caption-1-semibold text-navy mb-2 uppercase tracking-wide" style={{ fontFamily: "var(--font-sub)" }}>
-            {role === "Supply" ? "Pending Allocation" : role === "Operations" ? "Needs Follow-up" : "Needs Attention"}
-          </h2>
-          <div className="rounded-2xl bg-white border border-border overflow-hidden">
-            {attentionOrders.length === 0 ? (
-              <div className="px-5 py-10 text-center text-body-regular text-muted">Nothing needs attention right now.</div>
-            ) : (
-              attentionOrders.map((order) => <AttentionRow key={order.id} order={order} />)
-            )}
-          </div>
+      {/* Attention-needed list */}
+      <div>
+        <h2 className="text-caption-1-semibold text-navy mb-2 uppercase tracking-wide" style={{ fontFamily: "var(--font-sub)" }}>
+          {role === "Supply" ? "Pending Allocation" : role === "Operations" ? "Needs Follow-up" : "Needs Attention"}
+        </h2>
+        <div className="rounded-2xl bg-white border border-border overflow-hidden">
+          {attentionOrders.length === 0 ? (
+            <div className="px-5 py-10 text-center text-body-regular text-muted">Nothing needs attention right now.</div>
+          ) : (
+            attentionOrders.map((order) => <AttentionRow key={order.id} order={order} />)
+          )}
         </div>
-      )}
+      </div>
 
       {showOrderModal && <OrderFormModal mode="create" onClose={() => setShowOrderModal(false)} />}
       {showMonthlyModal && <MonthlyOrderFormModal onClose={() => setShowMonthlyModal(false)} />}

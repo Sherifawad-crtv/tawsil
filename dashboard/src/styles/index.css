@@ -48,12 +48,8 @@
   --shadow-md: 0 2px 4px -1px rgb(0 0 0 / 0.06), 0 4px 6px -1px rgb(0 0 0 / 0.10);
   --shadow-lg: 0 4px 6px -2px rgb(0 0 0 / 0.05), 0 10px 15px -3px rgb(0 0 0 / 0.10);
   --shadow-xl: 0 10px 10px -5px rgb(0 0 0 / 0.04), 0 20px 25px -5px rgb(0 0 0 / 0.10);
-  /* 1px contact shadow for a white surface sitting on a tinted card. */
-  --shadow-card: 0 1px 1px 0 rgb(0 0 0 / 0.05);
   /* Floating menu/dropdown/modal panel. */
   --shadow-dropdown: 0 1px 1px 0 rgb(0 0 0 / 0.04), 0 4px 4px 0 rgb(0 0 0 / 0.02);
-  /* Sidebar's floating-panel elevation. */
-  --shadow-sidebar: 0 1px 0 0 rgb(0 0 0 / 0.0196), 0 1px 12px 0 rgb(0 0 0 / 0.0588), 0 0 1px 0 rgb(0 0 0 / 0.3216);
   /* Selected sidebar nav row: 1px blue edge + inner top highlight. */
   --shadow-nav-selected: 0 0 0 1px var(--color-blue), inset 0 1px 0 0 rgb(255 255 255 / 0.25);
 

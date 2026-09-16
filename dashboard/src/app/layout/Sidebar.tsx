@@ -116,7 +116,7 @@ export default function Sidebar({
 
       <aside
         className={cx(
-          "fixed md:sticky top-0 md:top-3 left-0 z-40 md:z-0 h-screen md:h-[calc(100vh-24px)] w-64 flex-shrink-0 flex flex-col bg-white md:rounded-3xl border-r md:border border-border md:shadow-sidebar p-3",
+          "fixed md:static top-0 left-0 z-40 md:z-0 h-screen md:h-full w-64 flex-shrink-0 flex flex-col bg-white md:rounded-3xl border-r md:border border-border md:shadow-sidebar p-3",
           "transition-[transform,width,padding] duration-300 ease-in-out md:translate-x-0",
           open ? "translate-x-0" : "-translate-x-full",
           collapsed && "md:w-[60px] md:px-[11px] md:py-3",

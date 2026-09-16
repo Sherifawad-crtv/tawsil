@@ -33,7 +33,9 @@ export default function AppShell() {
           />
         </header>
 
-        <main className="flex-1 px-3.5 md:px-0 py-4 md:py-0 max-w-[1400px] w-full mx-auto">
+        {/* Fluid: a max-width here centred the content, which on wide screens
+            pulled it away from both the sidebar and the header above it. */}
+        <main className="flex-1 min-w-0 px-3.5 md:px-0 py-4 md:py-0">
           <Outlet />
         </main>
       </div>

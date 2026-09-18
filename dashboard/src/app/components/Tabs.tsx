@@ -16,10 +16,13 @@ export default function Tabs({
   tabs,
   active,
   onChange,
+  counts,
 }: {
   tabs: string[];
   active: string;
   onChange: (tab: string) => void;
+  /** Optional per-tab count, drawn as a small pill after the label. */
+  counts?: Record<string, number>;
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [underline, setUnderline] = useState<Underline | null>(null);
@@ -64,7 +67,22 @@ export default function Tabs({
               }
               style={{ fontFamily: "var(--font-sub)" }}
             >
-              {tab}
+              {({ isSelected }) => (
+                <>
+                  {tab}
+                  {counts && counts[tab] !== undefined && (
+                    <span
+                      className={cx(
+                        "rounded-md px-1.5 py-px text-caption-2-semibold",
+                        isSelected ? "bg-blue-soft text-blue" : "bg-grey-light text-muted",
+                      )}
+                      style={{ fontFamily: "var(--font-mono)" }}
+                    >
+                      {counts[tab]}
+                    </span>
+                  )}
+                </>
+              )}
             </AriaTab>
           ))}
         </AriaTabList>

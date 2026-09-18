@@ -2,19 +2,9 @@ import { useState } from "react";
 import { SnowflakeIcon, CheckCircleIcon } from "@solar-icons/react/linear";
 import { TRUCK_TYPES } from "../lib/constants";
 import type { TruckBaseClass } from "../lib/types";
-import imgDababa from "../../assets/truck-dababa.png";
-import imgJumbo from "../../assets/truck-jumbo.png";
-import imgVan from "../../assets/truck-van.png";
-import imgTrailer from "../../assets/truck-trailer.png";
+import { TRUCK_IMAGES } from "../lib/truckImages";
 
 const BASE_CLASSES: TruckBaseClass[] = ["Dababa", "Jumbo", "Suzuki Van", "Trailer"];
-
-const BASE_CLASS_IMAGES: Record<TruckBaseClass, string> = {
-  Dababa: imgDababa,
-  Jumbo: imgJumbo,
-  "Suzuki Van": imgVan,
-  Trailer: imgTrailer,
-};
 
 export default function TruckTypeGrid({ value, onChange }: { value: string; onChange: (truckTypeId: string) => void }) {
   const selectedType = TRUCK_TYPES.find((t) => t.id === value);
@@ -50,7 +40,7 @@ export default function TruckTypeGrid({ value, onChange }: { value: string; onCh
                   <CheckCircleIcon size={16} className="text-blue" />
                 </div>
               )}
-              <img src={BASE_CLASS_IMAGES[cls]} alt={cls} className="w-full h-14 object-contain" />
+              <img src={TRUCK_IMAGES[cls]} alt={cls} className="w-full h-14 object-contain" />
               <span className="text-caption-1-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
                 {cls}
               </span>

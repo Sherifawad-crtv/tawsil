@@ -86,7 +86,9 @@ function FitToRoute({ route }: { route: LatLng[] }) {
   useEffect(() => {
     if (route.length === 0) return;
     const bounds = L.latLngBounds(route.map((p) => [p.lat, p.lng] as [number, number]));
-    map.fitBounds(bounds, { padding: [72, 72], maxZoom: 13 });
+    // Extra room top-left: that corner holds the floating vehicle card, and
+    // a stop framed under it is a stop the operator can't see.
+    map.fitBounds(bounds, { paddingTopLeft: [330, 210], paddingBottomRight: [72, 72], maxZoom: 13 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, key]);
   return null;

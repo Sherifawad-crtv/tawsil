@@ -7,6 +7,7 @@ import {
   BillListIcon,
   Buildings2Icon,
   UsersGroupRoundedIcon,
+  InfoCircleIcon,
 } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import InsightCard from "../../components/InsightCard";
@@ -14,11 +15,13 @@ import { Select } from "../../components/Select";
 import FinancialCard from "../../components/financials/FinancialCard";
 import MoneySplitBar from "../../components/financials/MoneySplitBar";
 import MonthlyTrendChart from "../../components/financials/MonthlyTrendChart";
+import CoveragePie from "../../components/financials/CoveragePie";
 import RollupTable, { type RollupColumn } from "../../components/financials/RollupTable";
 import { useDataStore } from "../../lib/store";
 import { useRole } from "../../lib/RoleContext";
 import { canViewCommandCenter } from "../../lib/selectors";
 import { formatAmount } from "../../lib/format";
+import { coverageByArea, coveragePoints } from "../../lib/coverage";
 import {
   MONEY_COLORS,
   MONTH_OPTIONS,
@@ -82,6 +85,10 @@ export default function CommandCenter() {
     () => rollUpByContractor(periodOrders, orders, contractors),
     [periodOrders, orders, contractors]
   );
+  // Coverage follows the same filters as the money, so the pie and the globe
+  // answer "where did this period's work go", not "where have we ever been".
+  const areas = useMemo(() => coverageByArea(periodOrders), [periodOrders]);
+  const footprint = useMemo(() => coveragePoints(periodOrders), [periodOrders]);
 
   // The sidebar hides this tab for other roles, but hiding a link isn't
   // gating - without this the page is still reachable by typing the URL.
@@ -111,15 +118,64 @@ export default function CommandCenter() {
     <div className="flex flex-col gap-6">
       <PageHeader title="Command Center" subtitle="Accrued, invoiceable figures from completed orders." />
 
+      {/* Filters run the full width in one row, like every other filter bar here. */}
+      <div className="rounded-2xl bg-white border border-border p-4 flex flex-col gap-3">
+        <div className="flex flex-wrap items-end gap-3">
+          <Field label="Period">
+            <div className="flex items-center gap-2">
+              <Select
+                aria-label="Month"
+                value={String(filters.month)}
+                onChange={(v) => setFilters((f) => ({ ...f, month: v === "all" ? "all" : Number(v) }))}
+                options={MONTH_OPTIONS}
+              />
+              <Select
+                aria-label="Year"
+                value={String(filters.year)}
+                onChange={(v) => setFilters((f) => ({ ...f, year: Number(v) }))}
+                options={years.map((y) => ({ value: String(y), label: String(y) }))}
+              />
+            </div>
+          </Field>
+
+          <Field label="Client filter">
+            <Select
+              aria-label="Client filter"
+              value={filters.clientId}
+              onChange={(v) => setFilters((f) => ({ ...f, clientId: v }))}
+              options={[
+                { value: "all", label: "All clients" },
+                ...clients.map((c) => ({ value: c.id, label: c.name })),
+              ]}
+            />
+          </Field>
+
+          <Field label="Contractor filter">
+            <Select
+              aria-label="Contractor filter"
+              value={filters.contractorId}
+              onChange={(v) => setFilters((f) => ({ ...f, contractorId: v }))}
+              options={[
+                { value: "all", label: "All contractors" },
+                ...contractors.map((c) => ({ value: c.id, label: c.name })),
+              ]}
+            />
+          </Field>
+        </div>
+
+        <p className="flex items-center gap-1.5 text-caption-1-regular text-muted">
+          <InfoCircleIcon size={14} className="flex-shrink-0" />
+          Receivables = Payables + Earnings + VAT
+        </p>
+      </div>
+
       {/*
-        The globe sits dead centre and the cards overlay it from both sides.
-        Desktop and tablet only by request - there is deliberately no stacked
-        phone layout, so the grid below has no single-column branch.
+        The globe sits dead centre, turning, with the coverage footprint on
+        it. Money on the left over the trend; the split and the area
+        coverage on the right. Desktop and tablet only by request - there
+        is deliberately no stacked phone layout.
       */}
-      <div
-        className="relative overflow-hidden rounded-2xl"
-        style={{ minHeight: `${BAND_MIN_PX}px` }}
-      >
+      <div className="relative overflow-hidden rounded-2xl" style={{ minHeight: `${BAND_MIN_PX}px` }}>
         <div
           className="absolute"
           style={{
@@ -131,66 +187,44 @@ export default function CommandCenter() {
           }}
         >
           <Suspense fallback={null}>
-            <OrdersGlobe className="w-full h-full" />
+            <OrdersGlobe coverage={footprint} className="w-full h-full" />
           </Suspense>
         </div>
 
-        {/*
-          Three tracks: card column, globe gutter, card column. Both columns
-          are 1fr, which is what keeps every card on this band - the chart
-          included - to exactly one width.
-        */}
         <div className={`relative grid gap-3 items-start ${COLUMNS}`}>
           <div className="flex flex-col gap-3">
-            <div className="rounded-2xl bg-white border border-border p-4 flex flex-col gap-3">
-              <Field label="Period">
-                <div className="flex items-center gap-2">
-                  <Select
-                    aria-label="Month"
-                    className="flex-1 min-w-0"
-                    value={String(filters.month)}
-                    onChange={(v) => setFilters((f) => ({ ...f, month: v === "all" ? "all" : Number(v) }))}
-                    options={MONTH_OPTIONS}
-                  />
-                  <Select
-                    aria-label="Year"
-                    value={String(filters.year)}
-                    onChange={(v) => setFilters((f) => ({ ...f, year: Number(v) }))}
-                    options={years.map((y) => ({ value: String(y), label: String(y) }))}
-                  />
-                </div>
-              </Field>
-
-              <Field label="Client">
-                <Select
-                  aria-label="Client filter"
-                  className="w-full"
-                  value={filters.clientId}
-                  onChange={(v) => setFilters((f) => ({ ...f, clientId: v }))}
-                  options={[
-                    { value: "all", label: "All clients" },
-                    ...clients.map((c) => ({ value: c.id, label: c.name })),
-                  ]}
-                />
-              </Field>
-
-              <Field label="Contractor">
-                <Select
-                  aria-label="Contractor filter"
-                  className="w-full"
-                  value={filters.contractorId}
-                  onChange={(v) => setFilters((f) => ({ ...f, contractorId: v }))}
-                  options={[
-                    { value: "all", label: "All contractors" },
-                    ...contractors.map((c) => ({ value: c.id, label: c.name })),
-                  ]}
-                />
-              </Field>
+            <div className="grid grid-cols-2 gap-3">
+              <FinancialCard
+                icon={ArrowDownIcon}
+                iconColor={MONEY_COLORS.receivables}
+                label="Client receivables"
+                value={totals.receivable}
+                caption="Billed to clients, VAT included"
+                footer={`${totals.orderCount.toLocaleString()} orders · ${formatAmount(avgOrder)} avg`}
+              />
+              <FinancialCard
+                icon={ArrowUpIcon}
+                iconColor={MONEY_COLORS.payables}
+                label="Contractor payables"
+                value={totals.payable}
+                caption="Owed out to contractors"
+              />
+              <FinancialCard
+                icon={SafeSquareIcon}
+                iconColor={MONEY_COLORS.earnings}
+                label="Company earnings"
+                value={totals.earnings}
+                caption={`Kept — ${marginPercent}% of receivables`}
+              />
+              <FinancialCard
+                icon={BillListIcon}
+                iconColor={MONEY_COLORS.vat}
+                liability
+                label="Taxes (VAT)"
+                value={totals.vat}
+                caption="Held for the tax authority"
+              />
             </div>
-
-            <InsightCard title="Where it splits" subtitle="Every pound billed, accounted for">
-              <MoneySplitBar payables={totals.payable} earnings={totals.earnings} vat={totals.vat} />
-            </InsightCard>
 
             <MonthlyTrendChart data={trend} year={filters.year} />
           </div>
@@ -199,36 +233,13 @@ export default function CommandCenter() {
           <div aria-hidden />
 
           <div className="flex flex-col gap-3">
-            <FinancialCard
-              icon={ArrowDownIcon}
-              iconColor={MONEY_COLORS.receivables}
-              label="Client receivables"
-              value={totals.receivable}
-              caption="Billed to clients, VAT included"
-              footer={`${totals.orderCount.toLocaleString()} completed orders · ${formatAmount(avgOrder)} EGP average`}
-            />
-            <FinancialCard
-              icon={ArrowUpIcon}
-              iconColor={MONEY_COLORS.payables}
-              label="Contractor payables"
-              value={totals.payable}
-              caption="Owed out to contractors"
-            />
-            <FinancialCard
-              icon={SafeSquareIcon}
-              iconColor={MONEY_COLORS.earnings}
-              label="Company earnings"
-              value={totals.earnings}
-              caption={`What the company keeps — ${marginPercent}% of receivables`}
-            />
-            <FinancialCard
-              icon={BillListIcon}
-              iconColor={MONEY_COLORS.vat}
-              liability
-              label="Taxes (VAT)"
-              value={totals.vat}
-              caption="Held for the tax authority — not income"
-            />
+            <InsightCard title="Where it splits" subtitle="Every pound billed, accounted for">
+              <MoneySplitBar payables={totals.payable} earnings={totals.earnings} vat={totals.vat} />
+            </InsightCard>
+
+            <InsightCard title="Area coverage" subtitle="Share of orders by area">
+              <CoveragePie data={areas} />
+            </InsightCard>
           </div>
         </div>
       </div>

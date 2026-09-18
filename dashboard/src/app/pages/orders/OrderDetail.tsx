@@ -110,6 +110,9 @@ export default function OrderDetail() {
         }
       />
 
+      {/* Trip progress leads, full width - it's the first thing an operator reads. */}
+      <StatusHistoryList history={order.statusHistory} />
+
       {/*
         Cards stack in a fixed column on the left so the map has the rest
         of the width and stays in view while the operator scrolls the
@@ -183,8 +186,6 @@ export default function OrderDetail() {
               </div>
             )}
           </div>
-
-          <StatusHistoryList history={order.statusHistory} />
 
           <BiddingWidget bidding={order.bidding} />
         </div>

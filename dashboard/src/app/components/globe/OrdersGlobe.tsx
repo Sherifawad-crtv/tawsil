@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Globe, { type GlobeMethods } from "react-globe.gl";
-import { MeshPhongMaterial } from "three";
+import { MeshBasicMaterial } from "three";
 import { feature } from "topojson-client";
 import type { Topology } from "topojson-specification";
 import countries110m from "world-atlas/countries-110m.json";
@@ -12,25 +12,39 @@ import type { Order } from "../../lib/types";
  * location sized by how much runs through it, and a pulse on everything
  * currently moving.
  *
+ * Reads as ambient page furniture rather than a widget - landmasses are a
+ * field of pale dots with no sphere, frame or fill behind them, so the only
+ * saturated things on screen are the routes and hubs themselves.
+ *
  * Deliberately texture-free. Every globe.gl example pulls a photographic
- * earth JPEG off a CDN at runtime; that's a network dependency at render
- * time and it fights our flat palette. Instead the landmasses are drawn as
- * country polygons from a locally-bundled 110m topology and painted in our
- * own colors.
+ * earth JPEG off a CDN at render time; that's a runtime network dependency
+ * and it fights our flat palette. The dots come from a locally-bundled 110m
+ * country topology instead.
  */
 
-const OCEAN = "#040033";
-const LAND = "#151047";
-const LAND_STROKE = "#2a2170";
-const ATMOSPHERE = "#1253fa";
-const POINT = "#d8d9d4";
+// The sphere is painted exactly the page background and left unlit, so it
+// has no silhouette and no specular gradient - invisible, while still
+// occluding the dots on the far side so only the near hemisphere reads.
+const SPHERE = "#f5f5f3";
+const DOTS = "#d8d9d4";
+const POINT = "#0a0070";
 
 // Resolved once at module scope - the topology never changes, and feature()
 // on 110m data is cheap but pointless to repeat per mount.
-const COUNTRIES = feature(
-  countries110m as unknown as Topology,
-  (countries110m as unknown as Topology).objects.countries
-) as unknown as { features: object[] };
+//
+// hexPolygons tessellates through h3-js, and h3 throws an H3LibraryError on
+// a couple of this topology's simplified outlines. Checked each of the 177
+// countries against polygonToCells directly: at the resolution below only
+// North Korea (408) fails; Antarctica additionally fails at resolution 4, so
+// add "010" here if the dot density is ever raised.
+const H3_UNTESSELLATABLE = new Set(["408"]);
+
+const COUNTRIES = (
+  feature(
+    countries110m as unknown as Topology,
+    (countries110m as unknown as Topology).objects.countries
+  ) as unknown as { features: { id?: string | number }[] }
+).features.filter((f) => !H3_UNTESSELLATABLE.has(String(f.id)));
 
 export default function OrdersGlobe({ orders, className }: { orders: Order[]; className?: string }) {
   const globeRef = useRef<GlobeMethods | undefined>(undefined);
@@ -57,11 +71,7 @@ export default function OrdersGlobe({ orders, className }: { orders: Order[]; cl
     return () => ro.disconnect();
   }, []);
 
-  // The sphere itself: a flat navy ocean, no texture, barely any specular.
-  const globeMaterial = useMemo(
-    () => new MeshPhongMaterial({ color: OCEAN, shininess: 2 }),
-    []
-  );
+  const globeMaterial = useMemo(() => new MeshBasicMaterial({ color: SPHERE }), []);
 
   // Frame the camera on where the work actually is - on a full world view
   // Egypt is a speck and every arc overlaps in one spot.
@@ -89,14 +99,13 @@ export default function OrdersGlobe({ orders, className }: { orders: Order[]; cl
           height={size.height}
           backgroundColor="rgba(0,0,0,0)"
           globeMaterial={globeMaterial}
-          showAtmosphere
-          atmosphereColor={ATMOSPHERE}
-          atmosphereAltitude={0.18}
-          polygonsData={COUNTRIES.features}
-          polygonCapColor={() => LAND}
-          polygonSideColor={() => "rgba(10,0,112,0.4)"}
-          polygonStrokeColor={() => LAND_STROKE}
-          polygonAltitude={0.006}
+          showAtmosphere={false}
+          hexPolygonsData={COUNTRIES}
+          hexPolygonColor={() => DOTS}
+          hexPolygonResolution={3}
+          hexPolygonMargin={0.42}
+          hexPolygonUseDots
+          hexPolygonAltitude={0.004}
           arcsData={arcs}
           arcStartLat="startLat"
           arcStartLng="startLng"

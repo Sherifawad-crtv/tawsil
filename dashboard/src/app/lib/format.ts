@@ -1,5 +1,10 @@
 export function formatEGP(amount: number) {
-  return `EGP ${amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  return `EGP ${formatAmount(amount)}`;
+}
+
+/** Grouped to 2dp with no currency - for tables and for figures that carry their own EGP suffix. */
+export function formatAmount(amount: number) {
+  return amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 export function formatDate(iso: string) {

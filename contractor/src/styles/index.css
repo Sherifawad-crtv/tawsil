@@ -1,0 +1,62 @@
+@import './fonts.css';
+@import 'tailwindcss' source(none);
+@source '../**/*.{js,ts,jsx,tsx}';
+
+/* ---------------------------------------------------------------------------
+ * Design system: the Contractor app's own build-prompt spec (Tawsil Contractor
+ * PWA — Claude Code Build Prompts), matched to the same navy/royal/blue tokens
+ * already established for the Client mobile app and the ops dashboard.
+ * --------------------------------------------------------------------------- */
+
+@theme {
+  --font-heading: 'Archivo Black', sans-serif;
+  --font-sub: 'Archivo', sans-serif;
+  --font-mono: 'Courier Prime', monospace;
+
+  --color-navy: #040033;
+  --color-royal: #0a0070;
+  --color-blue: #1253fa;
+  --color-blue-soft: #eaf0fe;
+  --color-grey: #d8d9d4;
+  --color-grey-light: #f5f5f3;
+  --color-nav-bg: #fafaf8;
+  --color-tile: #f0f0ee;
+  --color-border: #e8e8e5;
+  --color-muted: #9ca3af;
+
+  /* Order status stepper: Pending -> Accepted -> Assigned -> In Progress ->
+     Completed / Cancelled. Same hexes as the dashboard's status palette so a
+     status reads the same color across every Tawsil app. */
+  --color-status-pending: #d97706;
+  --color-status-accepted: #d97706;
+  --color-status-assigned: #1253fa;
+  --color-status-progress: #0a0070;
+  --color-status-completed: #16803c;
+  --color-status-cancelled: #dc2626;
+
+  --radius-2lg: 10px;
+
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.06);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.06), 0 1px 3px 0 rgb(0 0 0 / 0.10);
+  --shadow-md: 0 2px 4px -1px rgb(0 0 0 / 0.06), 0 4px 6px -1px rgb(0 0 0 / 0.10);
+  --shadow-lg: 0 4px 6px -2px rgb(0 0 0 / 0.05), 0 10px 15px -3px rgb(0 0 0 / 0.10);
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-grey-light);
+  color: var(--color-navy);
+  font-family: var(--font-sub);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+/* Native app conventions: no text selection on chrome, no tap highlight,
+   momentum scrolling on iOS. Inputs stay selectable (set in index.html too,
+   restated here for anything rendered outside the initial document). */
+* {
+  -webkit-tap-highlight-color: transparent;
+}

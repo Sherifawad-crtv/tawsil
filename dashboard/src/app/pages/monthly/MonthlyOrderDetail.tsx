@@ -1,12 +1,9 @@
 import { useParams, useNavigate, Link } from "react-router";
-import { Calendar } from "react-aria-components";
-import { parseDate } from "@internationalized/date";
 import { ArrowLeftIcon, ClockCircleIcon, CalendarDateIcon } from "@solar-icons/react/linear";
 import OrdersTable from "../../components/OrdersTable";
 import PageHeader from "../../components/PageHeader";
-import { MonthPanel } from "../../components/date-picker/shared";
+import MultiDateCalendar from "../../components/MultiDateCalendar";
 import { ProgressBar } from "../../components/boardui/ProgressBar";
-import { useMediaQuery } from "../../lib/useMediaQuery";
 import { useDataStore } from "../../lib/store";
 import { byId } from "../../lib/selectors";
 import { formatEGP } from "../../lib/format";
@@ -15,7 +12,6 @@ export default function MonthlyOrderDetail() {
   const { contractId } = useParams();
   const navigate = useNavigate();
   const { monthlyOrders, clients, contractors, orders } = useDataStore();
-  const twoUp = useMediaQuery("(min-width: 768px)");
 
   const contract = monthlyOrders.find((m) => m.id === contractId);
   if (!contract) {
@@ -62,42 +58,22 @@ export default function MonthlyOrderDetail() {
           <CalendarDateIcon size={14} className="text-muted" />
           <span className="text-caption-1-regular text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>Execution Calendar</span>
         </div>
-        <Calendar
-          aria-label="Execution calendar"
-          isReadOnly
-          value={null}
-          defaultFocusedValue={parseDate(contract.dates[0])}
-          visibleDuration={{ months: twoUp ? 2 : 1 }}
-          className="flex w-full flex-col gap-3"
-        >
-          <div className="flex w-full gap-2">
-            <MonthPanel
-              offset={0}
-              showPrev
-              showNext={!twoUp}
-              fluid
-              selectedDates={new Set(contract.dates)}
-              edgeClassNameFor={(iso) => (executed.has(iso) ? "bg-status-completed/35" : "bg-blue-soft")}
-            />
-            {twoUp && (
-              <MonthPanel
-                offset={1}
-                showNext
-                fluid
-                selectedDates={new Set(contract.dates)}
-                edgeClassNameFor={(iso) => (executed.has(iso) ? "bg-status-completed/35" : "bg-blue-soft")}
-              />
-            )}
-          </div>
-          <div className="flex items-center gap-4 text-caption-1-regular text-muted">
-            <span className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-sm bg-status-completed/35" /> Executed
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-sm bg-blue-soft" /> Pending
-            </span>
-          </div>
-        </Calendar>
+        <MultiDateCalendar
+          ariaLabel="Execution calendar"
+          selectedDates={new Set(contract.dates)}
+          focusDate={contract.dates[0]}
+          edgeClassNameFor={(iso) => (executed.has(iso) ? "bg-status-completed/35" : "bg-blue-soft")}
+          legend={
+            <div className="flex items-center gap-4 text-caption-1-regular text-muted">
+              <span className="flex items-center gap-1.5">
+                <span className="w-3 h-3 rounded-sm bg-status-completed/35" /> Executed
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-3 h-3 rounded-sm bg-blue-soft" /> Pending
+              </span>
+            </div>
+          }
+        />
       </div>
 
       <div className="rounded-2xl bg-white border border-border p-4">

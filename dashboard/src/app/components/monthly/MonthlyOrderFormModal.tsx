@@ -180,7 +180,21 @@ export default function MonthlyOrderFormModal({ onClose }: { onClose: () => void
             <label className="block text-body-2-semibold text-navy mb-1.5" style={{ fontFamily: "var(--font-sub)" }}>
               Execution Dates <span className="text-status-cancelled">*</span>
             </label>
-            <MultiDateCalendar value={form.dates} onChange={(dates) => setForm((f) => ({ ...f, dates }))} />
+            <MultiDateCalendar
+              ariaLabel="Delivery dates"
+              selectedDates={new Set(form.dates)}
+              onToggle={(iso) =>
+                setForm((f) => ({
+                  ...f,
+                  dates: f.dates.includes(iso) ? f.dates.filter((d) => d !== iso) : [...f.dates, iso],
+                }))
+              }
+              legend={
+                <div className="text-caption-1-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>
+                  {form.dates.length} date{form.dates.length === 1 ? "" : "s"} selected
+                </div>
+              }
+            />
           </div>
         </div>
       )}

@@ -17,10 +17,13 @@ export default function VehicleCard({
   vehicle,
   selected,
   onSelect,
+  showContractor = true,
 }: {
   vehicle: Vehicle;
   selected: boolean;
   onSelect: () => void;
+  /** Off on a contractor's own board - every card there is already theirs. */
+  showContractor?: boolean;
 }) {
   const { orders, contractors, drivers } = useDataStore();
   const truckType = getTruckType(vehicle.truckTypeId);
@@ -50,8 +53,10 @@ export default function VehicleCard({
           <Fact label="License expiry" value={formatDate(vehicle.licenseExpiry)} />
           {current ? (
             <Fact label="On order" value={`${current.id}${driver ? ` · ${driver.name}` : ""}`} mono />
-          ) : (
+          ) : showContractor ? (
             <Fact label="Contractor" value={contractor?.name ?? "—"} />
+          ) : (
+            <Fact label="Max weight" value={vehicle.specs.maxWeightT ? `${vehicle.specs.maxWeightT} t` : "—"} />
           )}
         </div>
         <img

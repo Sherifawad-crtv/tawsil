@@ -7,7 +7,7 @@ import { Button } from "../../components/Button";
 import ActiveBadge from "../../components/ActiveBadge";
 import OrdersTable from "../../components/OrdersTable";
 import DriversTable from "../../components/DriversTable";
-import VehiclesTable from "../../components/VehiclesTable";
+import VehiclesBoard from "../../components/fleet/VehiclesBoard";
 import AddDriverModal from "../../components/AddDriverModal";
 import AddVehicleModal from "../../components/AddVehicleModal";
 import WaypointAnalyticsTable from "../../components/WaypointAnalyticsTable";
@@ -76,7 +76,7 @@ export default function ContractorDetail() {
 
       {tab === "Drivers" && <DriversTable drivers={contractorDrivers} showContractor={false} />}
 
-      {tab === "Vehicles" && <VehiclesTable vehicles={contractorVehicles} showContractor={false} />}
+      {tab === "Vehicles" && <VehiclesBoard vehicles={contractorVehicles} showContractor={false} />}
 
       {tab === "Orders" && (
         <OrdersTable orders={contractorOrders} />

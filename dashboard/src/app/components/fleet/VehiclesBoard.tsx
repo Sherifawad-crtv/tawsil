@@ -17,7 +17,14 @@ const TABS: Tab[] = ["All", ...VEHICLE_STATUSES];
  * contractor filter; the status tabs narrow it further here, so their
  * counts always describe what the other filters left.
  */
-export default function VehiclesBoard({ vehicles }: { vehicles: Vehicle[] }) {
+export default function VehiclesBoard({
+  vehicles,
+  showContractor = true,
+}: {
+  vehicles: Vehicle[];
+  /** Off on a contractor's own Vehicles tab - every card there is already theirs. */
+  showContractor?: boolean;
+}) {
   const { orders } = useDataStore();
   const [tab, setTab] = useState<Tab>("All");
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -53,6 +60,7 @@ export default function VehiclesBoard({ vehicles }: { vehicles: Vehicle[] }) {
                 vehicle={vehicle}
                 selected={vehicle.id === selectedId}
                 onSelect={() => setSelectedId(vehicle.id === selectedId ? null : vehicle.id)}
+                showContractor={showContractor}
               />
             ))}
           </div>

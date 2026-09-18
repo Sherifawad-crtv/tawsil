@@ -7,7 +7,6 @@ import {
   BillListIcon,
   Buildings2Icon,
   UsersGroupRoundedIcon,
-  InfoCircleIcon,
 } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import InsightCard from "../../components/InsightCard";
@@ -119,7 +118,7 @@ export default function CommandCenter() {
       <PageHeader title="Command Center" subtitle="Accrued, invoiceable figures from completed orders." />
 
       {/* Filters run the full width in one row, like every other filter bar here. */}
-      <div className="rounded-2xl bg-white border border-border p-4 flex flex-col gap-3">
+      <div className="rounded-2xl bg-white border border-border p-4">
         <div className="flex flex-wrap items-end gap-3">
           <Field label="Period">
             <div className="flex items-center gap-2">
@@ -162,11 +161,6 @@ export default function CommandCenter() {
             />
           </Field>
         </div>
-
-        <p className="flex items-center gap-1.5 text-caption-1-regular text-muted">
-          <InfoCircleIcon size={14} className="flex-shrink-0" />
-          Receivables = Payables + Earnings + VAT
-        </p>
       </div>
 
       {/*

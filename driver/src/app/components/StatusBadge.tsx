@@ -15,7 +15,7 @@ export const STATUS_STYLE: Record<OrderStatus, { bg: string; fg: string; icon: R
   Cancelled: { bg: "#FDECEC", fg: "#DC2626", icon: CloseRounded },
 };
 
-export default function StatusBadge({ status, size = "md", prominent = false }: { status: OrderStatus; size?: "sm" | "md"; prominent?: boolean }) {
+export default function StatusBadge({ status, size = "md" }: { status: OrderStatus; size?: "sm" | "md" }) {
   const s = STATUS_STYLE[status];
   const Icon = s.icon;
   return (
@@ -25,10 +25,9 @@ export default function StatusBadge({ status, size = "md", prominent = false }: 
         backgroundColor: s.bg,
         color: s.fg,
         fontFamily: "'Archivo', sans-serif",
-        fontWeight: prominent ? 800 : 600,
-        fontSize: size === "sm" ? (prominent ? "11.5px" : "11px") : "12px",
-        padding: prominent ? "5px 11px" : size === "sm" ? "3px 8px" : "4px 10px",
-        border: prominent ? `1.5px solid ${s.fg}` : "none",
+        fontWeight: 600,
+        fontSize: size === "sm" ? "11px" : "12px",
+        padding: size === "sm" ? "3px 8px" : "4px 10px",
       }}
     >
       <Icon sx={{ fontSize: size === "sm" ? 12 : 13 }} />

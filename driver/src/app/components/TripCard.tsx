@@ -10,12 +10,10 @@ import { truckTypeLabel } from "../lib/constants";
 import type { Order } from "../lib/types";
 
 /**
- * Uber-standard urgency split (Section 5.1): Pending (Assigned, not started -
- * needs a decision) reads urgent - heavier orange border, bolder badge.
- * Active (In Progress, already committed) reads calm - thin neutral border,
- * settled green tint. Same card, same fields, only the emphasis differs by
- * state. Colors match the status vocabulary: orange for Pending, green for
- * In Progress, same as the rest of the app's palette.
+ * A normal card in both states - no heavy colored border/glow on Pending,
+ * that read as noisy. Pending vs Active is carried entirely by the status
+ * badge color and the CTA strip below (orange "View & Respond" vs green
+ * "Continue Trip"), which is distinction enough on its own.
  */
 export default function TripCard({ order }: { order: Order }) {
   const navigate = useNavigate();
@@ -25,8 +23,8 @@ export default function TripCard({ order }: { order: Order }) {
     <div
       className="w-full rounded-[20px] bg-white overflow-hidden flex flex-col"
       style={{
-        border: pending ? "2px solid #D97706" : "1px solid #E8E8E5",
-        boxShadow: pending ? "0 2px 10px rgba(217,119,6,0.14)" : "0 1px 3px rgba(4,0,51,0.05)",
+        border: "1px solid #E8E8E5",
+        boxShadow: "0 1px 3px rgba(4,0,51,0.05)",
       }}
     >
       <div className="p-4 flex flex-col gap-3">
@@ -37,7 +35,7 @@ export default function TripCard({ order }: { order: Order }) {
               #{order.id}
             </span>
           </div>
-          <StatusBadge status={order.status} size="sm" prominent={pending} />
+          <StatusBadge status={order.status} size="sm" />
         </div>
 
         <div className="grid grid-cols-2 gap-3">

@@ -12,7 +12,6 @@ import PageHeader from "../../components/PageHeader";
 import InsightCard from "../../components/InsightCard";
 import { Select } from "../../components/Select";
 import FinancialCard from "../../components/financials/FinancialCard";
-import SolidMoneyStat from "../../components/financials/SolidMoneyStat";
 import MoneySplitBar from "../../components/financials/MoneySplitBar";
 import MonthlyTrendChart from "../../components/financials/MonthlyTrendChart";
 import RollupTable, { type RollupColumn } from "../../components/financials/RollupTable";
@@ -21,6 +20,7 @@ import { useRole } from "../../lib/RoleContext";
 import { canViewCommandCenter } from "../../lib/selectors";
 import { formatAmount } from "../../lib/format";
 import {
+  MONEY_COLORS,
   MONTH_OPTIONS,
   availableYears,
   filterForFinancials,
@@ -38,11 +38,29 @@ import {
 // exactly as fast as it did before this view existed.
 const OrdersGlobe = lazy(() => import("../../components/globe/OrdersGlobe"));
 
-// The globe's canvas is square and the sphere covers ~82% of it at the
-// framing OrdersGlobe uses, so this is also the band's height: the sphere
-// then has real margin above and below and is only ever cut on the right,
-// where it deliberately runs off the panel.
-const GLOBE_PX = 900;
+// Square canvas, centred in the band.
+//
+// The two numbers below were measured off the rendered page, not derived:
+// scanning the gutter column pixel by pixel, the sphere covers ~90% of its
+// square canvas at OrdersGlobe's framing, and the drop shadow reaches about
+// 34px past its bottom edge. The band is sized from those, so the sphere and
+// its shadow always clear the top and bottom - the only side ever cut is
+// left/right, where the cards overlap it on purpose.
+const GLOBE_PX = 820;
+const SPHERE_PX = Math.round(GLOBE_PX * 0.9);
+const BAND_MIN_PX = SPHERE_PX + 2 * 68;
+
+// The gap the two card columns leave down the middle for the globe to show
+// through, always narrower than the sphere: the cards are meant to overlap
+// its edges, not sit politely beside it. It steps down with the viewport so
+// a tablet still gets usable card columns - at a flat desktop gutter they
+// came out at 173px, which no card survives.
+const COLUMNS = [
+  "[grid-template-columns:minmax(0,1fr)_80px_minmax(0,1fr)]",
+  "lg:[grid-template-columns:minmax(0,1fr)_170px_minmax(0,1fr)]",
+  "xl:[grid-template-columns:minmax(0,1fr)_300px_minmax(0,1fr)]",
+  "2xl:[grid-template-columns:minmax(0,1fr)_380px_minmax(0,1fr)]",
+].join(" ");
 
 export default function CommandCenter() {
   const { orders, clients, contractors } = useDataStore();
@@ -94,25 +112,20 @@ export default function CommandCenter() {
       <PageHeader title="Command Center" subtitle="Accrued, invoiceable figures from completed orders." />
 
       {/*
-        The globe is the backdrop, oversized and running off the right edge -
-        overflow-hidden is what cuts that side, and only that side. The card
-        column sits over it on the left, in this dashboard's own grid: two
-        solid brand tiles carry the figures an exec reads first, everything
-        else stays on white so those keep their weight.
+        The globe sits dead centre and the cards overlay it from both sides.
+        Desktop and tablet only by request - there is deliberately no stacked
+        phone layout, so the grid below has no single-column branch.
       */}
-      <div className="relative overflow-hidden rounded-2xl" style={{ minHeight: `${GLOBE_PX}px` }}>
-        {/*
-          Centred vertically rather than pinned to the top: the card column
-          runs taller than the globe, and pinning left a dead gap on the
-          right below it. The band is never shorter than the globe (that's
-          what minHeight is for), so centring can't clip it either.
-        */}
+      <div
+        className="relative overflow-hidden rounded-2xl"
+        style={{ minHeight: `${BAND_MIN_PX}px` }}
+      >
         <div
-          className="absolute hidden lg:block"
+          className="absolute"
           style={{
             top: "50%",
-            transform: "translateY(-50%)",
-            right: "-220px",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
             width: `${GLOBE_PX}px`,
             height: `${GLOBE_PX}px`,
           }}
@@ -122,13 +135,19 @@ export default function CommandCenter() {
           </Suspense>
         </div>
 
-        <div className="relative w-full lg:w-[62%] flex flex-col gap-3 p-1">
-          <div className="rounded-2xl bg-white border border-border p-4">
-            <div className="flex flex-wrap items-end gap-3">
+        {/*
+          Three tracks: card column, globe gutter, card column. Both columns
+          are 1fr, which is what keeps every card on this band - the chart
+          included - to exactly one width.
+        */}
+        <div className={`relative grid gap-3 items-start ${COLUMNS}`}>
+          <div className="flex flex-col gap-3">
+            <div className="rounded-2xl bg-white border border-border p-4 flex flex-col gap-3">
               <Field label="Period">
                 <div className="flex items-center gap-2">
                   <Select
                     aria-label="Month"
+                    className="flex-1 min-w-0"
                     value={String(filters.month)}
                     onChange={(v) => setFilters((f) => ({ ...f, month: v === "all" ? "all" : Number(v) }))}
                     options={MONTH_OPTIONS}
@@ -145,6 +164,7 @@ export default function CommandCenter() {
               <Field label="Client">
                 <Select
                   aria-label="Client filter"
+                  className="w-full"
                   value={filters.clientId}
                   onChange={(v) => setFilters((f) => ({ ...f, clientId: v }))}
                   options={[
@@ -157,6 +177,7 @@ export default function CommandCenter() {
               <Field label="Contractor">
                 <Select
                   aria-label="Contractor filter"
+                  className="w-full"
                   value={filters.contractorId}
                   onChange={(v) => setFilters((f) => ({ ...f, contractorId: v }))}
                   options={[
@@ -166,57 +187,49 @@ export default function CommandCenter() {
                 />
               </Field>
             </div>
+
+            <InsightCard title="Where it splits" subtitle="Every pound billed, accounted for">
+              <MoneySplitBar payables={totals.payable} earnings={totals.earnings} vat={totals.vat} />
+            </InsightCard>
+
+            <MonthlyTrendChart data={trend} year={filters.year} />
           </div>
 
-          <div className="grid grid-cols-12 gap-3">
-            <div className="col-span-12 sm:col-span-7 flex flex-col gap-3">
-              <SolidMoneyStat
-                icon={ArrowDownIcon}
-                background="#1253fa"
-                label="Client receivables"
-                value={totals.receivable}
-                caption="Billed to clients, VAT included"
-                footer={`${totals.orderCount.toLocaleString()} completed orders · ${formatAmount(avgOrder)} EGP average`}
-              />
-              <SolidMoneyStat
-                icon={SafeSquareIcon}
-                background="#0a0070"
-                label="Company earnings"
-                value={totals.earnings}
-                caption={`What the company keeps — ${marginPercent}% of receivables`}
-              />
-            </div>
+          {/* The gutter the globe shows through. */}
+          <div aria-hidden />
 
-            <div className="col-span-12 sm:col-span-5">
-              <InsightCard title="Where it splits" subtitle="Every pound billed, accounted for">
-                <MoneySplitBar payables={totals.payable} earnings={totals.earnings} vat={totals.vat} />
-              </InsightCard>
-            </div>
+          <div className="flex flex-col gap-3">
+            <FinancialCard
+              icon={ArrowDownIcon}
+              iconColor={MONEY_COLORS.receivables}
+              label="Client receivables"
+              value={totals.receivable}
+              caption="Billed to clients, VAT included"
+              footer={`${totals.orderCount.toLocaleString()} completed orders · ${formatAmount(avgOrder)} EGP average`}
+            />
+            <FinancialCard
+              icon={ArrowUpIcon}
+              iconColor={MONEY_COLORS.payables}
+              label="Contractor payables"
+              value={totals.payable}
+              caption="Owed out to contractors"
+            />
+            <FinancialCard
+              icon={SafeSquareIcon}
+              iconColor={MONEY_COLORS.earnings}
+              label="Company earnings"
+              value={totals.earnings}
+              caption={`What the company keeps — ${marginPercent}% of receivables`}
+            />
+            <FinancialCard
+              icon={BillListIcon}
+              iconColor={MONEY_COLORS.vat}
+              liability
+              label="Taxes (VAT)"
+              value={totals.vat}
+              caption="Held for the tax authority — not income"
+            />
           </div>
-
-          <div className="grid grid-cols-12 gap-3">
-            <div className="col-span-12 sm:col-span-6">
-              <FinancialCard
-                icon={ArrowUpIcon}
-                tone="amber"
-                label="Contractor payables"
-                value={formatAmount(totals.payable)}
-                caption="Owed out to contractors"
-              />
-            </div>
-            <div className="col-span-12 sm:col-span-6">
-              <FinancialCard
-                icon={BillListIcon}
-                tone="navy"
-                liability
-                label="Taxes (VAT)"
-                value={formatAmount(totals.vat)}
-                caption="Held for the tax authority — not income"
-              />
-            </div>
-          </div>
-
-          <MonthlyTrendChart data={trend} year={filters.year} />
         </div>
       </div>
 

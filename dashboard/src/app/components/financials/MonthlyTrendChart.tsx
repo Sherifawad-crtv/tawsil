@@ -42,14 +42,14 @@ function TrendTooltip({ active, payload, label }: { active?: boolean; payload?: 
 export default function MonthlyTrendChart({ data, year }: { data: TrendPoint[]; year: number }) {
   return (
     <div className="rounded-2xl bg-white border border-border p-4 flex flex-col gap-1">
-      <h3 className="text-title-3-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>
+      <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
         Monthly trend · {year}
       </h3>
-      <p className="text-body-2-regular text-muted">Receivables, payables and VAT across the year</p>
+      <p className="text-caption-1-regular text-muted">Receivables, payables and VAT across the year</p>
 
-      <div className="mt-4" style={{ height: "260px" }}>
+      <div className="mt-4" style={{ height: "230px" }}>
         <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: 8 }}>
+          <ComposedChart data={data} margin={{ top: 8, right: 4, bottom: 0, left: 0 }}>
             <defs>
               <linearGradient id="trendReceivables" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor={MONEY_COLORS.receivables} stopOpacity={0.14} />
@@ -61,13 +61,15 @@ export default function MonthlyTrendChart({ data, year }: { data: TrendPoint[]; 
               dataKey="month"
               tickLine={false}
               axisLine={false}
+              // Every other month: at this card's width twelve labels collide.
+              interval={1}
               tick={{ fill: "#9ca3af", fontSize: 11, fontFamily: "var(--font-sub)" }}
               dy={8}
             />
             <YAxis
               tickLine={false}
               axisLine={false}
-              width={52}
+              width={40}
               tick={{ fill: "#9ca3af", fontSize: 11, fontFamily: "var(--font-mono)" }}
               tickFormatter={compact}
             />
@@ -95,14 +97,14 @@ export default function MonthlyTrendChart({ data, year }: { data: TrendPoint[]; 
         </ResponsiveContainer>
       </div>
 
-      <div className="flex items-center gap-4 flex-wrap pt-3">
+      <div className="grid grid-cols-2 gap-x-3 gap-y-2 pt-3">
         {SERIES.map((s) => (
           <LegendItem key={s.key} color={s.color} label={s.label} />
         ))}
         <LegendItem
           color={VAT_COLOR}
           dashed
-          label="Taxes (VAT) — a liability, not income"
+          label="Taxes (VAT)"
         />
       </div>
     </div>
@@ -111,7 +113,7 @@ export default function MonthlyTrendChart({ data, year }: { data: TrendPoint[]; 
 
 function LegendItem({ color, label, dashed = false }: { color: string; label: string; dashed?: boolean }) {
   return (
-    <span className="flex items-center gap-1.5">
+    <span className="flex items-center gap-1.5 min-w-0">
       <span
         className="w-4 flex-shrink-0"
         style={{
@@ -119,7 +121,7 @@ function LegendItem({ color, label, dashed = false }: { color: string; label: st
           borderTop: `2px ${dashed ? "dashed" : "solid"} ${color}`,
         }}
       />
-      <span className="text-caption-1-regular text-muted">{label}</span>
+      <span className="text-caption-1-regular text-muted truncate">{label}</span>
     </span>
   );
 }

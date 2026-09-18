@@ -139,6 +139,15 @@ export function canAssignDrivers(role: Role) {
   return role === "Supply" || role === "Admin";
 }
 
+/**
+ * Whether the role owns the nudges in the attention list (assign, follow up,
+ * renew). Sales sees the same list but none of those are its work — it only
+ * edits — so it gets an Edit action on those rows instead.
+ */
+export function canActOnAttention(role: Role) {
+  return role !== "Sales";
+}
+
 /** Order count per day for the trailing `days` window, oldest first - feeds the Home volume chart. */
 export function getOrderVolumeByDay(orders: Order[], days = 14) {
   const buckets: { key: string; label: string; count: number }[] = [];

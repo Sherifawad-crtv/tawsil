@@ -16,6 +16,7 @@ import {
   getHomeMetrics,
   getAttentionOrders,
   getAttentionOrdersForRole,
+  canActOnAttention,
   canCreateOrders,
   getOrderVolumeWeekOverWeek,
   getOrdersByStatus,
@@ -27,7 +28,18 @@ import { useDataStore } from "../lib/store";
 import { useRole } from "../lib/RoleContext";
 import type { AttentionOrder } from "../lib/types";
 
-function AttentionRow({ order }: { order: AttentionOrder }) {
+function AttentionRow({
+  order,
+  canAct,
+  onEdit,
+}: {
+  order: AttentionOrder;
+  /** Whether this role owns the row's nudge (assign / follow up / renew). */
+  canAct: boolean;
+  /** Offered instead when the role can only edit. Absent for monthly
+   *  contracts, which have no edit form. */
+  onEdit?: () => void;
+}) {
   const navigate = useNavigate();
   const flagged = order.reason === "stalled-pending" && order.minutesInStatus >= 120;
   const target = order.reason === "monthly-renewal" ? `/monthly-orders/${order.id}` : `/orders/${order.id}`;
@@ -58,9 +70,20 @@ function AttentionRow({ order }: { order: AttentionOrder }) {
           <ClockCircleIcon size={12} />
           {formatDuration(order.minutesInStatus)}
         </div>
-        <Button size="small">
-          {order.action}
-        </Button>
+        {canAct ? (
+          <Button size="small">{order.action}</Button>
+        ) : onEdit ? (
+          <Button
+            size="small"
+            variant="secondary"
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit();
+            }}
+          >
+            Edit
+          </Button>
+        ) : null}
       </div>
     </div>
   );
@@ -68,12 +91,15 @@ function AttentionRow({ order }: { order: AttentionOrder }) {
 
 export default function Home() {
   const [showOrderModal, setShowOrderModal] = useState(false);
+  const [editingOrderId, setEditingOrderId] = useState<string | null>(null);
   const [showMonthlyModal, setShowMonthlyModal] = useState(false);
   const { orders, clients, drivers, monthlyOrders } = useDataStore();
   const { role } = useRole();
   const metrics = getHomeMetrics(orders, drivers);
   const attentionOrders = getAttentionOrdersForRole(getAttentionOrders(orders, monthlyOrders, clients), role);
   const showQuickActions = canCreateOrders(role);
+
+  const editingOrder = editingOrderId ? orders.find((o) => o.id === editingOrderId) : undefined;
 
   const volumeData = getOrderVolumeWeekOverWeek(orders);
   const statusData = getOrdersByStatus(orders);
@@ -163,12 +189,24 @@ export default function Home() {
           {attentionOrders.length === 0 ? (
             <div className="px-5 py-10 text-center text-body-regular text-muted">Nothing needs attention right now.</div>
           ) : (
-            attentionOrders.map((order) => <AttentionRow key={order.id} order={order} />)
+            attentionOrders.map((item) => (
+              <AttentionRow
+                key={item.id}
+                order={item}
+                canAct={canActOnAttention(role)}
+                onEdit={
+                  item.reason === "monthly-renewal" ? undefined : () => setEditingOrderId(item.id)
+                }
+              />
+            ))
           )}
         </div>
       </div>
 
       {showOrderModal && <OrderFormModal mode="create" onClose={() => setShowOrderModal(false)} />}
+      {editingOrder && (
+        <OrderFormModal mode="edit" initialOrder={editingOrder} onClose={() => setEditingOrderId(null)} />
+      )}
       {showMonthlyModal && <MonthlyOrderFormModal onClose={() => setShowMonthlyModal(false)} />}
     </div>
   );

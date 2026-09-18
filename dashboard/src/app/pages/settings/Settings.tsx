@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { AddIcon, Pen2Icon, DangerTriangleIcon, LockKeyholeIcon, SnowflakeIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
+import Tabs from "../../components/Tabs";
 import TruckTypeFormModal from "../../components/settings/TruckTypeFormModal";
+import AccountTab from "../../components/settings/AccountTab";
+import TeamTab from "../../components/settings/TeamTab";
+import NotificationsTab from "../../components/settings/NotificationsTab";
 import { Button } from "../../components/Button";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "../../components/Table";
 import { useDataStore } from "../../lib/store";
@@ -10,7 +14,28 @@ import { CARGO_TYPES } from "../../lib/constants";
 import { formatEGP } from "../../lib/format";
 import type { TruckType } from "../../lib/types";
 
+const TABS = ["Account", "Team", "Notifications", "Rate Card", "Cargo Types"];
+
 export default function Settings() {
+  const [tab, setTab] = useState("Account");
+
+  return (
+    <div className="flex flex-col gap-6">
+      <PageHeader title="Settings" subtitle="Account, team access and the rate card." />
+
+      <Tabs tabs={TABS} active={tab} onChange={setTab} />
+
+      {tab === "Account" && <AccountTab />}
+      {tab === "Team" && <TeamTab />}
+      {tab === "Notifications" && <NotificationsTab />}
+      {tab === "Rate Card" && <RateCardTab />}
+      {tab === "Cargo Types" && <CargoTypesTab />}
+    </div>
+  );
+}
+
+/** Unchanged from before the tabs existed - moved in as its own section, not rebuilt. */
+function RateCardTab() {
   const { truckTypes } = useDataStore();
   const { role } = useRole();
   const isAdmin = role === "Admin";
@@ -23,18 +48,15 @@ export default function Settings() {
   }, {});
 
   return (
-    <div className="flex flex-col gap-6">
-      <PageHeader
-        title="Settings"
-        subtitle="Truck Types & Rate Card"
-        action={
-          isAdmin ? (
-            <Button leadingIcon={AddIcon} onClick={() => setShowAdd(true)}>
-              Add Truck Type
-            </Button>
-          ) : undefined
-        }
-      />
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-body-2-regular text-muted">{truckTypes.length} truck type configurations</p>
+        {isAdmin && (
+          <Button leadingIcon={AddIcon} onClick={() => setShowAdd(true)}>
+            Add Truck Type
+          </Button>
+        )}
+      </div>
 
       {!isAdmin && (
         <div className="flex items-center gap-2 px-4 py-2 rounded-2lg bg-grey-light text-body-2-regular text-muted">
@@ -104,22 +126,27 @@ export default function Settings() {
         </TableBody>
       </Table>
 
-      <div className="rounded-2xl bg-white border border-border p-4">
-        <h3 className="text-body-semibold text-navy mb-3" style={{ fontFamily: "var(--font-sub)" }}>Cargo Type Taxonomy</h3>
-        <p className="text-caption-1-regular text-muted mb-3">
-          {CARGO_TYPES.length} cargo types. This list drives the Cargo Type field in Order creation, filtered per truck type's allowed types.
-        </p>
-        <div className="flex flex-wrap gap-1.5">
-          {CARGO_TYPES.map((type) => (
-            <span key={type} className="px-2.5 py-1 rounded-full text-caption-1-regular text-navy bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
-              {type}
-            </span>
-          ))}
-        </div>
-      </div>
-
       {showAdd && <TruckTypeFormModal onClose={() => setShowAdd(false)} />}
       {editing && <TruckTypeFormModal existing={editing} onClose={() => setEditing(null)} />}
+    </div>
+  );
+}
+
+/** Unchanged from before the tabs existed. */
+function CargoTypesTab() {
+  return (
+    <div className="rounded-2xl bg-white border border-border p-4">
+      <h3 className="text-body-semibold text-navy mb-3" style={{ fontFamily: "var(--font-sub)" }}>Cargo Type Taxonomy</h3>
+      <p className="text-caption-1-regular text-muted mb-3">
+        {CARGO_TYPES.length} cargo types. This list drives the Cargo Type field in Order creation, filtered per truck type's allowed types.
+      </p>
+      <div className="flex flex-wrap gap-1.5">
+        {CARGO_TYPES.map((type) => (
+          <span key={type} className="px-2.5 py-1 rounded-full text-caption-1-regular text-navy bg-grey-light" style={{ fontFamily: "var(--font-sub)" }}>
+            {type}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

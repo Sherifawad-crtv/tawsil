@@ -1,4 +1,4 @@
-import type { Client, Contractor, Driver, Vehicle, SavedLocation } from "./types";
+import type { Client, Contractor, Driver, Vehicle, SavedLocation, CurrentUser, TeamMember } from "./types";
 import { TRUCK_TYPES } from "./constants";
 
 export const CLIENTS: Client[] = [
@@ -115,4 +115,26 @@ export const SAVED_LOCATIONS: SavedLocation[] = [
   { id: "loc-42", clientId: "cli-11", name: "Obour Land Damietta Depot", address: "Damietta, Damietta", lat: 31.4165, lng: 31.8133, tags: ["Depot"] },
   { id: "loc-43", clientId: "cli-12", name: "Cairo Poultry Zagazig Farm", address: "Zagazig, Sharqia", lat: 30.6000, lng: 31.4800, tags: ["Farm", "Cold Chain"] },
   { id: "loc-44", clientId: "cli-12", name: "Cairo Poultry Suez Cold Store", address: "Suez, Suez", lat: 29.9800, lng: 32.5300, tags: ["Cold Storage"] },
+];
+
+/**
+ * The signed-in operator. There's no auth in this data model - this is the
+ * one identity Settings' Account tab edits and the sidebar's account card
+ * reads, so editing a name there is a real change, not a dead form.
+ */
+export const CURRENT_USER: CurrentUser = {
+  name: "Ahmed Khan",
+  email: "ahmed@tawsil.com",
+  phone: "+20 100 555 0000",
+  title: "Operations Lead",
+};
+
+/** Everyone else with a seat, plus one pending invite - Settings' Team tab. */
+export const TEAM_MEMBERS: TeamMember[] = [
+  { id: "team-01", name: "Nour El-Din", email: "nour@tawsil.com", role: "Admin", status: "Active", invitedAt: "2025-01-14" },
+  { id: "team-02", name: "Sherif Awad", email: "sherif@tawsil.com", role: "Sales", status: "Active", invitedAt: "2025-03-02" },
+  { id: "team-03", name: "Mona Sabry", email: "mona@tawsil.com", role: "Supply", status: "Active", invitedAt: "2025-04-19" },
+  { id: "team-04", name: "Hany Fawzy", email: "hany@tawsil.com", role: "Operations", status: "Active", invitedAt: "2025-06-08" },
+  { id: "team-05", name: "Rania Adel", email: "rania@tawsil.com", role: "Executive", status: "Active", invitedAt: "2025-02-27" },
+  { id: "team-06", name: "Khaled Younis", email: "khaled@tawsil.com", role: "Sales", status: "Invited", invitedAt: "2026-09-10" },
 ];

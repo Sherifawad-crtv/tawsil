@@ -24,6 +24,7 @@ import { cx } from "../lib/cx";
 import { useDataStore } from "../lib/store";
 import { useRole } from "../lib/RoleContext";
 import { getOrdersForRole, canViewCommandCenter } from "../lib/selectors";
+import { initials } from "../lib/format";
 
 const NAV_ITEMS = [
   // Executive view, first in the list and hidden from everyone but
@@ -46,7 +47,7 @@ export default function Sidebar({
   open: boolean;
   onClose: () => void;
 }) {
-  const { orders } = useDataStore();
+  const { orders, currentUser } = useDataStore();
   const { role } = useRole();
   const orderCount = getOrdersForRole(orders, role).length;
   const navItems = NAV_ITEMS.filter((item) => !item.execOnly || canViewCommandCenter(role));
@@ -128,11 +129,11 @@ export default function Sidebar({
           <div className="h-px bg-border mb-3" />
           <div className="flex items-center gap-2.5 p-2 rounded-2lg hover:bg-grey-light transition-colors w-full">
             <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-navy">
-              <span className="text-white text-headline-semibold" style={{ fontFamily: "var(--font-heading)" }}>AK</span>
+              <span className="text-white text-headline-semibold" style={{ fontFamily: "var(--font-heading)" }}>{initials(currentUser.name)}</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="truncate text-navy text-body-2-semibold" style={{ fontFamily: "var(--font-sub)" }}>Ahmed Khan</p>
-              <p className="truncate text-muted text-caption-2-regular" style={{ fontFamily: "var(--font-mono)" }}>ahmed@tawsil.com</p>
+              <p className="truncate text-navy text-body-2-semibold" style={{ fontFamily: "var(--font-sub)" }}>{currentUser.name}</p>
+              <p className="truncate text-muted text-caption-2-regular" style={{ fontFamily: "var(--font-mono)" }}>{currentUser.email}</p>
             </div>
           </div>
         </div>

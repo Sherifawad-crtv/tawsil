@@ -180,3 +180,26 @@ export interface HomeMetrics {
   completedToday: number;
   completedYesterday: number;
 }
+
+export interface CurrentUser {
+  name: string;
+  email: string;
+  phone: string;
+  title: string;
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  email: string;
+  role: Role;
+  status: "Active" | "Invited";
+  invitedAt: string;
+}
+
+export interface NotificationPrefs {
+  orderUpdates: boolean;
+  stalledOrderAlerts: boolean;
+  monthlyContractRenewals: boolean;
+  weeklySummaryEmail: boolean;
+}

@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { Order, Client, Contractor, Driver, Vehicle, MonthlyOrder, SavedLocation, StatusHistoryEntry, OrderStatus, TruckType } from "./types";
+import type { Order, Client, Contractor, Driver, Vehicle, MonthlyOrder, SavedLocation, StatusHistoryEntry, OrderStatus, TruckType, CurrentUser, TeamMember, NotificationPrefs } from "./types";
 import { ORDERS, MONTHLY_ORDERS } from "./ordersMock";
-import { CLIENTS, CONTRACTORS, DRIVERS, VEHICLES, SAVED_LOCATIONS } from "./entities";
+import { CLIENTS, CONTRACTORS, DRIVERS, VEHICLES, SAVED_LOCATIONS, CURRENT_USER, TEAM_MEMBERS } from "./entities";
 import { TRUCK_TYPES } from "./constants";
 
 interface DataStoreValue {
@@ -36,6 +36,17 @@ interface DataStoreValue {
 
   addTruckType: (truckType: TruckType) => void;
   updateTruckType: (id: string, patch: Partial<TruckType>) => void;
+
+  currentUser: CurrentUser;
+  updateCurrentUser: (patch: Partial<CurrentUser>) => void;
+
+  teamMembers: TeamMember[];
+  inviteTeamMember: (member: Omit<TeamMember, "id" | "status" | "invitedAt">) => void;
+  updateTeamMemberRole: (id: string, role: TeamMember["role"]) => void;
+  removeTeamMember: (id: string) => void;
+
+  notificationPrefs: NotificationPrefs;
+  updateNotificationPrefs: (patch: Partial<NotificationPrefs>) => void;
 }
 
 const DataStoreContext = createContext<DataStoreValue | null>(null);
@@ -49,6 +60,14 @@ export function DataStoreProvider({ children }: { children: ReactNode }) {
   const [monthlyOrders, setMonthlyOrders] = useState<MonthlyOrder[]>(MONTHLY_ORDERS);
   const [savedLocations, setSavedLocations] = useState<SavedLocation[]>(SAVED_LOCATIONS);
   const [truckTypes, setTruckTypes] = useState<TruckType[]>(TRUCK_TYPES);
+  const [currentUser, setCurrentUser] = useState<CurrentUser>(CURRENT_USER);
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>(TEAM_MEMBERS);
+  const [notificationPrefs, setNotificationPrefs] = useState<NotificationPrefs>({
+    orderUpdates: true,
+    stalledOrderAlerts: true,
+    monthlyContractRenewals: true,
+    weeklySummaryEmail: false,
+  });
 
   const value: DataStoreValue = {
     orders,
@@ -59,6 +78,9 @@ export function DataStoreProvider({ children }: { children: ReactNode }) {
     monthlyOrders,
     savedLocations,
     truckTypes,
+    currentUser,
+    teamMembers,
+    notificationPrefs,
 
     addOrder: (order) => setOrders((cur) => [order, ...cur]),
     updateOrder: (id, patch) => setOrders((cur) => cur.map((o) => (o.id === id ? { ...o, ...patch } : o))),
@@ -115,6 +137,18 @@ export function DataStoreProvider({ children }: { children: ReactNode }) {
 
     addTruckType: (truckType) => setTruckTypes((cur) => [...cur, truckType]),
     updateTruckType: (id, patch) => setTruckTypes((cur) => cur.map((t) => (t.id === id ? { ...t, ...patch } : t))),
+
+    updateCurrentUser: (patch) => setCurrentUser((cur) => ({ ...cur, ...patch })),
+
+    inviteTeamMember: (member) =>
+      setTeamMembers((cur) => [
+        ...cur,
+        { ...member, id: `team-new-${Date.now()}`, status: "Invited", invitedAt: new Date().toISOString().slice(0, 10) },
+      ]),
+    updateTeamMemberRole: (id, role) => setTeamMembers((cur) => cur.map((m) => (m.id === id ? { ...m, role } : m))),
+    removeTeamMember: (id) => setTeamMembers((cur) => cur.filter((m) => m.id !== id)),
+
+    updateNotificationPrefs: (patch) => setNotificationPrefs((cur) => ({ ...cur, ...patch })),
   };
 
   return <DataStoreContext.Provider value={value}>{children}</DataStoreContext.Provider>;

@@ -151,25 +151,36 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
+/**
+ * Available: a plain label + checkmark row, nothing to act on.
+ * Not yet captured: the whole row is the tap target - a full-width tinted
+ * row, same "row-as-button" pattern as every other list item in this app
+ * (AccountRow, TruckCard, DriverCard) - not a small pill floating inset
+ * inside an otherwise-white row.
+ */
 function FileRow({ label, available, onCapture }: { label: string; available: boolean; onCapture: () => void }) {
-  return (
-    <div className="flex items-center justify-between py-2" style={{ minHeight: "44px" }}>
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "13px", color: "#6B7280" }}>{label}</span>
-      {available ? (
+  if (available) {
+    return (
+      <div className="flex items-center justify-between py-2" style={{ minHeight: "44px" }}>
+        <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "13px", color: "#6B7280" }}>{label}</span>
         <span className="flex items-center gap-1" style={{ color: "#16803C" }}>
           <CheckCircleRounded sx={{ fontSize: 16 }} />
           <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "11.5px" }}>Available</span>
         </span>
-      ) : (
-        <button
-          onClick={onCapture}
-          className="flex items-center gap-1.5 rounded-full pl-2.5 pr-3 py-1.5 cursor-pointer active:scale-95 transition-transform"
-          style={{ backgroundColor: "#EAF0FE" }}
-        >
-          <AddAPhotoRounded sx={{ fontSize: 14, color: "#1253FA" }} />
-          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "11.5px", color: "#1253FA" }}>Capture</span>
-        </button>
-      )}
-    </div>
+      </div>
+    );
+  }
+  return (
+    <button
+      onClick={onCapture}
+      className="w-full flex items-center justify-between rounded-xl px-3 my-1 cursor-pointer active:scale-[0.99] transition-transform"
+      style={{ backgroundColor: "#EAF0FE", minHeight: "44px" }}
+    >
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{label}</span>
+      <span className="flex items-center gap-1 flex-shrink-0" style={{ color: "#1253FA" }}>
+        <AddAPhotoRounded sx={{ fontSize: 15 }} />
+        <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "12px" }}>Capture</span>
+      </span>
+    </button>
   );
 }

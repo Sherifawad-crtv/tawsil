@@ -25,10 +25,19 @@ export default function OrderMap({
   route,
   vehicle,
   className,
+  clearTopLeft = [72, 72],
+  clearBottomRight = [72, 72],
 }: {
   route: LatLng[];
   vehicle: LatLng | null;
   className?: string;
+  /**
+   * Pixels to keep clear when framing the route, for whatever the page lays
+   * over the map - a side panel, a pinned card. A stop framed under an
+   * overlay is a stop the operator can't see.
+   */
+  clearTopLeft?: [number, number];
+  clearBottomRight?: [number, number];
 }) {
   const center = route[0] ?? { lat: 30.0444, lng: 31.2357 };
 
@@ -43,7 +52,7 @@ export default function OrderMap({
     >
       <TileLayer url={TILES} attribution={ATTRIBUTION} subdomains="abcd" maxZoom={19} />
       <ZoomControl position="topright" />
-      <FitToRoute route={route} />
+      <FitToRoute route={route} topLeft={clearTopLeft} bottomRight={clearBottomRight} />
 
       {route.length > 1 && (
         <Polyline
@@ -79,16 +88,22 @@ export default function OrderMap({
   );
 }
 
-/** Frame every stop once, with room for the floating card; the operator pans from there. */
-function FitToRoute({ route }: { route: LatLng[] }) {
+/** Frame every stop once, clear of the overlays; the operator pans from there. */
+function FitToRoute({
+  route,
+  topLeft,
+  bottomRight,
+}: {
+  route: LatLng[];
+  topLeft: [number, number];
+  bottomRight: [number, number];
+}) {
   const map = useMap();
   const key = route.map((p) => `${p.lat},${p.lng}`).join("|");
   useEffect(() => {
     if (route.length === 0) return;
     const bounds = L.latLngBounds(route.map((p) => [p.lat, p.lng] as [number, number]));
-    // Extra room top-left: that corner holds the floating vehicle card, and
-    // a stop framed under it is a stop the operator can't see.
-    map.fitBounds(bounds, { paddingTopLeft: [330, 210], paddingBottomRight: [72, 72], maxZoom: 13 });
+    map.fitBounds(bounds, { paddingTopLeft: topLeft, paddingBottomRight: bottomRight, maxZoom: 13 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, key]);
   return null;

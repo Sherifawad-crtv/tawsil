@@ -11,9 +11,11 @@ import type { Order } from "../lib/types";
 
 /**
  * Uber-standard urgency split (Section 5.1): Pending (Assigned, not started -
- * needs a decision) reads urgent - heavier blue border, bolder badge. Active
- * (In Progress, already committed) reads calm - thin neutral border, settled
- * purple tint. Same card, same fields, only the emphasis differs by state.
+ * needs a decision) reads urgent - heavier orange border, bolder badge.
+ * Active (In Progress, already committed) reads calm - thin neutral border,
+ * settled green tint. Same card, same fields, only the emphasis differs by
+ * state. Colors match the status vocabulary: orange for Pending, green for
+ * In Progress, same as the rest of the app's palette.
  */
 export default function TripCard({ order }: { order: Order }) {
   const navigate = useNavigate();
@@ -23,8 +25,8 @@ export default function TripCard({ order }: { order: Order }) {
     <div
       className="w-full rounded-[20px] bg-white overflow-hidden flex flex-col"
       style={{
-        border: pending ? "2px solid #1253FA" : "1px solid #E8E8E5",
-        boxShadow: pending ? "0 2px 10px rgba(18,83,250,0.12)" : "0 1px 3px rgba(4,0,51,0.05)",
+        border: pending ? "2px solid #D97706" : "1px solid #E8E8E5",
+        boxShadow: pending ? "0 2px 10px rgba(217,119,6,0.14)" : "0 1px 3px rgba(4,0,51,0.05)",
       }}
     >
       <div className="p-4 flex flex-col gap-3">
@@ -68,14 +70,14 @@ export default function TripCard({ order }: { order: Order }) {
         onClick={() => navigate(`/orders/${order.id}`)}
         className="w-full flex items-center justify-center gap-1.5 py-3 cursor-pointer active:brightness-95 transition-[filter]"
         style={{
-          backgroundColor: pending ? "#1253FA" : "#F3E8FF",
+          backgroundColor: pending ? "#D97706" : "#DCFCE7",
           minHeight: "44px",
         }}
       >
-        <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13px", color: pending ? "white" : "#7C3AED" }}>
+        <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13px", color: pending ? "white" : "#22C55E" }}>
           {pending ? "View & Respond" : "Continue Trip"}
         </span>
-        <ChevronRightRounded sx={{ fontSize: 16, color: pending ? "white" : "#7C3AED" }} />
+        <ChevronRightRounded sx={{ fontSize: 16, color: pending ? "white" : "#22C55E" }} />
       </button>
     </div>
   );

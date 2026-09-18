@@ -3,7 +3,7 @@ import type { OrderStatus } from "../lib/types";
 const STATUS_STYLES: Record<OrderStatus, string> = {
   Pending: "bg-[#FEF3E2] text-status-pending",
   Assigned: "bg-blue-soft text-status-assigned",
-  "In Progress": "bg-[#EEEAFB] text-status-progress",
+  "In Progress": "bg-[#DCFCE7] text-status-progress",
   Completed: "bg-[#E7F6EC] text-status-completed",
   Cancelled: "bg-[#FDECEC] text-status-cancelled",
 };

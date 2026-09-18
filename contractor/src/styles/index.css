@@ -26,11 +26,13 @@
 
   /* Order status stepper: Pending -> Accepted -> Assigned -> In Progress ->
      Completed / Cancelled. Same hexes as the dashboard's status palette so a
-     status reads the same color across every Tawsil app. */
+     status reads the same color across every Tawsil app. In Progress is
+     green, not navy - a lighter green than Completed's so the two stay
+     distinct wherever they appear together (e.g. a stacked breakdown bar). */
   --color-status-pending: #d97706;
   --color-status-accepted: #d97706;
   --color-status-assigned: #1253fa;
-  --color-status-progress: #0a0070;
+  --color-status-progress: #22c55e;
   --color-status-completed: #16803c;
   --color-status-cancelled: #dc2626;
 

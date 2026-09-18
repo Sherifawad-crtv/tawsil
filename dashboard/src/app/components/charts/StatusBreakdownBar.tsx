@@ -3,7 +3,7 @@ import type { OrderStatus } from "../../lib/types";
 const STATUS_COLORS: Record<OrderStatus, string> = {
   Pending: "#d97706",
   Assigned: "#1253fa",
-  "In Progress": "#0a0070",
+  "In Progress": "#22c55e",
   Completed: "#16803c",
   Cancelled: "#dc2626",
 };

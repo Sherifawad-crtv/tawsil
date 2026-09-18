@@ -25,11 +25,12 @@
   --color-border: #e8e8e5;
   --color-muted: #9ca3af;
 
-  /* Driver's own status colors: blue Assigned, purple In Progress, green
-     Completed, red Cancelled - purple is this app's own convention, distinct
-     from Contractor's navy "In Progress". */
-  --color-status-assigned: #1253fa;
-  --color-status-progress: #7c3aed;
+  /* Aligned with the Contractor app's status vocabulary: Assigned is this
+     app's "Pending" bucket (an order sitting unstarted), so it takes
+     Contractor's Pending orange rather than its own blue. In Progress is a
+     lighter green than Completed's so the two stay visually distinct. */
+  --color-status-assigned: #d97706;
+  --color-status-progress: #22c55e;
   --color-status-completed: #16803c;
   --color-status-cancelled: #dc2626;
 

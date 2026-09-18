@@ -10,7 +10,9 @@ export const STATUS_STYLE: Record<OrderStatus, { bg: string; fg: string; icon: R
   Pending: { bg: "#FEF3E2", fg: "#D97706", icon: HourglassEmptyRounded },
   Accepted: { bg: "#FEF3E2", fg: "#D97706", icon: CheckRounded },
   Assigned: { bg: "#EAF0FE", fg: "#1253FA", icon: PersonAddAlt1Rounded },
-  "In Progress": { bg: "rgba(10,0,112,0.08)", fg: "#0A0070", icon: LocalShippingRounded },
+  // Green, not navy - a lighter green than Completed's so the two stay
+  // visually distinct wherever they appear side by side.
+  "In Progress": { bg: "#DCFCE7", fg: "#22C55E", icon: LocalShippingRounded },
   Completed: { bg: "#E7F6EC", fg: "#16803C", icon: CheckCircleRounded },
   Cancelled: { bg: "#FDECEC", fg: "#DC2626", icon: CloseRounded },
 };

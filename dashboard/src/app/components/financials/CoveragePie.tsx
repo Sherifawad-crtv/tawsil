@@ -33,9 +33,12 @@ export default function CoveragePie({ data }: { data: AreaCoverage[] }) {
     return <p className="py-8 text-center text-body-2-regular text-muted">No orders in this period.</p>;
   }
 
+  // The card stretches to the bottom of its column so the right side ends
+  // level with the trend chart on the left; the plot takes whatever height
+  // that leaves, and the radii are percentages so the donut scales with it.
   return (
-    <div className="flex flex-col gap-3">
-      <div className="relative" style={{ height: "220px" }}>
+    <div className="flex flex-col gap-3 flex-1 min-h-0">
+      <div className="relative flex-1" style={{ minHeight: "220px" }}>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -44,8 +47,8 @@ export default function CoveragePie({ data }: { data: AreaCoverage[] }) {
               nameKey="area"
               cx="50%"
               cy="50%"
-              innerRadius={58}
-              outerRadius={92}
+              innerRadius="56%"
+              outerRadius="90%"
               paddingAngle={2}
               stroke="#ffffff"
               strokeWidth={2}
@@ -63,10 +66,10 @@ export default function CoveragePie({ data }: { data: AreaCoverage[] }) {
 
         {/* The leader as a hero number in the hole - what the donut is really for. */}
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-          <span className="text-title-3-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>
+          <span className="text-title-2-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>
             {Math.round(slices[0].share * 100)}%
           </span>
-          <span className="text-caption-2-regular text-muted truncate max-w-[96px]">{slices[0].area}</span>
+          <span className="text-caption-1-regular text-muted truncate max-w-[120px]">{slices[0].area}</span>
         </div>
       </div>
 

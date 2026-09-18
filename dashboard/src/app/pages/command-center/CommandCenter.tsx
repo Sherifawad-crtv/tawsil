@@ -191,7 +191,7 @@ export default function CommandCenter() {
           can't be dragged. It passes the pointer through; only the two card
           columns take it back.
         */}
-        <div className={`relative grid gap-3 items-start pointer-events-none ${COLUMNS}`}>
+        <div className={`relative grid gap-3 items-stretch pointer-events-none ${COLUMNS}`}>
           <div className="flex flex-col gap-3 pointer-events-auto">
             <div className="grid grid-cols-2 gap-3">
               <FinancialCard
@@ -236,7 +236,8 @@ export default function CommandCenter() {
               <MoneySplitBar payables={totals.payable} earnings={totals.earnings} vat={totals.vat} />
             </InsightCard>
 
-            <InsightCard title="Area coverage" subtitle="Share of orders by area">
+            {/* Fills the rest of the column so both sides end level. */}
+            <InsightCard title="Area coverage" subtitle="Share of orders by area" className="flex-1">
               <CoveragePie data={areas} />
             </InsightCard>
           </div>

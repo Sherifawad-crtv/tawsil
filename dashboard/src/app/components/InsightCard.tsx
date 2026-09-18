@@ -5,15 +5,18 @@ export default function InsightCard({
   title,
   subtitle,
   action,
+  className,
   children,
 }: {
   title: string;
   subtitle?: string;
   action?: ReactNode;
+  /** For layout only - e.g. flex-1 so the card fills its column. */
+  className?: string;
   children: ReactNode;
 }) {
   return (
-    <div className="rounded-2xl bg-white border border-border p-4 flex flex-col gap-3">
+    <div className={`rounded-2xl bg-white border border-border p-4 flex flex-col gap-3 ${className ?? ""}`}>
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>

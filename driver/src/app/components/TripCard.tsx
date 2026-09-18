@@ -10,10 +10,12 @@ import { truckTypeLabel } from "../lib/constants";
 import type { Order } from "../lib/types";
 
 /**
- * A normal card in both states - no heavy colored border/glow on Pending,
- * that read as noisy. Pending vs Active is carried entirely by the status
- * badge color and the CTA strip below (orange "View & Respond" vs green
- * "Continue Trip"), which is distinction enough on its own.
+ * A normal card - no colored border, no status-colored CTA. The action
+ * button is always blue, sitting inside the card's own padding like any
+ * other button (rounded, inset, not a full-bleed strip flush with the
+ * card's edges). Pending vs Active is carried by the status badge alone;
+ * the label still changes ("View & Respond" vs "Continue Trip") since
+ * that's informational, not decorative.
  */
 export default function TripCard({ order }: { order: Order }) {
   const navigate = useNavigate();
@@ -21,7 +23,7 @@ export default function TripCard({ order }: { order: Order }) {
 
   return (
     <div
-      className="w-full rounded-[20px] bg-white overflow-hidden flex flex-col"
+      className="w-full rounded-[20px] bg-white flex flex-col"
       style={{
         border: "1px solid #E8E8E5",
         boxShadow: "0 1px 3px rgba(4,0,51,0.05)",
@@ -61,22 +63,18 @@ export default function TripCard({ order }: { order: Order }) {
           <CalendarTodayRounded sx={{ fontSize: 13, color: "#9CA3AF" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#6B7280" }}>{formatDate(order.pickupAt)}</span>
         </div>
-      </div>
 
-      {/* Section 5.2: the card's bottom edge IS the primary tap target for its next action - not a generic "tap anywhere" card. */}
-      <button
-        onClick={() => navigate(`/orders/${order.id}`)}
-        className="w-full flex items-center justify-center gap-1.5 py-3 cursor-pointer active:brightness-95 transition-[filter]"
-        style={{
-          backgroundColor: pending ? "#D97706" : "#DCFCE7",
-          minHeight: "44px",
-        }}
-      >
-        <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13px", color: pending ? "white" : "#22C55E" }}>
-          {pending ? "View & Respond" : "Continue Trip"}
-        </span>
-        <ChevronRightRounded sx={{ fontSize: 16, color: pending ? "white" : "#22C55E" }} />
-      </button>
+        <button
+          onClick={() => navigate(`/orders/${order.id}`)}
+          className="w-full flex items-center justify-center gap-1.5 rounded-2xl py-3 cursor-pointer active:brightness-95 transition-[filter]"
+          style={{ backgroundColor: "#1253FA", minHeight: "44px" }}
+        >
+          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13px", color: "white" }}>
+            {pending ? "View & Respond" : "Continue Trip"}
+          </span>
+          <ChevronRightRounded sx={{ fontSize: 16, color: "white" }} />
+        </button>
+      </div>
     </div>
   );
 }

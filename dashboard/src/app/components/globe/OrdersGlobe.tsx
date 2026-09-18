@@ -5,11 +5,13 @@ import { feature } from "topojson-client";
 import type { Topology } from "topojson-specification";
 import countries110m from "world-atlas/countries-110m.json";
 import { blueShade, type CoveragePoint } from "../../lib/coverage";
+import { coverageCells } from "./coverageCells";
 
 /**
  * A dotted globe, coloured and sized to sit into the page rather than on
- * top of it, turning slowly, with the coverage footprint raised on it in
- * blue - the more orders through a cell, the darker and taller.
+ * top of it, turning slowly, with the coverage footprint painted onto the
+ * dots themselves in blue - the more orders through a cell, the darker.
+ * Not a separate raised layer: hex bins were tried and read as tubes.
  *
  * The finer order layers (route arcs, hub points, live pulses) are still
  * switched off, not deleted: lib/globeData.ts still shapes orders into
@@ -44,12 +46,6 @@ const VIEW = { lat: 26.8, lng: 30.8, altitude: 1.8 };
 // add "010" here if the dot density is ever raised.
 const H3_UNTESSELLATABLE = new Set(["408"]);
 
-// Coverage bins. Resolution 3 cells are ~100km across. Tried 4 (~30km)
-// first: the footprint came out as a speck at this altitude, because all of
-// it fits inside Greater Cairo plus three outlying cities. At 3 it pools
-// into a handful of cells - Cairo, Sadat City, Alexandria - each big enough
-// to read from across the room, shaded by how much runs through them.
-const COVERAGE_RESOLUTION = 3;
 // Full turn roughly every 3 minutes. OrbitControls' default of 2 is a spin.
 const ROTATE_SPEED = 0.35;
 
@@ -90,9 +86,11 @@ export default function OrdersGlobe({
 
   const globeMaterial = useMemo(() => new MeshBasicMaterial({ color: SPHERE }), []);
 
-  // The heaviest bin sets the top of the ramp, so the shading always spans
-  // the full light-to-dark range whatever the absolute traffic is.
-  const maxWeight = useMemo(() => Math.max(1, ...coverage.map((p) => p.weight)), [coverage]);
+  // Coverage cells go into the same hexPolygons layer as the countries: a
+  // cell-sized polygon tessellates to exactly its own dot, so each covered
+  // dot gets its own shade. They sit a hair above the grey dots so blue wins
+  // where the two grids coincide.
+  const polygons = useMemo(() => [...COUNTRIES, ...coverageCells(coverage)], [coverage]);
 
   useEffect(() => {
     const globe = globeRef.current;
@@ -122,20 +120,17 @@ export default function OrdersGlobe({
           backgroundColor="rgba(0,0,0,0)"
           globeMaterial={globeMaterial}
           showAtmosphere={false}
-          hexPolygonsData={COUNTRIES}
-          hexPolygonColor={() => DOTS}
+          hexPolygonsData={polygons}
+          hexPolygonColor={(f: object) => {
+            const c = (f as { properties?: { coverage?: number } }).properties?.coverage;
+            return c === undefined ? DOTS : blueShade(c);
+          }}
+          hexPolygonAltitude={(f: object) =>
+            (f as { properties?: { coverage?: number } }).properties?.coverage === undefined ? 0.004 : 0.006
+          }
           hexPolygonResolution={3}
           hexPolygonMargin={0.42}
           hexPolygonUseDots
-          hexPolygonAltitude={0.004}
-          hexBinPointsData={coverage}
-          hexBinPointWeight="weight"
-          hexBinResolution={COVERAGE_RESOLUTION}
-          hexBinMerge
-          hexMargin={0.12}
-          hexAltitude={(d: { sumWeight: number }) => 0.02 + 0.12 * (d.sumWeight / maxWeight)}
-          hexTopColor={(d: { sumWeight: number }) => blueShade(d.sumWeight / maxWeight)}
-          hexSideColor={(d: { sumWeight: number }) => blueShade(d.sumWeight / maxWeight)}
         />
       )}
     </div>

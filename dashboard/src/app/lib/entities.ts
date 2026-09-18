@@ -77,4 +77,42 @@ export const SAVED_LOCATIONS: SavedLocation[] = [
   { id: "loc-10", clientId: "cli-09", name: "Spinneys Zamalek Store", address: "Zamalek, Cairo", lat: 30.0626, lng: 31.2222, tags: ["Retail"] },
   { id: "loc-11", clientId: "cli-12", name: "Cairo Poultry Processing Plant", address: "Belbeis Rd, Sharqia", lat: 30.4189, lng: 31.5619, tags: ["Factory", "Cold Chain"] },
   { id: "loc-12", clientId: "cli-07", name: "Hero Egypt Warehouse — 10th of Ramadan", address: "10th of Ramadan City, Sharqia", lat: 30.3011, lng: 31.7381, tags: ["Warehouse"] },
+  // Demo spread: the first twelve all sit in Greater Cairo, the Delta edge
+  // and Alexandria, which paints the coverage map as a single smudge. These
+  // put a drop-off in every region so the footprint reads across Egypt. A
+  // client's first location stays its pickup (ordersMock reads locs[0]);
+  // everything added here is a drop-off. Addresses are written
+  // "<area>, <governorate>" so coverage.areaOf reads them cleanly.
+  { id: "loc-13", clientId: "cli-01", name: "Juhayna New Cairo DC", address: "New Cairo, Cairo", lat: 30.0300, lng: 31.4700, tags: ["Distribution Center"] },
+  { id: "loc-14", clientId: "cli-01", name: "Juhayna Delta Hub — Damanhour", address: "Damanhour, Beheira", lat: 31.0341, lng: 30.4682, tags: ["Regional Hub"] },
+  { id: "loc-15", clientId: "cli-01", name: "Juhayna Upper Egypt — Sohag", address: "Sohag, Sohag", lat: 26.5569, lng: 31.6948, tags: ["Regional Hub"] },
+  { id: "loc-16", clientId: "cli-02", name: "Carrefour Sheikh Zayed", address: "Sheikh Zayed, Giza", lat: 30.0400, lng: 30.9700, tags: ["Retail"] },
+  { id: "loc-17", clientId: "cli-02", name: "Carrefour Heliopolis", address: "Heliopolis, Cairo", lat: 30.0880, lng: 31.3280, tags: ["Retail"] },
+  { id: "loc-18", clientId: "cli-02", name: "Carrefour Borg El Arab", address: "Borg El Arab, Alexandria", lat: 30.9166, lng: 29.5833, tags: ["Retail"] },
+  { id: "loc-19", clientId: "cli-02", name: "Carrefour Suez", address: "Suez, Suez", lat: 29.9668, lng: 32.5498, tags: ["Retail"] },
+  { id: "loc-20", clientId: "cli-03", name: "Edita Benha Depot", address: "Benha, Qalyubia", lat: 30.4590, lng: 31.1786, tags: ["Depot"] },
+  { id: "loc-21", clientId: "cli-03", name: "Edita Beni Suef Depot", address: "Beni Suef, Beni Suef", lat: 29.0661, lng: 31.0994, tags: ["Depot"] },
+  { id: "loc-22", clientId: "cli-03", name: "Edita Fayoum Depot", address: "Fayoum, Fayoum", lat: 29.3084, lng: 30.8428, tags: ["Depot"] },
+  { id: "loc-23", clientId: "cli-04", name: "Al Ahram Marsa Matruh Depot", address: "Marsa Matruh, Matrouh", lat: 31.3543, lng: 27.2373, tags: ["Depot", "Seasonal"] },
+  { id: "loc-24", clientId: "cli-04", name: "Al Ahram Kafr El Sheikh Depot", address: "Kafr El Sheikh, Kafr El Sheikh", lat: 31.1107, lng: 30.9388, tags: ["Depot"] },
+  { id: "loc-25", clientId: "cli-05", name: "Nestlé Qena Hub", address: "Qena, Qena", lat: 26.1551, lng: 32.7160, tags: ["Regional Hub"] },
+  { id: "loc-26", clientId: "cli-06", name: "Domty Tanta DC", address: "Tanta, Gharbia", lat: 30.7865, lng: 31.0004, tags: ["Distribution Center", "Cold Chain"] },
+  { id: "loc-27", clientId: "cli-07", name: "Hero Mansoura Depot", address: "Mansoura, Dakahlia", lat: 31.0409, lng: 31.3785, tags: ["Depot"] },
+  { id: "loc-28", clientId: "cli-08", name: "Americana Plant — 6th of October", address: "6th of October City, Giza", lat: 29.9400, lng: 30.9300, tags: ["Factory", "Frequent Pickup"] },
+  { id: "loc-29", clientId: "cli-08", name: "Americana Red Sea Hub — Hurghada", address: "Hurghada, Red Sea", lat: 27.2579, lng: 33.8116, tags: ["Regional Hub"] },
+  { id: "loc-30", clientId: "cli-08", name: "Americana Luxor Depot", address: "Luxor, Luxor", lat: 25.6872, lng: 32.6396, tags: ["Depot"] },
+  { id: "loc-31", clientId: "cli-08", name: "Americana Aswan Depot", address: "Aswan, Aswan", lat: 24.0889, lng: 32.8998, tags: ["Depot"] },
+  { id: "loc-32", clientId: "cli-09", name: "Spinneys New Cairo Store", address: "New Cairo, Cairo", lat: 30.0200, lng: 31.4900, tags: ["Retail"] },
+  { id: "loc-33", clientId: "cli-09", name: "Spinneys Heliopolis Store", address: "Heliopolis, Cairo", lat: 30.0950, lng: 31.3400, tags: ["Retail"] },
+  { id: "loc-34", clientId: "cli-10", name: "B.Tech Central Warehouse — Obour", address: "Obour City, Qalyubia", lat: 30.2200, lng: 31.4800, tags: ["Warehouse", "Frequent Pickup"] },
+  { id: "loc-35", clientId: "cli-10", name: "B.Tech Mansoura Showroom", address: "Mansoura, Dakahlia", lat: 31.0450, lng: 31.3700, tags: ["Retail"] },
+  { id: "loc-36", clientId: "cli-10", name: "B.Tech Assiut Showroom", address: "Assiut, Assiut", lat: 27.1809, lng: 31.1837, tags: ["Retail"] },
+  { id: "loc-37", clientId: "cli-10", name: "B.Tech Minya Showroom", address: "Minya, Minya", lat: 28.1099, lng: 30.7503, tags: ["Retail"] },
+  { id: "loc-38", clientId: "cli-11", name: "Obour Land Factory — 10th of Ramadan", address: "10th of Ramadan City, Sharqia", lat: 30.2900, lng: 31.7600, tags: ["Factory", "Frequent Pickup"] },
+  { id: "loc-39", clientId: "cli-11", name: "Obour Land Zagazig Depot", address: "Zagazig, Sharqia", lat: 30.5877, lng: 31.5020, tags: ["Depot"] },
+  { id: "loc-40", clientId: "cli-11", name: "Obour Land Ismailia Depot", address: "Ismailia, Ismailia", lat: 30.6043, lng: 32.2723, tags: ["Depot"] },
+  { id: "loc-41", clientId: "cli-11", name: "Obour Land Port Said Depot", address: "Port Said, Port Said", lat: 31.2653, lng: 32.3019, tags: ["Depot"] },
+  { id: "loc-42", clientId: "cli-11", name: "Obour Land Damietta Depot", address: "Damietta, Damietta", lat: 31.4165, lng: 31.8133, tags: ["Depot"] },
+  { id: "loc-43", clientId: "cli-12", name: "Cairo Poultry Zagazig Farm", address: "Zagazig, Sharqia", lat: 30.6000, lng: 31.4800, tags: ["Farm", "Cold Chain"] },
+  { id: "loc-44", clientId: "cli-12", name: "Cairo Poultry Suez Cold Store", address: "Suez, Suez", lat: 29.9800, lng: 32.5300, tags: ["Cold Storage"] },
 ];

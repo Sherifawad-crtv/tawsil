@@ -14,6 +14,9 @@ importers:
       '@solar-icons/react':
         specifier: ^2.1.0
         version: 2.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      h3-js:
+        specifier: 4.5.0
+        version: 4.5.0
       react:
         specifier: 18.3.1
         version: 18.3.1

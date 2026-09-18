@@ -8,7 +8,7 @@ import AssignDriverModal from "../../components/orders/AssignDriverModal";
 import OrderFormModal from "../../components/orders/OrderFormModal";
 import { useDataStore } from "../../lib/store";
 import { useRole } from "../../lib/RoleContext";
-import { byId, getTruckType, canAssignDrivers } from "../../lib/selectors";
+import { byId, getTruckType, canAssignDrivers, isReadOnlyRole } from "../../lib/selectors";
 import { Button } from "../../components/Button";
 import PageHeader from "../../components/PageHeader";
 import { truckTypeLabel } from "../../lib/constants";
@@ -38,7 +38,10 @@ export default function OrderDetail() {
   const vehicle = byId(vehicles, order.vehicleId);
   const truckType = getTruckType(order.truckTypeId);
 
-  const canEditCancel = order.status !== "Completed" && order.status !== "Cancelled";
+  // Executive is read-only: it keeps everything that just looks at the order
+  // (including Track Order) and loses everything that changes it.
+  const readOnly = isReadOnlyRole(role);
+  const canEditCancel = !readOnly && order.status !== "Completed" && order.status !== "Cancelled";
   const needsAssignment = order.status === "Pending" && canAssignDrivers(role);
 
   function handleCancel() {
@@ -80,9 +83,11 @@ export default function OrderDetail() {
                 <Button variant="secondary" leadingIcon={RoutingIcon}>
                   Track Order
                 </Button>
-                <Button leadingIcon={RestartIcon} onClick={() => setShowReorder(true)}>
-                  Reorder
-                </Button>
+                {!readOnly && (
+                  <Button leadingIcon={RestartIcon} onClick={() => setShowReorder(true)}>
+                    Reorder
+                  </Button>
+                )}
               </>
             )}
           </>

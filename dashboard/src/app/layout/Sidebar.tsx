@@ -8,6 +8,7 @@ import {
   UsersGroupRoundedIcon as UsersGroupRoundedLinearIcon,
   CalendarMarkIcon as CalendarMarkLinearIcon,
   SettingsIcon as SettingsLinearIcon,
+  GlobalIcon as GlobalLinearIcon,
 } from "@solar-icons/react/linear";
 import {
   Widget2Icon as Widget2BoldIcon,
@@ -17,13 +18,17 @@ import {
   UsersGroupRoundedIcon as UsersGroupRoundedBoldIcon,
   CalendarMarkIcon as CalendarMarkBoldIcon,
   SettingsIcon as SettingsBoldIcon,
+  GlobalIcon as GlobalBoldIcon,
 } from "@solar-icons/react/bold";
 import { cx } from "../lib/cx";
 import { useDataStore } from "../lib/store";
 import { useRole } from "../lib/RoleContext";
-import { getOrdersForRole } from "../lib/selectors";
+import { getOrdersForRole, canViewCommandCenter } from "../lib/selectors";
 
 const NAV_ITEMS = [
+  // Executive view, first in the list and hidden from everyone but
+  // leadership - see canViewCommandCenter.
+  { to: "/command-center", label: "Command Center", iconOutline: GlobalLinearIcon, iconFilled: GlobalBoldIcon, execOnly: true },
   { to: "/", label: "Home", iconOutline: Widget2LinearIcon, iconFilled: Widget2BoldIcon, end: true },
   { to: "/orders", label: "Orders", iconOutline: BoxLinearIcon, iconFilled: BoxBoldIcon, showOrderCount: true },
   { to: "/contractors", label: "Contractors", iconOutline: BusLinearIcon, iconFilled: BusBoldIcon },
@@ -44,6 +49,7 @@ export default function Sidebar({
   const { orders } = useDataStore();
   const { role } = useRole();
   const orderCount = getOrdersForRole(orders, role).length;
+  const navItems = NAV_ITEMS.filter((item) => !item.execOnly || canViewCommandCenter(role));
 
   return (
     <>
@@ -77,7 +83,7 @@ export default function Sidebar({
         </div>
 
         <nav className="flex-1 px-0.5 flex flex-col gap-1 overflow-y-auto overflow-x-hidden">
-          {NAV_ITEMS.map(({ to, label, iconOutline: IconOutline, iconFilled: IconFilled, end, showOrderCount }) => (
+          {navItems.map(({ to, label, iconOutline: IconOutline, iconFilled: IconFilled, end, showOrderCount }) => (
             <NavLink
               key={to}
               to={to}

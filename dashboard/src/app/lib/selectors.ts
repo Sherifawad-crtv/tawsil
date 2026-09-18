@@ -142,10 +142,26 @@ export function canAssignDrivers(role: Role) {
 /**
  * Whether the role owns the nudges in the attention list (assign, follow up,
  * renew). Sales sees the same list but none of those are its work — it only
- * edits — so it gets an Edit action on those rows instead.
+ * edits — so it gets an Edit action on those rows instead. Executive owns
+ * none of it and can't edit either, so it gets no row action at all.
  */
 export function canActOnAttention(role: Role) {
-  return role !== "Sales";
+  return role === "Supply" || role === "Operations" || role === "Admin";
+}
+
+/**
+ * Executive (C-suite/founders) is a look-don't-touch persona: it sees the
+ * whole operation but changes none of it. Used to hide edit/cancel/reorder
+ * affordances that are otherwise gated on an order's status rather than on
+ * who's looking — every other role keeps exactly the access it had.
+ */
+export function isReadOnlyRole(role: Role) {
+  return role === "Executive";
+}
+
+/** The Command Center is the executive view: leadership and Admin only. */
+export function canViewCommandCenter(role: Role) {
+  return role === "Executive" || role === "Admin";
 }
 
 /** Order count per day for the trailing `days` window, oldest first - feeds the Home volume chart. */

@@ -3,6 +3,7 @@ import AppShell from "./layout/AppShell";
 import { RoleProvider } from "./lib/RoleContext";
 import { DataStoreProvider } from "./lib/store";
 import Home from "./pages/Home";
+import CommandCenter from "./pages/command-center/CommandCenter";
 import OrdersList from "./pages/orders/OrdersList";
 import OrderDetail from "./pages/orders/OrderDetail";
 import ContractorsList from "./pages/contractors/ContractorsList";
@@ -21,6 +22,7 @@ export default function App() {
         <Routes>
           <Route element={<AppShell />}>
             <Route index element={<Home />} />
+            <Route path="command-center" element={<CommandCenter />} />
             <Route path="orders" element={<OrdersList />} />
             <Route path="orders/:orderId" element={<OrderDetail />} />
             <Route path="contractors" element={<ContractorsList />} />

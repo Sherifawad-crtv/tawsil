@@ -8,7 +8,7 @@ interface RoleContextValue {
 
 const RoleContext = createContext<RoleContextValue | null>(null);
 
-const ROLES: Role[] = ["Sales", "Supply", "Operations", "Admin"];
+const ROLES: Role[] = ["Sales", "Supply", "Operations", "Admin", "Executive"];
 
 export function RoleProvider({ children }: { children: ReactNode }) {
   const [role, setRole] = useState<Role>("Sales");

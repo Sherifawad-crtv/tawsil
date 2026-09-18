@@ -1,6 +1,6 @@
 export type OrderStatus = "Pending" | "Assigned" | "In Progress" | "Completed" | "Cancelled";
 export type TripType = "On Demand" | "Daily" | "Monthly";
-export type Role = "Sales" | "Supply" | "Operations" | "Admin";
+export type Role = "Sales" | "Supply" | "Operations" | "Admin" | "Executive";
 
 export type TruckBaseClass = "Dababa" | "Jumbo" | "Suzuki Van" | "Trailer";
 export type TruckConfig = "Box" | "Open" | "Refrigerated" | "Flatbed";

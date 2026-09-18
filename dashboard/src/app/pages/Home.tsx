@@ -17,6 +17,7 @@ import {
   getAttentionOrders,
   getAttentionOrdersForRole,
   canActOnAttention,
+  isReadOnlyRole,
   canCreateOrders,
   getOrderVolumeWeekOverWeek,
   getOrdersByStatus,
@@ -195,7 +196,11 @@ export default function Home() {
                 order={item}
                 canAct={canActOnAttention(role)}
                 onEdit={
-                  item.reason === "monthly-renewal" ? undefined : () => setEditingOrderId(item.id)
+                  // No edit fallback for Executive - it's a read-only persona,
+                  // so those rows carry no action button at all.
+                  item.reason === "monthly-renewal" || isReadOnlyRole(role)
+                    ? undefined
+                    : () => setEditingOrderId(item.id)
                 }
               />
             ))

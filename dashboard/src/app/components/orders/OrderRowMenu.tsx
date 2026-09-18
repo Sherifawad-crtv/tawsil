@@ -13,7 +13,7 @@ import AssignDriverModal from "./AssignDriverModal";
 import OrderFormModal from "./OrderFormModal";
 import { useDataStore } from "../../lib/store";
 import { useRole } from "../../lib/RoleContext";
-import { canAssignDrivers } from "../../lib/selectors";
+import { canAssignDrivers, isReadOnlyRole } from "../../lib/selectors";
 import type { Order } from "../../lib/types";
 
 /**
@@ -29,7 +29,10 @@ export default function OrderRowMenu({ order }: { order: Order }) {
   const [showEdit, setShowEdit] = useState(false);
   const [showReorder, setShowReorder] = useState(false);
 
-  const canEditCancel = order.status !== "Completed" && order.status !== "Cancelled";
+  // Executive is read-only, so it gets View order and nothing that mutates.
+  const readOnly = isReadOnlyRole(role);
+  const canEditCancel = !readOnly && order.status !== "Completed" && order.status !== "Cancelled";
+  const canReorder = !readOnly && order.status === "Completed";
   const needsAssignment = order.status === "Pending" && canAssignDrivers(role);
 
   function run(action: () => void) {
@@ -75,7 +78,7 @@ export default function OrderRowMenu({ order }: { order: Order }) {
                 <Pen2Icon size={16} className="text-muted" /> Edit order
               </DropdownItem>
             )}
-            {order.status === "Completed" && (
+            {canReorder && (
               <DropdownItem onSelect={() => run(() => setShowReorder(true))}>
                 <RestartIcon size={16} className="text-muted" /> Reorder
               </DropdownItem>

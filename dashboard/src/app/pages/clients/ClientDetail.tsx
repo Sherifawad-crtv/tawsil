@@ -9,7 +9,7 @@ import EmptyState from "../../components/EmptyState";
 import OrdersTable from "../../components/OrdersTable";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "../../components/Table";
 import AddLocationModal from "../../components/AddLocationModal";
-import WaypointAnalyticsTable from "../../components/WaypointAnalyticsTable";
+import AnalyticsPanel from "../../components/analytics/AnalyticsPanel";
 import { useDataStore } from "../../lib/store";
 import { getOrdersForClient } from "../../lib/selectors";
 
@@ -108,7 +108,7 @@ export default function ClientDetail() {
         </div>
       )}
 
-      {tab === "Analytics" && <WaypointAnalyticsTable orders={clientOrders} filenamePrefix={client.name.toLowerCase().replace(/\s+/g, "-")} />}
+      {tab === "Analytics" && <AnalyticsPanel orders={clientOrders} filenamePrefix={client.name.toLowerCase().replace(/\s+/g, "-")} />}
 
       {showAddLocation && <AddLocationModal clientId={client.id} onClose={() => setShowAddLocation(false)} />}
     </div>

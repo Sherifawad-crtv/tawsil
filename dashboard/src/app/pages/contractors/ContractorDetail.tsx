@@ -10,7 +10,7 @@ import DriversTable from "../../components/DriversTable";
 import VehiclesBoard from "../../components/fleet/VehiclesBoard";
 import AddDriverModal from "../../components/AddDriverModal";
 import AddVehicleModal from "../../components/AddVehicleModal";
-import WaypointAnalyticsTable from "../../components/WaypointAnalyticsTable";
+import AnalyticsPanel from "../../components/analytics/AnalyticsPanel";
 import { useDataStore } from "../../lib/store";
 import { getDriversForContractor, getVehiclesForContractor, getOrdersForContractor } from "../../lib/selectors";
 
@@ -82,7 +82,7 @@ export default function ContractorDetail() {
         <OrdersTable orders={contractorOrders} />
       )}
 
-      {tab === "Analytics" && <WaypointAnalyticsTable orders={contractorOrders} filenamePrefix={contractor.name.toLowerCase().replace(/\s+/g, "-")} />}
+      {tab === "Analytics" && <AnalyticsPanel orders={contractorOrders} filenamePrefix={contractor.name.toLowerCase().replace(/\s+/g, "-")} />}
 
       {showAddDriver && <AddDriverModal contractorId={contractor.id} onClose={() => setShowAddDriver(false)} />}
       {showAddVehicle && <AddVehicleModal contractorId={contractor.id} onClose={() => setShowAddVehicle(false)} />}

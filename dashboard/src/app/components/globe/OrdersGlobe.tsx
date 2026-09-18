@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import Globe, { type GlobeMethods } from "react-globe.gl";
 import { MeshBasicMaterial } from "three";
 import { feature } from "topojson-client";
@@ -26,7 +26,7 @@ import type { Order } from "../../lib/types";
 // has no silhouette and no specular gradient - invisible, while still
 // occluding the dots on the far side so only the near hemisphere reads.
 const SPHERE = "#f5f5f3";
-const DOTS = "#d8d9d4";
+const DOTS = "#c7c8c1";
 const POINT = "#0a0070";
 
 // Resolved once at module scope - the topology never changes, and feature()
@@ -46,7 +46,15 @@ const COUNTRIES = (
   ) as unknown as { features: { id?: string | number }[] }
 ).features.filter((f) => !H3_UNTESSELLATABLE.has(String(f.id)));
 
-export default function OrdersGlobe({ orders, className }: { orders: Order[]; className?: string }) {
+export default function OrdersGlobe({
+  orders,
+  className,
+  style,
+}: {
+  orders: Order[];
+  className?: string;
+  style?: CSSProperties;
+}) {
   const globeRef = useRef<GlobeMethods | undefined>(undefined);
   const wrapRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
@@ -87,11 +95,15 @@ export default function OrdersGlobe({ orders, className }: { orders: Order[]; cl
     controls.autoRotate = false;
     controls.enableZoom = true;
 
-    globe.pointOfView({ lat: center.lat, lng: center.lng, altitude: 1.0 }, 0);
+    globe.pointOfView({ lat: center.lat, lng: center.lng, altitude: 1.35 }, 0);
   }, [size.width, center.lat, center.lng]);
 
   return (
-    <div ref={wrapRef} className={className}>
+    <div
+      ref={wrapRef}
+      className={className}
+      style={{ ...style, filter: "drop-shadow(0 16px 30px rgba(4,0,51,0.16))" }}
+    >
       {size.width > 0 && (
         <Globe
           ref={globeRef}

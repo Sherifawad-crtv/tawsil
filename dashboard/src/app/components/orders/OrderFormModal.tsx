@@ -87,7 +87,10 @@ export default function OrderFormModal({
 }) {
   const navigate = useNavigate();
   const { clients, addClient, addOrder, updateOrder } = useDataStore();
-  const [step, setStep] = useState(1);
+  // Editing an existing order opens on the Review step - the summary cards
+  // with a per-section Edit link - instead of replaying the whole creation
+  // wizard from Client. `goTo` on any card's link still walks to that step.
+  const [step, setStep] = useState(mode === "edit" ? TOTAL_STEPS : 1);
   const [form, setForm] = useState<FormState>(() => (initialOrder ? stateFromOrder(initialOrder) : emptyState()));
 
   const truckType = form.truckTypeId ? getTruckType(form.truckTypeId) : undefined;

@@ -9,7 +9,7 @@ export function byId<T extends { id: string }>(list: T[], id?: string): T | unde
   return id ? list.find((item) => item.id === id) : undefined;
 }
 
-export function minutesSince(iso: string) {
+function minutesSince(iso: string) {
   return Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
 }
 
@@ -165,7 +165,7 @@ export function canViewCommandCenter(role: Role) {
 }
 
 /** Order count per day for the trailing `days` window, oldest first - feeds the Home volume chart. */
-export function getOrderVolumeByDay(orders: Order[], days = 14) {
+function getOrderVolumeByDay(orders: Order[], days = 14) {
   const buckets: { key: string; label: string; count: number }[] = [];
   const today = new Date();
   for (let i = days - 1; i >= 0; i--) {
@@ -276,6 +276,11 @@ export function getActiveOrderCountForDriver(orders: Order[], driverId: string) 
 
 export function getCurrentOrderForDriver(orders: Order[], driverId: string) {
   return orders.find((o) => o.driverId === driverId && (o.status === "Assigned" || o.status === "In Progress"));
+}
+
+/** When the order was marked Completed, from its history - undefined if it never was. */
+export function completedAt(order: Order) {
+  return [...order.statusHistory].reverse().find((h) => h.toStatus === "Completed")?.timestamp;
 }
 
 export function getCurrentOrderForVehicle(orders: Order[], vehicleId: string) {

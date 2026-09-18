@@ -26,7 +26,7 @@ import { cx } from "../../lib/cx";
  */
 
 /** Exact paths from BoardUI's month-nav chevrons — 16x16, 2px round-capped. */
-export function ChevronLeft16({ className }: { className?: string }) {
+function ChevronLeft16({ className }: { className?: string }) {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={className} aria-hidden>
       <path
@@ -39,7 +39,7 @@ export function ChevronLeft16({ className }: { className?: string }) {
   );
 }
 
-export function ChevronRight16({ className }: { className?: string }) {
+function ChevronRight16({ className }: { className?: string }) {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={className} aria-hidden>
       <path
@@ -52,7 +52,7 @@ export function ChevronRight16({ className }: { className?: string }) {
   );
 }
 
-export type DayCellProps = CalendarCellRenderProps & {
+type DayCellProps = CalendarCellRenderProps & {
   isRange: boolean;
   /** Multi-select mode: selection is the caller's, not react-aria's. */
   selectedOverride?: boolean;
@@ -60,7 +60,7 @@ export type DayCellProps = CalendarCellRenderProps & {
   edgeClassName?: string;
 };
 
-export function DayCell(props: DayCellProps) {
+function DayCell(props: DayCellProps) {
   const {
     date,
     formattedDate,

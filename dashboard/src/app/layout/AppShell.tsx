@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet } from "react-router";
 import { HamburgerMenuIcon } from "@solar-icons/react/linear";
 import Sidebar from "./Sidebar";
+import RouteErrorBoundary from "./RouteErrorBoundary";
 import { Select } from "../components/Select";
 import { useRole, ROLES } from "../lib/RoleContext";
 
@@ -36,7 +37,9 @@ export default function AppShell() {
         {/* Fluid: a max-width here centred the content, which on wide screens
             pulled it away from both the sidebar and the header above it. */}
         <main className="flex-1 min-w-0 px-3.5 md:px-0 py-4 md:py-0">
-          <Outlet />
+          <RouteErrorBoundary>
+            <Outlet />
+          </RouteErrorBoundary>
         </main>
       </div>
     </div>

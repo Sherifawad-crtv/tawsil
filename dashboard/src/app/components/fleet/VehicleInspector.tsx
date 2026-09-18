@@ -6,7 +6,7 @@ import { useDataStore } from "../../lib/store";
 import { byId, getTruckType } from "../../lib/selectors";
 import { truckTypeLabel } from "../../lib/constants";
 import { TRUCK_IMAGES } from "../../lib/truckImages";
-import { formatDate } from "../../lib/format";
+import { formatDate, initials } from "../../lib/format";
 import { driverForVehicle, ordersForVehicle, vehiclePerformance, vehicleStatus } from "../../lib/fleet";
 import type { OrderStatus, Vehicle } from "../../lib/types";
 
@@ -185,10 +185,6 @@ export default function VehicleInspector({ vehicle, onClose }: { vehicle: Vehicl
       </div>
     </section>
   );
-}
-
-function initials(name: string) {
-  return name.split(/\s+/).slice(0, 2).map((p) => p[0]?.toUpperCase() ?? "").join("");
 }
 
 function Fact({ label, value }: { label: string; value: string }) {

@@ -13,11 +13,6 @@ import { coverageCells } from "./coverageCells";
  * dots themselves in blue - the more orders through a cell, the darker.
  * Not a separate raised layer: hex bins were tried and read as tubes.
  *
- * The finer order layers (route arcs, hub points, live pulses) are still
- * switched off, not deleted: lib/globeData.ts still shapes orders into
- * arcs, points and rings, so turning them back on means passing orders
- * back in and restoring the layer props.
- *
  * Deliberately texture-free. Every globe.gl example pulls a photographic
  * earth JPEG off a CDN at render time; that's a runtime network dependency
  * and it fights our flat palette. The dots come from a locally-bundled 110m

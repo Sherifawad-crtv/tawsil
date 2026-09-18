@@ -9,9 +9,9 @@ import type { CoveragePoint } from "../../lib/coverage";
  */
 
 /** Same h3 resolution the globe's country dots are drawn at, so coverage lands on the same grid. */
-export const COVERAGE_RES = 3;
+const COVERAGE_RES = 3;
 
-export interface CoverageCell {
+interface CoverageCell {
   type: "Feature";
   properties: { coverage: number };
   geometry: { type: "Polygon"; coordinates: number[][][] };

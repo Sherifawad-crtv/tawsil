@@ -12,7 +12,7 @@ import { byId, getTruckType, canAssignDrivers, isReadOnlyRole } from "../../lib/
 import { Button } from "../../components/Button";
 import PageHeader from "../../components/PageHeader";
 import { truckTypeLabel } from "../../lib/constants";
-import { formatDateTime } from "../../lib/format";
+import { formatDateTime, initials } from "../../lib/format";
 import { routeOf, vehiclePosition } from "../../lib/tracking";
 import { TRUCK_IMAGES } from "../../lib/truckImages";
 
@@ -148,7 +148,7 @@ export default function OrderDetail() {
                 {driver && vehicle ? (
                   <div className="flex items-center gap-3">
                     <div className="w-11 h-11 rounded-2xl bg-navy text-white flex items-center justify-center flex-shrink-0" style={{ fontFamily: "var(--font-heading)" }}>
-                      {driver.name.split(" ").map((p) => p[0]).join("").slice(0, 2)}
+                      {initials(driver.name)}
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="text-body-semibold text-navy truncate">{driver.name}</div>

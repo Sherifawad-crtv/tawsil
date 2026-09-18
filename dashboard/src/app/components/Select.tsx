@@ -127,11 +127,11 @@ export function Select({
   );
 }
 
-export interface SelectItemProps extends Omit<AriaListBoxItemProps, "children"> {
+interface SelectItemProps extends Omit<AriaListBoxItemProps, "children"> {
   children?: ReactNode;
 }
 
-export function SelectItem({ className, children, ...props }: SelectItemProps) {
+function SelectItem({ className, children, ...props }: SelectItemProps) {
   return (
     <AriaListBoxItem
       {...props}

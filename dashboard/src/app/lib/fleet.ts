@@ -1,4 +1,4 @@
-import { getCurrentOrderForVehicle } from "./selectors";
+import { byId, completedAt, getCurrentOrderForVehicle } from "./selectors";
 import type { Driver, Order, Vehicle } from "./types";
 
 /**
@@ -29,16 +29,16 @@ export function ordersForVehicle(orders: Order[], vehicleId: string) {
 export function driverForVehicle(vehicleOrders: Order[], drivers: Driver[]): { driver: Driver; current: boolean } | null {
   const current = vehicleOrders.find((o) => o.status === "Assigned" || o.status === "In Progress");
   const source = current ?? vehicleOrders.find((o) => o.driverId);
-  const driver = source?.driverId ? drivers.find((d) => d.id === source.driverId) : undefined;
+  const driver = source?.driverId ? byId(drivers, source.driverId) : undefined;
   return driver ? { driver, current: Boolean(current) } : null;
 }
 
-export interface MonthCount {
+interface MonthCount {
   label: string;
   count: number;
 }
 
-export interface VehiclePerformance {
+interface VehiclePerformance {
   total: number;
   completed: number;
   cancelled: number;
@@ -48,10 +48,6 @@ export interface VehiclePerformance {
 }
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-function completedAt(order: Order) {
-  return [...order.statusHistory].reverse().find((h) => h.toStatus === "Completed")?.timestamp;
-}
 
 export function vehiclePerformance(vehicleOrders: Order[], months = 6, now = new Date()): VehiclePerformance {
   const completedOrders = vehicleOrders.filter((o) => o.status === "Completed");

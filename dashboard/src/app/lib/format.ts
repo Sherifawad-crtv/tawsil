@@ -22,3 +22,12 @@ export function formatDuration(minutes: number) {
   if (h === 0) return `${m}m`;
   return `${h}h ${m}m`;
 }
+
+/** Up to two initials from a display name, for avatars. */
+export function initials(name: string) {
+  return name
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase() ?? "")
+    .join("");
+}

@@ -1,4 +1,4 @@
-import { getTruckType } from "./selectors";
+import { byId, completedAt, getTruckType } from "./selectors";
 import type { Order, Client, Contractor } from "./types";
 
 /**
@@ -14,15 +14,15 @@ import type { Order, Client, Contractor } from "./types";
  * It yields the identity the figures are meant to satisfy:
  *   Receivables = Payables + Earnings + VAT
  */
-export const CLIENT_MARKUP = 1.28;
-export const VAT_PERCENT = 14;
+const CLIENT_MARKUP = 1.28;
+const VAT_PERCENT = 14;
 
 /** Only completed work is invoiceable - pending and cancelled orders are not revenue. */
-export function isInvoiceable(order: Order) {
+function isInvoiceable(order: Order) {
   return order.status === "Completed";
 }
 
-export interface OrderMoney {
+interface OrderMoney {
   /** Owed out to the contractor. */
   payable: number;
   /** Client charge before VAT. */
@@ -37,7 +37,7 @@ export interface OrderMoney {
 
 const EMPTY: OrderMoney = { payable: 0, subtotal: 0, earnings: 0, vat: 0, receivable: 0 };
 
-export function orderMoney(order: Order): OrderMoney {
+function orderMoney(order: Order): OrderMoney {
   const truckType = getTruckType(order.truckTypeId);
   if (!truckType) return EMPTY;
 
@@ -80,9 +80,8 @@ export interface FinancialFilters {
 }
 
 /** An order counts toward a period by when it was completed, not when it was raised. */
-function completedAt(order: Order) {
-  const completion = [...order.statusHistory].reverse().find((h) => h.toStatus === "Completed");
-  return new Date(completion?.timestamp ?? order.createdAt);
+function completedOn(order: Order) {
+  return new Date(completedAt(order) ?? order.createdAt);
 }
 
 export function filterForFinancials(orders: Order[], filters: FinancialFilters) {
@@ -91,7 +90,7 @@ export function filterForFinancials(orders: Order[], filters: FinancialFilters) 
     if (filters.clientId !== "all" && order.clientId !== filters.clientId) return false;
     if (filters.contractorId !== "all" && order.contractorId !== filters.contractorId) return false;
 
-    const at = completedAt(order);
+    const at = completedOn(order);
     if (at.getFullYear() !== filters.year) return false;
     if (filters.month !== "all" && at.getMonth() + 1 !== filters.month) return false;
     return true;
@@ -110,20 +109,20 @@ export interface ClientRow {
 }
 
 export function rollUpByClient(orders: Order[], clients: Client[]): ClientRow[] {
-  const byId = new Map<string, ClientRow>();
+  const rows = new Map<string, ClientRow>();
 
   for (const order of orders) {
     const m = orderMoney(order);
-    const row = byId.get(order.clientId);
+    const row = rows.get(order.clientId);
     if (row) {
       row.orders += 1;
       row.subtotal += m.subtotal;
       row.vat += m.vat;
       row.totalDue += m.receivable;
     } else {
-      byId.set(order.clientId, {
+      rows.set(order.clientId, {
         id: order.clientId,
-        name: clients.find((c) => c.id === order.clientId)?.name ?? "Unknown client",
+        name: byId(clients, order.clientId)?.name ?? "Unknown client",
         orders: 1,
         subtotal: m.subtotal,
         vat: m.vat,
@@ -132,7 +131,7 @@ export function rollUpByClient(orders: Order[], clients: Client[]): ClientRow[] 
     }
   }
 
-  return [...byId.values()].sort((a, b) => b.totalDue - a.totalDue);
+  return [...rows.values()].sort((a, b) => b.totalDue - a.totalDue);
 }
 
 export interface ContractorRow {
@@ -155,18 +154,18 @@ export function rollUpByContractor(
     allTimeById.set(order.contractorId, (allTimeById.get(order.contractorId) ?? 0) + orderMoney(order).payable);
   }
 
-  const byId = new Map<string, ContractorRow>();
+  const rows = new Map<string, ContractorRow>();
   for (const order of periodOrders) {
     if (!order.contractorId) continue;
     const m = orderMoney(order);
-    const row = byId.get(order.contractorId);
+    const row = rows.get(order.contractorId);
     if (row) {
       row.orders += 1;
       row.earnedThisPeriod += m.payable;
     } else {
-      byId.set(order.contractorId, {
+      rows.set(order.contractorId, {
         id: order.contractorId,
-        name: contractors.find((c) => c.id === order.contractorId)?.name ?? "Unknown contractor",
+        name: byId(contractors, order.contractorId)?.name ?? "Unknown contractor",
         orders: 1,
         earnedThisPeriod: m.payable,
         allTime: allTimeById.get(order.contractorId) ?? 0,
@@ -174,7 +173,7 @@ export function rollUpByContractor(
     }
   }
 
-  return [...byId.values()].sort((a, b) => b.earnedThisPeriod - a.earnedThisPeriod);
+  return [...rows.values()].sort((a, b) => b.earnedThisPeriod - a.earnedThisPeriod);
 }
 
 // ---- Trend ------------------------------------------------------------------
@@ -202,7 +201,7 @@ export function monthlyTrend(orders: Order[], filters: FinancialFilters): TrendP
   const yearOrders = filterForFinancials(orders, { ...filters, month: "all" });
   for (const order of yearOrders) {
     const m = orderMoney(order);
-    const point = points[completedAt(order).getMonth()];
+    const point = points[completedOn(order).getMonth()];
     point.receivables += m.receivable;
     point.payables += m.payable;
     point.earnings += m.earnings;
@@ -216,7 +215,7 @@ export function monthlyTrend(orders: Order[], filters: FinancialFilters): TrendP
 export function availableYears(orders: Order[]): number[] {
   const years = new Set<number>();
   for (const order of orders) {
-    if (isInvoiceable(order)) years.add(completedAt(order).getFullYear());
+    if (isInvoiceable(order)) years.add(completedOn(order).getFullYear());
   }
   if (years.size === 0) years.add(new Date().getFullYear());
   return [...years].sort((a, b) => b - a);

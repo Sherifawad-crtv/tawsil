@@ -9,13 +9,18 @@ import { Select } from "../../components/Select";
 import { useDataStore } from "../../lib/store";
 import { useRole } from "../../lib/RoleContext";
 import { byId, getOrdersForRole, canCreateOrders } from "../../lib/selectors";
-import type { OrderStatus, TripType } from "../../lib/types";
+import type { OrderStatus, Role, TripType } from "../../lib/types";
 
-const STATUS_OPTIONS_BY_ROLE: Record<string, (OrderStatus | "All")[]> = {
+// Keyed by Role, not string, so adding a role without a row here is a
+// compile error rather than a blank page: Executive was missing, and
+// statusOptions[0] on undefined took the whole app down.
+const ALL_STATUSES: (OrderStatus | "All")[] = ["All", "Pending", "Assigned", "In Progress", "Completed", "Cancelled"];
+const STATUS_OPTIONS_BY_ROLE: Record<Role, (OrderStatus | "All")[]> = {
   Supply: ["Pending"],
   Operations: ["All", "Assigned", "In Progress"],
-  Sales: ["All", "Pending", "Assigned", "In Progress", "Completed", "Cancelled"],
-  Admin: ["All", "Pending", "Assigned", "In Progress", "Completed", "Cancelled"],
+  Sales: ALL_STATUSES,
+  Admin: ALL_STATUSES,
+  Executive: ALL_STATUSES,
 };
 const TRIP_OPTIONS: (TripType | "All")[] = ["All", "On Demand", "Daily", "Monthly"];
 

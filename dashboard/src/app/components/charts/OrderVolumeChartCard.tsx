@@ -10,7 +10,7 @@ import { useCountUp } from "../../lib/useCountUp";
  * recipe (count-up headline, delta chip, dashed comparison line, legend).
  */
 
-export type VolumePoint = { label: string; current: number; previous: number };
+type VolumePoint = { label: string; current: number; previous: number };
 
 function describeDelta(current: number, previous: number): { label: string; color: "positive" | "negative" | "neutral" } {
   if (previous === 0) return { label: current > 0 ? "New" : "0%", color: "neutral" };

@@ -7,7 +7,7 @@ import type { Order } from "./types";
  */
 
 /** The three brand blues, light to dark. Darker = more coverage, everywhere they're used. */
-export const BLUE_RAMP = ["#94b2fd", "#1253fa", "#0a0070"] as const;
+const BLUE_RAMP = ["#94b2fd", "#1253fa", "#0a0070"] as const;
 
 /**
  * Colour for a share of the maximum, 0..1, on the ramp above. A plain RGB
@@ -36,7 +36,7 @@ function hex(h: string) {
  * three; otherwise the first, unless it's a road, in which case the
  * governorate is the best area on offer.
  */
-export function areaOf(address: string) {
+function areaOf(address: string) {
   const parts = address.split(",").map((p) => p.trim()).filter(Boolean);
   if (parts.length >= 3) return parts[parts.length - 2];
   if (parts.length === 2 && /\b(rd|road|st|street)\b/i.test(parts[0])) return parts[1];

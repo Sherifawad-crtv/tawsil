@@ -24,7 +24,7 @@ import { cx } from "../lib/cx";
  * Sizes: `md` (default) and `sm` (denser rows), set once via the size flag.
  */
 
-export type TableSize = "sm" | "md";
+type TableSize = "sm" | "md";
 
 export interface TableProps extends Omit<AriaTableProps, "className"> {
   size?: TableSize;

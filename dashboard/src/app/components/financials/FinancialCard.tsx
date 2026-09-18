@@ -7,12 +7,6 @@ import { formatAmount } from "../../lib/format";
  * other card in this dashboard. The only colour is the icon, which carries
  * its series' hue so the card ties back to the split bar; the figure itself
  * stays navy like every other number in the app.
- *
- * `liability` marks a figure that is held rather than owned - dashed edge,
- * and the Liability badge takes the icon's slot, so VAT never reads as
- * income next to the earnings card. The badge sits in the tile slot rather
- * than beside the label because at the 2x2 grid's width the two together
- * truncated the label to "Taxes (…".
  */
 export default function FinancialCard({
   icon: Icon,
@@ -20,7 +14,6 @@ export default function FinancialCard({
   label,
   value,
   caption,
-  liability = false,
   footer,
 }: {
   icon: SolarIcon;
@@ -28,28 +21,14 @@ export default function FinancialCard({
   label: string;
   value: number;
   caption: string;
-  liability?: boolean;
   footer?: ReactNode;
 }) {
   return (
-    <section
-      className={`flex flex-col gap-3 rounded-2xl bg-white p-4 min-w-0 ${
-        liability ? "border border-dashed border-grey" : "border border-border"
-      }`}
-    >
+    <section className="flex flex-col gap-3 rounded-2xl bg-white border border-border p-4 min-w-0">
       <div className="flex items-center gap-2.5 min-w-0">
-        {liability ? (
-          <span
-            className="flex items-center h-9 rounded-lg px-2 text-caption-2-semibold uppercase tracking-wide text-muted bg-grey-light flex-shrink-0"
-            style={{ fontFamily: "var(--font-mono)" }}
-          >
-            Liability
-          </span>
-        ) : (
-          <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-grey-light flex-shrink-0">
-            <Icon size={17} strokeWidth={2.25} color={iconColor} />
-          </span>
-        )}
+        <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-grey-light flex-shrink-0">
+          <Icon size={17} strokeWidth={2.25} color={iconColor} />
+        </span>
         <p className="text-body-2-regular text-muted truncate">{label}</p>
       </div>
 

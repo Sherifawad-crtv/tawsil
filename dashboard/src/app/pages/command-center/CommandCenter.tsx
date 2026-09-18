@@ -185,8 +185,14 @@ export default function CommandCenter() {
           </Suspense>
         </div>
 
-        <div className={`relative grid gap-3 items-start ${COLUMNS}`}>
-          <div className="flex flex-col gap-3">
+        {/*
+          The grid is a full-width box painted above the globe, so left to
+          itself it swallows every pointer event in the gutter and the globe
+          can't be dragged. It passes the pointer through; only the two card
+          columns take it back.
+        */}
+        <div className={`relative grid gap-3 items-start pointer-events-none ${COLUMNS}`}>
+          <div className="flex flex-col gap-3 pointer-events-auto">
             <div className="grid grid-cols-2 gap-3">
               <FinancialCard
                 icon={ArrowDownIcon}
@@ -213,7 +219,6 @@ export default function CommandCenter() {
               <FinancialCard
                 icon={BillListIcon}
                 iconColor={MONEY_COLORS.vat}
-                liability
                 label="Taxes (VAT)"
                 value={totals.vat}
                 caption="Held for the tax authority"
@@ -226,7 +231,7 @@ export default function CommandCenter() {
           {/* The gutter the globe shows through. */}
           <div aria-hidden />
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 pointer-events-auto">
             <InsightCard title="Where it splits" subtitle="Every pound billed, accounted for">
               <MoneySplitBar payables={totals.payable} earnings={totals.earnings} vat={totals.vat} />
             </InsightCard>

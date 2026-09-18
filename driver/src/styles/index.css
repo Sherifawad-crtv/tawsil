@@ -1,0 +1,58 @@
+@import './fonts.css';
+@import 'tailwindcss' source(none);
+@source '../**/*.{js,ts,jsx,tsx}';
+
+/* ---------------------------------------------------------------------------
+ * Design system: the Driver app's own build-prompt spec (Tawsil Driver PWA -
+ * Claude Code Build Prompts), same navy/royal/blue tokens as the Client app,
+ * dashboard and Contractor app, plus a purple "In Progress" status specific
+ * to this app's own established convention.
+ * --------------------------------------------------------------------------- */
+
+@theme {
+  --font-heading: 'Archivo Black', sans-serif;
+  --font-sub: 'Archivo', sans-serif;
+  --font-mono: 'Courier Prime', monospace;
+
+  --color-navy: #040033;
+  --color-royal: #0a0070;
+  --color-blue: #1253fa;
+  --color-blue-soft: #eaf0fe;
+  --color-grey: #d8d9d4;
+  --color-grey-light: #f5f5f3;
+  --color-nav-bg: #fafaf8;
+  --color-tile: #f0f0ee;
+  --color-border: #e8e8e5;
+  --color-muted: #9ca3af;
+
+  /* Driver's own status colors: blue Assigned, purple In Progress, green
+     Completed, red Cancelled - purple is this app's own convention, distinct
+     from Contractor's navy "In Progress". */
+  --color-status-assigned: #1253fa;
+  --color-status-progress: #7c3aed;
+  --color-status-completed: #16803c;
+  --color-status-cancelled: #dc2626;
+
+  --radius-2lg: 10px;
+
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.06);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.06), 0 1px 3px 0 rgb(0 0 0 / 0.10);
+  --shadow-md: 0 2px 4px -1px rgb(0 0 0 / 0.06), 0 4px 6px -1px rgb(0 0 0 / 0.10);
+  --shadow-lg: 0 4px 6px -2px rgb(0 0 0 / 0.05), 0 10px 15px -3px rgb(0 0 0 / 0.10);
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-grey-light);
+  color: var(--color-navy);
+  font-family: var(--font-sub);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}

@@ -6,7 +6,7 @@ import {
   SafeSquareIcon,
   BillListIcon,
   Buildings2Icon,
-  UsersGroupRoundedIcon,
+  BuildingsIcon,
 } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import InsightCard from "../../components/InsightCard";
@@ -253,7 +253,7 @@ export default function CommandCenter() {
           emptyLabel="No invoiceable orders in this period."
         />
         <RollupTable
-          icon={UsersGroupRoundedIcon}
+          icon={BuildingsIcon}
           title={`Contractors · ${periodTitle}`}
           rows={contractorRows}
           columns={contractorColumns}

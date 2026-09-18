@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import type { ReactNode } from "react";
+import { AltArrowDownIcon } from "@solar-icons/react/linear";
 import {
   Button as AriaButton,
   ListBox as AriaListBox,
@@ -30,16 +31,7 @@ import { MENU_ITEM, MENU_ITEM_ACTIVE, MENU_ITEMS_CONTAINER, MENU_POPOVER_SURFACE
  */
 
 function ChevronDownSmall({ className }: { className?: string }) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={className} aria-hidden>
-      <path
-        d="M4 6.5L7.29289 9.79289C7.68342 10.1834 8.31658 10.1834 8.70711 9.79289L12 6.5"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
+  return <AltArrowDownIcon size={16} className={className} aria-hidden />;
 }
 
 export interface SelectOption {

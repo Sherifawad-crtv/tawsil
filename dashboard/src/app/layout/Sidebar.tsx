@@ -3,7 +3,7 @@ import { CloseIcon } from "@solar-icons/react/linear";
 import {
   Widget2Icon as Widget2LinearIcon,
   BoxIcon as BoxLinearIcon,
-  BusIcon as BusLinearIcon,
+  BuildingsIcon as BuildingsLinearIcon,
   Buildings2Icon as Buildings2LinearIcon,
   UsersGroupRoundedIcon as UsersGroupRoundedLinearIcon,
   CalendarMarkIcon as CalendarMarkLinearIcon,
@@ -13,7 +13,7 @@ import {
 import {
   Widget2Icon as Widget2BoldIcon,
   BoxIcon as BoxBoldIcon,
-  BusIcon as BusBoldIcon,
+  BuildingsIcon as BuildingsBoldIcon,
   Buildings2Icon as Buildings2BoldIcon,
   UsersGroupRoundedIcon as UsersGroupRoundedBoldIcon,
   CalendarMarkIcon as CalendarMarkBoldIcon,
@@ -31,7 +31,7 @@ const NAV_ITEMS = [
   { to: "/command-center", label: "Command Center", iconOutline: GlobalLinearIcon, iconFilled: GlobalBoldIcon, execOnly: true },
   { to: "/", label: "Home", iconOutline: Widget2LinearIcon, iconFilled: Widget2BoldIcon, end: true },
   { to: "/orders", label: "Orders", iconOutline: BoxLinearIcon, iconFilled: BoxBoldIcon, showOrderCount: true },
-  { to: "/contractors", label: "Contractors", iconOutline: BusLinearIcon, iconFilled: BusBoldIcon },
+  { to: "/contractors", label: "Contractors", iconOutline: BuildingsLinearIcon, iconFilled: BuildingsBoldIcon },
   { to: "/clients", label: "Clients", iconOutline: Buildings2LinearIcon, iconFilled: Buildings2BoldIcon },
   { to: "/resources", label: "Resources", iconOutline: UsersGroupRoundedLinearIcon, iconFilled: UsersGroupRoundedBoldIcon },
   { to: "/monthly-orders", label: "Monthly Orders", iconOutline: CalendarMarkLinearIcon, iconFilled: CalendarMarkBoldIcon },

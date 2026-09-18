@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import { AddIcon, BusIcon } from "@solar-icons/react/linear";
+import { AddIcon, BuildingsIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import SearchInput from "../../components/SearchInput";
 import EmptyState from "../../components/EmptyState";
@@ -43,7 +43,7 @@ export default function ContractorsList() {
           <TableColumn>Vehicles</TableColumn>
           <TableColumn>Status</TableColumn>
         </TableHeader>
-        <TableBody renderEmptyState={() => <EmptyState icon={BusIcon} title="No contractors match your search" />}>
+        <TableBody renderEmptyState={() => <EmptyState icon={BuildingsIcon} title="No contractors match your search" />}>
           {filtered.map(({ contractor, driverCount, vehicleCount }) => (
             <TableRow key={contractor.id} id={contractor.id}>
               <TableCell><span className="text-body-semibold text-navy">{contractor.name}</span></TableCell>

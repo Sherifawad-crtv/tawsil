@@ -5,6 +5,7 @@ import { ArrowLeftIcon, ClockCircleIcon, CalendarDateIcon } from "@solar-icons/r
 import OrdersTable from "../../components/OrdersTable";
 import PageHeader from "../../components/PageHeader";
 import { MonthPanel } from "../../components/date-picker/shared";
+import { ProgressBar } from "../../components/boardui/ProgressBar";
 import { useMediaQuery } from "../../lib/useMediaQuery";
 import { useDataStore } from "../../lib/store";
 import { byId } from "../../lib/selectors";
@@ -56,9 +57,7 @@ export default function MonthlyOrderDetail() {
           <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Progress</h3>
           <span className="text-caption-1-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>{pct}%</span>
         </div>
-        <div className="h-2 rounded-full bg-grey-light overflow-hidden mb-4">
-          <div className="h-full bg-blue rounded-full" style={{ width: `${pct}%` }} />
-        </div>
+        <ProgressBar value={pct} className="mb-4" />
         <div className="flex items-center gap-2 mb-3">
           <CalendarDateIcon size={14} className="text-muted" />
           <span className="text-caption-1-regular text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>Execution Calendar</span>
@@ -134,7 +133,7 @@ function StatTile({ icon: Icon, label, value, accent }: { icon?: React.ElementTy
         className="text-title-2-medium"
         style={{
           fontFamily: "var(--font-heading)",
-          color: accent === "green" ? "#16803C" : accent === "amber" ? "#D97706" : "#040033",
+          color: accent === "green" ? "var(--color-status-completed)" : accent === "amber" ? "var(--color-status-pending)" : "var(--color-navy)",
         }}
       >
         {value}

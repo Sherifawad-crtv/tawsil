@@ -6,8 +6,10 @@ import { useCountUp } from "../../lib/useCountUp";
 /**
  * This week's daily order count as a filled area against last week's line,
  * day-aligned. Hovering a day swaps the headline to that day's count and its
- * week-earlier comparison. Mirrors the BoardUI revenue/orders chart card
- * recipe (count-up headline, delta chip, dashed comparison line, legend).
+ * week-earlier comparison. Structure, hover behaviour and the count-up
+ * headline are BoardUI's revenue/orders chart card recipe; the series draw
+ * on the ported chart-6/chart-6-active/chart-neutral/chart-cursor tokens
+ * instead of the hand-picked hex this card used before.
  */
 
 type VolumePoint = { label: string; current: number; previous: number };
@@ -24,8 +26,8 @@ function ActiveDot({ cx: x, cy: y }: { cx?: number; cy?: number }) {
   if (x === undefined || y === undefined) return null;
   return (
     <g>
-      <circle cx={x} cy={y} r={7} fill="#1253FA" opacity={0.2} />
-      <circle cx={x} cy={y} r={3.5} fill="#1253FA" stroke="#F0F0EE" strokeWidth={2} />
+      <circle cx={x} cy={y} r={7} fill="var(--color-chart-6-active)" opacity={0.2} />
+      <circle cx={x} cy={y} r={3.5} fill="var(--color-chart-6-active)" stroke="var(--color-background-secondary-default)" strokeWidth={2} />
     </g>
   );
 }
@@ -63,11 +65,11 @@ export default function OrderVolumeChartCard({ data }: { data: VolumePoint[] }) 
         </div>
         <dl className="flex shrink-0 items-center gap-3 text-caption-2-regular text-muted">
           <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-blue" />
+            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "var(--color-chart-6-active)" }} />
             <dt style={{ fontFamily: "var(--font-sub)" }}>This week</dt>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-grey" />
+            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "var(--color-chart-neutral)" }} />
             <dt style={{ fontFamily: "var(--font-sub)" }}>Last week</dt>
           </div>
         </dl>
@@ -86,8 +88,8 @@ export default function OrderVolumeChartCard({ data }: { data: VolumePoint[] }) 
           >
             <defs>
               <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#1253FA" stopOpacity={0.3} />
-                <stop offset="100%" stopColor="#1253FA" stopOpacity={0} />
+                <stop offset="0%" stopColor="var(--color-chart-6)" stopOpacity={0.3} />
+                <stop offset="100%" stopColor="var(--color-chart-6)" stopOpacity={0} />
               </linearGradient>
             </defs>
             <YAxis
@@ -98,13 +100,32 @@ export default function OrderVolumeChartCard({ data }: { data: VolumePoint[] }) 
               tickFormatter={(v: number) => Math.round(v).toString()}
               tickLine={false}
               axisLine={false}
-              tick={{ fontSize: 10, fill: "#9ca3af" }}
+              tick={{ fontSize: 10, fill: "var(--color-text-tertiary)" }}
             />
-            <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} tick={{ fontSize: 11, fill: "#9ca3af" }} />
-            <Tooltip content={() => null} cursor={{ stroke: "#d8d9d4", strokeWidth: 1, strokeDasharray: "4 4" }} />
-            <Line type="monotone" dataKey="previous" stroke="#d8d9d4" strokeWidth={1.75} strokeDasharray="4 4" dot={false} activeDot={false} isAnimationActive animationDuration={400} />
+            <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} tick={{ fontSize: 11, fill: "var(--color-text-tertiary)" }} />
+            <Tooltip content={() => null} cursor={{ stroke: "var(--color-chart-cursor)", strokeWidth: 1, strokeDasharray: "4 4" }} />
+            <Line
+              type="monotone"
+              dataKey="previous"
+              stroke="var(--color-chart-neutral)"
+              strokeWidth={1.75}
+              strokeDasharray="4 4"
+              dot={false}
+              activeDot={false}
+              isAnimationActive
+              animationDuration={400}
+            />
             <Area type="monotone" dataKey="current" stroke="none" fill={`url(#${gradientId})`} isAnimationActive animationDuration={400} />
-            <Line type="monotone" dataKey="current" stroke="#1253FA" strokeWidth={2.25} dot={false} activeDot={<ActiveDot />} isAnimationActive animationDuration={400} />
+            <Line
+              type="monotone"
+              dataKey="current"
+              stroke="var(--color-chart-6-active)"
+              strokeWidth={2.25}
+              dot={false}
+              activeDot={<ActiveDot />}
+              isAnimationActive
+              animationDuration={400}
+            />
           </ComposedChart>
         </ResponsiveContainer>
       </div>

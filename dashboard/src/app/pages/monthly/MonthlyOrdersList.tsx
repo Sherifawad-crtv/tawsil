@@ -6,6 +6,7 @@ import EmptyState from "../../components/EmptyState";
 import MonthlyOrderFormModal from "../../components/monthly/MonthlyOrderFormModal";
 import { Button } from "../../components/Button";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "../../components/Table";
+import { ProgressBar } from "../../components/boardui/ProgressBar";
 import { useDataStore } from "../../lib/store";
 import { byId } from "../../lib/selectors";
 
@@ -51,9 +52,7 @@ export default function MonthlyOrdersList() {
                 <TableCell className="text-muted">{contractor?.name ?? "Unassigned"}</TableCell>
                 <TableCell>
                   <span className="flex items-center gap-2">
-                    <span className="h-1.5 w-24 rounded-full bg-grey-light overflow-hidden">
-                      <span className="block h-full bg-blue rounded-full" style={{ width: `${pct}%` }} />
-                    </span>
+                    <ProgressBar value={pct} size="sm" className="w-24" />
                     <span className="text-muted" style={{ fontFamily: "var(--font-mono)" }}>{pct}%</span>
                   </span>
                 </TableCell>

@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { CloseCircleIcon, ForbiddenIcon, CheckCircleIcon, PhoneIcon, LetterIcon } from "@solar-icons/react/linear";
 import { Chip } from "../Chip";
+import { ProgressBar } from "../boardui/ProgressBar";
 import VehicleStatusBadge from "./VehicleStatusBadge";
 import { useDataStore } from "../../lib/store";
 import { byId, getTruckType } from "../../lib/selectors";
@@ -121,27 +122,11 @@ export default function VehicleInspector({ vehicle, onClose }: { vehicle: Vehicl
       </div>
 
       <Block title="Performance · last 6 months">
-        <div className="flex items-end gap-1.5 h-12" aria-hidden>
-          {perf.monthly.map((m) => (
-            <div key={m.label} className="flex-1 flex flex-col items-center gap-1 h-full justify-end">
-              <div
-                className="w-full rounded-sm"
-                style={{
-                  height: `${Math.max(4, (m.count / peak) * 100)}%`,
-                  backgroundColor: m.count ? "var(--color-blue)" : "var(--color-border)",
-                }}
-                title={`${m.label}: ${m.count}`}
-              />
-            </div>
-          ))}
-        </div>
-        <div className="flex justify-between">
-          {perf.monthly.map((m) => (
-            <span key={m.label} className="text-caption-2-regular text-muted flex-1 text-center" style={{ fontFamily: "var(--font-mono)" }}>
-              {m.label}
-            </span>
-          ))}
-        </div>
+        <ProgressBar
+          direction="vertical"
+          bars={perf.monthly.map((m) => ({ label: m.label, value: m.count }))}
+          peak={peak}
+        />
         <div className="grid grid-cols-2 gap-x-4 pt-1">
           <Row label="Orders" value={String(perf.total)} />
           <Row label="Completed" value={String(perf.completed)} />

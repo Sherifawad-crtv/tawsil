@@ -3,7 +3,7 @@ import { blueShade, type AreaCoverage } from "../../lib/coverage";
 
 // Beyond this the slices stop being readable; the tail folds into Other.
 const MAX_SLICES = 5;
-const OTHER = "#d8d9d4"; // --color-grey: the tail is not coverage, so not blue
+const OTHER = "var(--color-grey)"; // --color-grey: the tail is not coverage, so not blue
 
 /**
  * Share of orders by area, as a donut on the brand blues: the biggest area

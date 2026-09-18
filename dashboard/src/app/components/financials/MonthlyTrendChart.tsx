@@ -1,14 +1,14 @@
 import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import type { TrendPoint } from "../../lib/financials";
+import { MONEY_COLORS, type TrendPoint } from "../../lib/financials";
 import { formatEGP } from "../../lib/format";
 
 const SERIES = [
-  { key: "receivables", label: "Client receivables", color: "#1253fa" },
-  { key: "payables", label: "Contractor payables", color: "#8a4b1f" },
-  { key: "earnings", label: "Company earnings", color: "#16803c" },
+  { key: "receivables", label: "Client receivables", color: MONEY_COLORS.receivables },
+  { key: "payables", label: "Contractor payables", color: MONEY_COLORS.payables },
+  { key: "earnings", label: "Company earnings", color: MONEY_COLORS.earnings },
 ] as const;
 
-const VAT_COLOR = "#9ca3af";
+const VAT_COLOR = MONEY_COLORS.vat;
 
 function compact(value: number) {
   if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
@@ -47,13 +47,13 @@ export default function MonthlyTrendChart({ data, year }: { data: TrendPoint[]; 
       </h3>
       <p className="text-body-2-regular text-muted">Receivables, payables and VAT across the year</p>
 
-      <div className="mt-4" style={{ height: "320px" }}>
+      <div className="mt-4" style={{ height: "260px" }}>
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: 8 }}>
             <defs>
               <linearGradient id="trendReceivables" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#1253fa" stopOpacity={0.14} />
-                <stop offset="100%" stopColor="#1253fa" stopOpacity={0} />
+                <stop offset="0%" stopColor={MONEY_COLORS.receivables} stopOpacity={0.14} />
+                <stop offset="100%" stopColor={MONEY_COLORS.receivables} stopOpacity={0} />
               </linearGradient>
             </defs>
 
@@ -76,13 +76,13 @@ export default function MonthlyTrendChart({ data, year }: { data: TrendPoint[]; 
             <Area
               type="monotone"
               dataKey="receivables"
-              stroke="#1253fa"
+              stroke={MONEY_COLORS.receivables}
               strokeWidth={2}
               fill="url(#trendReceivables)"
               dot={false}
             />
-            <Line type="monotone" dataKey="payables" stroke="#8a4b1f" strokeWidth={2} dot={false} />
-            <Line type="monotone" dataKey="earnings" stroke="#16803c" strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="payables" stroke={MONEY_COLORS.payables} strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="earnings" stroke={MONEY_COLORS.earnings} strokeWidth={2} dot={false} />
             <Line
               type="monotone"
               dataKey="vat"
@@ -102,7 +102,7 @@ export default function MonthlyTrendChart({ data, year }: { data: TrendPoint[]; 
         <LegendItem
           color={VAT_COLOR}
           dashed
-          label="Taxes (VAT) — Held for the tax authority, not income"
+          label="Taxes (VAT) — a liability, not income"
         />
       </div>
     </div>

@@ -236,3 +236,17 @@ export const MONTH_OPTIONS = [
 export function monthLabel(month: number | "all") {
   return month === "all" ? "Whole year" : FULL_MONTHS[month - 1];
 }
+
+// ---- Palette ----------------------------------------------------------------
+
+/**
+ * One colour per money series, drawn from the dashboard's own status tokens
+ * rather than invented for this page - so the split bar, the trend chart and
+ * the headline tiles can't drift apart.
+ */
+export const MONEY_COLORS = {
+  receivables: "#1253fa", // --color-blue
+  payables: "#d97706", // --color-status-pending
+  earnings: "#16803c", // --color-status-completed
+  vat: "#9ca3af", // --color-muted: a liability, deliberately colourless
+} as const;

@@ -7,11 +7,13 @@ import {
   BillListIcon,
   Buildings2Icon,
   UsersGroupRoundedIcon,
-  InfoCircleIcon,
 } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
+import InsightCard from "../../components/InsightCard";
 import { Select } from "../../components/Select";
 import FinancialCard from "../../components/financials/FinancialCard";
+import SolidMoneyStat from "../../components/financials/SolidMoneyStat";
+import MoneySplitBar from "../../components/financials/MoneySplitBar";
 import MonthlyTrendChart from "../../components/financials/MonthlyTrendChart";
 import RollupTable, { type RollupColumn } from "../../components/financials/RollupTable";
 import { useDataStore } from "../../lib/store";
@@ -35,6 +37,12 @@ import {
 // three.js is heavy - kept out of the main bundle so every other page loads
 // exactly as fast as it did before this view existed.
 const OrdersGlobe = lazy(() => import("../../components/globe/OrdersGlobe"));
+
+// The globe's canvas is square and the sphere covers ~82% of it at the
+// framing OrdersGlobe uses, so this is also the band's height: the sphere
+// then has real margin above and below and is only ever cut on the right,
+// where it deliberately runs off the panel.
+const GLOBE_PX = 900;
 
 export default function CommandCenter() {
   const { orders, clients, contractors } = useDataStore();
@@ -62,6 +70,9 @@ export default function CommandCenter() {
   if (!canViewCommandCenter(role)) return <Navigate to="/" replace />;
 
   const periodTitle = `${monthLabel(filters.month)} ${filters.year}`;
+  const marginPercent =
+    totals.receivable > 0 ? Math.round((totals.earnings / totals.receivable) * 100) : 0;
+  const avgOrder = totals.orderCount > 0 ? totals.receivable / totals.orderCount : 0;
 
   const clientColumns: RollupColumn<ClientRow>[] = [
     { id: "name", label: "Client", render: (r) => r.name },
@@ -83,19 +94,36 @@ export default function CommandCenter() {
       <PageHeader title="Command Center" subtitle="Accrued, invoiceable figures from completed orders." />
 
       {/*
-        Globe sits behind the filters and headline figures as the hero band,
-        running off the right edge. The dense content below takes the full
-        width instead of being squeezed beside it.
+        The globe is the backdrop, oversized and running off the right edge -
+        overflow-hidden is what cuts that side, and only that side. The card
+        column sits over it on the left, in this dashboard's own grid: two
+        solid brand tiles carry the figures an exec reads first, everything
+        else stays on white so those keep their weight.
       */}
-      <div className="relative overflow-hidden rounded-2xl" style={{ minHeight: "430px" }}>
-        <div className="absolute hidden lg:block" style={{ top: 0, right: "-140px", width: "430px", height: "430px" }}>
+      <div className="relative overflow-hidden rounded-2xl" style={{ minHeight: `${GLOBE_PX}px` }}>
+        {/*
+          Centred vertically rather than pinned to the top: the card column
+          runs taller than the globe, and pinning left a dead gap on the
+          right below it. The band is never shorter than the globe (that's
+          what minHeight is for), so centring can't clip it either.
+        */}
+        <div
+          className="absolute hidden lg:block"
+          style={{
+            top: "50%",
+            transform: "translateY(-50%)",
+            right: "-220px",
+            width: `${GLOBE_PX}px`,
+            height: `${GLOBE_PX}px`,
+          }}
+        >
           <Suspense fallback={null}>
             <OrdersGlobe className="w-full h-full" />
           </Suspense>
         </div>
 
-        <div className="relative w-full lg:w-[76%] flex flex-col gap-4 p-1">
-          <div className="rounded-2xl bg-white border border-border p-4 flex flex-col gap-3">
+        <div className="relative w-full lg:w-[62%] flex flex-col gap-3 p-1">
+          <div className="rounded-2xl bg-white border border-border p-4">
             <div className="flex flex-wrap items-end gap-3">
               <Field label="Period">
                 <div className="flex items-center gap-2">
@@ -114,7 +142,7 @@ export default function CommandCenter() {
                 </div>
               </Field>
 
-              <Field label="Client filter">
+              <Field label="Client">
                 <Select
                   aria-label="Client filter"
                   value={filters.clientId}
@@ -126,7 +154,7 @@ export default function CommandCenter() {
                 />
               </Field>
 
-              <Field label="Contractor filter">
+              <Field label="Contractor">
                 <Select
                   aria-label="Contractor filter"
                   value={filters.contractorId}
@@ -138,49 +166,59 @@ export default function CommandCenter() {
                 />
               </Field>
             </div>
-
-            <p className="flex items-center gap-1.5 text-caption-1-regular text-muted">
-              <InfoCircleIcon size={14} className="flex-shrink-0" />
-              Receivables = Payables + Earnings + VAT
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
-            <FinancialCard
-              icon={ArrowDownIcon}
-              tone="blue"
-              label="Client receivables"
-              value={formatAmount(totals.receivable)}
-              caption="Billed to clients, VAT included"
-              footer={`${totals.orderCount.toLocaleString()} orders`}
-            />
-            <FinancialCard
-              icon={ArrowUpIcon}
-              tone="amber"
-              label="Contractor payables"
-              value={formatAmount(totals.payable)}
-              caption="Owed out to contractors"
-            />
-            <FinancialCard
-              icon={SafeSquareIcon}
-              tone="green"
-              label="Company earnings"
-              value={formatAmount(totals.earnings)}
-              caption="What the company keeps"
-            />
-            <FinancialCard
-              icon={BillListIcon}
-              tone="navy"
-              liability
-              label="Taxes (VAT)"
-              value={formatAmount(totals.vat)}
-              caption="Held for the tax authority — not income"
-            />
+          <div className="grid grid-cols-12 gap-3">
+            <div className="col-span-12 sm:col-span-7 flex flex-col gap-3">
+              <SolidMoneyStat
+                icon={ArrowDownIcon}
+                background="#1253fa"
+                label="Client receivables"
+                value={totals.receivable}
+                caption="Billed to clients, VAT included"
+                footer={`${totals.orderCount.toLocaleString()} completed orders · ${formatAmount(avgOrder)} EGP average`}
+              />
+              <SolidMoneyStat
+                icon={SafeSquareIcon}
+                background="#0a0070"
+                label="Company earnings"
+                value={totals.earnings}
+                caption={`What the company keeps — ${marginPercent}% of receivables`}
+              />
+            </div>
+
+            <div className="col-span-12 sm:col-span-5">
+              <InsightCard title="Where it splits" subtitle="Every pound billed, accounted for">
+                <MoneySplitBar payables={totals.payable} earnings={totals.earnings} vat={totals.vat} />
+              </InsightCard>
+            </div>
           </div>
+
+          <div className="grid grid-cols-12 gap-3">
+            <div className="col-span-12 sm:col-span-6">
+              <FinancialCard
+                icon={ArrowUpIcon}
+                tone="amber"
+                label="Contractor payables"
+                value={formatAmount(totals.payable)}
+                caption="Owed out to contractors"
+              />
+            </div>
+            <div className="col-span-12 sm:col-span-6">
+              <FinancialCard
+                icon={BillListIcon}
+                tone="navy"
+                liability
+                label="Taxes (VAT)"
+                value={formatAmount(totals.vat)}
+                caption="Held for the tax authority — not income"
+              />
+            </div>
+          </div>
+
+          <MonthlyTrendChart data={trend} year={filters.year} />
         </div>
       </div>
-
-      <MonthlyTrendChart data={trend} year={filters.year} />
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
         <RollupTable

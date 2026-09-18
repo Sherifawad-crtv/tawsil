@@ -27,9 +27,14 @@ import countries110m from "world-atlas/countries-110m.json";
 const SPHERE = "#f5f5f3";
 const DOTS = "#c7c8c1";
 
-// Framed over Egypt/MENA - close enough that the landmasses read, far enough
-// that the whole sphere sits inside its box uncropped.
-const VIEW = { lat: 26.8, lng: 30.8, altitude: 1.5 };
+// Framed over Egypt/MENA. Altitude is what decides whether the sphere fits:
+// the camera sits at R*(1+altitude) and the silhouette subtends asin(R/d),
+// against globe.gl's 50-degree vertical FOV. At 1.5 the sphere covers 94% of
+// the canvas height, so its edges and its drop shadow were being clipped -
+// which read as "cropped top and bottom". At 1.8 it covers 82%, leaving a
+// real margin on both. Make the canvas bigger to make the globe bigger;
+// don't pull the camera in.
+const VIEW = { lat: 26.8, lng: 30.8, altitude: 1.8 };
 
 // hexPolygons tessellates through h3-js, and h3 throws an H3LibraryError on
 // a couple of this topology's simplified outlines. Checked each of the 177

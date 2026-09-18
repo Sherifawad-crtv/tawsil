@@ -1,4 +1,5 @@
 import { lazy, Suspense, useMemo } from "react";
+import { Navigate } from "react-router";
 import { ArrowUpIcon, BoxIcon, RoutingIcon, MapPointIcon, BusIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import InsightCard from "../../components/InsightCard";
@@ -12,6 +13,7 @@ import {
   getOrdersByStatus,
   getOrderVolumeWeekOverWeek,
   getProblemsByLocation,
+  canViewCommandCenter,
 } from "../../lib/selectors";
 import { getGlobePoints } from "../../lib/globeData";
 
@@ -29,6 +31,10 @@ export default function CommandCenter() {
   const locations = useMemo(() => getProblemsByLocation(orders, role), [orders, role]);
   const topPoints = useMemo(() => getGlobePoints(orders).slice(0, 3), [orders]);
 
+  // The sidebar hides this tab for other roles, but hiding a link isn't
+  // gating - without this the page is still reachable by typing the URL.
+  if (!canViewCommandCenter(role)) return <Navigate to="/" replace />;
+
   const completed = statusData.find((s) => s.status === "Completed")?.count ?? 0;
   const completionRate = orders.length > 0 ? Math.round((completed / orders.length) * 100) : 0;
 
@@ -41,10 +47,17 @@ export default function CommandCenter() {
         panel's edge rather than sitting inside it; overflow-hidden is what
         crops it. The card grid sits above it on the left.
       */}
-      <div className="relative overflow-hidden rounded-2xl" style={{ minHeight: "720px" }}>
+      <div className="relative overflow-hidden rounded-2xl" style={{ minHeight: "800px" }}>
+        {/*
+          Canvas height matches the container exactly and it's pinned to the
+          top, so the sphere is never clipped vertically - only the right
+          side runs past the panel edge. No pointer-events-none here: that
+          killed dragging. The card column below sits later in the DOM, so
+          it still takes its own clicks.
+        */}
         <div
-          className="absolute pointer-events-none hidden lg:block"
-          style={{ top: "50%", right: "-22%", transform: "translateY(-50%)", width: "980px", height: "980px" }}
+          className="absolute hidden lg:block"
+          style={{ top: 0, right: "-190px", width: "800px", height: "800px" }}
         >
           <Suspense fallback={null}>
             <OrdersGlobe className="w-full h-full" />

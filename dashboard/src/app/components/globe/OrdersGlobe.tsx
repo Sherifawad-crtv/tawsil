@@ -29,7 +29,7 @@ const DOTS = "#c7c8c1";
 
 // Framed over Egypt/MENA - close enough that the landmasses read, far enough
 // that the whole sphere sits inside its box uncropped.
-const VIEW = { lat: 26.8, lng: 30.8, altitude: 1.35 };
+const VIEW = { lat: 26.8, lng: 30.8, altitude: 1.5 };
 
 // hexPolygons tessellates through h3-js, and h3 throws an H3LibraryError on
 // a couple of this topology's simplified outlines. Checked each of the 177

@@ -1,4 +1,4 @@
-import { StarIcon, PhoneIcon, LetterIcon, UserIdIcon, ForbiddenIcon, CheckCircleIcon } from "@solar-icons/react/line-duotone";
+import { StarIcon, PhoneIcon, LetterIcon, UserIdIcon, ForbiddenIcon, CheckCircleIcon } from "@solar-icons/react/bold-duotone";
 import { useDataStore } from "../lib/store";
 import { getActiveOrderCountForDriver } from "../lib/selectors";
 import { formatDate } from "../lib/format";

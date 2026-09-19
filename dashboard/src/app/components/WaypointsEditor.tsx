@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AddIcon, TrashBinTrashIcon, AltArrowUpIcon, AltArrowDownIcon, MapPointIcon, BookmarkIcon } from "@solar-icons/react/line-duotone";
+import { AddIcon, TrashBinTrashIcon, AltArrowUpIcon, AltArrowDownIcon, MapPointIcon, BookmarkIcon } from "@solar-icons/react/bold-duotone";
 import { TextField, SelectField } from "./FormField";
 import { Button } from "./Button";
 import { SAVED_LOCATIONS } from "../lib/entities";

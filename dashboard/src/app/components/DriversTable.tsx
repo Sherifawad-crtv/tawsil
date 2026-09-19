@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StarIcon, UsersGroupRoundedIcon } from "@solar-icons/react/line-duotone";
+import { StarIcon, UsersGroupRoundedIcon } from "@solar-icons/react/bold-duotone";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "./Table";
 import ActiveBadge from "./ActiveBadge";
 import EmptyState from "./EmptyState";

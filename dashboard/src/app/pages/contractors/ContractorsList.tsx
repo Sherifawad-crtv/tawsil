@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import { AddIcon, BuildingsIcon } from "@solar-icons/react/line-duotone";
+import { AddIcon, BuildingsIcon } from "@solar-icons/react/bold-duotone";
 import PageHeader from "../../components/PageHeader";
 import SearchInput from "../../components/SearchInput";
 import EmptyState from "../../components/EmptyState";

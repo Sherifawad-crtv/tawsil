@@ -1,4 +1,4 @@
-import { DownloadIcon } from "@solar-icons/react/line-duotone";
+import { DownloadIcon } from "@solar-icons/react/bold-duotone";
 import { Button } from "./Button";
 
 export default function CsvExportButton({ filename, rows, headers }: { filename: string; rows: (string | number)[][]; headers: string[] }) {

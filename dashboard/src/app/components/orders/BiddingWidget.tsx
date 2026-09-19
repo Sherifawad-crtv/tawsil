@@ -1,4 +1,4 @@
-import { SledgehammerIcon } from "@solar-icons/react/line-duotone";
+import { SledgehammerIcon } from "@solar-icons/react/bold-duotone";
 import EmptyState from "../EmptyState";
 import { formatEGP, formatDateTime } from "../../lib/format";
 import type { BiddingInfo } from "../../lib/types";

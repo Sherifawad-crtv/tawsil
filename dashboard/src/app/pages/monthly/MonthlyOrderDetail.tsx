@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router";
-import { ArrowLeftIcon, ClockCircleIcon, CalendarDateIcon } from "@solar-icons/react/line-duotone";
+import { ArrowLeftIcon, ClockCircleIcon, CalendarDateIcon } from "@solar-icons/react/bold-duotone";
 import OrdersTable from "../../components/OrdersTable";
 import PageHeader from "../../components/PageHeader";
 import MultiDateCalendar from "../../components/MultiDateCalendar";

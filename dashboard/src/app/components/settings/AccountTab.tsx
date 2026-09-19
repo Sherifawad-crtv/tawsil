@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UserIcon, LetterIcon, PhoneIcon, CaseIcon, CheckCircleIcon } from "@solar-icons/react/line-duotone";
+import { UserIcon, LetterIcon, PhoneIcon, CaseIcon, CheckCircleIcon } from "@solar-icons/react/bold-duotone";
 import { TextField } from "../FormField";
 import { Button } from "../Button";
 import { SettingsCard, SettingsSectionLabel } from "./SettingsRows";

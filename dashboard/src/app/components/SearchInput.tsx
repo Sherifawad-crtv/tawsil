@@ -1,4 +1,4 @@
-import { MagnifierIcon } from "@solar-icons/react/line-duotone";
+import { MagnifierIcon } from "@solar-icons/react/bold-duotone";
 import { cx } from "../lib/cx";
 import { FIELD_BASE } from "../lib/fieldClass";
 

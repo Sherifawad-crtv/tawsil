@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { AltArrowDownIcon } from "@solar-icons/react/line-duotone";
+import { AltArrowDownIcon } from "@solar-icons/react/bold-duotone";
 import {
   Button as AriaButton,
   ListBox as AriaListBox,

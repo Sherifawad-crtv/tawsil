@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SnowflakeIcon, CheckCircleIcon } from "@solar-icons/react/line-duotone";
+import { SnowflakeIcon, CheckCircleIcon } from "@solar-icons/react/bold-duotone";
 import { TRUCK_TYPES } from "../lib/constants";
 import type { TruckBaseClass } from "../lib/types";
 import { TRUCK_IMAGES } from "../lib/truckImages";

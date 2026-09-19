@@ -71,7 +71,7 @@ export default function Sidebar({
           open ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <div className="flex items-center justify-between gap-1 flex-shrink-0 mb-6">
+        <div className="flex items-center justify-between gap-1 flex-shrink-0 mb-4">
           <img src={tawsilLogo} alt="Tawsil" className="h-8 w-auto max-w-none flex-shrink-0 pl-1 mt-2" />
           <button
             className="md:hidden w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer active:scale-90 transition-transform bg-grey-light flex-shrink-0"
@@ -81,6 +81,14 @@ export default function Sidebar({
             <CloseIcon size={16} className="text-navy" />
           </button>
         </div>
+
+        <div className="h-px bg-border mb-3 flex-shrink-0" />
+        <p
+          className="px-1.5 mb-2 flex-shrink-0 text-caption-1-regular text-muted uppercase tracking-wide"
+          style={{ fontFamily: "var(--font-mono)" }}
+        >
+          Navigation
+        </p>
 
         <nav className="flex-1 px-0.5 flex flex-col gap-1 overflow-y-auto overflow-x-hidden">
           {navItems.map(({ to, label, iconOutline: IconOutline, iconFilled: IconFilled, end, showOrderCount }) => (

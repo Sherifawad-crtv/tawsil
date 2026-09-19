@@ -1,6 +1,6 @@
 import { byId, getTruckType } from "../../lib/selectors";
 import { truckTypeLabel } from "../../lib/constants";
-import { TRUCK_IMAGES } from "../../lib/truckImages";
+import { VEHICLE_TILE_IMAGES } from "../../lib/truckImages";
 import { formatDate } from "../../lib/format";
 import { vehicleStatus } from "../../lib/fleet";
 import { useDataStore } from "../../lib/store";
@@ -60,7 +60,7 @@ export default function VehicleCard({
           )}
         </div>
         <img
-          src={TRUCK_IMAGES[truckType.baseClass]}
+          src={VEHICLE_TILE_IMAGES[truckType.baseClass]}
           alt=""
           className="h-32 w-32 object-cover object-left-bottom flex-shrink-0 -mr-4 -mb-4"
         />

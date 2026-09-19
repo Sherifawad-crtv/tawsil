@@ -39,7 +39,17 @@ export default function CoveragePie({ data }: { data: AreaCoverage[] }) {
   return (
     <div className="flex flex-col gap-3 flex-1 min-h-0">
       <div className="relative flex-1" style={{ minHeight: "220px" }}>
-        <ResponsiveContainer width="100%" height="100%">
+        {/*
+          Absolutely positioned instead of the plain height:100% recharts
+          ships with - that percentage only resolves against a parent whose
+          own height was set explicitly, not one that's merely stretched by
+          flex-grow (CSS treats it as auto in that case, so it collapses to
+          0 the moment this card sits somewhere without an ambient stretch
+          context, like the phone layout's plain stack). inset-0 resolves
+          against the nearest positioned ancestor's padding box instead,
+          which this "relative" div already provides either way.
+        */}
+        <ResponsiveContainer width="100%" height="100%" className="!absolute !inset-0">
           <PieChart>
             <Pie
               data={slices}

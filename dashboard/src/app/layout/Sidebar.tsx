@@ -71,8 +71,8 @@ export default function Sidebar({
           open ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <div className="flex items-center justify-between gap-1 flex-shrink-0 mb-3">
-          <img src={tawsilLogo} alt="Tawsil" className="h-8 w-auto max-w-none flex-shrink-0 pl-1" />
+        <div className="flex items-center justify-between gap-1 flex-shrink-0 mb-6">
+          <img src={tawsilLogo} alt="Tawsil" className="h-8 w-auto max-w-none flex-shrink-0 pl-1 mt-2" />
           <button
             className="md:hidden w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer active:scale-90 transition-transform bg-grey-light flex-shrink-0"
             onClick={onClose}

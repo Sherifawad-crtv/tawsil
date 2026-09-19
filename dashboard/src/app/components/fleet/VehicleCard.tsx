@@ -36,7 +36,7 @@ export default function VehicleCard({
       type="button"
       onClick={onSelect}
       aria-pressed={selected}
-      className={`text-left w-full rounded-2xl bg-white p-4 flex flex-col gap-3 cursor-pointer transition-[border-color,box-shadow] duration-150 outline-none focus-visible:ring-2 focus-visible:ring-blue ${
+      className={`text-left w-full rounded-2xl bg-white p-4 flex flex-col gap-3 cursor-pointer overflow-hidden transition-[border-color,box-shadow] duration-150 outline-none focus-visible:ring-2 focus-visible:ring-blue ${
         selected ? "border border-navy shadow-xs" : "border border-border hover:border-grey"
       }`}
     >
@@ -62,7 +62,7 @@ export default function VehicleCard({
         <img
           src={TRUCK_IMAGES[truckType.baseClass]}
           alt=""
-          className="h-32 w-32 object-cover object-left-bottom flex-shrink-0"
+          className="h-32 w-32 object-cover object-left-bottom flex-shrink-0 -mr-4 -mb-4"
         />
       </div>
     </button>

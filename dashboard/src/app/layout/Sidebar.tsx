@@ -1,5 +1,6 @@
 import { NavLink } from "react-router";
 import { CloseIcon } from "@solar-icons/react/linear";
+import tawsilLogo from "../../assets/tawsil-logo.webp";
 import {
   Widget2Icon as Widget2LinearIcon,
   BoxIcon as BoxLinearIcon,
@@ -71,9 +72,7 @@ export default function Sidebar({
         )}
       >
         <div className="flex items-center justify-between gap-1 flex-shrink-0 mb-3">
-          <h2 className="text-title-3-semibold tracking-tight text-navy pl-1" style={{ fontFamily: "var(--font-heading)" }}>
-            TAWSIL
-          </h2>
+          <img src={tawsilLogo} alt="Tawsil" className="h-8 w-auto max-w-none flex-shrink-0 pl-1" />
           <button
             className="md:hidden w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer active:scale-90 transition-transform bg-grey-light flex-shrink-0"
             onClick={onClose}

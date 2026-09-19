@@ -18,6 +18,7 @@ import CoveragePie from "../../components/financials/CoveragePie";
 import RollupTable, { type RollupColumn } from "../../components/financials/RollupTable";
 import { useDataStore } from "../../lib/store";
 import { useRole } from "../../lib/RoleContext";
+import { useMediaQuery } from "../../lib/useMediaQuery";
 import { canViewCommandCenter } from "../../lib/selectors";
 import { formatAmount } from "../../lib/format";
 import { coverageByArea, coveragePoints } from "../../lib/coverage";
@@ -67,6 +68,10 @@ const COLUMNS = [
 export default function CommandCenter() {
   const { orders, clients, contractors } = useDataStore();
   const { role } = useRole();
+  // The globe is a desktop/tablet set piece - on phones it's swapped for a
+  // plain stacked layout, the same shape as Home: no overlap, no absolute
+  // positioning, just cards in a column.
+  const showGlobe = useMediaQuery("(min-width: 768px)");
 
   const years = useMemo(() => availableYears(orders), [orders]);
   const [filters, setFilters] = useState<FinancialFilters>(() => ({
@@ -163,86 +168,135 @@ export default function CommandCenter() {
         </div>
       </div>
 
-      {/*
-        The globe sits dead centre, turning, with the coverage footprint on
-        it. Money on the left over the trend; the split and the area
-        coverage on the right. Desktop and tablet only by request - there
-        is deliberately no stacked phone layout.
-      */}
-      <div className="relative overflow-hidden rounded-2xl" style={{ minHeight: `${BAND_MIN_PX}px` }}>
-        <div
-          className="absolute"
-          style={{
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: `${GLOBE_PX}px`,
-            height: `${GLOBE_PX}px`,
-          }}
-        >
-          <Suspense fallback={null}>
-            <OrdersGlobe coverage={footprint} className="w-full h-full" />
-          </Suspense>
-        </div>
+      {showGlobe ? (
+        /*
+          The globe sits dead centre, turning, with the coverage footprint
+          on it. Money on the left over the trend; the split and the area
+          coverage on the right. Tablet and up only - see showGlobe.
+        */
+        <div className="relative overflow-hidden rounded-2xl" style={{ minHeight: `${BAND_MIN_PX}px` }}>
+          <div
+            className="absolute"
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: `${GLOBE_PX}px`,
+              height: `${GLOBE_PX}px`,
+            }}
+          >
+            <Suspense fallback={null}>
+              <OrdersGlobe coverage={footprint} className="w-full h-full" />
+            </Suspense>
+          </div>
 
-        {/*
-          The grid is a full-width box painted above the globe, so left to
-          itself it swallows every pointer event in the gutter and the globe
-          can't be dragged. It passes the pointer through; only the two card
-          columns take it back.
-        */}
-        <div className={`relative grid gap-3 items-stretch pointer-events-none ${COLUMNS}`}>
-          <div className="flex flex-col gap-3 pointer-events-auto">
-            <div className="grid grid-cols-2 gap-3">
-              <FinancialCard
-                icon={ArrowDownIcon}
-                iconColor={MONEY_COLORS.receivables}
-                label="Client receivables"
-                value={totals.receivable}
-                caption="Billed to clients, VAT included"
-                footer={`${totals.orderCount.toLocaleString()} orders · ${formatAmount(avgOrder)} avg`}
-              />
-              <FinancialCard
-                icon={ArrowUpIcon}
-                iconColor={MONEY_COLORS.payables}
-                label="Contractor payables"
-                value={totals.payable}
-                caption="Owed out to contractors"
-              />
-              <FinancialCard
-                icon={SafeSquareIcon}
-                iconColor={MONEY_COLORS.earnings}
-                label="Company earnings"
-                value={totals.earnings}
-                caption={`Kept — ${marginPercent}% of receivables`}
-              />
-              <FinancialCard
-                icon={BillListIcon}
-                iconColor={MONEY_COLORS.vat}
-                label="Taxes (VAT)"
-                value={totals.vat}
-                caption="Held for the tax authority"
-              />
+          {/*
+            The grid is a full-width box painted above the globe, so left to
+            itself it swallows every pointer event in the gutter and the globe
+            can't be dragged. It passes the pointer through; only the two card
+            columns take it back.
+          */}
+          <div className={`relative grid gap-3 items-stretch pointer-events-none ${COLUMNS}`}>
+            <div className="flex flex-col gap-3 pointer-events-auto">
+              <div className="grid grid-cols-2 gap-3">
+                <FinancialCard
+                  icon={ArrowDownIcon}
+                  iconColor={MONEY_COLORS.receivables}
+                  label="Client receivables"
+                  value={totals.receivable}
+                  caption="Billed to clients, VAT included"
+                  footer={`${totals.orderCount.toLocaleString()} orders · ${formatAmount(avgOrder)} avg`}
+                />
+                <FinancialCard
+                  icon={ArrowUpIcon}
+                  iconColor={MONEY_COLORS.payables}
+                  label="Contractor payables"
+                  value={totals.payable}
+                  caption="Owed out to contractors"
+                />
+                <FinancialCard
+                  icon={SafeSquareIcon}
+                  iconColor={MONEY_COLORS.earnings}
+                  label="Company earnings"
+                  value={totals.earnings}
+                  caption={`Kept — ${marginPercent}% of receivables`}
+                />
+                <FinancialCard
+                  icon={BillListIcon}
+                  iconColor={MONEY_COLORS.vat}
+                  label="Taxes (VAT)"
+                  value={totals.vat}
+                  caption="Held for the tax authority"
+                />
+              </div>
+
+              <MonthlyTrendChart data={trend} year={filters.year} />
             </div>
 
-            <MonthlyTrendChart data={trend} year={filters.year} />
-          </div>
+            {/* The gutter the globe shows through. */}
+            <div aria-hidden />
 
-          {/* The gutter the globe shows through. */}
-          <div aria-hidden />
+            <div className="flex flex-col gap-3 pointer-events-auto">
+              <InsightCard title="Where it splits" subtitle="Every pound billed, accounted for">
+                <MoneySplitBar payables={totals.payable} earnings={totals.earnings} vat={totals.vat} />
+              </InsightCard>
 
-          <div className="flex flex-col gap-3 pointer-events-auto">
-            <InsightCard title="Where it splits" subtitle="Every pound billed, accounted for">
-              <MoneySplitBar payables={totals.payable} earnings={totals.earnings} vat={totals.vat} />
-            </InsightCard>
-
-            {/* Fills the rest of the column so both sides end level. */}
-            <InsightCard title="Area coverage" subtitle="Share of orders by area" className="flex-1">
-              <CoveragePie data={areas} />
-            </InsightCard>
+              {/* Fills the rest of the column so both sides end level. */}
+              <InsightCard title="Area coverage" subtitle="Share of orders by area" className="flex-1">
+                <CoveragePie data={areas} />
+              </InsightCard>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        /*
+          Phones: no globe, no overlap - the same plain stacked-card shape
+          as Home. Same data, same components, just laid out top to bottom.
+        */
+        <div className="flex flex-col gap-3">
+          <div className="grid grid-cols-2 gap-3">
+            <FinancialCard
+              icon={ArrowDownIcon}
+              iconColor={MONEY_COLORS.receivables}
+              label="Client receivables"
+              value={totals.receivable}
+              caption="Billed to clients, VAT included"
+              footer={`${totals.orderCount.toLocaleString()} orders · ${formatAmount(avgOrder)} avg`}
+            />
+            <FinancialCard
+              icon={ArrowUpIcon}
+              iconColor={MONEY_COLORS.payables}
+              label="Contractor payables"
+              value={totals.payable}
+              caption="Owed out to contractors"
+            />
+            <FinancialCard
+              icon={SafeSquareIcon}
+              iconColor={MONEY_COLORS.earnings}
+              label="Company earnings"
+              value={totals.earnings}
+              caption={`Kept — ${marginPercent}% of receivables`}
+            />
+            <FinancialCard
+              icon={BillListIcon}
+              iconColor={MONEY_COLORS.vat}
+              label="Taxes (VAT)"
+              value={totals.vat}
+              caption="Held for the tax authority"
+            />
+          </div>
+
+          <MonthlyTrendChart data={trend} year={filters.year} />
+
+          <InsightCard title="Where it splits" subtitle="Every pound billed, accounted for">
+            <MoneySplitBar payables={totals.payable} earnings={totals.earnings} vat={totals.vat} />
+          </InsightCard>
+
+          <InsightCard title="Area coverage" subtitle="Share of orders by area">
+            <CoveragePie data={areas} />
+          </InsightCard>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
         <RollupTable

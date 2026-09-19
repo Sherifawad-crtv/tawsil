@@ -62,7 +62,7 @@ export default function VehicleCard({
         <img
           src={VEHICLE_TILE_IMAGES[truckType.baseClass]}
           alt=""
-          className="h-32 w-32 object-cover object-left-bottom flex-shrink-0 -mr-4 -mb-4"
+          className="h-32 w-48 max-w-none object-cover object-left-bottom flex-shrink-0 -mr-4 -mb-4"
         />
       </div>
     </button>

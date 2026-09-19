@@ -1,6 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import { Link, useLocation } from "react-router";
-import { DangerTriangleIcon } from "@solar-icons/react/bold-duotone";
+import { DangerTriangleIcon } from "@solar-icons/react/linear";
 
 /**
  * Catches a render error in the routed page and shows it in place, leaving

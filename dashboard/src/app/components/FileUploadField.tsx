@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CloudUploadIcon, FileTextIcon, CloseIcon } from "@solar-icons/react/bold-duotone";
+import { CloudUploadIcon, FileTextIcon, CloseIcon } from "@solar-icons/react/linear";
 import { FIELD_LABEL_CLASS } from "../lib/fieldClass";
 
 export default function FileUploadField({

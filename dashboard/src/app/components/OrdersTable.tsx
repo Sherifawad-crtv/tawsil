@@ -1,4 +1,4 @@
-import { BoxIcon } from "@solar-icons/react/bold-duotone";
+import { BoxIcon } from "@solar-icons/react/linear";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "./Table";
 import StatusBadge from "./StatusBadge";
 import EmptyState from "./EmptyState";

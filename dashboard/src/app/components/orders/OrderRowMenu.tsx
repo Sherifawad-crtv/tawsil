@@ -7,7 +7,7 @@ import {
   Pen2Icon,
   RestartIcon,
   ForbiddenIcon,
-} from "@solar-icons/react/bold-duotone";
+} from "@solar-icons/react/linear";
 import { Dropdown, DropdownTrigger, DropdownPopover, DropdownGroup, DropdownItem, DropdownDivider } from "../Dropdown";
 import AssignDriverModal from "./AssignDriverModal";
 import OrderFormModal from "./OrderFormModal";

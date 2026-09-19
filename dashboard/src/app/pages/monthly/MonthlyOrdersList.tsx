@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { AddIcon, CalendarMarkIcon } from "@solar-icons/react/bold-duotone";
+import { AddIcon, CalendarMarkIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import EmptyState from "../../components/EmptyState";
 import MonthlyOrderFormModal from "../../components/monthly/MonthlyOrderFormModal";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AddIcon, Pen2Icon, DangerTriangleIcon, LockKeyholeIcon, SnowflakeIcon } from "@solar-icons/react/bold-duotone";
+import { AddIcon, Pen2Icon, DangerTriangleIcon, LockKeyholeIcon, SnowflakeIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import Tabs from "../../components/Tabs";
 import TruckTypeFormModal from "../../components/settings/TruckTypeFormModal";

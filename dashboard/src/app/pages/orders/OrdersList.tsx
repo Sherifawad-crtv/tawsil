@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { AddIcon } from "@solar-icons/react/bold-duotone";
+import { AddIcon } from "@solar-icons/react/linear";
 import PageHeader from "../../components/PageHeader";
 import SearchInput from "../../components/SearchInput";
 import OrdersTable from "../../components/OrdersTable";

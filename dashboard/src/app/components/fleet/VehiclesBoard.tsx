@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { BusIcon } from "@solar-icons/react/bold-duotone";
+import { BusIcon } from "@solar-icons/react/linear";
 import Tabs from "../Tabs";
 import EmptyState from "../EmptyState";
 import VehicleCard from "./VehicleCard";

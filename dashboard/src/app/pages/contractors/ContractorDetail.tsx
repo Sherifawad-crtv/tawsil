@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
-import { ArrowLeftIcon, LetterIcon, PhoneIcon, AddIcon } from "@solar-icons/react/bold-duotone";
+import { ArrowLeftIcon, LetterIcon, PhoneIcon, AddIcon } from "@solar-icons/react/linear";
 import Tabs from "../../components/Tabs";
 import PageHeader from "../../components/PageHeader";
 import { Button } from "../../components/Button";

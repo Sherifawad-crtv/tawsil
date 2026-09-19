@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AddIcon, TrashBinTrashIcon } from "@solar-icons/react/bold-duotone";
+import { AddIcon, TrashBinTrashIcon } from "@solar-icons/react/linear";
 import { Button } from "../Button";
 import { Select } from "../Select";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "../Table";

@@ -19,7 +19,7 @@ import {
   CalendarMarkIcon as CalendarMarkBoldIcon,
   SettingsIcon as SettingsBoldIcon,
   GlobalIcon as GlobalBoldIcon,
-} from "@solar-icons/react/bold";
+} from "@solar-icons/react/bold-duotone";
 import { cx } from "../lib/cx";
 import { useDataStore } from "../lib/store";
 import { useRole } from "../lib/RoleContext";

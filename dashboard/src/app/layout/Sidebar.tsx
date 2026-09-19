@@ -90,7 +90,7 @@ export default function Sidebar({
           Navigation
         </p>
 
-        <nav className="flex-1 px-0.5 flex flex-col gap-1 overflow-y-auto overflow-x-hidden">
+        <nav className="flex-1 px-0.5 pt-0.5 flex flex-col gap-1 overflow-y-auto overflow-x-hidden">
           {navItems.map(({ to, label, iconOutline: IconOutline, iconFilled: IconFilled, end, showOrderCount }) => (
             <NavLink
               key={to}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router";
-import { HamburgerMenuIcon } from "@solar-icons/react/linear";
+import { HamburgerMenuIcon } from "@solar-icons/react/line-duotone";
 import Sidebar from "./Sidebar";
 import RouteErrorBoundary from "./RouteErrorBoundary";
 import { Select } from "../components/Select";

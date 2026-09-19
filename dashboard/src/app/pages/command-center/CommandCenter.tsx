@@ -7,7 +7,7 @@ import {
   BillListIcon,
   Buildings2Icon,
   BuildingsIcon,
-} from "@solar-icons/react/linear";
+} from "@solar-icons/react/line-duotone";
 import PageHeader from "../../components/PageHeader";
 import InsightCard from "../../components/InsightCard";
 import { Select } from "../../components/Select";

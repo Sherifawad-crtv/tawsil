@@ -1,4 +1,4 @@
-import { CloseIcon } from "@solar-icons/react/linear";
+import { CloseIcon } from "@solar-icons/react/line-duotone";
 import type { ReactNode } from "react";
 import { cx } from "../lib/cx";
 

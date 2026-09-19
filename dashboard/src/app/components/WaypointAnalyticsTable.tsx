@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { MapPointSearchIcon } from "@solar-icons/react/linear";
+import { MapPointSearchIcon } from "@solar-icons/react/line-duotone";
 import EmptyState from "./EmptyState";
 import CsvExportButton from "./CsvExportButton";
 import SegmentedControl from "./SegmentedControl";

@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { CloseCircleIcon, ForbiddenIcon, CheckCircleIcon, PhoneIcon, LetterIcon } from "@solar-icons/react/linear";
+import { CloseCircleIcon, ForbiddenIcon, CheckCircleIcon, PhoneIcon, LetterIcon } from "@solar-icons/react/line-duotone";
 import { Chip } from "../Chip";
 import { ProgressBar } from "../boardui/ProgressBar";
 import VehicleStatusBadge from "./VehicleStatusBadge";

@@ -1,4 +1,4 @@
-import { BoxIcon, CheckCircleIcon, ForbiddenIcon, ChartSquareIcon } from "@solar-icons/react/linear";
+import { BoxIcon, CheckCircleIcon, ForbiddenIcon, ChartSquareIcon } from "@solar-icons/react/line-duotone";
 import MetricCard from "../MetricCard";
 import InsightCard from "../InsightCard";
 import StatusBreakdownBar from "../charts/StatusBreakdownBar";

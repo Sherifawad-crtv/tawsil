@@ -11,7 +11,7 @@ import {
 } from "react-aria-components";
 import type { CalendarCellRenderProps } from "react-aria-components";
 import { getLocalTimeZone } from "@internationalized/date";
-import { AltArrowLeftIcon, AltArrowRightIcon } from "@solar-icons/react/linear";
+import { AltArrowLeftIcon, AltArrowRightIcon } from "@solar-icons/react/line-duotone";
 import { cx } from "../../lib/cx";
 
 /**

@@ -1,4 +1,4 @@
-import { RoutingIcon } from "@solar-icons/react/linear";
+import { RoutingIcon } from "@solar-icons/react/line-duotone";
 import { cx } from "../../lib/cx";
 import { formatDateTime } from "../../lib/format";
 import type { OrderStatus, StatusHistoryEntry } from "../../lib/types";

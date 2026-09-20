@@ -6,6 +6,8 @@ import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
 import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
 import CheckRounded from "@mui/icons-material/CheckRounded";
 import CloseRounded from "@mui/icons-material/CloseRounded";
+import { useAuth } from "../lib/AuthContext";
+import { displayName } from "../lib/authTypes";
 
 /* ── Mock Data ── */
 const RECENT_TRIPS = [
@@ -32,6 +34,7 @@ interface HomeScreenProps {
 }
 
 export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder }: HomeScreenProps) {
+  const { user } = useAuth();
   const [hasActiveTrip] = useState(true);
   const [greeting, setGreeting] = useState("Good morning");
 
@@ -42,6 +45,10 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
     else setGreeting("Good evening");
   }, []);
 
+  // A business's name doesn't read naturally in "Good morning, X" - only
+  // greet by name for individuals, first name only.
+  const greetName = user?.type === "individual" ? displayName(user).split(" ")[0] : undefined;
+
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
       <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(calc(env(safe-area-inset-top, 16px) + 60px), 76px)", paddingBottom: "32px" }}>
@@ -49,7 +56,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
         {/* ── Greeting ── */}
         <div className="mb-6">
           <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: "1.15" }}>
-            {greeting}, Ahmed
+            {greeting}{greetName ? `, ${greetName}` : ""}
           </h1>
           <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#9CA3AF", marginTop: "6px" }}>
             What would you like to ship today?

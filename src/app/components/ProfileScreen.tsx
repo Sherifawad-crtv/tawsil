@@ -1,14 +1,11 @@
 import { useState } from "react";
+import { useAuth } from "../lib/AuthContext";
+import { displayName, initialsOf } from "../lib/authTypes";
+import AddEmailModal from "./onboarding/AddEmailModal";
 
-const PROFILE = {
-  name: "Ahmed Khan",
-  email: "ahmed@fleetlink.ae",
-  phone: "+971 50 123 4567",
-  company: "Khan Logistics LLC",
-  memberSince: "Jan 2024",
-  tier: "Pro",
-  initials: "AK",
-};
+function formatMemberSince(iso: string): string {
+  return new Date(iso).toLocaleDateString("en-US", { month: "short", year: "numeric" });
+}
 
 const SETTINGS = [
   {
@@ -90,11 +87,22 @@ function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: (v: b
 }
 
 export default function ProfileScreen() {
+  const { user, updateEmail, signOut } = useAuth();
   const [toggles, setToggles] = useState<Record<string, boolean>>({
     notifications: true,
     location: true,
     pod: true,
   });
+  const [showAddEmail, setShowAddEmail] = useState(false);
+
+  // App.tsx never renders this screen without a signed-up user.
+  if (!user) return null;
+
+  const name = displayName(user);
+  const initials = initialsOf(user);
+  const accountTypeLabel = user.type === "business" ? "Business" : "Individual";
+  const subtitle = user.type === "business" ? "Business account" : undefined;
+  const memberSince = formatMemberSince(user.createdAt);
 
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
@@ -116,25 +124,27 @@ export default function ProfileScreen() {
               style={{ background: "linear-gradient(135deg, #040033, #0A0070)" }}
             >
               <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", color: "white" }}>
-                {PROFILE.initials}
+                {initials}
               </span>
             </div>
             <div className="flex-1 min-w-0">
               <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>
-                {PROFILE.name}
+                {name}
               </h2>
-              <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", marginTop: "2px" }}>
-                {PROFILE.company}
-              </p>
+              {subtitle && (
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", marginTop: "2px" }}>
+                  {subtitle}
+                </p>
+              )}
               <div className="flex items-center gap-2 mt-2">
                 <span
                   className="px-2.5 py-0.5 rounded-xl"
                   style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "10px", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.08)", textTransform: "uppercase", letterSpacing: "0.06em" }}
                 >
-                  {PROFILE.tier}
+                  {accountTypeLabel}
                 </span>
                 <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>
-                  Since {PROFILE.memberSince}
+                  Since {memberSince}
                 </span>
               </div>
             </div>
@@ -148,16 +158,33 @@ export default function ProfileScreen() {
                 <rect x="1.5" y="2.5" width="11" height="9" rx="2" stroke="#9CA3AF" strokeWidth="1.3" fill="none" />
                 <path d="M1.5 5.5L7 8.5L12.5 5.5" stroke="#9CA3AF" strokeWidth="1.3" />
               </svg>
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#040033" }}>{PROFILE.email}</span>
+              {user.email ? (
+                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#040033" }}>{user.email}</span>
+              ) : (
+                <button
+                  onClick={() => setShowAddEmail(true)}
+                  className="cursor-pointer active:opacity-70 transition-opacity"
+                  style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#1253FA", border: "none", background: "none" }}
+                >
+                  + Add email address
+                </button>
+              )}
             </div>
             <div className="flex items-center gap-3">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M12.5 10V12C12.5 12.3 12.2 12.5 11.9 12.5C6.5 12.5 1.5 7.5 1.5 2.1C1.5 1.8 1.8 1.5 2.1 1.5H4.1C4.4 1.5 4.6 1.8 4.6 2.1C4.6 2.9 4.7 3.6 5 4.3C5.1 4.5 5 4.8 4.8 5L3.8 6C4.7 7.8 5.7 8.8 7.5 9.7L8.5 8.7C8.7 8.5 9 8.4 9.2 8.5C9.9 8.8 10.6 8.9 11.4 8.9C11.7 8.9 11.9 9.1 12 9.4L12.5 10Z" stroke="#9CA3AF" strokeWidth="1.2" fill="none" />
               </svg>
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#040033" }}>{PROFILE.phone}</span>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#040033" }}>{user.phone}</span>
             </div>
           </div>
         </div>
+
+        {showAddEmail && (
+          <AddEmailModal
+            onSave={(email) => { updateEmail(email); setShowAddEmail(false); }}
+            onSkip={() => setShowAddEmail(false)}
+          />
+        )}
 
         {/* ── Settings ── */}
         <div className="mb-3">
@@ -251,6 +278,7 @@ export default function ProfileScreen() {
 
         {/* ── Logout ── */}
         <button
+          onClick={signOut}
           className="w-full py-3.5 rounded-2xl flex items-center justify-center gap-2 cursor-pointer active:scale-[0.97] transition-transform"
           style={{
             backgroundColor: "white",

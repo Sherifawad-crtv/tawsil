@@ -2,7 +2,7 @@ import { useState } from "react";
 import ScreenShell from "./ScreenShell";
 import AuthTextField from "./AuthTextField";
 import FileUploadRow from "./FileUploadRow";
-import { StepDots, BackButton, StepHeader, PrimaryButton } from "./StepChrome";
+import { StepDots, BackButton, StepHeader, PrimaryButton, CTAFooter, CTA_FOOTER_CLEARANCE } from "./StepChrome";
 import { useAuth } from "../../lib/AuthContext";
 
 const TOTAL_STEPS = 4;
@@ -57,7 +57,7 @@ export default function BusinessSignup({ onBack, onComplete }: { onBack: () => v
         <StepDots step={step} total={TOTAL_STEPS} />
       </div>
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col" style={{ paddingBottom: CTA_FOOTER_CLEARANCE }}>
         {step === 1 && (
           <>
             <StepHeader title="Tell us about your business" subtitle="This is how you'll appear to drivers and contractors." />
@@ -79,7 +79,9 @@ export default function BusinessSignup({ onBack, onComplete }: { onBack: () => v
                 onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
               />
             </div>
-            <PrimaryButton label="Continue" onClick={() => setStep(2)} disabled={!canContinueStep1} />
+            <CTAFooter>
+              <PrimaryButton label="Continue" onClick={() => setStep(2)} disabled={!canContinueStep1} />
+            </CTAFooter>
           </>
         )}
 
@@ -110,7 +112,9 @@ export default function BusinessSignup({ onBack, onComplete }: { onBack: () => v
                 onChange={(e) => setForm((f) => ({ ...f, registrationNumber: e.target.value }))}
               />
             </div>
-            <PrimaryButton label="Continue" onClick={() => setStep(3)} disabled={!canContinueStep2} />
+            <CTAFooter>
+              <PrimaryButton label="Continue" onClick={() => setStep(3)} disabled={!canContinueStep2} />
+            </CTAFooter>
           </>
         )}
 
@@ -131,7 +135,9 @@ export default function BusinessSignup({ onBack, onComplete }: { onBack: () => v
                 onSelect={(name) => setForm((f) => ({ ...f, registrationFileName: name }))}
               />
             </div>
-            <PrimaryButton label="Continue" onClick={() => setStep(4)} disabled={!canContinueStep3} />
+            <CTAFooter>
+              <PrimaryButton label="Continue" onClick={() => setStep(4)} disabled={!canContinueStep3} />
+            </CTAFooter>
           </>
         )}
 
@@ -149,7 +155,9 @@ export default function BusinessSignup({ onBack, onComplete }: { onBack: () => v
                 <ReviewRow label="Registration certificate" value={form.registrationFileName || "Not added"} last />
               </div>
             </div>
-            <PrimaryButton label="Confirm & Get Started" onClick={finish} />
+            <CTAFooter>
+              <PrimaryButton label="Confirm & Get Started" onClick={finish} />
+            </CTAFooter>
           </>
         )}
       </div>

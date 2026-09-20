@@ -1,4 +1,6 @@
+import type { ReactNode } from "react";
 import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
+import { useKeyboardInset } from "../../hooks/useKeyboardInset";
 
 /** Same growing-pill progress indicator as the booking flow's StepIndicator. */
 export function StepDots({ step, total }: { step: number; total: number }) {
@@ -92,3 +94,42 @@ export function GhostButton({ label, onClick }: { label: string; onClick: () => 
     </button>
   );
 }
+
+/**
+ * Pins its children (a PrimaryButton, optionally a GhostButton under it) to
+ * the bottom of the screen and tracks the on-screen keyboard, so the CTA
+ * rides just above it instead of getting covered - the same place a native
+ * app's keyboard accessory bar sits. Reserve matching space at the bottom
+ * of the scrollable content with reserveSpace() so nothing sits hidden
+ * behind it while the keyboard is closed.
+ */
+export function CTAFooter({ children }: { children: ReactNode }) {
+  const keyboardInset = useKeyboardInset();
+  const keyboardOpen = keyboardInset > 0;
+
+  return (
+    <div
+      className="fixed left-0 right-0 z-30 flex-shrink-0"
+      style={{
+        bottom: keyboardOpen ? `${keyboardInset}px` : 0,
+        backgroundColor: "#F5F5F3",
+        boxShadow: keyboardOpen ? "0 -1px 0 0 #E8E8E5" : "none",
+        transition: keyboardOpen ? "none" : "bottom 0.2s ease-out",
+      }}
+    >
+      <div
+        className="w-full max-w-lg mx-auto px-4 flex flex-col gap-1"
+        style={{
+          paddingTop: "12px",
+          paddingBottom: keyboardOpen ? "12px" : "max(env(safe-area-inset-bottom, 12px), 12px)",
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/** Bottom padding for scrollable content so it clears a CTAFooter - about
+ *  one button's height plus its footer padding and the home-indicator gap. */
+export const CTA_FOOTER_CLEARANCE = "104px";

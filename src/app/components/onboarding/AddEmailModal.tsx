@@ -2,6 +2,7 @@ import { useState } from "react";
 import MailOutlineRounded from "@mui/icons-material/MailOutlineRounded";
 import AuthTextField from "./AuthTextField";
 import { PrimaryButton, GhostButton } from "./StepChrome";
+import { useKeyboardInset } from "../../hooks/useKeyboardInset";
 
 /**
  * The one thing individual signup skips - asked once, right before the
@@ -9,6 +10,7 @@ import { PrimaryButton, GhostButton } from "./StepChrome";
  */
 export default function AddEmailModal({ onSave, onSkip }: { onSave: (email: string) => void; onSkip: () => void }) {
   const [email, setEmail] = useState("");
+  const keyboardInset = useKeyboardInset();
 
   return (
     <div
@@ -21,7 +23,11 @@ export default function AddEmailModal({ onSave, onSkip }: { onSave: (email: stri
         style={{
           backgroundColor: "#F5F5F3",
           borderRadius: "24px 24px 0 0",
-          paddingBottom: "max(env(safe-area-inset-bottom, 20px), 20px)",
+          paddingBottom: keyboardInset > 0 ? "20px" : "max(env(safe-area-inset-bottom, 20px), 20px)",
+          // The sheet holds the input, so the whole thing rides up above the
+          // keyboard together - not just the button underneath it.
+          marginBottom: keyboardInset,
+          transition: keyboardInset > 0 ? "none" : "margin-bottom 0.2s ease-out",
         }}
       >
         <div

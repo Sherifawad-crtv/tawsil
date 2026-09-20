@@ -2,7 +2,7 @@ import { useState } from "react";
 import ScreenShell from "./ScreenShell";
 import AuthTextField from "./AuthTextField";
 import OtpInput from "./OtpInput";
-import { StepDots, BackButton, StepHeader, PrimaryButton, GhostButton } from "./StepChrome";
+import { StepDots, BackButton, StepHeader, PrimaryButton, GhostButton, CTAFooter, CTA_FOOTER_CLEARANCE } from "./StepChrome";
 import { useAuth } from "../../lib/AuthContext";
 
 const TOTAL_STEPS = 3;
@@ -50,7 +50,7 @@ export default function IndividualSignup({ onBack, onComplete }: { onBack: () =>
         <StepDots step={step} total={TOTAL_STEPS} />
       </div>
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col" style={{ paddingBottom: CTA_FOOTER_CLEARANCE }}>
         {step === 1 && (
           <>
             <StepHeader title="What's your number?" subtitle="We'll text you a code to verify it's you." />
@@ -65,7 +65,9 @@ export default function IndividualSignup({ onBack, onComplete }: { onBack: () =>
                 onChange={(e) => setPhone(e.target.value)}
               />
             </div>
-            <PrimaryButton label="Send Code" onClick={sendCode} disabled={phone.trim().length < 6} />
+            <CTAFooter>
+              <PrimaryButton label="Send Code" onClick={sendCode} disabled={phone.trim().length < 6} />
+            </CTAFooter>
           </>
         )}
 
@@ -79,7 +81,9 @@ export default function IndividualSignup({ onBack, onComplete }: { onBack: () =>
               )}
               <GhostButton label="Didn't get it? Send again" onClick={sendCode} />
             </div>
-            <PrimaryButton label="Verify" onClick={verifyCode} disabled={code.length < 6} />
+            <CTAFooter>
+              <PrimaryButton label="Verify" onClick={verifyCode} disabled={code.length < 6} />
+            </CTAFooter>
           </>
         )}
 
@@ -96,7 +100,9 @@ export default function IndividualSignup({ onBack, onComplete }: { onBack: () =>
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <PrimaryButton label="Get Started" onClick={finish} disabled={name.trim().length < 2} />
+            <CTAFooter>
+              <PrimaryButton label="Get Started" onClick={finish} disabled={name.trim().length < 2} />
+            </CTAFooter>
           </>
         )}
       </div>

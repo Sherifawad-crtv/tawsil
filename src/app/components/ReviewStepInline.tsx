@@ -20,6 +20,7 @@ interface ReviewStepInlineProps {
   pickupLocations: AddedLocation[];
   clientOffer?: number | null;
   onClientOfferChange?: (v: number) => void;
+  showCargoDetails?: boolean;
 }
 
 const CONFIG_LABELS: Record<string, { name: string; detail: string }> = {
@@ -79,7 +80,7 @@ function StatusPill({ active, label }: { active: boolean; label: string }) {
 }
 
 export default function ReviewStepInline(props: ReviewStepInlineProps) {
-  const { truckId, configId, weightKg, schedule, deliverySettings, dropoffStops, pickupLocations, clientOffer, onClientOfferChange } = props;
+  const { truckId, configId, weightKg, schedule, deliverySettings, dropoffStops, pickupLocations, clientOffer, onClientOfferChange, showCargoDetails = true } = props;
   const truck = VEHICLES.find((v) => v.id === truckId) || VEHICLES[0];
   const config = CONFIG_LABELS[configId] || CONFIG_LABELS["closed"];
 
@@ -113,25 +114,29 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
         </div>
       </div>
 
-      <Divider />
+      {showCargoDetails && (
+        <>
+          <Divider />
 
-      {/* ── Config + Weight side by side ── */}
-      <div className="grid grid-cols-2 gap-2.5">
-        <div>
-          <SectionLabel>Configuration</SectionLabel>
-          <div className="p-3 rounded-2xl" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
-            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>{config.name}</span>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", marginTop: "1px" }}>{config.detail}</p>
+          {/* ── Config + Weight side by side ── */}
+          <div className="grid grid-cols-2 gap-2.5">
+            <div>
+              <SectionLabel>Configuration</SectionLabel>
+              <div className="p-3 rounded-2xl" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
+                <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>{config.name}</span>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", marginTop: "1px" }}>{config.detail}</p>
+              </div>
+            </div>
+            <div>
+              <SectionLabel>Weight</SectionLabel>
+              <div className="p-3 rounded-2xl" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "#040033" }}>{weightKg > 0 ? weightKg.toLocaleString() : "—"}</span>
+                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", marginLeft: "3px" }}>kg</span>
+              </div>
+            </div>
           </div>
-        </div>
-        <div>
-          <SectionLabel>Weight</SectionLabel>
-          <div className="p-3 rounded-2xl" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "#040033" }}>{weightKg > 0 ? weightKg.toLocaleString() : "—"}</span>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", marginLeft: "3px" }}>kg</span>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
 
       <Divider />
 

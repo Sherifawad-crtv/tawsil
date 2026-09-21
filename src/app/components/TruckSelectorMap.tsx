@@ -4,6 +4,7 @@ import { INITIAL_BOOKING_STATE } from "./BookingTypeSelector";
 import VehicleCarouselSelectable from "./VehicleCarouselSelectable";
 import TruckConfigGrid from "./TruckConfigGrid";
 import WeightInput from "./WeightInput";
+import ProofOfDeliveryToggle from "./ProofOfDeliveryToggle";
 import { ScheduleModal } from "./SchedulePicker";
 import DropoffStops from "./DropoffStops";
 import type { DropoffStop } from "./DropoffStops";
@@ -18,7 +19,7 @@ import "leaflet/dist/leaflet.css";
 import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
 import NavigationRounded from "@mui/icons-material/NavigationRounded";
 import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
-import CameraAltOutlined from "@mui/icons-material/CameraAltOutlined";
+import { useAuth } from "../lib/AuthContext";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -123,22 +124,29 @@ function useBottomSheet() {
   return { snapFraction, sheetEl, onPointerDown, onPointerMove, onPointerUp, expandTo };
 }
 
-/* ── Shared step config ── */
-const TOTAL_STEPS = 4;
-
-const STEP_TITLES: { title: string; subtitle: string }[] = [
+/* ── Shared step config ──
+   Business gets the full freight flow (vehicle config, cargo weight);
+   Individual skips both and goes straight from picking a vehicle to
+   pickup/drop-off - Uber-style, one step shorter. */
+const STEP_TITLES_BUSINESS: { title: string; subtitle: string }[] = [
   { title: "Vehicle & Config", subtitle: "Select your truck type and cargo configuration." },
   { title: "Cargo Weight", subtitle: "Enter your cargo weight and delivery proof." },
   { title: "Pickup & Drop-off", subtitle: "Set your pickup and delivery locations." },
   { title: "Review Booking", subtitle: "Verify all details before confirming." },
 ];
 
+const STEP_TITLES_INDIVIDUAL: { title: string; subtitle: string }[] = [
+  { title: "Choose a Ride", subtitle: "Pick the vehicle that fits your delivery." },
+  { title: "Pickup & Drop-off", subtitle: "Set your pickup and delivery locations." },
+  { title: "Review Booking", subtitle: "Verify all details before confirming." },
+];
+
 /* ── Step Indicator ── */
-function StepIndicator({ step }: { step: number }) {
+function StepIndicator({ step, total }: { step: number; total: number }) {
   return (
     <div className="flex items-center justify-between mb-4 flex-shrink-0">
       <div className="flex items-center gap-1.5">
-        {Array.from({ length: TOTAL_STEPS }, (_, i) => (
+        {Array.from({ length: total }, (_, i) => (
           <div
             key={i}
             className="rounded-full"
@@ -152,7 +160,7 @@ function StepIndicator({ step }: { step: number }) {
         ))}
       </div>
       <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, color: "#1253FA", fontSize: "11px", letterSpacing: "0.08em" }}>
-        {step} / {TOTAL_STEPS}
+        {step} / {total}
       </span>
     </div>
   );
@@ -331,6 +339,11 @@ function ConfirmationOverlay({ onDone, offer }: { onDone: () => void; offer?: Of
    MAIN COMPONENT
    ════════════════════════════════════════════════ */
 export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
+  const { user } = useAuth();
+  const isIndividual = user?.type === "individual";
+  const TOTAL_STEPS = isIndividual ? 3 : 4;
+  const STEP_TITLES = isIndividual ? STEP_TITLES_INDIVIDUAL : STEP_TITLES_BUSINESS;
+
   const [step, setStep] = useState(1);
   const [prevStep, setPrevStep] = useState(1);
   const [selected, setSelected] = useState<string>("pickup");
@@ -375,174 +388,137 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
 
   const ctaLabel = step === TOTAL_STEPS ? "Confirm Booking" : "Continue";
 
-  /* ── Step content renderer ── */
+  /* ── Step content renderer ──
+     Individual reuses every piece business does except vehicle
+     config and cargo weight - it just skips straight from picking a
+     vehicle to pickup/drop-off, one step shorter overall. */
+  const vehicleStepContent = (
+    <>
+      {/* ── Booking Type Selector ── */}
+      <BookingTypeSelector
+        state={bookingType}
+        onChange={(newState) => {
+          setBookingType(newState);
+          // Sync schedule state for on-demand mode
+          if (newState.category === "on-demand") {
+            if (newState.onDemandMode === "now") {
+              setSchedule({ mode: "now" });
+            }
+          }
+        }}
+        onOpenScheduleModal={() => {
+          setBookingType({ ...bookingType, onDemandMode: "schedule" });
+          setShowScheduleModal(true);
+        }}
+        scheduleSummary={
+          schedule.mode === "schedule" && schedule.date
+            ? `${schedule.date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} at ${schedule.time}`
+            : null
+        }
+      />
+
+      {/* ── Section divider ── */}
+      <div className="flex items-center gap-3 my-4 flex-shrink-0">
+        <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Vehicle</span>
+        <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
+      </div>
+
+      {/* ── Truck Selection ── */}
+      <div className="flex-shrink-0">
+        <div
+          className="flex gap-[9px] py-3 overflow-x-auto"
+          style={{ scrollSnapType: "x mandatory", paddingBottom: "8px", WebkitOverflowScrolling: "touch" }}
+        >
+          <VehicleCarouselSelectable selected={selected} onSelect={setSelected} />
+        </div>
+      </div>
+
+      {isIndividual ? (
+        <>
+          {/* ── Section divider ── */}
+          <div className="flex items-center gap-3 my-4 flex-shrink-0">
+            <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Delivery</span>
+            <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
+          </div>
+          <ProofOfDeliveryToggle value={proofOfDelivery} onChange={setProofOfDelivery} />
+        </>
+      ) : (
+        <>
+          {/* ── Section divider ── */}
+          <div className="flex items-center gap-3 my-4 flex-shrink-0">
+            <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Configuration</span>
+            <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
+          </div>
+          <TruckConfigGrid selected={config} onSelect={setConfig} />
+        </>
+      )}
+    </>
+  );
+
+  const weightStepContent = (
+    <>
+      {/* ── Weight ── */}
+      <WeightInput value={weightKg} onChange={setWeightKg} vehicleType={selected} />
+
+      {/* ── POD Toggle ── */}
+      <div className="flex items-center gap-3 my-5 flex-shrink-0">
+        <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Delivery</span>
+        <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
+      </div>
+      <ProofOfDeliveryToggle value={proofOfDelivery} onChange={setProofOfDelivery} />
+    </>
+  );
+
+  const pickupDropoffContent = (
+    <>
+      {/* ── Pickup ── */}
+      <div className="flex items-center gap-2 mb-3 flex-shrink-0">
+        <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#040033", border: "2px solid white", boxShadow: "0 0 0 1.5px #040033" }} />
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Pickup Locations</span>
+      </div>
+      <PickupStepInline value={pickupLocations} onChange={setPickupLocations} />
+
+      {/* ── Section divider ── */}
+      <div className="flex items-center gap-3 my-5 flex-shrink-0">
+        <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Drop-off Stops</span>
+        <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
+      </div>
+
+      {/* ── Drop-off ── */}
+      <DropoffStops value={dropoffStops} onChange={setDropoffStops} />
+    </>
+  );
+
+  const reviewContent = (
+    <ReviewStepInline
+      truckId={selected}
+      configId={config}
+      weightKg={weightKg}
+      schedule={schedule}
+      deliverySettings={proofOfDelivery}
+      dropoffStops={dropoffStops}
+      pickupLocations={pickupLocations}
+      clientOffer={clientOffer}
+      onClientOfferChange={setClientOffer}
+      showCargoDetails={!isIndividual}
+    />
+  );
+
   const renderStepContent = () => {
     switch (step) {
       case 1:
-        return (
-          <>
-            {/* ── Booking Type Selector ── */}
-            <BookingTypeSelector
-              state={bookingType}
-              onChange={(newState) => {
-                setBookingType(newState);
-                // Sync schedule state for on-demand mode
-                if (newState.category === "on-demand") {
-                  if (newState.onDemandMode === "now") {
-                    setSchedule({ mode: "now" });
-                  }
-                }
-              }}
-              onOpenScheduleModal={() => {
-                setBookingType({ ...bookingType, onDemandMode: "schedule" });
-                setShowScheduleModal(true);
-              }}
-              scheduleSummary={
-                schedule.mode === "schedule" && schedule.date
-                  ? `${schedule.date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} at ${schedule.time}`
-                  : null
-              }
-            />
-
-            {/* ── Section divider ── */}
-            <div className="flex items-center gap-3 my-4 flex-shrink-0">
-              <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Vehicle</span>
-              <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-            </div>
-
-            {/* ── Truck Selection ── */}
-            <div className="flex-shrink-0">
-              <div
-                className="flex gap-[9px] py-3 overflow-x-auto"
-                style={{ scrollSnapType: "x mandatory", paddingBottom: "8px", WebkitOverflowScrolling: "touch" }}
-              >
-                <VehicleCarouselSelectable selected={selected} onSelect={setSelected} />
-              </div>
-            </div>
-
-            {/* ── Section divider ── */}
-            <div className="flex items-center gap-3 my-4 flex-shrink-0">
-              <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Configuration</span>
-              <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-            </div>
-
-            {/* ── Truck Config ── */}
-            <TruckConfigGrid selected={config} onSelect={setConfig} />
-          </>
-        );
+        return vehicleStepContent;
       case 2:
-        return (
-          <>
-            {/* ── Weight ── */}
-            <WeightInput value={weightKg} onChange={setWeightKg} vehicleType={selected} />
-
-            {/* ── POD Toggle ── */}
-            <div className="flex items-center gap-3 my-5 flex-shrink-0">
-              <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Delivery</span>
-              <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-            </div>
-            <div
-              className="flex items-center gap-4 p-4 rounded-2xl active:bg-black/[0.02] cursor-pointer"
-              style={{
-                backgroundColor: "white",
-                boxShadow: "0 2px 12px rgba(0,0,0,0.04)",
-                transition: "background-color 0.3s ease",
-              }}
-              onClick={() => setProofOfDelivery(!proofOfDelivery)}
-            >
-              <div
-                className="flex items-center justify-center flex-shrink-0 rounded-2xl"
-                style={{
-                  width: "44px",
-                  height: "44px",
-                  backgroundColor: proofOfDelivery ? "rgba(18,83,250,0.08)" : "#F0F0EE",
-                  transition: "background-color 0.3s ease",
-                }}
-              >
-                <CameraAltOutlined sx={{ fontSize: 22, color: proofOfDelivery ? "#1253FA" : "#9CA3AF" }} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>
-                    Proof of Delivery
-                  </span>
-                  <span
-                    className="px-2 py-0.5 rounded-lg"
-                    style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.08)", letterSpacing: "0.04em", textTransform: "uppercase" }}
-                  >
-                    Recommended
-                  </span>
-                </div>
-                <p className="mt-0.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", lineHeight: "1.4" }}>
-                  Require photo confirmation at drop‑off.
-                </p>
-              </div>
-              <button
-                role="switch"
-                aria-checked={proofOfDelivery}
-                onClick={(e) => { e.stopPropagation(); setProofOfDelivery(!proofOfDelivery); }}
-                className="relative flex-shrink-0 cursor-pointer"
-                style={{
-                  width: "52px", height: "30px", borderRadius: "15px",
-                  backgroundColor: proofOfDelivery ? "#1253FA" : "#D8D9D4",
-                  transition: "background-color 0.3s cubic-bezier(0.4,0,0.2,1)",
-                  border: "none", padding: 0, outline: "none",
-                }}
-              >
-                <div style={{
-                  position: "absolute", inset: "-3px", borderRadius: "18px",
-                  boxShadow: proofOfDelivery ? "0 0 0 3px rgba(18,83,250,0.15)" : "none",
-                  transition: "box-shadow 0.3s cubic-bezier(0.4,0,0.2,1)", pointerEvents: "none",
-                }} />
-                <div style={{
-                  position: "absolute", top: "3px",
-                  left: proofOfDelivery ? "25px" : "3px",
-                  width: "24px", height: "24px", borderRadius: "12px", backgroundColor: "white",
-                  boxShadow: proofOfDelivery ? "0 2px 8px rgba(18,83,250,0.3)" : "0 1px 4px rgba(0,0,0,0.15)",
-                  transition: "left 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s",
-                }} />
-              </button>
-            </div>
-          </>
-        );
+        return isIndividual ? pickupDropoffContent : weightStepContent;
       case 3:
-        return (
-          <>
-            {/* ── Pickup ── */}
-            <div className="flex items-center gap-2 mb-3 flex-shrink-0">
-              <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#040033", border: "2px solid white", boxShadow: "0 0 0 1.5px #040033" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Pickup Locations</span>
-            </div>
-            <PickupStepInline value={pickupLocations} onChange={setPickupLocations} />
-
-            {/* ── Section divider ── */}
-            <div className="flex items-center gap-3 my-5 flex-shrink-0">
-              <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Drop-off Stops</span>
-              <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-            </div>
-
-            {/* ── Drop-off ── */}
-            <DropoffStops value={dropoffStops} onChange={setDropoffStops} />
-          </>
-        );
+        return isIndividual ? reviewContent : pickupDropoffContent;
       case 4:
-        return (
-          <ReviewStepInline
-            truckId={selected}
-            configId={config}
-            weightKg={weightKg}
-            schedule={schedule}
-            deliverySettings={proofOfDelivery}
-            dropoffStops={dropoffStops}
-            pickupLocations={pickupLocations}
-            clientOffer={clientOffer}
-            onClientOfferChange={setClientOffer}
-          />
-        );
+        return reviewContent;
       default:
         return null;
     }
@@ -553,7 +529,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
     if (step === 1) return null;
     return (
       <>
-        <StepIndicator step={step} />
+        <StepIndicator step={step} total={TOTAL_STEPS} />
         <h2
           className="flex-shrink-0"
           style={{

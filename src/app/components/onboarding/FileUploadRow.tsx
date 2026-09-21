@@ -68,50 +68,53 @@ export default function FileUploadRow({
   const isDone = !!fileName && !uploading;
 
   return (
-    <div>
+    <div className="flex flex-col gap-1.5">
+      <span
+        style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.06em", textTransform: "uppercase" }}
+      >
+        {label}
+      </span>
+
       <div
         role="button"
         tabIndex={0}
         onClick={() => { if (!uploading) inputRef.current?.click(); }}
         onKeyDown={(e) => { if (!uploading && (e.key === "Enter" || e.key === " ")) inputRef.current?.click(); }}
-        className="flex items-center gap-3.5 w-full px-4 py-3.5 rounded-2xl cursor-pointer active:scale-[0.98] transition-transform text-left relative overflow-hidden"
+        className="relative flex flex-col items-center justify-center w-full rounded-2xl cursor-pointer active:scale-[0.98] transition-transform text-center overflow-hidden"
         style={{
+          height: "136px",
+          padding: "16px",
           backgroundColor: "white",
           boxShadow: isDone ? "0 0 0 1.5px #1253FA" : "0 1px 6px rgba(0,0,0,0.04)",
           border: isDone || uploading ? "none" : "1.5px dashed #D8D9D4",
         }}
       >
-        <div
-          className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-          style={{ backgroundColor: isDone ? "rgba(18,83,250,0.08)" : "#F5F5F3" }}
-        >
-          {isDone ? (
-            <PictureAsPdfRounded sx={{ fontSize: 20, color: "#1253FA" }} />
-          ) : (
-            <UploadFileRounded sx={{ fontSize: 20, color: uploading ? "#1253FA" : "#9CA3AF" }} />
-          )}
-        </div>
-
-        <div className="flex-1 min-w-0">
-          <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>
-            {label}
-          </p>
-          <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", marginTop: "1px" }}>
-            {uploading ? "Uploading…" : fileName ? `${fileName}${fileSize ? ` · ${formatFileSize(fileSize)}` : ""}` : hint}
-          </p>
-        </div>
-
         {isDone && (
           <button
             type="button"
             onClick={handleRemove}
-            className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer active:scale-90"
+            className="absolute top-2.5 right-2.5 w-7 h-7 rounded-full flex items-center justify-center cursor-pointer active:scale-90"
             style={{ backgroundColor: "#F5F5F3" }}
             aria-label={`Remove ${label}`}
           >
             <CloseRounded sx={{ fontSize: 15, color: "#6B7280" }} />
           </button>
         )}
+
+        <div
+          className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+          style={{ backgroundColor: isDone ? "rgba(18,83,250,0.08)" : "#F5F5F3" }}
+        >
+          {isDone ? (
+            <PictureAsPdfRounded sx={{ fontSize: 22, color: "#1253FA" }} />
+          ) : (
+            <UploadFileRounded sx={{ fontSize: 22, color: uploading ? "#1253FA" : "#9CA3AF" }} />
+          )}
+        </div>
+
+        <p className="mt-2.5 px-2 w-full truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF" }}>
+          {uploading ? "Uploading…" : fileName ? `${fileName}${fileSize ? ` · ${formatFileSize(fileSize)}` : ""}` : hint}
+        </p>
 
         {uploading && (
           <div
@@ -133,9 +136,7 @@ export default function FileUploadRow({
       </div>
 
       {error && (
-        <p className="mt-1.5 px-1" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#DC2626" }}>
-          {error}
-        </p>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#DC2626" }}>{error}</span>
       )}
     </div>
   );

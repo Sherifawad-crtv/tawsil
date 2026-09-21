@@ -127,12 +127,14 @@ export default function BusinessSignup({ onBack, onComplete }: { onBack: () => v
                 hint="PDF - upload your tax registration document"
                 fileName={form.taxNumberFileName || undefined}
                 onSelect={(name) => setForm((f) => ({ ...f, taxNumberFileName: name }))}
+                onRemove={() => setForm((f) => ({ ...f, taxNumberFileName: "" }))}
               />
               <FileUploadRow
                 label="Registration certificate"
                 hint="PDF - upload your business registration document"
                 fileName={form.registrationFileName || undefined}
                 onSelect={(name) => setForm((f) => ({ ...f, registrationFileName: name }))}
+                onRemove={() => setForm((f) => ({ ...f, registrationFileName: "" }))}
               />
             </div>
             <CTAFooter>

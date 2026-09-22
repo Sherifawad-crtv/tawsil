@@ -9,7 +9,14 @@ import { useDataStore } from "../lib/store";
 import { byId } from "../lib/selectors";
 import { formatEGP, formatDate, formatTime } from "../lib/format";
 import { truckTypeLabel } from "../lib/constants";
-import type { Order } from "../lib/types";
+import type { Order, OrderStatus } from "../lib/types";
+
+/** Trip-lifecycle progress, same gradient bar as the client app's Active Trip card on its Home screen. */
+const TRIP_PROGRESS: Partial<Record<OrderStatus, { pct: number; label: string }>> = {
+  Assigned: { pct: 0.2, label: "Driver Assigned" },
+  "In Progress": { pct: 0.65, label: "In Transit" },
+  Completed: { pct: 1, label: "Delivered" },
+};
 
 /** Same route dot-timeline + meta-chip grammar as the client app's ActivityScreen trip card. */
 export default function TripCard({ order }: { order: Order }) {
@@ -23,6 +30,7 @@ export default function TripCard({ order }: { order: Order }) {
   const pickup = order.waypoints[0];
   const dropoff = order.waypoints[order.waypoints.length - 1];
   const extraStops = order.waypoints.length - 2;
+  const stage = TRIP_PROGRESS[order.status];
 
   return (
     <div
@@ -73,6 +81,26 @@ export default function TripCard({ order }: { order: Order }) {
                 )}
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Trip progress */}
+      {stage && (
+        <div className="px-5 pb-4">
+          <div className="w-full h-2 rounded-full overflow-hidden" style={{ backgroundColor: "#F0F0EE" }}>
+            <div
+              className="h-full rounded-full"
+              style={{
+                width: `${stage.pct * 100}%`,
+                background: "linear-gradient(90deg, #040033, #1253FA)",
+                transition: "width 1s ease",
+              }}
+            />
+          </div>
+          <div className="flex justify-between mt-1.5">
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>{stage.label}</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA" }}>{Math.round(stage.pct * 100)}%</span>
           </div>
         </div>
       )}

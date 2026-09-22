@@ -14,6 +14,11 @@ export function getActiveOrders(orders: Order[]) {
   return orders.filter((o) => (ACTIVE_STATUSES as readonly string[]).includes(o.status));
 }
 
+/** Accepted but no driver on it yet - the one thing blocking revenue on an already-won order. */
+export function getUnassignedOrders(orders: Order[]) {
+  return orders.filter((o) => o.status === "Accepted" && !o.driverId);
+}
+
 export function getHistoryOrders(orders: Order[]) {
   return orders.filter((o) => o.status === "Completed" || o.status === "Cancelled");
 }

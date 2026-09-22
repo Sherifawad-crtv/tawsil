@@ -22,9 +22,10 @@ export default function App() {
   return (
     <DataStoreProvider>
       <Routes>
-        {/* 3 tab roots only - Home, Orders, Account (no Trucks/Drivers, no separate History tab). */}
+        {/* Home is map-first and owns its own chrome (top bar + drawer, no bottom tab bar) - it sits outside TabLayout for exactly that reason. */}
+        <Route path="/home" element={<HomeScreen />} />
+
         <Route element={<TabLayout />}>
-          <Route path="/home" element={<HomeScreen />} />
           <Route path="/orders" element={<OrdersTab />} />
           <Route path="/account" element={<AccountList />} />
         </Route>

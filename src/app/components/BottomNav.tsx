@@ -1,4 +1,3 @@
-import { useLayoutEffect, useRef, useState } from "react";
 import HomeOutlined from "@mui/icons-material/HomeOutlined";
 import HomeRounded from "@mui/icons-material/HomeRounded";
 import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
@@ -24,52 +23,37 @@ const NAV_ITEMS: { id: NavScreen; label: string; outline: IconComponent; filled:
   { id: "profile", label: "Profile", outline: PersonOutlined, filled: PersonRounded },
 ];
 
-// A gentle spring overshoot - the pill settles past its target and eases
-// back, instead of a flat ease that just stops dead on arrival.
-const SPRING = "cubic-bezier(0.34, 1.56, 0.64, 1)";
-const SPRING_MS = 520;
+// Fixed slot geometry - every inactive tab is the same square size and
+// the active pill is always the same width, so the selector's position
+// is computed directly from the active index instead of being measured
+// off a button mid-transition (that's what made the padding look uneven).
+const CONTAINER_PADDING = 6;
+const GAP = 4;
+const INACTIVE_WIDTH = 44;
+const ACTIVE_WIDTH = 132;
+const SLOT = INACTIVE_WIDTH + GAP;
+
+const EASE = "cubic-bezier(0.32, 0.72, 0, 1)"; // smooth deceleration, no overshoot
+const DURATION_MS = 380;
 
 /**
  * Floating capsule tab bar - the whole pill is a frosted-glass surface.
- * A single indicator slides between tabs (measured off the real button
- * layout, not swapped per-button), and the active tab morphs into a
- * label alongside it while inactive tabs stay icon-only.
+ * A single selector of constant width walks between fixed slots as the
+ * active tab changes, staying visible throughout instead of resizing
+ * to match per-button content.
  */
 export default function BottomNav({ activeScreen, onNavigate }: BottomNavProps) {
-  const containerRef = useRef<HTMLElement>(null);
-  const itemRefs = useRef<Partial<Record<NavScreen, HTMLButtonElement | null>>>({});
-  const [indicator, setIndicator] = useState<{ left: number; width: number } | null>(null);
-
-  useLayoutEffect(() => {
-    const measure = () => {
-      const el = itemRefs.current[activeScreen];
-      const container = containerRef.current;
-      if (!el || !container) return;
-      const elRect = el.getBoundingClientRect();
-      const containerRect = container.getBoundingClientRect();
-      setIndicator({ left: elRect.left - containerRect.left, width: elRect.width });
-    };
-    measure();
-    // Labels animate their own width in via the button's padding
-    // transition, so the indicator's final size settles slightly after
-    // the state flip - keep re-measuring through that transition.
-    const raf = requestAnimationFrame(measure);
-    window.addEventListener("resize", measure);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", measure);
-    };
-  }, [activeScreen]);
+  const activeIndex = Math.max(0, NAV_ITEMS.findIndex((item) => item.id === activeScreen));
+  const indicatorLeft = CONTAINER_PADDING + activeIndex * SLOT;
 
   return (
     <nav
-      ref={containerRef}
       className="fixed left-1/2 z-40 flex items-center"
       style={{
         bottom: "max(env(safe-area-inset-bottom, 16px), 16px)",
         transform: "translateX(-50%)",
-        gap: "4px",
-        padding: "6px",
+        gap: `${GAP}px`,
+        padding: `${CONTAINER_PADDING}px`,
         borderRadius: "999px",
         backgroundColor: "rgba(255,255,255,0.75)",
         backdropFilter: "blur(24px) saturate(180%)",
@@ -78,25 +62,23 @@ export default function BottomNav({ activeScreen, onNavigate }: BottomNavProps) 
         border: "1px solid rgba(255,255,255,0.6)",
       }}
     >
-      {/* Sliding selector - one element that glides between tabs */}
-      {indicator && (
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            top: "6px",
-            bottom: "6px",
-            left: 0,
-            width: indicator.width,
-            borderRadius: "999px",
-            backgroundColor: "#040033",
-            transform: `translateX(${indicator.left}px)`,
-            transition: `transform ${SPRING_MS}ms ${SPRING}, width ${SPRING_MS}ms ${SPRING}`,
-            willChange: "transform, width",
-            zIndex: 0,
-          }}
-        />
-      )}
+      {/* Sliding selector - constant size, always visible, walks between slots */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: `${CONTAINER_PADDING}px`,
+          bottom: `${CONTAINER_PADDING}px`,
+          left: 0,
+          width: `${ACTIVE_WIDTH}px`,
+          borderRadius: "999px",
+          backgroundColor: "#040033",
+          transform: `translateX(${indicatorLeft}px)`,
+          transition: `transform ${DURATION_MS}ms ${EASE}`,
+          willChange: "transform",
+          zIndex: 0,
+        }}
+      />
 
       {NAV_ITEMS.map((item) => {
         const active = activeScreen === item.id;
@@ -104,36 +86,39 @@ export default function BottomNav({ activeScreen, onNavigate }: BottomNavProps) 
         return (
           <button
             key={item.id}
-            ref={(el) => { itemRefs.current[item.id] = el; }}
             onClick={() => onNavigate(item.id)}
             aria-label={item.label}
             aria-current={active ? "page" : undefined}
             className="relative flex items-center justify-center cursor-pointer active:scale-95"
             style={{
-              gap: "7px",
+              flexShrink: 0,
               border: "none",
               background: "none",
               height: "44px",
-              padding: active ? "0 18px" : "0 12px",
+              width: active ? `${ACTIVE_WIDTH}px` : `${INACTIVE_WIDTH}px`,
               borderRadius: "999px",
               zIndex: 1,
-              transition: `padding ${SPRING_MS}ms ${SPRING}`,
+              transition: `width ${DURATION_MS}ms ${EASE}`,
             }}
           >
-            <Icon sx={{ fontSize: 22, color: active ? "white" : "#9CA3AF", transition: "color 0.3s ease 0.05s" }} />
-            {active && (
-              <span
-                style={{
-                  fontFamily: "'Archivo', sans-serif",
-                  fontWeight: 600,
-                  fontSize: "13px",
-                  color: "white",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {item.label}
-              </span>
-            )}
+            <Icon sx={{ fontSize: 22, color: active ? "white" : "#9CA3AF", flexShrink: 0, transition: "color 0.3s ease" }} />
+            <span
+              style={{
+                fontFamily: "'Archivo', sans-serif",
+                fontWeight: 600,
+                fontSize: "13px",
+                color: "white",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                display: "inline-block",
+                marginLeft: active ? "7px" : "0px",
+                maxWidth: active ? "84px" : "0px",
+                opacity: active ? 1 : 0,
+                transition: `max-width ${DURATION_MS}ms ${EASE}, margin-left ${DURATION_MS}ms ${EASE}, opacity ${DURATION_MS}ms ${EASE}`,
+              }}
+            >
+              {item.label}
+            </span>
           </button>
         );
       })}

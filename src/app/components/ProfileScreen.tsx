@@ -237,7 +237,7 @@ export default function ProfileScreen() {
                 <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033", flex: 1 }}>
                   {item.label}
                 </span>
-                <ChevronRightRounded sx={{ fontSize: 14, color: "#D8D9D4" }} />
+                <ChevronRightRounded sx={{ fontSize: 14, color: "#9CA3AF" }} />
               </button>
             </div>
           ))}

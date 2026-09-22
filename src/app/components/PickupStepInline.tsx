@@ -463,7 +463,7 @@ export default function PickupStepInline({
                 <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{loc.name}</p>
                 <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF" }}>{loc.address}</p>
               </div>
-              <ChevronRightRounded sx={{ fontSize: 12, color: "#D8D9D4" }} />
+              <ChevronRightRounded sx={{ fontSize: 12, color: "#9CA3AF" }} />
             </button>
           ))}
         </div>

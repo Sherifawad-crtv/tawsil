@@ -31,7 +31,7 @@ function TypeCard({
         <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>{title}</span>
         <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", marginTop: "4px" }}>{subtitle}</p>
       </div>
-      <ChevronRightRounded sx={{ fontSize: 22, color: "#D8D9D4" }} />
+      <ChevronRightRounded sx={{ fontSize: 22, color: "#9CA3AF" }} />
     </button>
   );
 }

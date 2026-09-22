@@ -106,7 +106,7 @@ export default function ProfileScreen() {
 
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
-      <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(calc(env(safe-area-inset-top, 16px) + 60px), 76px)", paddingBottom: "32px" }}>
+      <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 20px), 20px)", paddingBottom: "calc(env(safe-area-inset-bottom, 16px) + 96px)" }}>
 
         {/* ── Header ── */}
         <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: "1.15", marginBottom: "24px" }}>

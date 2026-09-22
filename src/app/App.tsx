@@ -1,8 +1,8 @@
 import "../styles/fonts.css";
 import { useState } from "react";
 import { TruckSelectorMap } from "./components/TruckSelectorMap";
-import SideNav, { MenuButton } from "./components/SideNav";
-import type { NavScreen } from "./components/SideNav";
+import BottomNav from "./components/BottomNav";
+import type { NavScreen } from "./components/BottomNav";
 import HomeScreen from "./components/HomeScreen";
 import ActivityScreen from "./components/ActivityScreen";
 import InsightsScreen from "./components/InsightsScreen";
@@ -15,7 +15,6 @@ import { useIsMobileViewport } from "./hooks/useIsMobileViewport";
 import { useAuth } from "./lib/AuthContext";
 
 export default function App() {
-  const [navOpen, setNavOpen] = useState(false);
   const [screen, setScreen] = useState<NavScreen | "booking" | "order-details">("home");
   const [showEmailPrompt, setShowEmailPrompt] = useState(false);
   const [emailPromptDismissed, setEmailPromptDismissed] = useState(false);
@@ -49,19 +48,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen w-full relative" style={{ backgroundColor: "#F5F5F3" }}>
-      {/* Side Nav */}
-      <SideNav
-        isOpen={navOpen}
-        onClose={() => setNavOpen(false)}
-        activeScreen={screen === "booking" || screen === "order-details" ? "home" : screen}
-        onNavigate={handleNavigate}
-      />
-
-      {/* Menu button - hidden during booking flow */}
-      {screen !== "booking" && (
-        <MenuButton onClick={() => setNavOpen(true)} />
-      )}
-
       {/* Screens */}
       {screen === "home" && (
         <HomeScreen
@@ -78,6 +64,11 @@ export default function App() {
       {screen === "profile" && <ProfileScreen />}
       {screen === "booking" && (
         <TruckSelectorMap onBack={() => setScreen("home")} />
+      )}
+
+      {/* Bottom tab bar - hidden during booking and the full-screen order details drill-in */}
+      {screen !== "booking" && screen !== "order-details" && (
+        <BottomNav activeScreen={screen} onNavigate={handleNavigate} />
       )}
 
       {showEmailPrompt && (

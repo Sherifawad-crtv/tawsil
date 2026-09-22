@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import ArrowBackIosNewOutlined from "@mui/icons-material/ArrowBackIosNewOutlined";
-import StarOutlined from "@mui/icons-material/StarOutlined";
-import LocalShippingOutlined from "@mui/icons-material/LocalShippingOutlined";
-import VerifiedOutlined from "@mui/icons-material/VerifiedOutlined";
-import AccessTimeOutlined from "@mui/icons-material/AccessTimeOutlined";
-import CloseOutlined from "@mui/icons-material/CloseOutlined";
-import TrendingDownOutlined from "@mui/icons-material/TrendingDownOutlined";
-import GavelOutlined from "@mui/icons-material/GavelOutlined";
+import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
+import StarRounded from "@mui/icons-material/StarRounded";
+import LocalShippingRounded from "@mui/icons-material/LocalShippingRounded";
+import VerifiedRounded from "@mui/icons-material/VerifiedRounded";
+import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
+import CloseRounded from "@mui/icons-material/CloseRounded";
+import TrendingDownRounded from "@mui/icons-material/TrendingDownRounded";
+import GavelRounded from "@mui/icons-material/GavelRounded";
 
 export type Offer = {
   id: string;
@@ -87,7 +87,7 @@ export default function BiddingScreen({
           className="flex items-center justify-center cursor-pointer active:scale-90 transition-transform"
           style={{ width: "40px", height: "40px", borderRadius: "14px", backgroundColor: "rgba(255,255,255,0.08)", border: "none" }}
         >
-          <ArrowBackIosNewOutlined sx={{ fontSize: 16, color: "white" }} />
+          <ArrowBackIosNewRounded sx={{ fontSize: 16, color: "white" }} />
         </button>
         <div className="flex flex-col items-center">
           <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "white", letterSpacing: "0.04em" }}>
@@ -121,7 +121,7 @@ export default function BiddingScreen({
               className="flex items-center gap-1 px-2.5 py-1 rounded-lg cursor-pointer active:opacity-70"
               style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
             >
-              <GavelOutlined sx={{ fontSize: 12, color: "white" }} />
+              <GavelRounded sx={{ fontSize: 12, color: "white" }} />
               <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "11px", color: "white" }}>Adjust</span>
             </button>
           </div>
@@ -131,7 +131,7 @@ export default function BiddingScreen({
             </span>
             {cheapest < yourOffer && (
               <div className="flex items-center gap-0.5">
-                <TrendingDownOutlined sx={{ fontSize: 14, color: "#1253FA" }} />
+                <TrendingDownRounded sx={{ fontSize: 14, color: "#1253FA" }} />
                 <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#1253FA" }}>
                   -{yourOffer - cheapest}
                 </span>
@@ -208,7 +208,7 @@ export default function BiddingScreen({
             transition: "transform 0.2s ease",
           }}
         >
-          <CloseOutlined sx={{ fontSize: 16, color: "#DC2626" }} />
+          <CloseRounded sx={{ fontSize: 16, color: "#DC2626" }} />
           <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "#DC2626", letterSpacing: "0.02em" }}>
             Cancel Bidding
           </span>
@@ -298,7 +298,7 @@ function OfferCard({
                 border: "2px solid white",
               }}
             >
-              <VerifiedOutlined sx={{ fontSize: 10, color: "white" }} />
+              <VerifiedRounded sx={{ fontSize: 10, color: "white" }} />
             </div>
           )}
         </div>
@@ -327,7 +327,7 @@ function OfferCard({
           </div>
           <div className="flex items-center gap-2 flex-wrap">
             <div className="flex items-center gap-0.5">
-              <StarOutlined sx={{ fontSize: 13, color: "#040033" }} />
+              <StarRounded sx={{ fontSize: 13, color: "#040033" }} />
               <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#040033", fontWeight: 600 }}>
                 {offer.rating}
               </span>
@@ -338,13 +338,13 @@ function OfferCard({
           </div>
           <div className="flex items-center gap-3 mt-2">
             <div className="flex items-center gap-1">
-              <LocalShippingOutlined sx={{ fontSize: 13, color: "#6B7280" }} />
+              <LocalShippingRounded sx={{ fontSize: 13, color: "#6B7280" }} />
               <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>
                 {offer.vehicle}
               </span>
             </div>
             <div className="flex items-center gap-1">
-              <AccessTimeOutlined sx={{ fontSize: 13, color: "#6B7280" }} />
+              <AccessTimeRounded sx={{ fontSize: 13, color: "#6B7280" }} />
               <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>
                 {offer.etaMin} min
               </span>
@@ -420,7 +420,7 @@ function CounterOfferModal({
             className="flex items-center justify-center cursor-pointer active:opacity-70"
             style={{ width: "32px", height: "32px", borderRadius: "12px", backgroundColor: "white", border: "none" }}
           >
-            <CloseOutlined sx={{ fontSize: 16, color: "#040033" }} />
+            <CloseRounded sx={{ fontSize: 16, color: "#040033" }} />
           </button>
         </div>
 

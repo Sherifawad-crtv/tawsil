@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { VEHICLES } from "./VehicleCarouselSelectable";
-import AddOutlined from "@mui/icons-material/AddOutlined";
-import ChevronRightOutlined from "@mui/icons-material/ChevronRightOutlined";
-import AccessTimeOutlined from "@mui/icons-material/AccessTimeOutlined";
-import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
-import CheckOutlined from "@mui/icons-material/CheckOutlined";
-import CloseOutlined from "@mui/icons-material/CloseOutlined";
+import AddRounded from "@mui/icons-material/AddRounded";
+import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
+import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
+import PhoneRounded from "@mui/icons-material/PhoneRounded";
+import CheckRounded from "@mui/icons-material/CheckRounded";
+import CloseRounded from "@mui/icons-material/CloseRounded";
 import { useAuth } from "../lib/AuthContext";
 import { displayName } from "../lib/authTypes";
 
@@ -78,7 +78,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
             className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: "rgba(255,255,255,0.12)" }}
           >
-            <AddOutlined sx={{ fontSize: 26, color: "white" }} />
+            <AddRounded sx={{ fontSize: 26, color: "white" }} />
           </div>
           <div className="flex-1">
             <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "white" }}>
@@ -88,7 +88,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
               Start a new delivery booking
             </p>
           </div>
-          <ChevronRightOutlined sx={{ fontSize: 22, color: "rgba(255,255,255,0.5)" }} />
+          <ChevronRightRounded sx={{ fontSize: 22, color: "rgba(255,255,255,0.5)" }} />
         </button>
 
         {/* ── Active Trip (conditional) ── */}
@@ -123,7 +123,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <AccessTimeOutlined sx={{ fontSize: 14, color: "#1253FA" }} />
+                  <AccessTimeRounded sx={{ fontSize: 14, color: "#1253FA" }} />
                   <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "#040033" }}>
                     {ACTIVE_TRIP.eta}
                   </span>
@@ -184,7 +184,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                   className="w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer active:scale-90 transition-transform"
                   style={{ backgroundColor: "rgba(18,83,250,0.08)" }}
                 >
-                  <PhoneOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
+                  <PhoneRounded sx={{ fontSize: 16, color: "#1253FA" }} />
                 </span>
               </div>
             </button>
@@ -251,9 +251,9 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                 style={{ backgroundColor: trip.status === "completed" ? "rgba(18,83,250,0.06)" : "rgba(107,114,128,0.06)" }}
               >
                 {trip.status === "completed" ? (
-                  <CheckOutlined sx={{ fontSize: 18, color: "#1253FA" }} />
+                  <CheckRounded sx={{ fontSize: 18, color: "#1253FA" }} />
                 ) : (
-                  <CloseOutlined sx={{ fontSize: 18, color: "#6B7280" }} />
+                  <CloseRounded sx={{ fontSize: 18, color: "#6B7280" }} />
                 )}
               </div>
               <div className="flex-1 min-w-0">

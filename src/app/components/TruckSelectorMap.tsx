@@ -16,8 +16,8 @@ import type { Offer } from "./BiddingScreen";
 import { useState, useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import ArrowBackIosNewOutlined from "@mui/icons-material/ArrowBackIosNewOutlined";
-import NavigationOutlined from "@mui/icons-material/NavigationOutlined";
+import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
+import NavigationRounded from "@mui/icons-material/NavigationRounded";
 import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
 import { useAuth } from "../lib/AuthContext";
 
@@ -173,7 +173,7 @@ function BackButton({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       className="flex items-center gap-1.5 mb-3 cursor-pointer active:opacity-70 transition-opacity flex-shrink-0"
     >
-      <ArrowBackIosNewOutlined sx={{ fontSize: 14, color: "#040033" }} />
+      <ArrowBackIosNewRounded sx={{ fontSize: 14, color: "#040033" }} />
       <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>Back</span>
     </button>
   );
@@ -218,7 +218,7 @@ function TopBar({ onBack }: { onBack?: () => void }) {
         border: "none",
       }}
     >
-      <ArrowBackIosNewOutlined sx={{ fontSize: 18, color: "#040033" }} />
+      <ArrowBackIosNewRounded sx={{ fontSize: 18, color: "#040033" }} />
     </button>
   );
 }
@@ -228,7 +228,7 @@ function LocationFAB({ bottomOffset }: { bottomOffset: string }) {
   return (
     <div className="absolute z-10" style={{ right: "16px", bottom: bottomOffset, transition: "bottom 0.35s cubic-bezier(0.4,0,0.2,1)" }}>
       <button className="w-11 h-11 rounded-full flex items-center justify-center" style={{ backgroundColor: "white", boxShadow: "0 2px 14px rgba(0,0,0,0.1)" }}>
-        <NavigationOutlined sx={{ fontSize: 20, color: "#1253FA" }} />
+        <NavigationRounded sx={{ fontSize: 20, color: "#1253FA" }} />
       </button>
     </div>
   );

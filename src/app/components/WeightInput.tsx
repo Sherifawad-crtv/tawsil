@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import ScaleOutlined from "@mui/icons-material/ScaleOutlined";
-import InfoOutlined from "@mui/icons-material/InfoOutlined";
+import ScaleRounded from "@mui/icons-material/ScaleRounded";
+import InfoRounded from "@mui/icons-material/InfoRounded";
 
 type Unit = "kg" | "ton";
 
@@ -147,7 +147,7 @@ export default function WeightInput({
       <div className="relative flex flex-col items-center mb-2" style={{ height: "120px", width: "140px" }}>
         <WeightGauge fraction={gaugeFraction} overloaded={overloaded} />
         <div className="flex items-center justify-center" style={{ marginTop: "28px" }}>
-          <ScaleOutlined sx={{ fontSize: 48, color: "#040033" }} />
+          <ScaleRounded sx={{ fontSize: 48, color: "#040033" }} />
         </div>
       </div>
 
@@ -322,7 +322,7 @@ export default function WeightInput({
         className="flex items-start gap-2.5 w-full mt-5 px-4 py-3 rounded-2xl"
         style={{ backgroundColor: "rgba(18,83,250,0.05)" }}
       >
-        <InfoOutlined className="flex-shrink-0 mt-0.5" sx={{ fontSize: 16, color: "#1253FA" }} />
+        <InfoRounded className="flex-shrink-0 mt-0.5" sx={{ fontSize: 16, color: "#1253FA" }} />
         <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#6B7280", lineHeight: "1.5" }}>
           Weight must match your cargo documents. Overloading may incur additional fees.
         </p>

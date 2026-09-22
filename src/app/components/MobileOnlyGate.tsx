@@ -1,4 +1,4 @@
-import PhoneIphoneOutlined from "@mui/icons-material/PhoneIphoneOutlined";
+import PhoneIphoneRounded from "@mui/icons-material/PhoneIphoneRounded";
 
 export default function MobileOnlyGate() {
   return (
@@ -10,7 +10,7 @@ export default function MobileOnlyGate() {
         className="w-16 h-16 rounded-full flex items-center justify-center"
         style={{ backgroundColor: "rgba(18,83,250,0.15)" }}
       >
-        <PhoneIphoneOutlined sx={{ fontSize: 30, color: "#1253FA" }} />
+        <PhoneIphoneRounded sx={{ fontSize: 30, color: "#1253FA" }} />
       </div>
       <h1
         style={{

@@ -1,13 +1,13 @@
 import { useState, useRef, useCallback } from "react";
-import WarehouseOutlined from "@mui/icons-material/WarehouseOutlined";
-import BusinessOutlined from "@mui/icons-material/BusinessOutlined";
-import HomeOutlined from "@mui/icons-material/HomeOutlined";
-import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
-import CloseOutlined from "@mui/icons-material/CloseOutlined";
-import SearchOutlined from "@mui/icons-material/SearchOutlined";
-import MyLocationOutlined from "@mui/icons-material/MyLocationOutlined";
-import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
-import ChevronRightOutlined from "@mui/icons-material/ChevronRightOutlined";
+import WarehouseRounded from "@mui/icons-material/WarehouseRounded";
+import BusinessRounded from "@mui/icons-material/BusinessRounded";
+import HomeRounded from "@mui/icons-material/HomeRounded";
+import LocationOnRounded from "@mui/icons-material/LocationOnRounded";
+import CloseRounded from "@mui/icons-material/CloseRounded";
+import SearchRounded from "@mui/icons-material/SearchRounded";
+import MyLocationRounded from "@mui/icons-material/MyLocationRounded";
+import BookmarkBorderRounded from "@mui/icons-material/BookmarkBorderRounded";
+import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
 
 /* ── Types ── */
 export interface SavedLocation {
@@ -42,10 +42,10 @@ const SEARCH_RESULTS = [
 
 /* ── Icon ── */
 function LocationIcon({ type }: { type: SavedLocation["icon"] }) {
-  if (type === "warehouse") return <WarehouseOutlined sx={{ fontSize: 16, color: "#040033" }} />;
-  if (type === "office") return <BusinessOutlined sx={{ fontSize: 16, color: "#040033" }} />;
-  if (type === "home") return <HomeOutlined sx={{ fontSize: 16, color: "#040033" }} />;
-  return <LocationOnOutlined sx={{ fontSize: 16, color: "#040033" }} />;
+  if (type === "warehouse") return <WarehouseRounded sx={{ fontSize: 16, color: "#040033" }} />;
+  if (type === "office") return <BusinessRounded sx={{ fontSize: 16, color: "#040033" }} />;
+  if (type === "home") return <HomeRounded sx={{ fontSize: 16, color: "#040033" }} />;
+  return <LocationOnRounded sx={{ fontSize: 16, color: "#040033" }} />;
 }
 
 /* ══════════════════════════════════════════
@@ -142,7 +142,7 @@ function PickupCard({
         {/* ── Content ── */}
         <div className="flex-1 py-3.5 pr-4 pl-3.5 flex flex-col min-w-0 justify-center">
           <div className="flex items-center gap-2">
-            <LocationOnOutlined sx={{ fontSize: 14, color: "#040033" }} className="flex-shrink-0" />
+            <LocationOnRounded sx={{ fontSize: 14, color: "#040033" }} className="flex-shrink-0" />
             <span
               className="truncate"
               style={{
@@ -182,7 +182,7 @@ function PickupCard({
             borderLeft: "1px solid #F0F0EE",
           }}
         >
-          <CloseOutlined sx={{ fontSize: 16, color: "#D1D5DB" }} />
+          <CloseRounded sx={{ fontSize: 16, color: "#D1D5DB" }} />
         </button>
       </div>
     </div>
@@ -324,7 +324,7 @@ export default function PickupStepInline({
         className="flex items-center gap-3 rounded-2xl px-4"
         style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)", height: "48px" }}
       >
-        <SearchOutlined sx={{ fontSize: 16, color: "#9CA3AF" }} />
+        <SearchRounded sx={{ fontSize: 16, color: "#9CA3AF" }} />
         <input
           type="text"
           placeholder="Search pickup location..."
@@ -339,7 +339,7 @@ export default function PickupStepInline({
             className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer"
             style={{ backgroundColor: "#F0F0EE" }}
           >
-            <CloseOutlined sx={{ fontSize: 10, color: "#040033" }} />
+            <CloseRounded sx={{ fontSize: 10, color: "#040033" }} />
           </button>
         )}
       </div>
@@ -357,7 +357,7 @@ export default function PickupStepInline({
               className="flex items-center gap-3 w-full px-4 py-3 cursor-pointer active:bg-[#F5F5F3] transition-colors text-left"
             >
               <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F5F5F3" }}>
-                <LocationOnOutlined sx={{ fontSize: 12, color: "#9CA3AF" }} />
+                <LocationOnRounded sx={{ fontSize: 12, color: "#9CA3AF" }} />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{r.name}</p>
@@ -427,7 +427,7 @@ export default function PickupStepInline({
         style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}
       >
         <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(18,83,250,0.08)" }}>
-          <MyLocationOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
+          <MyLocationRounded sx={{ fontSize: 16, color: "#1253FA" }} />
         </div>
         <div className="flex-1 text-left">
           <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>Use current location</span>
@@ -441,10 +441,10 @@ export default function PickupStepInline({
       {/* Saved locations */}
       <button onClick={() => setShowSaved(!showSaved)} className="flex items-center justify-between w-full cursor-pointer">
         <div className="flex items-center gap-2">
-          <BookmarkBorderOutlined sx={{ fontSize: 14, color: "#040033" }} />
+          <BookmarkBorderRounded sx={{ fontSize: 14, color: "#040033" }} />
           <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>Saved Locations</span>
         </div>
-        <ChevronRightOutlined sx={{ fontSize: 12, color: "#9CA3AF", transform: showSaved ? "rotate(90deg)" : "rotate(0deg)", transition: "transform 0.2s" }} />
+        <ChevronRightRounded sx={{ fontSize: 12, color: "#9CA3AF", transform: showSaved ? "rotate(90deg)" : "rotate(0deg)", transition: "transform 0.2s" }} />
       </button>
 
       {showSaved && (
@@ -463,7 +463,7 @@ export default function PickupStepInline({
                 <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{loc.name}</p>
                 <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF" }}>{loc.address}</p>
               </div>
-              <ChevronRightOutlined sx={{ fontSize: 12, color: "#D8D9D4" }} />
+              <ChevronRightRounded sx={{ fontSize: 12, color: "#D8D9D4" }} />
             </button>
           ))}
         </div>

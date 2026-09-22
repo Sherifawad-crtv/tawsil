@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import ShowChartOutlined from "@mui/icons-material/ShowChartOutlined";
-import CheckOutlined from "@mui/icons-material/CheckOutlined";
-import AccessTimeOutlined from "@mui/icons-material/AccessTimeOutlined";
-import CloseOutlined from "@mui/icons-material/CloseOutlined";
-import RouteOutlined from "@mui/icons-material/RouteOutlined";
-import PaymentsOutlined from "@mui/icons-material/PaymentsOutlined";
+import ShowChartRounded from "@mui/icons-material/ShowChartRounded";
+import CheckRounded from "@mui/icons-material/CheckRounded";
+import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
+import CloseRounded from "@mui/icons-material/CloseRounded";
+import RouteRounded from "@mui/icons-material/RouteRounded";
+import PaymentsRounded from "@mui/icons-material/PaymentsRounded";
 
 /* ── Stats Data ── */
 const STATS = {
@@ -204,25 +204,25 @@ export default function InsightsScreen() {
             label="Total Trips"
             value={STATS.total}
             color="#040033"
-            icon={<ShowChartOutlined sx={{ fontSize: 16, color: "#040033" }} />}
+            icon={<ShowChartRounded sx={{ fontSize: 16, color: "#040033" }} />}
           />
           <StatCard
             label="Completed"
             value={STATS.completed}
             color="#059669"
-            icon={<CheckOutlined sx={{ fontSize: 16, color: "#059669" }} />}
+            icon={<CheckRounded sx={{ fontSize: 16, color: "#059669" }} />}
           />
           <StatCard
             label="Pending"
             value={STATS.pending}
             color="#1253FA"
-            icon={<AccessTimeOutlined sx={{ fontSize: 16, color: "#1253FA" }} />}
+            icon={<AccessTimeRounded sx={{ fontSize: 16, color: "#1253FA" }} />}
           />
           <StatCard
             label="Cancelled"
             value={STATS.cancelled}
             color="#6B7280"
-            icon={<CloseOutlined sx={{ fontSize: 16, color: "#6B7280" }} />}
+            icon={<CloseRounded sx={{ fontSize: 16, color: "#6B7280" }} />}
           />
         </div>
 
@@ -262,9 +262,9 @@ export default function InsightsScreen() {
                     className="w-9 h-9 rounded-xl flex items-center justify-center"
                     style={{ backgroundColor: "#F0F0EE" }}
                   >
-                    {item.icon === "clock" && <AccessTimeOutlined sx={{ fontSize: 16, color: "#6B7280" }} />}
-                    {item.icon === "route" && <RouteOutlined sx={{ fontSize: 16, color: "#6B7280" }} />}
-                    {item.icon === "money" && <PaymentsOutlined sx={{ fontSize: 16, color: "#6B7280" }} />}
+                    {item.icon === "clock" && <AccessTimeRounded sx={{ fontSize: 16, color: "#6B7280" }} />}
+                    {item.icon === "route" && <RouteRounded sx={{ fontSize: 16, color: "#6B7280" }} />}
+                    {item.icon === "money" && <PaymentsRounded sx={{ fontSize: 16, color: "#6B7280" }} />}
                   </div>
                   <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 500, fontSize: "13px", color: "#040033" }}>
                     {item.label}

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import UploadFileOutlined from "@mui/icons-material/UploadFileOutlined";
+import UploadFileRounded from "@mui/icons-material/UploadFileRounded";
 import PictureAsPdfRounded from "@mui/icons-material/PictureAsPdfRounded";
-import CloseOutlined from "@mui/icons-material/CloseOutlined";
+import CloseRounded from "@mui/icons-material/CloseRounded";
 
 function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
@@ -97,7 +97,7 @@ export default function FileUploadRow({
             style={{ backgroundColor: "#F5F5F3" }}
             aria-label={`Remove ${label}`}
           >
-            <CloseOutlined sx={{ fontSize: 15, color: "#6B7280" }} />
+            <CloseRounded sx={{ fontSize: 15, color: "#6B7280" }} />
           </button>
         )}
 
@@ -108,7 +108,7 @@ export default function FileUploadRow({
           {isDone ? (
             <PictureAsPdfRounded sx={{ fontSize: 22, color: "#1253FA" }} />
           ) : (
-            <UploadFileOutlined sx={{ fontSize: 22, color: uploading ? "#1253FA" : "#9CA3AF" }} />
+            <UploadFileRounded sx={{ fontSize: 22, color: uploading ? "#1253FA" : "#9CA3AF" }} />
           )}
         </div>
 

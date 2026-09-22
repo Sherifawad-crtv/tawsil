@@ -1,10 +1,6 @@
-import HomeOutlined from "@mui/icons-material/HomeOutlined";
 import HomeRounded from "@mui/icons-material/HomeRounded";
-import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
 import CalendarMonthRounded from "@mui/icons-material/CalendarMonthRounded";
-import BarChartOutlined from "@mui/icons-material/BarChartOutlined";
 import BarChartRounded from "@mui/icons-material/BarChartRounded";
-import PersonOutlined from "@mui/icons-material/PersonOutlined";
 import PersonRounded from "@mui/icons-material/PersonRounded";
 
 export type NavScreen = "home" | "activity" | "profile" | "insights";
@@ -14,13 +10,13 @@ interface BottomNavProps {
   onNavigate: (screen: NavScreen) => void;
 }
 
-type IconComponent = typeof HomeOutlined;
+type IconComponent = typeof HomeRounded;
 
-const NAV_ITEMS: { id: NavScreen; label: string; outline: IconComponent; filled: IconComponent }[] = [
-  { id: "home", label: "Home", outline: HomeOutlined, filled: HomeRounded },
-  { id: "activity", label: "Activity", outline: CalendarMonthOutlined, filled: CalendarMonthRounded },
-  { id: "insights", label: "Insights", outline: BarChartOutlined, filled: BarChartRounded },
-  { id: "profile", label: "Profile", outline: PersonOutlined, filled: PersonRounded },
+const NAV_ITEMS: { id: NavScreen; label: string; icon: IconComponent }[] = [
+  { id: "home", label: "Home", icon: HomeRounded },
+  { id: "activity", label: "Activity", icon: CalendarMonthRounded },
+  { id: "insights", label: "Insights", icon: BarChartRounded },
+  { id: "profile", label: "Profile", icon: PersonRounded },
 ];
 
 // Fixed slot geometry - every inactive tab is the same square size and
@@ -82,7 +78,7 @@ export default function BottomNav({ activeScreen, onNavigate }: BottomNavProps) 
 
       {NAV_ITEMS.map((item) => {
         const active = activeScreen === item.id;
-        const Icon = active ? item.filled : item.outline;
+        const Icon = item.icon;
         return (
           <button
             key={item.id}

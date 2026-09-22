@@ -1,8 +1,8 @@
 import { useState } from "react";
-import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
-import AccessTimeOutlined from "@mui/icons-material/AccessTimeOutlined";
-import ReplayOutlined from "@mui/icons-material/ReplayOutlined";
-import InboxOutlined from "@mui/icons-material/InboxOutlined";
+import CalendarMonthRounded from "@mui/icons-material/CalendarMonthRounded";
+import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
+import ReplayRounded from "@mui/icons-material/ReplayRounded";
+import InboxRounded from "@mui/icons-material/InboxRounded";
 
 type TabId = "active" | "completed" | "cancelled";
 
@@ -115,11 +115,11 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
         style={{ borderTop: "1px solid #F0F0EE" }}
       >
         <div className="flex items-center gap-1.5">
-          <CalendarMonthOutlined sx={{ fontSize: 12, color: "#9CA3AF" }} />
+          <CalendarMonthRounded sx={{ fontSize: 12, color: "#9CA3AF" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{trip.date}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <AccessTimeOutlined sx={{ fontSize: 12, color: "#9CA3AF" }} />
+          <AccessTimeRounded sx={{ fontSize: 12, color: "#9CA3AF" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{trip.time}</span>
         </div>
         <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
@@ -159,7 +159,7 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
               border: "none",
             }}
           >
-            <ReplayOutlined sx={{ fontSize: 14, color: "white" }} />
+            <ReplayRounded sx={{ fontSize: 14, color: "white" }} />
             <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "white" }}>
               Reorder
             </span>
@@ -255,7 +255,7 @@ export default function ActivityScreen() {
                 className="w-16 h-16 rounded-2xl flex items-center justify-center"
                 style={{ backgroundColor: "#F0F0EE" }}
               >
-                <InboxOutlined sx={{ fontSize: 28, color: "#D8D9D4" }} />
+                <InboxRounded sx={{ fontSize: 28, color: "#D8D9D4" }} />
               </div>
               <div className="text-center">
                 <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>No trips found</p>

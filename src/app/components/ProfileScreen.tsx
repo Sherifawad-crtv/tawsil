@@ -2,17 +2,17 @@ import { useState } from "react";
 import { useAuth } from "../lib/AuthContext";
 import { displayName, initialsOf } from "../lib/authTypes";
 import AddEmailModal from "./onboarding/AddEmailModal";
-import NotificationsOutlined from "@mui/icons-material/NotificationsOutlined";
-import MyLocationOutlined from "@mui/icons-material/MyLocationOutlined";
-import FactCheckOutlined from "@mui/icons-material/FactCheckOutlined";
-import MailOutlineOutlined from "@mui/icons-material/MailOutlineOutlined";
-import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
-import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
-import CreditCardOutlined from "@mui/icons-material/CreditCardOutlined";
-import HelpOutlineOutlined from "@mui/icons-material/HelpOutlineOutlined";
-import ShieldOutlined from "@mui/icons-material/ShieldOutlined";
-import ChevronRightOutlined from "@mui/icons-material/ChevronRightOutlined";
-import LogoutOutlined from "@mui/icons-material/LogoutOutlined";
+import NotificationsRounded from "@mui/icons-material/NotificationsRounded";
+import MyLocationRounded from "@mui/icons-material/MyLocationRounded";
+import FactCheckRounded from "@mui/icons-material/FactCheckRounded";
+import MailOutlineRounded from "@mui/icons-material/MailOutlineRounded";
+import PhoneRounded from "@mui/icons-material/PhoneRounded";
+import BookmarkBorderRounded from "@mui/icons-material/BookmarkBorderRounded";
+import CreditCardRounded from "@mui/icons-material/CreditCardRounded";
+import HelpOutlineRounded from "@mui/icons-material/HelpOutlineRounded";
+import ShieldRounded from "@mui/icons-material/ShieldRounded";
+import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
+import LogoutRounded from "@mui/icons-material/LogoutRounded";
 
 function formatMemberSince(iso: string): string {
   return new Date(iso).toLocaleDateString("en-US", { month: "short", year: "numeric" });
@@ -23,19 +23,19 @@ const SETTINGS = [
     id: "notifications",
     label: "Push Notifications",
     desc: "Trip updates and alerts",
-    icon: <NotificationsOutlined sx={{ fontSize: 18, color: "#040033" }} />,
+    icon: <NotificationsRounded sx={{ fontSize: 18, color: "#040033" }} />,
   },
   {
     id: "location",
     label: "Location Services",
     desc: "Auto-detect pickup location",
-    icon: <MyLocationOutlined sx={{ fontSize: 18, color: "#040033" }} />,
+    icon: <MyLocationRounded sx={{ fontSize: 18, color: "#040033" }} />,
   },
   {
     id: "pod",
     label: "Default POD",
     desc: "Proof of delivery on all orders",
-    icon: <FactCheckOutlined sx={{ fontSize: 18, color: "#040033" }} />,
+    icon: <FactCheckRounded sx={{ fontSize: 18, color: "#040033" }} />,
   },
 ];
 
@@ -148,7 +148,7 @@ export default function ProfileScreen() {
 
           <div className="flex flex-col gap-3 mt-4">
             <div className="flex items-center gap-3">
-              <MailOutlineOutlined sx={{ fontSize: 14, color: "#9CA3AF" }} />
+              <MailOutlineRounded sx={{ fontSize: 14, color: "#9CA3AF" }} />
               {user.email ? (
                 <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#040033" }}>{user.email}</span>
               ) : (
@@ -162,7 +162,7 @@ export default function ProfileScreen() {
               )}
             </div>
             <div className="flex items-center gap-3">
-              <PhoneOutlined sx={{ fontSize: 14, color: "#9CA3AF" }} />
+              <PhoneRounded sx={{ fontSize: 14, color: "#9CA3AF" }} />
               <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#040033" }}>{user.phone}</span>
             </div>
           </div>
@@ -229,15 +229,15 @@ export default function ProfileScreen() {
                   className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                   style={{ backgroundColor: "#F5F5F3" }}
                 >
-                  {item.icon === "bookmark" && <BookmarkBorderOutlined sx={{ fontSize: 16, color: "#040033" }} />}
-                  {item.icon === "card" && <CreditCardOutlined sx={{ fontSize: 16, color: "#040033" }} />}
-                  {item.icon === "help" && <HelpOutlineOutlined sx={{ fontSize: 16, color: "#040033" }} />}
-                  {item.icon === "shield" && <ShieldOutlined sx={{ fontSize: 16, color: "#040033" }} />}
+                  {item.icon === "bookmark" && <BookmarkBorderRounded sx={{ fontSize: 16, color: "#040033" }} />}
+                  {item.icon === "card" && <CreditCardRounded sx={{ fontSize: 16, color: "#040033" }} />}
+                  {item.icon === "help" && <HelpOutlineRounded sx={{ fontSize: 16, color: "#040033" }} />}
+                  {item.icon === "shield" && <ShieldRounded sx={{ fontSize: 16, color: "#040033" }} />}
                 </div>
                 <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033", flex: 1 }}>
                   {item.label}
                 </span>
-                <ChevronRightOutlined sx={{ fontSize: 14, color: "#D8D9D4" }} />
+                <ChevronRightRounded sx={{ fontSize: 14, color: "#D8D9D4" }} />
               </button>
             </div>
           ))}
@@ -253,7 +253,7 @@ export default function ProfileScreen() {
             border: "none",
           }}
         >
-          <LogoutOutlined sx={{ fontSize: 16, color: "#DC2626" }} />
+          <LogoutRounded sx={{ fontSize: 16, color: "#DC2626" }} />
           <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#DC2626" }}>
             Sign Out
           </span>

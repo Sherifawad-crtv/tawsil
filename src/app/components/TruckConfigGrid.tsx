@@ -1,18 +1,14 @@
-import AcUnitOutlined from "@mui/icons-material/AcUnitOutlined";
 import AcUnitRounded from "@mui/icons-material/AcUnitRounded";
-import ThermostatOutlined from "@mui/icons-material/ThermostatOutlined";
 import ThermostatRounded from "@mui/icons-material/ThermostatRounded";
-import ViewInArOutlined from "@mui/icons-material/ViewInArOutlined";
 import ViewInArRounded from "@mui/icons-material/ViewInArRounded";
-import Inventory2Outlined from "@mui/icons-material/Inventory2Outlined";
 import Inventory2Rounded from "@mui/icons-material/Inventory2Rounded";
 import CheckRounded from "@mui/icons-material/CheckRounded";
 
 const CONFIGS = [
-  { id: "frozen", name: "Frozen", description: "Below -18°C", outline: AcUnitOutlined, filled: AcUnitRounded },
-  { id: "chilled", name: "Chilled", description: "0°C to 5°C", outline: ThermostatOutlined, filled: ThermostatRounded },
-  { id: "open", name: "Open", description: "Flatbed cargo", outline: ViewInArOutlined, filled: ViewInArRounded },
-  { id: "closed", name: "Closed", description: "Sealed box", outline: Inventory2Outlined, filled: Inventory2Rounded },
+  { id: "frozen", name: "Frozen", description: "Below -18°C", Icon: AcUnitRounded },
+  { id: "chilled", name: "Chilled", description: "0°C to 5°C", Icon: ThermostatRounded },
+  { id: "open", name: "Open", description: "Flatbed cargo", Icon: ViewInArRounded },
+  { id: "closed", name: "Closed", description: "Sealed box", Icon: Inventory2Rounded },
 ];
 
 export default function TruckConfigGrid({
@@ -26,7 +22,6 @@ export default function TruckConfigGrid({
     <div className="grid grid-cols-2 gap-3">
       {CONFIGS.map((config) => {
         const isSelected = selected === config.id;
-        const ConfigIcon = isSelected ? config.filled : config.outline;
         return (
           <button
             key={config.id}
@@ -61,7 +56,7 @@ export default function TruckConfigGrid({
                 transition: "background-color 0.2s",
               }}
             >
-              <ConfigIcon sx={{ fontSize: 32, color: "#040033" }} />
+              <config.Icon sx={{ fontSize: 32, color: "#040033" }} />
             </div>
 
             {/* Label */}

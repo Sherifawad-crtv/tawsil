@@ -1,21 +1,15 @@
 import { useState, useMemo, useEffect } from "react";
-import BoltOutlined from "@mui/icons-material/BoltOutlined";
 import BoltRounded from "@mui/icons-material/BoltRounded";
-import DateRangeOutlined from "@mui/icons-material/DateRangeOutlined";
 import DateRangeRounded from "@mui/icons-material/DateRangeRounded";
-import AccessTimeOutlined from "@mui/icons-material/AccessTimeOutlined";
 import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
-import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
 import CalendarMonthRounded from "@mui/icons-material/CalendarMonthRounded";
-import CalendarTodayOutlined from "@mui/icons-material/CalendarTodayOutlined";
 import CalendarTodayRounded from "@mui/icons-material/CalendarTodayRounded";
-import AutorenewOutlined from "@mui/icons-material/AutorenewOutlined";
 import AutorenewRounded from "@mui/icons-material/AutorenewRounded";
-import SpeedOutlined from "@mui/icons-material/SpeedOutlined";
-import CheckCircleOutlined from "@mui/icons-material/CheckCircleOutlined";
-import ChevronLeftOutlined from "@mui/icons-material/ChevronLeftOutlined";
-import ChevronRightOutlined from "@mui/icons-material/ChevronRightOutlined";
-import InfoOutlined from "@mui/icons-material/InfoOutlined";
+import SpeedRounded from "@mui/icons-material/SpeedRounded";
+import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
+import ChevronLeftRounded from "@mui/icons-material/ChevronLeftRounded";
+import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
+import InfoRounded from "@mui/icons-material/InfoRounded";
 
 /* ── Types ── */
 export type BookingCategory = "on-demand" | "rental";
@@ -147,15 +141,11 @@ export default function BookingTypeSelector({ state, onChange, onOpenScheduleMod
 
 /* ── Icons ── */
 function OnDemandIcon({ active }: { active: boolean }) {
-  return active
-    ? <BoltRounded sx={{ fontSize: 16, color: "#1253FA" }} />
-    : <BoltOutlined sx={{ fontSize: 16, color: "#9CA3AF" }} />;
+  return <BoltRounded sx={{ fontSize: 16, color: active ? "#1253FA" : "#9CA3AF" }} />;
 }
 
 function RentalIcon({ active }: { active: boolean }) {
-  return active
-    ? <DateRangeRounded sx={{ fontSize: 16, color: "#1253FA" }} />
-    : <DateRangeOutlined sx={{ fontSize: 16, color: "#9CA3AF" }} />;
+  return <DateRangeRounded sx={{ fontSize: 16, color: active ? "#1253FA" : "#9CA3AF" }} />;
 }
 
 /* ══════════════════════════════════════════
@@ -179,17 +169,13 @@ function OnDemandSection({
             id: "now" as const,
             label: "Now",
             desc: "Instant dispatch",
-            icon: (a: boolean) => a
-              ? <AccessTimeRounded sx={{ fontSize: 18, color: "#1253FA" }} />
-              : <AccessTimeOutlined sx={{ fontSize: 18, color: "#9CA3AF" }} />,
+            icon: (a: boolean) => <AccessTimeRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#9CA3AF" }} />,
           },
           {
             id: "schedule" as const,
             label: "Schedule",
             desc: "Pick date & time",
-            icon: (a: boolean) => a
-              ? <CalendarMonthRounded sx={{ fontSize: 18, color: "#1253FA" }} />
-              : <CalendarMonthOutlined sx={{ fontSize: 18, color: "#9CA3AF" }} />,
+            icon: (a: boolean) => <CalendarMonthRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#9CA3AF" }} />,
           },
         ]).map(({ id, label, desc, icon }) => {
           const active = mode === id;
@@ -234,7 +220,7 @@ function OnDemandSection({
             className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: "rgba(18,83,250,0.08)" }}
           >
-            <BoltOutlined sx={{ fontSize: 18, color: "#1253FA" }} />
+            <BoltRounded sx={{ fontSize: 18, color: "#1253FA" }} />
           </div>
           <div>
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
@@ -252,7 +238,7 @@ function OnDemandSection({
           className="flex items-center gap-2.5 px-4 py-3 rounded-2xl"
           style={{ backgroundColor: "rgba(18,83,250,0.05)" }}
         >
-          <CheckCircleOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
+          <CheckCircleRounded sx={{ fontSize: 16, color: "#1253FA" }} />
           <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#1253FA" }}>
             Scheduled: {scheduleSummary}
           </p>
@@ -297,17 +283,13 @@ function RentalSection({
             id: "daily" as const,
             label: "Daily",
             desc: "Rent for a single day",
-            icon: (a: boolean) => a
-              ? <CalendarTodayRounded sx={{ fontSize: 18, color: "#1253FA" }} />
-              : <CalendarTodayOutlined sx={{ fontSize: 18, color: "#9CA3AF" }} />,
+            icon: (a: boolean) => <CalendarTodayRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#9CA3AF" }} />,
           },
           {
             id: "monthly" as const,
             label: "Monthly",
             desc: "10+ days per month",
-            icon: (a: boolean) => a
-              ? <AutorenewRounded sx={{ fontSize: 18, color: "#1253FA" }} />
-              : <AutorenewOutlined sx={{ fontSize: 18, color: "#9CA3AF" }} />,
+            icon: (a: boolean) => <AutorenewRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#9CA3AF" }} />,
           },
         ]).map(({ id, label, desc, icon }) => {
           const active = mode === id;
@@ -419,7 +401,7 @@ function DailyRentalPicker({
             className="w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer"
             style={{ backgroundColor: canGoPrev ? "#F0F0EE" : "transparent", opacity: canGoPrev ? 1 : 0.3, pointerEvents: canGoPrev ? "auto" : "none" }}
           >
-            <ChevronLeftOutlined sx={{ fontSize: 14, color: "#040033" }} />
+            <ChevronLeftRounded sx={{ fontSize: 14, color: "#040033" }} />
           </button>
           <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>
             {MONTHS_FULL[viewMonth]} {viewYear}
@@ -429,7 +411,7 @@ function DailyRentalPicker({
             className="w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer"
             style={{ backgroundColor: "#F0F0EE" }}
           >
-            <ChevronRightOutlined sx={{ fontSize: 14, color: "#040033" }} />
+            <ChevronRightRounded sx={{ fontSize: 14, color: "#040033" }} />
           </button>
         </div>
 
@@ -489,7 +471,7 @@ function DailyRentalPicker({
           className="flex items-center gap-3 px-4 py-3 rounded-2xl"
           style={{ backgroundColor: "rgba(18,83,250,0.04)" }}
         >
-          <CheckCircleOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
+          <CheckCircleRounded sx={{ fontSize: 16, color: "#1253FA" }} />
           <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#1253FA" }}>
             {selectedDay.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric", year: "numeric" })}
           </p>
@@ -503,7 +485,7 @@ function DailyRentalPicker({
           style={{ backgroundColor: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}
         >
           <div className="px-4 pt-4 pb-2 flex items-center gap-2">
-            <SpeedOutlined sx={{ fontSize: 16, color: "#040033" }} />
+            <SpeedRounded sx={{ fontSize: 16, color: "#040033" }} />
             <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.06em", textTransform: "uppercase" }}>
               Estimated Kilometers
             </span>
@@ -580,7 +562,7 @@ function DailyRentalPicker({
             className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: "#E8E8E5" }}
           >
-            <CalendarMonthOutlined sx={{ fontSize: 16, color: "#9CA3AF" }} />
+            <CalendarMonthRounded sx={{ fontSize: 16, color: "#9CA3AF" }} />
           </div>
           <div>
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
@@ -713,7 +695,7 @@ function MonthlyRentalPicker({
               style={{ backgroundColor: eligible ? "rgba(18,83,250,0.08)" : "rgba(220,38,38,0.08)" }}
             >
               {eligible ? (
-                <CheckCircleOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
+                <CheckCircleRounded sx={{ fontSize: 16, color: "#1253FA" }} />
               ) : (
                 <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#DC2626" }}>
                   {monthlyDays.length}
@@ -767,7 +749,7 @@ function MonthlyRentalPicker({
               className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
               style={{ backgroundColor: "rgba(18,83,250,0.08)" }}
             >
-              <InfoOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
+              <InfoRounded sx={{ fontSize: 16, color: "#1253FA" }} />
             </div>
             <div className="flex-1">
               <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>

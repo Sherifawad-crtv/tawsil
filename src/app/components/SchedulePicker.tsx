@@ -1,13 +1,11 @@
 import { useState, useMemo, useEffect } from "react";
-import AccessTimeOutlined from "@mui/icons-material/AccessTimeOutlined";
 import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
-import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
 import CalendarMonthRounded from "@mui/icons-material/CalendarMonthRounded";
-import BoltOutlined from "@mui/icons-material/BoltOutlined";
-import CheckCircleOutlined from "@mui/icons-material/CheckCircleOutlined";
-import CloseOutlined from "@mui/icons-material/CloseOutlined";
-import ChevronLeftOutlined from "@mui/icons-material/ChevronLeftOutlined";
-import ChevronRightOutlined from "@mui/icons-material/ChevronRightOutlined";
+import BoltRounded from "@mui/icons-material/BoltRounded";
+import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
+import CloseRounded from "@mui/icons-material/CloseRounded";
+import ChevronLeftRounded from "@mui/icons-material/ChevronLeftRounded";
+import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
 
 type Mode = "now" | "schedule";
 
@@ -68,13 +66,9 @@ export function ScheduleToggle({
             }}
           >
             {m === "now" ? (
-              mode === m
-                ? <AccessTimeRounded sx={{ fontSize: 16, color: "#1253FA" }} />
-                : <AccessTimeOutlined sx={{ fontSize: 16, color: "#9CA3AF" }} />
+              <AccessTimeRounded sx={{ fontSize: 16, color: mode === m ? "#1253FA" : "#9CA3AF" }} />
             ) : (
-              mode === m
-                ? <CalendarMonthRounded sx={{ fontSize: 16, color: "#1253FA" }} />
-                : <CalendarMonthOutlined sx={{ fontSize: 16, color: "#9CA3AF" }} />
+              <CalendarMonthRounded sx={{ fontSize: 16, color: mode === m ? "#1253FA" : "#9CA3AF" }} />
             )}
             <span
               style={{
@@ -101,7 +95,7 @@ export function ScheduleToggle({
             className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: "rgba(18,83,250,0.08)" }}
           >
-            <BoltOutlined sx={{ fontSize: 20, color: "#1253FA" }} />
+            <BoltRounded sx={{ fontSize: 20, color: "#1253FA" }} />
           </div>
           <div>
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>
@@ -119,7 +113,7 @@ export function ScheduleToggle({
           className="flex items-center gap-2.5 px-4 py-3 rounded-2xl mt-3"
           style={{ backgroundColor: "rgba(18,83,250,0.05)" }}
         >
-          <CheckCircleOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
+          <CheckCircleRounded sx={{ fontSize: 16, color: "#1253FA" }} />
           <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#1253FA" }}>
             Scheduled: {scheduleSummary}
           </p>
@@ -231,7 +225,7 @@ export function ScheduleModal({
             className="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer"
             style={{ backgroundColor: "#E8E8E5" }}
           >
-            <CloseOutlined sx={{ fontSize: 14, color: "#040033" }} />
+            <CloseRounded sx={{ fontSize: 14, color: "#040033" }} />
           </button>
         </div>
 
@@ -253,7 +247,7 @@ export function ScheduleModal({
                   pointerEvents: canGoPrev ? "auto" : "none",
                 }}
               >
-                <ChevronLeftOutlined sx={{ fontSize: 14, color: "#040033" }} />
+                <ChevronLeftRounded sx={{ fontSize: 14, color: "#040033" }} />
               </button>
               <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>
                 {MONTHS[viewMonth]} {viewYear}
@@ -263,7 +257,7 @@ export function ScheduleModal({
                 className="w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer"
                 style={{ backgroundColor: "#F0F0EE" }}
               >
-                <ChevronRightOutlined sx={{ fontSize: 14, color: "#040033" }} />
+                <ChevronRightRounded sx={{ fontSize: 14, color: "#040033" }} />
               </button>
             </div>
 
@@ -332,7 +326,7 @@ export function ScheduleModal({
             style={{ backgroundColor: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}
           >
             <div className="px-5 pt-4 pb-2 flex items-center gap-2">
-              <AccessTimeOutlined sx={{ fontSize: 14, color: "#040033" }} />
+              <AccessTimeRounded sx={{ fontSize: 14, color: "#040033" }} />
               <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.06em", textTransform: "uppercase" }}>
                 Pickup Time
               </span>

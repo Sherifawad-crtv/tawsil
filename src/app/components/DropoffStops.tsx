@@ -1,8 +1,8 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
-import CloseOutlined from "@mui/icons-material/CloseOutlined";
-import AddLocationAltOutlined from "@mui/icons-material/AddLocationAltOutlined";
-import InfoOutlined from "@mui/icons-material/InfoOutlined";
+import LocationOnRounded from "@mui/icons-material/LocationOnRounded";
+import CloseRounded from "@mui/icons-material/CloseRounded";
+import AddLocationAltRounded from "@mui/icons-material/AddLocationAltRounded";
+import InfoRounded from "@mui/icons-material/InfoRounded";
 
 /* ══════════════════════════════════════════
    TYPES
@@ -192,7 +192,7 @@ function StopCard({
 
           {/* Address */}
           <div className="flex items-center gap-2">
-            <LocationOnOutlined
+            <LocationOnRounded
               className="flex-shrink-0"
               style={{ width: "14px", height: "14px", color: isActive ? "#1253FA" : "#040033" }}
             />
@@ -263,7 +263,7 @@ function StopCard({
               borderLeftColor: "#F0F0EE",
             }}
           >
-            <CloseOutlined style={{ width: "16px", height: "16px", color: "#D1D5DB" }} />
+            <CloseRounded style={{ width: "16px", height: "16px", color: "#D1D5DB" }} />
           </button>
         )}
       </div>
@@ -389,7 +389,7 @@ export default function DropoffStops({ value, onChange }: DropoffStopsProps) {
           className="flex items-center justify-center rounded-xl flex-shrink-0"
           style={{ width: "36px", height: "36px", backgroundColor: "rgba(18,83,250,0.1)" }}
         >
-          <LocationOnOutlined sx={{ fontSize: 18, color: "#1253FA" }} />
+          <LocationOnRounded sx={{ fontSize: 18, color: "#1253FA" }} />
         </div>
         <div className="flex-1 min-w-0">
           <span
@@ -489,7 +489,7 @@ export default function DropoffStops({ value, onChange }: DropoffStopsProps) {
             className="w-7 h-7 rounded-xl flex items-center justify-center"
             style={{ backgroundColor: "rgba(18,83,250,0.08)" }}
           >
-            <AddLocationAltOutlined style={{ width: "14px", height: "14px", color: "#1253FA" }} />
+            <AddLocationAltRounded style={{ width: "14px", height: "14px", color: "#1253FA" }} />
           </div>
           <span
             style={{
@@ -519,7 +519,7 @@ export default function DropoffStops({ value, onChange }: DropoffStopsProps) {
           className="mt-4 flex items-center justify-center gap-2 px-4 py-3 rounded-2xl"
           style={{ backgroundColor: "rgba(107,114,128,0.05)" }}
         >
-          <InfoOutlined sx={{ fontSize: 14, color: "#6B7280" }} />
+          <InfoRounded sx={{ fontSize: 14, color: "#6B7280" }} />
           <span
             style={{
               fontFamily: "'Courier Prime', monospace",

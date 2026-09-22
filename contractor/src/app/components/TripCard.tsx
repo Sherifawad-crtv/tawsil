@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import CalendarTodayRounded from "./icons/CalendarTodayRounded";
 import AccessTimeRounded from "./icons/AccessTimeRounded";
-import WarningRounded from "./icons/WarningRounded";
-import ChevronRightRounded from "./icons/ChevronRightRounded";
+import LocalShippingRounded from "./icons/LocalShippingRounded";
 import StatusBadge from "./StatusBadge";
 import DispatchSheet from "./DispatchSheet";
 import { useDataStore } from "../lib/store";
@@ -49,24 +48,6 @@ export default function TripCard({ order }: { order: Order }) {
           {formatEGP(order.priceEGP)}
         </span>
       </div>
-
-      {unassigned && (
-        <div className="mx-5 mb-3">
-          <button
-            onClick={(e) => { e.stopPropagation(); setDispatchOpen(true); }}
-            className="w-full flex items-center justify-between gap-1.5 rounded-xl px-3 py-2.5 cursor-pointer active:scale-[0.98] transition-transform"
-            style={{ backgroundColor: "#FCF2DE", border: "none" }}
-          >
-            <span className="flex items-center gap-1.5">
-              <WarningRounded sx={{ fontSize: 15, color: "#B45309" }} />
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "12.5px", color: "#B45309" }}>
-                Dispatch Now
-              </span>
-            </span>
-            <ChevronRightRounded sx={{ fontSize: 15, color: "#B45309" }} />
-          </button>
-        </div>
-      )}
 
       {/* Route */}
       {pickup && dropoff && (
@@ -131,6 +112,22 @@ export default function TripCard({ order }: { order: Order }) {
           >
             {truck.plateNumber}
           </span>
+        </div>
+      )}
+
+      {/* Dispatch CTA - same bottom-of-card button language as the client app's Reorder CTA. */}
+      {unassigned && (
+        <div className="px-5 pb-4 pt-1">
+          <button
+            onClick={(e) => { e.stopPropagation(); setDispatchOpen(true); }}
+            className="w-full py-3 rounded-2xl flex items-center justify-center gap-2 cursor-pointer active:scale-[0.97] transition-transform"
+            style={{ backgroundColor: "#040033", border: "none" }}
+          >
+            <LocalShippingRounded sx={{ fontSize: 14, color: "white" }} />
+            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "white" }}>
+              Dispatch Now
+            </span>
+          </button>
         </div>
       )}
 

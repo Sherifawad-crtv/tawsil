@@ -15,22 +15,22 @@ export const STATUS_STYLE: Record<OrderStatus, { bg: string; fg: string; icon: R
   Cancelled: { bg: "#FDECEC", fg: "#DC2626", icon: CloseRounded },
 };
 
+/** Text-only uppercase pill - same badge language as the client and contractor apps' trip status chips. */
 export default function StatusBadge({ status, size = "md" }: { status: OrderStatus; size?: "sm" | "md" }) {
   const s = STATUS_STYLE[status];
-  const Icon = s.icon;
   return (
     <span
-      className="inline-flex items-center gap-1 rounded-full whitespace-nowrap"
+      className="rounded-xl whitespace-nowrap"
       style={{
         backgroundColor: s.bg,
         color: s.fg,
-        fontFamily: "'Archivo', sans-serif",
-        fontWeight: 600,
-        fontSize: size === "sm" ? "11px" : "12px",
+        fontFamily: "'Courier Prime', monospace",
+        fontSize: size === "sm" ? "9px" : "10px",
+        textTransform: "uppercase",
+        letterSpacing: "0.05em",
         padding: size === "sm" ? "3px 8px" : "4px 10px",
       }}
     >
-      <Icon sx={{ fontSize: size === "sm" ? 12 : 13 }} />
       {status}
     </span>
   );

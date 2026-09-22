@@ -26,11 +26,10 @@ export default function HomeScreen() {
         <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033", lineHeight: 1.15, marginTop: "2px" }}>Dashboard</h1>
       </div>
 
-      {/* Stat bar: 2 metrics, correctly simpler than Contractor's 3. */}
-      <div className="rounded-[22px] p-5 flex items-center mb-6" style={{ backgroundColor: "#040033" }}>
-        <StatItem icon={ClockCircleRounded} label="Pending" value={pending.length} />
-        <div className="w-px self-stretch my-1" style={{ backgroundColor: "rgba(255,255,255,0.12)" }} />
-        <StatItem icon={RouteRounded} label="Active" value={active.length} />
+      {/* Stat tiles - light, tappable, same treatment as the contractor app's Home: 2 metrics, correctly simpler than Contractor's 3. */}
+      <div className="grid grid-cols-2 gap-2.5 mb-6">
+        <StatTile icon={ClockCircleRounded} label="Pending" value={pending.length} onClick={() => navigate("/orders", { state: { tab: "pending" } })} />
+        <StatTile icon={RouteRounded} label="Active" value={active.length} onClick={() => navigate("/orders", { state: { tab: "active" } })} />
       </div>
 
       <Section
@@ -68,13 +67,29 @@ export default function HomeScreen() {
   );
 }
 
-function StatItem({ icon: Icon, label, value }: { icon: React.ElementType; label: string; value: number }) {
+function StatTile({
+  icon: Icon,
+  label,
+  value,
+  onClick,
+}: {
+  icon: React.ElementType;
+  label: string;
+  value: number;
+  onClick: () => void;
+}) {
   return (
-    <div className="flex-1 flex flex-col items-center gap-1.5">
-      <Icon sx={{ fontSize: 18, color: "#1253FA" }} />
-      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "white" }}>{value}</span>
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.6)" }}>{label}</span>
-    </div>
+    <button
+      onClick={onClick}
+      className="rounded-[18px] bg-white p-3.5 flex flex-col items-center gap-1.5 cursor-pointer active:scale-[0.97] transition-transform"
+      style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}
+    >
+      <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
+        <Icon sx={{ fontSize: 16, color: "#1253FA" }} />
+      </div>
+      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "17px", color: "#040033" }}>{value}</span>
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#9CA3AF" }}>{label}</span>
+    </button>
   );
 }
 

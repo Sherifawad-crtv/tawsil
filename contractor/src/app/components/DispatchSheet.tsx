@@ -170,7 +170,10 @@ export default function DispatchSheet({ order, onClose }: { order: Order; onClos
                   No available trucks match your search.
                 </p>
               ) : (
-                <div className="flex gap-3 px-5 pb-2 overflow-x-auto" style={{ scrollSnapType: "x mandatory" }}>
+                <div
+                  className="flex gap-3 px-5 pb-2 overflow-x-auto"
+                  style={{ scrollSnapType: "x mandatory", scrollPaddingLeft: "20px", scrollPaddingRight: "20px" }}
+                >
                   {filteredTrucks.map((t) => (
                     <VehicleTile key={t.id} truck={t} selected={truckId === t.id} onSelect={() => setTruckId(t.id)} />
                   ))}

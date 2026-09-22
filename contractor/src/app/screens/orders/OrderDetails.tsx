@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import RefreshRounded from "../../components/icons/RefreshRounded";
 import AccessTimeRounded from "../../components/icons/AccessTimeRounded";
@@ -15,6 +16,7 @@ import CheckCircleRounded from "../../components/icons/CheckCircleRounded";
 import RadioButtonUncheckedRounded from "../../components/icons/RadioButtonUncheckedRounded";
 import ScreenHeader from "../../components/ScreenHeader";
 import MapSnippet from "../../components/MapSnippet";
+import DispatchSheet from "../../components/DispatchSheet";
 import StatusBadge, { STATUS_STYLE } from "../../components/StatusBadge";
 import StatusStepper from "../../components/StatusStepper";
 import CollapsibleSection from "../../components/CollapsibleSection";
@@ -29,6 +31,7 @@ export default function OrderDetails() {
   const { orderId } = useParams();
   const { orders, drivers, trucks, profile } = useDataStore();
   const order = byId(orders, orderId);
+  const [dispatchOpen, setDispatchOpen] = useState(false);
 
   if (!order) {
     return (
@@ -42,6 +45,7 @@ export default function OrderDetails() {
   const driver = byId(drivers, order.driverId);
   const truck = byId(trucks, order.truckId);
   const hero = STATUS_STYLE[order.status];
+  const unassigned = order.status === "Accepted" && !order.driverId;
 
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
@@ -55,7 +59,10 @@ export default function OrderDetails() {
           <div className="w-10 h-1.5 rounded-full" style={{ backgroundColor: "#D8D9D4" }} />
         </div>
 
-        <div className="w-full max-w-lg mx-auto px-4 pb-10 flex flex-col gap-4">
+        <div
+          className="w-full max-w-lg mx-auto px-4 flex flex-col gap-4"
+          style={{ paddingBottom: unassigned ? "calc(env(safe-area-inset-bottom, 16px) + 88px)" : "40px" }}
+        >
           {/* 1. Status hero */}
           <div className="rounded-[20px] p-4 flex items-center justify-between gap-3" style={{ backgroundColor: hero.bg }}>
             <div className="flex items-center gap-2.5 min-w-0">
@@ -183,6 +190,34 @@ export default function OrderDetails() {
           </Section>
         </div>
       </div>
+
+      {/* Sticky dispatch bar - only for an unassigned order, always pinned to the bottom of this screen. */}
+      {unassigned && (
+        <div
+          className="fixed left-0 right-0 bottom-0 z-40"
+          style={{
+            backgroundColor: "rgba(255,255,255,0.92)",
+            backdropFilter: "blur(20px)",
+            borderTop: "1px solid #F0F0EE",
+            padding: "12px 16px calc(env(safe-area-inset-bottom, 12px) + 12px) 16px",
+          }}
+        >
+          <div className="w-full max-w-lg mx-auto">
+            <button
+              onClick={() => setDispatchOpen(true)}
+              className="w-full py-3 rounded-2xl flex items-center justify-center gap-2 cursor-pointer active:scale-[0.97] transition-transform"
+              style={{ backgroundColor: "#040033", border: "none" }}
+            >
+              <LocalShippingRounded sx={{ fontSize: 14, color: "white" }} />
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "white" }}>
+                Dispatch Now
+              </span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {dispatchOpen && <DispatchSheet order={order} onClose={() => setDispatchOpen(false)} />}
     </div>
   );
 }

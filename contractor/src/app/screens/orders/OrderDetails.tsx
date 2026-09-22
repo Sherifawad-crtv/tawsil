@@ -6,18 +6,14 @@ import PinDropRounded from "../../components/icons/PinDropRounded";
 import TaskAltRounded from "../../components/icons/TaskAltRounded";
 import PersonRounded from "../../components/icons/PersonRounded";
 import LocalShippingRounded from "../../components/icons/LocalShippingRounded";
-import ThermostatRounded from "../../components/icons/ThermostatRounded";
-import PaymentsRounded from "../../components/icons/PaymentsRounded";
-import ScaleRounded from "../../components/icons/ScaleRounded";
-import RouteRounded from "../../components/icons/RouteRounded";
-import StraightenRounded from "../../components/icons/StraightenRounded";
 import PhotoCameraRounded from "../../components/icons/PhotoCameraRounded";
 import CheckCircleRounded from "../../components/icons/CheckCircleRounded";
 import RadioButtonUncheckedRounded from "../../components/icons/RadioButtonUncheckedRounded";
+import HourglassEmptyRounded from "../../components/icons/HourglassEmptyRounded";
 import ScreenHeader from "../../components/ScreenHeader";
 import MapSnippet from "../../components/MapSnippet";
 import DispatchSheet from "../../components/DispatchSheet";
-import StatusBadge, { STATUS_STYLE } from "../../components/StatusBadge";
+import { STATUS_STYLE } from "../../components/StatusBadge";
 import StatusStepper from "../../components/StatusStepper";
 import CollapsibleSection from "../../components/CollapsibleSection";
 import { InfoRow, PersonCard } from "../../components/InfoRow";
@@ -63,95 +59,76 @@ export default function OrderDetails() {
           className="w-full max-w-lg mx-auto px-4 flex flex-col gap-4"
           style={{ paddingBottom: unassigned ? "calc(env(safe-area-inset-bottom, 16px) + 88px)" : "40px" }}
         >
-          {/* 1. Status hero */}
-          <div className="rounded-[20px] p-4 flex items-center justify-between gap-3" style={{ backgroundColor: hero.bg }}>
-            <div className="flex items-center gap-2.5 min-w-0">
-              <hero.icon sx={{ fontSize: 20, color: hero.fg, flexShrink: 0 }} />
-              <div className="min-w-0">
-                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13px", color: hero.fg }}>{order.status}</p>
-                <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: hero.fg, opacity: 0.85 }}>
-                  #{order.id}
-                </p>
+          {/* 1. Status + fare - the two facts that matter most at a glance, together up top. */}
+          <div className="rounded-[20px] p-4" style={{ backgroundColor: hero.bg }}>
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <hero.icon sx={{ fontSize: 20, color: hero.fg, flexShrink: 0 }} />
+                <div className="min-w-0">
+                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13px", color: hero.fg }}>{order.status}</p>
+                  <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: hero.fg, opacity: 0.85 }}>
+                    #{order.id}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2.5 flex-shrink-0">
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: hero.fg }}>
+                  {formatEGP(order.priceEGP)}
+                </span>
+                <button
+                  aria-label="Reorder"
+                  className="w-9 h-9 rounded-full flex items-center justify-center cursor-pointer active:scale-90 transition-transform flex-shrink-0"
+                  style={{ backgroundColor: "rgba(255,255,255,0.6)" }}
+                >
+                  <RefreshRounded sx={{ fontSize: 17, color: hero.fg }} />
+                </button>
               </div>
             </div>
-            <button
-              aria-label="Reorder"
-              className="w-9 h-9 rounded-full flex items-center justify-center cursor-pointer active:scale-90 transition-transform flex-shrink-0"
-              style={{ backgroundColor: "rgba(255,255,255,0.6)" }}
-            >
-              <RefreshRounded sx={{ fontSize: 17, color: hero.fg }} />
-            </button>
           </div>
 
-          {/* 2. Status stepper */}
+          {/* 2. Status stepper - secondary to the hero above, compact progress reference. */}
           <div className="rounded-[20px] bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
             <StatusStepper status={order.status} />
           </div>
 
-          {/* 3. Order Information (Order Number lives in the hero card above only - not repeated here) */}
-          <Section title="Order Information">
-            <InfoRow icon={<AccessTimeRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Pickup Time" value={formatDateTime(order.pickupAt)} />
-            <InfoRow icon={<PinDropRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Waypoints" value={`${order.waypoints.length} stop${order.waypoints.length === 1 ? "" : "s"}`} />
-            <InfoRow icon={<TaskAltRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="POD Required" value={order.podRequired ? "Yes" : "No"} />
-          </Section>
-
-          {/* 4. Driver & Truck - moved above Trip Details/files: who's doing this order matters more than cargo specs when checking on it */}
-          <Section title="Driver & Truck">
-            <div className="flex flex-col gap-2.5">
-              {driver ? (
+          {/* 3. Driver & Vehicle - the single most important fact once a trip is in motion, promoted right under status. One card, no title chrome. */}
+          <div className="rounded-[20px] bg-white overflow-hidden" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
+            {driver ? (
+              <div className="p-4">
                 <PersonCard title="Driver" name={driver.name} subtitle={driver.phone} avatarColor="#0A0070" />
-              ) : (
+              </div>
+            ) : (
+              <div className="p-4">
                 <UnassignedRow icon={<PersonRounded sx={{ fontSize: 18, color: "#9CA3AF" }} />} label="No driver assigned yet" />
-              )}
-              {truck ? (
+              </div>
+            )}
+            <div style={{ height: "1px", backgroundColor: "#F0F0EE" }} />
+            {truck ? (
+              <div className="p-4">
                 <div className="rounded-[18px] p-3.5 flex items-center gap-3" style={{ backgroundColor: "#F5F5F3" }}>
                   <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#1253FA" }}>
                     <LocalShippingRounded sx={{ fontSize: 18, color: "white" }} />
                   </div>
                   <div className="min-w-0">
-                    <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#9CA3AF" }}>Truck</p>
+                    <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#9CA3AF" }}>Vehicle</p>
                     <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13.5px", color: "#040033" }}>{truckTypeLabel(order)}</p>
                     <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>{truck.plateNumber}</p>
                   </div>
                 </div>
-              ) : (
-                <UnassignedRow icon={<LocalShippingRounded sx={{ fontSize: 18, color: "#9CA3AF" }} />} label="No truck assigned yet" />
-              )}
-            </div>
-          </Section>
-
-          {/* 5. People Involved */}
-          <Section title="People Involved">
-            <div className="flex flex-col gap-2.5">
-              <PersonCard title="Client" name={order.clientName} subtitle={order.clientPhone} avatarColor="#16803C" />
-              <PersonCard title="Contractor" name={profile.fullName} subtitle={profile.phone} avatarColor="#040033" />
-            </div>
-          </Section>
-
-          {/* 6. Trip Details - collapsed by default */}
-          <CollapsibleSection icon={<RouteRounded sx={{ fontSize: 16, color: "#1253FA" }} />} title="Trip Details">
-            <InfoRow icon={<RouteRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Trip Type" value={order.tripType} />
-            <InfoRow icon={<LocalShippingRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Truck Type" value={truckTypeLabel(order)} />
-            {order.truckTempC !== undefined && (
-              <InfoRow icon={<ThermostatRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Truck Temperature" value={`${order.truckTempC}°C`} />
+              </div>
+            ) : (
+              <div className="p-4">
+                <UnassignedRow icon={<LocalShippingRounded sx={{ fontSize: 18, color: "#9CA3AF" }} />} label="No vehicle assigned yet" />
+              </div>
             )}
-            <InfoRow icon={<PaymentsRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Price" value={formatEGP(order.priceEGP)} />
-            {order.weightKg !== undefined && <InfoRow icon={<ScaleRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Weight" value={`${order.weightKg} kg`} />}
-            {order.hours !== undefined && <InfoRow icon={<AccessTimeRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Hours" value={`${order.hours}h`} />}
-            {order.km !== undefined && <InfoRow icon={<StraightenRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Distance" value={`${order.km} km`} />}
-          </CollapsibleSection>
+          </div>
 
-          {/* 7. Trip files & images - read-only for Contractor: view-only status, no upload affordance (the Driver app owns submitting these) */}
-          <CollapsibleSection icon={<PhotoCameraRounded sx={{ fontSize: 16, color: "#1253FA" }} />} title="Trip Files & Images">
-            <FileRow label="Truck's odometer before start" available={!!order.files.odometerBeforeUrl} />
-            <FileRow label="Truck's odometer at end" available={!!order.files.odometerAfterUrl} />
-            <FileRow label="Additional images" available={order.files.additionalImages.length > 0} />
-          </CollapsibleSection>
-
-          {/* 8. Route Waypoints */}
-          {order.waypoints.length > 0 && (
-            <Section title="Route Waypoints">
-              <div className="flex flex-col gap-2.5">
+          {/* 4. Trip - schedule anchor first, then the route as a single scannable list (no separate map-duplicating section). */}
+          <Section title="Trip">
+            <InfoRow icon={<AccessTimeRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Pickup Time" value={formatDateTime(order.pickupAt)} />
+            <InfoRow icon={<TaskAltRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="POD Required" value={order.podRequired ? "Yes" : "No"} />
+            {order.waypoints.length > 0 && (
+              <div className="flex flex-col gap-2.5 mt-3 pt-3" style={{ borderTop: "1px solid #F0F0EE" }}>
                 {order.waypoints.map((wp, i) => (
                   <div key={wp.id} className="flex items-start gap-2.5">
                     <div
@@ -167,11 +144,40 @@ export default function OrderDetails() {
                   </div>
                 ))}
               </div>
-            </Section>
-          )}
+            )}
+          </Section>
 
-          {/* 9. Timeline */}
-          <Section title="Timeline">
+          {/* 5. Fare Breakdown - plain label/value receipt rows, ending in the same total shown in the hero above. */}
+          <Section title="Fare Breakdown">
+            <InfoRow label="Trip Type" value={order.tripType} />
+            <InfoRow label="Truck Type" value={truckTypeLabel(order)} />
+            {order.truckTempC !== undefined && <InfoRow label="Truck Temperature" value={`${order.truckTempC}°C`} />}
+            {order.weightKg !== undefined && <InfoRow label="Weight" value={`${order.weightKg} kg`} />}
+            {order.hours !== undefined && <InfoRow label="Duration" value={`${order.hours}h`} />}
+            {order.km !== undefined && <InfoRow label="Distance" value={`${order.km} km`} />}
+            <div className="flex items-center justify-between mt-2 pt-3" style={{ borderTop: "1px solid #F0F0EE" }}>
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13.5px", color: "#040033" }}>Total</span>
+              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>{formatEGP(order.priceEGP)}</span>
+            </div>
+          </Section>
+
+          {/* 6. Contacts - secondary to Driver & Vehicle, tucked below the fare. */}
+          <Section title="Contacts">
+            <div className="flex flex-col gap-2.5">
+              <PersonCard title="Client" name={order.clientName} subtitle={order.clientPhone} avatarColor="#16803C" />
+              <PersonCard title="Contractor" name={profile.fullName} subtitle={profile.phone} avatarColor="#040033" />
+            </div>
+          </Section>
+
+          {/* 7. Trip files & images - read-only for Contractor: view-only status, no upload affordance (the Driver app owns submitting these). Collapsed - administrative detail, not glanceable info. */}
+          <CollapsibleSection icon={<PhotoCameraRounded sx={{ fontSize: 16, color: "#1253FA" }} />} title="Trip Files & Images">
+            <FileRow label="Truck's odometer before start" available={!!order.files.odometerBeforeUrl} />
+            <FileRow label="Truck's odometer at end" available={!!order.files.odometerAfterUrl} />
+            <FileRow label="Additional images" available={order.files.additionalImages.length > 0} />
+          </CollapsibleSection>
+
+          {/* 8. Timeline - collapsed by default, same as Files: a log you check, not something to scan by default. */}
+          <CollapsibleSection icon={<HourglassEmptyRounded sx={{ fontSize: 16, color: "#1253FA" }} />} title="Timeline">
             <div className="flex flex-col">
               {order.statusHistory.map((h, i) => (
                 <div key={h.id} className="flex gap-3">
@@ -187,7 +193,7 @@ export default function OrderDetails() {
                 </div>
               ))}
             </div>
-          </Section>
+          </CollapsibleSection>
         </div>
       </div>
 

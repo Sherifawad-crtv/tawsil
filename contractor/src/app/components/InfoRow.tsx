@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export function InfoRow({ icon, label, value }: { icon: ReactNode; label: string; value: ReactNode }) {
+export function InfoRow({ icon, label, value }: { icon?: ReactNode; label: string; value: ReactNode }) {
   return (
     <div className="flex items-center justify-between gap-3 py-2">
       <div className="flex items-center gap-2 min-w-0">

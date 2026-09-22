@@ -1,8 +1,7 @@
+import HomeRounded from "@mui/icons-material/HomeRounded";
 import CalendarMonthRounded from "@mui/icons-material/CalendarMonthRounded";
 import BarChartRounded from "@mui/icons-material/BarChartRounded";
 import PersonRounded from "@mui/icons-material/PersonRounded";
-import type { SvgIconProps } from "@mui/material/SvgIcon";
-import HomeBlendedRounded from "./icons/HomeBlendedRounded";
 
 export type NavScreen = "home" | "activity" | "profile" | "insights";
 
@@ -11,10 +10,10 @@ interface BottomNavProps {
   onNavigate: (screen: NavScreen) => void;
 }
 
-type IconComponent = React.ComponentType<SvgIconProps>;
+type IconComponent = typeof HomeRounded;
 
 const NAV_ITEMS: { id: NavScreen; label: string; icon: IconComponent }[] = [
-  { id: "home", label: "Home", icon: HomeBlendedRounded },
+  { id: "home", label: "Home", icon: HomeRounded },
   { id: "activity", label: "Activity", icon: CalendarMonthRounded },
   { id: "insights", label: "Insights", icon: BarChartRounded },
   { id: "profile", label: "Profile", icon: PersonRounded },

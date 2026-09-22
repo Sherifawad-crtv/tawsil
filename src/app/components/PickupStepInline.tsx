@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import WarehouseRounded from "@mui/icons-material/WarehouseRounded";
 import BusinessRounded from "@mui/icons-material/BusinessRounded";
-import HomeBlendedRounded from "./icons/HomeBlendedRounded";
+import HomeRounded from "@mui/icons-material/HomeRounded";
 import LocationOnRounded from "@mui/icons-material/LocationOnRounded";
 import CloseRounded from "@mui/icons-material/CloseRounded";
 import SearchRounded from "@mui/icons-material/SearchRounded";
@@ -44,7 +44,7 @@ const SEARCH_RESULTS = [
 function LocationIcon({ type }: { type: SavedLocation["icon"] }) {
   if (type === "warehouse") return <WarehouseRounded sx={{ fontSize: 16, color: "#040033" }} />;
   if (type === "office") return <BusinessRounded sx={{ fontSize: 16, color: "#040033" }} />;
-  if (type === "home") return <HomeBlendedRounded sx={{ fontSize: 16, color: "#040033" }} />;
+  if (type === "home") return <HomeRounded sx={{ fontSize: 16, color: "#040033" }} />;
   return <LocationOnRounded sx={{ fontSize: 16, color: "#040033" }} />;
 }
 

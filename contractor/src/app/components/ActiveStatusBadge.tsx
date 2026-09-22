@@ -1,5 +1,5 @@
-import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
-import CancelRounded from "@mui/icons-material/CancelRounded";
+import CheckCircleRounded from "./icons/CheckCircleRounded";
+import CancelRounded from "./icons/CancelRounded";
 
 /** Display-only Active/Inactive badge for Edit Truck / Edit Driver headers. */
 export default function ActiveStatusBadge({ active }: { active: boolean }) {

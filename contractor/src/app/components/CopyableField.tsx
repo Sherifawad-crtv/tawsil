@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ContentCopyRounded from "@mui/icons-material/ContentCopyRounded";
-import CheckRounded from "@mui/icons-material/CheckRounded";
+import ContentCopyRounded from "./icons/ContentCopyRounded";
+import CheckRounded from "./icons/CheckRounded";
 
 /**
  * Label + value row with a copy icon. The icon renders only when there's a

@@ -3,7 +3,7 @@ import ScreenHeader from "../../components/ScreenHeader";
 import SegmentedControl from "../../components/SegmentedControl";
 import TripCard from "../../components/TripCard";
 import EmptyState from "../../components/EmptyState";
-import InboxRounded from "@mui/icons-material/InboxRounded";
+import InboxRounded from "../../components/icons/InboxRounded";
 import { useDataStore } from "../../lib/store";
 import { getAvailableOrders } from "../../lib/selectors";
 

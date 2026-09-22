@@ -3,8 +3,8 @@ import ScreenHeader from "../../components/ScreenHeader";
 import SectionHeading from "../../components/SectionHeading";
 import CopyableField from "../../components/CopyableField";
 import { Button } from "../../components/Button";
-import PersonRounded from "@mui/icons-material/PersonRounded";
-import BadgeRounded from "@mui/icons-material/BadgeRounded";
+import PersonRounded from "../../components/icons/PersonRounded";
+import BadgeRounded from "../../components/icons/BadgeRounded";
 import { useDataStore } from "../../lib/store";
 
 export default function ProfileSettings() {

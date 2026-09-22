@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import SettingsOutlined from "@mui/icons-material/SettingsOutlined";
-import LocalShippingRounded from "@mui/icons-material/LocalShippingRounded";
-import PeopleAltRounded from "@mui/icons-material/PeopleAltRounded";
-import BoltRounded from "@mui/icons-material/BoltRounded";
-import InboxRounded from "@mui/icons-material/InboxRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
+import SettingsRounded from "../../components/icons/SettingsRounded";
+import LocalShippingRounded from "../../components/icons/LocalShippingRounded";
+import GroupsRounded from "../../components/icons/GroupsRounded";
+import BoltRounded from "../../components/icons/BoltRounded";
+import InboxRounded from "../../components/icons/InboxRounded";
+import ChevronRightRounded from "../../components/icons/ChevronRightRounded";
 import SegmentedControl from "../../components/SegmentedControl";
 import TripCard from "../../components/TripCard";
 import EmptyState from "../../components/EmptyState";
@@ -42,7 +42,7 @@ export default function HomeScreen() {
           className="w-10 h-10 rounded-2xl flex items-center justify-center cursor-pointer active:scale-90 transition-transform flex-shrink-0"
           style={{ backgroundColor: "white", boxShadow: "0 1px 4px rgba(4,0,51,0.08)" }}
         >
-          <SettingsOutlined sx={{ fontSize: 19, color: "#040033" }} />
+          <SettingsRounded sx={{ fontSize: 19, color: "#040033" }} />
         </button>
       </div>
 
@@ -53,7 +53,7 @@ export default function HomeScreen() {
       >
         <StatItem icon={LocalShippingRounded} label="Trucks" value={trucks.length} />
         <Divider />
-        <StatItem icon={PeopleAltRounded} label="Drivers" value={drivers.length} />
+        <StatItem icon={GroupsRounded} label="Drivers" value={drivers.length} />
         <Divider />
         <StatItem icon={BoltRounded} label="Active" value={active.length} />
       </div>

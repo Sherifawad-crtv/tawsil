@@ -5,7 +5,7 @@ import BottomTabBar from "../components/BottomTabBar";
 export default function TabLayout() {
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
-      <div style={{ paddingBottom: "calc(64px + env(safe-area-inset-bottom, 0px))" }}>
+      <div style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 16px) + 96px)" }}>
         <Outlet />
       </div>
       <BottomTabBar />

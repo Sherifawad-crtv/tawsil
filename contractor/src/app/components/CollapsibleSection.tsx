@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import ExpandMoreRounded from "@mui/icons-material/ExpandMoreRounded";
+import ExpandMoreRounded from "./icons/ExpandMoreRounded";
 
 /** Progressive disclosure section, collapsed by default so the higher-priority content above it (Driver & Truck, People Involved) stays in view without extra scrolling. */
 export default function CollapsibleSection({

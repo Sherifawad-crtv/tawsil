@@ -1,4 +1,4 @@
-import PhoneIphoneRounded from "@mui/icons-material/PhoneIphoneRounded";
+import PhoneIphoneRounded from "./icons/PhoneIphoneRounded";
 
 export default function MobileOnlyGate() {
   return (

@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import PeopleAltRounded from "@mui/icons-material/PeopleAltRounded";
-import GroupsRounded from "@mui/icons-material/GroupsRounded";
+import GroupsRounded from "../../components/icons/GroupsRounded";
 import SearchField from "../../components/SearchField";
 import SegmentedControl from "../../components/SegmentedControl";
 import DriverCard from "../../components/DriverCard";
@@ -37,7 +36,7 @@ export default function DriversList() {
           className="inline-flex items-center gap-1 rounded-full px-2.5 py-1"
           style={{ backgroundColor: "#FCE7F3", color: "#BE185D", fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "12px" }}
         >
-          <PeopleAltRounded sx={{ fontSize: 13 }} />
+          <GroupsRounded sx={{ fontSize: 13 }} />
           {bySegment.length} {bySegment.length === 1 ? "Driver" : "Drivers"}
         </span>
       </div>

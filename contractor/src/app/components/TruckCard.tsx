@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
-import LocalShippingRounded from "@mui/icons-material/LocalShippingRounded";
-import EventRounded from "@mui/icons-material/EventRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
+import LocalShippingRounded from "./icons/LocalShippingRounded";
+import EventRounded from "./icons/EventRounded";
+import ChevronRightRounded from "./icons/ChevronRightRounded";
 import { truckTypeLabel } from "../lib/constants";
 import { formatDate, isExpired } from "../lib/format";
 import type { Truck } from "../lib/types";

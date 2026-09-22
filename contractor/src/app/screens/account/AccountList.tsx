@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import ManageAccountsOutlined from "@mui/icons-material/ManageAccountsOutlined";
-import TranslateRounded from "@mui/icons-material/TranslateRounded";
-import HelpOutlineRounded from "@mui/icons-material/HelpOutlineRounded";
-import LogoutRounded from "@mui/icons-material/LogoutRounded";
+import ManageAccountsRounded from "../../components/icons/ManageAccountsRounded";
+import TranslateRounded from "../../components/icons/TranslateRounded";
+import HelpOutlineRounded from "../../components/icons/HelpOutlineRounded";
+import LogoutRounded from "../../components/icons/LogoutRounded";
 import ScreenHeader from "../../components/ScreenHeader";
 import AccountRow from "../../components/AccountRow";
 import ConfirmSheet from "../../components/ConfirmSheet";
@@ -24,7 +24,7 @@ export default function AccountList() {
 
       <div className="w-full max-w-lg mx-auto px-4 pb-8 flex flex-col gap-2.5">
         <AccountRow
-          icon={<ManageAccountsOutlined sx={{ fontSize: 18, color: "#1253FA" }} />}
+          icon={<ManageAccountsRounded sx={{ fontSize: 18, color: "#1253FA" }} />}
           label="Profile Settings"
           onClick={() => navigate("/account/profile")}
         />

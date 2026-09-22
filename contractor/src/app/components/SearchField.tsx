@@ -1,4 +1,4 @@
-import SearchRounded from "@mui/icons-material/SearchRounded";
+import SearchRounded from "./icons/SearchRounded";
 
 export default function SearchField({
   value,

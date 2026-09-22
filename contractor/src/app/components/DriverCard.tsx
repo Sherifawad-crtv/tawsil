@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router";
-import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
-import BadgeRounded from "@mui/icons-material/BadgeRounded";
-import EventRounded from "@mui/icons-material/EventRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
-import PersonOffRounded from "@mui/icons-material/PersonOffRounded";
+import PhoneRounded from "./icons/PhoneRounded";
+import BadgeRounded from "./icons/BadgeRounded";
+import EventRounded from "./icons/EventRounded";
+import ChevronRightRounded from "./icons/ChevronRightRounded";
+import PersonOffRounded from "./icons/PersonOffRounded";
 import { formatDate, formatDateTime } from "../lib/format";
 import type { Driver } from "../lib/types";
 
@@ -26,7 +26,7 @@ export default function DriverCard({ driver }: { driver: Driver }) {
         <div className="flex-1 min-w-0">
           <p className="truncate" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>{driver.name}</p>
           <div className="flex items-center gap-1.5">
-            <PhoneOutlined sx={{ fontSize: 12.5, color: "#9CA3AF" }} />
+            <PhoneRounded sx={{ fontSize: 12.5, color: "#9CA3AF" }} />
             <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#6B7280" }}>{driver.phone}</span>
           </div>
         </div>

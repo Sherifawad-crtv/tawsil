@@ -1,4 +1,4 @@
-import AddRounded from "@mui/icons-material/AddRounded";
+import AddRounded from "./icons/AddRounded";
 
 /**
  * Bottom-right floating action button. `bottomOffset` gives callers control

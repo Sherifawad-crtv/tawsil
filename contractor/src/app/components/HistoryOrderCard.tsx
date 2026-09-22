@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
-import RouteRounded from "@mui/icons-material/RouteRounded";
-import LocalShippingOutlined from "@mui/icons-material/LocalShippingOutlined";
-import CalendarTodayRounded from "@mui/icons-material/CalendarTodayRounded";
+import RouteRounded from "./icons/RouteRounded";
+import LocalShippingRounded from "./icons/LocalShippingRounded";
+import CalendarTodayRounded from "./icons/CalendarTodayRounded";
 import StatusBadge from "./StatusBadge";
 import { useDataStore } from "../lib/store";
 import { byId } from "../lib/selectors";
@@ -37,7 +37,7 @@ export default function HistoryOrderCard({ order }: { order: Order }) {
           </div>
         </div>
         <div className="flex items-start gap-1.5 min-w-0">
-          <LocalShippingOutlined sx={{ fontSize: 15, color: "#9CA3AF", flexShrink: 0, marginTop: "1px" }} />
+          <LocalShippingRounded sx={{ fontSize: 15, color: "#9CA3AF", flexShrink: 0, marginTop: "1px" }} />
           <div className="min-w-0">
             <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#9CA3AF" }}>Truck Type</p>
             {/* Wraps instead of clipping mid-word - loses zero information, unlike the previous truncation bug. */}

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import PersonRounded from "@mui/icons-material/PersonRounded";
-import BadgeRounded from "@mui/icons-material/BadgeRounded";
-import PersonAddAlt1Rounded from "@mui/icons-material/PersonAddAlt1Rounded";
-import InfoRounded from "@mui/icons-material/InfoRounded";
+import PersonRounded from "../../components/icons/PersonRounded";
+import BadgeRounded from "../../components/icons/BadgeRounded";
+import PersonAddRounded from "../../components/icons/PersonAddRounded";
+import InfoRounded from "../../components/icons/InfoRounded";
 import ScreenHeader from "../../components/ScreenHeader";
 import SectionHeading from "../../components/SectionHeading";
 import { TextField } from "../../components/FormField";
@@ -72,7 +72,7 @@ export default function DriverForm({ mode }: { mode: "create" | "edit" }) {
         ) : (
           <div className="rounded-[22px] p-5 flex flex-col items-center text-center gap-2" style={{ backgroundColor: "white", border: "1px solid #E8E8E5" }}>
             <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
-              <PersonAddAlt1Rounded sx={{ fontSize: 26, color: "#1253FA" }} />
+              <PersonAddRounded sx={{ fontSize: 26, color: "#1253FA" }} />
             </div>
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "16px", color: "#040033" }}>Create New Driver Profile</p>
             <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF" }}>

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import LocalShippingRounded from "@mui/icons-material/LocalShippingRounded";
-import InventoryRounded from "@mui/icons-material/InventoryRounded";
+import LocalShippingRounded from "../../components/icons/LocalShippingRounded";
+import InventoryRounded from "../../components/icons/InventoryRounded";
 import SearchField from "../../components/SearchField";
 import SegmentedControl from "../../components/SegmentedControl";
 import TruckCard from "../../components/TruckCard";

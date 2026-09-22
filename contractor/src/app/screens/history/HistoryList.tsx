@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import InventoryRounded from "@mui/icons-material/InventoryRounded";
+import InventoryRounded from "../../components/icons/InventoryRounded";
 import HistoryOrderCard from "../../components/HistoryOrderCard";
 import EmptyState from "../../components/EmptyState";
 import { useDataStore } from "../../lib/store";

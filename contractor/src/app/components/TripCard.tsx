@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router";
-import DescriptionRounded from "@mui/icons-material/DescriptionRounded";
-import RouteRounded from "@mui/icons-material/RouteRounded";
-import LocalShippingOutlined from "@mui/icons-material/LocalShippingOutlined";
-import CalendarTodayRounded from "@mui/icons-material/CalendarTodayRounded";
-import WarningAmberRounded from "@mui/icons-material/WarningAmberRounded";
+import DescriptionRounded from "./icons/DescriptionRounded";
+import RouteRounded from "./icons/RouteRounded";
+import LocalShippingRounded from "./icons/LocalShippingRounded";
+import CalendarTodayRounded from "./icons/CalendarTodayRounded";
+import WarningAmberRounded from "./icons/WarningRounded";
 import StatusBadge from "./StatusBadge";
 import { formatEGP, formatDate } from "../lib/format";
 import { truckTypeLabel } from "../lib/constants";
@@ -53,7 +53,7 @@ export default function TripCard({ order }: { order: Order }) {
           </div>
         </div>
         <div className="flex items-start gap-1.5 min-w-0">
-          <LocalShippingOutlined sx={{ fontSize: 15, color: "#9CA3AF", flexShrink: 0, marginTop: "1px" }} />
+          <LocalShippingRounded sx={{ fontSize: 15, color: "#9CA3AF", flexShrink: 0, marginTop: "1px" }} />
           <div className="min-w-0">
             <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#9CA3AF" }}>Truck Type</p>
             <p className="whitespace-normal break-words" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "12.5px", color: "#040033" }}>

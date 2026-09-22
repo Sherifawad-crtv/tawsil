@@ -1,19 +1,18 @@
 import { useNavigate, useParams } from "react-router";
-import RefreshRounded from "@mui/icons-material/RefreshRounded";
-import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
-import PinDropRounded from "@mui/icons-material/PinDropRounded";
-import TaskAltRounded from "@mui/icons-material/TaskAltRounded";
-import PersonRounded from "@mui/icons-material/PersonRounded";
-import LocalShippingRounded from "@mui/icons-material/LocalShippingRounded";
-import LocalShippingOutlined from "@mui/icons-material/LocalShippingOutlined";
-import ThermostatRounded from "@mui/icons-material/ThermostatRounded";
-import PaymentsRounded from "@mui/icons-material/PaymentsRounded";
-import ScaleRounded from "@mui/icons-material/ScaleRounded";
-import RouteRounded from "@mui/icons-material/RouteRounded";
-import StraightenRounded from "@mui/icons-material/StraightenRounded";
-import PhotoCameraRounded from "@mui/icons-material/PhotoCameraRounded";
-import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
-import RadioButtonUncheckedRounded from "@mui/icons-material/RadioButtonUncheckedRounded";
+import RefreshRounded from "../../components/icons/RefreshRounded";
+import AccessTimeRounded from "../../components/icons/AccessTimeRounded";
+import PinDropRounded from "../../components/icons/PinDropRounded";
+import TaskAltRounded from "../../components/icons/TaskAltRounded";
+import PersonRounded from "../../components/icons/PersonRounded";
+import LocalShippingRounded from "../../components/icons/LocalShippingRounded";
+import ThermostatRounded from "../../components/icons/ThermostatRounded";
+import PaymentsRounded from "../../components/icons/PaymentsRounded";
+import ScaleRounded from "../../components/icons/ScaleRounded";
+import RouteRounded from "../../components/icons/RouteRounded";
+import StraightenRounded from "../../components/icons/StraightenRounded";
+import PhotoCameraRounded from "../../components/icons/PhotoCameraRounded";
+import CheckCircleRounded from "../../components/icons/CheckCircleRounded";
+import RadioButtonUncheckedRounded from "../../components/icons/RadioButtonUncheckedRounded";
 import ScreenHeader from "../../components/ScreenHeader";
 import MapSnippet from "../../components/MapSnippet";
 import StatusBadge, { STATUS_STYLE } from "../../components/StatusBadge";
@@ -109,7 +108,7 @@ export default function OrderDetails() {
                   </div>
                 </div>
               ) : (
-                <UnassignedRow icon={<LocalShippingOutlined sx={{ fontSize: 18, color: "#9CA3AF" }} />} label="No truck assigned yet" />
+                <UnassignedRow icon={<LocalShippingRounded sx={{ fontSize: 18, color: "#9CA3AF" }} />} label="No truck assigned yet" />
               )}
             </div>
           </Section>
@@ -125,7 +124,7 @@ export default function OrderDetails() {
           {/* 6. Trip Details - collapsed by default */}
           <CollapsibleSection icon={<RouteRounded sx={{ fontSize: 16, color: "#1253FA" }} />} title="Trip Details">
             <InfoRow icon={<RouteRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Trip Type" value={order.tripType} />
-            <InfoRow icon={<LocalShippingOutlined sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Truck Type" value={truckTypeLabel(order)} />
+            <InfoRow icon={<LocalShippingRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Truck Type" value={truckTypeLabel(order)} />
             {order.truckTempC !== undefined && (
               <InfoRow icon={<ThermostatRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Truck Temperature" value={`${order.truckTempC}°C`} />
             )}

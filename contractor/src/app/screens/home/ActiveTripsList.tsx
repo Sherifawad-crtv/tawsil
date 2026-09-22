@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import ScreenHeader from "../../components/ScreenHeader";
 import TripCard from "../../components/TripCard";
 import EmptyState from "../../components/EmptyState";
-import InboxRounded from "@mui/icons-material/InboxRounded";
+import InboxRounded from "../../components/icons/InboxRounded";
 import { useDataStore } from "../../lib/store";
 import { getActiveOrders } from "../../lib/selectors";
 

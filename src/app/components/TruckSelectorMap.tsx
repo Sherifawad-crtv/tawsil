@@ -1,3 +1,4 @@
+import CheckRounded from "./icons/CheckRounded";
 import BookingTypeSelector from "./BookingTypeSelector";
 import type { BookingTypeState } from "./BookingTypeSelector";
 import { INITIAL_BOOKING_STATE } from "./BookingTypeSelector";
@@ -297,15 +298,15 @@ function ConfirmationOverlay({ onDone, offer }: { onDone: () => void; offer?: Of
           transition: "opacity 0.6s cubic-bezier(0.16,1,0.3,1) 0.15s, transform 0.6s cubic-bezier(0.16,1,0.3,1) 0.15s",
         }}
       >
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          <path d="M8 18L15 25L28 11" stroke="#1253FA" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"
-            style={{
-              strokeDasharray: 40,
-              strokeDashoffset: entered ? 0 : 40,
-              transition: "stroke-dashoffset 0.7s cubic-bezier(0.16,1,0.3,1) 0.4s",
-            }}
-          />
-        </svg>
+        <CheckRounded
+          sx={{
+            fontSize: 36,
+            color: "#1253FA",
+            opacity: entered ? 1 : 0,
+            transform: entered ? "scale(1)" : "scale(0.5)",
+            transition: "opacity 0.5s cubic-bezier(0.16,1,0.3,1) 0.4s, transform 0.5s cubic-bezier(0.16,1,0.3,1) 0.4s",
+          }}
+        />
       </div>
       <h1 style={{
         fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033",

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { VEHICLES } from "./VehicleCarouselSelectable";
-import AddRounded from "@mui/icons-material/AddRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
-import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
+import AddOutlined from "@mui/icons-material/AddOutlined";
+import ChevronRightOutlined from "@mui/icons-material/ChevronRightOutlined";
+import AccessTimeOutlined from "@mui/icons-material/AccessTimeOutlined";
 import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
-import CheckRounded from "@mui/icons-material/CheckRounded";
-import CloseRounded from "@mui/icons-material/CloseRounded";
+import CheckOutlined from "@mui/icons-material/CheckOutlined";
+import CloseOutlined from "@mui/icons-material/CloseOutlined";
 import { useAuth } from "../lib/AuthContext";
 import { displayName } from "../lib/authTypes";
 
@@ -78,7 +78,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
             className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: "rgba(255,255,255,0.12)" }}
           >
-            <AddRounded sx={{ fontSize: 26, color: "white" }} />
+            <AddOutlined sx={{ fontSize: 26, color: "white" }} />
           </div>
           <div className="flex-1">
             <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "white" }}>
@@ -88,7 +88,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
               Start a new delivery booking
             </p>
           </div>
-          <ChevronRightRounded sx={{ fontSize: 22, color: "rgba(255,255,255,0.5)" }} />
+          <ChevronRightOutlined sx={{ fontSize: 22, color: "rgba(255,255,255,0.5)" }} />
         </button>
 
         {/* ── Active Trip (conditional) ── */}
@@ -123,7 +123,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <AccessTimeRounded sx={{ fontSize: 14, color: "#1253FA" }} />
+                  <AccessTimeOutlined sx={{ fontSize: 14, color: "#1253FA" }} />
                   <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "#040033" }}>
                     {ACTIVE_TRIP.eta}
                   </span>
@@ -251,9 +251,9 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                 style={{ backgroundColor: trip.status === "completed" ? "rgba(18,83,250,0.06)" : "rgba(107,114,128,0.06)" }}
               >
                 {trip.status === "completed" ? (
-                  <CheckRounded sx={{ fontSize: 18, color: "#1253FA" }} />
+                  <CheckOutlined sx={{ fontSize: 18, color: "#1253FA" }} />
                 ) : (
-                  <CloseRounded sx={{ fontSize: 18, color: "#6B7280" }} />
+                  <CloseOutlined sx={{ fontSize: 18, color: "#6B7280" }} />
                 )}
               </div>
               <div className="flex-1 min-w-0">

@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
-import CloseRounded from "@mui/icons-material/CloseRounded";
+import CloseOutlined from "@mui/icons-material/CloseOutlined";
 import AddLocationAltOutlined from "@mui/icons-material/AddLocationAltOutlined";
 import InfoOutlined from "@mui/icons-material/InfoOutlined";
 
@@ -263,7 +263,7 @@ function StopCard({
               borderLeftColor: "#F0F0EE",
             }}
           >
-            <CloseRounded style={{ width: "16px", height: "16px", color: "#D1D5DB" }} />
+            <CloseOutlined style={{ width: "16px", height: "16px", color: "#D1D5DB" }} />
           </button>
         )}
       </div>

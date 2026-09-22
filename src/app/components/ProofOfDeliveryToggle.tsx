@@ -1,6 +1,8 @@
 import CameraAltOutlined from "@mui/icons-material/CameraAltOutlined";
+import CameraAltRounded from "@mui/icons-material/CameraAltRounded";
 
 export default function ProofOfDeliveryToggle({ value, onChange }: { value: boolean; onChange: (v: boolean) => void }) {
+  const CameraIcon = value ? CameraAltRounded : CameraAltOutlined;
   return (
     <div
       className="flex items-center gap-4 p-4 rounded-2xl active:bg-black/[0.02] cursor-pointer flex-shrink-0"
@@ -20,7 +22,7 @@ export default function ProofOfDeliveryToggle({ value, onChange }: { value: bool
           transition: "background-color 0.3s ease",
         }}
       >
-        <CameraAltOutlined sx={{ fontSize: 22, color: value ? "#1253FA" : "#9CA3AF" }} />
+        <CameraIcon sx={{ fontSize: 22, color: value ? "#1253FA" : "#9CA3AF" }} />
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">

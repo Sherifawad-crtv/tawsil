@@ -1,5 +1,5 @@
 import { useState } from "react";
-import MailOutlineRounded from "@mui/icons-material/MailOutlineRounded";
+import MailOutlineOutlined from "@mui/icons-material/MailOutlineOutlined";
 import AuthTextField from "./AuthTextField";
 import { PrimaryButton, GhostButton } from "./StepChrome";
 import { useKeyboardInset } from "../../hooks/useKeyboardInset";
@@ -34,7 +34,7 @@ export default function AddEmailModal({ onSave, onSkip }: { onSave: (email: stri
           className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4"
           style={{ backgroundColor: "rgba(18,83,250,0.08)" }}
         >
-          <MailOutlineRounded sx={{ fontSize: 26, color: "#1253FA" }} />
+          <MailOutlineOutlined sx={{ fontSize: 26, color: "#1253FA" }} />
         </div>
 
         <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>

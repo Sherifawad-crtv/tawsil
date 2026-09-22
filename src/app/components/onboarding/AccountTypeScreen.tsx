@@ -1,6 +1,6 @@
-import ApartmentRounded from "@mui/icons-material/ApartmentRounded";
-import PersonRounded from "@mui/icons-material/PersonRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
+import ApartmentOutlined from "@mui/icons-material/ApartmentOutlined";
+import PersonOutlined from "@mui/icons-material/PersonOutlined";
+import ChevronRightOutlined from "@mui/icons-material/ChevronRightOutlined";
 import ScreenShell from "./ScreenShell";
 import type { AccountType } from "../../lib/authTypes";
 
@@ -31,7 +31,7 @@ function TypeCard({
         <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>{title}</span>
         <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", marginTop: "4px" }}>{subtitle}</p>
       </div>
-      <ChevronRightRounded sx={{ fontSize: 22, color: "#D8D9D4" }} />
+      <ChevronRightOutlined sx={{ fontSize: 22, color: "#D8D9D4" }} />
     </button>
   );
 }
@@ -51,13 +51,13 @@ export default function AccountTypeScreen({ onChoose }: { onChoose: (type: Accou
 
         <div className="flex flex-col gap-3">
           <TypeCard
-            icon={<ApartmentRounded sx={{ fontSize: 26, color: "#1253FA" }} />}
+            icon={<ApartmentOutlined sx={{ fontSize: 26, color: "#1253FA" }} />}
             title="I'm a Business"
             subtitle="Company account with tax details and invoicing"
             onClick={() => onChoose("business")}
           />
           <TypeCard
-            icon={<PersonRounded sx={{ fontSize: 26, color: "#1253FA" }} />}
+            icon={<PersonOutlined sx={{ fontSize: 26, color: "#1253FA" }} />}
             title="I'm an Individual"
             subtitle="Quick signup with just your phone number"
             onClick={() => onChoose("individual")}

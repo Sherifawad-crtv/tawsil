@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
+import ArrowBackIosNewOutlined from "@mui/icons-material/ArrowBackIosNewOutlined";
 import { useKeyboardInset } from "../../hooks/useKeyboardInset";
 
 /** Same growing-pill progress indicator as the booking flow's StepIndicator. */
@@ -35,7 +35,7 @@ export function BackButton({ onClick, label = "Back" }: { onClick: () => void; l
       className="flex items-center gap-1.5 mb-3 cursor-pointer active:opacity-70 transition-opacity flex-shrink-0 w-fit"
       style={{ border: "none", background: "none", padding: 0 }}
     >
-      <ArrowBackIosNewRounded sx={{ fontSize: 14, color: "#040033" }} />
+      <ArrowBackIosNewOutlined sx={{ fontSize: 14, color: "#040033" }} />
       <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{label}</span>
     </button>
   );

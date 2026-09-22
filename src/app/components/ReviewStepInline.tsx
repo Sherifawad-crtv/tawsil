@@ -2,13 +2,13 @@ import { VEHICLES } from "./VehicleCarouselSelectable";
 import type { DropoffStop } from "./DropoffStops";
 import type { AddedLocation } from "./PickupStepInline";
 import ShieldOutlined from "@mui/icons-material/ShieldOutlined";
-import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
+import AccessTimeOutlined from "@mui/icons-material/AccessTimeOutlined";
 import CreditCardOutlined from "@mui/icons-material/CreditCardOutlined";
-import RemoveRounded from "@mui/icons-material/RemoveRounded";
-import AddRounded from "@mui/icons-material/AddRounded";
-import TrendingUpRounded from "@mui/icons-material/TrendingUpRounded";
-import TrendingDownRounded from "@mui/icons-material/TrendingDownRounded";
-import HorizontalRuleRounded from "@mui/icons-material/HorizontalRuleRounded";
+import RemoveOutlined from "@mui/icons-material/RemoveOutlined";
+import AddOutlined from "@mui/icons-material/AddOutlined";
+import TrendingUpOutlined from "@mui/icons-material/TrendingUpOutlined";
+import TrendingDownOutlined from "@mui/icons-material/TrendingDownOutlined";
+import HorizontalRuleOutlined from "@mui/icons-material/HorizontalRuleOutlined";
 
 interface ReviewStepInlineProps {
   truckId: string;
@@ -299,7 +299,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
               }}
               aria-label="Decrease offer"
             >
-              <RemoveRounded sx={{ fontSize: 20, color: "#040033" }} />
+              <RemoveOutlined sx={{ fontSize: 20, color: "#040033" }} />
             </button>
 
             <div className="flex-1 flex flex-col items-center">
@@ -312,7 +312,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
               <div className="flex items-center gap-1 mt-1">
                 {diff === 0 && (
                   <>
-                    <HorizontalRuleRounded sx={{ fontSize: 12, color: "#6B7280" }} />
+                    <HorizontalRuleOutlined sx={{ fontSize: 12, color: "#6B7280" }} />
                     <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>
                       Match recommended
                     </span>
@@ -320,7 +320,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
                 )}
                 {diff > 0 && (
                   <>
-                    <TrendingUpRounded sx={{ fontSize: 12, color: "#1253FA" }} />
+                    <TrendingUpOutlined sx={{ fontSize: 12, color: "#1253FA" }} />
                     <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA" }}>
                       +EGP {diff} · faster match
                     </span>
@@ -328,7 +328,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
                 )}
                 {diff < 0 && (
                   <>
-                    <TrendingDownRounded sx={{ fontSize: 12, color: "#DC2626" }} />
+                    <TrendingDownOutlined sx={{ fontSize: 12, color: "#DC2626" }} />
                     <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#DC2626" }}>
                       {diff} EGP · fewer offers
                     </span>
@@ -351,7 +351,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
               }}
               aria-label="Increase offer"
             >
-              <AddRounded sx={{ fontSize: 20, color: "white" }} />
+              <AddOutlined sx={{ fontSize: 20, color: "white" }} />
             </button>
           </div>
 
@@ -394,7 +394,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#9CA3AF" }}>Secure</span>
         </div>
         <div className="flex items-center gap-1">
-          <AccessTimeRounded sx={{ fontSize: 10, color: "#D8D9D4" }} />
+          <AccessTimeOutlined sx={{ fontSize: 10, color: "#D8D9D4" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#9CA3AF" }}>Cancel anytime</span>
         </div>
         <div className="flex items-center gap-1">

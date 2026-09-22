@@ -1,28 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
-import MoreVertRounded from "@mui/icons-material/MoreVertRounded";
-import AcUnitRounded from "@mui/icons-material/AcUnitRounded";
-import LocalShippingRounded from "@mui/icons-material/LocalShippingRounded";
-import PhoneRounded from "@mui/icons-material/PhoneRounded";
-import ChatBubbleOutlineRounded from "@mui/icons-material/ChatBubbleOutlineRounded";
-import StarRounded from "@mui/icons-material/StarRounded";
-import StraightenRounded from "@mui/icons-material/StraightenRounded";
-import ScaleRounded from "@mui/icons-material/ScaleRounded";
-import PaymentsRounded from "@mui/icons-material/PaymentsRounded";
-import CategoryRounded from "@mui/icons-material/CategoryRounded";
-import HistoryRounded from "@mui/icons-material/HistoryRounded";
-import GroupsRounded from "@mui/icons-material/GroupsRounded";
-import KeyboardArrowDownRounded from "@mui/icons-material/KeyboardArrowDownRounded";
-import OpenInFullRounded from "@mui/icons-material/OpenInFullRounded";
-import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
-import RadioButtonUncheckedRounded from "@mui/icons-material/RadioButtonUncheckedRounded";
-import VerifiedRounded from "@mui/icons-material/VerifiedRounded";
-import IosShareRounded from "@mui/icons-material/IosShareRounded";
+import ArrowBackIosNewOutlined from "@mui/icons-material/ArrowBackIosNewOutlined";
+import MoreVertOutlined from "@mui/icons-material/MoreVertOutlined";
+import AcUnitOutlined from "@mui/icons-material/AcUnitOutlined";
+import LocalShippingOutlined from "@mui/icons-material/LocalShippingOutlined";
+import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
+import ChatBubbleOutlineOutlined from "@mui/icons-material/ChatBubbleOutlineOutlined";
+import StarOutlined from "@mui/icons-material/StarOutlined";
+import StraightenOutlined from "@mui/icons-material/StraightenOutlined";
+import ScaleOutlined from "@mui/icons-material/ScaleOutlined";
+import PaymentsOutlined from "@mui/icons-material/PaymentsOutlined";
+import CategoryOutlined from "@mui/icons-material/CategoryOutlined";
+import HistoryOutlined from "@mui/icons-material/HistoryOutlined";
+import GroupsOutlined from "@mui/icons-material/GroupsOutlined";
+import KeyboardArrowDownOutlined from "@mui/icons-material/KeyboardArrowDownOutlined";
+import OpenInFullOutlined from "@mui/icons-material/OpenInFullOutlined";
+import CheckCircleOutlined from "@mui/icons-material/CheckCircleOutlined";
+import RadioButtonUncheckedOutlined from "@mui/icons-material/RadioButtonUncheckedOutlined";
+import VerifiedOutlined from "@mui/icons-material/VerifiedOutlined";
+import IosShareOutlined from "@mui/icons-material/IosShareOutlined";
 import ReportProblemOutlined from "@mui/icons-material/ReportProblemOutlined";
-import CloseRounded from "@mui/icons-material/CloseRounded";
-import RefreshRounded from "@mui/icons-material/RefreshRounded";
+import CloseOutlined from "@mui/icons-material/CloseOutlined";
+import RefreshOutlined from "@mui/icons-material/RefreshOutlined";
 import VerticalAlignTopRounded from "@mui/icons-material/VerticalAlignTopRounded";
 
 /* ─────────── Mock data ─────────── */
@@ -233,7 +233,7 @@ function ColdChainCard() {
   return (
     <Card>
       <SectionHeader
-        icon={<AcUnitRounded sx={{ fontSize: 16 }} />}
+        icon={<AcUnitOutlined sx={{ fontSize: 16 }} />}
         label="Cold Chain"
         accent="#1253FA"
         right={
@@ -273,7 +273,7 @@ function ColdChainCard() {
       </div>
       <button className="w-full mt-3 pt-3 flex items-center justify-center gap-1 cursor-pointer active:opacity-70" style={{ borderTop: "1px solid #F0F0EE", borderLeft: "none", borderRight: "none", borderBottom: "none", backgroundColor: "transparent" }}>
         <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "11px", color: "#1253FA" }}>View 24h Log</span>
-        <KeyboardArrowDownRounded sx={{ fontSize: 14, color: "#1253FA", transform: "rotate(-90deg)" }} />
+        <KeyboardArrowDownOutlined sx={{ fontSize: 14, color: "#1253FA", transform: "rotate(-90deg)" }} />
       </button>
     </Card>
   );
@@ -320,10 +320,10 @@ function WaypointRow({ idx, type, status, name, address, addrLang, contact }: {
           </div>
           <div className="flex items-center gap-1.5 flex-shrink-0">
             <button aria-label={`Call ${contact}`} className="w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "rgba(18,83,250,0.1)", border: "none" }}>
-              <PhoneRounded sx={{ fontSize: 14, color: "#1253FA" }} />
+              <PhoneOutlined sx={{ fontSize: 14, color: "#1253FA" }} />
             </button>
             <button aria-label={`Message ${contact}`} className="w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "rgba(4,0,51,0.06)", border: "none" }}>
-              <ChatBubbleOutlineRounded sx={{ fontSize: 14, color: "#040033" }} />
+              <ChatBubbleOutlineOutlined sx={{ fontSize: 14, color: "#040033" }} />
             </button>
           </div>
         </div>
@@ -352,7 +352,7 @@ function CancelModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: (
             <ReportProblemOutlined sx={{ fontSize: 22, color: "#DC2626" }} />
           </div>
           <button onClick={onClose} aria-label="Close" className="w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer" style={{ backgroundColor: "white", border: "none" }}>
-            <CloseRounded sx={{ fontSize: 16, color: "#040033" }} />
+            <CloseOutlined sx={{ fontSize: 16, color: "#040033" }} />
           </button>
         </div>
         <h3 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>Cancel this order?</h3>
@@ -410,10 +410,10 @@ function OverflowMenu({ onClose, onCancel }: { onClose: () => void; onCancel: ()
     <div className="fixed inset-0 z-[60]" onClick={onClose}>
       <div className="absolute" style={{ top: "calc(env(safe-area-inset-top, 16px) + 60px)", right: "12px", animation: "slideIn 0.25s cubic-bezier(0.16,1,0.3,1)" }} onClick={(e) => e.stopPropagation()}>
         <div className="rounded-2xl py-1.5 min-w-[200px]" style={{ backgroundColor: "white", boxShadow: "0 8px 32px rgba(4,0,51,0.18)" }}>
-          <MenuItem icon={<IosShareRounded sx={{ fontSize: 16 }} />} label="Share" />
+          <MenuItem icon={<IosShareOutlined sx={{ fontSize: 16 }} />} label="Share" />
           <MenuItem icon={<ReportProblemOutlined sx={{ fontSize: 16 }} />} label="Report Issue" />
           <div className="my-1" style={{ height: "1px", backgroundColor: "#F0F0EE" }} />
-          <MenuItem icon={<CloseRounded sx={{ fontSize: 16 }} />} label="Cancel Order" destructive onClick={onCancel} />
+          <MenuItem icon={<CloseOutlined sx={{ fontSize: 16 }} />} label="Cancel Order" destructive onClick={onCancel} />
         </div>
       </div>
     </div>
@@ -465,7 +465,7 @@ function Toast({ msg, onDone }: { msg: string; onDone: () => void }) {
   return (
     <div className="fixed left-1/2 z-[80]" style={{ bottom: "calc(env(safe-area-inset-bottom, 16px) + 24px)", transform: "translateX(-50%)", animation: "slideIn 0.4s cubic-bezier(0.16,1,0.3,1)" }}>
       <div className="flex items-center gap-2 px-4 py-3 rounded-2xl" style={{ backgroundColor: "#040033", boxShadow: "0 8px 28px rgba(4,0,51,0.3)" }}>
-        <CheckCircleRounded sx={{ fontSize: 16, color: "#1253FA" }} />
+        <CheckCircleOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
         <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "white" }}>{msg}</span>
       </div>
     </div>
@@ -522,21 +522,21 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
         }}
       >
         <button onClick={onBack} aria-label="Back" className="w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.05)", border: "none" }}>
-          <ArrowBackIosNewRounded sx={{ fontSize: 16, color: "#040033" }} />
+          <ArrowBackIosNewOutlined sx={{ fontSize: 16, color: "#040033" }} />
         </button>
         <div className="flex flex-col items-center">
           <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>Order Details</span>
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280", letterSpacing: "0.04em" }}>{ORDER.id}</span>
         </div>
         <button onClick={() => setMenuOpen(true)} aria-label="More options" className="w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.05)", border: "none" }}>
-          <MoreVertRounded sx={{ fontSize: 18, color: "#040033" }} />
+          <MoreVertOutlined sx={{ fontSize: 18, color: "#040033" }} />
         </button>
       </div>
 
       {/* Pull-to-refresh indicator */}
       <div className="flex items-center justify-center flex-shrink-0" style={{ height: pull, transition: refreshing ? "none" : "height 0.25s ease", overflow: "hidden" }}>
         <div className="flex items-center gap-1.5">
-          <RefreshRounded sx={{ fontSize: 14, color: "#1253FA", animation: refreshing ? "spin 1s linear infinite" : "none", transform: `rotate(${pull * 4}deg)` }} />
+          <RefreshOutlined sx={{ fontSize: 14, color: "#1253FA", animation: refreshing ? "spin 1s linear infinite" : "none", transform: `rotate(${pull * 4}deg)` }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>
             {refreshing ? "Refreshing…" : pull > 50 ? "Release to refresh" : "Pull to refresh"}
           </span>
@@ -580,7 +580,7 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
             className="absolute cursor-pointer active:scale-90 w-10 h-10 rounded-xl flex items-center justify-center"
             style={{ top: "12px", right: "12px", backgroundColor: "rgba(255,255,255,0.96)", boxShadow: "0 4px 18px rgba(0,0,0,0.1)", border: "none" }}
           >
-            <OpenInFullRounded sx={{ fontSize: 16, color: "#040033" }} />
+            <OpenInFullOutlined sx={{ fontSize: 16, color: "#040033" }} />
           </button>
         </div>
 
@@ -596,7 +596,7 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
 
           {/* Waypoints */}
           <Card>
-            <SectionHeader icon={<LocalShippingRounded sx={{ fontSize: 16 }} />} label="Route" accent="#040033" right={
+            <SectionHeader icon={<LocalShippingOutlined sx={{ fontSize: 16 }} />} label="Route" accent="#040033" right={
               <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280", letterSpacing: "0.06em" }}>2 STOPS</span>
             } />
             <WaypointRow idx={1} type="PICKUP" status={ORDER.pickup.status} name={ORDER.pickup.name} address={ORDER.pickup.address} addrLang={ORDER.pickup.lang} contact={ORDER.pickup.contact} />
@@ -605,7 +605,7 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
 
           {/* Driver & Truck */}
           <Card>
-            <SectionHeader icon={<VerifiedRounded sx={{ fontSize: 16 }} />} label="Driver & Truck" accent="#0A0070" />
+            <SectionHeader icon={<VerifiedOutlined sx={{ fontSize: 16 }} />} label="Driver & Truck" accent="#0A0070" />
             <div className="flex items-center gap-3 pb-3" style={{ borderBottom: "1px solid #F0F0EE" }}>
               <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#040033" }}>
                 <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "white" }}>{ORDER.driver.initials}</span>
@@ -613,19 +613,19 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
               <div className="flex-1 min-w-0">
                 <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>{ORDER.driver.name}</p>
                 <div className="flex items-center gap-1 mt-0.5">
-                  <StarRounded sx={{ fontSize: 12, color: "#040033" }} />
+                  <StarOutlined sx={{ fontSize: 12, color: "#040033" }} />
                   <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#040033", fontWeight: 600 }}>{ORDER.driver.rating}</span>
                   <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF" }}>· {ORDER.driver.trips.toLocaleString()} trips</span>
                 </div>
               </div>
-              <IconBtn label="Call" accent="#1253FA"><PhoneRounded sx={{ fontSize: 14 }} /></IconBtn>
+              <IconBtn label="Call" accent="#1253FA"><PhoneOutlined sx={{ fontSize: 14 }} /></IconBtn>
               <button aria-label={`Message ${ORDER.driver.name}`} className="w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "rgba(4,0,51,0.06)", border: "none" }}>
-                <ChatBubbleOutlineRounded sx={{ fontSize: 14, color: "#040033" }} />
+                <ChatBubbleOutlineOutlined sx={{ fontSize: 14, color: "#040033" }} />
               </button>
             </div>
             <div className="flex items-center gap-3 pt-3">
               <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(18,83,250,0.1)" }}>
-                <LocalShippingRounded sx={{ fontSize: 20, color: "#1253FA" }} />
+                <LocalShippingOutlined sx={{ fontSize: 20, color: "#1253FA" }} />
               </div>
               <div className="flex-1 min-w-0">
                 <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>{ORDER.vehicle}</p>
@@ -636,23 +636,23 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
 
           {/* Trip summary inline grid */}
           <Card>
-            <SectionHeader icon={<CategoryRounded sx={{ fontSize: 16 }} />} label="Trip Summary" accent="#6B7280" />
+            <SectionHeader icon={<CategoryOutlined sx={{ fontSize: 16 }} />} label="Trip Summary" accent="#6B7280" />
             <div className="grid grid-cols-2 gap-2.5">
-              <SummaryCell icon={<CategoryRounded sx={{ fontSize: 14 }} />} label="Trip Type" value="On-Demand" accent="#040033" />
-              <SummaryCell icon={<StraightenRounded sx={{ fontSize: 14 }} />} label="Distance" value={`${ORDER.distanceKm.toFixed(2)} km`} accent="#0A0070" />
-              <SummaryCell icon={<ScaleRounded sx={{ fontSize: 14 }} />} label="Weight" value={`${ORDER.weightKg.toLocaleString()} kg`} accent="#1253FA" />
-              <SummaryCell icon={<PaymentsRounded sx={{ fontSize: 14 }} />} label="Price" value={`EGP ${ORDER.priceEgp.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`} accent="#040033" highlight />
+              <SummaryCell icon={<CategoryOutlined sx={{ fontSize: 14 }} />} label="Trip Type" value="On-Demand" accent="#040033" />
+              <SummaryCell icon={<StraightenOutlined sx={{ fontSize: 14 }} />} label="Distance" value={`${ORDER.distanceKm.toFixed(2)} km`} accent="#0A0070" />
+              <SummaryCell icon={<ScaleOutlined sx={{ fontSize: 14 }} />} label="Weight" value={`${ORDER.weightKg.toLocaleString()} kg`} accent="#1253FA" />
+              <SummaryCell icon={<PaymentsOutlined sx={{ fontSize: 14 }} />} label="Price" value={`EGP ${ORDER.priceEgp.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`} accent="#040033" highlight />
             </div>
           </Card>
 
           {/* POD line (compact, since not required) */}
           {ORDER.podRequired ? (
             <Card>
-              <SectionHeader icon={<VerifiedRounded sx={{ fontSize: 16 }} />} label="Files & POD" accent="#1253FA" />
+              <SectionHeader icon={<VerifiedOutlined sx={{ fontSize: 16 }} />} label="Files & POD" accent="#1253FA" />
               {["Bill of Lading", "Odometer Start", "Odometer End", "Delivery Photos", "Signature"].map((item) => (
                 <div key={item} className="flex items-center justify-between py-2.5" style={{ borderBottom: "1px solid #F0F0EE" }}>
                   <div className="flex items-center gap-2">
-                    <RadioButtonUncheckedRounded sx={{ fontSize: 16, color: "#9CA3AF" }} />
+                    <RadioButtonUncheckedOutlined sx={{ fontSize: 16, color: "#9CA3AF" }} />
                     <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{item}</span>
                   </div>
                   <button className="px-3 py-1.5 rounded-lg cursor-pointer active:scale-95" style={{ backgroundColor: "rgba(18,83,250,0.1)", border: "none" }}>
@@ -663,7 +663,7 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
             </Card>
           ) : (
             <div className="flex items-center gap-2 px-4 py-3 rounded-2xl" style={{ backgroundColor: "rgba(107,114,128,0.06)" }}>
-              <VerifiedRounded sx={{ fontSize: 14, color: "#6B7280" }} />
+              <VerifiedOutlined sx={{ fontSize: 14, color: "#6B7280" }} />
               <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>
                 Proof of Delivery not required for this order
               </span>
@@ -675,12 +675,12 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
             <button onClick={() => setTimelineOpen((v) => !v)} className="w-full flex items-center justify-between cursor-pointer" style={{ border: "none", backgroundColor: "transparent" }}>
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(10,0,112,0.08)" }}>
-                  <HistoryRounded sx={{ fontSize: 16, color: "#0A0070" }} />
+                  <HistoryOutlined sx={{ fontSize: 16, color: "#0A0070" }} />
                 </div>
                 <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#040033" }}>Timeline</span>
                 <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280", letterSpacing: "0.06em" }}>{ORDER.events.length} EVENTS</span>
               </div>
-              <KeyboardArrowDownRounded sx={{ fontSize: 18, color: "#040033", transform: timelineOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.25s ease" }} />
+              <KeyboardArrowDownOutlined sx={{ fontSize: 18, color: "#040033", transform: timelineOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.25s ease" }} />
             </button>
             {timelineOpen && (
               <div className="mt-3 pt-3" style={{ borderTop: "1px solid #F0F0EE" }}>
@@ -705,11 +705,11 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
             <button onClick={() => setPeopleOpen((v) => !v)} className="w-full flex items-center justify-between cursor-pointer" style={{ border: "none", backgroundColor: "transparent" }}>
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(107,114,128,0.1)" }}>
-                  <GroupsRounded sx={{ fontSize: 16, color: "#6B7280" }} />
+                  <GroupsOutlined sx={{ fontSize: 16, color: "#6B7280" }} />
                 </div>
                 <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#040033" }}>People Involved</span>
               </div>
-              <KeyboardArrowDownRounded sx={{ fontSize: 18, color: "#040033", transform: peopleOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.25s ease" }} />
+              <KeyboardArrowDownOutlined sx={{ fontSize: 18, color: "#040033", transform: peopleOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.25s ease" }} />
             </button>
             {peopleOpen && (
               <div className="mt-3 pt-3 flex flex-col gap-3" style={{ borderTop: "1px solid #F0F0EE" }}>
@@ -761,10 +761,10 @@ function PersonRow({ role, name, contact }: { role: string; name: string; contac
         <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>{contact}</p>
       </div>
       <button aria-label={`Call ${name}`} className="w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "rgba(18,83,250,0.1)", border: "none" }}>
-        <PhoneRounded sx={{ fontSize: 14, color: "#1253FA" }} />
+        <PhoneOutlined sx={{ fontSize: 14, color: "#1253FA" }} />
       </button>
       <button aria-label={`Message ${name}`} className="w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "rgba(4,0,51,0.06)", border: "none" }}>
-        <ChatBubbleOutlineRounded sx={{ fontSize: 14, color: "#040033" }} />
+        <ChatBubbleOutlineOutlined sx={{ fontSize: 14, color: "#040033" }} />
       </button>
     </div>
   );
@@ -777,7 +777,7 @@ function FullscreenMap({ onClose }: { onClose: () => void }) {
         <MapHero expanded />
       </div>
       <button onClick={onClose} aria-label="Close map" className="absolute w-11 h-11 rounded-2xl flex items-center justify-center cursor-pointer active:scale-90" style={{ top: "max(env(safe-area-inset-top, 16px), 16px)", left: "16px", backgroundColor: "white", boxShadow: "0 4px 18px rgba(0,0,0,0.12)", border: "none" }}>
-        <CloseRounded sx={{ fontSize: 18, color: "#040033" }} />
+        <CloseOutlined sx={{ fontSize: 18, color: "#040033" }} />
       </button>
     </div>
   );

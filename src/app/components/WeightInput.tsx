@@ -59,20 +59,6 @@ function parseToKg(input: string, unit: Unit): number {
   return unit === "ton" ? num * 1000 : num;
 }
 
-/* ── Weight scale decorative icon ── */
-function WeightIcon({ size = 48 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
-      <rect x="10" y="32" width="28" height="8" rx="4" stroke="#040033" strokeWidth="2.2" fill="none" />
-      <path d="M24 32V18" stroke="#040033" strokeWidth="2.2" strokeLinecap="round" />
-      <path d="M14 22L24 18L34 22" stroke="#040033" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="14" cy="22" r="4" stroke="#040033" strokeWidth="2" fill="none" />
-      <circle cx="34" cy="22" r="4" stroke="#040033" strokeWidth="2" fill="none" />
-      <circle cx="24" cy="16" r="3" fill="#040033" />
-    </svg>
-  );
-}
-
 /* ── Animated ring gauge ── */
 function WeightGauge({ fraction, overloaded }: { fraction: number; overloaded: boolean }) {
   const r = 58;

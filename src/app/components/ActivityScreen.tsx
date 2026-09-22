@@ -1,4 +1,8 @@
 import { useState } from "react";
+import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
+import AccessTimeOutlined from "@mui/icons-material/AccessTimeOutlined";
+import ReplayOutlined from "@mui/icons-material/ReplayOutlined";
+import InboxOutlined from "@mui/icons-material/InboxOutlined";
 
 type TabId = "active" | "completed" | "cancelled";
 
@@ -111,17 +115,11 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
         style={{ borderTop: "1px solid #F0F0EE" }}
       >
         <div className="flex items-center gap-1.5">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <rect x="1.5" y="2" width="9" height="8.5" rx="1.5" stroke="#9CA3AF" strokeWidth="1.2" fill="none" />
-            <path d="M1.5 5H10.5" stroke="#9CA3AF" strokeWidth="1.2" />
-          </svg>
+          <CalendarMonthOutlined sx={{ fontSize: 12, color: "#9CA3AF" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{trip.date}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <circle cx="6" cy="6" r="4.5" stroke="#9CA3AF" strokeWidth="1.2" fill="none" />
-            <path d="M6 3.5V6.5L8 7.5" stroke="#9CA3AF" strokeWidth="1.2" strokeLinecap="round" />
-          </svg>
+          <AccessTimeOutlined sx={{ fontSize: 12, color: "#9CA3AF" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{trip.time}</span>
         </div>
         <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
@@ -161,9 +159,7 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
               border: "none",
             }}
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M2 10L5 2L8 7L11 4L12 10" stroke="white" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-            </svg>
+            <ReplayOutlined sx={{ fontSize: 14, color: "white" }} />
             <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "white" }}>
               Reorder
             </span>
@@ -259,10 +255,7 @@ export default function ActivityScreen() {
                 className="w-16 h-16 rounded-2xl flex items-center justify-center"
                 style={{ backgroundColor: "#F0F0EE" }}
               >
-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                  <rect x="4" y="6" width="20" height="16" rx="3" stroke="#D8D9D4" strokeWidth="1.8" fill="none" />
-                  <path d="M4 12H24" stroke="#D8D9D4" strokeWidth="1.8" />
-                </svg>
+                <InboxOutlined sx={{ fontSize: 28, color: "#D8D9D4" }} />
               </div>
               <div className="text-center">
                 <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>No trips found</p>

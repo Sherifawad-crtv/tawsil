@@ -2,6 +2,17 @@ import { useState } from "react";
 import { useAuth } from "../lib/AuthContext";
 import { displayName, initialsOf } from "../lib/authTypes";
 import AddEmailModal from "./onboarding/AddEmailModal";
+import NotificationsOutlined from "@mui/icons-material/NotificationsOutlined";
+import MyLocationOutlined from "@mui/icons-material/MyLocationOutlined";
+import FactCheckOutlined from "@mui/icons-material/FactCheckOutlined";
+import MailOutlineOutlined from "@mui/icons-material/MailOutlineOutlined";
+import PhoneOutlined from "@mui/icons-material/PhoneOutlined";
+import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
+import CreditCardOutlined from "@mui/icons-material/CreditCardOutlined";
+import HelpOutlineOutlined from "@mui/icons-material/HelpOutlineOutlined";
+import ShieldOutlined from "@mui/icons-material/ShieldOutlined";
+import ChevronRightOutlined from "@mui/icons-material/ChevronRightOutlined";
+import LogoutOutlined from "@mui/icons-material/LogoutOutlined";
 
 function formatMemberSince(iso: string): string {
   return new Date(iso).toLocaleDateString("en-US", { month: "short", year: "numeric" });
@@ -12,36 +23,19 @@ const SETTINGS = [
     id: "notifications",
     label: "Push Notifications",
     desc: "Trip updates and alerts",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <path d="M13.5 6.5C13.5 4.01 11.49 2 9 2C6.51 2 4.5 4.01 4.5 6.5C4.5 11 2.5 12.5 2.5 12.5H15.5C15.5 12.5 13.5 11 13.5 6.5Z" stroke="#040033" strokeWidth="1.4" fill="none" />
-        <path d="M7.5 12.5V13.5C7.5 14.33 8.17 15 9 15C9.83 15 10.5 14.33 10.5 13.5V12.5" stroke="#040033" strokeWidth="1.4" />
-      </svg>
-    ),
+    icon: <NotificationsOutlined sx={{ fontSize: 18, color: "#040033" }} />,
   },
   {
     id: "location",
     label: "Location Services",
     desc: "Auto-detect pickup location",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <circle cx="9" cy="9" r="3" fill="none" stroke="#040033" strokeWidth="1.4" />
-        <circle cx="9" cy="9" r="7" stroke="#040033" strokeWidth="1.4" fill="none" />
-        <path d="M9 1V3.5M9 14.5V17M1 9H3.5M14.5 9H17" stroke="#040033" strokeWidth="1.4" strokeLinecap="round" />
-      </svg>
-    ),
+    icon: <MyLocationOutlined sx={{ fontSize: 18, color: "#040033" }} />,
   },
   {
     id: "pod",
     label: "Default POD",
     desc: "Proof of delivery on all orders",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <rect x="3" y="2" width="12" height="14" rx="2" stroke="#040033" strokeWidth="1.4" fill="none" />
-        <path d="M6 7L8 9L12 5" stroke="#040033" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M6 12H12" stroke="#040033" strokeWidth="1.2" strokeLinecap="round" />
-      </svg>
-    ),
+    icon: <FactCheckOutlined sx={{ fontSize: 18, color: "#040033" }} />,
   },
 ];
 
@@ -154,10 +148,7 @@ export default function ProfileScreen() {
 
           <div className="flex flex-col gap-3 mt-4">
             <div className="flex items-center gap-3">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <rect x="1.5" y="2.5" width="11" height="9" rx="2" stroke="#9CA3AF" strokeWidth="1.3" fill="none" />
-                <path d="M1.5 5.5L7 8.5L12.5 5.5" stroke="#9CA3AF" strokeWidth="1.3" />
-              </svg>
+              <MailOutlineOutlined sx={{ fontSize: 14, color: "#9CA3AF" }} />
               {user.email ? (
                 <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#040033" }}>{user.email}</span>
               ) : (
@@ -171,9 +162,7 @@ export default function ProfileScreen() {
               )}
             </div>
             <div className="flex items-center gap-3">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M12.5 10V12C12.5 12.3 12.2 12.5 11.9 12.5C6.5 12.5 1.5 7.5 1.5 2.1C1.5 1.8 1.8 1.5 2.1 1.5H4.1C4.4 1.5 4.6 1.8 4.6 2.1C4.6 2.9 4.7 3.6 5 4.3C5.1 4.5 5 4.8 4.8 5L3.8 6C4.7 7.8 5.7 8.8 7.5 9.7L8.5 8.7C8.7 8.5 9 8.4 9.2 8.5C9.9 8.8 10.6 8.9 11.4 8.9C11.7 8.9 11.9 9.1 12 9.4L12.5 10Z" stroke="#9CA3AF" strokeWidth="1.2" fill="none" />
-              </svg>
+              <PhoneOutlined sx={{ fontSize: 14, color: "#9CA3AF" }} />
               <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#040033" }}>{user.phone}</span>
             </div>
           </div>
@@ -240,37 +229,15 @@ export default function ProfileScreen() {
                   className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                   style={{ backgroundColor: "#F5F5F3" }}
                 >
-                  {item.icon === "bookmark" && (
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M3.5 2H12.5C13 2 13.5 2.45 13.5 3V14L8 11L2.5 14V3C2.5 2.45 3 2 3.5 2Z" stroke="#040033" strokeWidth="1.4" fill="none" />
-                    </svg>
-                  )}
-                  {item.icon === "card" && (
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <rect x="1.5" y="3.5" width="13" height="9" rx="2" stroke="#040033" strokeWidth="1.4" fill="none" />
-                      <path d="M1.5 7H14.5" stroke="#040033" strokeWidth="1.4" />
-                    </svg>
-                  )}
-                  {item.icon === "help" && (
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <circle cx="8" cy="8" r="6.5" stroke="#040033" strokeWidth="1.4" fill="none" />
-                      <path d="M6 6.5C6 5.4 6.9 4.5 8 4.5C9.1 4.5 10 5.4 10 6.5C10 7.6 8 8 8 9" stroke="#040033" strokeWidth="1.4" strokeLinecap="round" />
-                      <circle cx="8" cy="11" r="0.6" fill="#040033" />
-                    </svg>
-                  )}
-                  {item.icon === "shield" && (
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M8 1.5L2.5 4V7.5C2.5 11.2 4.8 14 8 14.5C11.2 14 13.5 11.2 13.5 7.5V4L8 1.5Z" stroke="#040033" strokeWidth="1.4" fill="none" />
-                      <path d="M5.5 8L7 9.5L10.5 6" stroke="#040033" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  )}
+                  {item.icon === "bookmark" && <BookmarkBorderOutlined sx={{ fontSize: 16, color: "#040033" }} />}
+                  {item.icon === "card" && <CreditCardOutlined sx={{ fontSize: 16, color: "#040033" }} />}
+                  {item.icon === "help" && <HelpOutlineOutlined sx={{ fontSize: 16, color: "#040033" }} />}
+                  {item.icon === "shield" && <ShieldOutlined sx={{ fontSize: 16, color: "#040033" }} />}
                 </div>
                 <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033", flex: 1 }}>
                   {item.label}
                 </span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M5 3L9 7L5 11" stroke="#D8D9D4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <ChevronRightOutlined sx={{ fontSize: 14, color: "#D8D9D4" }} />
               </button>
             </div>
           ))}
@@ -286,11 +253,7 @@ export default function ProfileScreen() {
             border: "none",
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M6 14H3C2.45 14 2 13.55 2 13V3C2 2.45 2.45 2 3 2H6" stroke="#DC2626" strokeWidth="1.5" strokeLinecap="round" />
-            <path d="M10.5 11L14 8L10.5 5" stroke="#DC2626" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M14 8H6" stroke="#DC2626" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
+          <LogoutOutlined sx={{ fontSize: 16, color: "#DC2626" }} />
           <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#DC2626" }}>
             Sign Out
           </span>

@@ -389,15 +389,7 @@ export default function DropoffStops({ value, onChange }: DropoffStopsProps) {
           className="flex items-center justify-center rounded-xl flex-shrink-0"
           style={{ width: "36px", height: "36px", backgroundColor: "rgba(18,83,250,0.1)" }}
         >
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path
-              d="M9 1C5.96 1 3.5 3.46 3.5 6.5C3.5 10.5 9 17 9 17C9 17 14.5 10.5 14.5 6.5C14.5 3.46 12.04 1 9 1Z"
-              stroke="#1253FA"
-              strokeWidth="1.5"
-              fill="none"
-            />
-            <circle cx="9" cy="6.5" r="2" fill="#1253FA" />
-          </svg>
+          <LocationOnOutlined sx={{ fontSize: 18, color: "#1253FA" }} />
         </div>
         <div className="flex-1 min-w-0">
           <span

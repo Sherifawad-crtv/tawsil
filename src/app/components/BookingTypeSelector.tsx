@@ -1,4 +1,21 @@
 import { useState, useMemo, useEffect } from "react";
+import BoltOutlined from "@mui/icons-material/BoltOutlined";
+import BoltRounded from "@mui/icons-material/BoltRounded";
+import DateRangeOutlined from "@mui/icons-material/DateRangeOutlined";
+import DateRangeRounded from "@mui/icons-material/DateRangeRounded";
+import AccessTimeOutlined from "@mui/icons-material/AccessTimeOutlined";
+import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
+import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
+import CalendarMonthRounded from "@mui/icons-material/CalendarMonthRounded";
+import CalendarTodayOutlined from "@mui/icons-material/CalendarTodayOutlined";
+import CalendarTodayRounded from "@mui/icons-material/CalendarTodayRounded";
+import AutorenewOutlined from "@mui/icons-material/AutorenewOutlined";
+import AutorenewRounded from "@mui/icons-material/AutorenewRounded";
+import SpeedOutlined from "@mui/icons-material/SpeedOutlined";
+import CheckCircleOutlined from "@mui/icons-material/CheckCircleOutlined";
+import ChevronLeftOutlined from "@mui/icons-material/ChevronLeftOutlined";
+import ChevronRightOutlined from "@mui/icons-material/ChevronRightOutlined";
+import InfoOutlined from "@mui/icons-material/InfoOutlined";
 
 /* ── Types ── */
 export type BookingCategory = "on-demand" | "rental";
@@ -130,22 +147,15 @@ export default function BookingTypeSelector({ state, onChange, onOpenScheduleMod
 
 /* ── Icons ── */
 function OnDemandIcon({ active }: { active: boolean }) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M13 3L4 14H12L11 21L20 10H12L13 3Z" transform="scale(0.65) translate(1,1)" fill={active ? "#1253FA" : "#9CA3AF"} />
-    </svg>
-  );
+  return active
+    ? <BoltRounded sx={{ fontSize: 16, color: "#1253FA" }} />
+    : <BoltOutlined sx={{ fontSize: 16, color: "#9CA3AF" }} />;
 }
 
 function RentalIcon({ active }: { active: boolean }) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M2 5.5C2 4.4 2.9 3.5 4 3.5H12C13.1 3.5 14 4.4 14 5.5V12C14 13.1 13.1 14 12 14H4C2.9 14 2 13.1 2 12V5.5Z" stroke={active ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" fill="none" />
-      <path d="M5 2V4.5M11 2V4.5" stroke={active ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" strokeLinecap="round" />
-      <path d="M2 7.5H14" stroke={active ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" />
-      <path d="M5 10H11" stroke={active ? "#1253FA" : "#9CA3AF"} strokeWidth="1.2" strokeLinecap="round" />
-    </svg>
-  );
+  return active
+    ? <DateRangeRounded sx={{ fontSize: 16, color: "#1253FA" }} />
+    : <DateRangeOutlined sx={{ fontSize: 16, color: "#9CA3AF" }} />;
 }
 
 /* ══════════════════════════════════════════
@@ -169,24 +179,17 @@ function OnDemandSection({
             id: "now" as const,
             label: "Now",
             desc: "Instant dispatch",
-            icon: (a: boolean) => (
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="9" cy="9" r="6.5" stroke={a ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" fill="none" />
-                <path d="M9 5.5V9L11.5 10.5" stroke={a ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            ),
+            icon: (a: boolean) => a
+              ? <AccessTimeRounded sx={{ fontSize: 18, color: "#1253FA" }} />
+              : <AccessTimeOutlined sx={{ fontSize: 18, color: "#9CA3AF" }} />,
           },
           {
             id: "schedule" as const,
             label: "Schedule",
             desc: "Pick date & time",
-            icon: (a: boolean) => (
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <rect x="2.5" y="3.5" width="13" height="11.5" rx="2" stroke={a ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" fill="none" />
-                <path d="M2.5 7.5H15.5" stroke={a ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" />
-                <path d="M6 2V4.5M12 2V4.5" stroke={a ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" strokeLinecap="round" />
-              </svg>
-            ),
+            icon: (a: boolean) => a
+              ? <CalendarMonthRounded sx={{ fontSize: 18, color: "#1253FA" }} />
+              : <CalendarMonthOutlined sx={{ fontSize: 18, color: "#9CA3AF" }} />,
           },
         ]).map(({ id, label, desc, icon }) => {
           const active = mode === id;
@@ -231,9 +234,7 @@ function OnDemandSection({
             className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: "rgba(18,83,250,0.08)" }}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M13 3L4 14H12L11 21L20 10H12L13 3Z" fill="#1253FA" />
-            </svg>
+            <BoltOutlined sx={{ fontSize: 18, color: "#1253FA" }} />
           </div>
           <div>
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
@@ -251,10 +252,7 @@ function OnDemandSection({
           className="flex items-center gap-2.5 px-4 py-3 rounded-2xl"
           style={{ backgroundColor: "rgba(18,83,250,0.05)" }}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="8" r="6.5" stroke="#1253FA" strokeWidth="1.4" fill="none" />
-            <path d="M5.5 8L7.2 9.7L10.5 6.3" stroke="#1253FA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <CheckCircleOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
           <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#1253FA" }}>
             Scheduled: {scheduleSummary}
           </p>
@@ -299,26 +297,17 @@ function RentalSection({
             id: "daily" as const,
             label: "Daily",
             desc: "Rent for a single day",
-            icon: (a: boolean) => (
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <rect x="2.5" y="3" width="13" height="12" rx="2.5" stroke={a ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" fill="none" />
-                <path d="M6 1.5V4M12 1.5V4" stroke={a ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" strokeLinecap="round" />
-                <path d="M2.5 7H15.5" stroke={a ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" />
-                <rect x="7" y="9.5" width="4" height="3.5" rx="1" fill={a ? "#1253FA" : "#D8D9D4"} opacity="0.5" />
-              </svg>
-            ),
+            icon: (a: boolean) => a
+              ? <CalendarTodayRounded sx={{ fontSize: 18, color: "#1253FA" }} />
+              : <CalendarTodayOutlined sx={{ fontSize: 18, color: "#9CA3AF" }} />,
           },
           {
             id: "monthly" as const,
             label: "Monthly",
             desc: "10+ days per month",
-            icon: (a: boolean) => (
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M9 2C5.13 2 2 5.13 2 9C2 12.87 5.13 16 9 16C12.87 16 16 12.87 16 9" stroke={a ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" fill="none" strokeLinecap="round" />
-                <path d="M13.5 2.5L16 5L13.5 7.5" stroke={a ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M16 5H12.5C10.84 5 9.5 6.34 9.5 8" stroke={a ? "#1253FA" : "#9CA3AF"} strokeWidth="1.4" strokeLinecap="round" />
-              </svg>
-            ),
+            icon: (a: boolean) => a
+              ? <AutorenewRounded sx={{ fontSize: 18, color: "#1253FA" }} />
+              : <AutorenewOutlined sx={{ fontSize: 18, color: "#9CA3AF" }} />,
           },
         ]).map(({ id, label, desc, icon }) => {
           const active = mode === id;
@@ -430,9 +419,7 @@ function DailyRentalPicker({
             className="w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer"
             style={{ backgroundColor: canGoPrev ? "#F0F0EE" : "transparent", opacity: canGoPrev ? 1 : 0.3, pointerEvents: canGoPrev ? "auto" : "none" }}
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M9 3L5 7L9 11" stroke="#040033" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <ChevronLeftOutlined sx={{ fontSize: 14, color: "#040033" }} />
           </button>
           <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>
             {MONTHS_FULL[viewMonth]} {viewYear}
@@ -442,9 +429,7 @@ function DailyRentalPicker({
             className="w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer"
             style={{ backgroundColor: "#F0F0EE" }}
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M5 3L9 7L5 11" stroke="#040033" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <ChevronRightOutlined sx={{ fontSize: 14, color: "#040033" }} />
           </button>
         </div>
 
@@ -504,10 +489,7 @@ function DailyRentalPicker({
           className="flex items-center gap-3 px-4 py-3 rounded-2xl"
           style={{ backgroundColor: "rgba(18,83,250,0.04)" }}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="8" r="6.5" stroke="#1253FA" strokeWidth="1.4" fill="none" />
-            <path d="M5.5 8L7.2 9.7L10.5 6.3" stroke="#1253FA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <CheckCircleOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
           <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#1253FA" }}>
             {selectedDay.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric", year: "numeric" })}
           </p>
@@ -521,12 +503,7 @@ function DailyRentalPicker({
           style={{ backgroundColor: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}
         >
           <div className="px-4 pt-4 pb-2 flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <circle cx="8" cy="8" r="6.5" stroke="#040033" strokeWidth="1.4" fill="none" />
-              <path d="M8 4.5V8" stroke="#040033" strokeWidth="1.4" strokeLinecap="round" />
-              <path d="M8 8L10.5 10" stroke="#040033" strokeWidth="1.4" strokeLinecap="round" />
-              <circle cx="8" cy="8" r="1" fill="#040033" />
-            </svg>
+            <SpeedOutlined sx={{ fontSize: 16, color: "#040033" }} />
             <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.06em", textTransform: "uppercase" }}>
               Estimated Kilometers
             </span>
@@ -603,11 +580,7 @@ function DailyRentalPicker({
             className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: "#E8E8E5" }}
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <rect x="2" y="3" width="12" height="11" rx="2" stroke="#9CA3AF" strokeWidth="1.4" fill="none" />
-              <path d="M2 7H14" stroke="#9CA3AF" strokeWidth="1.4" />
-              <path d="M5.5 1.5V4M10.5 1.5V4" stroke="#9CA3AF" strokeWidth="1.4" strokeLinecap="round" />
-            </svg>
+            <CalendarMonthOutlined sx={{ fontSize: 16, color: "#9CA3AF" }} />
           </div>
           <div>
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
@@ -740,10 +713,7 @@ function MonthlyRentalPicker({
               style={{ backgroundColor: eligible ? "rgba(18,83,250,0.08)" : "rgba(220,38,38,0.08)" }}
             >
               {eligible ? (
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <circle cx="8" cy="8" r="6.5" stroke="#1253FA" strokeWidth="1.4" fill="none" />
-                  <path d="M5.5 8L7.2 9.7L10.5 6.3" stroke="#1253FA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <CheckCircleOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
               ) : (
                 <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#DC2626" }}>
                   {monthlyDays.length}
@@ -797,11 +767,7 @@ function MonthlyRentalPicker({
               className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
               style={{ backgroundColor: "rgba(18,83,250,0.08)" }}
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <circle cx="8" cy="8" r="6.5" stroke="#1253FA" strokeWidth="1.4" fill="none" />
-                <path d="M8 5V8.5" stroke="#1253FA" strokeWidth="1.6" strokeLinecap="round" />
-                <circle cx="8" cy="11" r="0.7" fill="#1253FA" />
-              </svg>
+              <InfoOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
             </div>
             <div className="flex-1">
               <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>

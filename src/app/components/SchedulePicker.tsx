@@ -1,4 +1,13 @@
 import { useState, useMemo, useEffect } from "react";
+import AccessTimeOutlined from "@mui/icons-material/AccessTimeOutlined";
+import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
+import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
+import CalendarMonthRounded from "@mui/icons-material/CalendarMonthRounded";
+import BoltOutlined from "@mui/icons-material/BoltOutlined";
+import CheckCircleOutlined from "@mui/icons-material/CheckCircleOutlined";
+import CloseOutlined from "@mui/icons-material/CloseOutlined";
+import ChevronLeftOutlined from "@mui/icons-material/ChevronLeftOutlined";
+import ChevronRightOutlined from "@mui/icons-material/ChevronRightOutlined";
 
 type Mode = "now" | "schedule";
 
@@ -59,17 +68,13 @@ export function ScheduleToggle({
             }}
           >
             {m === "now" ? (
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <circle cx="8" cy="8" r="6.5" stroke={mode === m ? "#1253FA" : "#9CA3AF"} strokeWidth="1.5" fill="none" />
-                <path d="M8 4.5V8L10.5 9.5" stroke={mode === m ? "#1253FA" : "#9CA3AF"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              mode === m
+                ? <AccessTimeRounded sx={{ fontSize: 16, color: "#1253FA" }} />
+                : <AccessTimeOutlined sx={{ fontSize: 16, color: "#9CA3AF" }} />
             ) : (
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <rect x="2" y="3" width="12" height="11" rx="2" stroke={mode === m ? "#1253FA" : "#9CA3AF"} strokeWidth="1.5" fill="none" />
-                <path d="M2 7H14" stroke={mode === m ? "#1253FA" : "#9CA3AF"} strokeWidth="1.5" />
-                <path d="M5.5 1.5V4" stroke={mode === m ? "#1253FA" : "#9CA3AF"} strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M10.5 1.5V4" stroke={mode === m ? "#1253FA" : "#9CA3AF"} strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
+              mode === m
+                ? <CalendarMonthRounded sx={{ fontSize: 16, color: "#1253FA" }} />
+                : <CalendarMonthOutlined sx={{ fontSize: 16, color: "#9CA3AF" }} />
             )}
             <span
               style={{
@@ -96,9 +101,7 @@ export function ScheduleToggle({
             className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: "rgba(18,83,250,0.08)" }}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M13 3L4 14H12L11 21L20 10H12L13 3Z" fill="#1253FA" />
-            </svg>
+            <BoltOutlined sx={{ fontSize: 20, color: "#1253FA" }} />
           </div>
           <div>
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>
@@ -116,10 +119,7 @@ export function ScheduleToggle({
           className="flex items-center gap-2.5 px-4 py-3 rounded-2xl mt-3"
           style={{ backgroundColor: "rgba(18,83,250,0.05)" }}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="8" r="6.5" stroke="#1253FA" strokeWidth="1.4" fill="none" />
-            <path d="M5.5 8L7.2 9.7L10.5 6.3" stroke="#1253FA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <CheckCircleOutlined sx={{ fontSize: 16, color: "#1253FA" }} />
           <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#1253FA" }}>
             Scheduled: {scheduleSummary}
           </p>
@@ -231,9 +231,7 @@ export function ScheduleModal({
             className="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer"
             style={{ backgroundColor: "#E8E8E5" }}
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M3 3L11 11M11 3L3 11" stroke="#040033" strokeWidth="1.8" strokeLinecap="round" />
-            </svg>
+            <CloseOutlined sx={{ fontSize: 14, color: "#040033" }} />
           </button>
         </div>
 
@@ -255,9 +253,7 @@ export function ScheduleModal({
                   pointerEvents: canGoPrev ? "auto" : "none",
                 }}
               >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M9 3L5 7L9 11" stroke="#040033" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <ChevronLeftOutlined sx={{ fontSize: 14, color: "#040033" }} />
               </button>
               <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>
                 {MONTHS[viewMonth]} {viewYear}
@@ -267,9 +263,7 @@ export function ScheduleModal({
                 className="w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer"
                 style={{ backgroundColor: "#F0F0EE" }}
               >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M5 3L9 7L5 11" stroke="#040033" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <ChevronRightOutlined sx={{ fontSize: 14, color: "#040033" }} />
               </button>
             </div>
 
@@ -338,10 +332,7 @@ export function ScheduleModal({
             style={{ backgroundColor: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}
           >
             <div className="px-5 pt-4 pb-2 flex items-center gap-2">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <circle cx="7" cy="7" r="5.5" stroke="#040033" strokeWidth="1.4" fill="none" />
-                <path d="M7 4V7L9 8.5" stroke="#040033" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <AccessTimeOutlined sx={{ fontSize: 14, color: "#040033" }} />
               <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.06em", textTransform: "uppercase" }}>
                 Pickup Time
               </span>

@@ -1,4 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import ShowChartOutlined from "@mui/icons-material/ShowChartOutlined";
+import CheckOutlined from "@mui/icons-material/CheckOutlined";
+import AccessTimeOutlined from "@mui/icons-material/AccessTimeOutlined";
+import CloseOutlined from "@mui/icons-material/CloseOutlined";
+import RouteOutlined from "@mui/icons-material/RouteOutlined";
+import PaymentsOutlined from "@mui/icons-material/PaymentsOutlined";
 
 /* ── Stats Data ── */
 const STATS = {
@@ -198,42 +204,25 @@ export default function InsightsScreen() {
             label="Total Trips"
             value={STATS.total}
             color="#040033"
-            icon={
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M2 12L5.5 4L9 9L13 5L14 12" stroke="#040033" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-              </svg>
-            }
+            icon={<ShowChartOutlined sx={{ fontSize: 16, color: "#040033" }} />}
           />
           <StatCard
             label="Completed"
             value={STATS.completed}
             color="#059669"
-            icon={
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3.5 8L6.5 11L12.5 5" stroke="#059669" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            }
+            icon={<CheckOutlined sx={{ fontSize: 16, color: "#059669" }} />}
           />
           <StatCard
             label="Pending"
             value={STATS.pending}
             color="#1253FA"
-            icon={
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <circle cx="8" cy="8" r="5.5" stroke="#1253FA" strokeWidth="1.5" fill="none" />
-                <path d="M8 5V8.5L10.5 10" stroke="#1253FA" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-            }
+            icon={<AccessTimeOutlined sx={{ fontSize: 16, color: "#1253FA" }} />}
           />
           <StatCard
             label="Cancelled"
             value={STATS.cancelled}
             color="#6B7280"
-            icon={
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M4.5 4.5L11.5 11.5M11.5 4.5L4.5 11.5" stroke="#6B7280" strokeWidth="1.8" strokeLinecap="round" />
-              </svg>
-            }
+            icon={<CloseOutlined sx={{ fontSize: 16, color: "#6B7280" }} />}
           />
         </div>
 
@@ -273,24 +262,9 @@ export default function InsightsScreen() {
                     className="w-9 h-9 rounded-xl flex items-center justify-center"
                     style={{ backgroundColor: "#F0F0EE" }}
                   >
-                    {item.icon === "clock" && (
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <circle cx="8" cy="8" r="6" stroke="#6B7280" strokeWidth="1.4" fill="none" />
-                        <path d="M8 4.5V8.5L10.5 10" stroke="#6B7280" strokeWidth="1.4" strokeLinecap="round" />
-                      </svg>
-                    )}
-                    {item.icon === "route" && (
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M3 13L8 3L13 13" stroke="#6B7280" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                        <path d="M5 9H11" stroke="#6B7280" strokeWidth="1.4" strokeLinecap="round" />
-                      </svg>
-                    )}
-                    {item.icon === "money" && (
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <rect x="2" y="4" width="12" height="8" rx="1.5" stroke="#6B7280" strokeWidth="1.4" fill="none" />
-                        <circle cx="8" cy="8" r="2" stroke="#6B7280" strokeWidth="1.2" fill="none" />
-                      </svg>
-                    )}
+                    {item.icon === "clock" && <AccessTimeOutlined sx={{ fontSize: 16, color: "#6B7280" }} />}
+                    {item.icon === "route" && <RouteOutlined sx={{ fontSize: 16, color: "#6B7280" }} />}
+                    {item.icon === "money" && <PaymentsOutlined sx={{ fontSize: 16, color: "#6B7280" }} />}
                   </div>
                   <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 500, fontSize: "13px", color: "#040033" }}>
                     {item.label}

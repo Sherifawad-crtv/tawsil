@@ -1,10 +1,10 @@
 import SvgIcon, { type SvgIconProps } from "@mui/material/SvgIcon";
 
-/** Sourced from google/material-design-icons (Star, round style, 24px). */
+/** Sourced from google/material-design-icons Material Symbols (Star, rounded, filled, 24px). */
 export default function StarRounded(props: SvgIconProps) {
   return (
-    <SvgIcon {...props}>
-      <path d="m12 17.27 4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z" />
+    <SvgIcon viewBox="0 -960 960 960" {...props}>
+      <path d="M480-269 314-169q-11 7-23 6t-21-8q-9-7-14-17.5t-2-23.5l44-189-147-127q-10-9-12.5-20.5T140-571q4-11 12-18t22-9l194-17 75-178q5-12 15.5-18t21.5-6q11 0 21.5 6t15.5 18l75 178 194 17q14 2 22 9t12 18q4 11 1.5 22.5T809-528L662-401l44 189q3 13-2 23.5T690-171q-9 7-21 8t-23-6L480-269Z" />
     </SvgIcon>
   );
 }

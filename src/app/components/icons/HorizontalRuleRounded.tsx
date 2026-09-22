@@ -1,10 +1,10 @@
 import SvgIcon, { type SvgIconProps } from "@mui/material/SvgIcon";
 
-/** Sourced from google/material-design-icons (HorizontalRule, round style, 24px). */
+/** Sourced from google/material-design-icons Material Symbols (HorizontalRule, rounded, filled, 24px). */
 export default function HorizontalRuleRounded(props: SvgIconProps) {
   return (
-    <SvgIcon {...props}>
-      <path d="M19,13H5c-0.55,0-1-0.45-1-1v0c0-0.55,0.45-1,1-1h14c0.55,0,1,0.45,1,1v0 C20,12.55,19.55,13,19,13z" />
+    <SvgIcon viewBox="0 -960 960 960" {...props}>
+      <path d="M200-440q-17 0-28.5-11.5T160-480q0-17 11.5-28.5T200-520h560q17 0 28.5 11.5T800-480q0 17-11.5 28.5T760-440H200Z" />
     </SvgIcon>
   );
 }

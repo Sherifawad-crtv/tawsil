@@ -1,10 +1,10 @@
 import SvgIcon, { type SvgIconProps } from "@mui/material/SvgIcon";
 
-/** Sourced from google/material-design-icons (BookmarkBorder, round style, 24px). */
+/** Sourced from google/material-design-icons Material Symbols (BookmarkBorder, rounded, filled, 24px). */
 export default function BookmarkBorderRounded(props: SvgIconProps) {
   return (
-    <SvgIcon {...props}>
-      <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V6c0-.55.45-1 1-1h8c.55 0 1 .45 1 1v12z" />
+    <SvgIcon viewBox="0 -960 960 960" {...props}>
+      <path d="m480-240-168 72q-40 17-76-6.5T200-241v-519q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v519q0 43-36 66.5t-76 6.5l-168-72Z" />
     </SvgIcon>
   );
 }

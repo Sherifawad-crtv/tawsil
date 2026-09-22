@@ -1,10 +1,10 @@
 import SvgIcon, { type SvgIconProps } from "@mui/material/SvgIcon";
 
-/** Sourced from google/material-design-icons (Warehouse, round style, 24px). */
+/** Sourced from google/material-design-icons Material Symbols (Warehouse, rounded, filled, 24px). */
 export default function WarehouseRounded(props: SvgIconProps) {
   return (
-    <SvgIcon {...props}>
-      <path d="M22,19V8.35c0-0.82-0.5-1.55-1.26-1.86l-8-3.2c-0.48-0.19-1.01-0.19-1.49,0l-8,3.2C2.5,6.8,2,7.54,2,8.35V19 c0,1.1,0.9,2,2,2h3v-9h10v9h3C21.1,21,22,20.1,22,19z M11,19H9v2h2V19z M13,16h-2v2h2V16z M15,19h-2v2h2V19z" />
+    <SvgIcon viewBox="0 -960 960 960" {...props}>
+      <path d="M80-200v-426q0-25 13.5-45t36.5-29l320-128q14-6 30-6t30 6l320 128q23 9 36.5 29t13.5 45v426q0 33-23.5 56.5T800-120H640v-320H320v320H160q-33 0-56.5-23.5T80-200Zm280 80v-80h80v80h-80Zm80-120v-80h80v80h-80Zm80 120v-80h80v80h-80Z" />
     </SvgIcon>
   );
 }

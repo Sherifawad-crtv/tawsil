@@ -1,10 +1,10 @@
 import SvgIcon, { type SvgIconProps } from "@mui/material/SvgIcon";
 
-/** Sourced from google/material-design-icons (KeyboardArrowDown, round style, 24px). */
+/** Sourced from google/material-design-icons Material Symbols (KeyboardArrowDown, rounded, filled, 24px). */
 export default function KeyboardArrowDownRounded(props: SvgIconProps) {
   return (
-    <SvgIcon {...props}>
-      <path d="M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z" />
+    <SvgIcon viewBox="0 -960 960 960" {...props}>
+      <path d="M480-361q-8 0-15-2.5t-13-8.5L268-556q-11-11-11-28t11-28q11-11 28-11t28 11l156 156 156-156q11-11 28-11t28 11q11 11 11 28t-11 28L508-372q-6 6-13 8.5t-15 2.5Z" />
     </SvgIcon>
   );
 }

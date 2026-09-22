@@ -1,11 +1,10 @@
 import SvgIcon, { type SvgIconProps } from "@mui/material/SvgIcon";
 
-/** Sourced from google/material-design-icons (IosShare, round style, 24px). */
+/** Sourced from google/material-design-icons Material Symbols (IosShare, rounded, filled, 24px). */
 export default function IosShareRounded(props: SvgIconProps) {
   return (
-    <SvgIcon {...props}>
-      <path d="M18,8h-2c-0.55,0-1,0.45-1,1v0c0,0.55,0.45,1,1,1h2v11H6V10h2c0.55,0,1-0.45,1-1v0c0-0.55-0.45-1-1-1H6c-1.1,0-2,0.9-2,2 v11c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V10C20,8.9,19.1,8,18,8z" />
-      <path d="M12,16L12,16c0.55,0,1-0.45,1-1V5h1.79c0.45,0,0.67-0.54,0.35-0.85l-2.79-2.79c-0.2-0.2-0.51-0.2-0.71,0L8.85,4.15 C8.54,4.46,8.76,5,9.21,5H11v10C11,15.55,11.45,16,12,16z" />
+    <SvgIcon viewBox="0 -960 960 960" {...props}>
+      <path d="M240-40q-33 0-56.5-23.5T160-120v-440q0-33 23.5-56.5T240-640h80q17 0 28.5 11.5T360-600q0 17-11.5 28.5T320-560h-80v440h480v-440h-80q-17 0-28.5-11.5T600-600q0-17 11.5-28.5T640-640h80q33 0 56.5 23.5T800-560v440q0 33-23.5 56.5T720-40H240Zm200-727-36 36q-12 12-28 11.5T348-732q-11-12-11.5-28t11.5-28l104-104q12-12 28-12t28 12l104 104q11 11 11 27.5T612-732q-12 12-28.5 12T555-732l-35-35v407q0 17-11.5 28.5T480-320q-17 0-28.5-11.5T440-360v-407Z" />
     </SvgIcon>
   );
 }

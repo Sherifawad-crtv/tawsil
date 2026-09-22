@@ -1,7 +1,7 @@
-import HomeRounded from "@mui/icons-material/HomeRounded";
-import CalendarMonthRounded from "@mui/icons-material/CalendarMonthRounded";
-import BarChartRounded from "@mui/icons-material/BarChartRounded";
-import PersonRounded from "@mui/icons-material/PersonRounded";
+import HomeRounded from "./icons/HomeRounded";
+import CalendarMonthRounded from "./icons/CalendarMonthRounded";
+import BarChartRounded from "./icons/BarChartRounded";
+import PersonRounded from "./icons/PersonRounded";
 
 export type NavScreen = "home" | "activity" | "profile" | "insights";
 

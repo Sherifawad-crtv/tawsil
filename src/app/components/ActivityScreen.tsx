@@ -1,8 +1,8 @@
 import { useState } from "react";
-import CalendarMonthRounded from "@mui/icons-material/CalendarMonthRounded";
-import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
-import ReplayRounded from "@mui/icons-material/ReplayRounded";
-import InboxRounded from "@mui/icons-material/InboxRounded";
+import CalendarMonthRounded from "./icons/CalendarMonthRounded";
+import AccessTimeRounded from "./icons/AccessTimeRounded";
+import ReplayRounded from "./icons/ReplayRounded";
+import InboxRounded from "./icons/InboxRounded";
 
 type TabId = "active" | "completed" | "cancelled";
 

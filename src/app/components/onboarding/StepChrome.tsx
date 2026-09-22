@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
+import ArrowBackIosNewRounded from "../icons/ArrowBackIosNewRounded";
 import { useKeyboardInset } from "../../hooks/useKeyboardInset";
 
 /** Same growing-pill progress indicator as the booking flow's StepIndicator. */

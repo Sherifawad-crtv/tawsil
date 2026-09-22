@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { VEHICLES } from "./VehicleCarouselSelectable";
-import AddRounded from "@mui/icons-material/AddRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
-import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
-import PhoneRounded from "@mui/icons-material/PhoneRounded";
-import CheckRounded from "@mui/icons-material/CheckRounded";
-import CloseRounded from "@mui/icons-material/CloseRounded";
+import AddRounded from "./icons/AddRounded";
+import ChevronRightRounded from "./icons/ChevronRightRounded";
+import AccessTimeRounded from "./icons/AccessTimeRounded";
+import PhoneRounded from "./icons/PhoneRounded";
+import CheckRounded from "./icons/CheckRounded";
+import CloseRounded from "./icons/CloseRounded";
 import { useAuth } from "../lib/AuthContext";
 import { displayName } from "../lib/authTypes";
 

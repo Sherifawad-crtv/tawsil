@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import ScaleRounded from "@mui/icons-material/ScaleRounded";
-import InfoRounded from "@mui/icons-material/InfoRounded";
+import ScaleRounded from "./icons/ScaleRounded";
+import InfoRounded from "./icons/InfoRounded";
 
 type Unit = "kg" | "ton";
 

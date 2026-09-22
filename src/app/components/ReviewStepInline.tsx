@@ -1,14 +1,14 @@
 import { VEHICLES } from "./VehicleCarouselSelectable";
 import type { DropoffStop } from "./DropoffStops";
 import type { AddedLocation } from "./PickupStepInline";
-import ShieldRounded from "@mui/icons-material/ShieldRounded";
-import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
-import CreditCardRounded from "@mui/icons-material/CreditCardRounded";
-import RemoveRounded from "@mui/icons-material/RemoveRounded";
-import AddRounded from "@mui/icons-material/AddRounded";
-import TrendingUpRounded from "@mui/icons-material/TrendingUpRounded";
-import TrendingDownRounded from "@mui/icons-material/TrendingDownRounded";
-import HorizontalRuleRounded from "@mui/icons-material/HorizontalRuleRounded";
+import ShieldRounded from "./icons/ShieldRounded";
+import AccessTimeRounded from "./icons/AccessTimeRounded";
+import CreditCardRounded from "./icons/CreditCardRounded";
+import RemoveRounded from "./icons/RemoveRounded";
+import AddRounded from "./icons/AddRounded";
+import TrendingUpRounded from "./icons/TrendingUpRounded";
+import TrendingDownRounded from "./icons/TrendingDownRounded";
+import HorizontalRuleRounded from "./icons/HorizontalRuleRounded";
 
 interface ReviewStepInlineProps {
   truckId: string;

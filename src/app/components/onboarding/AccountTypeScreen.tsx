@@ -1,6 +1,6 @@
-import ApartmentRounded from "@mui/icons-material/ApartmentRounded";
-import PersonRounded from "@mui/icons-material/PersonRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
+import ApartmentRounded from "../icons/ApartmentRounded";
+import PersonRounded from "../icons/PersonRounded";
+import ChevronRightRounded from "../icons/ChevronRightRounded";
 import ScreenShell from "./ScreenShell";
 import type { AccountType } from "../../lib/authTypes";
 

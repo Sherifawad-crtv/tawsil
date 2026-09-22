@@ -1,11 +1,11 @@
 import { useState, useMemo, useEffect } from "react";
-import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
-import CalendarMonthRounded from "@mui/icons-material/CalendarMonthRounded";
-import BoltRounded from "@mui/icons-material/BoltRounded";
-import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
-import CloseRounded from "@mui/icons-material/CloseRounded";
-import ChevronLeftRounded from "@mui/icons-material/ChevronLeftRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
+import AccessTimeRounded from "./icons/AccessTimeRounded";
+import CalendarMonthRounded from "./icons/CalendarMonthRounded";
+import BoltRounded from "./icons/BoltRounded";
+import CheckCircleRounded from "./icons/CheckCircleRounded";
+import CloseRounded from "./icons/CloseRounded";
+import ChevronLeftRounded from "./icons/ChevronLeftRounded";
+import ChevronRightRounded from "./icons/ChevronRightRounded";
 
 type Mode = "now" | "schedule";
 

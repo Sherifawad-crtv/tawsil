@@ -1,15 +1,15 @@
 import { useState, useMemo, useEffect } from "react";
-import BoltRounded from "@mui/icons-material/BoltRounded";
-import DateRangeRounded from "@mui/icons-material/DateRangeRounded";
-import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
-import CalendarMonthRounded from "@mui/icons-material/CalendarMonthRounded";
-import CalendarTodayRounded from "@mui/icons-material/CalendarTodayRounded";
-import AutorenewRounded from "@mui/icons-material/AutorenewRounded";
-import SpeedRounded from "@mui/icons-material/SpeedRounded";
-import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
-import ChevronLeftRounded from "@mui/icons-material/ChevronLeftRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
-import InfoRounded from "@mui/icons-material/InfoRounded";
+import BoltRounded from "./icons/BoltRounded";
+import DateRangeRounded from "./icons/DateRangeRounded";
+import AccessTimeRounded from "./icons/AccessTimeRounded";
+import CalendarMonthRounded from "./icons/CalendarMonthRounded";
+import CalendarTodayRounded from "./icons/CalendarTodayRounded";
+import AutorenewRounded from "./icons/AutorenewRounded";
+import SpeedRounded from "./icons/SpeedRounded";
+import CheckCircleRounded from "./icons/CheckCircleRounded";
+import ChevronLeftRounded from "./icons/ChevronLeftRounded";
+import ChevronRightRounded from "./icons/ChevronRightRounded";
+import InfoRounded from "./icons/InfoRounded";
 
 /* ── Types ── */
 export type BookingCategory = "on-demand" | "rental";

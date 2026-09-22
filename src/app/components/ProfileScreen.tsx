@@ -2,17 +2,17 @@ import { useState } from "react";
 import { useAuth } from "../lib/AuthContext";
 import { displayName, initialsOf } from "../lib/authTypes";
 import AddEmailModal from "./onboarding/AddEmailModal";
-import NotificationsRounded from "@mui/icons-material/NotificationsRounded";
-import MyLocationRounded from "@mui/icons-material/MyLocationRounded";
-import FactCheckRounded from "@mui/icons-material/FactCheckRounded";
-import MailOutlineRounded from "@mui/icons-material/MailOutlineRounded";
-import PhoneRounded from "@mui/icons-material/PhoneRounded";
-import BookmarkBorderRounded from "@mui/icons-material/BookmarkBorderRounded";
-import CreditCardRounded from "@mui/icons-material/CreditCardRounded";
-import HelpOutlineRounded from "@mui/icons-material/HelpOutlineRounded";
-import ShieldRounded from "@mui/icons-material/ShieldRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
-import LogoutRounded from "@mui/icons-material/LogoutRounded";
+import NotificationsRounded from "./icons/NotificationsRounded";
+import MyLocationRounded from "./icons/MyLocationRounded";
+import FactCheckRounded from "./icons/FactCheckRounded";
+import MailOutlineRounded from "./icons/MailOutlineRounded";
+import PhoneRounded from "./icons/PhoneRounded";
+import BookmarkBorderRounded from "./icons/BookmarkBorderRounded";
+import CreditCardRounded from "./icons/CreditCardRounded";
+import HelpOutlineRounded from "./icons/HelpOutlineRounded";
+import ShieldRounded from "./icons/ShieldRounded";
+import ChevronRightRounded from "./icons/ChevronRightRounded";
+import LogoutRounded from "./icons/LogoutRounded";
 
 function formatMemberSince(iso: string): string {
   return new Date(iso).toLocaleDateString("en-US", { month: "short", year: "numeric" });

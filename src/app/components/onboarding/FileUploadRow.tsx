@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import UploadFileRounded from "@mui/icons-material/UploadFileRounded";
-import PictureAsPdfRounded from "@mui/icons-material/PictureAsPdfRounded";
-import CloseRounded from "@mui/icons-material/CloseRounded";
+import UploadFileRounded from "../icons/UploadFileRounded";
+import PictureAsPdfRounded from "../icons/PictureAsPdfRounded";
+import CloseRounded from "../icons/CloseRounded";
 
 function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;

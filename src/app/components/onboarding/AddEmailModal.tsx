@@ -1,5 +1,5 @@
 import { useState } from "react";
-import MailOutlineRounded from "@mui/icons-material/MailOutlineRounded";
+import MailOutlineRounded from "../icons/MailOutlineRounded";
 import AuthTextField from "./AuthTextField";
 import { PrimaryButton, GhostButton } from "./StepChrome";
 import { useKeyboardInset } from "../../hooks/useKeyboardInset";

@@ -16,9 +16,9 @@ import type { Offer } from "./BiddingScreen";
 import { useState, useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
-import NavigationRounded from "@mui/icons-material/NavigationRounded";
-import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
+import ArrowBackIosNewRounded from "./icons/ArrowBackIosNewRounded";
+import NavigationRounded from "./icons/NavigationRounded";
+import CheckCircleRounded from "./icons/CheckCircleRounded";
 import { useAuth } from "../lib/AuthContext";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;

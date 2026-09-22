@@ -1,4 +1,4 @@
-import CameraAltRounded from "@mui/icons-material/CameraAltRounded";
+import CameraAltRounded from "./icons/CameraAltRounded";
 
 export default function ProofOfDeliveryToggle({ value, onChange }: { value: boolean; onChange: (v: boolean) => void }) {
   return (

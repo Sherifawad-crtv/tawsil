@@ -1,8 +1,8 @@
-import AcUnitRounded from "@mui/icons-material/AcUnitRounded";
-import ThermostatRounded from "@mui/icons-material/ThermostatRounded";
-import ViewInArRounded from "@mui/icons-material/ViewInArRounded";
-import Inventory2Rounded from "@mui/icons-material/Inventory2Rounded";
-import CheckRounded from "@mui/icons-material/CheckRounded";
+import AcUnitRounded from "./icons/AcUnitRounded";
+import ThermostatRounded from "./icons/ThermostatRounded";
+import ViewInArRounded from "./icons/ViewInArRounded";
+import Inventory2Rounded from "./icons/Inventory2Rounded";
+import CheckRounded from "./icons/CheckRounded";
 
 const CONFIGS = [
   { id: "frozen", name: "Frozen", description: "Below -18°C", Icon: AcUnitRounded },

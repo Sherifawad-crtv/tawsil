@@ -1,13 +1,13 @@
 import { useState, useRef, useCallback } from "react";
-import WarehouseRounded from "@mui/icons-material/WarehouseRounded";
-import BusinessRounded from "@mui/icons-material/BusinessRounded";
-import HomeRounded from "@mui/icons-material/HomeRounded";
-import LocationOnRounded from "@mui/icons-material/LocationOnRounded";
-import CloseRounded from "@mui/icons-material/CloseRounded";
-import SearchRounded from "@mui/icons-material/SearchRounded";
-import MyLocationRounded from "@mui/icons-material/MyLocationRounded";
-import BookmarkBorderRounded from "@mui/icons-material/BookmarkBorderRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
+import WarehouseRounded from "./icons/WarehouseRounded";
+import BusinessRounded from "./icons/BusinessRounded";
+import HomeRounded from "./icons/HomeRounded";
+import LocationOnRounded from "./icons/LocationOnRounded";
+import CloseRounded from "./icons/CloseRounded";
+import SearchRounded from "./icons/SearchRounded";
+import MyLocationRounded from "./icons/MyLocationRounded";
+import BookmarkBorderRounded from "./icons/BookmarkBorderRounded";
+import ChevronRightRounded from "./icons/ChevronRightRounded";
 
 /* ── Types ── */
 export interface SavedLocation {

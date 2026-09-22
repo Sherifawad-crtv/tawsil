@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
-import StarRounded from "@mui/icons-material/StarRounded";
-import LocalShippingRounded from "@mui/icons-material/LocalShippingRounded";
-import VerifiedRounded from "@mui/icons-material/VerifiedRounded";
-import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
-import CloseRounded from "@mui/icons-material/CloseRounded";
-import TrendingDownRounded from "@mui/icons-material/TrendingDownRounded";
-import GavelRounded from "@mui/icons-material/GavelRounded";
+import ArrowBackIosNewRounded from "./icons/ArrowBackIosNewRounded";
+import StarRounded from "./icons/StarRounded";
+import LocalShippingRounded from "./icons/LocalShippingRounded";
+import VerifiedRounded from "./icons/VerifiedRounded";
+import AccessTimeRounded from "./icons/AccessTimeRounded";
+import CloseRounded from "./icons/CloseRounded";
+import TrendingDownRounded from "./icons/TrendingDownRounded";
+import GavelRounded from "./icons/GavelRounded";
 
 export type Offer = {
   id: string;

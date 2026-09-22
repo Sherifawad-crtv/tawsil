@@ -1,8 +1,8 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import LocationOnRounded from "@mui/icons-material/LocationOnRounded";
-import CloseRounded from "@mui/icons-material/CloseRounded";
-import AddLocationAltRounded from "@mui/icons-material/AddLocationAltRounded";
-import InfoRounded from "@mui/icons-material/InfoRounded";
+import LocationOnRounded from "./icons/LocationOnRounded";
+import CloseRounded from "./icons/CloseRounded";
+import AddLocationAltRounded from "./icons/AddLocationAltRounded";
+import InfoRounded from "./icons/InfoRounded";
 
 /* ══════════════════════════════════════════
    TYPES

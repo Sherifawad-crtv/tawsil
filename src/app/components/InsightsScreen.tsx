@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import ShowChartRounded from "@mui/icons-material/ShowChartRounded";
-import CheckRounded from "@mui/icons-material/CheckRounded";
-import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
-import CloseRounded from "@mui/icons-material/CloseRounded";
-import RouteRounded from "@mui/icons-material/RouteRounded";
-import PaymentsRounded from "@mui/icons-material/PaymentsRounded";
+import ShowChartRounded from "./icons/ShowChartRounded";
+import CheckRounded from "./icons/CheckRounded";
+import AccessTimeRounded from "./icons/AccessTimeRounded";
+import CloseRounded from "./icons/CloseRounded";
+import RouteRounded from "./icons/RouteRounded";
+import PaymentsRounded from "./icons/PaymentsRounded";
 
 /* ── Stats Data ── */
 const STATS = {

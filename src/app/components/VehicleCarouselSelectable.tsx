@@ -2,7 +2,7 @@ import imgPickup from "figma:asset/98be2a271b1c4c84914eeda4a3e9f2e5409c61e7.png"
 import imgTrailer from "figma:asset/8b02eb9ed88c311922718ae698eb2ffa6c3174e0.png";
 import imgVan from "figma:asset/d08db6dfa4e9aec1f5c875df64625f61b61888c5.png";
 import imgJumbo from "figma:asset/23b0286dd8ed8ae37715cce9fd2f871bbec923ab.png";
-import CheckRounded from "@mui/icons-material/CheckRounded";
+import CheckRounded from "./icons/CheckRounded";
 
 const VEHICLES = [
   { id: "pickup", name: "Pickup", image: imgJumbo },

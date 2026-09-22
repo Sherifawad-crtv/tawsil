@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import CheckRounded from "./icons/CheckRounded";
 import ChevronLeftRounded from "./icons/ChevronLeftRounded";
 import CloseRounded from "./icons/CloseRounded";
@@ -103,7 +104,12 @@ export default function DispatchSheet({ order, onClose }: { order: Order; onClos
     onClose();
   }
 
-  return (
+  // Portaled straight to <body> - nested inside TripCard's own active:scale
+  // press-state, this sheet's `position: fixed` would re-anchor to that
+  // scaled ancestor (any transformed ancestor becomes the containing block
+  // for a fixed descendant) instead of the viewport, making it visibly
+  // drift/scale on every tap inside it.
+  return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-end justify-center"
       style={{ backgroundColor: "rgba(4,0,51,0.5)", backdropFilter: "blur(8px)" }}
@@ -195,6 +201,7 @@ export default function DispatchSheet({ order, onClose }: { order: Order; onClos
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import InventoryRounded from "../../components/icons/InventoryRounded";
-import HistoryOrderCard from "../../components/HistoryOrderCard";
+import TripCard from "../../components/TripCard";
 import EmptyState from "../../components/EmptyState";
 import { useDataStore } from "../../lib/store";
 import { getHistoryOrders } from "../../lib/selectors";
@@ -20,7 +20,8 @@ export default function HistoryList() {
         History Orders
       </h1>
 
-      <div className="flex items-center gap-6 mb-4" style={{ borderBottom: "1px solid #E8E8E5" }}>
+      {/* Pill-segmented tabs with count badges - same grammar as the client app's Activity tabs. */}
+      <div className="flex rounded-2xl p-1 mb-6" style={{ backgroundColor: "#E8E8E5" }}>
         {(["Completed", "Cancelled"] as const).map((t) => {
           const active = tab === t;
           const count = t === "Completed" ? completed.length : cancelled.length;
@@ -28,22 +29,35 @@ export default function HistoryList() {
             <button
               key={t}
               onClick={() => setTab(t)}
-              className="pb-2.5 cursor-pointer relative"
+              className="flex-1 py-2.5 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all"
               style={{
-                fontFamily: "'Archivo', sans-serif",
-                fontWeight: active ? 700 : 500,
-                fontSize: "14.5px",
-                color: active ? "#040033" : "#9CA3AF",
+                backgroundColor: active ? "white" : "transparent",
+                boxShadow: active ? "0 2px 8px rgba(0,0,0,0.06)" : "none",
+                border: "none",
               }}
             >
-              {t} ({count})
-              {active && <div className="absolute left-0 right-0 bottom-0 h-[2.5px] rounded-full" style={{ backgroundColor: "#1253FA" }} />}
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: active ? 700 : 500, fontSize: "13px", color: active ? "#040033" : "#6B7280", transition: "color 0.3s" }}>
+                {t}
+              </span>
+              <span
+                className="w-5 h-5 rounded-md flex items-center justify-center"
+                style={{
+                  fontFamily: "'Archivo', sans-serif",
+                  fontWeight: 700,
+                  fontSize: "10px",
+                  color: active ? "#1253FA" : "#9CA3AF",
+                  backgroundColor: active ? "rgba(18,83,250,0.08)" : "rgba(107,114,128,0.06)",
+                  transition: "all 0.3s",
+                }}
+              >
+                {count}
+              </span>
             </button>
           );
         })}
       </div>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-4">
         {shown.length === 0 ? (
           <EmptyState
             icon={<InventoryRounded sx={{ fontSize: 24, color: "#9CA3AF" }} />}
@@ -51,7 +65,7 @@ export default function HistoryList() {
             subtitle="Orders will show up here once they're finished."
           />
         ) : (
-          shown.map((o) => <HistoryOrderCard key={o.id} order={o} />)
+          shown.map((o) => <TripCard key={o.id} order={o} />)
         )}
       </div>
     </div>

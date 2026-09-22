@@ -2,18 +2,13 @@ import { useNavigate, useParams } from "react-router";
 import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
 import PinDropRounded from "@mui/icons-material/PinDropRounded";
 import TaskAltRounded from "@mui/icons-material/TaskAltRounded";
-import RouteRounded from "@mui/icons-material/RouteRounded";
-import LocalShippingOutlined from "@mui/icons-material/LocalShippingOutlined";
-import ThermostatRounded from "@mui/icons-material/ThermostatRounded";
-import ScaleRounded from "@mui/icons-material/ScaleRounded";
-import StraightenRounded from "@mui/icons-material/StraightenRounded";
 import PhotoCameraRounded from "@mui/icons-material/PhotoCameraRounded";
+import HourglassEmptyRounded from "@mui/icons-material/HourglassEmptyRounded";
 import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
 import AddAPhotoRounded from "@mui/icons-material/AddAPhotoRounded";
-import DirectionsCarRounded from "@mui/icons-material/DirectionsCarRounded";
 import ScreenHeader from "../../components/ScreenHeader";
 import MapSnippet from "../../components/MapSnippet";
-import StatusBadge, { STATUS_STYLE } from "../../components/StatusBadge";
+import { STATUS_STYLE } from "../../components/StatusBadge";
 import StatusStepper from "../../components/StatusStepper";
 import CollapsibleSection from "../../components/CollapsibleSection";
 import { InfoRow, PersonCard } from "../../components/InfoRow";
@@ -50,7 +45,7 @@ export default function OrderDetails() {
         </div>
 
         <div className="w-full max-w-lg mx-auto px-4 pb-10 flex flex-col gap-4">
-          {/* 1. Status hero - no reorder action here, that's a Contractor concern, not a driver one. */}
+          {/* 1. Status - no reorder action or price here, those are Contractor concerns, not a driver one. */}
           <div className="rounded-[20px] p-4 flex items-center gap-2.5" style={{ backgroundColor: hero.bg }}>
             <hero.icon sx={{ fontSize: 20, color: hero.fg, flexShrink: 0 }} />
             <div className="min-w-0">
@@ -59,53 +54,28 @@ export default function OrderDetails() {
             </div>
           </div>
 
-          {/* 2. Status stepper */}
-          <div className="rounded-[20px] bg-white p-4" style={{ border: "1px solid #E8E8E5" }}>
+          {/* 2. Status stepper - secondary to the hero above, compact progress reference. */}
+          <div className="rounded-[20px] bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
             <StatusStepper status={order.status} />
           </div>
 
-          {/* 3. Order Information */}
-          <Section title="Order Information">
+          {/* 3. Client - who the driver is actually en route to meet, promoted right under status (Contractor's screen promotes Driver & Vehicle here for the same reason: the most operationally relevant "who"). */}
+          <div className="rounded-[20px] bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
+            <PersonCard title="Client" name={order.clientName} subtitle={order.clientPhone} avatarColor="#16803C" />
+          </div>
+
+          {/* 4. Trip - schedule anchor first, then the route as a single scannable list (no separate map-duplicating section). */}
+          <Section title="Trip">
             <InfoRow icon={<AccessTimeRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Pickup Time" value={formatDateTime(order.pickupAt)} />
-            <InfoRow icon={<PinDropRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Waypoints" value={`${order.waypoints.length} stop${order.waypoints.length === 1 ? "" : "s"}`} />
             <InfoRow icon={<TaskAltRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="POD Required" value={order.podRequired ? "Yes" : "No"} />
-          </Section>
-
-          {/* 4. People Involved - Client + the driver's own Contractor (reference, not a self-card). */}
-          <Section title="People Involved">
-            <div className="flex flex-col gap-2.5">
-              <PersonCard title="Client" name={order.clientName} subtitle={order.clientPhone} avatarColor="#16803C" />
-              <PersonCard title="Contractor" name={profile.contractorName} avatarColor="#040033" />
-            </div>
-          </Section>
-
-          {/* 5. Trip Details - no price: the spec never shows a driver a trip's commercial value. */}
-          <CollapsibleSection icon={<RouteRounded sx={{ fontSize: 16, color: "#1253FA" }} />} title="Trip Details">
-            <InfoRow icon={<RouteRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Trip Type" value={order.tripType} />
-            <InfoRow icon={<LocalShippingOutlined sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Truck Type" value={truckTypeLabel(order)} />
-            <InfoRow icon={<DirectionsCarRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Truck Plate" value={order.truckPlate} />
-            {order.truckTempC !== undefined && (
-              <InfoRow icon={<ThermostatRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Truck Temperature" value={`${order.truckTempC}°C`} />
-            )}
-            {order.weightKg !== undefined && <InfoRow icon={<ScaleRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Weight" value={`${order.weightKg} kg`} />}
-            {order.hours !== undefined && <InfoRow icon={<AccessTimeRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Hours" value={`${order.hours}h`} />}
-            {order.km !== undefined && <InfoRow icon={<StraightenRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Distance" value={`${order.km} km`} />}
-          </CollapsibleSection>
-
-          {/* 6. Trip files & images - actionable here: submitting these is the Driver app's job (Contractor's Order Details is read-only for exactly this reason). */}
-          <CollapsibleSection icon={<PhotoCameraRounded sx={{ fontSize: 16, color: "#1253FA" }} />} title="Trip Files & Images">
-            <FileRow label="Truck's odometer before start" available={!!order.files.odometerBeforeUrl} onCapture={() => captureFile(order.id, "odometerBeforeUrl")} />
-            <FileRow label="Truck's odometer at end" available={!!order.files.odometerAfterUrl} onCapture={() => captureFile(order.id, "odometerAfterUrl")} />
-            <FileRow label="Additional images" available={order.files.additionalImages.length > 0} onCapture={() => captureFile(order.id, "additionalImage")} />
-          </CollapsibleSection>
-
-          {/* 7. Route Waypoints */}
-          {order.waypoints.length > 0 && (
-            <Section title="Route Waypoints">
-              <div className="flex flex-col gap-2.5">
+            {order.waypoints.length > 0 && (
+              <div className="flex flex-col gap-2.5 mt-3 pt-3" style={{ borderTop: "1px solid #F0F0EE" }}>
                 {order.waypoints.map((wp, i) => (
                   <div key={wp.id} className="flex items-start gap-2.5">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: i === 0 ? "#EAF0FE" : "#FDECEC" }}>
+                    <div
+                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ backgroundColor: i === 0 ? "#EAF0FE" : "#FDECEC" }}
+                    >
                       <PinDropRounded sx={{ fontSize: 13, color: i === 0 ? "#1253FA" : "#DC2626" }} />
                     </div>
                     <div className="min-w-0">
@@ -115,11 +85,34 @@ export default function OrderDetails() {
                   </div>
                 ))}
               </div>
-            </Section>
-          )}
+            )}
+          </Section>
 
-          {/* 8. Timeline */}
-          <Section title="Timeline">
+          {/* 5. Load Details - plain label/value rows, same receipt language as Contractor's Fare Breakdown minus the price (a driver's spec never shows a trip's commercial value). */}
+          <Section title="Load Details">
+            <InfoRow label="Trip Type" value={order.tripType} />
+            <InfoRow label="Truck Type" value={truckTypeLabel(order)} />
+            <InfoRow label="Truck Plate" value={order.truckPlate} />
+            {order.truckTempC !== undefined && <InfoRow label="Truck Temperature" value={`${order.truckTempC}°C`} />}
+            {order.weightKg !== undefined && <InfoRow label="Weight" value={`${order.weightKg} kg`} />}
+            {order.hours !== undefined && <InfoRow label="Duration" value={`${order.hours}h`} />}
+            {order.km !== undefined && <InfoRow label="Distance" value={`${order.km} km`} />}
+          </Section>
+
+          {/* 6. Contractor - secondary reference, tucked below Load Details. */}
+          <Section title="Contractor">
+            <PersonCard title="Contractor" name={profile.contractorName} avatarColor="#040033" />
+          </Section>
+
+          {/* 7. Trip files & images - actionable here: submitting these is the Driver app's job (Contractor's Order Details is read-only for exactly this reason). */}
+          <CollapsibleSection icon={<PhotoCameraRounded sx={{ fontSize: 16, color: "#1253FA" }} />} title="Trip Files & Images">
+            <FileRow label="Truck's odometer before start" available={!!order.files.odometerBeforeUrl} onCapture={() => captureFile(order.id, "odometerBeforeUrl")} />
+            <FileRow label="Truck's odometer at end" available={!!order.files.odometerAfterUrl} onCapture={() => captureFile(order.id, "odometerAfterUrl")} />
+            <FileRow label="Additional images" available={order.files.additionalImages.length > 0} onCapture={() => captureFile(order.id, "additionalImage")} />
+          </CollapsibleSection>
+
+          {/* 8. Timeline - collapsed by default, same as Files: a log you check, not something to scan by default. */}
+          <CollapsibleSection icon={<HourglassEmptyRounded sx={{ fontSize: 16, color: "#1253FA" }} />} title="Timeline">
             <div className="flex flex-col">
               {order.statusHistory.map((h, i) => (
                 <div key={h.id} className="flex gap-3">
@@ -135,7 +128,7 @@ export default function OrderDetails() {
                 </div>
               ))}
             </div>
-          </Section>
+          </CollapsibleSection>
         </div>
       </div>
     </div>
@@ -144,7 +137,7 @@ export default function OrderDetails() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-[20px] bg-white p-4" style={{ border: "1px solid #E8E8E5" }}>
+    <div className="rounded-[20px] bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
       <h3 className="mb-1" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "14px", color: "#040033" }}>{title}</h3>
       {children}
     </div>

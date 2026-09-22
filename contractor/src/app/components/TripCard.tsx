@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import CalendarTodayRounded from "./icons/CalendarTodayRounded";
 import AccessTimeRounded from "./icons/AccessTimeRounded";
 import WarningRounded from "./icons/WarningRounded";
+import ChevronRightRounded from "./icons/ChevronRightRounded";
 import StatusBadge from "./StatusBadge";
+import DispatchSheet from "./DispatchSheet";
 import { useDataStore } from "../lib/store";
 import { byId } from "../lib/selectors";
 import { formatEGP, formatDate, formatTime } from "../lib/format";
@@ -16,14 +19,18 @@ export default function TripCard({ order }: { order: Order }) {
   const driver = byId(drivers, order.driverId);
   const truck = byId(trucks, order.truckId);
   const unassigned = order.status === "Accepted" && !order.driverId;
+  const [dispatchOpen, setDispatchOpen] = useState(false);
 
   const pickup = order.waypoints[0];
   const dropoff = order.waypoints[order.waypoints.length - 1];
   const extraStops = order.waypoints.length - 2;
 
   return (
-    <button
+    <div
+      role="button"
+      tabIndex={0}
       onClick={() => navigate(`/orders/${order.id}`)}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") navigate(`/orders/${order.id}`); }}
       className="w-full text-left rounded-[20px] overflow-hidden bg-white cursor-pointer active:scale-[0.99] transition-transform"
       style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}
     >
@@ -44,11 +51,20 @@ export default function TripCard({ order }: { order: Order }) {
       </div>
 
       {unassigned && (
-        <div className="mx-5 mb-3 flex items-center gap-1.5 rounded-xl px-3 py-2" style={{ backgroundColor: "#FCF2DE" }}>
-          <WarningRounded sx={{ fontSize: 15, color: "#B45309" }} />
-          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "12px", color: "#B45309" }}>
-            No Driver Assigned
-          </span>
+        <div className="mx-5 mb-3">
+          <button
+            onClick={(e) => { e.stopPropagation(); setDispatchOpen(true); }}
+            className="w-full flex items-center justify-between gap-1.5 rounded-xl px-3 py-2.5 cursor-pointer active:scale-[0.98] transition-transform"
+            style={{ backgroundColor: "#FCF2DE", border: "none" }}
+          >
+            <span className="flex items-center gap-1.5">
+              <WarningRounded sx={{ fontSize: 15, color: "#B45309" }} />
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "12.5px", color: "#B45309" }}>
+                Dispatch Now
+              </span>
+            </span>
+            <ChevronRightRounded sx={{ fontSize: 15, color: "#B45309" }} />
+          </button>
         </div>
       )}
 
@@ -117,6 +133,12 @@ export default function TripCard({ order }: { order: Order }) {
           </span>
         </div>
       )}
-    </button>
+
+      {dispatchOpen && (
+        <div onClick={(e) => e.stopPropagation()}>
+          <DispatchSheet order={order} onClose={() => setDispatchOpen(false)} />
+        </div>
+      )}
+    </div>
   );
 }

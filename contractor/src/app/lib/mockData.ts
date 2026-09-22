@@ -22,6 +22,9 @@ export const TRUCKS: Truck[] = [
   { id: "trk-09", plateNumber: "TRL-2002", baseClass: "Trailer", config: "Flatbed", licenseExpiry: "2027-07-22", active: true },
   { id: "trk-10", plateNumber: "OLD-0099", baseClass: "Dababa", config: "Box", licenseExpiry: "2025-01-01", active: false },
   { id: "trk-11", plateNumber: "OLD-0088", baseClass: "Jumbo", config: "Open", licenseExpiry: "2025-06-01", active: false },
+  { id: "trk-12", plateNumber: "QRS-6601", baseClass: "Dababa", config: "Box", licenseExpiry: "2027-10-15", active: true },
+  { id: "trk-13", plateNumber: "QRS-6602", baseClass: "Suzuki Van", config: "Box", licenseExpiry: "2027-05-08", active: true },
+  { id: "trk-14", plateNumber: "QRS-6603", baseClass: "Jumbo", config: "Box", licenseExpiry: "2027-02-28", active: true },
 ];
 
 export const DRIVERS: Driver[] = [
@@ -43,6 +46,33 @@ export const DRIVERS: Driver[] = [
     licenseExpiry: "2026-02-14",
     active: false,
     deactivatedAt: "2026-09-02T14:32:00.000Z",
+  },
+  {
+    id: "drv-03",
+    name: "Youssef Adel",
+    email: "youssef.adel@tawsil.com",
+    phone: "+20 102 345 6789",
+    licenseNumber: "DL-51309",
+    licenseExpiry: "2027-04-22",
+    active: true,
+  },
+  {
+    id: "drv-04",
+    name: "Karim Hassan",
+    email: "karim.hassan@tawsil.com",
+    phone: "+20 111 234 5678",
+    licenseNumber: "DL-62841",
+    licenseExpiry: "2027-01-10",
+    active: true,
+  },
+  {
+    id: "drv-05",
+    name: "Sameh Fathy",
+    email: "sameh.fathy@tawsil.com",
+    phone: "+20 122 876 5432",
+    licenseNumber: "DL-73956",
+    licenseExpiry: "2026-11-05",
+    active: true,
   },
 ];
 

@@ -25,3 +25,14 @@ export function activeTrucks(trucks: Truck[]) {
 export function activeDrivers(drivers: Driver[]) {
   return drivers.filter((d) => d.active);
 }
+
+/** Trucks/drivers already on another order that hasn't finished yet - excluded from dispatch. */
+export function dispatchableTrucks(trucks: Truck[], orders: Order[]) {
+  const busy = new Set(getActiveOrders(orders).map((o) => o.truckId).filter(Boolean));
+  return activeTrucks(trucks).filter((t) => !busy.has(t.id));
+}
+
+export function dispatchableDrivers(drivers: Driver[], orders: Order[]) {
+  const busy = new Set(getActiveOrders(orders).map((o) => o.driverId).filter(Boolean));
+  return activeDrivers(drivers).filter((d) => !busy.has(d.id));
+}

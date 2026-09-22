@@ -15,6 +15,8 @@ interface DataStoreValue {
   addDriver: (d: Driver) => void;
   updateDriver: (id: string, patch: Partial<Driver>) => void;
   toggleDriverActive: (id: string) => void;
+  /** Dispatch: puts a truck and driver on an Accepted order, moving it to Assigned. */
+  assignOrder: (orderId: string, truckId: string, driverId: string) => void;
 }
 
 const DataStoreContext = createContext<DataStoreValue | null>(null);
@@ -22,7 +24,7 @@ const DataStoreContext = createContext<DataStoreValue | null>(null);
 export function DataStoreProvider({ children }: { children: ReactNode }) {
   const [trucks, setTrucks] = useState<Truck[]>(TRUCKS);
   const [drivers, setDrivers] = useState<Driver[]>(DRIVERS);
-  const [orders] = useState<Order[]>(ALL_ORDERS);
+  const [orders, setOrders] = useState<Order[]>(ALL_ORDERS);
   const [language, setLanguage] = useState<Language>("en");
 
   const value = useMemo<DataStoreValue>(
@@ -42,6 +44,23 @@ export function DataStoreProvider({ children }: { children: ReactNode }) {
         setDrivers((cur) =>
           cur.map((d) =>
             d.id === id ? { ...d, active: !d.active, deactivatedAt: d.active ? new Date().toISOString() : undefined } : d
+          )
+        ),
+      assignOrder: (orderId, truckId, driverId) =>
+        setOrders((cur) =>
+          cur.map((o) =>
+            o.id === orderId
+              ? {
+                  ...o,
+                  truckId,
+                  driverId,
+                  status: "Assigned",
+                  statusHistory: [
+                    ...o.statusHistory,
+                    { id: `h-${o.statusHistory.length}`, timestamp: new Date().toISOString(), fromStatus: o.status, toStatus: "Assigned" },
+                  ],
+                }
+              : o
           )
         ),
     }),

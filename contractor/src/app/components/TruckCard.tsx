@@ -15,8 +15,8 @@ export default function TruckCard({ truck }: { truck: Truck }) {
       onClick={() => navigate(`/trucks/${truck.id}`)}
       className="w-full text-left rounded-[20px] bg-white p-4 flex flex-col gap-2.5 cursor-pointer active:scale-[0.99] transition-transform"
       style={{
-        border: expired ? "1.5px solid #DC2626" : "1px solid #E8E8E5",
-        boxShadow: "0 1px 3px rgba(4,0,51,0.06)",
+        border: expired ? "1.5px solid #DC2626" : "1.5px solid transparent",
+        boxShadow: expired ? "none" : "0 2px 14px rgba(0,0,0,0.04)",
       }}
     >
       <div className="flex items-center gap-3">

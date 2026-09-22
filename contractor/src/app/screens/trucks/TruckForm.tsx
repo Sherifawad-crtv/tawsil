@@ -64,7 +64,7 @@ export default function TruckForm({ mode }: { mode: "create" | "edit" }) {
             <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>{existing.plateNumber}</p>
           </div>
         ) : (
-          <div className="rounded-[22px] p-5 flex flex-col items-center text-center gap-2" style={{ backgroundColor: "white", border: "1px solid #E8E8E5" }}>
+          <div className="rounded-[22px] p-5 flex flex-col items-center text-center gap-2" style={{ backgroundColor: "white", boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
             <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
               <AddCircleRounded sx={{ fontSize: 26, color: "#1253FA" }} />
             </div>

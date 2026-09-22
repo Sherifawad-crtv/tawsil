@@ -16,7 +16,7 @@ export default function AccountRow({
     <button
       onClick={onClick}
       className="w-full flex items-center gap-3 rounded-[18px] bg-white px-4 py-3.5 cursor-pointer active:scale-[0.99] transition-transform"
-      style={{ border: "1px solid #E8E8E5" }}
+      style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}
     >
       <div
         className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"

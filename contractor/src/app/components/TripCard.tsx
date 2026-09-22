@@ -25,7 +25,7 @@ export default function TripCard({ order }: { order: Order }) {
     <button
       onClick={() => navigate(`/orders/${order.id}`)}
       className="w-full text-left rounded-[20px] overflow-hidden bg-white cursor-pointer active:scale-[0.99] transition-transform"
-      style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)", border: "1px solid #E8E8E5" }}
+      style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}
     >
       {/* Header */}
       <div className="flex items-center justify-between gap-2 px-5 pt-4 pb-3">

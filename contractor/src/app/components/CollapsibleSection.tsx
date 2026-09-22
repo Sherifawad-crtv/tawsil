@@ -15,7 +15,7 @@ export default function CollapsibleSection({
 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="rounded-[20px] bg-white overflow-hidden" style={{ border: "1px solid #E8E8E5" }}>
+    <div className="rounded-[20px] bg-white overflow-hidden" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
       <button
         onClick={() => setOpen((o) => !o)}
         className="w-full flex items-center gap-2.5 p-4 cursor-pointer"

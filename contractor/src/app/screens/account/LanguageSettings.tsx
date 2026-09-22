@@ -42,7 +42,10 @@ export default function LanguageSettings() {
                 key={opt.value}
                 onClick={() => setSelected(opt.value)}
                 className="w-full flex items-center gap-3 rounded-[20px] bg-white p-4 cursor-pointer active:scale-[0.99] transition-transform"
-                style={{ border: active ? "2px solid #1253FA" : "1px solid #E8E8E5" }}
+                style={{
+                  border: active ? "2px solid #1253FA" : "2px solid transparent",
+                  boxShadow: active ? "0 2px 14px rgba(18,83,250,0.12)" : "0 2px 14px rgba(0,0,0,0.04)",
+                }}
               >
                 <span style={{ fontSize: "26px" }}>{opt.flag}</span>
                 <div className="flex-1 text-left" dir={opt.dir}>

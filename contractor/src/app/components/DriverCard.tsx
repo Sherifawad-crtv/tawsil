@@ -17,7 +17,7 @@ export default function DriverCard({ driver }: { driver: Driver }) {
     <button
       onClick={() => navigate(`/drivers/${driver.id}`)}
       className="w-full text-left rounded-[20px] bg-white p-4 flex flex-col gap-2.5 cursor-pointer active:scale-[0.99] transition-transform"
-      style={{ border: "1px solid #E8E8E5", boxShadow: "0 1px 3px rgba(4,0,51,0.06)" }}
+      style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}
     >
       <div className="flex items-center gap-3">
         <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: color }}>

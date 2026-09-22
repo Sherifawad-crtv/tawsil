@@ -77,7 +77,7 @@ export default function OrderDetails() {
           </div>
 
           {/* 2. Status stepper */}
-          <div className="rounded-[20px] bg-white p-4" style={{ border: "1px solid #E8E8E5" }}>
+          <div className="rounded-[20px] bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
             <StatusStepper status={order.status} />
           </div>
 
@@ -189,7 +189,7 @@ export default function OrderDetails() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-[20px] bg-white p-4" style={{ border: "1px solid #E8E8E5" }}>
+    <div className="rounded-[20px] bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
       <h3 className="mb-1" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "14px", color: "#040033" }}>{title}</h3>
       {children}
     </div>

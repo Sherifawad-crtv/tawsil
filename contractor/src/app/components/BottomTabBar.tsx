@@ -1,16 +1,23 @@
 import { useLocation, useNavigate } from "react-router";
 import HomeRounded from "./icons/HomeRounded";
+import HomeRoundedBold from "./icons/HomeRoundedBold";
 import LocalShippingRounded from "./icons/LocalShippingRounded";
+import LocalShippingRoundedBold from "./icons/LocalShippingRoundedBold";
 import GroupsRounded from "./icons/GroupsRounded";
+import GroupsRoundedBold from "./icons/GroupsRoundedBold";
 import AccessTimeRounded from "./icons/AccessTimeRounded";
+import AccessTimeRoundedBold from "./icons/AccessTimeRoundedBold";
 
 type IconComponent = typeof HomeRounded;
 
-const TABS: { to: string; label: string; icon: IconComponent }[] = [
-  { to: "/home", label: "Home", icon: HomeRounded },
-  { to: "/trucks", label: "Trucks", icon: LocalShippingRounded },
-  { to: "/drivers", label: "Drivers", icon: GroupsRounded },
-  { to: "/history", label: "History", icon: AccessTimeRounded },
+// Selected tabs render the bold/filled variant of the same icon, unselected
+// ones the linear/stroke variant - matching Apple HIG's tab-bar convention
+// (SF Symbols: line for unselected, filled for the active tab).
+const TABS: { to: string; label: string; icon: IconComponent; iconActive: IconComponent }[] = [
+  { to: "/home", label: "Home", icon: HomeRounded, iconActive: HomeRoundedBold },
+  { to: "/trucks", label: "Trucks", icon: LocalShippingRounded, iconActive: LocalShippingRoundedBold },
+  { to: "/drivers", label: "Drivers", icon: GroupsRounded, iconActive: GroupsRoundedBold },
+  { to: "/history", label: "History", icon: AccessTimeRounded, iconActive: AccessTimeRoundedBold },
 ];
 
 // Fixed slot geometry - every inactive tab is the same square size and
@@ -73,7 +80,7 @@ export default function BottomTabBar() {
 
       {TABS.map((tab) => {
         const active = pathname.startsWith(tab.to);
-        const Icon = tab.icon;
+        const Icon = active ? tab.iconActive : tab.icon;
         return (
           <button
             key={tab.to}

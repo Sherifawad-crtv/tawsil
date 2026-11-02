@@ -1,7 +1,11 @@
 import HomeRounded from "./icons/HomeRounded";
+import HomeRoundedBold from "./icons/HomeRoundedBold";
 import CalendarMonthRounded from "./icons/CalendarMonthRounded";
+import CalendarMonthRoundedBold from "./icons/CalendarMonthRoundedBold";
 import BarChartRounded from "./icons/BarChartRounded";
+import BarChartRoundedBold from "./icons/BarChartRoundedBold";
 import PersonRounded from "./icons/PersonRounded";
+import PersonRoundedBold from "./icons/PersonRoundedBold";
 
 export type NavScreen = "home" | "activity" | "profile" | "insights";
 
@@ -12,11 +16,14 @@ interface BottomNavProps {
 
 type IconComponent = typeof HomeRounded;
 
-const NAV_ITEMS: { id: NavScreen; label: string; icon: IconComponent }[] = [
-  { id: "home", label: "Home", icon: HomeRounded },
-  { id: "activity", label: "Activity", icon: CalendarMonthRounded },
-  { id: "insights", label: "Insights", icon: BarChartRounded },
-  { id: "profile", label: "Profile", icon: PersonRounded },
+// Selected tabs render the bold/filled variant of the same icon, unselected
+// ones the linear/stroke variant - matching Apple HIG's tab-bar convention
+// (SF Symbols: line for unselected, filled for the active tab).
+const NAV_ITEMS: { id: NavScreen; label: string; icon: IconComponent; iconActive: IconComponent }[] = [
+  { id: "home", label: "Home", icon: HomeRounded, iconActive: HomeRoundedBold },
+  { id: "activity", label: "Activity", icon: CalendarMonthRounded, iconActive: CalendarMonthRoundedBold },
+  { id: "insights", label: "Insights", icon: BarChartRounded, iconActive: BarChartRoundedBold },
+  { id: "profile", label: "Profile", icon: PersonRounded, iconActive: PersonRoundedBold },
 ];
 
 // Fixed slot geometry - every inactive tab is the same square size and
@@ -78,7 +85,7 @@ export default function BottomNav({ activeScreen, onNavigate }: BottomNavProps) 
 
       {NAV_ITEMS.map((item) => {
         const active = activeScreen === item.id;
-        const Icon = item.icon;
+        const Icon = active ? item.iconActive : item.icon;
         return (
           <button
             key={item.id}

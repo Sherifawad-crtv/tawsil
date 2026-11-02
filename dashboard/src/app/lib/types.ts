@@ -40,6 +40,8 @@ export interface Client {
   registrationNumber: string;
   active: boolean;
   createdAt: string;
+  /** The Sales rep (a TeamMember id) who owns this account - feeds the Sales Command Center's "my accounts" scoping. */
+  salesRepId?: string;
 }
 
 export interface SavedLocation {
@@ -195,6 +197,8 @@ export interface TeamMember {
   role: Role;
   status: "Active" | "Invited";
   invitedAt: string;
+  /** This period's revenue goal, Sales reps only - feeds the Sales Command Center's target card. */
+  monthlyTargetEGP?: number;
 }
 
 export interface NotificationPrefs {

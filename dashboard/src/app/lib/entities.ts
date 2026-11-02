@@ -1,19 +1,21 @@
 import type { Client, Contractor, Driver, Vehicle, SavedLocation, CurrentUser, TeamMember } from "./types";
 import { TRUCK_TYPES } from "./constants";
 
+// Accounts alternate between the two Sales reps (team-02/team-06) so each has
+// a non-trivial "my open accounts" book for the Sales Command Center view.
 export const CLIENTS: Client[] = [
-  { id: "cli-01", name: "Juhayna Food Industries", email: "logistics@juhayna.com", phone: "+20 100 111 2201", taxNumber: "TX-118820", registrationNumber: "RC-40021", active: true, createdAt: "2024-02-11" },
-  { id: "cli-02", name: "Carrefour Egypt", email: "supplychain@carrefouregypt.com", phone: "+20 100 111 2202", taxNumber: "TX-118821", registrationNumber: "RC-40022", active: true, createdAt: "2023-11-03" },
-  { id: "cli-03", name: "Edita Food Industries", email: "distribution@edita.com.eg", phone: "+20 100 111 2203", taxNumber: "TX-118822", registrationNumber: "RC-40023", active: true, createdAt: "2024-04-22" },
-  { id: "cli-04", name: "Al Ahram Beverages", email: "ops@ahrambev.com", phone: "+20 100 111 2204", taxNumber: "TX-118823", registrationNumber: "RC-40024", active: true, createdAt: "2023-08-15" },
-  { id: "cli-05", name: "Nestlé Egypt", email: "logistics.eg@nestle.com", phone: "+20 100 111 2205", taxNumber: "TX-118824", registrationNumber: "RC-40025", active: true, createdAt: "2023-05-02" },
-  { id: "cli-06", name: "Domty Dairy", email: "supply@domty.com", phone: "+20 100 111 2206", taxNumber: "TX-118825", registrationNumber: "RC-40026", active: true, createdAt: "2024-06-19" },
-  { id: "cli-07", name: "Hero Egypt", email: "logistics@heroegypt.com", phone: "+20 100 111 2207", taxNumber: "TX-118826", registrationNumber: "RC-40027", active: true, createdAt: "2024-01-09" },
-  { id: "cli-08", name: "Americana Group", email: "distribution@americana.com.eg", phone: "+20 100 111 2208", taxNumber: "TX-118827", registrationNumber: "RC-40028", active: true, createdAt: "2023-09-27" },
-  { id: "cli-09", name: "Spinneys Egypt", email: "supplychain@spinneys.com.eg", phone: "+20 100 111 2209", taxNumber: "TX-118828", registrationNumber: "RC-40029", active: true, createdAt: "2024-03-14" },
-  { id: "cli-10", name: "B.Tech Electronics", email: "logistics@btech.com", phone: "+20 100 111 2210", taxNumber: "TX-118829", registrationNumber: "RC-40030", active: true, createdAt: "2024-07-01" },
-  { id: "cli-11", name: "Obour Land for Food Industries", email: "ops@obourland.com", phone: "+20 100 111 2211", taxNumber: "TX-118830", registrationNumber: "RC-40031", active: false, createdAt: "2023-02-18" },
-  { id: "cli-12", name: "Cairo Poultry Company", email: "distribution@cairopoultry.com", phone: "+20 100 111 2212", taxNumber: "TX-118831", registrationNumber: "RC-40032", active: true, createdAt: "2024-08-05" },
+  { id: "cli-01", name: "Juhayna Food Industries", email: "logistics@juhayna.com", phone: "+20 100 111 2201", taxNumber: "TX-118820", registrationNumber: "RC-40021", active: true, createdAt: "2024-02-11", salesRepId: "team-02" },
+  { id: "cli-02", name: "Carrefour Egypt", email: "supplychain@carrefouregypt.com", phone: "+20 100 111 2202", taxNumber: "TX-118821", registrationNumber: "RC-40022", active: true, createdAt: "2023-11-03", salesRepId: "team-06" },
+  { id: "cli-03", name: "Edita Food Industries", email: "distribution@edita.com.eg", phone: "+20 100 111 2203", taxNumber: "TX-118822", registrationNumber: "RC-40023", active: true, createdAt: "2024-04-22", salesRepId: "team-02" },
+  { id: "cli-04", name: "Al Ahram Beverages", email: "ops@ahrambev.com", phone: "+20 100 111 2204", taxNumber: "TX-118823", registrationNumber: "RC-40024", active: true, createdAt: "2023-08-15", salesRepId: "team-06" },
+  { id: "cli-05", name: "Nestlé Egypt", email: "logistics.eg@nestle.com", phone: "+20 100 111 2205", taxNumber: "TX-118824", registrationNumber: "RC-40025", active: true, createdAt: "2023-05-02", salesRepId: "team-02" },
+  { id: "cli-06", name: "Domty Dairy", email: "supply@domty.com", phone: "+20 100 111 2206", taxNumber: "TX-118825", registrationNumber: "RC-40026", active: true, createdAt: "2024-06-19", salesRepId: "team-06" },
+  { id: "cli-07", name: "Hero Egypt", email: "logistics@heroegypt.com", phone: "+20 100 111 2207", taxNumber: "TX-118826", registrationNumber: "RC-40027", active: true, createdAt: "2024-01-09", salesRepId: "team-02" },
+  { id: "cli-08", name: "Americana Group", email: "distribution@americana.com.eg", phone: "+20 100 111 2208", taxNumber: "TX-118827", registrationNumber: "RC-40028", active: true, createdAt: "2023-09-27", salesRepId: "team-06" },
+  { id: "cli-09", name: "Spinneys Egypt", email: "supplychain@spinneys.com.eg", phone: "+20 100 111 2209", taxNumber: "TX-118828", registrationNumber: "RC-40029", active: true, createdAt: "2024-03-14", salesRepId: "team-02" },
+  { id: "cli-10", name: "B.Tech Electronics", email: "logistics@btech.com", phone: "+20 100 111 2210", taxNumber: "TX-118829", registrationNumber: "RC-40030", active: true, createdAt: "2024-07-01", salesRepId: "team-06" },
+  { id: "cli-11", name: "Obour Land for Food Industries", email: "ops@obourland.com", phone: "+20 100 111 2211", taxNumber: "TX-118830", registrationNumber: "RC-40031", active: false, createdAt: "2023-02-18", salesRepId: "team-02" },
+  { id: "cli-12", name: "Cairo Poultry Company", email: "distribution@cairopoultry.com", phone: "+20 100 111 2212", taxNumber: "TX-118831", registrationNumber: "RC-40032", active: true, createdAt: "2024-08-05", salesRepId: "team-06" },
 ];
 
 export const CONTRACTORS: Contractor[] = [
@@ -132,9 +134,9 @@ export const CURRENT_USER: CurrentUser = {
 /** Everyone else with a seat, plus one pending invite - Settings' Team tab. */
 export const TEAM_MEMBERS: TeamMember[] = [
   { id: "team-01", name: "Nour El-Din", email: "nour@tawsil.com", role: "Admin", status: "Active", invitedAt: "2025-01-14" },
-  { id: "team-02", name: "Sherif Awad", email: "sherif@tawsil.com", role: "Sales", status: "Active", invitedAt: "2025-03-02" },
+  { id: "team-02", name: "Sherif Awad", email: "sherif@tawsil.com", role: "Sales", status: "Active", invitedAt: "2025-03-02", monthlyTargetEGP: 500000 },
   { id: "team-03", name: "Mona Sabry", email: "mona@tawsil.com", role: "Supply", status: "Active", invitedAt: "2025-04-19" },
   { id: "team-04", name: "Hany Fawzy", email: "hany@tawsil.com", role: "Operations", status: "Active", invitedAt: "2025-06-08" },
   { id: "team-05", name: "Rania Adel", email: "rania@tawsil.com", role: "Executive", status: "Active", invitedAt: "2025-02-27" },
-  { id: "team-06", name: "Khaled Younis", email: "khaled@tawsil.com", role: "Sales", status: "Invited", invitedAt: "2026-09-10" },
+  { id: "team-06", name: "Khaled Younis", email: "khaled@tawsil.com", role: "Sales", status: "Invited", invitedAt: "2026-09-10", monthlyTargetEGP: 350000 },
 ];

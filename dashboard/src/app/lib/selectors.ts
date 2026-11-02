@@ -1,5 +1,5 @@
 import { TRUCK_TYPES } from "./constants";
-import type { AttentionOrder, Client, Contractor, Driver, HomeMetrics, MonthlyOrder, Order, OrderStatus, Role, Vehicle } from "./types";
+import type { AttentionOrder, Client, Contractor, Driver, HomeMetrics, MonthlyOrder, Order, OrderStatus, Role, TeamMember, Vehicle } from "./types";
 
 export function getTruckType(id: string) {
   return TRUCK_TYPES.find((t) => t.id === id)!;
@@ -159,9 +159,24 @@ export function isReadOnlyRole(role: Role) {
   return role === "Executive";
 }
 
-/** The Command Center is the executive view: leadership and Admin only. */
+/**
+ * The Command Center is visible to every operating role now, each scoped to
+ * its own slice (see CommandCenter.tsx): Sales sees only its own accounts'
+ * revenue and target, Supply sees payables only, Operations sees the coverage
+ * heatmap only. Executive and Admin keep the full, unscoped view.
+ */
 export function canViewCommandCenter(role: Role) {
-  return role === "Executive" || role === "Admin";
+  return role === "Executive" || role === "Admin" || role === "Sales" || role === "Supply" || role === "Operations";
+}
+
+/**
+ * The team member whose book a scoped Command Center view stands in for.
+ * There's no per-user login in this prototype - RoleContext just previews a
+ * role - so "my accounts" picks the first active member with that role,
+ * falling back to any member with it (e.g. an invited-only Sales seat).
+ */
+export function getActiveTeamMemberForRole(teamMembers: TeamMember[], role: Role): TeamMember | undefined {
+  return teamMembers.find((m) => m.role === role && m.status === "Active") ?? teamMembers.find((m) => m.role === role);
 }
 
 /** Order count per day for the trailing `days` window, oldest first - feeds the Home volume chart. */

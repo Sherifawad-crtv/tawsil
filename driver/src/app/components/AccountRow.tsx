@@ -1,4 +1,4 @@
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
+import ChevronRightRounded from "./icons/ChevronRightRounded";
 import type { ReactNode } from "react";
 
 /** Row height comfortably clears a 44pt touch target - one-handed use between trips (Section 5.5). */

@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import ExpandMoreRounded from "@mui/icons-material/ExpandMoreRounded";
+import ExpandMoreRounded from "./icons/ExpandMoreRounded";
 
 export default function CollapsibleSection({
   icon,

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useLocation } from "react-router";
-import InboxRounded from "@mui/icons-material/InboxRounded";
+import InboxRounded from "../../components/icons/InboxRounded";
 import SegmentedControl from "../../components/SegmentedControl";
 import TripCard from "../../components/TripCard";
 import EmptyState from "../../components/EmptyState";

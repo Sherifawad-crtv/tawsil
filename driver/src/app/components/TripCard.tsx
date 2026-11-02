@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
-import CalendarTodayRounded from "@mui/icons-material/CalendarTodayRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
+import CalendarTodayRounded from "./icons/CalendarTodayRounded";
+import ChevronRightRounded from "./icons/ChevronRightRounded";
 import StatusBadge from "./StatusBadge";
 import { formatDate } from "../lib/format";
 import { truckTypeLabel } from "../lib/constants";

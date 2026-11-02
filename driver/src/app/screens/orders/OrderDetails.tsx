@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from "react-router";
-import AccessTimeRounded from "@mui/icons-material/AccessTimeRounded";
-import PinDropRounded from "@mui/icons-material/PinDropRounded";
-import TaskAltRounded from "@mui/icons-material/TaskAltRounded";
-import PhotoCameraRounded from "@mui/icons-material/PhotoCameraRounded";
-import HourglassEmptyRounded from "@mui/icons-material/HourglassEmptyRounded";
-import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
-import AddAPhotoRounded from "@mui/icons-material/AddAPhotoRounded";
+import AccessTimeRounded from "../../components/icons/AccessTimeRounded";
+import PinDropRounded from "../../components/icons/PinDropRounded";
+import TaskAltRounded from "../../components/icons/TaskAltRounded";
+import PhotoCameraRounded from "../../components/icons/PhotoCameraRounded";
+import HourglassEmptyRounded from "../../components/icons/HourglassEmptyRounded";
+import CheckCircleRounded from "../../components/icons/CheckCircleRounded";
+import AddAPhotoRounded from "../../components/icons/AddAPhotoRounded";
 import ScreenHeader from "../../components/ScreenHeader";
 import MapSnippet from "../../components/MapSnippet";
 import { STATUS_STYLE } from "../../components/StatusBadge";

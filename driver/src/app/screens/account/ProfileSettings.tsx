@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
-import PersonRounded from "@mui/icons-material/PersonRounded";
-import BadgeRounded from "@mui/icons-material/BadgeRounded";
-import ApartmentRounded from "@mui/icons-material/ApartmentRounded";
-import VerifiedRounded from "@mui/icons-material/VerifiedRounded";
+import PersonRounded from "../../components/icons/PersonRounded";
+import BadgeRounded from "../../components/icons/BadgeRounded";
+import ApartmentRounded from "../../components/icons/ApartmentRounded";
+import VerifiedRounded from "../../components/icons/VerifiedRounded";
 import ScreenHeader from "../../components/ScreenHeader";
 import SectionHeading from "../../components/SectionHeading";
 import ActionField from "../../components/ActionField";

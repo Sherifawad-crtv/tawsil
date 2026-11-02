@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import TranslateRounded from "@mui/icons-material/TranslateRounded";
+import TranslateRounded from "../../components/icons/TranslateRounded";
 import ScreenHeader from "../../components/ScreenHeader";
 import { Button } from "../../components/Button";
 import { useDataStore } from "../../lib/store";

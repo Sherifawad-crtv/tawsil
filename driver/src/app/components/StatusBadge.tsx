@@ -1,7 +1,7 @@
-import HourglassEmptyRounded from "@mui/icons-material/HourglassEmptyRounded";
-import LocalShippingRounded from "@mui/icons-material/LocalShippingRounded";
-import CheckCircleRounded from "@mui/icons-material/CheckCircleRounded";
-import CloseRounded from "@mui/icons-material/CloseRounded";
+import HourglassEmptyRounded from "./icons/HourglassEmptyRounded";
+import LocalShippingRounded from "./icons/LocalShippingRounded";
+import CheckCircleRounded from "./icons/CheckCircleRounded";
+import CloseRounded from "./icons/CloseRounded";
 import type { OrderStatus } from "../lib/types";
 
 // Same colors as the Contractor app's status vocabulary: Assigned is this

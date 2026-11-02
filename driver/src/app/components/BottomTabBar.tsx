@@ -1,10 +1,10 @@
 import { NavLink } from "react-router";
-import HomeRounded from "@mui/icons-material/HomeRounded";
-import HomeOutlined from "@mui/icons-material/HomeOutlined";
-import BoxRounded from "@mui/icons-material/Inventory2Rounded";
-import BoxOutlined from "@mui/icons-material/Inventory2Outlined";
-import PersonRounded from "@mui/icons-material/PersonRounded";
-import PersonOutlineRounded from "@mui/icons-material/PersonOutlineRounded";
+import HomeRounded from "./icons/HomeRounded";
+import HomeOutlined from "./icons/HomeOutlined";
+import BoxRounded from "./icons/Inventory2Rounded";
+import BoxOutlined from "./icons/Inventory2Outlined";
+import PersonRounded from "./icons/PersonRounded";
+import PersonOutlineRounded from "./icons/PersonOutlineRounded";
 
 // 3 tabs only - Driver has no fleet to manage, so no Trucks/Drivers tabs like Contractor's 4-tab bar.
 const TABS = [

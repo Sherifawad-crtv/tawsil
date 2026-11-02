@@ -1,5 +1,5 @@
-import CheckRounded from "@mui/icons-material/CheckRounded";
-import CloseRounded from "@mui/icons-material/CloseRounded";
+import CheckRounded from "./icons/CheckRounded";
+import CloseRounded from "./icons/CloseRounded";
 import type { OrderStatus } from "../lib/types";
 
 // Starts at Assigned - a driver never sees the Pending/Accepted stages that happen before a contractor assigns them the order.

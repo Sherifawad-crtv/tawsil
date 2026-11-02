@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import ArrowBackIosNewRounded from "@mui/icons-material/ArrowBackIosNewRounded";
+import ArrowBackIosNewRounded from "./icons/ArrowBackIosNewRounded";
 import type { ReactNode } from "react";
 
 /** Native large-title header with a back chevron, for every stack screen below the tab roots. */

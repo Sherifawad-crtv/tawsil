@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router";
-import ClockCircleRounded from "@mui/icons-material/AccessTimeRounded";
-import RouteRounded from "@mui/icons-material/RouteRounded";
-import ChevronRightRounded from "@mui/icons-material/ChevronRightRounded";
-import InboxRounded from "@mui/icons-material/InboxRounded";
+import ClockCircleRounded from "../../components/icons/AccessTimeRounded";
+import RouteRounded from "../../components/icons/RouteRounded";
+import ChevronRightRounded from "../../components/icons/ChevronRightRounded";
+import InboxRounded from "../../components/icons/InboxRounded";
 import TripCard from "../../components/TripCard";
 import EmptyState from "../../components/EmptyState";
 import { useDataStore } from "../../lib/store";

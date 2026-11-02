@@ -1,6 +1,6 @@
 import { useState } from "react";
-import AddRounded from "@mui/icons-material/AddRounded";
-import LocationOnRounded from "@mui/icons-material/LocationOnRounded";
+import AddRounded from "./icons/AddRounded";
+import LocationOnRounded from "./icons/LocationOnRounded";
 
 /** Static map snippet - decorative route between the order's first and last stop, no live map data. Already aligned with map-first order detail conventions (Section 5.4) - no structural change from Contractor's version. */
 export default function MapSnippet() {

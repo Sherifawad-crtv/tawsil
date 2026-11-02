@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
-import ContentCopyRounded from "@mui/icons-material/ContentCopyRounded";
-import CheckRounded from "@mui/icons-material/CheckRounded";
-import ChatBubbleOutlineRounded from "@mui/icons-material/ChatBubbleOutlineRounded";
+import ContentCopyRounded from "./icons/ContentCopyRounded";
+import CheckRounded from "./icons/CheckRounded";
+import ChatBubbleOutlineRounded from "./icons/ChatBubbleOutlineRounded";
 
 /** 44px action button - comfortable one-handed touch target (Section 5.5). */
 function ActionButton({ onClick, ariaLabel, children }: { onClick: () => void; ariaLabel: string; children: ReactNode }) {

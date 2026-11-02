@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import ManageAccountsOutlined from "@mui/icons-material/ManageAccountsOutlined";
-import TranslateRounded from "@mui/icons-material/TranslateRounded";
-import HelpOutlineRounded from "@mui/icons-material/HelpOutlineRounded";
-import LogoutRounded from "@mui/icons-material/LogoutRounded";
+import ManageAccountsOutlined from "../../components/icons/ManageAccountsOutlined";
+import TranslateRounded from "../../components/icons/TranslateRounded";
+import HelpOutlineRounded from "../../components/icons/HelpOutlineRounded";
+import LogoutRounded from "../../components/icons/LogoutRounded";
 import AccountRow from "../../components/AccountRow";
 import ConfirmSheet from "../../components/ConfirmSheet";
 

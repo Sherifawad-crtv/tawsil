@@ -2,6 +2,7 @@ import ApartmentRounded from "../icons/ApartmentRounded";
 import PersonRounded from "../icons/PersonRounded";
 import ChevronRightRounded from "../icons/ChevronRightRounded";
 import ScreenShell from "./ScreenShell";
+import { GhostButton } from "./StepChrome";
 import type { AccountType } from "../../lib/authTypes";
 
 function TypeCard({
@@ -36,7 +37,15 @@ function TypeCard({
   );
 }
 
-export default function AccountTypeScreen({ onChoose }: { onChoose: (type: AccountType) => void }) {
+export default function AccountTypeScreen({
+  onChoose,
+  onContinueAsGuest,
+}: {
+  onChoose: (type: AccountType) => void;
+  /** Individual-only shortcut: browse and book without an account - they're asked to
+   *  register later, right before their booking is confirmed (see TruckSelectorMap). */
+  onContinueAsGuest: () => void;
+}) {
   return (
     <ScreenShell>
       <div className="flex-1 flex flex-col justify-center" style={{ paddingBottom: "40px" }}>
@@ -63,6 +72,8 @@ export default function AccountTypeScreen({ onChoose }: { onChoose: (type: Accou
             onClick={() => onChoose("individual")}
           />
         </div>
+
+        <GhostButton label="Continue as Guest" onClick={onContinueAsGuest} />
       </div>
     </ScreenShell>
   );

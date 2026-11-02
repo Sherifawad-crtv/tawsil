@@ -19,7 +19,7 @@ export default function App() {
   const [showEmailPrompt, setShowEmailPrompt] = useState(false);
   const [emailPromptDismissed, setEmailPromptDismissed] = useState(false);
   const isMobileViewport = useIsMobileViewport();
-  const { user, updateEmail } = useAuth();
+  const { user, isGuest, updateEmail } = useAuth();
 
   // Individual signups skip email entirely - the one time it's actually
   // needed is the first real action, booking a truck, not before. Once
@@ -40,9 +40,11 @@ export default function App() {
     return <MobileOnlyGate />;
   }
 
-  // Nothing else in this app is reachable until signup completes - it's the
-  // starting point, not a screen you can navigate past.
-  if (!user) {
+  // Nothing else in this app is reachable until signup completes or they
+  // continue as a guest - it's the starting point, not a screen you can
+  // navigate past. A guest gets the full app; they're only asked to
+  // register once their booking is ready to confirm (see TruckSelectorMap).
+  if (!user && !isGuest) {
     return <OnboardingFlow />;
   }
 

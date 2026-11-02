@@ -14,6 +14,7 @@ import type { AddedLocation } from "./PickupStepInline";
 import ReviewStepInline from "./ReviewStepInline";
 import BiddingScreen from "./BiddingScreen";
 import type { Offer } from "./BiddingScreen";
+import IndividualSignup from "./onboarding/IndividualSignup";
 import { useState, useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -340,8 +341,14 @@ function ConfirmationOverlay({ onDone, offer }: { onDone: () => void; offer?: Of
    MAIN COMPONENT
    ════════════════════════════════════════════════ */
 export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
-  const { user } = useAuth();
-  const isIndividual = user?.type === "individual";
+  const { user, isGuest } = useAuth();
+  // A guest (no user yet) is the non-B2B path by definition, so it gets the
+  // same shorter individual flow - not just for the right copy, but because
+  // registering mid-flow turns them into an individual user without
+  // resetting `step`: if that switched TOTAL_STEPS/STEP_TITLES out from
+  // under the step they were already on, STEP_TITLES[step - 1] could read
+  // past the end of the (now-shorter-or-differently-shaped) array.
+  const isIndividual = user?.type !== "business";
   const TOTAL_STEPS = isIndividual ? 3 : 4;
   const STEP_TITLES = isIndividual ? STEP_TITLES_INDIVIDUAL : STEP_TITLES_BUSINESS;
 
@@ -356,6 +363,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
   const [dropoffStops, setDropoffStops] = useState<DropoffStop[]>([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showBidding, setShowBidding] = useState(false);
+  const [showRegisterGate, setShowRegisterGate] = useState(false);
   const [acceptedOffer, setAcceptedOffer] = useState<Offer | null>(null);
   const [clientOffer, setClientOffer] = useState<number | null>(null);
   const [showScheduleModal, setShowScheduleModal] = useState(false);
@@ -376,6 +384,10 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
   const onCTA = () => {
     if (step < TOTAL_STEPS) {
       goTo(step + 1);
+    } else if (isGuest) {
+      // Order's complete, but a guest hasn't registered yet - gate it here,
+      // before live bidding opens and starts showing driver prices.
+      setShowRegisterGate(true);
     } else {
       // Final step - open live bidding
       setShowBidding(true);
@@ -649,6 +661,17 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
           offer={acceptedOffer}
           onDone={() => { setShowConfirmation(false); setAcceptedOffer(null); goTo(1); }}
         />
+      )}
+
+      {showRegisterGate && (
+        <div className="fixed inset-0 z-50">
+          <IndividualSignup
+            introTitle="One last step"
+            introSubtitle="Create your account to confirm this booking and see your matched drivers' prices."
+            onBack={() => setShowRegisterGate(false)}
+            onComplete={() => { setShowRegisterGate(false); setShowBidding(true); }}
+          />
+        </div>
       )}
     </div>
   );

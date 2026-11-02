@@ -8,7 +8,18 @@ import { useAuth } from "../../lib/AuthContext";
 const TOTAL_STEPS = 3;
 const MOCK_OTP = "123456";
 
-export default function IndividualSignup({ onBack, onComplete }: { onBack: () => void; onComplete: () => void }) {
+export default function IndividualSignup({
+  onBack,
+  onComplete,
+  introTitle,
+  introSubtitle,
+}: {
+  onBack: () => void;
+  onComplete: () => void;
+  /** Overrides step 1's header - used to explain why a guest is being asked to register mid-booking. */
+  introTitle?: string;
+  introSubtitle?: string;
+}) {
   const { signUpIndividual } = useAuth();
   const [step, setStep] = useState(1);
   const [phone, setPhone] = useState("");
@@ -53,7 +64,10 @@ export default function IndividualSignup({ onBack, onComplete }: { onBack: () =>
       <div className="flex-1 flex flex-col" style={{ paddingBottom: CTA_FOOTER_CLEARANCE }}>
         {step === 1 && (
           <>
-            <StepHeader title="What's your number?" subtitle="We'll text you a code to verify it's you." />
+            <StepHeader
+              title={introTitle ?? "What's your number?"}
+              subtitle={introSubtitle ?? "We'll text you a code to verify it's you."}
+            />
             <div className="flex flex-col gap-4 flex-1">
               <AuthTextField
                 label="Mobile number"

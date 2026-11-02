@@ -2,11 +2,14 @@ import { useState } from "react";
 import { useAuth } from "../lib/AuthContext";
 import { displayName, initialsOf } from "../lib/authTypes";
 import AddEmailModal from "./onboarding/AddEmailModal";
+import IndividualSignup from "./onboarding/IndividualSignup";
+import { PrimaryButton, GhostButton } from "./onboarding/StepChrome";
 import NotificationsRounded from "./icons/NotificationsRounded";
 import MyLocationRounded from "./icons/MyLocationRounded";
 import FactCheckRounded from "./icons/FactCheckRounded";
 import MailOutlineRounded from "./icons/MailOutlineRounded";
 import PhoneRounded from "./icons/PhoneRounded";
+import PersonRounded from "./icons/PersonRounded";
 import BookmarkBorderRounded from "./icons/BookmarkBorderRounded";
 import CreditCardRounded from "./icons/CreditCardRounded";
 import HelpOutlineRounded from "./icons/HelpOutlineRounded";
@@ -88,9 +91,35 @@ export default function ProfileScreen() {
     pod: true,
   });
   const [showAddEmail, setShowAddEmail] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
 
-  // App.tsx never renders this screen without a signed-up user.
-  if (!user) return null;
+  // App.tsx reaches this screen without a user for a guest session - give
+  // them a way to register (or step out of guest mode) instead of a blank screen.
+  if (!user) {
+    return (
+      <div className="min-h-screen w-full flex flex-col items-center justify-center px-5" style={{ backgroundColor: "#F5F5F3" }}>
+        <div className="w-full max-w-lg rounded-[22px] p-6 text-center" style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
+          <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: "rgba(18,83,250,0.08)" }}>
+            <PersonRounded sx={{ fontSize: 26, color: "#1253FA" }} />
+          </div>
+          <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "19px", color: "#040033" }}>
+            You're browsing as a guest
+          </h2>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12.5px", color: "#9CA3AF", marginTop: "8px", marginBottom: "20px", lineHeight: 1.5 }}>
+            Create an account to save your details, track orders and book faster next time.
+          </p>
+          <PrimaryButton label="Create Account" onClick={() => setShowRegister(true)} />
+          <GhostButton label="Exit guest mode" onClick={signOut} />
+        </div>
+
+        {showRegister && (
+          <div className="fixed inset-0 z-50">
+            <IndividualSignup onBack={() => setShowRegister(false)} onComplete={() => setShowRegister(false)} />
+          </div>
+        )}
+      </div>
+    );
+  }
 
   const name = displayName(user);
   const initials = initialsOf(user);

@@ -124,7 +124,7 @@ export default function ProfileScreen() {
   const name = displayName(user);
   const initials = initialsOf(user);
   const accountTypeLabel = user.type === "business" ? "Business" : "Individual";
-  const subtitle = user.type === "business" ? "Business account" : undefined;
+  const subtitle = user.type === "business" ? `Business account · ${user.contactName}` : undefined;
   const memberSince = formatMemberSince(user.createdAt);
 
   return (

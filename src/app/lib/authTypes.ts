@@ -13,6 +13,8 @@ export interface BusinessProfile {
   type: "business";
   businessName: string;
   phone: string;
+  /** The individual signing up on the business's behalf - who we actually call/email day to day. */
+  contactName: string;
   email: string;
   taxNumber: string;
   registrationNumber: string;

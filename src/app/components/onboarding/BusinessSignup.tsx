@@ -10,6 +10,7 @@ const TOTAL_STEPS = 4;
 interface FormState {
   businessName: string;
   phone: string;
+  contactName: string;
   email: string;
   taxNumber: string;
   registrationNumber: string;
@@ -18,7 +19,7 @@ interface FormState {
 }
 
 function emptyState(): FormState {
-  return { businessName: "", phone: "", email: "", taxNumber: "", registrationNumber: "", taxNumberFileName: "", registrationFileName: "" };
+  return { businessName: "", phone: "", contactName: "", email: "", taxNumber: "", registrationNumber: "", taxNumberFileName: "", registrationFileName: "" };
 }
 
 export default function BusinessSignup({ onBack, onComplete }: { onBack: () => void; onComplete: () => void }) {
@@ -35,6 +36,7 @@ export default function BusinessSignup({ onBack, onComplete }: { onBack: () => v
     signUpBusiness({
       businessName: form.businessName,
       phone: form.phone,
+      contactName: form.contactName,
       email: form.email,
       taxNumber: form.taxNumber,
       registrationNumber: form.registrationNumber,
@@ -44,7 +46,8 @@ export default function BusinessSignup({ onBack, onComplete }: { onBack: () => v
     onComplete();
   }
 
-  const canContinueStep1 = form.businessName.trim().length > 1 && form.phone.trim().length >= 6;
+  const canContinueStep1 =
+    form.businessName.trim().length > 1 && form.phone.trim().length >= 6 && form.contactName.trim().length > 1;
   const canContinueStep2 = form.email.trim().length > 3 && form.taxNumber.trim().length > 0 && form.registrationNumber.trim().length > 0;
   // Documents are collected like the dashboard's own Add Client form does,
   // but not required to proceed there either - same leniency here.
@@ -77,6 +80,13 @@ export default function BusinessSignup({ onBack, onComplete }: { onBack: () => v
                 placeholder="+20 100 123 4567"
                 value={form.phone}
                 onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+              />
+              <AuthTextField
+                label="Contact person"
+                type="text"
+                placeholder="Ahmed Khan"
+                value={form.contactName}
+                onChange={(e) => setForm((f) => ({ ...f, contactName: e.target.value }))}
               />
             </div>
             <CTAFooter>
@@ -150,6 +160,7 @@ export default function BusinessSignup({ onBack, onComplete }: { onBack: () => v
               <div className="rounded-2xl p-4" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
                 <ReviewRow label="Business name" value={form.businessName} />
                 <ReviewRow label="Phone" value={form.phone} />
+                <ReviewRow label="Contact person" value={form.contactName} />
                 <ReviewRow label="Email" value={form.email} />
                 <ReviewRow label="Tax number" value={form.taxNumber} />
                 <ReviewRow label="Registration number" value={form.registrationNumber} />

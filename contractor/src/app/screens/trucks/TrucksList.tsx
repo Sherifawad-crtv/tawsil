@@ -56,7 +56,7 @@ export default function TrucksList() {
       <div className="mt-4 flex flex-col gap-3" style={{ paddingBottom: "96px" }}>
         {filtered.length === 0 ? (
           <EmptyState
-            icon={<InventoryRounded sx={{ fontSize: 24, color: "#9CA3AF" }} />}
+            icon={<InventoryRounded sx={{ fontSize: 24, color: "#626A76" }} />}
             title={tab === "active" ? "No active trucks" : "No inactive trucks"}
             subtitle={query ? "No trucks match your search." : "Trucks you add to your fleet will appear here."}
           />

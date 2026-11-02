@@ -76,7 +76,7 @@ export default function TruckConfigGrid({
               style={{
                 fontFamily: "'Courier Prime', monospace",
                 fontSize: "11px",
-                color: "#9CA3AF",
+                color: "#626A76",
               }}
             >
               {config.description}

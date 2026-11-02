@@ -31,7 +31,7 @@ export default function LanguageSettings() {
               اختر اللغة
             </p>
           </div>
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF" }}>Choose your language to continue</p>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>Choose your language to continue</p>
         </div>
 
         <div className="flex flex-col gap-3">
@@ -50,7 +50,7 @@ export default function LanguageSettings() {
                 <span style={{ fontSize: "26px" }}>{opt.flag}</span>
                 <div className="flex-1 text-left" dir={opt.dir}>
                   <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "15px", color: "#040033" }}>{opt.title}</p>
-                  <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "12px", color: "#9CA3AF" }}>{opt.subtitle}</p>
+                  <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "12px", color: "#626A76" }}>{opt.subtitle}</p>
                 </div>
                 {/* Radio stays on the same side for every row - only the text above reflects each language's own script direction. */}
                 <div
@@ -78,7 +78,7 @@ export default function LanguageSettings() {
           <button
             onClick={() => navigate("/account")}
             className="cursor-pointer"
-            style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#9CA3AF" }}
+            style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#626A76" }}
           >
             Skip for now
           </button>

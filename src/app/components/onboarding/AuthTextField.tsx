@@ -12,7 +12,7 @@ export default function AuthTextField({ label, error, id, ...inputProps }: AuthT
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={fieldId}
-        style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.06em", textTransform: "uppercase" }}
+        style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}
       >
         {label}
       </label>

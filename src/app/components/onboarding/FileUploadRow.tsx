@@ -70,7 +70,7 @@ export default function FileUploadRow({
   return (
     <div className="flex flex-col gap-1.5">
       <span
-        style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.06em", textTransform: "uppercase" }}
+        style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}
       >
         {label}
       </span>
@@ -108,11 +108,11 @@ export default function FileUploadRow({
           {isDone ? (
             <PictureAsPdfRounded sx={{ fontSize: 22, color: "#1253FA" }} />
           ) : (
-            <UploadFileRounded sx={{ fontSize: 22, color: uploading ? "#1253FA" : "#9CA3AF" }} />
+            <UploadFileRounded sx={{ fontSize: 22, color: uploading ? "#1253FA" : "#626A76" }} />
           )}
         </div>
 
-        <p className="mt-2.5 px-2 w-full truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF" }}>
+        <p className="mt-2.5 px-2 w-full truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>
           {uploading ? "Uploading…" : fileName ? `${fileName}${fileSize ? ` · ${formatFileSize(fileSize)}` : ""}` : hint}
         </p>
 

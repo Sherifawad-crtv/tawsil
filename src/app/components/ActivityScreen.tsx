@@ -100,7 +100,7 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
             <div>
               <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{trip.to}</p>
               {trip.stops > 1 && (
-                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>
+                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
                   +{trip.stops - 1} stop{trip.stops > 2 ? "s" : ""}
                 </span>
               )}
@@ -115,11 +115,11 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
         style={{ borderTop: "1px solid #F0F0EE" }}
       >
         <div className="flex items-center gap-1.5">
-          <CalendarMonthRounded sx={{ fontSize: 12, color: "#9CA3AF" }} />
+          <CalendarMonthRounded sx={{ fontSize: 12, color: "#626A76" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{trip.date}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <AccessTimeRounded sx={{ fontSize: 12, color: "#9CA3AF" }} />
+          <AccessTimeRounded sx={{ fontSize: 12, color: "#626A76" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{trip.time}</span>
         </div>
         <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
@@ -187,7 +187,7 @@ export default function ActivityScreen() {
         <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: "1.15", marginBottom: "4px" }}>
           Activity
         </h1>
-        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#9CA3AF", marginBottom: "20px" }}>
+        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#626A76", marginBottom: "20px" }}>
           Track and manage your shipments
         </p>
 
@@ -231,7 +231,7 @@ export default function ActivityScreen() {
                     fontFamily: "'Archivo', sans-serif",
                     fontWeight: 700,
                     fontSize: "10px",
-                    color: isActive ? "#1253FA" : "#9CA3AF",
+                    color: isActive ? "#1253FA" : "#626A76",
                     backgroundColor: isActive ? "rgba(18,83,250,0.08)" : "rgba(107,114,128,0.06)",
                     transition: "all 0.3s",
                   }}
@@ -259,7 +259,7 @@ export default function ActivityScreen() {
               </div>
               <div className="text-center">
                 <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>No trips found</p>
-                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", marginTop: "4px" }}>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginTop: "4px" }}>
                   {activeTab === "active" ? "You have no active deliveries right now." : `No ${activeTab} trips to show.`}
                 </p>
               </div>

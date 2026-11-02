@@ -25,7 +25,7 @@ export default function ProfileSettings() {
           </div>
           <div className="min-w-0">
             <p className="truncate" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>{profile.fullName}</p>
-            <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF" }}>{profile.email}</p>
+            <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>{profile.email}</p>
           </div>
         </div>
 

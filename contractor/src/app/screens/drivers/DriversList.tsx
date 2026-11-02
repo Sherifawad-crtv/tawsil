@@ -54,7 +54,7 @@ export default function DriversList() {
       <div className="mt-4 flex flex-col gap-3" style={{ paddingBottom: "96px" }}>
         {filtered.length === 0 ? (
           <EmptyState
-            icon={<GroupsRounded sx={{ fontSize: 24, color: "#9CA3AF" }} />}
+            icon={<GroupsRounded sx={{ fontSize: 24, color: "#626A76" }} />}
             title={tab === "active" ? "No active drivers" : "No inactive drivers"}
             subtitle={query ? "No drivers match your search." : "Drivers you add to your fleet will appear here."}
           />

@@ -22,7 +22,7 @@ export default function HomeScreen() {
     <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 12px), 12px)", paddingBottom: "24px" }}>
       {/* Greeting fixed: no license-number parenthetical appended - "Welcome Back Driver" stands alone. */}
       <div className="mb-5">
-        <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "13px", color: "#9CA3AF" }}>Welcome back, {firstName}</p>
+        <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "13px", color: "#626A76" }}>Welcome back, {firstName}</p>
         <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033", lineHeight: 1.15, marginTop: "2px" }}>Dashboard</h1>
       </div>
 
@@ -38,7 +38,7 @@ export default function HomeScreen() {
         onViewAll={() => navigate("/orders", { state: { tab: "pending" } })}
       >
         {pending.length === 0 ? (
-          <EmptyState icon={<InboxRounded sx={{ fontSize: 24, color: "#9CA3AF" }} />} title="No pending orders" subtitle="Newly assigned orders will appear here." />
+          <EmptyState icon={<InboxRounded sx={{ fontSize: 24, color: "#626A76" }} />} title="No pending orders" subtitle="Newly assigned orders will appear here." />
         ) : (
           <div className="flex flex-col gap-3">
             {pending.slice(0, PREVIEW_COUNT).map((o) => (
@@ -54,7 +54,7 @@ export default function HomeScreen() {
         onViewAll={() => navigate("/orders", { state: { tab: "active" } })}
       >
         {active.length === 0 ? (
-          <EmptyState icon={<InboxRounded sx={{ fontSize: 24, color: "#9CA3AF" }} />} title="No active orders" subtitle="Trips you've started will appear here." />
+          <EmptyState icon={<InboxRounded sx={{ fontSize: 24, color: "#626A76" }} />} title="No active orders" subtitle="Trips you've started will appear here." />
         ) : (
           <div className="flex flex-col gap-3">
             {active.slice(0, PREVIEW_COUNT).map((o) => (
@@ -88,7 +88,7 @@ function StatTile({
         <Icon sx={{ fontSize: 16, color: "#1253FA" }} />
       </div>
       <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "17px", color: "#040033" }}>{value}</span>
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#9CA3AF" }}>{label}</span>
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#626A76" }}>{label}</span>
     </button>
   );
 }

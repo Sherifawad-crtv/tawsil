@@ -27,11 +27,11 @@ export default function TruckCard({ truck }: { truck: Truck }) {
           <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>{truck.plateNumber}</p>
           <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "12.5px", color: "#6B7280" }}>{truckTypeLabel(truck)}</p>
         </div>
-        <ChevronRightRounded sx={{ fontSize: 20, color: "#9CA3AF", flexShrink: 0 }} />
+        <ChevronRightRounded sx={{ fontSize: 20, color: "#626A76", flexShrink: 0 }} />
       </div>
 
       <div className="flex items-center gap-1.5 flex-wrap">
-        <EventRounded sx={{ fontSize: 14, color: "#9CA3AF" }} />
+        <EventRounded sx={{ fontSize: 14, color: "#626A76" }} />
         <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#6B7280" }}>
           Expires: {formatDate(truck.licenseExpiry)}
         </span>

@@ -406,7 +406,7 @@ export default function DropoffStops({ value, onChange }: DropoffStopsProps) {
             style={{
               fontFamily: "'Courier Prime', monospace",
               fontSize: "11px",
-              color: "#9CA3AF",
+              color: "#626A76",
               marginTop: "1px",
             }}
           >
@@ -505,7 +505,7 @@ export default function DropoffStops({ value, onChange }: DropoffStopsProps) {
             style={{
               fontFamily: "'Courier Prime', monospace",
               fontSize: "11px",
-              color: "#9CA3AF",
+              color: "#626A76",
             }}
           >
             ({maxStops - value.length} left)

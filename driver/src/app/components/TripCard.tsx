@@ -58,7 +58,7 @@ export default function TripCard({ order }: { order: Order }) {
                   {dropoff.address}
                 </p>
                 {extraStops > 0 && (
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
                     +{extraStops} stop{extraStops > 1 ? "s" : ""}
                   </span>
                 )}
@@ -82,7 +82,7 @@ export default function TripCard({ order }: { order: Order }) {
             />
           </div>
           <div className="flex justify-between mt-1.5">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>{stage.label}</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>{stage.label}</span>
             <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA" }}>{Math.round(stage.pct * 100)}%</span>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function TripCard({ order }: { order: Order }) {
       {/* Meta row */}
       <div className="flex items-center gap-3 px-5 py-3 flex-wrap" style={{ borderTop: "1px solid #F0F0EE" }}>
         <div className="flex items-center gap-1.5">
-          <CalendarTodayRounded sx={{ fontSize: 12, color: "#9CA3AF" }} />
+          <CalendarTodayRounded sx={{ fontSize: 12, color: "#626A76" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{formatDate(order.pickupAt)}</span>
         </div>
         <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>

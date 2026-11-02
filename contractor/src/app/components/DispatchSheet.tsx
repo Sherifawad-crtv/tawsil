@@ -59,7 +59,7 @@ function DriverRow({ driver, selected, onSelect }: { driver: Driver; selected: b
       </div>
       <div className="flex-1 min-w-0">
         <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "14px", color: "#040033" }}>{driver.name}</p>
-        <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#9CA3AF" }}>{driver.phone}</p>
+        <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#626A76" }}>{driver.phone}</p>
       </div>
       <div
         className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
@@ -144,7 +144,7 @@ export default function DispatchSheet({ order, onClose }: { order: Order; onClos
               <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "#040033" }}>
                 {step === "vehicle" ? "Select Vehicle" : "Select Driver"}
               </p>
-              <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#9CA3AF" }}>
+              <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#626A76" }}>
                 Dispatching #{order.id} · Step {step === "vehicle" ? "1" : "2"} of 2
               </p>
             </div>
@@ -166,7 +166,7 @@ export default function DispatchSheet({ order, onClose }: { order: Order; onClos
                 <SearchField value={truckQuery} onChange={setTruckQuery} placeholder="Search by plate or truck type" />
               </div>
               {filteredTrucks.length === 0 ? (
-                <p className="px-5 py-8 text-center" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF" }}>
+                <p className="px-5 py-8 text-center" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>
                   No available trucks match your search.
                 </p>
               ) : (
@@ -184,7 +184,7 @@ export default function DispatchSheet({ order, onClose }: { order: Order; onClos
             <div className="flex flex-col gap-3 px-5 pb-2">
               <SearchField value={driverQuery} onChange={setDriverQuery} placeholder="Search by name or phone" />
               {filteredDrivers.length === 0 ? (
-                <p className="py-8 text-center" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF" }}>
+                <p className="py-8 text-center" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>
                   No available drivers match your search.
                 </p>
               ) : (

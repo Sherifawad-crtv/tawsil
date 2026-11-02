@@ -40,7 +40,7 @@ export default function AddEmailModal({ onSave, onSkip }: { onSave: (email: stri
         <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>
           Add your email
         </h2>
-        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", marginTop: "6px", marginBottom: "20px" }}>
+        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginTop: "6px", marginBottom: "20px" }}>
           For receipts and booking confirmations. You can skip this and add it later from your profile.
         </p>
 

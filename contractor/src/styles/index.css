@@ -22,7 +22,7 @@
   --color-nav-bg: #fafaf8;
   --color-tile: #f0f0ee;
   --color-border: #e8e8e5;
-  --color-muted: #9ca3af;
+  --color-muted: #626a76;
 
   /* Order status stepper: Pending -> Accepted -> Assigned -> In Progress ->
      Completed / Cancelled. Same hexes as the dashboard's status palette so a

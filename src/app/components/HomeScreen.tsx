@@ -58,7 +58,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
           <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: "1.15" }}>
             {greeting}{greetName ? `, ${greetName}` : ""}
           </h1>
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#9CA3AF", marginTop: "6px" }}>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#626A76", marginTop: "6px" }}>
             What would you like to ship today?
           </p>
         </div>
@@ -140,11 +140,11 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                 <div className="flex-1 flex flex-col gap-3">
                   <div>
                     <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{ACTIVE_TRIP.from}</p>
-                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>Pickup</p>
+                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>Pickup</p>
                   </div>
                   <div>
                     <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{ACTIVE_TRIP.to}</p>
-                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>Drop-off</p>
+                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>Drop-off</p>
                   </div>
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                   />
                 </div>
                 <div className="flex justify-between mt-1.5">
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>In Transit</span>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>In Transit</span>
                   <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA" }}>{Math.round(ACTIVE_TRIP.progress * 100)}%</span>
                 </div>
               </div>
@@ -174,7 +174,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                 </div>
                 <div className="flex-1">
                   <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "12px", color: "#040033" }}>{ACTIVE_TRIP.driver}</p>
-                  <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>Driver assigned</p>
+                  <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>Driver assigned</p>
                 </div>
                 <span
                   role="button"
@@ -193,7 +193,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
 
         {/* ── Quick Actions - Vehicle Cards ── */}
         <div className="flex items-center justify-between mb-3">
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             Quick Select Vehicle
           </span>
         </div>
@@ -227,7 +227,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
 
         {/* ── Recent Trips ── */}
         <div className="flex items-center justify-between mb-3">
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             Recent Trips
           </span>
           <button
@@ -261,9 +261,9 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                   {trip.from} → {trip.to}
                 </p>
                 <div className="flex items-center gap-2 mt-1">
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>{trip.date}</span>
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>•</span>
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>{trip.vehicle}</span>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>{trip.date}</span>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>•</span>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>{trip.vehicle}</span>
                 </div>
               </div>
               <div className="flex flex-col items-end gap-1 flex-shrink-0">

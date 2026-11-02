@@ -26,20 +26,20 @@ export default function DriverCard({ driver }: { driver: Driver }) {
         <div className="flex-1 min-w-0">
           <p className="truncate" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>{driver.name}</p>
           <div className="flex items-center gap-1.5">
-            <PhoneRounded sx={{ fontSize: 12.5, color: "#9CA3AF" }} />
+            <PhoneRounded sx={{ fontSize: 12.5, color: "#626A76" }} />
             <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#6B7280" }}>{driver.phone}</span>
           </div>
         </div>
-        <ChevronRightRounded sx={{ fontSize: 20, color: "#9CA3AF", flexShrink: 0 }} />
+        <ChevronRightRounded sx={{ fontSize: 20, color: "#626A76", flexShrink: 0 }} />
       </div>
 
       <div className="flex items-center gap-3 flex-wrap">
         <div className="flex items-center gap-1.5">
-          <BadgeRounded sx={{ fontSize: 14, color: "#9CA3AF" }} />
+          <BadgeRounded sx={{ fontSize: 14, color: "#626A76" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#6B7280" }}>License: {driver.licenseNumber}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <EventRounded sx={{ fontSize: 14, color: "#9CA3AF" }} />
+          <EventRounded sx={{ fontSize: 14, color: "#626A76" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#6B7280" }}>Expires: {formatDate(driver.licenseExpiry)}</span>
         </div>
       </div>

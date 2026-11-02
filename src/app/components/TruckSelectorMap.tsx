@@ -433,7 +433,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
       {/* ── Section divider ── */}
       <div className="flex items-center gap-3 my-4 flex-shrink-0">
         <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Vehicle</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Vehicle</span>
         <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
       </div>
 
@@ -452,7 +452,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
           {/* ── Section divider ── */}
           <div className="flex items-center gap-3 my-4 flex-shrink-0">
             <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Delivery</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Delivery</span>
             <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
           </div>
           <ProofOfDeliveryToggle value={proofOfDelivery} onChange={setProofOfDelivery} />
@@ -462,7 +462,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
           {/* ── Section divider ── */}
           <div className="flex items-center gap-3 my-4 flex-shrink-0">
             <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Configuration</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Configuration</span>
             <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
           </div>
           <TruckConfigGrid selected={config} onSelect={setConfig} />
@@ -479,7 +479,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
       {/* ── POD Toggle ── */}
       <div className="flex items-center gap-3 my-5 flex-shrink-0">
         <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Delivery</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Delivery</span>
         <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
       </div>
       <ProofOfDeliveryToggle value={proofOfDelivery} onChange={setProofOfDelivery} />
@@ -491,14 +491,14 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
       {/* ── Pickup ── */}
       <div className="flex items-center gap-2 mb-3 flex-shrink-0">
         <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#040033", border: "2px solid white", boxShadow: "0 0 0 1.5px #040033" }} />
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Pickup Locations</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Pickup Locations</span>
       </div>
       <PickupStepInline value={pickupLocations} onChange={setPickupLocations} />
 
       {/* ── Section divider ── */}
       <div className="flex items-center gap-3 my-5 flex-shrink-0">
         <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>Drop-off Stops</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Drop-off Stops</span>
         <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
       </div>
 
@@ -559,7 +559,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
           className="flex-shrink-0"
           style={{
             fontFamily: "'Courier Prime', monospace",
-            color: "#9CA3AF",
+            color: "#626A76",
             fontSize: "12px",
             marginBottom: "16px",
           }}

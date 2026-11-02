@@ -104,7 +104,7 @@ export default function BottomNav({ activeScreen, onNavigate }: BottomNavProps) 
               transition: `width ${DURATION_MS}ms ${EASE}`,
             }}
           >
-            <Icon sx={{ fontSize: 22, color: active ? "white" : "#9CA3AF", flexShrink: 0, transition: "color 0.3s ease" }} />
+            <Icon sx={{ fontSize: 22, color: active ? "white" : "#626A76", flexShrink: 0, transition: "color 0.3s ease" }} />
             <span
               style={{
                 fontFamily: "'Archivo', sans-serif",

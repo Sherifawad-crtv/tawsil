@@ -45,7 +45,7 @@ export function StepHeader({ title, subtitle }: { title: string; subtitle: strin
   return (
     <div className="mb-6">
       <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "24px", color: "#040033", lineHeight: "1.15" }}>{title}</h1>
-      <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#9CA3AF", marginTop: "6px" }}>{subtitle}</p>
+      <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#626A76", marginTop: "6px" }}>{subtitle}</p>
     </div>
   );
 }

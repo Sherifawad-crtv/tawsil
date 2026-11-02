@@ -38,7 +38,7 @@ export default function OrdersTab() {
 
       {shown.length === 0 ? (
         <EmptyState
-          icon={<InboxRounded sx={{ fontSize: 24, color: "#9CA3AF" }} />}
+          icon={<InboxRounded sx={{ fontSize: 24, color: "#626A76" }} />}
           title={tab === "pending" ? "No pending orders" : "No active orders"}
           subtitle={tab === "pending" ? "Newly assigned orders will appear here." : "Trips you've started will appear here."}
         />

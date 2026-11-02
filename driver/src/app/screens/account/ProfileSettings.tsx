@@ -28,7 +28,7 @@ export default function ProfileSettings() {
           </div>
           <div className="min-w-0 flex-1">
             <p className="truncate" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>{profile.fullName}</p>
-            <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF" }}>{profile.email}</p>
+            <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>{profile.email}</p>
           </div>
           {profile.licenseValid && (
             <span
@@ -63,7 +63,7 @@ export default function ProfileSettings() {
           <SectionHeading icon={<ApartmentRounded sx={{ fontSize: 16, color: "#1253FA" }} />}>Contractor</SectionHeading>
           {/* Reference-only - correctly not editable from here. */}
           <div className="py-2">
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "11.5px", color: "#9CA3AF" }}>Contractor Name</p>
+            <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "11.5px", color: "#626A76" }}>Contractor Name</p>
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13.5px", color: "#040033" }}>{profile.contractorName}</p>
           </div>
         </div>

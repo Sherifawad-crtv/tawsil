@@ -28,7 +28,7 @@ export default function CollapsibleSection({
           {title}
         </h3>
         <ExpandMoreRounded
-          sx={{ fontSize: 20, color: "#9CA3AF", transform: open ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}
+          sx={{ fontSize: 20, color: "#626A76", transform: open ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}
         />
       </button>
       {open && <div className="px-4 pb-4">{children}</div>}

@@ -23,7 +23,7 @@ export default function AccountList() {
     <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 12px), 12px)", paddingBottom: "8px" }}>
       <div className="flex items-start justify-between gap-3 mb-5">
         <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033" }}>Account</h1>
-        <span className="mt-2" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF" }}>App Version 1.9</span>
+        <span className="mt-2" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>App Version 1.9</span>
       </div>
 
       <div className="flex flex-col gap-2.5">

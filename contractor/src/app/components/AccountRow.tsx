@@ -30,7 +30,7 @@ export default function AccountRow({
       >
         {label}
       </span>
-      <ChevronRightRounded sx={{ fontSize: 19, color: destructive ? "#DC2626" : "#9CA3AF" }} />
+      <ChevronRightRounded sx={{ fontSize: 19, color: destructive ? "#DC2626" : "#626A76" }} />
     </button>
   );
 }

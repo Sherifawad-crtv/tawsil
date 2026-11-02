@@ -155,7 +155,7 @@ export default function WeightInput({
       <p className="mb-4" style={{
         fontFamily: "'Courier Prime', monospace",
         fontSize: "11px",
-        color: overloaded ? "#DC2626" : "#9CA3AF",
+        color: overloaded ? "#DC2626" : "#626A76",
         letterSpacing: "0.04em",
         transition: "color 0.3s",
       }}>
@@ -182,7 +182,7 @@ export default function WeightInput({
                 fontFamily: "'Archivo', sans-serif",
                 fontWeight: 600,
                 fontSize: "14px",
-                color: unit === u ? "#040033" : "#9CA3AF",
+                color: unit === u ? "#040033" : "#626A76",
                 transition: "color 0.2s",
               }}
             >
@@ -211,7 +211,7 @@ export default function WeightInput({
           style={{
             fontFamily: "'Courier Prime', monospace",
             fontSize: "11px",
-            color: focused ? "#1253FA" : "#9CA3AF",
+            color: focused ? "#1253FA" : "#626A76",
             letterSpacing: "0.06em",
             textTransform: "uppercase",
             transition: "color 0.2s",
@@ -244,7 +244,7 @@ export default function WeightInput({
               fontFamily: "'Archivo', sans-serif",
               fontWeight: 600,
               fontSize: "20px",
-              color: "#9CA3AF",
+              color: "#626A76",
               flexShrink: 0,
             }}
           >
@@ -259,7 +259,7 @@ export default function WeightInput({
             style={{
               fontFamily: "'Courier Prime', monospace",
               fontSize: "12px",
-              color: overloaded ? "#DC2626" : "#9CA3AF",
+              color: overloaded ? "#DC2626" : "#626A76",
             }}
           >
             {overloaded
@@ -278,7 +278,7 @@ export default function WeightInput({
           style={{
             fontFamily: "'Courier Prime', monospace",
             fontSize: "11px",
-            color: "#9CA3AF",
+            color: "#626A76",
             letterSpacing: "0.06em",
             textTransform: "uppercase",
           }}

@@ -45,7 +45,7 @@ export default function HistoryList() {
                   fontFamily: "'Archivo', sans-serif",
                   fontWeight: 700,
                   fontSize: "10px",
-                  color: active ? "#1253FA" : "#9CA3AF",
+                  color: active ? "#1253FA" : "#626A76",
                   backgroundColor: active ? "rgba(18,83,250,0.08)" : "rgba(107,114,128,0.06)",
                   transition: "all 0.3s",
                 }}
@@ -60,7 +60,7 @@ export default function HistoryList() {
       <div className="flex flex-col gap-4">
         {shown.length === 0 ? (
           <EmptyState
-            icon={<InventoryRounded sx={{ fontSize: 24, color: "#9CA3AF" }} />}
+            icon={<InventoryRounded sx={{ fontSize: 24, color: "#626A76" }} />}
             title={`No ${tab.toLowerCase()} orders`}
             subtitle="Orders will show up here once they're finished."
           />

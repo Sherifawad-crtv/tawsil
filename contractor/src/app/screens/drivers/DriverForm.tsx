@@ -28,7 +28,7 @@ export default function DriverForm({ mode }: { mode: "create" | "edit" }) {
     return (
       <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
         <ScreenHeader title="Edit Driver" onBack={() => navigate("/drivers")} />
-        <p className="text-center px-6" style={{ fontFamily: "'Archivo', sans-serif", color: "#9CA3AF" }}>Driver not found.</p>
+        <p className="text-center px-6" style={{ fontFamily: "'Archivo', sans-serif", color: "#626A76" }}>Driver not found.</p>
       </div>
     );
   }
@@ -75,7 +75,7 @@ export default function DriverForm({ mode }: { mode: "create" | "edit" }) {
               <PersonAddRounded sx={{ fontSize: 26, color: "#1253FA" }} />
             </div>
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "16px", color: "#040033" }}>Create New Driver Profile</p>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF" }}>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>
               Fill in the details below to add a new driver
             </p>
           </div>

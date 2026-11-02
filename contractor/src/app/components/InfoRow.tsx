@@ -21,7 +21,7 @@ export function PersonCard({ title, name, subtitle, avatarColor = "#040033" }: {
         <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "white" }}>{name[0]}</span>
       </div>
       <div className="min-w-0">
-        <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#9CA3AF" }}>{title}</p>
+        <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#626A76" }}>{title}</p>
         <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13.5px", color: "#040033" }}>{name}</p>
         {subtitle && (
           <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>{subtitle}</p>

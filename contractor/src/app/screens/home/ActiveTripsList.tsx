@@ -16,7 +16,7 @@ export default function ActiveTripsList() {
       <div className="w-full max-w-lg mx-auto px-4 pb-8">
         {active.length === 0 ? (
           <EmptyState
-            icon={<InboxRounded sx={{ fontSize: 24, color: "#9CA3AF" }} />}
+            icon={<InboxRounded sx={{ fontSize: 24, color: "#626A76" }} />}
             title="No Active trips"
             subtitle="You have no active trips right now. Accepted orders will appear here automatically."
           />

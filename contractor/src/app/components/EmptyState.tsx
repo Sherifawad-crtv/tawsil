@@ -11,7 +11,7 @@ export default function EmptyState({ icon, title, subtitle }: { icon: ReactNode;
       </div>
       <div>
         <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "15px", color: "#040033" }}>{title}</p>
-        <p className="mt-1" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", lineHeight: 1.6 }}>
+        <p className="mt-1" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", lineHeight: 1.6 }}>
           {subtitle}
         </p>
       </div>

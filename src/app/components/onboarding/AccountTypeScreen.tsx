@@ -30,9 +30,9 @@ function TypeCard({
       </div>
       <div className="flex-1">
         <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>{title}</span>
-        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", marginTop: "4px" }}>{subtitle}</p>
+        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginTop: "4px" }}>{subtitle}</p>
       </div>
-      <ChevronRightRounded sx={{ fontSize: 22, color: "#9CA3AF" }} />
+      <ChevronRightRounded sx={{ fontSize: 22, color: "#626A76" }} />
     </button>
   );
 }
@@ -53,7 +53,7 @@ export default function AccountTypeScreen({
           <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "30px", color: "#040033", lineHeight: "1.15" }}>
             Welcome to Tawsil
           </h1>
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#9CA3AF", marginTop: "8px" }}>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#626A76", marginTop: "8px" }}>
             Tell us who's shipping, and we'll set you up.
           </p>
         </div>

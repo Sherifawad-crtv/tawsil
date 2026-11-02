@@ -178,7 +178,7 @@ function StatusStrip({ status }: { status: OrderStatus }) {
             <div className="w-full flex items-center gap-1">
               <div className="w-full rounded-full" style={{ height: "4px", backgroundColor: done || active ? "#1253FA" : "#E8E8E5", transition: "background-color 0.4s ease" }} />
             </div>
-            <span style={{ fontFamily: active ? "'Archivo Black', sans-serif" : "'Courier Prime', monospace", fontSize: "9px", color: done ? "#040033" : active ? "#1253FA" : "#9CA3AF", letterSpacing: "0.04em", textAlign: "center", whiteSpace: "nowrap" }}>
+            <span style={{ fontFamily: active ? "'Archivo Black', sans-serif" : "'Courier Prime', monospace", fontSize: "9px", color: done ? "#040033" : active ? "#1253FA" : "#626A76", letterSpacing: "0.04em", textAlign: "center", whiteSpace: "nowrap" }}>
               {s}
             </span>
           </div>
@@ -253,10 +253,10 @@ function ColdChainCard() {
             </span>
             <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#6B7280" }}>°C</span>
           </div>
-          <p className="mt-0.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>
+          <p className="mt-0.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
             Target {ORDER.targetTempC}°C · ±2°C
           </p>
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
             Updated {ORDER.lastTempUpdate}
           </p>
         </div>
@@ -284,7 +284,7 @@ function WaypointRow({ idx, type, status, name, address, addrLang, contact }: {
   idx: number; type: "PICKUP" | "DROPOFF"; status: StopStatus; name: string; address: string; addrLang: "en" | "ar"; contact: string;
 }) {
   const accent = type === "PICKUP" ? "#040033" : "#1253FA";
-  const statusColor = status === "Completed" ? "#1253FA" : status === "Arrived" ? "#040033" : "#9CA3AF";
+  const statusColor = status === "Completed" ? "#1253FA" : status === "Arrived" ? "#040033" : "#626A76";
   return (
     <div className="flex gap-3">
       <div className="flex flex-col items-center">
@@ -359,7 +359,7 @@ function CancelModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: (
         <p className="mt-1.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#6B7280", lineHeight: 1.5 }}>
           The driver has already been assigned. Cancelling now may incur a fee. Type the order number to confirm.
         </p>
-        <div className="mt-4 mb-2" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+        <div className="mt-4 mb-2" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>
           Order ID
         </div>
         <div className="rounded-2xl p-3 mb-3" style={{ backgroundColor: "white", border: "1px solid #E8E8E5" }}>
@@ -396,7 +396,7 @@ function CancelModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: (
               transition: "background-color 0.2s ease",
             }}
           >
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: matches ? "white" : "#9CA3AF" }}>Cancel Order</span>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: matches ? "white" : "#626A76" }}>Cancel Order</span>
           </button>
         </div>
       </div>
@@ -615,7 +615,7 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
                 <div className="flex items-center gap-1 mt-0.5">
                   <StarRounded sx={{ fontSize: 12, color: "#040033" }} />
                   <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#040033", fontWeight: 600 }}>{ORDER.driver.rating}</span>
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF" }}>· {ORDER.driver.trips.toLocaleString()} trips</span>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>· {ORDER.driver.trips.toLocaleString()} trips</span>
                 </div>
               </div>
               <IconBtn label="Call" accent="#1253FA"><PhoneRounded sx={{ fontSize: 14 }} /></IconBtn>
@@ -652,7 +652,7 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
               {["Bill of Lading", "Odometer Start", "Odometer End", "Delivery Photos", "Signature"].map((item) => (
                 <div key={item} className="flex items-center justify-between py-2.5" style={{ borderBottom: "1px solid #F0F0EE" }}>
                   <div className="flex items-center gap-2">
-                    <RadioButtonUncheckedRounded sx={{ fontSize: 16, color: "#9CA3AF" }} />
+                    <RadioButtonUncheckedRounded sx={{ fontSize: 16, color: "#626A76" }} />
                     <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{item}</span>
                   </div>
                   <button className="px-3 py-1.5 rounded-lg cursor-pointer active:scale-95" style={{ backgroundColor: "rgba(18,83,250,0.1)", border: "none" }}>
@@ -740,7 +740,7 @@ function SummaryCell({ icon, label, value, accent, highlight }: { icon: React.Re
     <div className="rounded-2xl p-3" style={{ backgroundColor: highlight ? "#040033" : "#F8F8F6" }}>
       <div className="flex items-center gap-1.5 mb-1.5">
         <span style={{ color: highlight ? "rgba(255,255,255,0.6)" : accent, display: "flex" }}>{icon}</span>
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: highlight ? "rgba(255,255,255,0.6)" : "#9CA3AF", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: highlight ? "rgba(255,255,255,0.6)" : "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</span>
       </div>
       <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: highlight ? "white" : "#040033", lineHeight: 1.1 }}>{value}</p>
     </div>
@@ -756,7 +756,7 @@ function PersonRow({ role, name, contact }: { role: string; name: string; contac
         </span>
       </div>
       <div className="flex-1 min-w-0">
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase" }}>{role}</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>{role}</span>
         <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{name}</p>
         <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>{contact}</p>
       </div>

@@ -30,7 +30,7 @@ export default function AvailableOrdersList() {
         </div>
         {filtered.length === 0 ? (
           <EmptyState
-            icon={<InboxRounded sx={{ fontSize: 24, color: "#9CA3AF" }} />}
+            icon={<InboxRounded sx={{ fontSize: 24, color: "#626A76" }} />}
             title="No Available orders"
             subtitle="You have no orders right now. New orders will appear here automatically."
           />

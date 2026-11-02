@@ -27,7 +27,7 @@ export default function OrderDetails() {
     return (
       <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
         <ScreenHeader title="Order Details" onBack={() => navigate(-1)} />
-        <p className="text-center px-6" style={{ fontFamily: "'Archivo', sans-serif", color: "#9CA3AF" }}>Order not found.</p>
+        <p className="text-center px-6" style={{ fontFamily: "'Archivo', sans-serif", color: "#626A76" }}>Order not found.</p>
       </div>
     );
   }
@@ -66,8 +66,8 @@ export default function OrderDetails() {
 
           {/* 4. Trip - schedule anchor first, then the route as a single scannable list (no separate map-duplicating section). */}
           <Section title="Trip">
-            <InfoRow icon={<AccessTimeRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Pickup Time" value={formatDateTime(order.pickupAt)} />
-            <InfoRow icon={<TaskAltRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="POD Required" value={order.podRequired ? "Yes" : "No"} />
+            <InfoRow icon={<AccessTimeRounded sx={{ fontSize: 15, color: "#626A76" }} />} label="Pickup Time" value={formatDateTime(order.pickupAt)} />
+            <InfoRow icon={<TaskAltRounded sx={{ fontSize: 15, color: "#626A76" }} />} label="POD Required" value={order.podRequired ? "Yes" : "No"} />
             {order.waypoints.length > 0 && (
               <div className="flex flex-col gap-2.5 mt-3 pt-3" style={{ borderTop: "1px solid #F0F0EE" }}>
                 {order.waypoints.map((wp, i) => (
@@ -122,7 +122,7 @@ export default function OrderDetails() {
                   </div>
                   <div className="pb-3.5 min-w-0">
                     <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "12.5px", color: "#040033" }}>{h.toStatus}</p>
-                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF" }}>{formatDateTime(h.timestamp)}</p>
+                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>{formatDateTime(h.timestamp)}</p>
                     {h.note && <p className="mt-0.5" style={{ fontFamily: "'Archivo', sans-serif", fontSize: "11.5px", color: "#6B7280" }}>{h.note}</p>}
                   </div>
                 </div>

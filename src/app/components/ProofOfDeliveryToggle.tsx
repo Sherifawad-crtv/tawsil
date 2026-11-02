@@ -20,7 +20,7 @@ export default function ProofOfDeliveryToggle({ value, onChange }: { value: bool
           transition: "background-color 0.3s ease",
         }}
       >
-        <CameraAltRounded sx={{ fontSize: 22, color: value ? "#1253FA" : "#9CA3AF" }} />
+        <CameraAltRounded sx={{ fontSize: 22, color: value ? "#1253FA" : "#626A76" }} />
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
@@ -34,7 +34,7 @@ export default function ProofOfDeliveryToggle({ value, onChange }: { value: bool
             Recommended
           </span>
         </div>
-        <p className="mt-0.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", lineHeight: "1.4" }}>
+        <p className="mt-0.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", lineHeight: "1.4" }}>
           Require photo confirmation at drop‑off.
         </p>
       </div>

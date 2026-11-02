@@ -34,7 +34,7 @@ export default function HomeScreen() {
       {/* ── Header ── */}
       <div className="flex items-start justify-between gap-3 mb-5">
         <div>
-          <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "13px", color: "#9CA3AF" }}>Welcome back, {firstName}</p>
+          <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "13px", color: "#626A76" }}>Welcome back, {firstName}</p>
           <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033", lineHeight: 1.15, marginTop: "2px" }}>
             Dashboard
           </h1>
@@ -74,7 +74,7 @@ export default function HomeScreen() {
         <SectionHeading label="Active Trips" count={inProgress.length} />
         {inProgress.length === 0 ? (
           <EmptyState
-            icon={<InboxRounded sx={{ fontSize: 24, color: "#9CA3AF" }} />}
+            icon={<InboxRounded sx={{ fontSize: 24, color: "#626A76" }} />}
             title="No trips in progress"
             subtitle="Dispatched orders will appear here once they're on their way."
           />
@@ -104,7 +104,7 @@ export default function HomeScreen() {
         </div>
         {availableFiltered.length === 0 ? (
           <EmptyState
-            icon={<InboxRounded sx={{ fontSize: 24, color: "#9CA3AF" }} />}
+            icon={<InboxRounded sx={{ fontSize: 24, color: "#626A76" }} />}
             title="No Available orders"
             subtitle="You have no orders right now. New orders will appear here automatically."
           />
@@ -142,7 +142,7 @@ function StatTile({
         <Icon sx={{ fontSize: 16, color: "#1253FA" }} />
       </div>
       <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "17px", color: "#040033" }}>{value}</span>
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#9CA3AF" }}>{label}</span>
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#626A76" }}>{label}</span>
     </button>
   );
 }

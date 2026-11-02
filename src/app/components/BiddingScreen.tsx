@@ -7,6 +7,7 @@ import AccessTimeRounded from "./icons/AccessTimeRounded";
 import CloseRounded from "./icons/CloseRounded";
 import TrendingDownRounded from "./icons/TrendingDownRounded";
 import GavelRounded from "./icons/GavelRounded";
+import ConfirmSheet from "./ConfirmSheet";
 
 export type Offer = {
   id: string;
@@ -43,6 +44,7 @@ export default function BiddingScreen({
   const [offers, setOffers] = useState<Offer[]>([SEED_OFFERS[0]]);
   const [yourOffer, setYourOffer] = useState<number>(initialOffer ?? RECOMMENDED_PRICE);
   const [counterOpen, setCounterOpen] = useState(false);
+  const [confirmingCancel, setConfirmingCancel] = useState(false);
   const [pulseId, setPulseId] = useState<string | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const idx = useRef(1);
@@ -83,7 +85,7 @@ export default function BiddingScreen({
         }}
       >
         <button
-          onClick={onCancel}
+          onClick={() => setConfirmingCancel(true)}
           className="flex items-center justify-center cursor-pointer active:scale-90 transition-transform"
           style={{ width: "40px", height: "40px", borderRadius: "14px", backgroundColor: "rgba(255,255,255,0.08)", border: "none" }}
         >
@@ -182,7 +184,7 @@ export default function BiddingScreen({
               <div className="h-3 rounded mb-2" style={{ width: "55%", backgroundColor: "#F0F0EE", animation: "shimmer 1.5s ease-in-out infinite" }} />
               <div className="h-2.5 rounded" style={{ width: "35%", backgroundColor: "#F0F0EE", animation: "shimmer 1.5s ease-in-out infinite 0.2s" }} />
             </div>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.08em" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.08em" }}>
               SEARCHING…
             </span>
           </div>
@@ -199,7 +201,7 @@ export default function BiddingScreen({
         }}
       >
         <button
-          onClick={onCancel}
+          onClick={() => setConfirmingCancel(true)}
           className="w-full rounded-2xl flex items-center justify-center gap-2 active:scale-[0.97] cursor-pointer"
           style={{
             backgroundColor: "white",
@@ -214,6 +216,17 @@ export default function BiddingScreen({
           </span>
         </button>
       </div>
+
+      {confirmingCancel && (
+        <ConfirmSheet
+          title="Cancel bidding?"
+          body="Drivers' offers so far will be discarded and you'll go back to your booking."
+          confirmLabel="Cancel Bidding"
+          cancelLabel="Keep Bidding"
+          onConfirm={onCancel}
+          onCancel={() => setConfirmingCancel(false)}
+        />
+      )}
 
       {counterOpen && (
         <CounterOfferModal
@@ -332,7 +345,7 @@ function OfferCard({
                 {offer.rating}
               </span>
             </div>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>
               · {offer.trips.toLocaleString()} trips · {offer.yearsActive}y
             </span>
           </div>
@@ -354,7 +367,7 @@ function OfferCard({
 
         {/* Price */}
         <div className="flex flex-col items-end flex-shrink-0">
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#9CA3AF", letterSpacing: "0.1em" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#626A76", letterSpacing: "0.1em" }}>
             EGP
           </span>
           <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", color: "#040033", lineHeight: 1 }}>
@@ -426,7 +439,7 @@ function CounterOfferModal({
 
         <div className="rounded-2xl p-5 mb-4" style={{ backgroundColor: "white" }}>
           <div className="flex items-baseline justify-center gap-2 mb-4">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#9CA3AF" }}>EGP</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#626A76" }}>EGP</span>
             <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "44px", color: "#040033", lineHeight: 1 }}>
               {val}
             </span>
@@ -442,13 +455,13 @@ function CounterOfferModal({
             style={{ accentColor: "#1253FA" }}
           />
           <div className="flex justify-between mt-1">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
               EGP {min}
             </span>
             <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA" }}>
               Recommended: EGP {recommended}
             </span>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
               EGP {max}
             </span>
           </div>

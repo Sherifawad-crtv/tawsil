@@ -97,7 +97,7 @@ export default function BookingTypeSelector({ state, onChange, onOpenScheduleMod
                   fontFamily: "'Archivo', sans-serif",
                   fontWeight: 600,
                   fontSize: "14px",
-                  color: active ? "#040033" : "#9CA3AF",
+                  color: active ? "#040033" : "#626A76",
                   transition: "color 0.2s",
                 }}
               >
@@ -141,11 +141,11 @@ export default function BookingTypeSelector({ state, onChange, onOpenScheduleMod
 
 /* ── Icons ── */
 function OnDemandIcon({ active }: { active: boolean }) {
-  return <BoltRounded sx={{ fontSize: 16, color: active ? "#1253FA" : "#9CA3AF" }} />;
+  return <BoltRounded sx={{ fontSize: 16, color: active ? "#1253FA" : "#626A76" }} />;
 }
 
 function RentalIcon({ active }: { active: boolean }) {
-  return <DateRangeRounded sx={{ fontSize: 16, color: active ? "#1253FA" : "#9CA3AF" }} />;
+  return <DateRangeRounded sx={{ fontSize: 16, color: active ? "#1253FA" : "#626A76" }} />;
 }
 
 /* ══════════════════════════════════════════
@@ -169,13 +169,13 @@ function OnDemandSection({
             id: "now" as const,
             label: "Now",
             desc: "Instant dispatch",
-            icon: (a: boolean) => <AccessTimeRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#9CA3AF" }} />,
+            icon: (a: boolean) => <AccessTimeRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#626A76" }} />,
           },
           {
             id: "schedule" as const,
             label: "Schedule",
             desc: "Pick date & time",
-            icon: (a: boolean) => <CalendarMonthRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#9CA3AF" }} />,
+            icon: (a: boolean) => <CalendarMonthRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#626A76" }} />,
           },
         ]).map(({ id, label, desc, icon }) => {
           const active = mode === id;
@@ -201,7 +201,7 @@ function OnDemandSection({
                 <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: active ? "#040033" : "#6B7280" }}>
                   {label}
                 </p>
-                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", marginTop: "1px" }}>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", marginTop: "1px" }}>
                   {desc}
                 </p>
               </div>
@@ -226,7 +226,7 @@ function OnDemandSection({
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
               Instant Dispatch
             </p>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", marginTop: "1px" }}>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "1px" }}>
               Truck assigned within minutes
             </p>
           </div>
@@ -283,13 +283,13 @@ function RentalSection({
             id: "daily" as const,
             label: "Daily",
             desc: "Rent for a single day",
-            icon: (a: boolean) => <CalendarTodayRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#9CA3AF" }} />,
+            icon: (a: boolean) => <CalendarTodayRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#626A76" }} />,
           },
           {
             id: "monthly" as const,
             label: "Monthly",
             desc: "10+ days per month",
-            icon: (a: boolean) => <AutorenewRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#9CA3AF" }} />,
+            icon: (a: boolean) => <AutorenewRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#626A76" }} />,
           },
         ]).map(({ id, label, desc, icon }) => {
           const active = mode === id;
@@ -315,7 +315,7 @@ function RentalSection({
                 <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: active ? "#040033" : "#6B7280" }}>
                   {label}
                 </p>
-                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", marginTop: "1px" }}>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", marginTop: "1px" }}>
                   {desc}
                 </p>
               </div>
@@ -419,7 +419,7 @@ function DailyRentalPicker({
         <div className="grid grid-cols-7 px-3 pb-1">
           {DAYS.map((d) => (
             <div key={d} className="flex items-center justify-center py-1.5">
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.04em" }}>{d}</span>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.04em" }}>{d}</span>
             </div>
           ))}
         </div>
@@ -486,7 +486,7 @@ function DailyRentalPicker({
         >
           <div className="px-4 pt-4 pb-2 flex items-center gap-2">
             <SpeedRounded sx={{ fontSize: 16, color: "#040033" }} />
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>
               Estimated Kilometers
             </span>
           </div>
@@ -511,7 +511,7 @@ function DailyRentalPicker({
                   minWidth: 0,
                 }}
               />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "14px", color: "#9CA3AF" }}>km</span>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "14px", color: "#626A76" }}>km</span>
             </div>
           </div>
 
@@ -545,7 +545,7 @@ function DailyRentalPicker({
 
           {/* Info line */}
           <div className="px-4 pb-4">
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", lineHeight: "1.5" }}>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", lineHeight: "1.5" }}>
               Set the expected distance for this rental day. Charges apply per km.
             </p>
           </div>
@@ -562,13 +562,13 @@ function DailyRentalPicker({
             className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
             style={{ backgroundColor: "#E8E8E5" }}
           >
-            <CalendarMonthRounded sx={{ fontSize: 16, color: "#9CA3AF" }} />
+            <CalendarMonthRounded sx={{ fontSize: 16, color: "#626A76" }} />
           </div>
           <div>
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
               Select a rental day
             </p>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", marginTop: "1px" }}>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", marginTop: "1px" }}>
               Tap a date on the calendar above
             </p>
           </div>
@@ -856,7 +856,7 @@ function MonthDayPicker({
       <div className="grid grid-cols-7 px-3 pb-1">
         {DAYS.map((d) => (
           <div key={d} className="flex items-center justify-center py-1.5">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.04em" }}>{d}</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.04em" }}>{d}</span>
           </div>
         ))}
       </div>
@@ -891,7 +891,7 @@ function MonthDayPicker({
                 fontFamily: "'Archivo', sans-serif",
                 fontWeight: sel || tod ? 700 : 500,
                 fontSize: "13px",
-                color: sel ? "white" : tod ? "#1253FA" : wknd ? "#9CA3AF" : "#040033",
+                color: sel ? "white" : tod ? "#1253FA" : wknd ? "#626A76" : "#040033",
               }}>
                 {day}
               </span>

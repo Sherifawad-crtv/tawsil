@@ -3,6 +3,7 @@ import { useAuth } from "../lib/AuthContext";
 import { displayName, initialsOf } from "../lib/authTypes";
 import AddEmailModal from "./onboarding/AddEmailModal";
 import IndividualSignup from "./onboarding/IndividualSignup";
+import ConfirmSheet from "./ConfirmSheet";
 import { PrimaryButton, GhostButton } from "./onboarding/StepChrome";
 import NotificationsRounded from "./icons/NotificationsRounded";
 import MyLocationRounded from "./icons/MyLocationRounded";
@@ -92,6 +93,7 @@ export default function ProfileScreen() {
   });
   const [showAddEmail, setShowAddEmail] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [confirmingSignOut, setConfirmingSignOut] = useState(false);
 
   // App.tsx reaches this screen without a user for a guest session - give
   // them a way to register (or step out of guest mode) instead of a blank screen.
@@ -105,12 +107,22 @@ export default function ProfileScreen() {
           <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "19px", color: "#040033" }}>
             You're browsing as a guest
           </h2>
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12.5px", color: "#9CA3AF", marginTop: "8px", marginBottom: "20px", lineHeight: 1.5 }}>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12.5px", color: "#626A76", marginTop: "8px", marginBottom: "20px", lineHeight: 1.5 }}>
             Create an account to save your details, track orders and book faster next time.
           </p>
           <PrimaryButton label="Create Account" onClick={() => setShowRegister(true)} />
-          <GhostButton label="Exit guest mode" onClick={signOut} />
+          <GhostButton label="Exit guest mode" onClick={() => setConfirmingSignOut(true)} />
         </div>
+
+        {confirmingSignOut && (
+          <ConfirmSheet
+            title="Exit guest mode?"
+            body="You'll go back to the welcome screen and any booking you started will be lost."
+            confirmLabel="Exit"
+            onConfirm={signOut}
+            onCancel={() => setConfirmingSignOut(false)}
+          />
+        )}
 
         {showRegister && (
           <div className="fixed inset-0 z-50">
@@ -155,7 +167,7 @@ export default function ProfileScreen() {
                 {name}
               </h2>
               {subtitle && (
-                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF", marginTop: "2px" }}>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginTop: "2px" }}>
                   {subtitle}
                 </p>
               )}
@@ -166,7 +178,7 @@ export default function ProfileScreen() {
                 >
                   {accountTypeLabel}
                 </span>
-                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF" }}>
+                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
                   Since {memberSince}
                 </span>
               </div>
@@ -177,7 +189,7 @@ export default function ProfileScreen() {
 
           <div className="flex flex-col gap-3 mt-4">
             <div className="flex items-center gap-3">
-              <MailOutlineRounded sx={{ fontSize: 14, color: "#9CA3AF" }} />
+              <MailOutlineRounded sx={{ fontSize: 14, color: "#626A76" }} />
               {user.email ? (
                 <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#040033" }}>{user.email}</span>
               ) : (
@@ -191,11 +203,21 @@ export default function ProfileScreen() {
               )}
             </div>
             <div className="flex items-center gap-3">
-              <PhoneRounded sx={{ fontSize: 14, color: "#9CA3AF" }} />
+              <PhoneRounded sx={{ fontSize: 14, color: "#626A76" }} />
               <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#040033" }}>{user.phone}</span>
             </div>
           </div>
         </div>
+
+        {confirmingSignOut && (
+          <ConfirmSheet
+            title="Sign out?"
+            body="You'll need your phone number and a verification code to sign back in."
+            confirmLabel="Sign Out"
+            onConfirm={signOut}
+            onCancel={() => setConfirmingSignOut(false)}
+          />
+        )}
 
         {showAddEmail && (
           <AddEmailModal
@@ -206,7 +228,7 @@ export default function ProfileScreen() {
 
         {/* ── Settings ── */}
         <div className="mb-3">
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             Settings
           </span>
         </div>
@@ -226,7 +248,7 @@ export default function ProfileScreen() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>{setting.label}</p>
-                  <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", marginTop: "1px" }}>{setting.desc}</p>
+                  <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "1px" }}>{setting.desc}</p>
                 </div>
                 <ToggleSwitch
                   checked={toggles[setting.id]}
@@ -239,7 +261,7 @@ export default function ProfileScreen() {
 
         {/* ── Menu Items ── */}
         <div className="mb-3">
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             More
           </span>
         </div>
@@ -266,7 +288,7 @@ export default function ProfileScreen() {
                 <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033", flex: 1 }}>
                   {item.label}
                 </span>
-                <ChevronRightRounded sx={{ fontSize: 14, color: "#9CA3AF" }} />
+                <ChevronRightRounded sx={{ fontSize: 14, color: "#626A76" }} />
               </button>
             </div>
           ))}
@@ -274,7 +296,7 @@ export default function ProfileScreen() {
 
         {/* ── Logout ── */}
         <button
-          onClick={signOut}
+          onClick={() => setConfirmingSignOut(true)}
           className="w-full py-3.5 rounded-2xl flex items-center justify-center gap-2 cursor-pointer active:scale-[0.97] transition-transform"
           style={{
             backgroundColor: "white",

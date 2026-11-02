@@ -26,7 +26,7 @@ export default function ConfirmSheet({
         </div>
         <div className="text-center">
           <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "17px", color: "#040033" }}>{title}</p>
-          <p className="mt-1.5" style={{ fontFamily: "'Archivo', sans-serif", fontSize: "13px", color: "#9CA3AF" }}>{body}</p>
+          <p className="mt-1.5" style={{ fontFamily: "'Archivo', sans-serif", fontSize: "13px", color: "#626A76" }}>{body}</p>
         </div>
         <div className="flex flex-col gap-2.5">
           <Button variant="destructive" onClick={onConfirm}>{confirmLabel}</Button>

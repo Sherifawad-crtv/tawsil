@@ -28,7 +28,7 @@ export default function TruckForm({ mode }: { mode: "create" | "edit" }) {
     return (
       <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
         <ScreenHeader title="Edit Truck" onBack={() => navigate("/trucks")} />
-        <p className="text-center px-6" style={{ fontFamily: "'Archivo', sans-serif", color: "#9CA3AF" }}>Truck not found.</p>
+        <p className="text-center px-6" style={{ fontFamily: "'Archivo', sans-serif", color: "#626A76" }}>Truck not found.</p>
       </div>
     );
   }
@@ -69,7 +69,7 @@ export default function TruckForm({ mode }: { mode: "create" | "edit" }) {
               <AddCircleRounded sx={{ fontSize: 26, color: "#1253FA" }} />
             </div>
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "16px", color: "#040033" }}>Register New Truck</p>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#9CA3AF" }}>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>
               Add a new truck to your fleet management system
             </p>
           </div>

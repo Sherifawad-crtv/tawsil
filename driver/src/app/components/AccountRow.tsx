@@ -25,7 +25,7 @@ export default function AccountRow({
       <span className="flex-1 text-left" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: destructive ? "#DC2626" : "#040033" }}>
         {label}
       </span>
-      <ChevronRightRounded sx={{ fontSize: 19, color: destructive ? "#DC2626" : "#9CA3AF" }} />
+      <ChevronRightRounded sx={{ fontSize: 19, color: destructive ? "#DC2626" : "#626A76" }} />
     </button>
   );
 }

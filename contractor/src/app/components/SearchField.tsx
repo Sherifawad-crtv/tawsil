@@ -14,7 +14,7 @@ export default function SearchField({
       className="flex items-center gap-2 rounded-2xl px-3.5"
       style={{ backgroundColor: "#F0F0EE", height: "44px" }}
     >
-      <SearchRounded sx={{ fontSize: 19, color: "#9CA3AF", flexShrink: 0 }} />
+      <SearchRounded sx={{ fontSize: 19, color: "#626A76", flexShrink: 0 }} />
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}

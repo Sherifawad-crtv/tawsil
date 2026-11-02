@@ -66,16 +66,16 @@ export function ScheduleToggle({
             }}
           >
             {m === "now" ? (
-              <AccessTimeRounded sx={{ fontSize: 16, color: mode === m ? "#1253FA" : "#9CA3AF" }} />
+              <AccessTimeRounded sx={{ fontSize: 16, color: mode === m ? "#1253FA" : "#626A76" }} />
             ) : (
-              <CalendarMonthRounded sx={{ fontSize: 16, color: mode === m ? "#1253FA" : "#9CA3AF" }} />
+              <CalendarMonthRounded sx={{ fontSize: 16, color: mode === m ? "#1253FA" : "#626A76" }} />
             )}
             <span
               style={{
                 fontFamily: "'Archivo', sans-serif",
                 fontWeight: 600,
                 fontSize: "14px",
-                color: mode === m ? "#040033" : "#9CA3AF",
+                color: mode === m ? "#040033" : "#626A76",
                 transition: "color 0.2s",
               }}
             >
@@ -101,7 +101,7 @@ export function ScheduleToggle({
             <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>
               Instant Dispatch
             </p>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", marginTop: "2px" }}>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "2px" }}>
               Truck assigned within minutes
             </p>
           </div>
@@ -265,7 +265,7 @@ export function ScheduleModal({
             <div className="grid grid-cols-7 px-4 pb-1">
               {DAYS.map((d) => (
                 <div key={d} className="flex items-center justify-center py-1.5">
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.04em" }}>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.04em" }}>
                     {d}
                   </span>
                 </div>
@@ -327,7 +327,7 @@ export function ScheduleModal({
           >
             <div className="px-5 pt-4 pb-2 flex items-center gap-2">
               <AccessTimeRounded sx={{ fontSize: 14, color: "#040033" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>
                 Pickup Time
               </span>
             </div>

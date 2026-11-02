@@ -33,7 +33,7 @@ export default function OrderDetails() {
     return (
       <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
         <ScreenHeader title="Order Details" onBack={() => navigate(-1)} />
-        <p className="text-center px-6" style={{ fontFamily: "'Archivo', sans-serif", color: "#9CA3AF" }}>Order not found.</p>
+        <p className="text-center px-6" style={{ fontFamily: "'Archivo', sans-serif", color: "#626A76" }}>Order not found.</p>
       </div>
     );
   }
@@ -99,7 +99,7 @@ export default function OrderDetails() {
               </div>
             ) : (
               <div className="p-4">
-                <UnassignedRow icon={<PersonRounded sx={{ fontSize: 18, color: "#9CA3AF" }} />} label="No driver assigned yet" />
+                <UnassignedRow icon={<PersonRounded sx={{ fontSize: 18, color: "#626A76" }} />} label="No driver assigned yet" />
               </div>
             )}
             <div style={{ height: "1px", backgroundColor: "#F0F0EE" }} />
@@ -110,7 +110,7 @@ export default function OrderDetails() {
                     <LocalShippingRounded sx={{ fontSize: 18, color: "white" }} />
                   </div>
                   <div className="min-w-0">
-                    <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#9CA3AF" }}>Vehicle</p>
+                    <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#626A76" }}>Vehicle</p>
                     <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13.5px", color: "#040033" }}>{truckTypeLabel(order)}</p>
                     <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>{truck.plateNumber}</p>
                   </div>
@@ -118,15 +118,15 @@ export default function OrderDetails() {
               </div>
             ) : (
               <div className="p-4">
-                <UnassignedRow icon={<LocalShippingRounded sx={{ fontSize: 18, color: "#9CA3AF" }} />} label="No vehicle assigned yet" />
+                <UnassignedRow icon={<LocalShippingRounded sx={{ fontSize: 18, color: "#626A76" }} />} label="No vehicle assigned yet" />
               </div>
             )}
           </div>
 
           {/* 4. Trip - schedule anchor first, then the route as a single scannable list (no separate map-duplicating section). */}
           <Section title="Trip">
-            <InfoRow icon={<AccessTimeRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="Pickup Time" value={formatDateTime(order.pickupAt)} />
-            <InfoRow icon={<TaskAltRounded sx={{ fontSize: 15, color: "#9CA3AF" }} />} label="POD Required" value={order.podRequired ? "Yes" : "No"} />
+            <InfoRow icon={<AccessTimeRounded sx={{ fontSize: 15, color: "#626A76" }} />} label="Pickup Time" value={formatDateTime(order.pickupAt)} />
+            <InfoRow icon={<TaskAltRounded sx={{ fontSize: 15, color: "#626A76" }} />} label="POD Required" value={order.podRequired ? "Yes" : "No"} />
             {order.waypoints.length > 0 && (
               <div className="flex flex-col gap-2.5 mt-3 pt-3" style={{ borderTop: "1px solid #F0F0EE" }}>
                 {order.waypoints.map((wp, i) => (
@@ -187,7 +187,7 @@ export default function OrderDetails() {
                   </div>
                   <div className="pb-3.5 min-w-0">
                     <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "12.5px", color: "#040033" }}>{h.toStatus}</p>
-                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF" }}>{formatDateTime(h.timestamp)}</p>
+                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>{formatDateTime(h.timestamp)}</p>
                     {h.note && <p className="mt-0.5" style={{ fontFamily: "'Archivo', sans-serif", fontSize: "11.5px", color: "#6B7280" }}>{h.note}</p>}
                   </div>
                 </div>
@@ -241,7 +241,7 @@ function UnassignedRow({ icon, label }: { icon: React.ReactNode; label: string }
   return (
     <div className="rounded-[18px] p-3.5 flex items-center gap-3" style={{ backgroundColor: "#F5F5F3", border: "1px dashed #D8D9D4" }}>
       {icon}
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "12.5px", color: "#9CA3AF" }}>{label}</span>
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "12.5px", color: "#626A76" }}>{label}</span>
     </div>
   );
 }
@@ -256,7 +256,7 @@ function FileRow({ label, available }: { label: string; available: boolean }) {
           <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "11.5px" }}>Available</span>
         </span>
       ) : (
-        <span className="flex items-center gap-1" style={{ color: "#9CA3AF" }}>
+        <span className="flex items-center gap-1" style={{ color: "#626A76" }}>
           <RadioButtonUncheckedRounded sx={{ fontSize: 16 }} />
           <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "11.5px" }}>Not Available</span>
         </span>

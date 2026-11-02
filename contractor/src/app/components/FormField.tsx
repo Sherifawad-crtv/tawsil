@@ -3,7 +3,7 @@ import type { InputHTMLAttributes, SelectHTMLAttributes } from "react";
 const LABEL_STYLE = {
   fontFamily: "'Courier Prime', monospace",
   fontSize: "11px",
-  color: "#9CA3AF",
+  color: "#626A76",
   letterSpacing: "0.06em",
   textTransform: "uppercase" as const,
 };

@@ -1,10 +1,4 @@
-import SvgIcon, { type SvgIconProps } from "@mui/material/SvgIcon";
+import { MinusIcon } from "@solar-icons/react/linear";
+import { makeIcon } from "./_makeIcon";
 
-/** Sourced from google/material-design-icons Material Symbols (Remove, rounded, filled, 24px). */
-export default function RemoveRounded(props: SvgIconProps) {
-  return (
-    <SvgIcon viewBox="0 -960 960 960" {...props}>
-      <path d="M240-440q-17 0-28.5-11.5T200-480q0-17 11.5-28.5T240-520h480q17 0 28.5 11.5T760-480q0 17-11.5 28.5T720-440H240Z" />
-    </SvgIcon>
-  );
-}
+export default makeIcon(MinusIcon);

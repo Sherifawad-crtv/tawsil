@@ -109,7 +109,7 @@ export default function BottomNav({ activeScreen, onNavigate }: BottomNavProps) 
               style={{
                 fontFamily: "'Archivo', sans-serif",
                 fontWeight: 600,
-                fontSize: "13px",
+                fontSize: "var(--type-body-sm)",
                 color: "white",
                 whiteSpace: "nowrap",
                 overflow: "hidden",

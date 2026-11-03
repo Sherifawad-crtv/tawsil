@@ -104,10 +104,10 @@ export default function ProfileScreen() {
           <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: "rgba(18,83,250,0.08)" }}>
             <PersonRounded sx={{ fontSize: 26, color: "#1253FA" }} />
           </div>
-          <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "19px", color: "#040033" }}>
+          <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-heading)", color: "#040033" }}>
             You're browsing as a guest
           </h2>
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12.5px", color: "#626A76", marginTop: "8px", marginBottom: "20px", lineHeight: 1.5 }}>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76", marginTop: "8px", marginBottom: "20px", lineHeight: 1.5 }}>
             Create an account to save your details, track orders and book faster next time.
           </p>
           <PrimaryButton label="Create Account" onClick={() => setShowRegister(true)} />
@@ -144,7 +144,7 @@ export default function ProfileScreen() {
       <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 20px), 20px)", paddingBottom: "calc(env(safe-area-inset-bottom, 16px) + 96px)" }}>
 
         {/* ── Header ── */}
-        <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: "1.15", marginBottom: "24px" }}>
+        <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033", lineHeight: "1.15", marginBottom: "24px" }}>
           Profile
         </h1>
 
@@ -158,27 +158,27 @@ export default function ProfileScreen() {
               className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
               style={{ background: "linear-gradient(135deg, #040033, #0A0070)" }}
             >
-              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", color: "white" }}>
+              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-heading)", color: "white" }}>
                 {initials}
               </span>
             </div>
             <div className="flex-1 min-w-0">
-              <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>
+              <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-heading)", color: "#040033" }}>
                 {name}
               </h2>
               {subtitle && (
-                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginTop: "2px" }}>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76", marginTop: "2px" }}>
                   {subtitle}
                 </p>
               )}
               <div className="flex items-center gap-2 mt-2">
                 <span
                   className="px-2.5 py-0.5 rounded-xl"
-                  style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "10px", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.08)", textTransform: "uppercase", letterSpacing: "0.06em" }}
+                  style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-caption)", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.08)", textTransform: "uppercase", letterSpacing: "0.06em" }}
                 >
                   {accountTypeLabel}
                 </span>
-                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
+                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
                   Since {memberSince}
                 </span>
               </div>
@@ -191,12 +191,12 @@ export default function ProfileScreen() {
             <div className="flex items-center gap-3">
               <MailOutlineRounded sx={{ fontSize: 14, color: "#626A76" }} />
               {user.email ? (
-                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#040033" }}>{user.email}</span>
+                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#040033" }}>{user.email}</span>
               ) : (
                 <button
                   onClick={() => setShowAddEmail(true)}
                   className="cursor-pointer active:opacity-70 transition-opacity"
-                  style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#1253FA", border: "none", background: "none" }}
+                  style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#1253FA", border: "none", background: "none" }}
                 >
                   + Add email address
                 </button>
@@ -204,7 +204,7 @@ export default function ProfileScreen() {
             </div>
             <div className="flex items-center gap-3">
               <PhoneRounded sx={{ fontSize: 14, color: "#626A76" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#040033" }}>{user.phone}</span>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#040033" }}>{user.phone}</span>
             </div>
           </div>
         </div>
@@ -228,7 +228,7 @@ export default function ProfileScreen() {
 
         {/* ── Settings ── */}
         <div className="mb-3">
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             Settings
           </span>
         </div>
@@ -247,8 +247,8 @@ export default function ProfileScreen() {
                   {setting.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>{setting.label}</p>
-                  <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "1px" }}>{setting.desc}</p>
+                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" }}>{setting.label}</p>
+                  <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", marginTop: "1px" }}>{setting.desc}</p>
                 </div>
                 <ToggleSwitch
                   checked={toggles[setting.id]}
@@ -261,7 +261,7 @@ export default function ProfileScreen() {
 
         {/* ── Menu Items ── */}
         <div className="mb-3">
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             More
           </span>
         </div>
@@ -285,7 +285,7 @@ export default function ProfileScreen() {
                   {item.icon === "help" && <HelpOutlineRounded sx={{ fontSize: 16, color: "#040033" }} />}
                   {item.icon === "shield" && <ShieldRounded sx={{ fontSize: 16, color: "#040033" }} />}
                 </div>
-                <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033", flex: 1 }}>
+                <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033", flex: 1 }}>
                   {item.label}
                 </span>
                 <ChevronRightRounded sx={{ fontSize: 14, color: "#626A76" }} />
@@ -305,7 +305,7 @@ export default function ProfileScreen() {
           }}
         >
           <LogoutRounded sx={{ fontSize: 16, color: "#DC2626" }} />
-          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#DC2626" }}>
+          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#DC2626" }}>
             Sign Out
           </span>
         </button>

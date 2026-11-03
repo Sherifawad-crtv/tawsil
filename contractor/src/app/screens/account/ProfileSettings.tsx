@@ -19,13 +19,13 @@ export default function ProfileSettings() {
       <div className="w-full max-w-lg mx-auto px-4 pb-8 flex flex-col gap-5">
         <div className="rounded-[20px] bg-white p-4 flex items-center gap-3.5" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
           <div className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#040033" }}>
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "white" }}>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "white" }}>
               {profile.fullName.split(" ").map((p) => p[0]).join("")}
             </span>
           </div>
           <div className="min-w-0">
-            <p className="truncate" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>{profile.fullName}</p>
-            <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>{profile.email}</p>
+            <p className="truncate" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "#040033" }}>{profile.fullName}</p>
+            <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>{profile.email}</p>
           </div>
         </div>
 

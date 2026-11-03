@@ -61,15 +61,15 @@ export default function TruckForm({ mode }: { mode: "create" | "edit" }) {
             <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
               <LocalShippingRounded sx={{ fontSize: 34, color: "#1253FA" }} />
             </div>
-            <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>{existing.plateNumber}</p>
+            <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-heading)", color: "#040033" }}>{existing.plateNumber}</p>
           </div>
         ) : (
           <div className="rounded-[22px] p-5 flex flex-col items-center text-center gap-2" style={{ backgroundColor: "white", boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
             <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
               <AddCircleRounded sx={{ fontSize: 26, color: "#1253FA" }} />
             </div>
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "16px", color: "#040033" }}>Register New Truck</p>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>
+            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-title)", color: "#040033" }}>Register New Truck</p>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>
               Add a new truck to your fleet management system
             </p>
           </div>

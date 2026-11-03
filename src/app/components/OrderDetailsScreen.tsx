@@ -134,7 +134,7 @@ function SectionHeader({ icon, label, accent, right }: { icon: React.ReactNode; 
         <div className="w-7 h-7 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${accent}14` }}>
           <span style={{ color: accent, display: "flex" }}>{icon}</span>
         </div>
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#040033", letterSpacing: "0.02em" }}>{label}</span>
+        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body-sm)", color: "#040033", letterSpacing: "0.02em" }}>{label}</span>
       </div>
       {right}
     </div>
@@ -158,7 +158,7 @@ function IconBtn({ children, label, onClick, accent = "#1253FA" }: { children: R
       style={{ backgroundColor: `${accent}12`, border: "none", transition: "transform 0.15s ease" }}
     >
       <span style={{ color: accent, display: "flex" }}>{children}</span>
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "11px", color: accent, letterSpacing: "0.02em" }}>
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-caption)", color: accent, letterSpacing: "0.02em" }}>
         {label}
       </span>
     </button>
@@ -178,7 +178,7 @@ function StatusStrip({ status }: { status: OrderStatus }) {
             <div className="w-full flex items-center gap-1">
               <div className="w-full rounded-full" style={{ height: "4px", backgroundColor: done || active ? "#1253FA" : "#E8E8E5", transition: "background-color 0.4s ease" }} />
             </div>
-            <span style={{ fontFamily: active ? "'Archivo Black', sans-serif" : "'Courier Prime', monospace", fontSize: "9px", color: done ? "#040033" : active ? "#1253FA" : "#626A76", letterSpacing: "0.04em", textAlign: "center", whiteSpace: "nowrap" }}>
+            <span style={{ fontFamily: active ? "'Archivo Black', sans-serif" : "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: done ? "#040033" : active ? "#1253FA" : "#626A76", letterSpacing: "0.04em", textAlign: "center", whiteSpace: "nowrap" }}>
               {s}
             </span>
           </div>
@@ -210,7 +210,7 @@ function ContextualCTA({ status, onAction }: { status: OrderStatus; onAction: ()
         transition: "transform 0.2s ease",
       }}
     >
-      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "white", letterSpacing: "0.04em" }}>
+      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "white", letterSpacing: "0.04em" }}>
         {map[status].toUpperCase()}
       </span>
     </button>
@@ -239,7 +239,7 @@ function ColdChainCard() {
         right={
           <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg" style={{ backgroundColor: `${dotColor}12` }}>
             <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dotColor, boxShadow: `0 0 6px ${dotColor}` }} />
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: dotColor, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: dotColor, letterSpacing: "0.06em", textTransform: "uppercase" }}>
               In Range
             </span>
           </div>
@@ -248,15 +248,15 @@ function ColdChainCard() {
       <div className="flex items-end justify-between gap-3">
         <div>
           <div className="flex items-baseline gap-1">
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "30px", color: "#040033", lineHeight: 1 }}>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033", lineHeight: 1 }}>
               {ORDER.currentTempC.toFixed(1)}
             </span>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#6B7280" }}>°C</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#6B7280" }}>°C</span>
           </div>
-          <p className="mt-0.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
+          <p className="mt-0.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
             Target {ORDER.targetTempC}°C · ±2°C
           </p>
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
             Updated {ORDER.lastTempUpdate}
           </p>
         </div>
@@ -272,7 +272,7 @@ function ColdChainCard() {
         </svg>
       </div>
       <button className="w-full mt-3 pt-3 flex items-center justify-center gap-1 cursor-pointer active:opacity-70" style={{ borderTop: "1px solid #F0F0EE", borderLeft: "none", borderRight: "none", borderBottom: "none", backgroundColor: "transparent" }}>
-        <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "11px", color: "#1253FA" }}>View 24h Log</span>
+        <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-caption)", color: "#1253FA" }}>View 24h Log</span>
         <KeyboardArrowDownRounded sx={{ fontSize: 14, color: "#1253FA", transform: "rotate(-90deg)" }} />
       </button>
     </Card>
@@ -289,34 +289,34 @@ function WaypointRow({ idx, type, status, name, address, addrLang, contact }: {
     <div className="flex gap-3">
       <div className="flex flex-col items-center">
         <div className="flex items-center justify-center" style={{ width: "26px", height: "26px", borderRadius: "13px", backgroundColor: accent }}>
-          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "11px", color: "white" }}>{idx}</span>
+          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-caption)", color: "white" }}>{idx}</span>
         </div>
         {idx === 1 && <div style={{ width: "1.5px", flex: 1, minHeight: "30px", marginTop: "4px", marginBottom: "4px", background: "repeating-linear-gradient(to bottom, #D8D9D4 0 4px, transparent 4px 8px)" }} />}
       </div>
       <div className="flex-1 min-w-0 pb-3">
         <div className="flex items-center gap-2 mb-1.5">
-          <span className="px-2 py-0.5 rounded-md" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "9px", color: accent, backgroundColor: `${accent}12`, letterSpacing: "0.08em" }}>
+          <span className="px-2 py-0.5 rounded-md" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-caption)", color: accent, backgroundColor: `${accent}12`, letterSpacing: "0.08em" }}>
             {type}
           </span>
           <span className="flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: statusColor }} />
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: statusColor, letterSpacing: "0.06em", textTransform: "uppercase" }}>{status}</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: statusColor, letterSpacing: "0.06em", textTransform: "uppercase" }}>{status}</span>
           </span>
         </div>
-        <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>{name}</p>
+        <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" }}>{name}</p>
         <p
           className="mt-0.5"
           dir={addrLang === "ar" ? "rtl" : "ltr"}
-          style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280", lineHeight: 1.5, textAlign: addrLang === "ar" ? "right" : "left" }}
+          style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280", lineHeight: 1.5, textAlign: addrLang === "ar" ? "right" : "left" }}
         >
           {address}
         </p>
         <div className="flex items-center justify-between mt-2.5">
           <div className="flex items-center gap-1.5 min-w-0">
             <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F0F0EE" }}>
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "8px", color: "#040033" }}>{contact.split(" ").map((s) => s[0]).slice(0, 2).join("")}</span>
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-caption)", color: "#040033" }}>{contact.split(" ").map((s) => s[0]).slice(0, 2).join("")}</span>
             </div>
-            <span className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "11px", color: "#040033" }}>{contact}</span>
+            <span className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-caption)", color: "#040033" }}>{contact}</span>
           </div>
           <div className="flex items-center gap-1.5 flex-shrink-0">
             <button aria-label={`Call ${contact}`} className="w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "rgba(18,83,250,0.1)", border: "none" }}>
@@ -355,15 +355,15 @@ function CancelModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: (
             <CloseRounded sx={{ fontSize: 16, color: "#040033" }} />
           </button>
         </div>
-        <h3 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>Cancel this order?</h3>
-        <p className="mt-1.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#6B7280", lineHeight: 1.5 }}>
+        <h3 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-heading)", color: "#040033" }}>Cancel this order?</h3>
+        <p className="mt-1.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#6B7280", lineHeight: 1.5 }}>
           The driver has already been assigned. Cancelling now may incur a fee. Type the order number to confirm.
         </p>
-        <div className="mt-4 mb-2" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+        <div className="mt-4 mb-2" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>
           Order ID
         </div>
         <div className="rounded-2xl p-3 mb-3" style={{ backgroundColor: "white", border: "1px solid #E8E8E5" }}>
-          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "#040033", letterSpacing: "0.04em" }}>{ORDER.id}</span>
+          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033", letterSpacing: "0.04em" }}>{ORDER.id}</span>
         </div>
         <input
           autoFocus
@@ -376,14 +376,14 @@ function CancelModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: (
             border: `1.5px solid ${matches ? "#1253FA" : "#E8E8E5"}`,
             padding: "14px 16px",
             fontFamily: "'Courier Prime', monospace",
-            fontSize: "14px",
+            fontSize: "var(--type-body)",
             color: "#040033",
             transition: "border-color 0.2s ease",
           }}
         />
         <div className="flex gap-2 mt-4">
           <button onClick={onClose} className="flex-1 rounded-2xl active:scale-[0.97] cursor-pointer" style={{ backgroundColor: "white", border: "1px solid #E8E8E5", padding: "14px" }}>
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#040033" }}>Keep Order</span>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body-sm)", color: "#040033" }}>Keep Order</span>
           </button>
           <button
             onClick={onConfirm}
@@ -396,7 +396,7 @@ function CancelModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: (
               transition: "background-color 0.2s ease",
             }}
           >
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: matches ? "white" : "#626A76" }}>Cancel Order</span>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body-sm)", color: matches ? "white" : "#626A76" }}>Cancel Order</span>
           </button>
         </div>
       </div>
@@ -424,7 +424,7 @@ function MenuItem({ icon, label, destructive, onClick }: { icon: React.ReactNode
   return (
     <button onClick={onClick} className="w-full flex items-center gap-2.5 px-4 py-2.5 cursor-pointer active:bg-black/[0.03]" style={{ border: "none", backgroundColor: "transparent" }}>
       <span style={{ color: c, display: "flex" }}>{icon}</span>
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: c }}>{label}</span>
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: c }}>{label}</span>
     </button>
   );
 }
@@ -466,7 +466,7 @@ function Toast({ msg, onDone }: { msg: string; onDone: () => void }) {
     <div className="fixed left-1/2 z-[80]" style={{ bottom: "calc(env(safe-area-inset-bottom, 16px) + 24px)", transform: "translateX(-50%)", animation: "slideIn 0.4s cubic-bezier(0.16,1,0.3,1)" }}>
       <div className="flex items-center gap-2 px-4 py-3 rounded-2xl" style={{ backgroundColor: "#040033", boxShadow: "0 8px 28px rgba(4,0,51,0.3)" }}>
         <CheckCircleRounded sx={{ fontSize: 16, color: "#1253FA" }} />
-        <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "white" }}>{msg}</span>
+        <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "white" }}>{msg}</span>
       </div>
     </div>
   );
@@ -525,8 +525,8 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
           <ArrowBackIosNewRounded sx={{ fontSize: 16, color: "#040033" }} />
         </button>
         <div className="flex flex-col items-center">
-          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>Order Details</span>
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280", letterSpacing: "0.04em" }}>{ORDER.id}</span>
+          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033" }}>Order Details</span>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280", letterSpacing: "0.04em" }}>{ORDER.id}</span>
         </div>
         <button onClick={() => setMenuOpen(true)} aria-label="More options" className="w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.05)", border: "none" }}>
           <MoreVertRounded sx={{ fontSize: 18, color: "#040033" }} />
@@ -537,7 +537,7 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
       <div className="flex items-center justify-center flex-shrink-0" style={{ height: pull, transition: refreshing ? "none" : "height 0.25s ease", overflow: "hidden" }}>
         <div className="flex items-center gap-1.5">
           <RefreshRounded sx={{ fontSize: 14, color: "#1253FA", animation: refreshing ? "spin 1s linear infinite" : "none", transform: `rotate(${pull * 4}deg)` }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>
             {refreshing ? "Refreshing…" : pull > 50 ? "Release to refresh" : "Pull to refresh"}
           </span>
         </div>
@@ -559,18 +559,18 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
           <div className="absolute" style={{ top: "12px", left: "12px" }}>
             <div className="flex items-center gap-2 px-3 py-2 rounded-2xl" style={{ backgroundColor: "rgba(255,255,255,0.96)", boxShadow: "0 4px 18px rgba(0,0,0,0.1)", backdropFilter: "blur(12px)" }}>
               <div className="w-7 h-7 rounded-xl flex items-center justify-center" style={{ backgroundColor: ORDER.onTime ? "rgba(18,83,250,0.12)" : "rgba(220,38,38,0.12)" }}>
-                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "10px", color: ORDER.onTime ? "#1253FA" : "#DC2626" }}>ETA</span>
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-caption)", color: ORDER.onTime ? "#1253FA" : "#DC2626" }}>ETA</span>
               </div>
               <div className="flex flex-col">
-                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "#040033", lineHeight: 1 }}>{ORDER.eta}</span>
-                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: ORDER.onTime ? "#1253FA" : "#DC2626", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033", lineHeight: 1 }}>{ORDER.eta}</span>
+                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: ORDER.onTime ? "#1253FA" : "#DC2626", letterSpacing: "0.06em", textTransform: "uppercase" }}>
                   {ORDER.onTime ? "On Time" : "Delayed"}
                 </span>
               </div>
               <div className="w-px h-7" style={{ backgroundColor: "#E8E8E5" }} />
               <div className="flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#1253FA", animation: "pulse 2s ease-in-out infinite" }} />
-                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{pingAge}s ago</span>
+                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>{pingAge}s ago</span>
               </div>
             </div>
           </div>
@@ -597,7 +597,7 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
           {/* Waypoints */}
           <Card>
             <SectionHeader icon={<LocalShippingRounded sx={{ fontSize: 16 }} />} label="Route" accent="#040033" right={
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280", letterSpacing: "0.06em" }}>2 STOPS</span>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280", letterSpacing: "0.06em" }}>2 STOPS</span>
             } />
             <WaypointRow idx={1} type="PICKUP" status={ORDER.pickup.status} name={ORDER.pickup.name} address={ORDER.pickup.address} addrLang={ORDER.pickup.lang} contact={ORDER.pickup.contact} />
             <WaypointRow idx={2} type="DROPOFF" status={ORDER.dropoff.status} name={ORDER.dropoff.name} address={ORDER.dropoff.address} addrLang={ORDER.dropoff.lang} contact={ORDER.dropoff.contact} />
@@ -608,14 +608,14 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
             <SectionHeader icon={<VerifiedRounded sx={{ fontSize: 16 }} />} label="Driver & Truck" accent="#0A0070" />
             <div className="flex items-center gap-3 pb-3" style={{ borderBottom: "1px solid #F0F0EE" }}>
               <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#040033" }}>
-                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "white" }}>{ORDER.driver.initials}</span>
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body-sm)", color: "white" }}>{ORDER.driver.initials}</span>
               </div>
               <div className="flex-1 min-w-0">
-                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>{ORDER.driver.name}</p>
+                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" }}>{ORDER.driver.name}</p>
                 <div className="flex items-center gap-1 mt-0.5">
                   <StarRounded sx={{ fontSize: 12, color: "#040033" }} />
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#040033", fontWeight: 600 }}>{ORDER.driver.rating}</span>
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>· {ORDER.driver.trips.toLocaleString()} trips</span>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#040033", fontWeight: 600 }}>{ORDER.driver.rating}</span>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>· {ORDER.driver.trips.toLocaleString()} trips</span>
                 </div>
               </div>
               <IconBtn label="Call" accent="#1253FA"><PhoneRounded sx={{ fontSize: 14 }} /></IconBtn>
@@ -628,8 +628,8 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
                 <LocalShippingRounded sx={{ fontSize: 20, color: "#1253FA" }} />
               </div>
               <div className="flex-1 min-w-0">
-                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>{ORDER.vehicle}</p>
-                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>Plate {ORDER.plate} · 1.5T capacity</p>
+                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" }}>{ORDER.vehicle}</p>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>Plate {ORDER.plate} · 1.5T capacity</p>
               </div>
             </div>
           </Card>
@@ -653,10 +653,10 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
                 <div key={item} className="flex items-center justify-between py-2.5" style={{ borderBottom: "1px solid #F0F0EE" }}>
                   <div className="flex items-center gap-2">
                     <RadioButtonUncheckedRounded sx={{ fontSize: 16, color: "#626A76" }} />
-                    <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{item}</span>
+                    <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{item}</span>
                   </div>
                   <button className="px-3 py-1.5 rounded-lg cursor-pointer active:scale-95" style={{ backgroundColor: "rgba(18,83,250,0.1)", border: "none" }}>
-                    <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "11px", color: "#1253FA" }}>Upload</span>
+                    <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-caption)", color: "#1253FA" }}>Upload</span>
                   </button>
                 </div>
               ))}
@@ -664,7 +664,7 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
           ) : (
             <div className="flex items-center gap-2 px-4 py-3 rounded-2xl" style={{ backgroundColor: "rgba(107,114,128,0.06)" }}>
               <VerifiedRounded sx={{ fontSize: 14, color: "#6B7280" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>
                 Proof of Delivery not required for this order
               </span>
             </div>
@@ -677,8 +677,8 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
                 <div className="w-7 h-7 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(10,0,112,0.08)" }}>
                   <HistoryRounded sx={{ fontSize: 16, color: "#0A0070" }} />
                 </div>
-                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#040033" }}>Timeline</span>
-                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280", letterSpacing: "0.06em" }}>{ORDER.events.length} EVENTS</span>
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body-sm)", color: "#040033" }}>Timeline</span>
+                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280", letterSpacing: "0.06em" }}>{ORDER.events.length} EVENTS</span>
               </div>
               <KeyboardArrowDownRounded sx={{ fontSize: 18, color: "#040033", transform: timelineOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.25s ease" }} />
             </button>
@@ -691,8 +691,8 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
                       {i < ORDER.events.length - 1 && <div className="flex-1 w-px mt-1" style={{ backgroundColor: "#E8E8E5", minHeight: "16px" }} />}
                     </div>
                     <div className="flex-1 -mt-1">
-                      <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{ev.label}</p>
-                      <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>{ev.at}</p>
+                      <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{ev.label}</p>
+                      <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>{ev.at}</p>
                     </div>
                   </div>
                 ))}
@@ -707,7 +707,7 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
                 <div className="w-7 h-7 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(107,114,128,0.1)" }}>
                   <GroupsRounded sx={{ fontSize: 16, color: "#6B7280" }} />
                 </div>
-                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#040033" }}>People Involved</span>
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body-sm)", color: "#040033" }}>People Involved</span>
               </div>
               <KeyboardArrowDownRounded sx={{ fontSize: 18, color: "#040033", transform: peopleOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.25s ease" }} />
             </button>
@@ -740,9 +740,9 @@ function SummaryCell({ icon, label, value, accent, highlight }: { icon: React.Re
     <div className="rounded-2xl p-3" style={{ backgroundColor: highlight ? "#040033" : "#F8F8F6" }}>
       <div className="flex items-center gap-1.5 mb-1.5">
         <span style={{ color: highlight ? "rgba(255,255,255,0.6)" : accent, display: "flex" }}>{icon}</span>
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: highlight ? "rgba(255,255,255,0.6)" : "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: highlight ? "rgba(255,255,255,0.6)" : "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</span>
       </div>
-      <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: highlight ? "white" : "#040033", lineHeight: 1.1 }}>{value}</p>
+      <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: highlight ? "white" : "#040033", lineHeight: 1.1 }}>{value}</p>
     </div>
   );
 }
@@ -751,14 +751,14 @@ function PersonRow({ role, name, contact }: { role: string; name: string; contac
   return (
     <div className="flex items-center gap-3">
       <div className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F0F0EE" }}>
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "11px", color: "#040033" }}>
+        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-caption)", color: "#040033" }}>
           {name.split(" ").map((s) => s[0]).slice(0, 2).join("")}
         </span>
       </div>
       <div className="flex-1 min-w-0">
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>{role}</span>
-        <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{name}</p>
-        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>{contact}</p>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>{role}</span>
+        <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{name}</p>
+        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>{contact}</p>
       </div>
       <button aria-label={`Call ${name}`} className="w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "rgba(18,83,250,0.1)", border: "none" }}>
         <PhoneRounded sx={{ fontSize: 14, color: "#1253FA" }} />

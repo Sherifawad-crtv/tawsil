@@ -24,17 +24,17 @@ export default function ProofOfDeliveryToggle({ value, onChange }: { value: bool
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>
+          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" }}>
             Proof of Delivery
           </span>
           <span
             className="px-2 py-0.5 rounded-lg"
-            style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.08)", letterSpacing: "0.04em", textTransform: "uppercase" }}
+            style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.08)", letterSpacing: "0.04em", textTransform: "uppercase" }}
           >
             Recommended
           </span>
         </div>
-        <p className="mt-0.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", lineHeight: "1.4" }}>
+        <p className="mt-0.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76", lineHeight: "1.4" }}>
           Require photo confirmation at drop‑off.
         </p>
       </div>

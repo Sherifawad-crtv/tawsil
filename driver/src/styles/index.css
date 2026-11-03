@@ -42,7 +42,7 @@
   --shadow-lg: 0 4px 6px -2px rgb(0 0 0 / 0.05), 0 10px 15px -3px rgb(0 0 0 / 0.10);
 }
 
-/* Type scale: six named steps in rem, so every size follows the root text
+/* Type scale: seven named steps in rem, so every size follows the root text
    size instead of being pinned in px. 11px is the floor (Apple's smallest
    readable size); the base steps are 13 / 15 for dense mobile UI. */
 :root {
@@ -52,6 +52,7 @@
   --type-title: 1.0625rem;   /* 17px - card/section titles */
   --type-heading: 1.25rem;   /* 20px - screen sub-headings, large figures */
   --type-display: 1.625rem;  /* 26px - screen titles */
+  --type-hero: 2.5rem;       /* 40px - hero figures (prices, totals) */
 }
 
 /* iOS has no other way to hand a PWA the user's Dynamic Type setting: this

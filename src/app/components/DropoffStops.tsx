@@ -119,7 +119,7 @@ function StopCard({
             <span
               style={{
                 fontFamily: "'Archivo Black', sans-serif",
-                fontSize: "14px",
+                fontSize: "var(--type-body)",
                 color: isActive ? "#1253FA" : "#6B7280",
                 transition: "color 0.3s",
               }}
@@ -148,7 +148,7 @@ function StopCard({
               className="px-2 py-0.5 rounded-lg flex-shrink-0"
               style={{
                 fontFamily: "'Courier Prime', monospace",
-                fontSize: "10px",
+                fontSize: "var(--type-caption)",
                 letterSpacing: "0.06em",
                 textTransform: "uppercase",
                 color: isActive ? "#1253FA" : "#6B7280",
@@ -163,7 +163,7 @@ function StopCard({
                 className="px-2 py-0.5 rounded-lg"
                 style={{
                   fontFamily: "'Courier Prime', monospace",
-                  fontSize: "10px",
+                  fontSize: "var(--type-caption)",
                   color: "#6B7280",
                   backgroundColor: "#F0F0EE",
                   letterSpacing: "0.04em",
@@ -178,7 +178,7 @@ function StopCard({
                 className="px-2 py-0.5 rounded-lg"
                 style={{
                   fontFamily: "'Courier Prime', monospace",
-                  fontSize: "10px",
+                  fontSize: "var(--type-caption)",
                   color: "#6B7280",
                   backgroundColor: "#F0F0EE",
                   letterSpacing: "0.04em",
@@ -201,7 +201,7 @@ function StopCard({
               style={{
                 fontFamily: "'Archivo', sans-serif",
                 fontWeight: 600,
-                fontSize: "14px",
+                fontSize: "var(--type-body)",
                 color: "#040033",
               }}
             >
@@ -229,7 +229,7 @@ function StopCard({
               className="w-full outline-none"
               style={{
                 fontFamily: "'Courier Prime', monospace",
-                fontSize: "12px",
+                fontSize: "var(--type-body-sm)",
                 color: "#040033",
                 backgroundColor: "#F8F8F6",
                 borderRadius: "12px",
@@ -396,7 +396,7 @@ export default function DropoffStops({ value, onChange }: DropoffStopsProps) {
             style={{
               fontFamily: "'Archivo', sans-serif",
               fontWeight: 600,
-              fontSize: "14px",
+              fontSize: "var(--type-body)",
               color: "#040033",
             }}
           >
@@ -405,7 +405,7 @@ export default function DropoffStops({ value, onChange }: DropoffStopsProps) {
           <p
             style={{
               fontFamily: "'Courier Prime', monospace",
-              fontSize: "11px",
+              fontSize: "var(--type-caption)",
               color: "#626A76",
               marginTop: "1px",
             }}
@@ -421,7 +421,7 @@ export default function DropoffStops({ value, onChange }: DropoffStopsProps) {
           <span
             style={{
               fontFamily: "'Archivo Black', sans-serif",
-              fontSize: "12px",
+              fontSize: "var(--type-body-sm)",
               color: "#040033",
             }}
           >
@@ -495,7 +495,7 @@ export default function DropoffStops({ value, onChange }: DropoffStopsProps) {
             style={{
               fontFamily: "'Archivo', sans-serif",
               fontWeight: 600,
-              fontSize: "14px",
+              fontSize: "var(--type-body)",
               color: "#1253FA",
             }}
           >
@@ -504,7 +504,7 @@ export default function DropoffStops({ value, onChange }: DropoffStopsProps) {
           <span
             style={{
               fontFamily: "'Courier Prime', monospace",
-              fontSize: "11px",
+              fontSize: "var(--type-caption)",
               color: "#626A76",
             }}
           >
@@ -523,7 +523,7 @@ export default function DropoffStops({ value, onChange }: DropoffStopsProps) {
           <span
             style={{
               fontFamily: "'Courier Prime', monospace",
-              fontSize: "12px",
+              fontSize: "var(--type-body-sm)",
               color: "#6B7280",
             }}
           >

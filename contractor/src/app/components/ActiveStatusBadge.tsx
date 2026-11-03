@@ -12,7 +12,7 @@ export default function ActiveStatusBadge({ active }: { active: boolean }) {
         color: active ? "#16803C" : "#DC2626",
         fontFamily: "'Archivo', sans-serif",
         fontWeight: 700,
-        fontSize: "11.5px",
+        fontSize: "var(--type-caption)",
       }}
     >
       <Icon sx={{ fontSize: 13 }} />

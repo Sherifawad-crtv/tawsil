@@ -25,7 +25,7 @@ export default function TrucksList() {
 
   return (
     <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 12px), 12px)", paddingBottom: "8px" }}>
-      <h1 className="mb-4" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033" }}>
+      <h1 className="mb-4" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033" }}>
         Trucks
       </h1>
 
@@ -37,7 +37,7 @@ export default function TrucksList() {
       <div className="flex items-center gap-2 mb-2">
         <span
           className="inline-flex items-center gap-1 rounded-full px-2.5 py-1"
-          style={{ backgroundColor: "#FCE7F3", color: "#BE185D", fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "12px" }}
+          style={{ backgroundColor: "#FCE7F3", color: "#BE185D", fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body-sm)" }}
         >
           <LocalShippingRounded sx={{ fontSize: 13 }} />
           {bySegment.length} {bySegment.length === 1 ? "Truck" : "Trucks"}

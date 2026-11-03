@@ -92,16 +92,16 @@ export default function BiddingScreen({
           <ArrowBackIosNewRounded sx={{ fontSize: 16, color: "white" }} />
         </button>
         <div className="flex flex-col items-center">
-          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "white", letterSpacing: "0.04em" }}>
+          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "white", letterSpacing: "0.04em" }}>
             LIVE BIDDING
           </span>
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#9CA3AF", letterSpacing: "0.1em" }}>
             {String(Math.floor(elapsed / 60)).padStart(2, "0")}:{String(elapsed % 60).padStart(2, "0")} elapsed
           </span>
         </div>
         <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl" style={{ backgroundColor: "rgba(18,83,250,0.18)" }}>
           <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#1253FA", boxShadow: "0 0 8px #1253FA", animation: "pulse 1.4s ease-in-out infinite" }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA", letterSpacing: "0.08em" }}>LIVE</span>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#1253FA", letterSpacing: "0.08em" }}>LIVE</span>
         </div>
       </div>
 
@@ -115,7 +115,7 @@ export default function BiddingScreen({
           }}
         >
           <div className="flex items-center justify-between mb-2">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#9CA3AF", letterSpacing: "0.12em", textTransform: "uppercase" }}>
               Your Offer
             </span>
             <button
@@ -124,23 +124,23 @@ export default function BiddingScreen({
               style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
             >
               <GavelRounded sx={{ fontSize: 12, color: "white" }} />
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "11px", color: "white" }}>Adjust</span>
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-caption)", color: "white" }}>Adjust</span>
             </button>
           </div>
           <div className="flex items-baseline gap-2">
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "32px", color: "white", lineHeight: 1 }}>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-hero)", color: "white", lineHeight: 1 }}>
               EGP {yourOffer}
             </span>
             {cheapest < yourOffer && (
               <div className="flex items-center gap-0.5">
                 <TrendingDownRounded sx={{ fontSize: 14, color: "#1253FA" }} />
-                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#1253FA" }}>
+                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#1253FA" }}>
                   -{yourOffer - cheapest}
                 </span>
               </div>
             )}
           </div>
-          <p className="mt-1.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF" }}>
+          <p className="mt-1.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#9CA3AF" }}>
             {offers.length} driver{offers.length !== 1 ? "s" : ""} responding · Avg EGP {Math.round(offers.reduce((s, o) => s + o.price, 0) / offers.length)}
           </p>
         </div>
@@ -148,12 +148,12 @@ export default function BiddingScreen({
 
       {/* Section header */}
       <div className="flex items-center justify-between px-4 pt-5 pb-3 flex-shrink-0">
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>
+        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "#040033" }}>
           Offers Coming In
         </span>
         <span
           className="px-2 py-1 rounded-lg"
-          style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.08)", letterSpacing: "0.08em" }}
+          style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.08)", letterSpacing: "0.08em" }}
         >
           {offers.length} ACTIVE
         </span>
@@ -184,7 +184,7 @@ export default function BiddingScreen({
               <div className="h-3 rounded mb-2" style={{ width: "55%", backgroundColor: "#F0F0EE", animation: "shimmer 1.5s ease-in-out infinite" }} />
               <div className="h-2.5 rounded" style={{ width: "35%", backgroundColor: "#F0F0EE", animation: "shimmer 1.5s ease-in-out infinite 0.2s" }} />
             </div>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.08em" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.08em" }}>
               SEARCHING…
             </span>
           </div>
@@ -211,7 +211,7 @@ export default function BiddingScreen({
           }}
         >
           <CloseRounded sx={{ fontSize: 16, color: "#DC2626" }} />
-          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "#DC2626", letterSpacing: "0.02em" }}>
+          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#DC2626", letterSpacing: "0.02em" }}>
             Cancel Bidding
           </span>
         </button>
@@ -295,7 +295,7 @@ function OfferCard({
             position: "relative",
           }}
         >
-          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "white", letterSpacing: "0.04em" }}>
+          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "white", letterSpacing: "0.04em" }}>
             {offer.initials}
           </span>
           {offer.verified && (
@@ -319,7 +319,7 @@ function OfferCard({
         {/* Driver info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-0.5">
-            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>
+            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" }}>
               {offer.driverName}
             </span>
             {isCheapest && (
@@ -327,7 +327,7 @@ function OfferCard({
                 className="px-1.5 py-0.5 rounded-md"
                 style={{
                   fontFamily: "'Courier Prime', monospace",
-                  fontSize: "9px",
+                  fontSize: "var(--type-caption)",
                   color: "white",
                   backgroundColor: "#1253FA",
                   letterSpacing: "0.08em",
@@ -341,24 +341,24 @@ function OfferCard({
           <div className="flex items-center gap-2 flex-wrap">
             <div className="flex items-center gap-0.5">
               <StarRounded sx={{ fontSize: 13, color: "#040033" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#040033", fontWeight: 600 }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#040033", fontWeight: 600 }}>
                 {offer.rating}
               </span>
             </div>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
               · {offer.trips.toLocaleString()} trips · {offer.yearsActive}y
             </span>
           </div>
           <div className="flex items-center gap-3 mt-2">
             <div className="flex items-center gap-1">
               <LocalShippingRounded sx={{ fontSize: 13, color: "#6B7280" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>
                 {offer.vehicle}
               </span>
             </div>
             <div className="flex items-center gap-1">
               <AccessTimeRounded sx={{ fontSize: 13, color: "#6B7280" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>
                 {offer.etaMin} min
               </span>
             </div>
@@ -367,10 +367,10 @@ function OfferCard({
 
         {/* Price */}
         <div className="flex flex-col items-end flex-shrink-0">
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#626A76", letterSpacing: "0.1em" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.1em" }}>
             EGP
           </span>
-          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", color: "#040033", lineHeight: 1 }}>
+          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-heading)", color: "#040033", lineHeight: 1 }}>
             {offer.price}
           </span>
         </div>
@@ -387,7 +387,7 @@ function OfferCard({
           boxShadow: isCheapest ? "0 4px 16px rgba(18,83,250,0.25)" : "none",
         }}
       >
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "white", letterSpacing: "0.04em" }}>
+        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body-sm)", color: "white", letterSpacing: "0.04em" }}>
           ACCEPT · EGP {offer.price}
         </span>
       </button>
@@ -425,7 +425,7 @@ function CounterOfferModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
-          <h3 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "#040033" }}>
+          <h3 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "#040033" }}>
             Adjust Your Offer
           </h3>
           <button
@@ -439,8 +439,8 @@ function CounterOfferModal({
 
         <div className="rounded-2xl p-5 mb-4" style={{ backgroundColor: "white" }}>
           <div className="flex items-baseline justify-center gap-2 mb-4">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#626A76" }}>EGP</span>
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "44px", color: "#040033", lineHeight: 1 }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>EGP</span>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-hero)", color: "#040033", lineHeight: 1 }}>
               {val}
             </span>
           </div>
@@ -455,13 +455,13 @@ function CounterOfferModal({
             style={{ accentColor: "#1253FA" }}
           />
           <div className="flex justify-between mt-1">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
               EGP {min}
             </span>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#1253FA" }}>
               Recommended: EGP {recommended}
             </span>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
               EGP {max}
             </span>
           </div>
@@ -479,7 +479,7 @@ function CounterOfferModal({
                 padding: "10px",
                 fontFamily: "'Archivo', sans-serif",
                 fontWeight: 600,
-                fontSize: "13px",
+                fontSize: "var(--type-body-sm)",
                 color: "#040033",
                 transition: "transform 0.15s ease",
               }}
@@ -500,7 +500,7 @@ function CounterOfferModal({
             border: "none",
           }}
         >
-          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "white", letterSpacing: "0.02em" }}>
+          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "white", letterSpacing: "0.02em" }}>
             Update Offer
           </span>
         </button>

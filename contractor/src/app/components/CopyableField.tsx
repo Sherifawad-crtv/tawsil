@@ -23,8 +23,8 @@ export default function CopyableField({ label, value }: { label: string; value: 
   return (
     <div className="flex items-center justify-between gap-3 py-2.5">
       <div className="min-w-0">
-        <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "11.5px", color: "#626A76" }}>{label}</p>
-        <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13.5px", color: value ? "#040033" : "#626A76" }}>
+        <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-caption)", color: "#626A76" }}>{label}</p>
+        <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: value ? "#040033" : "#626A76" }}>
           {value || "Not set"}
         </p>
       </div>

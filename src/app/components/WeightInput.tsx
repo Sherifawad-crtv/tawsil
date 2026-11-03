@@ -154,7 +154,7 @@ export default function WeightInput({
       {/* Capacity label */}
       <p className="mb-4" style={{
         fontFamily: "'Courier Prime', monospace",
-        fontSize: "11px",
+        fontSize: "var(--type-caption)",
         color: overloaded ? "#DC2626" : "#626A76",
         letterSpacing: "0.04em",
         transition: "color 0.3s",
@@ -181,7 +181,7 @@ export default function WeightInput({
               style={{
                 fontFamily: "'Archivo', sans-serif",
                 fontWeight: 600,
-                fontSize: "14px",
+                fontSize: "var(--type-body)",
                 color: unit === u ? "#040033" : "#626A76",
                 transition: "color 0.2s",
               }}
@@ -210,7 +210,7 @@ export default function WeightInput({
           className="block mb-1"
           style={{
             fontFamily: "'Courier Prime', monospace",
-            fontSize: "11px",
+            fontSize: "var(--type-caption)",
             color: focused ? "#1253FA" : "#626A76",
             letterSpacing: "0.06em",
             textTransform: "uppercase",
@@ -233,7 +233,7 @@ export default function WeightInput({
             className="flex-1 border-none outline-none bg-transparent min-w-0"
             style={{
               fontFamily: "'Archivo Black', sans-serif",
-              fontSize: "44px",
+              fontSize: "var(--type-hero)",
               color: "#040033",
               lineHeight: "1.1",
               caretColor: "#1253FA",
@@ -243,7 +243,7 @@ export default function WeightInput({
             style={{
               fontFamily: "'Archivo', sans-serif",
               fontWeight: 600,
-              fontSize: "20px",
+              fontSize: "var(--type-heading)",
               color: "#626A76",
               flexShrink: 0,
             }}
@@ -258,7 +258,7 @@ export default function WeightInput({
             className="mt-2"
             style={{
               fontFamily: "'Courier Prime', monospace",
-              fontSize: "12px",
+              fontSize: "var(--type-body-sm)",
               color: overloaded ? "#DC2626" : "#626A76",
             }}
           >
@@ -277,7 +277,7 @@ export default function WeightInput({
           className="block mb-2.5"
           style={{
             fontFamily: "'Courier Prime', monospace",
-            fontSize: "11px",
+            fontSize: "var(--type-caption)",
             color: "#626A76",
             letterSpacing: "0.06em",
             textTransform: "uppercase",
@@ -305,7 +305,7 @@ export default function WeightInput({
                   style={{
                     fontFamily: "'Archivo', sans-serif",
                     fontWeight: 600,
-                    fontSize: "14px",
+                    fontSize: "var(--type-body)",
                     color: isActive ? "white" : "#040033",
                   }}
                 >
@@ -323,7 +323,7 @@ export default function WeightInput({
         style={{ backgroundColor: "rgba(18,83,250,0.05)" }}
       >
         <InfoRounded className="flex-shrink-0 mt-0.5" sx={{ fontSize: 16, color: "#1253FA" }} />
-        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#6B7280", lineHeight: "1.5" }}>
+        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#6B7280", lineHeight: "1.5" }}>
           Weight must match your cargo documents. Overloading may incur additional fees.
         </p>
       </div>

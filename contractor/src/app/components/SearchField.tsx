@@ -20,7 +20,7 @@ export default function SearchField({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className="flex-1 min-w-0 bg-transparent outline-none"
-        style={{ fontFamily: "'Archivo', sans-serif", fontSize: "14px", color: "#040033" }}
+        style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-body)", color: "#040033" }}
       />
     </div>
   );

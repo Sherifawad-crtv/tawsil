@@ -22,7 +22,7 @@ export function Button({
         height: "52px",
         fontFamily: "'Archivo', sans-serif",
         fontWeight: 700,
-        fontSize: "15px",
+        fontSize: "var(--type-body)",
       }}
     >
       {children}

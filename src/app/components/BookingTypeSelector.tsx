@@ -96,7 +96,7 @@ export default function BookingTypeSelector({ state, onChange, onOpenScheduleMod
                 style={{
                   fontFamily: "'Archivo', sans-serif",
                   fontWeight: 600,
-                  fontSize: "14px",
+                  fontSize: "var(--type-body)",
                   color: active ? "#040033" : "#626A76",
                   transition: "color 0.2s",
                 }}
@@ -183,7 +183,7 @@ function OnDemandSection({
             <button
               key={id}
               onClick={() => onModeChange(id)}
-              className="flex-1 flex items-center gap-3 p-3.5 rounded-2xl cursor-pointer active:scale-[0.97] transition-all"
+              className="flex-1 min-w-0 flex items-center gap-3 p-3.5 rounded-2xl cursor-pointer active:scale-[0.97] transition-all"
               style={{
                 backgroundColor: active ? "white" : "transparent",
                 border: active ? "2px solid #1253FA" : "2px solid #E8E8E5",
@@ -197,11 +197,11 @@ function OnDemandSection({
               >
                 {icon(active)}
               </div>
-              <div>
-                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: active ? "#040033" : "#6B7280" }}>
+              <div className="min-w-0">
+                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: active ? "#040033" : "#6B7280" }}>
                   {label}
                 </p>
-                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", marginTop: "1px" }}>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", marginTop: "1px" }}>
                   {desc}
                 </p>
               </div>
@@ -223,10 +223,10 @@ function OnDemandSection({
             <BoltRounded sx={{ fontSize: 18, color: "#1253FA" }} />
           </div>
           <div>
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
+            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>
               Instant Dispatch
             </p>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "1px" }}>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", marginTop: "1px" }}>
               Truck assigned within minutes
             </p>
           </div>
@@ -239,7 +239,7 @@ function OnDemandSection({
           style={{ backgroundColor: "rgba(18,83,250,0.05)" }}
         >
           <CheckCircleRounded sx={{ fontSize: 16, color: "#1253FA" }} />
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#1253FA" }}>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#1253FA" }}>
             Scheduled: {scheduleSummary}
           </p>
         </div>
@@ -297,7 +297,7 @@ function RentalSection({
             <button
               key={id}
               onClick={() => onModeChange(id)}
-              className="flex-1 flex items-center gap-3 p-3.5 rounded-2xl cursor-pointer active:scale-[0.97] transition-all"
+              className="flex-1 min-w-0 flex items-center gap-3 p-3.5 rounded-2xl cursor-pointer active:scale-[0.97] transition-all"
               style={{
                 backgroundColor: active ? "white" : "transparent",
                 border: active ? "2px solid #1253FA" : "2px solid #E8E8E5",
@@ -311,11 +311,11 @@ function RentalSection({
               >
                 {icon(active)}
               </div>
-              <div>
-                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: active ? "#040033" : "#6B7280" }}>
+              <div className="min-w-0">
+                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: active ? "#040033" : "#6B7280" }}>
                   {label}
                 </p>
-                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", marginTop: "1px" }}>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", marginTop: "1px" }}>
                   {desc}
                 </p>
               </div>
@@ -403,7 +403,7 @@ function DailyRentalPicker({
           >
             <ChevronLeftRounded sx={{ fontSize: 14, color: "#040033" }} />
           </button>
-          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>
+          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" }}>
             {MONTHS_FULL[viewMonth]} {viewYear}
           </span>
           <button
@@ -419,7 +419,7 @@ function DailyRentalPicker({
         <div className="grid grid-cols-7 px-3 pb-1">
           {DAYS.map((d) => (
             <div key={d} className="flex items-center justify-center py-1.5">
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.04em" }}>{d}</span>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.04em" }}>{d}</span>
             </div>
           ))}
         </div>
@@ -451,7 +451,7 @@ function DailyRentalPicker({
                 <span style={{
                   fontFamily: "'Archivo', sans-serif",
                   fontWeight: sel || tod ? 700 : 500,
-                  fontSize: "13px",
+                  fontSize: "var(--type-body-sm)",
                   color: sel ? "white" : tod ? "#1253FA" : "#040033",
                 }}>
                   {day}
@@ -472,7 +472,7 @@ function DailyRentalPicker({
           style={{ backgroundColor: "rgba(18,83,250,0.04)" }}
         >
           <CheckCircleRounded sx={{ fontSize: 16, color: "#1253FA" }} />
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#1253FA" }}>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#1253FA" }}>
             {selectedDay.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric", year: "numeric" })}
           </p>
         </div>
@@ -486,7 +486,7 @@ function DailyRentalPicker({
         >
           <div className="px-4 pt-4 pb-2 flex items-center gap-2">
             <SpeedRounded sx={{ fontSize: 16, color: "#040033" }} />
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>
               Estimated Kilometers
             </span>
           </div>
@@ -506,12 +506,12 @@ function DailyRentalPicker({
                 style={{
                   fontFamily: "'Archivo', sans-serif",
                   fontWeight: 600,
-                  fontSize: "18px",
+                  fontSize: "var(--type-title)",
                   color: "#040033",
                   minWidth: 0,
                 }}
               />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "14px", color: "#626A76" }}>km</span>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body)", color: "#626A76" }}>km</span>
             </div>
           </div>
 
@@ -532,7 +532,7 @@ function DailyRentalPicker({
                   <span style={{
                     fontFamily: "'Archivo', sans-serif",
                     fontWeight: 600,
-                    fontSize: "13px",
+                    fontSize: "var(--type-body-sm)",
                     color: active ? "white" : "#040033",
                     whiteSpace: "nowrap",
                   }}>
@@ -545,7 +545,7 @@ function DailyRentalPicker({
 
           {/* Info line */}
           <div className="px-4 pb-4">
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", lineHeight: "1.5" }}>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", lineHeight: "1.5" }}>
               Set the expected distance for this rental day. Charges apply per km.
             </p>
           </div>
@@ -565,10 +565,10 @@ function DailyRentalPicker({
             <CalendarMonthRounded sx={{ fontSize: 16, color: "#626A76" }} />
           </div>
           <div>
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
+            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>
               Select a rental day
             </p>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", marginTop: "1px" }}>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", marginTop: "1px" }}>
               Tap a date on the calendar above
             </p>
           </div>
@@ -653,7 +653,7 @@ function MonthlyRentalPicker({
               <span style={{
                 fontFamily: "'Archivo', sans-serif",
                 fontWeight: 600,
-                fontSize: "13px",
+                fontSize: "var(--type-body-sm)",
                 color: sel ? "white" : "#040033",
                 whiteSpace: "nowrap",
               }}>
@@ -697,26 +697,26 @@ function MonthlyRentalPicker({
               {eligible ? (
                 <CheckCircleRounded sx={{ fontSize: 16, color: "#1253FA" }} />
               ) : (
-                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#DC2626" }}>
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body-sm)", color: "#DC2626" }}>
                   {monthlyDays.length}
                 </span>
               )}
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
+                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>
                   {monthlyDays.length} day{monthlyDays.length !== 1 ? "s" : ""} selected
                 </p>
                 {!eligible && monthlyDays.length > 0 && (
                   <span
                     className="px-1.5 py-0.5 rounded-md"
-                    style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#DC2626", backgroundColor: "rgba(220,38,38,0.08)", textTransform: "uppercase", letterSpacing: "0.04em" }}
+                    style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#DC2626", backgroundColor: "rgba(220,38,38,0.08)", textTransform: "uppercase", letterSpacing: "0.04em" }}
                   >
                     Min {MIN_MONTHLY_DAYS}
                   </span>
                 )}
               </div>
-              <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280", marginTop: "3px", lineHeight: "1.5" }}>
+              <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280", marginTop: "3px", lineHeight: "1.5" }}>
                 {eligible
                   ? `Eligible for monthly rental — ${MONTHS_FULL[rentalMonth.month]} ${rentalMonth.year}`
                   : `Select at least ${MIN_MONTHLY_DAYS} working days to qualify for monthly rental pricing.`}
@@ -752,10 +752,10 @@ function MonthlyRentalPicker({
               <InfoRounded sx={{ fontSize: 16, color: "#1253FA" }} />
             </div>
             <div className="flex-1">
-              <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
+              <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>
                 Select a month to begin
               </p>
-              <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280", marginTop: "3px", lineHeight: "1.5" }}>
+              <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280", marginTop: "3px", lineHeight: "1.5" }}>
                 Choose your rental month above, then pick at least {MIN_MONTHLY_DAYS} working days.
               </p>
             </div>
@@ -825,7 +825,7 @@ function MonthDayPicker({
     >
       {/* Header with month + bulk actions */}
       <div className="flex items-center justify-between px-4 pt-4 pb-2">
-        <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>
+        <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" }}>
           {MONTHS_FULL[month]} {year}
         </span>
         <div className="flex gap-1.5">
@@ -834,7 +834,7 @@ function MonthDayPicker({
             className="px-2.5 py-1 rounded-lg cursor-pointer active:scale-[0.96] transition-all"
             style={{ backgroundColor: "rgba(18,83,250,0.06)" }}
           >
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#1253FA", textTransform: "uppercase", letterSpacing: "0.04em" }}>
               All Work Days
             </span>
           </button>
@@ -844,7 +844,7 @@ function MonthDayPicker({
               className="px-2.5 py-1 rounded-lg cursor-pointer active:scale-[0.96] transition-all"
               style={{ backgroundColor: "#F0F0EE" }}
             >
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280", textTransform: "uppercase", letterSpacing: "0.04em" }}>
                 Clear
               </span>
             </button>
@@ -856,7 +856,7 @@ function MonthDayPicker({
       <div className="grid grid-cols-7 px-3 pb-1">
         {DAYS.map((d) => (
           <div key={d} className="flex items-center justify-center py-1.5">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.04em" }}>{d}</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.04em" }}>{d}</span>
           </div>
         ))}
       </div>
@@ -890,7 +890,7 @@ function MonthDayPicker({
               <span style={{
                 fontFamily: "'Archivo', sans-serif",
                 fontWeight: sel || tod ? 700 : 500,
-                fontSize: "13px",
+                fontSize: "var(--type-body-sm)",
                 color: sel ? "white" : tod ? "#1253FA" : wknd ? "#626A76" : "#040033",
               }}>
                 {day}

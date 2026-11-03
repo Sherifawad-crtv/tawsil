@@ -26,7 +26,7 @@ export default function AccountRow({
       </div>
       <span
         className="flex-1 text-left"
-        style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: destructive ? "#DC2626" : "#040033" }}
+        style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: destructive ? "#DC2626" : "#040033" }}
       >
         {label}
       </span>

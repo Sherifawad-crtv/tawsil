@@ -16,7 +16,7 @@ export default function HistoryList() {
 
   return (
     <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 12px), 12px)", paddingBottom: "8px" }}>
-      <h1 className="mb-4" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033" }}>
+      <h1 className="mb-4" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033" }}>
         History Orders
       </h1>
 
@@ -36,7 +36,7 @@ export default function HistoryList() {
                 border: "none",
               }}
             >
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: active ? 700 : 500, fontSize: "13px", color: active ? "#040033" : "#6B7280", transition: "color 0.3s" }}>
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: active ? 700 : 500, fontSize: "var(--type-body-sm)", color: active ? "#040033" : "#6B7280", transition: "color 0.3s" }}>
                 {t}
               </span>
               <span
@@ -44,7 +44,7 @@ export default function HistoryList() {
                 style={{
                   fontFamily: "'Archivo', sans-serif",
                   fontWeight: 700,
-                  fontSize: "10px",
+                  fontSize: "var(--type-caption)",
                   color: active ? "#1253FA" : "#626A76",
                   backgroundColor: active ? "rgba(18,83,250,0.08)" : "rgba(107,114,128,0.06)",
                   transition: "all 0.3s",

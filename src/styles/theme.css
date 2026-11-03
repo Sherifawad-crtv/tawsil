@@ -134,7 +134,7 @@
   */
 
   html {
-    font-size: var(--font-size);
+    font-size: 100%;
   }
 
   h1 {

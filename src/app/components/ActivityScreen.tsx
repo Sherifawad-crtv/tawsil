@@ -51,7 +51,7 @@ function StatusBadge({ status }: { status: Trip["status"] }) {
       className="px-2.5 py-1 rounded-xl"
       style={{
         fontFamily: "'Courier Prime', monospace",
-        fontSize: "10px",
+        fontSize: "var(--type-caption)",
         textTransform: "uppercase",
         letterSpacing: "0.05em",
         color: s.color,
@@ -74,13 +74,13 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
         <div className="flex items-center gap-2.5">
           <span
             className="px-2.5 py-1 rounded-xl"
-            style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "11px", color: "#040033", backgroundColor: "#F0F0EE" }}
+            style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-caption)", color: "#040033", backgroundColor: "#F0F0EE" }}
           >
             {trip.orderId}
           </span>
           <StatusBadge status={trip.status} />
         </div>
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>
+        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033" }}>
           {trip.price}
         </span>
       </div>
@@ -95,12 +95,12 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
           </div>
           <div className="flex-1 flex flex-col gap-2.5">
             <div>
-              <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{trip.from}</p>
+              <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{trip.from}</p>
             </div>
             <div>
-              <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{trip.to}</p>
+              <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{trip.to}</p>
               {trip.stops > 1 && (
-                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
+                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
                   +{trip.stops - 1} stop{trip.stops > 2 ? "s" : ""}
                 </span>
               )}
@@ -116,16 +116,16 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
       >
         <div className="flex items-center gap-1.5">
           <CalendarMonthRounded sx={{ fontSize: 12, color: "#626A76" }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{trip.date}</span>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>{trip.date}</span>
         </div>
         <div className="flex items-center gap-1.5">
           <AccessTimeRounded sx={{ fontSize: 12, color: "#626A76" }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{trip.time}</span>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>{trip.time}</span>
         </div>
-        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
+        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
           {trip.vehicle}
         </span>
-        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE" }}>
+        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280", backgroundColor: "#F0F0EE" }}>
           {trip.weight}
         </span>
       </div>
@@ -135,15 +135,15 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
         <div className="flex items-center justify-between px-5 py-3" style={{ borderTop: "1px solid #F0F0EE" }}>
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-full flex items-center justify-center" style={{ backgroundColor: "#040033" }}>
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "9px", color: "white" }}>
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-caption)", color: "white" }}>
                 {trip.driver.split(" ").map(n => n[0]).join("")}
               </span>
             </div>
-            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "12px", color: "#040033" }}>{trip.driver}</span>
+            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{trip.driver}</span>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#1253FA", animation: "pulse 2s ease-in-out infinite" }} />
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#1253FA" }}>ETA {trip.eta}</span>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body-sm)", color: "#1253FA" }}>ETA {trip.eta}</span>
           </div>
         </div>
       )}
@@ -160,7 +160,7 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
             }}
           >
             <ReplayRounded sx={{ fontSize: 14, color: "white" }} />
-            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "white" }}>
+            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "white" }}>
               Reorder
             </span>
           </button>
@@ -184,10 +184,10 @@ export default function ActivityScreen() {
       <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 20px), 20px)", paddingBottom: "calc(env(safe-area-inset-bottom, 16px) + 96px)" }}>
 
         {/* ── Header ── */}
-        <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: "1.15", marginBottom: "4px" }}>
+        <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033", lineHeight: "1.15", marginBottom: "4px" }}>
           Activity
         </h1>
-        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#626A76", marginBottom: "20px" }}>
+        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76", marginBottom: "20px" }}>
           Track and manage your shipments
         </p>
 
@@ -218,7 +218,7 @@ export default function ActivityScreen() {
                   style={{
                     fontFamily: "'Archivo', sans-serif",
                     fontWeight: isActive ? 700 : 500,
-                    fontSize: "13px",
+                    fontSize: "var(--type-body-sm)",
                     color: isActive ? "#040033" : "#6B7280",
                     transition: "color 0.3s",
                   }}
@@ -230,7 +230,7 @@ export default function ActivityScreen() {
                   style={{
                     fontFamily: "'Archivo', sans-serif",
                     fontWeight: 700,
-                    fontSize: "10px",
+                    fontSize: "var(--type-caption)",
                     color: isActive ? "#1253FA" : "#626A76",
                     backgroundColor: isActive ? "rgba(18,83,250,0.08)" : "rgba(107,114,128,0.06)",
                     transition: "all 0.3s",
@@ -258,8 +258,8 @@ export default function ActivityScreen() {
                 <InboxRounded sx={{ fontSize: 28, color: "#D8D9D4" }} />
               </div>
               <div className="text-center">
-                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>No trips found</p>
-                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginTop: "4px" }}>
+                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" }}>No trips found</p>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76", marginTop: "4px" }}>
                   {activeTab === "active" ? "You have no active deliveries right now." : `No ${activeTab} trips to show.`}
                 </p>
               </div>

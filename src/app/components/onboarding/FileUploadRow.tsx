@@ -70,7 +70,7 @@ export default function FileUploadRow({
   return (
     <div className="flex flex-col gap-1.5">
       <span
-        style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}
+        style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}
       >
         {label}
       </span>
@@ -112,7 +112,7 @@ export default function FileUploadRow({
           )}
         </div>
 
-        <p className="mt-2.5 px-2 w-full truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>
+        <p className="mt-2.5 px-2 w-full truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
           {uploading ? "Uploading…" : fileName ? `${fileName}${fileSize ? ` · ${formatFileSize(fileSize)}` : ""}` : hint}
         </p>
 
@@ -136,7 +136,7 @@ export default function FileUploadRow({
       </div>
 
       {error && (
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#DC2626" }}>{error}</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#DC2626" }}>{error}</span>
       )}
     </div>
   );

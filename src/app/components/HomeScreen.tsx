@@ -55,10 +55,10 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
 
         {/* ── Greeting ── */}
         <div className="mb-6">
-          <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: "1.15" }}>
+          <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033", lineHeight: "1.15" }}>
             {greeting}{greetName ? `, ${greetName}` : ""}
           </h1>
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#626A76", marginTop: "6px" }}>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76", marginTop: "6px" }}>
             What would you like to ship today?
           </p>
         </div>
@@ -81,10 +81,10 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
             <AddRounded sx={{ fontSize: 26, color: "white" }} />
           </div>
           <div className="flex-1">
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "white" }}>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "white" }}>
               Book a Truck
             </span>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "rgba(255,255,255,0.6)", marginTop: "4px" }}>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "rgba(255,255,255,0.6)", marginTop: "4px" }}>
               Start a new delivery booking
             </p>
           </div>
@@ -96,7 +96,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
           <>
             <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#1253FA", animation: "pulse 2s ease-in-out infinite" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#1253FA", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#1253FA", letterSpacing: "0.08em", textTransform: "uppercase" }}>
                 Active Trip
               </span>
             </div>
@@ -111,20 +111,20 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                 <div className="flex items-center gap-2">
                   <span
                     className="px-2.5 py-1 rounded-xl"
-                    style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "11px", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.08)" }}
+                    style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-caption)", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.08)" }}
                   >
                     {ACTIVE_TRIP.orderId}
                   </span>
                   <span
                     className="px-2.5 py-1 rounded-xl"
-                    style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase", letterSpacing: "0.04em" }}
+                    style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase", letterSpacing: "0.04em" }}
                   >
                     {ACTIVE_TRIP.vehicle}
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <AccessTimeRounded sx={{ fontSize: 14, color: "#1253FA" }} />
-                  <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "#040033" }}>
+                  <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033" }}>
                     {ACTIVE_TRIP.eta}
                   </span>
                 </div>
@@ -139,12 +139,12 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                 </div>
                 <div className="flex-1 flex flex-col gap-3">
                   <div>
-                    <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{ACTIVE_TRIP.from}</p>
-                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>Pickup</p>
+                    <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{ACTIVE_TRIP.from}</p>
+                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>Pickup</p>
                   </div>
                   <div>
-                    <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{ACTIVE_TRIP.to}</p>
-                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>Drop-off</p>
+                    <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{ACTIVE_TRIP.to}</p>
+                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>Drop-off</p>
                   </div>
                 </div>
               </div>
@@ -162,19 +162,19 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                   />
                 </div>
                 <div className="flex justify-between mt-1.5">
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>In Transit</span>
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA" }}>{Math.round(ACTIVE_TRIP.progress * 100)}%</span>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>In Transit</span>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#1253FA" }}>{Math.round(ACTIVE_TRIP.progress * 100)}%</span>
                 </div>
               </div>
 
               {/* Driver */}
               <div className="flex items-center gap-3 pt-3" style={{ borderTop: "1px solid #F0F0EE" }}>
                 <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#040033" }}>
-                  <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "11px", color: "white" }}>MR</span>
+                  <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-caption)", color: "white" }}>MR</span>
                 </div>
                 <div className="flex-1">
-                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "12px", color: "#040033" }}>{ACTIVE_TRIP.driver}</p>
-                  <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>Driver assigned</p>
+                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{ACTIVE_TRIP.driver}</p>
+                  <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>Driver assigned</p>
                 </div>
                 <span
                   role="button"
@@ -193,7 +193,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
 
         {/* ── Quick Actions - Vehicle Cards ── */}
         <div className="flex items-center justify-between mb-3">
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             Quick Select Vehicle
           </span>
         </div>
@@ -219,7 +219,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                 <img src={v.image} alt={v.name} className="h-[52px] object-contain" />
               </div>
               <div className="px-3 py-2.5">
-                <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{v.name}</span>
+                <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{v.name}</span>
               </div>
             </button>
           ))}
@@ -227,13 +227,13 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
 
         {/* ── Recent Trips ── */}
         <div className="flex items-center justify-between mb-3">
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             Recent Trips
           </span>
           <button
             onClick={onViewActivity}
             className="cursor-pointer active:opacity-70 transition-opacity"
-            style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "12px", color: "#1253FA", border: "none", background: "none" }}
+            style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#1253FA", border: "none", background: "none" }}
           >
             View All
           </button>
@@ -257,22 +257,22 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
+                <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>
                   {trip.from} → {trip.to}
                 </p>
                 <div className="flex items-center gap-2 mt-1">
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>{trip.date}</span>
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>•</span>
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>{trip.vehicle}</span>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>{trip.date}</span>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>•</span>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>{trip.vehicle}</span>
                 </div>
               </div>
               <div className="flex flex-col items-end gap-1 flex-shrink-0">
-                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#040033" }}>{trip.price}</span>
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body-sm)", color: "#040033" }}>{trip.price}</span>
                 <span
                   className="px-2 py-0.5 rounded-lg"
                   style={{
                     fontFamily: "'Courier Prime', monospace",
-                    fontSize: "9px",
+                    fontSize: "var(--type-caption)",
                     textTransform: "uppercase",
                     letterSpacing: "0.04em",
                     color: trip.status === "completed" ? "#1253FA" : "#6B7280",

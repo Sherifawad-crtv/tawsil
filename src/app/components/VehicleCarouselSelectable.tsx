@@ -38,7 +38,7 @@ function VehicleCard({
           alt={vehicle.name}
           className="w-[100px] h-[100px] object-contain flex-shrink-0"
         />
-        <p className="font-['Archivo_Black:Regular',sans-serif] leading-[normal] text-[#1a1a1a] text-[16px] text-left">
+        <p className="font-['Archivo_Black:Regular',sans-serif] leading-[normal] text-[#1a1a1a] text-[length:var(--type-title)] text-left">
           {vehicle.name}
         </p>
       </div>

@@ -74,7 +74,7 @@ export function ScheduleToggle({
               style={{
                 fontFamily: "'Archivo', sans-serif",
                 fontWeight: 600,
-                fontSize: "14px",
+                fontSize: "var(--type-body)",
                 color: mode === m ? "#040033" : "#626A76",
                 transition: "color 0.2s",
               }}
@@ -98,10 +98,10 @@ export function ScheduleToggle({
             <BoltRounded sx={{ fontSize: 20, color: "#1253FA" }} />
           </div>
           <div>
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>
+            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" }}>
               Instant Dispatch
             </p>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "2px" }}>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", marginTop: "2px" }}>
               Truck assigned within minutes
             </p>
           </div>
@@ -114,7 +114,7 @@ export function ScheduleToggle({
           style={{ backgroundColor: "rgba(18,83,250,0.05)" }}
         >
           <CheckCircleRounded sx={{ fontSize: 16, color: "#1253FA" }} />
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#1253FA" }}>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#1253FA" }}>
             Scheduled: {scheduleSummary}
           </p>
         </div>
@@ -217,7 +217,7 @@ export function ScheduleModal({
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-5 pb-3 flex-shrink-0">
-          <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>
+          <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-heading)", color: "#040033" }}>
             Schedule Pickup
           </h2>
           <button
@@ -249,7 +249,7 @@ export function ScheduleModal({
               >
                 <ChevronLeftRounded sx={{ fontSize: 14, color: "#040033" }} />
               </button>
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" }}>
                 {MONTHS[viewMonth]} {viewYear}
               </span>
               <button
@@ -265,7 +265,7 @@ export function ScheduleModal({
             <div className="grid grid-cols-7 px-4 pb-1">
               {DAYS.map((d) => (
                 <div key={d} className="flex items-center justify-center py-1.5">
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.04em" }}>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.04em" }}>
                     {d}
                   </span>
                 </div>
@@ -302,7 +302,7 @@ export function ScheduleModal({
                       style={{
                         fontFamily: "'Archivo', sans-serif",
                         fontWeight: sel || tod ? 700 : 500,
-                        fontSize: "14px",
+                        fontSize: "var(--type-body)",
                         color: sel ? "white" : tod ? "#1253FA" : "#040033",
                       }}
                     >
@@ -327,7 +327,7 @@ export function ScheduleModal({
           >
             <div className="px-5 pt-4 pb-2 flex items-center gap-2">
               <AccessTimeRounded sx={{ fontSize: 14, color: "#040033" }} />
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>
                 Pickup Time
               </span>
             </div>
@@ -354,7 +354,7 @@ export function ScheduleModal({
                       style={{
                         fontFamily: "'Archivo', sans-serif",
                         fontWeight: 600,
-                        fontSize: "13px",
+                        fontSize: "var(--type-body-sm)",
                         color: isActive ? "white" : "#040033",
                         whiteSpace: "nowrap",
                       }}
@@ -380,7 +380,7 @@ export function ScheduleModal({
               transition: "transform 0.2s ease",
             }}
           >
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "white", letterSpacing: "0.02em" }}>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "white", letterSpacing: "0.02em" }}>
               Confirm Schedule
             </span>
           </button>

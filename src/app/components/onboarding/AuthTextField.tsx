@@ -12,7 +12,7 @@ export default function AuthTextField({ label, error, id, ...inputProps }: AuthT
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={fieldId}
-        style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}
+        style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}
       >
         {label}
       </label>
@@ -28,11 +28,11 @@ export default function AuthTextField({ label, error, id, ...inputProps }: AuthT
           id={fieldId}
           {...inputProps}
           className="flex-1 border-none outline-none bg-transparent w-full"
-          style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033", caretColor: "#1253FA" }}
+          style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033", caretColor: "#1253FA" }}
         />
       </div>
       {error && (
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#DC2626" }}>{error}</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#DC2626" }}>{error}</span>
       )}
     </div>
   );

@@ -35,7 +35,7 @@ export default function StatusStepper({ status }: { status: OrderStatus }) {
                 style={{
                   fontFamily: "'Archivo', sans-serif",
                   fontWeight: isCurrent ? 700 : 500,
-                  fontSize: "9.5px",
+                  fontSize: "var(--type-caption)",
                   color: isCancelledStep ? "#DC2626" : done ? "#040033" : "#626A76",
                   lineHeight: 1.2,
                 }}

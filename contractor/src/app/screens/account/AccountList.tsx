@@ -18,7 +18,7 @@ export default function AccountList() {
         title="Account"
         onBack={() => navigate("/home")}
         trailing={
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>App Version 1.9</span>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>App Version 1.9</span>
         }
       />
 

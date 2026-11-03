@@ -91,7 +91,7 @@ export default function IndividualSignup({
             <div className="flex flex-col gap-4 flex-1">
               <OtpInput value={code} onChange={(v) => { setCode(v); setCodeError(""); }} />
               {codeError && (
-                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#DC2626" }}>{codeError}</p>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#DC2626" }}>{codeError}</p>
               )}
               <GhostButton label="Didn't get it? Send again" onClick={sendCode} />
             </div>

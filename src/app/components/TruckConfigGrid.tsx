@@ -63,7 +63,7 @@ export default function TruckConfigGrid({
             <span
               style={{
                 fontFamily: "'Archivo Black', sans-serif",
-                fontSize: "15px",
+                fontSize: "var(--type-body)",
                 color: "#040033",
               }}
             >
@@ -75,7 +75,7 @@ export default function TruckConfigGrid({
               className="mt-0.5"
               style={{
                 fontFamily: "'Courier Prime', monospace",
-                fontSize: "11px",
+                fontSize: "var(--type-caption)",
                 color: "#626A76",
               }}
             >

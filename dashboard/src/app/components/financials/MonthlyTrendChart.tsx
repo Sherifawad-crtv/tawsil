@@ -63,14 +63,14 @@ export default function MonthlyTrendChart({ data, year }: { data: TrendPoint[]; 
               axisLine={false}
               // Every other month: at this card's width twelve labels collide.
               interval={1}
-              tick={{ fill: "var(--color-muted)", fontSize: 11, fontFamily: "var(--font-sub)" }}
+              tick={{ fill: "var(--color-muted)", fontSize: "0.6875rem", fontFamily: "var(--font-sub)" }}
               dy={8}
             />
             <YAxis
               tickLine={false}
               axisLine={false}
               width={40}
-              tick={{ fill: "var(--color-muted)", fontSize: 11, fontFamily: "var(--font-mono)" }}
+              tick={{ fill: "var(--color-muted)", fontSize: "0.6875rem", fontFamily: "var(--font-mono)" }}
               tickFormatter={compact}
             />
             <Tooltip content={<TrendTooltip />} cursor={{ stroke: "var(--color-border)" }} />

@@ -32,7 +32,7 @@ export default function BottomTabBar() {
             return (
               <>
                 <Icon sx={{ fontSize: 23, color: isActive ? "#1253FA" : "#626A76" }} />
-                <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: isActive ? 700 : 500, fontSize: "10.5px", color: isActive ? "#1253FA" : "#626A76" }}>
+                <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: isActive ? 700 : 500, fontSize: "var(--type-caption)", color: isActive ? "#1253FA" : "#626A76" }}>
                   {tab.label}
                 </span>
               </>

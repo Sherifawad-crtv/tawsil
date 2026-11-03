@@ -22,18 +22,18 @@ export default function ProfileSettings() {
       <div className="w-full max-w-lg mx-auto px-4 pb-8 flex flex-col gap-5">
         <div className="rounded-[20px] bg-white p-4 flex items-center gap-3.5" style={{ border: "1px solid #E8E8E5" }}>
           <div className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#040033" }}>
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "white" }}>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "white" }}>
               {profile.fullName.split(" ").map((p) => p[0]).join("")}
             </span>
           </div>
           <div className="min-w-0 flex-1">
-            <p className="truncate" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>{profile.fullName}</p>
-            <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>{profile.email}</p>
+            <p className="truncate" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "#040033" }}>{profile.fullName}</p>
+            <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>{profile.email}</p>
           </div>
           {profile.licenseValid && (
             <span
               className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 flex-shrink-0"
-              style={{ backgroundColor: "#E7F6EC", color: "#16803C", fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "11px" }}
+              style={{ backgroundColor: "#E7F6EC", color: "#16803C", fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-caption)" }}
             >
               <VerifiedRounded sx={{ fontSize: 13 }} />
               VALID
@@ -63,8 +63,8 @@ export default function ProfileSettings() {
           <SectionHeading icon={<ApartmentRounded sx={{ fontSize: 16, color: "#1253FA" }} />}>Contractor</SectionHeading>
           {/* Reference-only - correctly not editable from here. */}
           <div className="py-2">
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "11.5px", color: "#626A76" }}>Contractor Name</p>
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13.5px", color: "#040033" }}>{profile.contractorName}</p>
+            <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-caption)", color: "#626A76" }}>Contractor Name</p>
+            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{profile.contractorName}</p>
           </div>
         </div>
 

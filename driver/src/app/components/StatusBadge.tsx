@@ -25,7 +25,7 @@ export default function StatusBadge({ status, size = "md" }: { status: OrderStat
         backgroundColor: s.bg,
         color: s.fg,
         fontFamily: "'Courier Prime', monospace",
-        fontSize: size === "sm" ? "9px" : "10px",
+        fontSize: "var(--type-caption)",
         textTransform: "uppercase",
         letterSpacing: "0.05em",
         padding: size === "sm" ? "3px 8px" : "4px 10px",

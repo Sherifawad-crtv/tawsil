@@ -22,8 +22,8 @@ export default function HomeScreen() {
     <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 12px), 12px)", paddingBottom: "24px" }}>
       {/* Greeting fixed: no license-number parenthetical appended - "Welcome Back Driver" stands alone. */}
       <div className="mb-5">
-        <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "13px", color: "#626A76" }}>Welcome back, {firstName}</p>
-        <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033", lineHeight: 1.15, marginTop: "2px" }}>Dashboard</h1>
+        <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-body-sm)", color: "#626A76" }}>Welcome back, {firstName}</p>
+        <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033", lineHeight: 1.15, marginTop: "2px" }}>Dashboard</h1>
       </div>
 
       {/* Stat tiles - light, tappable, same treatment as the contractor app's Home: 2 metrics, correctly simpler than Contractor's 3. */}
@@ -87,8 +87,8 @@ function StatTile({
       <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
         <Icon sx={{ fontSize: 16, color: "#1253FA" }} />
       </div>
-      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "17px", color: "#040033" }}>{value}</span>
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#626A76" }}>{label}</span>
+      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "#040033" }}>{value}</span>
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-caption)", color: "#626A76" }}>{label}</span>
     </button>
   );
 }
@@ -98,16 +98,16 @@ function Section({ title, count, onViewAll, children }: { title: string; count: 
     <div className="mb-6">
       <div className="flex items-center justify-between mb-2.5">
         <div className="flex items-center gap-2">
-          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "15px", color: "#040033" }}>{title}</h2>
+          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body)", color: "#040033" }}>{title}</h2>
           <span
             className="rounded-full px-1.5 py-0.5"
-            style={{ backgroundColor: "#F0F0EE", color: "#6B7280", fontFamily: "'Courier Prime', monospace", fontSize: "11px", fontWeight: 700 }}
+            style={{ backgroundColor: "#F0F0EE", color: "#6B7280", fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", fontWeight: 700 }}
           >
             {count}
           </span>
         </div>
         {count > PREVIEW_COUNT && (
-          <button onClick={onViewAll} className="flex items-center gap-0.5 cursor-pointer" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "12.5px", color: "#1253FA" }}>
+          <button onClick={onViewAll} className="flex items-center gap-0.5 cursor-pointer" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body-sm)", color: "#1253FA" }}>
             View All <ChevronRightRounded sx={{ fontSize: 15 }} />
           </button>
         )}

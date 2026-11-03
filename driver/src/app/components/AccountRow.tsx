@@ -22,7 +22,7 @@ export default function AccountRow({
       <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: destructive ? "#FDECEC" : "#EAF0FE" }}>
         {icon}
       </div>
-      <span className="flex-1 text-left" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: destructive ? "#DC2626" : "#040033" }}>
+      <span className="flex-1 text-left" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: destructive ? "#DC2626" : "#040033" }}>
         {label}
       </span>
       <ChevronRightRounded sx={{ fontSize: 19, color: destructive ? "#DC2626" : "#626A76" }} />

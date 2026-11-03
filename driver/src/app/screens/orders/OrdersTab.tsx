@@ -20,7 +20,7 @@ export default function OrdersTab() {
 
   return (
     <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 12px), 12px)", paddingBottom: "8px" }}>
-      <h1 className="mb-4" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033" }}>
+      <h1 className="mb-4" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033" }}>
         Orders
       </h1>
 

@@ -15,7 +15,7 @@ export default function MobileOnlyGate() {
       <h1
         style={{
           fontFamily: "'Archivo Black', sans-serif",
-          fontSize: "22px",
+          fontSize: "var(--type-heading)",
           color: "white",
           lineHeight: 1.3,
         }}
@@ -25,7 +25,7 @@ export default function MobileOnlyGate() {
       <p
         style={{
           fontFamily: "'Courier Prime', monospace",
-          fontSize: "13px",
+          fontSize: "var(--type-body-sm)",
           color: "#9CA3AF",
           lineHeight: 1.6,
           maxWidth: "320px",

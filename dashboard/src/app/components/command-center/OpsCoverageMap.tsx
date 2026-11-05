@@ -6,24 +6,24 @@ import "leaflet/dist/leaflet.css";
 import type { AreaCoverage, CoveragePoint } from "../../lib/coverage";
 
 /**
- * Operations' coverage view: a dark map with a heat layer over everywhere
+ * Operations' coverage view: a light map with a heat layer over everywhere
  * this period's orders touched, a dot at each stop, and a side panel with the
  * zones-covered count, the colour legend and the busiest zones. No money and
  * no per-zone counts - Operations sees where work went, not what it was worth.
  *
- * Tiles are CARTO's dark basemap, fetched at render time from their CDN like
- * the order map's light one.
+ * Tiles are CARTO's Positron, fetched at render time from their CDN - the
+ * same basemap as the order map.
  */
 
-const TILES = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+const TILES = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
 const ATTRIBUTION =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
-const SURFACE = "#16171c";
-const PANEL = "#1c1d23";
-const LINE = "rgba(255,255,255,0.08)";
-const DIM = "#9ca3af";
-const ACCENT = "#6d7bff";
+const SURFACE = "#f0f0ee";
+const PANEL = "#ffffff";
+const LINE = "#e8e8e5";
+const DIM = "#626a76";
+const ACCENT = "#1253fa";
 
 /** Low to high, same stops on the map and in the legend. */
 const HEAT_GRADIENT: Record<number, string> = {
@@ -115,7 +115,7 @@ export default function OpsCoverageMap({
           <p className="text-caption-1-regular uppercase tracking-wide" style={{ color: DIM, fontFamily: "var(--font-mono)" }}>
             Zones covered
           </p>
-          <p className="mt-1 flex items-baseline gap-1.5 text-white" style={{ fontFamily: "var(--font-heading)" }}>
+          <p className="mt-1 flex items-baseline gap-1.5 text-navy" style={{ fontFamily: "var(--font-heading)" }}>
             <span style={{ fontSize: "3rem", lineHeight: 1 }}>{areas.length}</span>
             <span className="text-body-2-regular" style={{ color: DIM }}>zones</span>
           </p>
@@ -125,7 +125,7 @@ export default function OpsCoverageMap({
         </div>
 
         <div style={{ borderTop: `1px solid ${LINE}` }} className="pt-5">
-          <p className="text-body-semibold text-white" style={{ fontFamily: "var(--font-sub)" }}>Color legend</p>
+          <p className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Color legend</p>
           <div className="mt-3 h-2.5 rounded-full" style={{ background: LEGEND_BAR }} />
           <div className="mt-1.5 flex justify-between text-caption-1-regular" style={{ color: DIM }}>
             <span>Fewer orders</span>
@@ -134,7 +134,7 @@ export default function OpsCoverageMap({
         </div>
 
         <div style={{ borderTop: `1px solid ${LINE}` }} className="pt-5">
-          <p className="text-body-semibold text-white" style={{ fontFamily: "var(--font-sub)" }}>Busiest zones</p>
+          <p className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Busiest zones</p>
           {busiest.length === 0 ? (
             <p className="mt-3 text-body-2-regular" style={{ color: DIM }}>No orders in this period.</p>
           ) : (
@@ -143,10 +143,10 @@ export default function OpsCoverageMap({
                 <li
                   key={a.area}
                   className="rounded-xl px-3 py-2"
-                  style={{ border: `1px solid ${i === 0 ? ACCENT : "transparent"}`, backgroundColor: i === 0 ? "rgba(109,123,255,0.08)" : "transparent" }}
+                  style={{ border: `1px solid ${i === 0 ? ACCENT : "transparent"}`, backgroundColor: i === 0 ? "rgba(18,83,250,0.06)" : "transparent" }}
                 >
-                  <div className="text-body-2-regular text-white truncate">{a.area}</div>
-                  <div className="mt-1.5 h-1 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.08)" }}>
+                  <div className="text-body-2-regular text-navy truncate">{a.area}</div>
+                  <div className="mt-1.5 h-1 rounded-full" style={{ backgroundColor: "#f0f0ee" }}>
                     <div className="h-full rounded-full" style={{ width: `${Math.max(8, (a.orders / top) * 100)}%`, backgroundColor: ACCENT }} />
                   </div>
                 </li>

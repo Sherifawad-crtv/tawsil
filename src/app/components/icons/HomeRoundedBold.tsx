@@ -1,4 +1,4 @@
-import { HomeIcon } from "@solar-icons/react/bold";
+import Icon from "~icons/material-symbols/home-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(HomeIcon);
+export default makeIcon(Icon);

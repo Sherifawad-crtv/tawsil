@@ -1,4 +1,4 @@
-import { HourglassIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/hourglass-empty-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(HourglassIcon);
+export default makeIcon(Icon);

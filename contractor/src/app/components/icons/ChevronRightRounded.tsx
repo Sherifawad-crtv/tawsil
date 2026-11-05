@@ -1,4 +1,4 @@
-import { AltArrowRightIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/chevron-right-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(AltArrowRightIcon);
+export default makeIcon(Icon);

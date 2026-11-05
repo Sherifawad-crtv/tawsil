@@ -1,4 +1,4 @@
-import { Buildings3Icon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/warehouse-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(Buildings3Icon);
+export default makeIcon(Icon);

@@ -1,4 +1,4 @@
-import { UserCrossIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/person-off-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(UserCrossIcon);
+export default makeIcon(Icon);

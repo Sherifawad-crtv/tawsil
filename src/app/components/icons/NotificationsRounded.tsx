@@ -1,4 +1,4 @@
-import { BellIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/notifications-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(BellIcon);
+export default makeIcon(Icon);

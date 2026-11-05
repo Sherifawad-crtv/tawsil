@@ -1,4 +1,4 @@
-import { CalendarIcon } from "@solar-icons/react/bold";
+import Icon from "~icons/material-symbols/calendar-month-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(CalendarIcon);
+export default makeIcon(Icon);

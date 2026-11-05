@@ -1,4 +1,4 @@
-import { DeliveryIcon } from "@solar-icons/react/bold";
+import Icon from "~icons/material-symbols/local-shipping-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(DeliveryIcon);
+export default makeIcon(Icon);

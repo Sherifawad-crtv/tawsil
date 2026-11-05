@@ -1,4 +1,4 @@
-import { IPhoneIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/mobile-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(IPhoneIcon);
+export default makeIcon(Icon);

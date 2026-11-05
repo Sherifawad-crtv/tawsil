@@ -1,4 +1,4 @@
-import { AddCircleIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/add-circle-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(AddCircleIcon);
+export default makeIcon(Icon);

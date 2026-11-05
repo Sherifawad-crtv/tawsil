@@ -1,4 +1,4 @@
-import { BookmarkIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/bookmark-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(BookmarkIcon);
+export default makeIcon(Icon);

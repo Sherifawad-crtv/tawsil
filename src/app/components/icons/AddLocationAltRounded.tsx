@@ -1,4 +1,4 @@
-import { MapPointAddIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/add-location-alt-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(MapPointAddIcon);
+export default makeIcon(Icon);

@@ -1,4 +1,4 @@
-import { WalletMoneyIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/payments-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(WalletMoneyIcon);
+export default makeIcon(Icon);

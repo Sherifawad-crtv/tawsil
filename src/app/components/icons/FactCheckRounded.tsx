@@ -1,4 +1,4 @@
-import { ChecklistIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/fact-check-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(ChecklistIcon);
+export default makeIcon(Icon);

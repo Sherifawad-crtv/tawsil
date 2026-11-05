@@ -1,4 +1,4 @@
-import { LetterIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/mail-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(LetterIcon);
+export default makeIcon(Icon);

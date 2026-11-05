@@ -1,4 +1,4 @@
-import { LogoutIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/logout-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(LogoutIcon);
+export default makeIcon(Icon);

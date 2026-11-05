@@ -1,4 +1,4 @@
-import { CameraIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/photo-camera-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(CameraIcon);
+export default makeIcon(Icon);

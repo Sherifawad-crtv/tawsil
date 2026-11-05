@@ -1,4 +1,4 @@
-import { HistoryIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/history-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(HistoryIcon);
+export default makeIcon(Icon);

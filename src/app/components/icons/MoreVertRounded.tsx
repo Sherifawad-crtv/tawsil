@@ -1,4 +1,4 @@
-import { MenuDotsIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/more-vert-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(MenuDotsIcon);
+export default makeIcon(Icon);

@@ -1,4 +1,4 @@
-import { ShieldIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/shield-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(ShieldIcon);
+export default makeIcon(Icon);

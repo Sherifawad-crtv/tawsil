@@ -1,4 +1,4 @@
-import { CardIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/credit-card-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(CardIcon);
+export default makeIcon(Icon);

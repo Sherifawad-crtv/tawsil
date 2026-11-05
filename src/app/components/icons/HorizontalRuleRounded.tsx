@@ -1,4 +1,4 @@
-import { MinusIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/horizontal-rule-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(MinusIcon);
+export default makeIcon(Icon);

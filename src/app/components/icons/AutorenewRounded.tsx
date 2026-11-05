@@ -1,4 +1,4 @@
-import { RefreshIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/autorenew-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(RefreshIcon);
+export default makeIcon(Icon);

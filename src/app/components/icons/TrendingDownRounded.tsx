@@ -1,4 +1,4 @@
-import { GraphDownIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/trending-down-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(GraphDownIcon);
+export default makeIcon(Icon);

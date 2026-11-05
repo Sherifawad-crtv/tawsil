@@ -3,6 +3,7 @@ import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import Icons from 'unplugin-icons/vite'
 
 
 function figmaAssetResolver() {
@@ -24,6 +25,9 @@ export default defineConfig({
     // Tailwind is not being actively used – do not remove them
     react(),
     tailwindcss(),
+    // Material Symbols are compiled on demand: only the icons actually imported
+    // as ~icons/material-symbols/<name> end up in the bundle.
+    Icons({ compiler: 'jsx', jsx: 'react' }),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['apple-touch-icon.png'],

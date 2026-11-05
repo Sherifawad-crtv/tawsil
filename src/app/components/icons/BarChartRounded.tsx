@@ -1,4 +1,4 @@
-import { ChartIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/bar-chart-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(ChartIcon);
+export default makeIcon(Icon);

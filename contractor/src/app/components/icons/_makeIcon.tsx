@@ -1,32 +1,26 @@
-import type { ComponentType, CSSProperties } from "react";
-
-interface SolarIconProps {
-  size?: number | string;
-  color?: string;
-  strokeWidth?: number | string;
-  className?: string;
-  style?: CSSProperties;
-}
+import type { ComponentType, CSSProperties, SVGProps } from "react";
 
 export interface SxIconProps {
   /** MUI SvgIcon-style prop this app's call sites already use everywhere.
-   *  fontSize/color map to the Solar icon's own size/color; any other CSS
+   *  fontSize/color map to the icon's size and color; any other CSS
    *  property (transform, opacity, animation, flexShrink, ...) is forwarded
-   *  as inline style, same as MUI's sx did. */
+   *  as inline style. */
   sx?: ({ fontSize?: number | string; color?: string } & CSSProperties) | undefined;
   className?: string;
   style?: CSSProperties;
 }
 
 /**
- * Adapter so every icon component keeps the sx={{ fontSize, color }}
- * call-site API this app inherited from MUI's SvgIcon, while actually
- * rendering a real Solar Icons component underneath - no call site needs
- * to change when the icon set does.
+ * Wraps a Material Symbols Rounded icon (compiled on demand by
+ * unplugin-icons) so every icon keeps the sx={{ fontSize, color }} call-site
+ * API. Which icon file you import decides the look: the plain file is the
+ * outline (stroke) form, the *Bold sibling is the filled form for selected
+ * or affirmative states.
  */
-export function makeIcon(Icon: ComponentType<SolarIconProps>) {
+export function makeIcon(Icon: ComponentType<SVGProps<SVGSVGElement>>) {
   return function IconWrapper({ sx, style, ...rest }: SxIconProps) {
     const { fontSize, color, ...restSx } = sx ?? {};
-    return <Icon size={fontSize} color={color} strokeWidth={1.8} style={{ ...restSx, ...style }} {...rest} />;
+    const size = fontSize ?? 24;
+    return <Icon width={size} height={size} color={color} style={{ ...restSx, ...style }} {...rest} />;
   };
 }

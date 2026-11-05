@@ -1,4 +1,4 @@
-import { Widget2Icon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/category-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(Widget2Icon);
+export default makeIcon(Icon);

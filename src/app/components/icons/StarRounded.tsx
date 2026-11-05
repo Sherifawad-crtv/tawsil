@@ -1,4 +1,4 @@
-import { StarIcon } from "@solar-icons/react/bold";
+import Icon from "~icons/material-symbols/star-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(StarIcon);
+export default makeIcon(Icon);

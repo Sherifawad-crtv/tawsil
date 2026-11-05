@@ -1,4 +1,4 @@
-import { ShareIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/ios-share-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(ShareIcon);
+export default makeIcon(Icon);

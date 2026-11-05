@@ -1,4 +1,4 @@
-import { CheckCircleIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/check-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(CheckCircleIcon);
+export default makeIcon(Icon);

@@ -1,4 +1,4 @@
-import { UserIdIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/badge-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(UserIdIcon);
+export default makeIcon(Icon);

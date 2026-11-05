@@ -1,4 +1,4 @@
-import { RulerIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/straighten-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(RulerIcon);
+export default makeIcon(Icon);

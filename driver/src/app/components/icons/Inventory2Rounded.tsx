@@ -1,4 +1,4 @@
-import { BoxIcon } from "@solar-icons/react/bold";
+import Icon from "~icons/material-symbols/inventory-2-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(BoxIcon);
+export default makeIcon(Icon);

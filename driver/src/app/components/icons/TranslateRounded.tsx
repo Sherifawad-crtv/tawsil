@@ -1,4 +1,4 @@
-import { GlobeIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/translate-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(GlobeIcon);
+export default makeIcon(Icon);

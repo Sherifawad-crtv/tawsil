@@ -1,4 +1,4 @@
-import { ClockCircleIcon } from "@solar-icons/react/bold";
+import Icon from "~icons/material-symbols/schedule-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(ClockCircleIcon);
+export default makeIcon(Icon);

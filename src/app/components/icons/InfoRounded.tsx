@@ -1,4 +1,4 @@
-import { InfoCircleIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/info-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(InfoCircleIcon);
+export default makeIcon(Icon);

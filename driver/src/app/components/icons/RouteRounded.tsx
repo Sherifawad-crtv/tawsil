@@ -1,4 +1,4 @@
-import { RouteIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/route-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(RouteIcon);
+export default makeIcon(Icon);

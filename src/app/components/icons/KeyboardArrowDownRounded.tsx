@@ -1,4 +1,4 @@
-import { AltArrowDownIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/keyboard-arrow-down-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(AltArrowDownIcon);
+export default makeIcon(Icon);

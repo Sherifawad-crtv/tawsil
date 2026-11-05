@@ -1,4 +1,4 @@
-import { SpeedometerMiddleIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/speed-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(SpeedometerMiddleIcon);
+export default makeIcon(Icon);

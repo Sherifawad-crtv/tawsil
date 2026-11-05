@@ -1,4 +1,4 @@
-import { OutgoingCallIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/call-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(OutgoingCallIcon);
+export default makeIcon(Icon);

@@ -1,4 +1,4 @@
-import { CloseIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/close-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(CloseIcon);
+export default makeIcon(Icon);

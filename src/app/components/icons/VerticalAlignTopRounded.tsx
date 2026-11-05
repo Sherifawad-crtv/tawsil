@@ -1,4 +1,4 @@
-import { ArrowUpIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/vertical-align-top-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(ArrowUpIcon);
+export default makeIcon(Icon);

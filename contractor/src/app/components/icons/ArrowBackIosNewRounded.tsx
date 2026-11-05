@@ -1,4 +1,4 @@
-import { AltArrowLeftIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/arrow-back-ios-new-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(AltArrowLeftIcon);
+export default makeIcon(Icon);

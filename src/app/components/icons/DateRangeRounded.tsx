@@ -1,4 +1,4 @@
-import { CalendarDateIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/date-range-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(CalendarDateIcon);
+export default makeIcon(Icon);

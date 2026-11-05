@@ -1,4 +1,4 @@
-import { RecordIcon } from "@solar-icons/react/linear";
+import Icon from "~icons/material-symbols/radio-button-unchecked-outline-rounded";
 import { makeIcon } from "./_makeIcon";
 
-export default makeIcon(RecordIcon);
+export default makeIcon(Icon);

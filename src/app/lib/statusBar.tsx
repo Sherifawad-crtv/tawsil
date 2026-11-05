@@ -46,6 +46,13 @@ export function useStatusBar(bg: string = PAGE_BG, top: string = STATUS_NAVY) {
   }, [bg, top]);
 }
 
+// Preview aid: open the app with ?sat=47 to see the status-bar blend in a desktop
+// browser or device emulator, which have no real status bar to measure.
+if (typeof window !== "undefined") {
+  const sat = Number(new URLSearchParams(window.location.search).get("sat"));
+  if (sat > 0 && sat < 100) document.documentElement.style.setProperty("--sat", `${sat}px`);
+}
+
 const subscribe = (l: () => void) => {
   listeners.add(l);
   return () => listeners.delete(l);

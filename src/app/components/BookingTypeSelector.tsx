@@ -494,7 +494,7 @@ function DailyRentalPicker({
           {/* Custom km input */}
           <div className="px-4 pb-3">
             <div
-              className="flex items-center gap-2 rounded-xl px-4 py-3"
+              className="field flex items-center gap-2 rounded-xl px-4 py-3"
               style={{ backgroundColor: "#F5F5F3", border: dailyKm > 0 ? "2px solid #1253FA" : "2px solid transparent", transition: "border-color 0.2s" }}
             >
               <input

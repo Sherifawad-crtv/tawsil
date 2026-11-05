@@ -17,7 +17,8 @@ export default function AuthTextField({ label, error, id, ...inputProps }: AuthT
         {label}
       </label>
       <div
-        className="flex items-center rounded-2xl px-4"
+        className="field flex items-center rounded-2xl px-4"
+        data-invalid={error ? "true" : undefined}
         style={{
           backgroundColor: "white",
           boxShadow: error ? "0 0 0 1.5px #DC2626" : "0 1px 6px rgba(0,0,0,0.04)",

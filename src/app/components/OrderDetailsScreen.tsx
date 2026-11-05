@@ -371,7 +371,7 @@ function CancelModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: (
           value={val}
           onChange={(e) => setVal(e.target.value)}
           placeholder="Type the order number"
-          className="w-full rounded-2xl outline-none"
+          className="field-input w-full rounded-2xl outline-none"
           style={{
             backgroundColor: "white",
             border: `1.5px solid ${matches ? "#1253FA" : "#E8E8E5"}`,

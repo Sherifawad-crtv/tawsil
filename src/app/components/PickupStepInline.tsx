@@ -321,7 +321,7 @@ export default function PickupStepInline({
     <div className="flex flex-col gap-3">
       {/* Search input */}
       <div
-        className="flex items-center gap-3 rounded-2xl px-4"
+        className="field flex items-center gap-3 rounded-2xl px-4"
         style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)", height: "48px" }}
       >
         <SearchRounded sx={{ fontSize: 16, color: "#626A76" }} />

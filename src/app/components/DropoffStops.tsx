@@ -226,7 +226,7 @@ function StopCard({
               value={stop.notes || ""}
               onChange={(e) => onNotesChange(e.target.value)}
               onClick={(e) => e.stopPropagation()}
-              className="w-full outline-none"
+              className="field-input w-full outline-none"
               style={{
                 fontFamily: "'Courier Prime', monospace",
                 fontSize: "12px",

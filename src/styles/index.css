@@ -4,3 +4,15 @@
 
 /* Height of the system status bar when the app runs edge-to-edge (0 elsewhere). */
 :root { --sat: env(safe-area-inset-top, 0px); }
+
+/* Focus state for every text field: a blue ring and soft halo, same family as the weight field.
+   .field wraps an input (focus-within); .field-input is the input itself. */
+.field, .field-input { transition: box-shadow 0.15s ease, border-color 0.15s ease; }
+.field:focus-within, .field-input:focus {
+  border-color: #1253FA !important;
+  box-shadow: 0 0 0 2px #1253FA, 0 0 0 5px rgba(18, 83, 250, 0.14) !important;
+}
+.field[data-invalid="true"]:focus-within {
+  border-color: #DC2626 !important;
+  box-shadow: 0 0 0 2px #DC2626, 0 0 0 5px rgba(220, 38, 38, 0.14) !important;
+}

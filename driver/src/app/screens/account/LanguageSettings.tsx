@@ -29,12 +29,12 @@ export default function LanguageSettings() {
             <TranslateRounded sx={{ fontSize: 26, color: "#1253FA" }} />
           </div>
           <div>
-            <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-heading)", color: "#040033" }}>Select Language</h1>
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-title)", color: "#040033", marginTop: "2px" }} dir="rtl">
+            <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>Select Language</h1>
+            <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "16px", color: "#040033", marginTop: "2px" }} dir="rtl">
               اختر اللغة
             </p>
           </div>
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>Choose your language to continue</p>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>Choose your language to continue</p>
         </div>
 
         <div className="flex flex-col gap-3">
@@ -47,10 +47,10 @@ export default function LanguageSettings() {
                 className="w-full flex items-center gap-3 rounded-[20px] bg-white p-4 cursor-pointer active:scale-[0.99] transition-transform"
                 style={{ border: active ? "2px solid #1253FA" : "1px solid #E8E8E5" }}
               >
-                <span style={{ fontSize: "var(--type-display)" }}>{opt.flag}</span>
+                <span style={{ fontSize: "26px" }}>{opt.flag}</span>
                 <div className="flex-1 text-left" dir={opt.dir}>
-                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body)", color: "#040033" }}>{opt.title}</p>
-                  <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-body-sm)", color: "#626A76" }}>{opt.subtitle}</p>
+                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "15px", color: "#040033" }}>{opt.title}</p>
+                  <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "12px", color: "#626A76" }}>{opt.subtitle}</p>
                 </div>
                 <div
                   className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
@@ -74,7 +74,7 @@ export default function LanguageSettings() {
           >
             Continue
           </Button>
-          <button onClick={() => navigate("/account")} className="cursor-pointer" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#626A76" }}>
+          <button onClick={() => navigate("/account")} className="cursor-pointer" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#626A76" }}>
             Skip for now
           </button>
         </div>

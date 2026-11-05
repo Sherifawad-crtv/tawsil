@@ -30,7 +30,7 @@ export default function SegmentedControl<T extends string>({
               boxShadow: active ? "0 1px 4px rgba(4,0,51,0.10)" : "none",
               fontFamily: "'Archivo', sans-serif",
               fontWeight: active ? 700 : 500,
-              fontSize: "var(--type-body-sm)",
+              fontSize: "13px",
               color: active ? "#040033" : "#6B7280",
             }}
           >

@@ -28,7 +28,7 @@ export default function ScreenHeader({
       </button>
       <h1
         className="flex-1 truncate"
-        style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-heading)", color: "#040033" }}
+        style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "19px", color: "#040033" }}
       >
         {title}
       </h1>

@@ -36,7 +36,7 @@ class Boundary extends Component<{ children: ReactNode; resetKey: string }, { er
         <p className="text-body-2-regular text-muted max-w-md" style={{ fontFamily: "var(--font-mono)" }}>
           {this.state.error.message}
         </p>
-        <Link to="/" className="mt-2 text-caption-1-semibold text-blue hover:underline" style={{ fontFamily: "var(--font-sub)" }}>
+        <Link to="/home" className="mt-2 text-caption-1-semibold text-blue hover:underline" style={{ fontFamily: "var(--font-sub)" }}>
           Back to Home
         </Link>
       </div>

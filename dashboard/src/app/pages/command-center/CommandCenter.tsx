@@ -117,7 +117,7 @@ export default function CommandCenter() {
 
   // The sidebar hides this tab for other roles, but hiding a link isn't
   // gating - without this the page is still reachable by typing the URL.
-  if (!canViewCommandCenter(role)) return <Navigate to="/" replace />;
+  if (!canViewCommandCenter(role)) return <Navigate to="/home" replace />;
 
   const periodTitle = `${monthLabel(filters.month)} ${filters.year}`;
   const marginPercent =

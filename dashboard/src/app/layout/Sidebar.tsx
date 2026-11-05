@@ -24,14 +24,14 @@ import {
 import { cx } from "../lib/cx";
 import { useDataStore } from "../lib/store";
 import { useRole } from "../lib/RoleContext";
-import { getOrdersForRole, canViewCommandCenter } from "../lib/selectors";
+import { getOrdersForRole } from "../lib/selectors";
 import { initials } from "../lib/format";
 
 const NAV_ITEMS = [
-  // Executive view, first in the list and hidden from everyone but
-  // leadership - see canViewCommandCenter.
-  { to: "/command-center", label: "Command Center", iconOutline: GlobalLinearIcon, iconFilled: GlobalBoldIcon, execOnly: true },
-  { to: "/", label: "Home", iconOutline: Widget2LinearIcon, iconFilled: Widget2BoldIcon, end: true },
+  // The landing page: "/" redirects here, and every role sees it (scoped to
+  // its own slice - see CommandCenter.tsx).
+  { to: "/command-center", label: "Command Center", iconOutline: GlobalLinearIcon, iconFilled: GlobalBoldIcon },
+  { to: "/home", label: "Home", iconOutline: Widget2LinearIcon, iconFilled: Widget2BoldIcon },
   { to: "/orders", label: "Orders", iconOutline: BoxLinearIcon, iconFilled: BoxBoldIcon, showOrderCount: true },
   { to: "/contractors", label: "Contractors", iconOutline: BuildingsLinearIcon, iconFilled: BuildingsBoldIcon },
   { to: "/clients", label: "Clients", iconOutline: Buildings2LinearIcon, iconFilled: Buildings2BoldIcon },
@@ -51,7 +51,7 @@ export default function Sidebar({
   const { orders, currentUser } = useDataStore();
   const { role } = useRole();
   const orderCount = getOrdersForRole(orders, role).length;
-  const navItems = NAV_ITEMS.filter((item) => !item.execOnly || canViewCommandCenter(role));
+  const navItems = NAV_ITEMS;
 
   return (
     <>
@@ -91,11 +91,10 @@ export default function Sidebar({
         </p>
 
         <nav className="flex-1 px-0.5 pt-0.5 flex flex-col gap-1 overflow-y-auto overflow-x-hidden">
-          {navItems.map(({ to, label, iconOutline: IconOutline, iconFilled: IconFilled, end, showOrderCount }) => (
+          {navItems.map(({ to, label, iconOutline: IconOutline, iconFilled: IconFilled, showOrderCount }) => (
             <NavLink
               key={to}
               to={to}
-              end={end}
               onClick={onClose}
               className={({ isActive }) =>
                 cx(

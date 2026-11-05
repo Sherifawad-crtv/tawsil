@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import AppShell from "./layout/AppShell";
 import { RoleProvider } from "./lib/RoleContext";
 import { DataStoreProvider } from "./lib/store";
@@ -21,7 +21,8 @@ export default function App() {
       <RoleProvider>
         <Routes>
           <Route element={<AppShell />}>
-            <Route index element={<Home />} />
+            <Route index element={<Navigate to="/command-center" replace />} />
+            <Route path="home" element={<Home />} />
             <Route path="command-center" element={<CommandCenter />} />
             <Route path="orders" element={<OrdersList />} />
             <Route path="orders/:orderId" element={<OrderDetail />} />

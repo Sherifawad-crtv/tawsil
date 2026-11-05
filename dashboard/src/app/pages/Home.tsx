@@ -154,7 +154,7 @@ export default function Home() {
       </div>
 
       {/* Volume trend + status mix */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid lg:grid-cols-2 gap-3">
         <OrderVolumeChartCard data={volumeData} />
 
         <InsightCard title="Orders by Status" subtitle={`${orders.length} total orders`}>
@@ -163,7 +163,7 @@ export default function Home() {
       </div>
 
       {/* Problem hotspots - when and where issues cluster */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid lg:grid-cols-2 gap-3">
         <InsightCard title="When Problems Happen" subtitle="Open issues by time of day">
           {totalProblems === 0 ? (
             <div className="py-6 text-center text-body-2-regular text-muted">No open problems right now.</div>

@@ -79,7 +79,7 @@ export default function OrderVolumeChartCard({ data }: { data: VolumePoint[] }) 
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
             data={data}
-            margin={{ top: 4, right: 16, bottom: 0, left: 0 }}
+            margin={{ top: 4, right: 4, bottom: 0, left: 0 }}
             onMouseMove={(state) => {
               const index = Number(state?.activeTooltipIndex);
               if (state?.isTooltipActive && Number.isFinite(index)) setActiveIndex(index);
@@ -100,9 +100,9 @@ export default function OrderVolumeChartCard({ data }: { data: VolumePoint[] }) 
               tickFormatter={(v: number) => Math.round(v).toString()}
               tickLine={false}
               axisLine={false}
-              tick={{ fontSize: "0.6875rem", fill: "var(--color-text-tertiary)" }}
+              tick={{ fontSize: 10, fill: "var(--color-text-tertiary)" }}
             />
-            <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} tick={{ fontSize: "0.6875rem", fill: "var(--color-text-tertiary)" }} />
+            <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} tick={{ fontSize: 11, fill: "var(--color-text-tertiary)" }} />
             <Tooltip content={() => null} cursor={{ stroke: "var(--color-chart-cursor)", strokeWidth: 1, strokeDasharray: "4 4" }} />
             <Line
               type="monotone"

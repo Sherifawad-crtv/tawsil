@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { PAGE_BG, useStatusBar } from "../../lib/statusBar";
 
 /**
  * The same full-height off-white page wrapper every screen in this app uses.
@@ -14,6 +15,8 @@ export default function ScreenShell({
   /** Exactly one viewport tall and never scrolls (the welcome screen). */
   fixedHeight?: boolean;
 }) {
+  // The map backdrop is painted on white, so the status bar eases into white there.
+  useStatusBar(background ? "#FFFFFF" : PAGE_BG);
   return (
     <div
       className={`relative w-full flex flex-col overflow-hidden ${fixedHeight ? "h-dvh" : "min-h-screen"}`}

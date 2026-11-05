@@ -1,10 +1,15 @@
-import ApartmentRounded from "../icons/ApartmentRounded";
-import PersonRounded from "../icons/PersonRounded";
 import ChevronRightRounded from "../icons/ChevronRightRounded";
 import ScreenShell from "./ScreenShell";
 import MapBackdrop from "./MapBackdrop";
+import businessArt from "../../../assets/welcome-business.webp";
+import individualArt from "../../../assets/welcome-individual.webp";
 import { GhostButton } from "./StepChrome";
 import type { AccountType } from "../../lib/authTypes";
+
+/** The illustrations sit on white; multiply lets the card colour show through. */
+function Art({ src }: { src: string }) {
+  return <img src={src} alt="" draggable={false} className="max-w-full max-h-full object-contain" style={{ mixBlendMode: "multiply" }} />;
+}
 
 function TypeCard({
   icon,
@@ -23,12 +28,7 @@ function TypeCard({
       className="w-full rounded-[22px] p-5 flex items-center gap-4 cursor-pointer active:scale-[0.98] transition-transform text-left"
       style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)", border: "none" }}
     >
-      <div
-        className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
-        style={{ backgroundColor: "rgba(18,83,250,0.08)" }}
-      >
-        {icon}
-      </div>
+      <div className="w-16 h-16 flex items-center justify-center flex-shrink-0">{icon}</div>
       <div className="flex-1 min-w-0">
         <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>{title}</span>
         <p className="whitespace-nowrap overflow-hidden text-ellipsis" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginTop: "4px" }}>{subtitle}</p>
@@ -61,13 +61,13 @@ export default function AccountTypeScreen({
 
         <div className="flex flex-col gap-3">
           <TypeCard
-            icon={<ApartmentRounded sx={{ fontSize: 26, color: "#1253FA" }} />}
+            icon={<Art src={businessArt} />}
             title="I'm a Business"
             subtitle="Tax details & invoicing"
             onClick={() => onChoose("business")}
           />
           <TypeCard
-            icon={<PersonRounded sx={{ fontSize: 26, color: "#1253FA" }} />}
+            icon={<Art src={individualArt} />}
             title="I'm an Individual"
             subtitle="Just your phone number"
             onClick={() => onChoose("individual")}

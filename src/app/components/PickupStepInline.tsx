@@ -119,7 +119,7 @@ function PickupCard({
             <span
               style={{
                 fontFamily: "'Archivo Black', sans-serif",
-                fontSize: "var(--type-body)",
+                fontSize: "14px",
                 color: "#040033",
               }}
             >
@@ -148,7 +148,7 @@ function PickupCard({
               style={{
                 fontFamily: "'Archivo', sans-serif",
                 fontWeight: 600,
-                fontSize: "var(--type-body-sm)",
+                fontSize: "13px",
                 color: "#040033",
               }}
             >
@@ -159,7 +159,7 @@ function PickupCard({
             className="truncate mt-0.5 ml-[22px]"
             style={{
               fontFamily: "'Courier Prime', monospace",
-              fontSize: "var(--type-caption)",
+              fontSize: "11px",
               color: "#626A76",
             }}
           >
@@ -331,7 +331,7 @@ export default function PickupStepInline({
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           className="flex-1 border-none outline-none bg-transparent"
-          style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-body)", color: "#040033", caretColor: "#1253FA" }}
+          style={{ fontFamily: "'Archivo', sans-serif", fontSize: "14px", color: "#040033", caretColor: "#1253FA" }}
         />
         {searchValue && (
           <button
@@ -360,13 +360,13 @@ export default function PickupStepInline({
                 <LocationOnRounded sx={{ fontSize: 12, color: "#626A76" }} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{r.name}</p>
-                <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>{r.address}</p>
+                <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{r.name}</p>
+                <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>{r.address}</p>
               </div>
             </button>
           ))}
           {filteredResults.length === 0 && (
-            <p className="px-4 py-4 text-center" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>No results found</p>
+            <p className="px-4 py-4 text-center" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>No results found</p>
           )}
         </div>
       )}
@@ -375,11 +375,11 @@ export default function PickupStepInline({
       {value.length > 0 && (
         <div>
           <div className="flex items-center justify-between mb-2">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>
               Added ({value.length})
             </span>
             {value.length > 1 && (
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
                 Drag to reorder
               </span>
             )}
@@ -430,8 +430,8 @@ export default function PickupStepInline({
           <MyLocationRounded sx={{ fontSize: 16, color: "#1253FA" }} />
         </div>
         <div className="flex-1 text-left">
-          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>Use current location</span>
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", marginTop: "1px" }}>Auto-detect your position</p>
+          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>Use current location</span>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "1px" }}>Auto-detect your position</p>
         </div>
       </button>
 
@@ -442,7 +442,7 @@ export default function PickupStepInline({
       <button onClick={() => setShowSaved(!showSaved)} className="flex items-center justify-between w-full cursor-pointer">
         <div className="flex items-center gap-2">
           <BookmarkBorderRounded sx={{ fontSize: 14, color: "#040033" }} />
-          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>Saved Locations</span>
+          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>Saved Locations</span>
         </div>
         <ChevronRightRounded sx={{ fontSize: 12, color: "#626A76", transform: showSaved ? "rotate(90deg)" : "rotate(0deg)", transition: "transform 0.2s" }} />
       </button>
@@ -460,8 +460,8 @@ export default function PickupStepInline({
                 <LocationIcon type={loc.icon} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{loc.name}</p>
-                <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>{loc.address}</p>
+                <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{loc.name}</p>
+                <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>{loc.address}</p>
               </div>
               <ChevronRightRounded sx={{ fontSize: 12, color: "#626A76" }} />
             </button>

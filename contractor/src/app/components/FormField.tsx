@@ -2,12 +2,12 @@ import type { InputHTMLAttributes, SelectHTMLAttributes } from "react";
 
 const LABEL_STYLE = {
   fontFamily: "'Courier Prime', monospace",
-  fontSize: "var(--type-caption)",
+  fontSize: "11px",
   color: "#626A76",
   letterSpacing: "0.06em",
   textTransform: "uppercase" as const,
 };
-const FIELD_STYLE = { fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" };
+const FIELD_STYLE = { fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" };
 
 /** Same white-card/soft-shadow input as the client app's AuthTextField, with an error state shown as a red ring. */
 export function TextField({
@@ -27,7 +27,7 @@ export function TextField({
       >
         <input {...props} className="flex-1 border-none outline-none bg-transparent w-full" style={{ ...FIELD_STYLE, caretColor: "#1253FA" }} />
       </div>
-      {error && <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#DC2626" }}>{error}</span>}
+      {error && <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#DC2626" }}>{error}</span>}
     </label>
   );
 }
@@ -52,7 +52,7 @@ export function SelectField({
           {children}
         </select>
       </div>
-      {error && <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#DC2626" }}>{error}</span>}
+      {error && <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#DC2626" }}>{error}</span>}
     </label>
   );
 }

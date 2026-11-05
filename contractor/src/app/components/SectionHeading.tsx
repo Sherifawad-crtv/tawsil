@@ -16,7 +16,7 @@ export default function SectionHeading({ icon, children }: { icon: ReactNode; ch
       >
         {icon}
       </div>
-      <h3 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body)", color: "#040033" }}>{children}</h3>
+      <h3 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "14px", color: "#040033" }}>{children}</h3>
     </div>
   );
 }

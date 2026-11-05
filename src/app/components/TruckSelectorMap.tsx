@@ -161,7 +161,7 @@ function StepIndicator({ step, total }: { step: number; total: number }) {
           />
         ))}
       </div>
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, color: "#1253FA", fontSize: "var(--type-caption)", letterSpacing: "0.08em" }}>
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, color: "#1253FA", fontSize: "11px", letterSpacing: "0.08em" }}>
         {step} / {total}
       </span>
     </div>
@@ -176,7 +176,7 @@ function BackButton({ onClick }: { onClick: () => void }) {
       className="flex items-center gap-1.5 mb-3 cursor-pointer active:opacity-70 transition-opacity flex-shrink-0"
     >
       <ArrowBackIosNewRounded sx={{ fontSize: 14, color: "#040033" }} />
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>Back</span>
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>Back</span>
     </button>
   );
 }
@@ -195,7 +195,7 @@ function CTAButton({ label, onClick, disabled }: { label: string; onClick: () =>
         transition: "background-color 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease",
       }}
     >
-      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "white", letterSpacing: "0.02em" }}>
+      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "white", letterSpacing: "0.02em" }}>
         {label}
       </span>
     </button>
@@ -310,13 +310,13 @@ function ConfirmationOverlay({ onDone, offer }: { onDone: () => void; offer?: Of
         />
       </div>
       <h1 style={{
-        fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033",
+        fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033",
         opacity: entered ? 1 : 0,
         transform: entered ? "translateY(0)" : "translateY(12px)",
         transition: "opacity 0.5s ease 0.35s, transform 0.5s cubic-bezier(0.16,1,0.3,1) 0.35s",
       }}>Booking Confirmed</h1>
       <p style={{
-        fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body)", color: "#6B7280",
+        fontFamily: "'Courier Prime', monospace", fontSize: "14px", color: "#6B7280",
         opacity: entered ? 1 : 0,
         transform: entered ? "translateY(0)" : "translateY(10px)",
         transition: "opacity 0.5s ease 0.5s, transform 0.5s cubic-bezier(0.16,1,0.3,1) 0.5s",
@@ -329,7 +329,7 @@ function ConfirmationOverlay({ onDone, offer }: { onDone: () => void; offer?: Of
         transform: entered ? "translateY(0)" : "translateY(10px)",
         transition: "opacity 0.5s ease 0.65s, transform 0.5s cubic-bezier(0.16,1,0.3,1) 0.65s",
       }}>
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "#1253FA" }}>
+        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#1253FA" }}>
           Order #FLT-{Math.floor(Math.random() * 9000 + 1000)}
         </span>
       </div>
@@ -433,7 +433,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
       {/* ── Section divider ── */}
       <div className="flex items-center gap-3 my-4 flex-shrink-0">
         <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Vehicle</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Vehicle</span>
         <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
       </div>
 
@@ -452,7 +452,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
           {/* ── Section divider ── */}
           <div className="flex items-center gap-3 my-4 flex-shrink-0">
             <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Delivery</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Delivery</span>
             <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
           </div>
           <ProofOfDeliveryToggle value={proofOfDelivery} onChange={setProofOfDelivery} />
@@ -462,7 +462,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
           {/* ── Section divider ── */}
           <div className="flex items-center gap-3 my-4 flex-shrink-0">
             <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Configuration</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Configuration</span>
             <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
           </div>
           <TruckConfigGrid selected={config} onSelect={setConfig} />
@@ -479,7 +479,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
       {/* ── POD Toggle ── */}
       <div className="flex items-center gap-3 my-5 flex-shrink-0">
         <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Delivery</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Delivery</span>
         <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
       </div>
       <ProofOfDeliveryToggle value={proofOfDelivery} onChange={setProofOfDelivery} />
@@ -491,14 +491,14 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
       {/* ── Pickup ── */}
       <div className="flex items-center gap-2 mb-3 flex-shrink-0">
         <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#040033", border: "2px solid white", boxShadow: "0 0 0 1.5px #040033" }} />
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Pickup Locations</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Pickup Locations</span>
       </div>
       <PickupStepInline value={pickupLocations} onChange={setPickupLocations} />
 
       {/* ── Section divider ── */}
       <div className="flex items-center gap-3 my-5 flex-shrink-0">
         <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Drop-off Stops</span>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>Drop-off Stops</span>
         <div className="flex-1" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
       </div>
 
@@ -547,7 +547,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
           className="flex-shrink-0"
           style={{
             fontFamily: "'Archivo Black', sans-serif",
-            fontSize: "var(--type-heading)",
+            fontSize: "20px",
             color: "#040033",
             lineHeight: "1.15",
             marginBottom: "4px",
@@ -560,7 +560,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
           style={{
             fontFamily: "'Courier Prime', monospace",
             color: "#626A76",
-            fontSize: "var(--type-body-sm)",
+            fontSize: "12px",
             marginBottom: "16px",
           }}
         >

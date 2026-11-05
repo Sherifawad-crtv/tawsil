@@ -42,17 +42,17 @@ export default function TripCard({ order }: { order: Order }) {
       style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}
     >
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 px-5 pt-4 pb-3">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center justify-between gap-2 px-5 pt-4 pb-3">
+        <div className="flex items-center gap-2 min-w-0">
           <span
-            className="px-2.5 py-1 rounded-xl whitespace-nowrap"
-            style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-caption)", color: "#040033", backgroundColor: "#F0F0EE" }}
+            className="px-2.5 py-1 rounded-xl truncate"
+            style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "11px", color: "#040033", backgroundColor: "#F0F0EE" }}
           >
             #{order.id}
           </span>
           <StatusBadge status={order.status} size="sm" />
         </div>
-        <span className="flex-shrink-0 ml-auto" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033" }}>
+        <span className="flex-shrink-0" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>
           {formatEGP(order.priceEGP)}
         </span>
       </div>
@@ -67,15 +67,15 @@ export default function TripCard({ order }: { order: Order }) {
               <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#1253FA", border: "2px solid white", boxShadow: "0 0 0 1.5px #1253FA" }} />
             </div>
             <div className="flex-1 min-w-0 flex flex-col gap-2.5">
-              <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>
+              <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
                 {pickup.address}
               </p>
               <div className="min-w-0">
-                <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>
+                <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
                   {dropoff.address}
                 </p>
                 {extraStops > 0 && (
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
                     +{extraStops} stop{extraStops > 1 ? "s" : ""}
                   </span>
                 )}
@@ -99,8 +99,8 @@ export default function TripCard({ order }: { order: Order }) {
             />
           </div>
           <div className="flex justify-between mt-1.5">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>{stage.label}</span>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#1253FA" }}>{Math.round(stage.pct * 100)}%</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>{stage.label}</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA" }}>{Math.round(stage.pct * 100)}%</span>
           </div>
         </div>
       )}
@@ -109,16 +109,16 @@ export default function TripCard({ order }: { order: Order }) {
       <div className="flex items-center gap-3 px-5 py-3 flex-wrap" style={{ borderTop: "1px solid #F0F0EE" }}>
         <div className="flex items-center gap-1.5">
           <CalendarTodayRounded sx={{ fontSize: 12, color: "#626A76" }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>{formatDate(order.pickupAt)}</span>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{formatDate(order.pickupAt)}</span>
         </div>
         <div className="flex items-center gap-1.5">
           <AccessTimeRounded sx={{ fontSize: 12, color: "#626A76" }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>{formatTime(order.pickupAt)}</span>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{formatTime(order.pickupAt)}</span>
         </div>
-        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
+        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
           {order.tripType}
         </span>
-        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280", backgroundColor: "#F0F0EE" }}>
+        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE" }}>
           {truckTypeLabel(order)}
         </span>
       </div>
@@ -128,15 +128,15 @@ export default function TripCard({ order }: { order: Order }) {
         <div className="flex items-center justify-between gap-2 px-5 py-3" style={{ borderTop: "1px solid #F0F0EE" }}>
           <div className="flex items-center gap-2.5 min-w-0">
             <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#040033" }}>
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-caption)", color: "white" }}>{driver.name[0]}</span>
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "9px", color: "white" }}>{driver.name[0]}</span>
             </div>
-            <span className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>
+            <span className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "12px", color: "#040033" }}>
               {driver.name}
             </span>
           </div>
           <span
             className="rounded-lg px-2 py-1 flex-shrink-0"
-            style={{ backgroundColor: "#F5F5F3", fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", fontWeight: 700, color: "#040033" }}
+            style={{ backgroundColor: "#F5F5F3", fontFamily: "'Courier Prime', monospace", fontSize: "11px", fontWeight: 700, color: "#040033" }}
           >
             {truck.plateNumber}
           </span>
@@ -152,7 +152,7 @@ export default function TripCard({ order }: { order: Order }) {
             style={{ backgroundColor: "#040033", border: "none" }}
           >
             <LocalShippingRounded sx={{ fontSize: 14, color: "white" }} />
-            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "white" }}>
+            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "white" }}>
               Dispatch Now
             </span>
           </button>

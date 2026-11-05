@@ -61,18 +61,18 @@ export default function OrderDetails() {
         >
           {/* 1. Status + fare - the two facts that matter most at a glance, together up top. */}
           <div className="rounded-[20px] p-4" style={{ backgroundColor: hero.bg }}>
-            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-              <div className="flex items-center gap-2.5">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5 min-w-0">
                 <hero.icon sx={{ fontSize: 20, color: hero.fg, flexShrink: 0 }} />
-                <div>
-                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body-sm)", color: hero.fg }}>{order.status}</p>
-                  <p className="whitespace-nowrap" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: hero.fg, opacity: 0.85 }}>
+                <div className="min-w-0">
+                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13px", color: hero.fg }}>{order.status}</p>
+                  <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: hero.fg, opacity: 0.85 }}>
                     #{order.id}
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-2.5 flex-shrink-0 ml-auto">
-                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: hero.fg }}>
+              <div className="flex items-center gap-2.5 flex-shrink-0">
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: hero.fg }}>
                   {formatEGP(order.priceEGP)}
                 </span>
                 <button
@@ -110,9 +110,9 @@ export default function OrderDetails() {
                     <LocalShippingRounded sx={{ fontSize: 18, color: "white" }} />
                   </div>
                   <div className="min-w-0">
-                    <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-caption)", color: "#626A76" }}>Vehicle</p>
-                    <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body-sm)", color: "#040033" }}>{truckTypeLabel(order)}</p>
-                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>{truck.plateNumber}</p>
+                    <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#626A76" }}>Vehicle</p>
+                    <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13.5px", color: "#040033" }}>{truckTypeLabel(order)}</p>
+                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#6B7280" }}>{truck.plateNumber}</p>
                   </div>
                 </div>
               </div>
@@ -138,8 +138,8 @@ export default function OrderDetails() {
                       <PinDropRounded sx={{ fontSize: 13, color: i === 0 ? "#1253FA" : "#DC2626" }} />
                     </div>
                     <div className="min-w-0">
-                      <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{wp.label}</p>
-                      <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>{wp.address}</p>
+                      <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "12.5px", color: "#040033" }}>{wp.label}</p>
+                      <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#6B7280" }}>{wp.address}</p>
                     </div>
                   </div>
                 ))}
@@ -156,8 +156,8 @@ export default function OrderDetails() {
             {order.hours !== undefined && <InfoRow label="Duration" value={`${order.hours}h`} />}
             {order.km !== undefined && <InfoRow label="Distance" value={`${order.km} km`} />}
             <div className="flex items-center justify-between mt-2 pt-3" style={{ borderTop: "1px solid #F0F0EE" }}>
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body-sm)", color: "#040033" }}>Total</span>
-              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033" }}>{formatEGP(order.priceEGP)}</span>
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13.5px", color: "#040033" }}>Total</span>
+              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>{formatEGP(order.priceEGP)}</span>
             </div>
           </Section>
 
@@ -186,9 +186,9 @@ export default function OrderDetails() {
                     {i < order.statusHistory.length - 1 && <div className="w-px flex-1" style={{ backgroundColor: "#E8E8E5" }} />}
                   </div>
                   <div className="pb-3.5 min-w-0">
-                    <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body-sm)", color: "#040033" }}>{h.toStatus}</p>
-                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>{formatDateTime(h.timestamp)}</p>
-                    {h.note && <p className="mt-0.5" style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-caption)", color: "#6B7280" }}>{h.note}</p>}
+                    <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "12.5px", color: "#040033" }}>{h.toStatus}</p>
+                    <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>{formatDateTime(h.timestamp)}</p>
+                    {h.note && <p className="mt-0.5" style={{ fontFamily: "'Archivo', sans-serif", fontSize: "11.5px", color: "#6B7280" }}>{h.note}</p>}
                   </div>
                 </div>
               ))}
@@ -215,7 +215,7 @@ export default function OrderDetails() {
               style={{ backgroundColor: "#040033", border: "none" }}
             >
               <LocalShippingRounded sx={{ fontSize: 14, color: "white" }} />
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "white" }}>
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "white" }}>
                 Dispatch Now
               </span>
             </button>
@@ -231,7 +231,7 @@ export default function OrderDetails() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-[20px] bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
-      <h3 className="mb-1" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body)", color: "#040033" }}>{title}</h3>
+      <h3 className="mb-1" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "14px", color: "#040033" }}>{title}</h3>
       {children}
     </div>
   );
@@ -241,7 +241,7 @@ function UnassignedRow({ icon, label }: { icon: React.ReactNode; label: string }
   return (
     <div className="rounded-[18px] p-3.5 flex items-center gap-3" style={{ backgroundColor: "#F5F5F3", border: "1px dashed #D8D9D4" }}>
       {icon}
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-body-sm)", color: "#626A76" }}>{label}</span>
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "12.5px", color: "#626A76" }}>{label}</span>
     </div>
   );
 }
@@ -249,16 +249,16 @@ function UnassignedRow({ icon, label }: { icon: React.ReactNode; label: string }
 function FileRow({ label, available }: { label: string; available: boolean }) {
   return (
     <div className="flex items-center justify-between py-2">
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-body-sm)", color: "#6B7280" }}>{label}</span>
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "13px", color: "#6B7280" }}>{label}</span>
       {available ? (
         <span className="flex items-center gap-1" style={{ color: "#16803C" }}>
           <CheckCircleRounded sx={{ fontSize: 16 }} />
-          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-caption)" }}>Available</span>
+          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "11.5px" }}>Available</span>
         </span>
       ) : (
         <span className="flex items-center gap-1" style={{ color: "#626A76" }}>
           <RadioButtonUncheckedRounded sx={{ fontSize: 16 }} />
-          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-caption)" }}>Not Available</span>
+          <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "11.5px" }}>Not Available</span>
         </span>
       )}
     </div>

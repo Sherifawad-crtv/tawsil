@@ -24,21 +24,21 @@ export default function TruckCard({ truck }: { truck: Truck }) {
           <LocalShippingRounded sx={{ fontSize: 20, color: "#1253FA" }} />
         </div>
         <div className="flex-1 min-w-0">
-          <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033" }}>{truck.plateNumber}</p>
-          <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-body-sm)", color: "#6B7280" }}>{truckTypeLabel(truck)}</p>
+          <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>{truck.plateNumber}</p>
+          <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "12.5px", color: "#6B7280" }}>{truckTypeLabel(truck)}</p>
         </div>
         <ChevronRightRounded sx={{ fontSize: 20, color: "#626A76", flexShrink: 0 }} />
       </div>
 
       <div className="flex items-center gap-1.5 flex-wrap">
         <EventRounded sx={{ fontSize: 14, color: "#626A76" }} />
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#6B7280" }}>
           Expires: {formatDate(truck.licenseExpiry)}
         </span>
         {expired && (
           <span
             className="rounded-full px-2 py-0.5"
-            style={{ backgroundColor: "#FDECEC", color: "#DC2626", fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-caption)" }}
+            style={{ backgroundColor: "#FDECEC", color: "#DC2626", fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "10px" }}
           >
             EXPIRED
           </span>

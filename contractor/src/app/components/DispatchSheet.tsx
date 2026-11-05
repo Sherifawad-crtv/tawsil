@@ -29,8 +29,8 @@ function VehicleTile({ truck, selected, onSelect }: { truck: Truck; selected: bo
         <img src={VEHICLE_TILE_IMAGES[truck.baseClass]} alt="" className="w-full h-full object-cover object-left-bottom" />
       </div>
       <div className="p-3">
-        <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body-sm)", color: "#040033" }}>{truck.plateNumber}</p>
-        <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-caption)", color: "#6B7280", marginTop: "1px" }}>
+        <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#040033" }}>{truck.plateNumber}</p>
+        <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontSize: "11.5px", color: "#6B7280", marginTop: "1px" }}>
           {truckTypeLabel(truck)}
         </p>
       </div>
@@ -55,11 +55,11 @@ function DriverRow({ driver, selected, onSelect }: { driver: Driver; selected: b
       }}
     >
       <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: color }}>
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "white" }}>{driver.name[0]}</span>
+        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "white" }}>{driver.name[0]}</span>
       </div>
       <div className="flex-1 min-w-0">
-        <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body)", color: "#040033" }}>{driver.name}</p>
-        <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>{driver.phone}</p>
+        <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "14px", color: "#040033" }}>{driver.name}</p>
+        <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#626A76" }}>{driver.phone}</p>
       </div>
       <div
         className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
@@ -141,10 +141,10 @@ export default function DispatchSheet({ order, onClose }: { order: Order; onClos
               </button>
             )}
             <div className="min-w-0">
-              <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "#040033" }}>
+              <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "#040033" }}>
                 {step === "vehicle" ? "Select Vehicle" : "Select Driver"}
               </p>
-              <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
+              <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#626A76" }}>
                 Dispatching #{order.id} · Step {step === "vehicle" ? "1" : "2"} of 2
               </p>
             </div>
@@ -166,7 +166,7 @@ export default function DispatchSheet({ order, onClose }: { order: Order; onClos
                 <SearchField value={truckQuery} onChange={setTruckQuery} placeholder="Search by plate or truck type" />
               </div>
               {filteredTrucks.length === 0 ? (
-                <p className="px-5 py-8 text-center" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>
+                <p className="px-5 py-8 text-center" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>
                   No available trucks match your search.
                 </p>
               ) : (
@@ -184,7 +184,7 @@ export default function DispatchSheet({ order, onClose }: { order: Order; onClos
             <div className="flex flex-col gap-3 px-5 pb-2">
               <SearchField value={driverQuery} onChange={setDriverQuery} placeholder="Search by name or phone" />
               {filteredDrivers.length === 0 ? (
-                <p className="py-8 text-center" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>
+                <p className="py-8 text-center" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>
                   No available drivers match your search.
                 </p>
               ) : (

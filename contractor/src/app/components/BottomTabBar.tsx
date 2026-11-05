@@ -104,7 +104,7 @@ export default function BottomTabBar() {
               style={{
                 fontFamily: "'Archivo', sans-serif",
                 fontWeight: 600,
-                fontSize: "var(--type-body-sm)",
+                fontSize: "13px",
                 color: "white",
                 whiteSpace: "nowrap",
                 overflow: "hidden",

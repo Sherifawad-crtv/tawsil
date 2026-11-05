@@ -34,8 +34,8 @@ export default function HomeScreen() {
       {/* ── Header ── */}
       <div className="flex items-start justify-between gap-3 mb-5">
         <div>
-          <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-body-sm)", color: "#626A76" }}>Welcome back, {firstName}</p>
-          <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033", lineHeight: 1.15, marginTop: "2px" }}>
+          <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "13px", color: "#626A76" }}>Welcome back, {firstName}</p>
+          <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033", lineHeight: 1.15, marginTop: "2px" }}>
             Dashboard
           </h1>
         </div>
@@ -141,8 +141,8 @@ function StatTile({
       <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
         <Icon sx={{ fontSize: 16, color: "#1253FA" }} />
       </div>
-      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "#040033" }}>{value}</span>
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-caption)", color: "#626A76" }}>{label}</span>
+      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "17px", color: "#040033" }}>{value}</span>
+      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#626A76" }}>{label}</span>
     </button>
   );
 }
@@ -161,10 +161,10 @@ function SectionHeading({
   return (
     <div className="flex items-center gap-1.5 mb-3">
       {Icon && <Icon sx={{ fontSize: 15, color: accent }} />}
-      <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body)", color: accent }}>{label}</h2>
+      <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "15px", color: accent }}>{label}</h2>
       <span
         className="px-1.5 rounded-md"
-        style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-caption)", color: accent, backgroundColor: accent === "#040033" ? "#F0F0EE" : "#FCF2DE" }}
+        style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "11px", color: accent, backgroundColor: accent === "#040033" ? "#F0F0EE" : "#FCF2DE" }}
       >
         {count}
       </span>
@@ -177,7 +177,7 @@ function ViewAllLink({ onClick }: { onClick: () => void }) {
     <button
       onClick={onClick}
       className="w-full flex items-center justify-center gap-1 py-2.5 cursor-pointer"
-      style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body-sm)", color: "#1253FA" }}
+      style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13px", color: "#1253FA" }}
     >
       View All <ChevronRightRounded sx={{ fontSize: 16 }} />
     </button>

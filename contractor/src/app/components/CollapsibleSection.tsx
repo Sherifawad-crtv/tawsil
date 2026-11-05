@@ -24,7 +24,7 @@ export default function CollapsibleSection({
         <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#EAF0FE" }}>
           {icon}
         </div>
-        <h3 className="flex-1 text-left" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-body)", color: "#040033" }}>
+        <h3 className="flex-1 text-left" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "14px", color: "#040033" }}>
           {title}
         </h3>
         <ExpandMoreRounded

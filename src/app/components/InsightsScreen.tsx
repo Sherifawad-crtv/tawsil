@@ -71,10 +71,10 @@ function ProgressRing({ percentage, size = 180, strokeWidth = 12 }: { percentage
       </svg>
       {/* Center text */}
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-hero)", color: "#040033", lineHeight: "1" }}>
+        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "42px", color: "#040033", lineHeight: "1" }}>
           {percentage}
         </span>
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76", marginTop: "2px" }}>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginTop: "2px" }}>
           % rate
         </span>
       </div>
@@ -116,11 +116,11 @@ function StatCard({ label, value, color, icon }: { label: string; value: number;
         >
           {icon}
         </div>
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033" }}>
+        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033" }}>
           {count}
         </span>
       </div>
-      <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+      <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", textTransform: "uppercase", letterSpacing: "0.06em" }}>
         {label}
       </span>
     </div>
@@ -154,7 +154,7 @@ function MiniBarChart({ data }: { data: typeof MONTHLY_DATA }) {
               }}
             />
           </div>
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
             {d.month}
           </span>
         </div>
@@ -172,10 +172,10 @@ export default function InsightsScreen() {
       <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 20px), 20px)", paddingBottom: "calc(env(safe-area-inset-bottom, 16px) + 96px)" }}>
 
         {/* ── Header ── */}
-        <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033", lineHeight: "1.15", marginBottom: "4px" }}>
+        <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: "1.15", marginBottom: "4px" }}>
           Insights
         </h1>
-        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76", marginBottom: "24px" }}>
+        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#626A76", marginBottom: "24px" }}>
           Your logistics performance overview
         </p>
 
@@ -184,14 +184,14 @@ export default function InsightsScreen() {
           className="rounded-[22px] p-6 flex flex-col items-center gap-4 mb-6"
           style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
         >
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", textTransform: "uppercase", letterSpacing: "0.08em" }}>
             Completion Rate
           </span>
           <ProgressRing percentage={STATS.completionRate} />
           <div className="flex items-center gap-2">
             <span
               className="px-3 py-1 rounded-xl"
-              style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.06)" }}
+              style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "12px", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.06)" }}
             >
               {STATS.completed} of {STATS.total} trips completed
             </span>
@@ -232,10 +232,10 @@ export default function InsightsScreen() {
           style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
         >
           <div className="flex items-center justify-between mb-4">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", textTransform: "uppercase", letterSpacing: "0.08em" }}>
               Monthly Trips
             </span>
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033" }}>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "#040033" }}>
               Last 6 Months
             </span>
           </div>
@@ -247,7 +247,7 @@ export default function InsightsScreen() {
           className="rounded-[22px] p-5"
           style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
         >
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", textTransform: "uppercase", letterSpacing: "0.08em" }}>
             Performance
           </span>
           <div className="flex flex-col gap-4 mt-4">
@@ -266,11 +266,11 @@ export default function InsightsScreen() {
                     {item.icon === "route" && <RouteRounded sx={{ fontSize: 16, color: "#6B7280" }} />}
                     {item.icon === "money" && <PaymentsRounded sx={{ fontSize: 16, color: "#6B7280" }} />}
                   </div>
-                  <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 500, fontSize: "var(--type-body-sm)", color: "#040033" }}>
+                  <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 500, fontSize: "13px", color: "#040033" }}>
                     {item.label}
                   </span>
                 </div>
-                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033" }}>
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "#040033" }}>
                   {item.value}
                 </span>
               </div>

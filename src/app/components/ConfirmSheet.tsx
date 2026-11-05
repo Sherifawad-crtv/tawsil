@@ -31,8 +31,8 @@ export default function ConfirmSheet({
           <div className="w-10 h-1.5 rounded-full" style={{ backgroundColor: "#D8D9D4" }} />
         </div>
         <div className="text-center">
-          <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "#040033" }}>{title}</p>
-          <p className="mt-1.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#6B7280", lineHeight: 1.5 }}>{body}</p>
+          <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "17px", color: "#040033" }}>{title}</p>
+          <p className="mt-1.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12.5px", color: "#6B7280", lineHeight: 1.5 }}>{body}</p>
         </div>
         <div className="flex flex-col gap-2.5">
           <button
@@ -40,14 +40,14 @@ export default function ConfirmSheet({
             className="w-full rounded-2xl cursor-pointer active:scale-[0.97]"
             style={{ backgroundColor: "#DC2626", padding: "15px", border: "none", transition: "transform 0.2s ease" }}
           >
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "white" }}>{confirmLabel}</span>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "white" }}>{confirmLabel}</span>
           </button>
           <button
             onClick={onCancel}
             className="w-full rounded-2xl cursor-pointer active:scale-[0.97]"
             style={{ backgroundColor: "#F5F5F3", padding: "15px", border: "none", transition: "transform 0.2s ease" }}
           >
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033" }}>{cancelLabel}</span>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "#040033" }}>{cancelLabel}</span>
           </button>
         </div>
       </div>

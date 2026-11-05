@@ -65,17 +65,17 @@ export default function DriverForm({ mode }: { mode: "create" | "edit" }) {
         {mode === "edit" && existing ? (
           <div className="flex flex-col items-center gap-2 py-2">
             <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: "#0A0070" }}>
-              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "white" }}>{existing.name[0]}</span>
+              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "white" }}>{existing.name[0]}</span>
             </div>
-            <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-heading)", color: "#040033" }}>{existing.name}</p>
+            <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>{existing.name}</p>
           </div>
         ) : (
           <div className="rounded-[22px] p-5 flex flex-col items-center text-center gap-2" style={{ backgroundColor: "white", boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
             <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
               <PersonAddRounded sx={{ fontSize: 26, color: "#1253FA" }} />
             </div>
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "var(--type-title)", color: "#040033" }}>Create New Driver Profile</p>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>
+            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "16px", color: "#040033" }}>Create New Driver Profile</p>
+            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>
               Fill in the details below to add a new driver
             </p>
           </div>
@@ -103,7 +103,7 @@ export default function DriverForm({ mode }: { mode: "create" | "edit" }) {
         {mode === "create" && (
           <div className="flex items-start gap-2 rounded-2xl p-3" style={{ backgroundColor: "#EAF0FE" }}>
             <InfoRounded sx={{ fontSize: 17, color: "#1253FA", flexShrink: 0, marginTop: "1px" }} />
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "var(--type-body-sm)", color: "#1253FA", lineHeight: 1.5 }}>
+            <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "12.5px", color: "#1253FA", lineHeight: 1.5 }}>
               Make sure all information is accurate before creating the driver profile
             </p>
           </div>

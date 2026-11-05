@@ -184,8 +184,8 @@ function ReviewRow({ label, value, last = false }: { label: string; value: strin
       className="flex items-center justify-between gap-3 py-2.5"
       style={last ? undefined : { borderBottom: "1px solid #F0F0EE" }}
     >
-      <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>{label}</span>
-      <span className="truncate text-right" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033", maxWidth: "60%" }}>
+      <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>{label}</span>
+      <span className="truncate text-right" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033", maxWidth: "60%" }}>
         {value}
       </span>
     </div>

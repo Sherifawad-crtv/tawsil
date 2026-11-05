@@ -44,7 +44,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
       className="block mb-2"
       style={{
         fontFamily: "'Courier Prime', monospace",
-        fontSize: "var(--type-caption)",
+        fontSize: "10px",
         letterSpacing: "0.1em",
         textTransform: "uppercase",
         color: "#626A76",
@@ -69,7 +69,7 @@ function StatusPill({ active, label }: { active: boolean; label: string }) {
         backgroundColor: active ? "rgba(18,83,250,0.07)" : "rgba(0,0,0,0.03)",
         fontFamily: "'Archivo', sans-serif",
         fontWeight: 600,
-        fontSize: "var(--type-caption)",
+        fontSize: "11px",
         color: active ? "#1253FA" : "#626A76",
       }}
     >
@@ -104,10 +104,10 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
           <img src={truck.image} alt={truck.name} className="w-11 h-11 object-contain" />
         </div>
         <div className="flex-1 min-w-0">
-          <h3 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033" }}>{truck.name}</h3>
+          <h3 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>{truck.name}</h3>
           <span
             className="inline-block mt-0.5 px-2 py-0.5 rounded-md"
-            style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.06)", textTransform: "uppercase" }}
+            style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.06)", textTransform: "uppercase" }}
           >
             {truck.id === "jumbo" ? "Heavy Duty" : truck.id === "trailer" ? "Long Haul" : truck.id === "van" ? "Mid-Range" : "Light Load"}
           </span>
@@ -123,15 +123,15 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
             <div>
               <SectionLabel>Configuration</SectionLabel>
               <div className="p-3 rounded-2xl" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
-                <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body)", color: "#040033" }}>{config.name}</span>
-                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", marginTop: "1px" }}>{config.detail}</p>
+                <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>{config.name}</span>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "1px" }}>{config.detail}</p>
               </div>
             </div>
             <div>
               <SectionLabel>Weight</SectionLabel>
               <div className="p-3 rounded-2xl" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
-                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-title)", color: "#040033" }}>{weightKg > 0 ? weightKg.toLocaleString() : "—"}</span>
-                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76", marginLeft: "3px" }}>kg</span>
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "#040033" }}>{weightKg > 0 ? weightKg.toLocaleString() : "—"}</span>
+                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginLeft: "3px" }}>kg</span>
               </div>
             </div>
           </div>
@@ -150,8 +150,8 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
             <div style={{ width: "1.5px", height: "18px", backgroundColor: "#E8E8E5", margin: "3px 0" }} />
           </div>
           <div className="flex-1 min-w-0 -mt-0.5">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>Pickup</span>
-            <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>Pickup</span>
+            <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
               {pickupLocations.length > 0 ? pickupLocations[0].address : "Al Quoz Industrial Area"}
             </p>
           </div>
@@ -165,10 +165,10 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
               {i < arr.length - 1 && <div style={{ width: "1.5px", height: "18px", backgroundColor: "#E8E8E5", margin: "3px 0" }} />}
             </div>
             <div className="flex-1 min-w-0 -mt-0.5">
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>
                 Drop-off{arr.length > 1 ? ` #${i + 1}` : ""}
               </span>
-              <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{stop.address}</p>
+              <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{stop.address}</p>
             </div>
           </div>
         ))}
@@ -181,13 +181,13 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
       <div className="p-3 rounded-2xl" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
         {schedule.mode === "now" ? (
           <div className="flex items-center justify-between">
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-body)", color: "#040033" }}>ASAP</span>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>~15 min dispatch</span>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>ASAP</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>~15 min dispatch</span>
           </div>
         ) : (
           <div className="flex items-center justify-between">
-            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>{formatDate(schedule.date)}</span>
-            {schedule.time && <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#1253FA" }}>{schedule.time}</span>}
+            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{formatDate(schedule.date)}</span>
+            {schedule.time && <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#1253FA" }}>{schedule.time}</span>}
           </div>
         )}
       </div>
@@ -198,7 +198,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
       <SectionLabel>Proof of Delivery</SectionLabel>
       <div className="p-3 rounded-2xl flex items-center gap-3" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
         <StatusPill active={deliverySettings} label="Photo POD" />
-        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>
+        <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>
           {deliverySettings ? "Enabled — photo required at drop‑off" : "Disabled"}
         </span>
       </div>
@@ -208,53 +208,53 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
       {/* ── Price ── */}
       <div className="rounded-2xl overflow-hidden" style={{ border: "2px solid #040033" }}>
         <div className="px-4 py-3 flex items-center justify-between" style={{ backgroundColor: "#040033" }}>
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)" }}>
             Price Estimate
           </span>
-          <span className="px-2 py-0.5 rounded-md" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", textTransform: "uppercase", color: "#FF4310", backgroundColor: "rgba(255,67,16,0.15)" }}>
+          <span className="px-2 py-0.5 rounded-md" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", textTransform: "uppercase", color: "#FF4310", backgroundColor: "rgba(255,67,16,0.15)" }}>
             Final at delivery
           </span>
         </div>
         <div className="px-4 py-3" style={{ backgroundColor: "white" }}>
           <div className="flex items-center justify-between py-1">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>Base fare</span>
-            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>EGP {basePrice}</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>Base fare</span>
+            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>EGP {basePrice}</span>
           </div>
           {configMult > 1 && (
             <div className="flex items-center justify-between py-1">
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>Config surcharge</span>
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>EGP {Math.round(basePrice * (configMult - 1))}</span>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>Config surcharge</span>
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>EGP {Math.round(basePrice * (configMult - 1))}</span>
             </div>
           )}
           {weightSurcharge > 0 && (
             <div className="flex items-center justify-between py-1">
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>Weight</span>
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>EGP {weightSurcharge}</span>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>Weight</span>
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>EGP {weightSurcharge}</span>
             </div>
           )}
           {stopFee > 0 && (
             <div className="flex items-center justify-between py-1">
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-body-sm)", color: "#626A76" }}>Multi-stop</span>
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>EGP {stopFee}</span>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>Multi-stop</span>
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>EGP {stopFee}</span>
             </div>
           )}
 
           <div className="my-2" style={{ height: "1px", backgroundColor: "#E8E8E5" }} />
 
           <div className="flex items-center justify-between py-1">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>Subtotal</span>
-            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>EGP {subtotal}</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>Subtotal</span>
+            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>EGP {subtotal}</span>
           </div>
           <div className="flex items-center justify-between py-1">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>VAT (5%)</span>
-            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#626A76" }}>EGP {vat}</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>VAT (5%)</span>
+            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#626A76" }}>EGP {vat}</span>
           </div>
 
           <div className="my-2" style={{ height: "1.5px", backgroundColor: "#040033" }} />
 
           <div className="flex items-center justify-between">
-            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-body-sm)", color: "#040033" }}>Total</span>
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033", lineHeight: "1.1" }}>EGP {total.toLocaleString()}</span>
+            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>Total</span>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "24px", color: "#040033", lineHeight: "1.1" }}>EGP {total.toLocaleString()}</span>
           </div>
         </div>
       </div>
@@ -263,7 +263,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
       <div className="mt-4">
         <div className="flex items-center justify-between mb-2">
           <SectionLabel>Your Offer</SectionLabel>
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#1253FA", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             Bid your price
           </span>
         </div>
@@ -272,14 +272,14 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
           {/* Recommended */}
           <div className="flex items-center justify-between mb-3 pb-3" style={{ borderBottom: "1px dashed #E8E8E5" }}>
             <div className="flex flex-col">
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 Recommended
               </span>
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", marginTop: "2px" }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "2px" }}>
                 Based on similar trips
               </span>
             </div>
-            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "var(--type-title)", color: "#040033" }}>
+            <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "16px", color: "#040033" }}>
               EGP {total.toLocaleString()}
             </span>
           </div>
@@ -303,17 +303,17 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
             </button>
 
             <div className="flex-1 flex flex-col items-center">
-              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", letterSpacing: "0.12em" }}>
+              <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#626A76", letterSpacing: "0.12em" }}>
                 EGP
               </span>
-              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "var(--type-display)", color: "#040033", lineHeight: 1.05 }}>
+              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "30px", color: "#040033", lineHeight: 1.05 }}>
                 {currentOffer.toLocaleString()}
               </span>
               <div className="flex items-center gap-1 mt-1">
                 {diff === 0 && (
                   <>
                     <HorizontalRuleRounded sx={{ fontSize: 12, color: "#6B7280" }} />
-                    <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#6B7280" }}>
+                    <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>
                       Match recommended
                     </span>
                   </>
@@ -321,7 +321,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
                 {diff > 0 && (
                   <>
                     <TrendingUpRounded sx={{ fontSize: 12, color: "#1253FA" }} />
-                    <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#1253FA" }}>
+                    <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA" }}>
                       +EGP {diff} · faster match
                     </span>
                   </>
@@ -329,7 +329,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
                 {diff < 0 && (
                   <>
                     <TrendingDownRounded sx={{ fontSize: 12, color: "#DC2626" }} />
-                    <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#DC2626" }}>
+                    <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#DC2626" }}>
                       {diff} EGP · fewer offers
                     </span>
                   </>
@@ -371,7 +371,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
                     transition: "background-color 0.2s ease, transform 0.15s ease",
                     fontFamily: "'Archivo', sans-serif",
                     fontWeight: 600,
-                    fontSize: "var(--type-body-sm)",
+                    fontSize: "12px",
                     color: active ? "white" : "#040033",
                   }}
                 >
@@ -381,7 +381,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
             })}
           </div>
 
-          <p className="mt-3" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76", lineHeight: 1.5, textAlign: "center" }}>
+          <p className="mt-3" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10.5px", color: "#626A76", lineHeight: 1.5, textAlign: "center" }}>
             Drivers will counter-bid live. Higher offers attract faster pickups.
           </p>
         </div>
@@ -391,15 +391,15 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
       <div className="flex items-center justify-center gap-3 mt-3">
         <div className="flex items-center gap-1">
           <ShieldRounded sx={{ fontSize: 10, color: "#D8D9D4" }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>Secure</span>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#626A76" }}>Secure</span>
         </div>
         <div className="flex items-center gap-1">
           <AccessTimeRounded sx={{ fontSize: 10, color: "#D8D9D4" }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>Cancel anytime</span>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#626A76" }}>Cancel anytime</span>
         </div>
         <div className="flex items-center gap-1">
           <CreditCardRounded sx={{ fontSize: 10, color: "#D8D9D4" }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "var(--type-caption)", color: "#626A76" }}>Pay on delivery</span>
+          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#626A76" }}>Pay on delivery</span>
         </div>
       </div>
     </div>

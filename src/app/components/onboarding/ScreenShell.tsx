@@ -25,6 +25,12 @@ export default function ScreenShell({
       {background && (
         <div aria-hidden className="absolute inset-0 pointer-events-none">
           {background}
+          {/* Where the system draws its own status bar above the page, the map would
+              otherwise start in a hard edge right under it. */}
+          <div
+            className="absolute top-0 left-0 right-0 h-16"
+            style={{ background: "linear-gradient(to bottom, #FFFFFF, rgba(255,255,255,0))" }}
+          />
         </div>
       )}
       <div

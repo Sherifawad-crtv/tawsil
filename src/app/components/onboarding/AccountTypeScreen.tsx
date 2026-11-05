@@ -2,6 +2,7 @@ import ApartmentRounded from "../icons/ApartmentRounded";
 import PersonRounded from "../icons/PersonRounded";
 import ChevronRightRounded from "../icons/ChevronRightRounded";
 import ScreenShell from "./ScreenShell";
+import MapBackdrop from "./MapBackdrop";
 import { GhostButton } from "./StepChrome";
 import type { AccountType } from "../../lib/authTypes";
 
@@ -47,7 +48,7 @@ export default function AccountTypeScreen({
   onContinueAsGuest: () => void;
 }) {
   return (
-    <ScreenShell>
+    <ScreenShell background={<MapBackdrop />}>
       <div className="flex-1 flex flex-col justify-center" style={{ paddingBottom: "40px" }}>
         <div className="mb-8">
           <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "30px", color: "#040033", lineHeight: "1.15" }}>

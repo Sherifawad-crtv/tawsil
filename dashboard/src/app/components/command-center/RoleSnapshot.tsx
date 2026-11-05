@@ -1,14 +1,13 @@
-import { Suspense, useMemo, useState } from "react";
+import { lazy, Suspense, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { ApartmentIcon, DomainIcon, ArrowDownwardIcon, ArrowUpwardIcon, SavingsIcon } from "../icons";
 import InsightCard from "../InsightCard";
 import { Select } from "../Select";
 import FinancialCard from "../financials/FinancialCard";
 import RollupTable, { type RollupColumn } from "../financials/RollupTable";
-import { Field, Money, OrdersGlobe, GLOBE_PX, BAND_MIN_PX } from "./shared";
+import { Field, Money } from "./shared";
 import { useDataStore } from "../../lib/store";
 import { useRole } from "../../lib/RoleContext";
-import { useMediaQuery } from "../../lib/useMediaQuery";
 import { getActiveTeamMemberForRole } from "../../lib/selectors";
 import { formatAmount } from "../../lib/format";
 import { coverageByArea, coveragePoints } from "../../lib/coverage";
@@ -26,20 +25,20 @@ import {
   type FinancialFilters,
 } from "../../lib/financials";
 
+// Leaflet and the heat layer stay out of the main bundle until an Operations user opens Home.
+const OpsCoverageMap = lazy(() => import("./OpsCoverageMap"));
+
 /**
  * The Command Center is Executive/Admin only. Sales, Supply and Operations
  * get their own slice of it here instead, shown at the top of their Home:
  * Sales sees its own open accounts' revenue and target, Supply sees
  * contractor payables only (never receivables), Operations sees the
- * coverage heatmap with a zones-covered count in place of any money.
+ * coverage heatmap map with a zones-covered count in place of any money.
  * Renders nothing for the other roles.
  */
 export default function RoleSnapshot() {
   const { orders, clients, contractors, teamMembers } = useDataStore();
   const { role } = useRole();
-  // The globe is a desktop/tablet set piece - on phones it's swapped for a
-  // plain stacked card.
-  const showGlobe = useMediaQuery("(min-width: 768px)");
 
   const years = useMemo(() => availableYears(orders), [orders]);
   const [filters, setFilters] = useState<FinancialFilters>(() => ({
@@ -241,42 +240,9 @@ export default function RoleSnapshot() {
 
       {periodFilter()}
 
-      {showGlobe ? (
-        <div className="relative overflow-hidden rounded-2xl" style={{ minHeight: `${BAND_MIN_PX}px` }}>
-          <div
-            className="absolute"
-            style={{
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: `${GLOBE_PX}px`,
-              height: `${GLOBE_PX}px`,
-            }}
-          >
-            <Suspense fallback={null}>
-              <OrdersGlobe coverage={footprint} className="w-full h-full" />
-            </Suspense>
-          </div>
-
-          <div className="relative flex justify-center pt-6 pointer-events-none">
-            <div className="pointer-events-auto">
-              <InsightCard title="Zones covered" subtitle={periodTitle}>
-                <p className="text-title-2-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>
-                  {areas.length}
-                </p>
-                <p className="text-caption-1-regular text-muted">distinct areas touched by this period's orders</p>
-              </InsightCard>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <InsightCard title="Zones covered" subtitle={periodTitle}>
-          <p className="text-title-2-semibold text-navy" style={{ fontFamily: "var(--font-heading)" }}>
-            {areas.length}
-          </p>
-          <p className="text-caption-1-regular text-muted">distinct areas touched by this period's orders</p>
-        </InsightCard>
-      )}
+      <Suspense fallback={<div className="rounded-2xl bg-white border border-border" style={{ minHeight: 360 }} />}>
+        <OpsCoverageMap footprint={footprint} areas={areas} periodTitle={periodTitle} />
+      </Suspense>
     </section>
   );
 }

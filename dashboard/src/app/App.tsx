@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router";
 import AppShell from "./layout/AppShell";
-import { RoleProvider } from "./lib/RoleContext";
+import { RoleProvider, useRole } from "./lib/RoleContext";
+import { canViewCommandCenter } from "./lib/selectors";
 import { DataStoreProvider } from "./lib/store";
 import Home from "./pages/Home";
 import CommandCenter from "./pages/command-center/CommandCenter";
@@ -15,13 +16,19 @@ import MonthlyOrdersList from "./pages/monthly/MonthlyOrdersList";
 import MonthlyOrderDetail from "./pages/monthly/MonthlyOrderDetail";
 import Settings from "./pages/settings/Settings";
 
+/** Executive and Admin land on the Command Center; everyone else on Home. */
+function Landing() {
+  const { role } = useRole();
+  return <Navigate to={canViewCommandCenter(role) ? "/command-center" : "/home"} replace />;
+}
+
 export default function App() {
   return (
     <DataStoreProvider>
       <RoleProvider>
         <Routes>
           <Route element={<AppShell />}>
-            <Route index element={<Navigate to="/command-center" replace />} />
+            <Route index element={<Landing />} />
             <Route path="home" element={<Home />} />
             <Route path="command-center" element={<CommandCenter />} />
             <Route path="orders" element={<OrdersList />} />

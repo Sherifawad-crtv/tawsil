@@ -11,6 +11,7 @@ import StatusBreakdownBar from "../components/charts/StatusBreakdownBar";
 import ProblemsHourlyChart from "../components/charts/ProblemsHourlyChart";
 import LocationBarList from "../components/charts/LocationBarList";
 import OrderFormModal from "../components/orders/OrderFormModal";
+import RoleSnapshot from "../components/command-center/RoleSnapshot";
 import MonthlyOrderFormModal from "../components/monthly/MonthlyOrderFormModal";
 import {
   getHomeMetrics,
@@ -137,6 +138,9 @@ export default function Home() {
           ) : undefined
         }
       />
+
+      {/* Sales / Supply / Operations: their slice of what Executive and Admin see on the Command Center. Renders nothing for the other roles. */}
+      <RoleSnapshot />
 
       {/* Metrics strip */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">

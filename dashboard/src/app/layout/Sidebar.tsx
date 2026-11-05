@@ -6,13 +6,13 @@ import { DashboardFilledIcon as Widget2BoldIcon, Inventory2FilledIcon as BoxBold
 import { cx } from "../lib/cx";
 import { useDataStore } from "../lib/store";
 import { useRole } from "../lib/RoleContext";
-import { getOrdersForRole } from "../lib/selectors";
+import { getOrdersForRole, canViewCommandCenter } from "../lib/selectors";
 import { initials } from "../lib/format";
 
 const NAV_ITEMS = [
-  // The landing page: "/" redirects here, and every role sees it (scoped to
-  // its own slice - see CommandCenter.tsx).
-  { to: "/command-center", label: "Command Center", iconOutline: GlobalLinearIcon, iconFilled: GlobalBoldIcon },
+  // Executive and Admin only (see canViewCommandCenter), and where "/" lands
+  // for them. Everyone else gets their slice of it at the top of Home.
+  { to: "/command-center", label: "Command Center", iconOutline: GlobalLinearIcon, iconFilled: GlobalBoldIcon, execOnly: true },
   { to: "/home", label: "Home", iconOutline: Widget2LinearIcon, iconFilled: Widget2BoldIcon },
   { to: "/orders", label: "Orders", iconOutline: BoxLinearIcon, iconFilled: BoxBoldIcon, showOrderCount: true },
   { to: "/contractors", label: "Contractors", iconOutline: BuildingsLinearIcon, iconFilled: BuildingsBoldIcon },
@@ -33,7 +33,7 @@ export default function Sidebar({
   const { orders, currentUser } = useDataStore();
   const { role } = useRole();
   const orderCount = getOrdersForRole(orders, role).length;
-  const navItems = NAV_ITEMS;
+  const navItems = NAV_ITEMS.filter((item) => !item.execOnly || canViewCommandCenter(role));
 
   return (
     <>

@@ -160,13 +160,12 @@ export function isReadOnlyRole(role: Role) {
 }
 
 /**
- * The Command Center is visible to every operating role now, each scoped to
- * its own slice (see CommandCenter.tsx): Sales sees only its own accounts'
- * revenue and target, Supply sees payables only, Operations sees the coverage
- * heatmap only. Executive and Admin keep the full, unscoped view.
+ * The Command Center page is the executive view: Executive and Admin only.
+ * Sales, Supply and Operations see their own scoped slice of it at the top
+ * of Home instead (components/command-center/RoleSnapshot.tsx).
  */
 export function canViewCommandCenter(role: Role) {
-  return role === "Executive" || role === "Admin" || role === "Sales" || role === "Supply" || role === "Operations";
+  return role === "Executive" || role === "Admin";
 }
 
 /**

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
-import { ArrowLeftIcon, LetterIcon, PhoneIcon, AddIcon, MapPointIcon, BookmarkIcon } from "@solar-icons/react/linear";
+import { ArrowBackIcon, MailIcon, CallIcon, AddIcon, LocationOnIcon, BookmarkIcon } from "../../components/icons";
 import Tabs from "../../components/Tabs";
 import PageHeader from "../../components/PageHeader";
 import { Button } from "../../components/Button";
@@ -37,7 +37,7 @@ export default function ClientDetail() {
   return (
     <div className="flex flex-col gap-6">
       <button onClick={() => navigate("/clients")} className="flex items-center gap-1.5 text-body-2-regular text-muted hover:text-navy cursor-pointer w-fit">
-        <ArrowLeftIcon size={15} /> Back to Clients
+        <ArrowBackIcon size={15} /> Back to Clients
       </button>
 
       <PageHeader
@@ -49,8 +49,8 @@ export default function ClientDetail() {
         }
         subtitle={
           <span className="flex items-center gap-4 flex-wrap">
-            <span className="flex items-center gap-1.5"><LetterIcon size={13} /> {client.email}</span>
-            <span className="flex items-center gap-1.5"><PhoneIcon size={13} /> {client.phone}</span>
+            <span className="flex items-center gap-1.5"><MailIcon size={13} /> {client.email}</span>
+            <span className="flex items-center gap-1.5"><CallIcon size={13} /> {client.phone}</span>
           </span>
         }
         action={
@@ -82,7 +82,7 @@ export default function ClientDetail() {
                 <TableRow key={loc.id} id={loc.id}>
                   <TableCell>
                     <span className="flex items-center gap-2">
-                      <MapPointIcon size={15} className="text-blue flex-shrink-0" />
+                      <LocationOnIcon size={15} className="text-blue flex-shrink-0" />
                       <span className="text-body-semibold text-navy">{loc.name}</span>
                     </span>
                   </TableCell>

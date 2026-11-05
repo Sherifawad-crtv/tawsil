@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SnowflakeIcon, CheckCircleIcon } from "@solar-icons/react/linear";
+import { AcUnitIcon, CheckCircleIcon } from "./icons";
 import { TRUCK_TYPES } from "../lib/constants";
 import type { TruckBaseClass } from "../lib/types";
 import { TRUCK_IMAGES } from "../lib/truckImages";
@@ -64,7 +64,7 @@ export default function TruckTypeGrid({ value, onChange }: { value: string; onCh
               >
                 <div className="flex items-center gap-1.5 text-body-2-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>
                   {t.config}
-                  {t.requiresTempControl && <SnowflakeIcon size={12} className="text-blue" />}
+                  {t.requiresTempControl && <AcUnitIcon size={12} className="text-blue" />}
                 </div>
                 <div className="text-caption-2-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>
                   {t.capacityMinT}–{t.capacityMaxT}t

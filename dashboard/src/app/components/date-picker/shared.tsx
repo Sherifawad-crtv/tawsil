@@ -11,7 +11,7 @@ import {
 } from "react-aria-components";
 import type { CalendarCellRenderProps } from "react-aria-components";
 import { getLocalTimeZone } from "@internationalized/date";
-import { AltArrowLeftIcon, AltArrowRightIcon } from "@solar-icons/react/linear";
+import { ChevronLeftIcon, ChevronRightIcon } from "../icons";
 import { cx } from "../../lib/cx";
 
 /**
@@ -28,11 +28,11 @@ import { cx } from "../../lib/cx";
 
 /** Month-nav chevrons, Solar's alt-arrow pair - the same chevron family WaypointsEditor's reorder buttons already use. */
 function ChevronLeft16({ className }: { className?: string }) {
-  return <AltArrowLeftIcon size={16} className={className} aria-hidden />;
+  return <ChevronLeftIcon size={16} className={className} aria-hidden />;
 }
 
 function ChevronRight16({ className }: { className?: string }) {
-  return <AltArrowRightIcon size={16} className={className} aria-hidden />;
+  return <ChevronRightIcon size={16} className={className} aria-hidden />;
 }
 
 type DayCellProps = CalendarCellRenderProps & {

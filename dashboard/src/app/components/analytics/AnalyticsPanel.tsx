@@ -1,4 +1,4 @@
-import { BoxIcon, CheckCircleIcon, ForbiddenIcon, ChartSquareIcon } from "@solar-icons/react/linear";
+import { Inventory2Icon, CheckCircleIcon, BlockIcon, BarChartIcon } from "../icons";
 import MetricCard from "../MetricCard";
 import InsightCard from "../InsightCard";
 import StatusBreakdownBar from "../charts/StatusBreakdownBar";
@@ -37,10 +37,10 @@ export default function AnalyticsPanel({ orders, filenamePrefix }: { orders: Ord
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
-        <MetricCard label="Total Orders" value={stats.total} icon={BoxIcon} accent="navy" />
+        <MetricCard label="Total Orders" value={stats.total} icon={Inventory2Icon} accent="navy" />
         <MetricCard label="Completed" value={stats.completed} icon={CheckCircleIcon} accent="green" />
-        <MetricCard label="Cancelled" value={stats.cancelled} icon={ForbiddenIcon} accent="amber" />
-        <MetricCard label="Completion Rate" value={`${stats.completionRate}%`} icon={ChartSquareIcon} accent="blue" />
+        <MetricCard label="Cancelled" value={stats.cancelled} icon={BlockIcon} accent="amber" />
+        <MetricCard label="Completion Rate" value={`${stats.completionRate}%`} icon={BarChartIcon} accent="blue" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">

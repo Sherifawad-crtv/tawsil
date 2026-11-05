@@ -1,4 +1,4 @@
-import type { Icon as SolarIcon } from "@solar-icons/react/lib/types";
+import type { AppIcon } from "./icons";
 import { Chip } from "./Chip";
 
 const ACCENT_ICON: Record<string, string> = {
@@ -18,7 +18,7 @@ export default function MetricCard({
 }: {
   label: string;
   value: number | string;
-  icon: SolarIcon;
+  icon: AppIcon;
   accent?: "blue" | "navy" | "amber" | "green";
   /** Comparison readout ("+2 vs yesterday") - omit when there's no honest baseline to compare against. */
   delta?: string;

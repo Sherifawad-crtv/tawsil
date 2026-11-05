@@ -1,13 +1,6 @@
 import { lazy, Suspense, useMemo, useState } from "react";
 import { Navigate } from "react-router";
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  SafeSquareIcon,
-  BillListIcon,
-  Buildings2Icon,
-  BuildingsIcon,
-} from "@solar-icons/react/linear";
+import { ApartmentIcon, DomainIcon, ArrowDownwardIcon, ArrowUpwardIcon, SavingsIcon, ReceiptLongIcon } from "../../components/icons";
 import PageHeader from "../../components/PageHeader";
 import InsightCard from "../../components/InsightCard";
 import { Select } from "../../components/Select";
@@ -172,7 +165,7 @@ export default function CommandCenter() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <FinancialCard
-            icon={ArrowDownIcon}
+            icon={ArrowDownwardIcon}
             iconColor={MONEY_COLORS.receivables}
             label="Revenue generated"
             value={salesTotals.receivable}
@@ -180,7 +173,7 @@ export default function CommandCenter() {
             footer={`${salesTotals.orderCount.toLocaleString()} orders · ${formatAmount(salesAvgOrder)} avg`}
           />
           <FinancialCard
-            icon={SafeSquareIcon}
+            icon={SavingsIcon}
             iconColor={MONEY_COLORS.earnings}
             label="Target"
             value={salesTarget}
@@ -201,7 +194,7 @@ export default function CommandCenter() {
         </InsightCard>
 
         <RollupTable
-          icon={Buildings2Icon}
+          icon={ApartmentIcon}
           title={`Your accounts · ${periodTitle}`}
           rows={rollUpByClient(salesPeriodOrders, ownedClients)}
           columns={clientColumns}
@@ -253,7 +246,7 @@ export default function CommandCenter() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <FinancialCard
-            icon={ArrowUpIcon}
+            icon={ArrowUpwardIcon}
             iconColor={MONEY_COLORS.payables}
             label="Contractor payables"
             value={totals.payable}
@@ -261,7 +254,7 @@ export default function CommandCenter() {
             footer={`${totals.orderCount.toLocaleString()} orders this period`}
           />
           <FinancialCard
-            icon={BuildingsIcon}
+            icon={DomainIcon}
             iconColor={MONEY_COLORS.payables}
             label="Avg payable per contractor"
             value={avgPayablePerContractor}
@@ -270,7 +263,7 @@ export default function CommandCenter() {
         </div>
 
         <RollupTable
-          icon={BuildingsIcon}
+          icon={DomainIcon}
           title={`Contractors · ${periodTitle}`}
           rows={contractorRows}
           columns={contractorColumns}
@@ -431,7 +424,7 @@ export default function CommandCenter() {
             <div className="flex flex-col gap-3 pointer-events-auto">
               <div className="grid grid-cols-2 gap-3">
                 <FinancialCard
-                  icon={ArrowDownIcon}
+                  icon={ArrowDownwardIcon}
                   iconColor={MONEY_COLORS.receivables}
                   label="Client receivables"
                   value={totals.receivable}
@@ -439,21 +432,21 @@ export default function CommandCenter() {
                   footer={`${totals.orderCount.toLocaleString()} orders · ${formatAmount(avgOrder)} avg`}
                 />
                 <FinancialCard
-                  icon={ArrowUpIcon}
+                  icon={ArrowUpwardIcon}
                   iconColor={MONEY_COLORS.payables}
                   label="Contractor payables"
                   value={totals.payable}
                   caption="Owed out to contractors"
                 />
                 <FinancialCard
-                  icon={SafeSquareIcon}
+                  icon={SavingsIcon}
                   iconColor={MONEY_COLORS.earnings}
                   label="Company earnings"
                   value={totals.earnings}
                   caption={`Kept — ${marginPercent}% of receivables`}
                 />
                 <FinancialCard
-                  icon={BillListIcon}
+                  icon={ReceiptLongIcon}
                   iconColor={MONEY_COLORS.vat}
                   label="Taxes (VAT)"
                   value={totals.vat}
@@ -487,7 +480,7 @@ export default function CommandCenter() {
         <div className="flex flex-col gap-3">
           <div className="grid grid-cols-2 gap-3">
             <FinancialCard
-              icon={ArrowDownIcon}
+              icon={ArrowDownwardIcon}
               iconColor={MONEY_COLORS.receivables}
               label="Client receivables"
               value={totals.receivable}
@@ -495,21 +488,21 @@ export default function CommandCenter() {
               footer={`${totals.orderCount.toLocaleString()} orders · ${formatAmount(avgOrder)} avg`}
             />
             <FinancialCard
-              icon={ArrowUpIcon}
+              icon={ArrowUpwardIcon}
               iconColor={MONEY_COLORS.payables}
               label="Contractor payables"
               value={totals.payable}
               caption="Owed out to contractors"
             />
             <FinancialCard
-              icon={SafeSquareIcon}
+              icon={SavingsIcon}
               iconColor={MONEY_COLORS.earnings}
               label="Company earnings"
               value={totals.earnings}
               caption={`Kept — ${marginPercent}% of receivables`}
             />
             <FinancialCard
-              icon={BillListIcon}
+              icon={ReceiptLongIcon}
               iconColor={MONEY_COLORS.vat}
               label="Taxes (VAT)"
               value={totals.vat}
@@ -531,14 +524,14 @@ export default function CommandCenter() {
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
         <RollupTable
-          icon={Buildings2Icon}
+          icon={ApartmentIcon}
           title={`Clients · ${periodTitle}`}
           rows={clientRows}
           columns={clientColumns}
           emptyLabel="No invoiceable orders in this period."
         />
         <RollupTable
-          icon={BuildingsIcon}
+          icon={DomainIcon}
           title={`Contractors · ${periodTitle}`}
           rows={contractorRows}
           columns={contractorColumns}

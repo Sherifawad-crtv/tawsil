@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { AddIcon, Buildings2Icon } from "@solar-icons/react/linear";
+import { AddIcon, ApartmentIcon } from "../../components/icons";
 import PageHeader from "../../components/PageHeader";
 import SearchInput from "../../components/SearchInput";
 import EmptyState from "../../components/EmptyState";
@@ -40,7 +40,7 @@ export default function ClientsList() {
           <TableColumn>Orders</TableColumn>
           <TableColumn>Status</TableColumn>
         </TableHeader>
-        <TableBody renderEmptyState={() => <EmptyState icon={Buildings2Icon} title="No clients match your search" />}>
+        <TableBody renderEmptyState={() => <EmptyState icon={ApartmentIcon} title="No clients match your search" />}>
           {filtered.map((client) => (
             <TableRow key={client.id} id={client.id}>
               <TableCell><span className="text-body-semibold text-navy">{client.name}</span></TableCell>

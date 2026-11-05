@@ -1,13 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import {
-  MenuDotsIcon,
-  EyeIcon,
-  UserPlusRoundedIcon,
-  Pen2Icon,
-  RestartIcon,
-  ForbiddenIcon,
-} from "@solar-icons/react/linear";
+import { PersonAddIcon, EditIcon, RestartAltIcon, BlockIcon, MoreHorizIcon, VisibilityIcon } from "../icons";
 import { Dropdown, DropdownTrigger, DropdownPopover, DropdownGroup, DropdownItem, DropdownDivider } from "../Dropdown";
 import AssignDriverModal from "./AssignDriverModal";
 import OrderFormModal from "./OrderFormModal";
@@ -61,26 +54,26 @@ export default function OrderRowMenu({ order }: { order: Order }) {
           aria-label={`Actions for ${order.id}`}
           className="flex h-8 w-8 items-center justify-center rounded-lg text-muted transition-colors hover:bg-white hover:text-navy"
         >
-          <MenuDotsIcon size={16} />
+          <MoreHorizIcon size={16} />
         </DropdownTrigger>
         <DropdownPopover aria-label={`Quick actions for ${order.id}`} className="w-[220px]">
           <DropdownGroup>
             <DropdownItem onSelect={() => run(() => navigate(`/orders/${order.id}`))}>
-              <EyeIcon size={16} className="text-muted" /> View order
+              <VisibilityIcon size={16} className="text-muted" /> View order
             </DropdownItem>
             {needsAssignment && (
               <DropdownItem onSelect={() => run(() => setShowAssign(true))}>
-                <UserPlusRoundedIcon size={16} className="text-muted" /> Assign driver
+                <PersonAddIcon size={16} className="text-muted" /> Assign driver
               </DropdownItem>
             )}
             {canEditCancel && (
               <DropdownItem onSelect={() => run(() => setShowEdit(true))}>
-                <Pen2Icon size={16} className="text-muted" /> Edit order
+                <EditIcon size={16} className="text-muted" /> Edit order
               </DropdownItem>
             )}
             {canReorder && (
               <DropdownItem onSelect={() => run(() => setShowReorder(true))}>
-                <RestartIcon size={16} className="text-muted" /> Reorder
+                <RestartAltIcon size={16} className="text-muted" /> Reorder
               </DropdownItem>
             )}
           </DropdownGroup>
@@ -92,7 +85,7 @@ export default function OrderRowMenu({ order }: { order: Order }) {
                   onSelect={() => run(handleCancel)}
                   className="text-status-cancelled hover:bg-[#FDECEC]"
                 >
-                  <ForbiddenIcon size={16} /> Cancel order
+                  <BlockIcon size={16} /> Cancel order
                 </DropdownItem>
               </DropdownGroup>
             </>

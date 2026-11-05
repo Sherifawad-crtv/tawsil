@@ -1,4 +1,4 @@
-import { RoutingIcon } from "@solar-icons/react/linear";
+import { RouteIcon } from "../icons";
 import { cx } from "../../lib/cx";
 import { formatDateTime } from "../../lib/format";
 import type { OrderStatus, StatusHistoryEntry } from "../../lib/types";
@@ -33,7 +33,7 @@ export default function StatusHistoryList({ history }: { history: StatusHistoryE
   return (
     <div className="rounded-2xl bg-white border border-border p-4">
       <div className="flex items-center gap-2 mb-4">
-        <RoutingIcon size={16} className="text-muted" />
+        <RouteIcon size={16} className="text-muted" />
         <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Trip Status</h3>
       </div>
       <ol className="flex overflow-x-auto">

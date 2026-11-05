@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AddIcon, TrashBinTrashIcon, AltArrowUpIcon, AltArrowDownIcon, MapPointIcon, BookmarkIcon } from "@solar-icons/react/linear";
+import { AddIcon, DeleteIcon, KeyboardArrowUpIcon, KeyboardArrowDownIcon, LocationOnIcon, BookmarkIcon } from "./icons";
 import { TextField, SelectField } from "./FormField";
 import { Button } from "./Button";
 import { SAVED_LOCATIONS } from "../lib/entities";
@@ -71,20 +71,20 @@ export default function WaypointsEditor({
         <div key={wp.id} className="rounded-2lg border border-border p-4 bg-grey-light">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-1.5">
-              <MapPointIcon size={14} className={wp.type === "Pickup" ? "text-navy" : "text-blue"} />
+              <LocationOnIcon size={14} className={wp.type === "Pickup" ? "text-navy" : "text-blue"} />
               <span className="text-caption-1-semibold uppercase tracking-wide text-muted" style={{ fontFamily: "var(--font-mono)" }}>
                 Waypoint {i + 1}
               </span>
             </div>
             <div className="flex items-center gap-1">
               <button type="button" onClick={() => move(wp.id, -1)} disabled={i === 0} className="p-1.5 rounded-lg hover:bg-white disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed">
-                <AltArrowUpIcon size={14} />
+                <KeyboardArrowUpIcon size={14} />
               </button>
               <button type="button" onClick={() => move(wp.id, 1)} disabled={i === value.length - 1} className="p-1.5 rounded-lg hover:bg-white disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed">
-                <AltArrowDownIcon size={14} />
+                <KeyboardArrowDownIcon size={14} />
               </button>
               <button type="button" onClick={() => remove(wp.id)} className="p-1.5 rounded-lg hover:bg-[#FDECEC] text-status-cancelled cursor-pointer">
-                <TrashBinTrashIcon size={14} />
+                <DeleteIcon size={14} />
               </button>
             </div>
           </div>

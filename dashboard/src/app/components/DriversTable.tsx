@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StarIcon, UsersGroupRoundedIcon } from "@solar-icons/react/linear";
+import { StarIcon, GroupsIcon } from "./icons";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "./Table";
 import ActiveBadge from "./ActiveBadge";
 import EmptyState from "./EmptyState";
@@ -42,7 +42,7 @@ export default function DriversTable({
         <TableColumn>On Order</TableColumn>
         <TableColumn>Status</TableColumn>
       </TableHeader>
-      <TableBody renderEmptyState={() => <EmptyState icon={UsersGroupRoundedIcon} title={emptyTitle} />}>
+      <TableBody renderEmptyState={() => <EmptyState icon={GroupsIcon} title={emptyTitle} />}>
         {drivers.flatMap((driver) => {
           const contractor = byId(contractors, driver.contractorId);
           const currentOrder = getCurrentOrderForDriver(orders, driver.id);

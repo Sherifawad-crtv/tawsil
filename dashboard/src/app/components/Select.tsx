@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { AltArrowDownIcon } from "@solar-icons/react/linear";
+import { KeyboardArrowDownIcon } from "./icons";
 import {
   Button as AriaButton,
   ListBox as AriaListBox,
@@ -31,7 +31,7 @@ import { MENU_ITEM, MENU_ITEM_ACTIVE, MENU_ITEMS_CONTAINER, MENU_POPOVER_SURFACE
  */
 
 function ChevronDownSmall({ className }: { className?: string }) {
-  return <AltArrowDownIcon size={16} className={className} aria-hidden />;
+  return <KeyboardArrowDownIcon size={16} className={className} aria-hidden />;
 }
 
 export interface SelectOption {

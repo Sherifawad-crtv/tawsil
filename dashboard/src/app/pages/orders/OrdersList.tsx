@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { AddIcon } from "@solar-icons/react/linear";
+import { AddIcon } from "../../components/icons";
 import PageHeader from "../../components/PageHeader";
 import SearchInput from "../../components/SearchInput";
 import OrdersTable from "../../components/OrdersTable";

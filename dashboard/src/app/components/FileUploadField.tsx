@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CloudUploadIcon, FileTextIcon, CloseIcon } from "@solar-icons/react/linear";
+import { CloudUploadIcon, DescriptionIcon, CloseIcon } from "./icons";
 import { FIELD_LABEL_CLASS } from "../lib/fieldClass";
 
 export default function FileUploadField({
@@ -21,7 +21,7 @@ export default function FileUploadField({
       </label>
       {fileName ? (
         <div className="flex items-center gap-2 h-9 px-3 rounded-2lg bg-grey-light">
-          <FileTextIcon size={16} className="text-blue flex-shrink-0" />
+          <DescriptionIcon size={16} className="text-blue flex-shrink-0" />
           <span className="text-body-regular text-navy truncate flex-1" style={{ fontFamily: "var(--font-mono)" }}>
             {fileName}
           </span>

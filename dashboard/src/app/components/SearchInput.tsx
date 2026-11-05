@@ -1,4 +1,4 @@
-import { MagnifierIcon } from "@solar-icons/react/linear";
+import { SearchIcon } from "./icons";
 import { cx } from "../lib/cx";
 import { FIELD_BASE } from "../lib/fieldClass";
 
@@ -13,7 +13,7 @@ export default function SearchInput({
 }) {
   return (
     <div className="relative flex-1 min-w-[200px]">
-      <MagnifierIcon size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
+      <SearchIcon size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}

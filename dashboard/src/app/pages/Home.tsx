@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { ClockCircleIcon, RoutingIcon, UsersGroupRoundedIcon, CheckCircleIcon, AddIcon, CalendarAddIcon, DangerTriangleIcon } from "@solar-icons/react/linear";
+import { ScheduleIcon, RouteIcon, GroupsIcon, CheckCircleIcon, AddIcon, CalendarAddOnIcon, WarningIcon } from "../components/icons";
 import MetricCard from "../components/MetricCard";
 import PageHeader from "../components/PageHeader";
 import StatusBadge from "../components/StatusBadge";
@@ -50,7 +50,7 @@ function AttentionRow({
       onClick={() => navigate(target)}
     >
       <div className="flex items-center gap-2.5 min-w-0 flex-1">
-        {flagged && <DangerTriangleIcon size={15} className="text-status-pending flex-shrink-0" />}
+        {flagged && <WarningIcon size={15} className="text-status-pending flex-shrink-0" />}
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span
@@ -68,7 +68,7 @@ function AttentionRow({
 
       <div className="flex items-center justify-between sm:justify-end gap-3 flex-shrink-0">
         <div className="flex items-center gap-1.5 text-caption-1-regular text-muted" style={{ fontFamily: "var(--font-mono)" }}>
-          <ClockCircleIcon size={12} />
+          <ScheduleIcon size={12} />
           {formatDuration(order.minutesInStatus)}
         </div>
         {canAct ? (
@@ -130,7 +130,7 @@ export default function Home() {
               <Button leadingIcon={AddIcon} onClick={() => setShowOrderModal(true)}>
                 New Order
               </Button>
-              <Button variant="secondary" leadingIcon={CalendarAddIcon} onClick={() => setShowMonthlyModal(true)}>
+              <Button variant="secondary" leadingIcon={CalendarAddOnIcon} onClick={() => setShowMonthlyModal(true)}>
                 New Monthly Order
               </Button>
             </div>
@@ -140,9 +140,9 @@ export default function Home() {
 
       {/* Metrics strip */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <MetricCard label="Pending Orders" value={metrics.pendingOrders} icon={ClockCircleIcon} accent="amber" />
-        <MetricCard label="Active Orders" value={metrics.activeOrders} icon={RoutingIcon} accent="navy" />
-        <MetricCard label="Available Drivers" value={metrics.availableDrivers} icon={UsersGroupRoundedIcon} accent="blue" />
+        <MetricCard label="Pending Orders" value={metrics.pendingOrders} icon={ScheduleIcon} accent="amber" />
+        <MetricCard label="Active Orders" value={metrics.activeOrders} icon={RouteIcon} accent="navy" />
+        <MetricCard label="Available Drivers" value={metrics.availableDrivers} icon={GroupsIcon} accent="blue" />
         <MetricCard
           label="Completed Today"
           value={metrics.completedToday}

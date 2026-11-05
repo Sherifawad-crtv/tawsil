@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router";
-import { ArrowLeftIcon, ClockCircleIcon, CalendarDateIcon } from "@solar-icons/react/linear";
+import { ArrowBackIcon, ScheduleIcon, CalendarTodayIcon } from "../../components/icons";
 import OrdersTable from "../../components/OrdersTable";
 import PageHeader from "../../components/PageHeader";
 import MultiDateCalendar from "../../components/MultiDateCalendar";
@@ -36,13 +36,13 @@ export default function MonthlyOrderDetail() {
   return (
     <div className="flex flex-col gap-6">
       <button onClick={() => navigate("/monthly-orders")} className="flex items-center gap-1.5 text-body-2-regular text-muted hover:text-navy cursor-pointer w-fit">
-        <ArrowLeftIcon size={15} /> Back to Monthly Orders
+        <ArrowBackIcon size={15} /> Back to Monthly Orders
       </button>
 
       <PageHeader title={contract.id} subtitle={`${client?.name ?? "—"} · ${contractor?.name ?? "Unassigned"}`} />
 
       <div className="grid sm:grid-cols-4 gap-4">
-        <StatTile icon={ClockCircleIcon} label="Daily Time" value={contract.dailyPickupTime} />
+        <StatTile icon={ScheduleIcon} label="Daily Time" value={contract.dailyPickupTime} />
         <StatTile label="Total Days" value={String(total)} />
         <StatTile label="Executed" value={String(executedCount)} accent="green" />
         <StatTile label="Remaining" value={String(remaining)} accent={remaining <= 2 ? "amber" : undefined} />
@@ -55,7 +55,7 @@ export default function MonthlyOrderDetail() {
         </div>
         <ProgressBar value={pct} className="mb-4" />
         <div className="flex items-center gap-2 mb-3">
-          <CalendarDateIcon size={14} className="text-muted" />
+          <CalendarTodayIcon size={14} className="text-muted" />
           <span className="text-caption-1-regular text-muted uppercase tracking-wide" style={{ fontFamily: "var(--font-mono)" }}>Execution Calendar</span>
         </div>
         <MultiDateCalendar

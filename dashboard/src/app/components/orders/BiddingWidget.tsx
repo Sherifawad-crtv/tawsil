@@ -1,4 +1,4 @@
-import { SledgehammerIcon } from "@solar-icons/react/linear";
+import { GavelIcon } from "../icons";
 import EmptyState from "../EmptyState";
 import { formatEGP, formatDateTime } from "../../lib/format";
 import type { BiddingInfo } from "../../lib/types";
@@ -7,12 +7,12 @@ export default function BiddingWidget({ bidding }: { bidding?: BiddingInfo }) {
   return (
     <div className="rounded-2xl bg-white border border-border p-4">
       <div className="flex items-center gap-2 mb-4">
-        <SledgehammerIcon size={16} className="text-muted" />
+        <GavelIcon size={16} className="text-muted" />
         <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Bidding</h3>
       </div>
 
       {!bidding ? (
-        <EmptyState icon={SledgehammerIcon} title="No bids yet" note="Bids from contractor drivers will appear here once live bidding opens." />
+        <EmptyState icon={GavelIcon} title="No bids yet" note="Bids from contractor drivers will appear here once live bidding opens." />
       ) : (
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-3 gap-3">

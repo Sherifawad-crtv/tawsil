@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { BusIcon } from "@solar-icons/react/linear";
+import { DirectionsBusIcon } from "../icons";
 import Tabs from "../Tabs";
 import EmptyState from "../EmptyState";
 import VehicleCard from "./VehicleCard";
@@ -50,7 +50,7 @@ export default function VehiclesBoard({
       <Tabs tabs={TABS} active={tab} onChange={(t) => setTab(t as Tab)} counts={counts} />
 
       {shown.length === 0 ? (
-        <EmptyState icon={BusIcon} title="No vehicles match your filters" />
+        <EmptyState icon={DirectionsBusIcon} title="No vehicles match your filters" />
       ) : (
         <div className={`grid gap-4 items-start ${selected ? "xl:grid-cols-[minmax(0,1fr)_420px]" : ""}`}>
           <div className={`grid gap-3 ${selected ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1 md:grid-cols-2 xl:grid-cols-3"}`}>

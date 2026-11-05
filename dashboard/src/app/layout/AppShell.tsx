@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router";
-import { HamburgerMenuIcon } from "@solar-icons/react/linear";
+import { MenuIcon } from "../components/icons";
 import Sidebar from "./Sidebar";
 import RouteErrorBoundary from "./RouteErrorBoundary";
 import { Select } from "../components/Select";
@@ -21,7 +21,7 @@ export default function AppShell() {
             onClick={() => setNavOpen(true)}
             aria-label="Open menu"
           >
-            <HamburgerMenuIcon size={20} className="text-navy" />
+            <MenuIcon size={20} className="text-navy" />
           </button>
 
           <div className="flex-1" />

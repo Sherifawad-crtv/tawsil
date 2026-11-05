@@ -1,4 +1,4 @@
-import { StarIcon, PhoneIcon, LetterIcon, UserIdIcon, ForbiddenIcon, CheckCircleIcon } from "@solar-icons/react/linear";
+import { StarIcon, CallIcon, MailIcon, BadgeIcon, BlockIcon, CheckCircleIcon } from "./icons";
 import { useDataStore } from "../lib/store";
 import { getActiveOrderCountForDriver } from "../lib/selectors";
 import { formatDate } from "../lib/format";
@@ -13,12 +13,12 @@ export default function DriverDetailPanel({ driver, onClose }: { driver: Driver;
       <div className="grid sm:grid-cols-3 gap-4">
         <div>
           <div className="text-caption-1-regular text-muted uppercase tracking-wide mb-1.5" style={{ fontFamily: "var(--font-mono)" }}>Contact</div>
-          <div className="flex items-center gap-1.5 text-body-regular text-navy mb-1"><LetterIcon size={13} className="text-muted" /> {driver.email}</div>
-          <div className="flex items-center gap-1.5 text-body-regular text-navy"><PhoneIcon size={13} className="text-muted" /> {driver.phone}</div>
+          <div className="flex items-center gap-1.5 text-body-regular text-navy mb-1"><MailIcon size={13} className="text-muted" /> {driver.email}</div>
+          <div className="flex items-center gap-1.5 text-body-regular text-navy"><CallIcon size={13} className="text-muted" /> {driver.phone}</div>
         </div>
         <div>
           <div className="text-caption-1-regular text-muted uppercase tracking-wide mb-1.5" style={{ fontFamily: "var(--font-mono)" }}>License Info</div>
-          <div className="flex items-center gap-1.5 text-body-regular text-navy mb-1"><UserIdIcon size={13} className="text-muted" /> {driver.licenseNumber}</div>
+          <div className="flex items-center gap-1.5 text-body-regular text-navy mb-1"><BadgeIcon size={13} className="text-muted" /> {driver.licenseNumber}</div>
           <div className="text-body-regular text-muted">Expires {formatDate(driver.licenseExpiry)}</div>
         </div>
         <div>
@@ -38,7 +38,7 @@ export default function DriverDetailPanel({ driver, onClose }: { driver: Driver;
           }`}
           style={{ fontFamily: "var(--font-sub)" }}
         >
-          {driver.active ? <><ForbiddenIcon size={13} /> Deactivate</> : <><CheckCircleIcon size={13} /> Reactivate</>}
+          {driver.active ? <><BlockIcon size={13} /> Deactivate</> : <><CheckCircleIcon size={13} /> Reactivate</>}
         </button>
       </div>
     </div>

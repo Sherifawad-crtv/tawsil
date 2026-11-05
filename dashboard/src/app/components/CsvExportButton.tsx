@@ -1,4 +1,4 @@
-import { DownloadIcon } from "@solar-icons/react/linear";
+import { DownloadIcon } from "./icons";
 import { Button } from "./Button";
 
 export default function CsvExportButton({ filename, rows, headers }: { filename: string; rows: (string | number)[][]; headers: string[] }) {

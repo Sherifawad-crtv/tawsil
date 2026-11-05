@@ -1,6 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import { Link, useLocation } from "react-router";
-import { DangerTriangleIcon } from "@solar-icons/react/linear";
+import { WarningIcon } from "../components/icons";
 
 /**
  * Catches a render error in the routed page and shows it in place, leaving
@@ -30,7 +30,7 @@ class Boundary extends Component<{ children: ReactNode; resetKey: string }, { er
     return (
       <div className="rounded-2xl bg-white border border-border p-8 flex flex-col items-center text-center gap-2">
         <span className="w-10 h-10 rounded-2xl bg-[#FDECEC] text-status-cancelled flex items-center justify-center">
-          <DangerTriangleIcon size={18} />
+          <WarningIcon size={18} />
         </span>
         <p className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>This page hit an error</p>
         <p className="text-body-2-regular text-muted max-w-md" style={{ fontFamily: "var(--font-mono)" }}>

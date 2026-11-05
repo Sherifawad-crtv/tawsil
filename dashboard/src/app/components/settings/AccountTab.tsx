@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UserIcon, LetterIcon, PhoneIcon, CaseIcon, CheckCircleIcon } from "@solar-icons/react/linear";
+import { PersonIcon, MailIcon, CallIcon, WorkIcon, CheckCircleIcon } from "../icons";
 import { TextField } from "../FormField";
 import { Button } from "../Button";
 import { SettingsCard, SettingsSectionLabel } from "./SettingsRows";
@@ -80,16 +80,16 @@ export default function AccountTab() {
 
       <SettingsSectionLabel className="mt-2">At a glance</SettingsSectionLabel>
       <SettingsCard>
-        <Row icon={UserIcon} label="Full name" value={currentUser.name} />
-        <Row icon={CaseIcon} label="Title" value={currentUser.title} />
-        <Row icon={LetterIcon} label="Email" value={currentUser.email} mono />
-        <Row icon={PhoneIcon} label="Phone" value={currentUser.phone} mono />
+        <Row icon={PersonIcon} label="Full name" value={currentUser.name} />
+        <Row icon={WorkIcon} label="Title" value={currentUser.title} />
+        <Row icon={MailIcon} label="Email" value={currentUser.email} mono />
+        <Row icon={CallIcon} label="Phone" value={currentUser.phone} mono />
       </SettingsCard>
     </div>
   );
 }
 
-function Row({ icon: Icon, label, value, mono = false }: { icon: typeof UserIcon; label: string; value: string; mono?: boolean }) {
+function Row({ icon: Icon, label, value, mono = false }: { icon: typeof PersonIcon; label: string; value: string; mono?: boolean }) {
   return (
     <div className="flex items-center gap-3 min-h-[52px] py-2.5 pr-4 border-b border-border last:border-b-0">
       <Icon size={15} className="text-muted flex-shrink-0" />

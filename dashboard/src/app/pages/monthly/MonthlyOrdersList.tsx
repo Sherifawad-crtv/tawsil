@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { AddIcon, CalendarMarkIcon } from "@solar-icons/react/linear";
+import { AddIcon, EventIcon } from "../../components/icons";
 import PageHeader from "../../components/PageHeader";
 import EmptyState from "../../components/EmptyState";
 import MonthlyOrderFormModal from "../../components/monthly/MonthlyOrderFormModal";
@@ -36,7 +36,7 @@ export default function MonthlyOrdersList() {
           <TableColumn>Days</TableColumn>
           <TableColumn>Status</TableColumn>
         </TableHeader>
-        <TableBody renderEmptyState={() => <EmptyState icon={CalendarMarkIcon} title="No monthly contracts yet" />}>
+        <TableBody renderEmptyState={() => <EmptyState icon={EventIcon} title="No monthly contracts yet" />}>
           {monthlyOrders.map((contract) => {
             const client = byId(clients, contract.clientId);
             const contractor = byId(contractors, contract.contractorId);

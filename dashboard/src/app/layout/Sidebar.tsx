@@ -1,26 +1,8 @@
 import { NavLink } from "react-router";
-import { CloseIcon } from "@solar-icons/react/linear";
+import { CloseIcon } from "../components/icons";
 import tawsilLogo from "../../assets/tawsil-logo.webp";
-import {
-  Widget2Icon as Widget2LinearIcon,
-  BoxIcon as BoxLinearIcon,
-  BuildingsIcon as BuildingsLinearIcon,
-  Buildings2Icon as Buildings2LinearIcon,
-  UsersGroupRoundedIcon as UsersGroupRoundedLinearIcon,
-  CalendarMarkIcon as CalendarMarkLinearIcon,
-  SettingsIcon as SettingsLinearIcon,
-  GlobalIcon as GlobalLinearIcon,
-} from "@solar-icons/react/linear";
-import {
-  Widget2Icon as Widget2BoldIcon,
-  BoxIcon as BoxBoldIcon,
-  BuildingsIcon as BuildingsBoldIcon,
-  Buildings2Icon as Buildings2BoldIcon,
-  UsersGroupRoundedIcon as UsersGroupRoundedBoldIcon,
-  CalendarMarkIcon as CalendarMarkBoldIcon,
-  SettingsIcon as SettingsBoldIcon,
-  GlobalIcon as GlobalBoldIcon,
-} from "@solar-icons/react/bold-duotone";
+import { DashboardIcon as Widget2LinearIcon, Inventory2Icon as BoxLinearIcon, DomainIcon as BuildingsLinearIcon, ApartmentIcon as Buildings2LinearIcon, GroupsIcon as UsersGroupRoundedLinearIcon, EventIcon as CalendarMarkLinearIcon, SettingsIcon as SettingsLinearIcon, PublicIcon as GlobalLinearIcon } from "../components/icons";
+import { DashboardFilledIcon as Widget2BoldIcon, Inventory2FilledIcon as BoxBoldIcon, DomainFilledIcon as BuildingsBoldIcon, ApartmentFilledIcon as Buildings2BoldIcon, GroupsFilledIcon as UsersGroupRoundedBoldIcon, EventFilledIcon as CalendarMarkBoldIcon, SettingsFilledIcon as SettingsBoldIcon, PublicFilledIcon as GlobalBoldIcon } from "../components/icons";
 import { cx } from "../lib/cx";
 import { useDataStore } from "../lib/store";
 import { useRole } from "../lib/RoleContext";

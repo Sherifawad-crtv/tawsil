@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { CloseCircleIcon, ForbiddenIcon, CheckCircleIcon, PhoneIcon, LetterIcon } from "@solar-icons/react/linear";
+import { CancelIcon, BlockIcon, CheckCircleIcon, CallIcon, MailIcon } from "../icons";
 import { Chip } from "../Chip";
 import { ProgressBar } from "../boardui/ProgressBar";
 import VehicleStatusBadge from "./VehicleStatusBadge";
@@ -46,7 +46,7 @@ export default function VehicleInspector({ vehicle, onClose }: { vehicle: Vehicl
           aria-label="Close"
           className="text-muted hover:text-navy cursor-pointer flex-shrink-0"
         >
-          <CloseCircleIcon size={20} />
+          <CancelIcon size={20} />
         </button>
       </div>
 
@@ -148,10 +148,10 @@ export default function VehicleInspector({ vehicle, onClose }: { vehicle: Vehicl
             <p className="text-caption-2-regular text-muted">{who.current ? "Driver on this order" : "Last driver"}</p>
           </div>
           <a href={`tel:${who.driver.phone.replace(/\s+/g, "")}`} aria-label="Call driver" className="text-muted hover:text-navy">
-            <PhoneIcon size={16} />
+            <CallIcon size={16} />
           </a>
           <a href={`mailto:${who.driver.email}`} aria-label="Email driver" className="text-muted hover:text-navy">
-            <LetterIcon size={16} />
+            <MailIcon size={16} />
           </a>
         </div>
       )}
@@ -165,7 +165,7 @@ export default function VehicleInspector({ vehicle, onClose }: { vehicle: Vehicl
           }`}
           style={{ fontFamily: "var(--font-sub)" }}
         >
-          {vehicle.active ? <><ForbiddenIcon size={13} /> Deactivate</> : <><CheckCircleIcon size={13} /> Reactivate</>}
+          {vehicle.active ? <><BlockIcon size={13} /> Deactivate</> : <><CheckCircleIcon size={13} /> Reactivate</>}
         </button>
       </div>
     </section>

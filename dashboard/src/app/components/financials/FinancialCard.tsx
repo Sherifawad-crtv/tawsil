@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { Icon as SolarIcon } from "@solar-icons/react/lib/types";
+import type { AppIcon } from "../icons";
 import { formatAmount } from "../../lib/format";
 
 /**
@@ -16,7 +16,7 @@ export default function FinancialCard({
   caption,
   footer,
 }: {
-  icon: SolarIcon;
+  icon: AppIcon;
   iconColor: string;
   label: string;
   value: number;

@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import type { Icon as SolarIcon } from "@solar-icons/react/lib/types";
+import type { AppIcon } from "../icons";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "../Table";
 
 export interface RollupColumn<T> {
@@ -22,7 +22,7 @@ export default function RollupTable<T extends { id: string }>({
   footnote,
   emptyLabel,
 }: {
-  icon: SolarIcon;
+  icon: AppIcon;
   title: string;
   rows: T[];
   columns: RollupColumn<T>[];

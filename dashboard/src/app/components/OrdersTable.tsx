@@ -1,4 +1,4 @@
-import { BoxIcon } from "@solar-icons/react/linear";
+import { Inventory2Icon } from "./icons";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "./Table";
 import StatusBadge from "./StatusBadge";
 import EmptyState from "./EmptyState";
@@ -27,7 +27,7 @@ export default function OrdersTable({ orders, emptyTitle = "No orders yet", empt
         <TableColumn>Pickup</TableColumn>
         <TableColumn>{""}</TableColumn>
       </TableHeader>
-      <TableBody renderEmptyState={() => <EmptyState icon={BoxIcon} title={emptyTitle} note={emptyNote} />}>
+      <TableBody renderEmptyState={() => <EmptyState icon={Inventory2Icon} title={emptyTitle} note={emptyNote} />}>
         {orders.map((order) => {
           const client = byId(clients, order.clientId);
           const contractor = byId(contractors, order.contractorId);

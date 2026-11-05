@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AddIcon, TrashBinTrashIcon } from "@solar-icons/react/linear";
+import { AddIcon, DeleteIcon } from "../icons";
 import { Button } from "../Button";
 import { Select } from "../Select";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "../Table";
@@ -110,7 +110,7 @@ export default function TeamTab() {
                     className="p-1.5 rounded-lg hover:bg-[#FDECEC] cursor-pointer text-muted hover:text-status-cancelled"
                     aria-label={`Remove ${m.name}`}
                   >
-                    <TrashBinTrashIcon size={14} />
+                    <DeleteIcon size={14} />
                   </button>
                 </TableCell>
               ) : null}

@@ -1,5 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode, Ref } from "react";
-import type { Icon as SolarIcon } from "@solar-icons/react/lib/types";
+import type { AppIcon } from "./icons";
 import { cx } from "../lib/cx";
 
 /**
@@ -14,8 +14,8 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   variant?: ButtonVariant;
   size?: ButtonSize;
   iconOnly?: boolean;
-  leadingIcon?: SolarIcon;
-  trailingIcon?: SolarIcon;
+  leadingIcon?: AppIcon;
+  trailingIcon?: AppIcon;
   children?: ReactNode;
   ref?: Ref<HTMLButtonElement>;
 }

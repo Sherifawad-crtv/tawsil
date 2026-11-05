@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { MapPointSearchIcon } from "@solar-icons/react/linear";
+import { LocationSearchingIcon } from "./icons";
 import EmptyState from "./EmptyState";
 import CsvExportButton from "./CsvExportButton";
 import SegmentedControl from "./SegmentedControl";
@@ -48,7 +48,7 @@ export default function WaypointAnalyticsTable({ orders, filenamePrefix }: { ord
           <TableColumn>Last Visited</TableColumn>
           <TableColumn>Type</TableColumn>
         </TableHeader>
-        <TableBody renderEmptyState={() => <EmptyState icon={MapPointSearchIcon} title="No waypoint data in this range" />}>
+        <TableBody renderEmptyState={() => <EmptyState icon={LocationSearchingIcon} title="No waypoint data in this range" />}>
           {rows.map((r, i) => (
             <TableRow key={r.location} id={r.location}>
               <TableCell style={{ fontFamily: "var(--font-mono)" }}>{i + 1}</TableCell>

@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
-import { ArrowLeftIcon, UserIcon, MapPointIcon, CameraIcon, UserPlusRoundedIcon, Pen2Icon, ForbiddenIcon, RoutingIcon, RestartIcon } from "@solar-icons/react/linear";
+import { ArrowBackIcon, PersonIcon, LocationOnIcon, PhotoCameraIcon, PersonAddIcon, EditIcon, BlockIcon, RouteIcon, RestartAltIcon } from "../../components/icons";
 import StatusBadge from "../../components/StatusBadge";
 import StatusHistoryList from "../../components/orders/StatusHistoryList";
 import BiddingWidget from "../../components/orders/BiddingWidget";
@@ -73,7 +73,7 @@ export default function OrderDetail() {
         onClick={() => navigate("/orders")}
         className="flex items-center gap-1.5 text-body-2-regular text-muted hover:text-navy cursor-pointer w-fit"
       >
-        <ArrowLeftIcon size={15} /> Back to Orders
+        <ArrowBackIcon size={15} /> Back to Orders
       </button>
 
       <PageHeader
@@ -83,27 +83,27 @@ export default function OrderDetail() {
         action={
           <>
             {needsAssignment && (
-              <Button leadingIcon={UserPlusRoundedIcon} onClick={() => setShowAssign(true)}>
+              <Button leadingIcon={PersonAddIcon} onClick={() => setShowAssign(true)}>
                 Assign Driver
               </Button>
             )}
             {canEditCancel && (
               <>
-                <Button variant="secondary" leadingIcon={Pen2Icon} onClick={() => setShowEdit(true)}>
+                <Button variant="secondary" leadingIcon={EditIcon} onClick={() => setShowEdit(true)}>
                   Edit
                 </Button>
-                <Button variant="danger" leadingIcon={ForbiddenIcon} onClick={handleCancel}>
+                <Button variant="danger" leadingIcon={BlockIcon} onClick={handleCancel}>
                   Cancel
                 </Button>
               </>
             )}
             {order.status === "Completed" && (
               <>
-                <Button variant="secondary" leadingIcon={RoutingIcon}>
+                <Button variant="secondary" leadingIcon={RouteIcon}>
                   Track Order
                 </Button>
                 {!readOnly && (
-                  <Button leadingIcon={RestartIcon} onClick={() => setShowReorder(true)}>
+                  <Button leadingIcon={RestartAltIcon} onClick={() => setShowReorder(true)}>
                     Reorder
                   </Button>
                 )}
@@ -160,7 +160,7 @@ export default function OrderDetail() {
                   </div>
                 ) : (
                   <div className="flex items-center gap-3 px-4 py-2 rounded-2lg bg-grey-light">
-                    <UserIcon size={16} className="text-muted" />
+                    <PersonIcon size={16} className="text-muted" />
                     <span className="text-body-medium text-muted">Not Assigned</span>
                   </div>
                 )}
@@ -171,14 +171,14 @@ export default function OrderDetail() {
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-body-semibold text-navy" style={{ fontFamily: "var(--font-sub)" }}>Delivery</h3>
                   <div className="flex items-center gap-1.5 text-caption-1-regular text-muted">
-                    <CameraIcon size={13} />
+                    <PhotoCameraIcon size={13} />
                     POD {order.podRequired ? (order.podUploaded ? "uploaded" : "pending") : "n/a"}
                   </div>
                 </div>
                 <div className="flex flex-col gap-2.5">
                   {order.waypoints.map((wp) => (
                     <div key={wp.id} className="flex items-start gap-3">
-                      <MapPointIcon size={14} className={`mt-0.5 flex-shrink-0 ${wp.type === "Pickup" ? "text-navy" : "text-blue"}`} />
+                      <LocationOnIcon size={14} className={`mt-0.5 flex-shrink-0 ${wp.type === "Pickup" ? "text-navy" : "text-blue"}`} />
                       <div className="min-w-0">
                         <div className="text-body-2-regular text-navy">
                           <span className="font-semibold">{wp.type}</span> · {wp.name}

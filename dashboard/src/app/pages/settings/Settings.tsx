@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AddIcon, Pen2Icon, DangerTriangleIcon, LockKeyholeIcon, SnowflakeIcon } from "@solar-icons/react/linear";
+import { AddIcon, EditIcon, WarningIcon, LockIcon, AcUnitIcon } from "../../components/icons";
 import PageHeader from "../../components/PageHeader";
 import Tabs from "../../components/Tabs";
 import TruckTypeFormModal from "../../components/settings/TruckTypeFormModal";
@@ -60,7 +60,7 @@ function RateCardTab() {
 
       {!isAdmin && (
         <div className="flex items-center gap-2 px-4 py-2 rounded-2lg bg-grey-light text-body-2-regular text-muted">
-          <LockKeyholeIcon size={14} />
+          <LockIcon size={14} />
           Viewing only — switch to <strong className="text-navy">Admin</strong> in the top-right role switcher to edit the rate card.
         </div>
       )}
@@ -82,7 +82,7 @@ function RateCardTab() {
                 <TableCell>
                   <span className="inline-flex items-center gap-1.5">
                     {t.config}
-                    {t.requiresTempControl && <SnowflakeIcon size={12} className="text-blue" />}
+                    {t.requiresTempControl && <AcUnitIcon size={12} className="text-blue" />}
                   </span>
                 </TableCell>
                 <TableCell style={{ fontFamily: "var(--font-mono)" }}>
@@ -90,7 +90,7 @@ function RateCardTab() {
                     {formatEGP(t.dailyRentEGP)}
                     {t.flagged && (
                       <span title={t.flagNote}>
-                        <DangerTriangleIcon size={13} className="text-status-pending" />
+                        <WarningIcon size={13} className="text-status-pending" />
                       </span>
                     )}
                   </span>
@@ -100,7 +100,7 @@ function RateCardTab() {
                 {isAdmin ? (
                   <TableCell>
                     <button onClick={() => setEditing(t)} className="p-1.5 rounded-lg hover:bg-grey-light cursor-pointer text-muted hover:text-navy">
-                      <Pen2Icon size={14} />
+                      <EditIcon size={14} />
                     </button>
                   </TableCell>
                 ) : null}
@@ -113,7 +113,7 @@ function RateCardTab() {
                   <TableCell colSpan={isAdmin ? 6 : 5} className="pt-0 pb-3">
                     {flagged.map((t) => (
                       <div key={t.id} className="flex items-start gap-2 text-caption-1-regular text-status-pending bg-[#FFF9EC] rounded-lg px-3 py-2">
-                        <DangerTriangleIcon size={13} className="mt-0.5 flex-shrink-0" />
+                        <WarningIcon size={13} className="mt-0.5 flex-shrink-0" />
                         <span>{t.flagNote}</span>
                       </div>
                     ))}

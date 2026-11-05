@@ -29,9 +29,9 @@ function TypeCard({
       >
         {icon}
       </div>
-      <div className="flex-1">
+      <div className="flex-1 min-w-0">
         <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>{title}</span>
-        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginTop: "4px" }}>{subtitle}</p>
+        <p className="whitespace-nowrap overflow-hidden text-ellipsis" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginTop: "4px" }}>{subtitle}</p>
       </div>
       <ChevronRightRounded sx={{ fontSize: 22, color: "#626A76" }} />
     </button>
@@ -48,7 +48,7 @@ export default function AccountTypeScreen({
   onContinueAsGuest: () => void;
 }) {
   return (
-    <ScreenShell background={<MapBackdrop />}>
+    <ScreenShell background={<MapBackdrop />} fixedHeight>
       <div className="flex-1 flex flex-col justify-center" style={{ paddingBottom: "40px" }}>
         <div className="mb-8">
           <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "30px", color: "#040033", lineHeight: "1.15" }}>
@@ -63,13 +63,13 @@ export default function AccountTypeScreen({
           <TypeCard
             icon={<ApartmentRounded sx={{ fontSize: 26, color: "#1253FA" }} />}
             title="I'm a Business"
-            subtitle="Company account with tax details and invoicing"
+            subtitle="Tax details & invoicing"
             onClick={() => onChoose("business")}
           />
           <TypeCard
             icon={<PersonRounded sx={{ fontSize: 26, color: "#1253FA" }} />}
             title="I'm an Individual"
-            subtitle="Quick signup with just your phone number"
+            subtitle="Just your phone number"
             onClick={() => onChoose("individual")}
           />
         </div>

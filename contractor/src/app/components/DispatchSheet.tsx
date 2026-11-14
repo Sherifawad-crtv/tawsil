@@ -24,8 +24,8 @@ function VehicleTile({ truck, selected, onSelect }: { truck: Truck; selected: bo
         boxShadow: selected ? "0 4px 20px rgba(18,83,250,0.18)" : "0 2px 14px rgba(0,0,0,0.04)",
       }}
     >
-      <div className="w-full overflow-hidden" style={{ height: "128px", backgroundColor: "#F0F0EE" }}>
-        <img src={VEHICLE_TILE_IMAGES[truck.baseClass]} alt="" className="w-full h-full object-cover object-left-bottom" />
+      <div className="w-full overflow-hidden flex items-center justify-center" style={{ height: "128px", backgroundColor: "#F0F0EE" }}>
+        <img src={VEHICLE_TILE_IMAGES[truck.baseClass]} alt="" draggable={false} className="object-contain" style={{ width: "180px", maxHeight: "80px" }} />
       </div>
       <div className="p-3">
         <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#040033" }}>{truck.plateNumber}</p>

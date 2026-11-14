@@ -60,8 +60,8 @@ export default function TruckCard({ truck, interactive = true }: { truck: Truck;
           src={VEHICLE_TILE_IMAGES[truck.baseClass]}
           alt=""
           draggable={false}
-          className="max-w-full max-h-full object-contain"
-          style={{ filter: "drop-shadow(0 6px 7px rgba(4,0,51,0.16))" }}
+          className="object-contain"
+          style={{ width: "215px", maxHeight: "96px", filter: "drop-shadow(0 6px 7px rgba(4,0,51,0.16))" }}
         />
       </div>
 

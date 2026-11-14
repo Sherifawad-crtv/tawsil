@@ -35,7 +35,7 @@ export default function TripCard({ order }: { order: Order }) {
       className="w-full text-left rounded-[20px] overflow-hidden bg-white cursor-pointer active:scale-[0.99] transition-transform"
       style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}
     >
-      {/* Header: id and price, one line */}
+      {/* Header: order id and status, one line */}
       <div className="flex items-center justify-between gap-2 px-5 pt-4 pb-3">
         <span
           className="px-2.5 py-1 rounded-xl truncate min-w-0"
@@ -43,8 +43,8 @@ export default function TripCard({ order }: { order: Order }) {
         >
           #{order.id}
         </span>
-        <span className="flex-shrink-0" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>
-          {formatEGP(order.priceEGP)}
+        <span className="flex-shrink-0">
+          <StatusBadge status={order.status} size="sm" />
         </span>
       </div>
 
@@ -96,9 +96,9 @@ export default function TripCard({ order }: { order: Order }) {
         </div>
       )}
 
-      {/* Meta: two fixed lines (when, then status and tags) so the card is the same height whatever the text */}
+      {/* Meta: two fixed lines (date, time and price; then the tags) so the card height never depends on the text */}
       <div className="flex flex-col gap-2 px-5 py-3" style={{ borderTop: "1px solid #F0F0EE" }}>
-        <div className="flex items-center gap-3 whitespace-nowrap">
+        <div className="flex items-center gap-2 whitespace-nowrap">
           <div className="flex items-center gap-1.5">
             <CalendarTodayRounded sx={{ fontSize: 12, color: "#626A76" }} />
             <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{formatDate(order.pickupAt)}</span>
@@ -107,11 +107,11 @@ export default function TripCard({ order }: { order: Order }) {
             <AccessTimeRounded sx={{ fontSize: 12, color: "#626A76" }} />
             <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{formatTime(order.pickupAt)}</span>
           </div>
+          <span className="ml-auto flex-shrink-0" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>
+            {formatEGP(order.priceEGP)}
+          </span>
         </div>
         <div className="flex items-center gap-2 min-w-0 whitespace-nowrap">
-          <span className="flex-shrink-0">
-            <StatusBadge status={order.status} size="sm" />
-          </span>
           <span className="px-2 py-0.5 rounded-lg flex-shrink-0" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
             {order.tripType}
           </span>

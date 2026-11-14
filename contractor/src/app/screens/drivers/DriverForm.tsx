@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import ScreenHeader from "../../components/ScreenHeader";
 import { TextField } from "../../components/FormField";
 import { Button } from "../../components/Button";
-import ActiveStatusBadge from "../../components/ActiveStatusBadge";
+import DriverCard from "../../components/DriverCard";
 import { useDataStore } from "../../lib/store";
 import { byId } from "../../lib/selectors";
 
@@ -54,16 +54,8 @@ export default function DriverForm({ mode }: { mode: "create" | "edit" }) {
 
       <div className="w-full max-w-lg mx-auto px-4 pt-5 pb-8">
         {mode === "edit" && existing && (
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #040033, #0A0070)" }}>
-              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", color: "white" }}>{existing.name[0]}</span>
-            </div>
-            <div className="min-w-0">
-              <h2 className="truncate" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>{existing.name}</h2>
-              <div className="mt-2">
-                <ActiveStatusBadge active={existing.active} />
-              </div>
-            </div>
+          <div className="mb-6">
+            <DriverCard driver={existing} interactive={false} />
           </div>
         )}
 

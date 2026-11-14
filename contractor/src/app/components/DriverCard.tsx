@@ -2,23 +2,22 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router";
 import PhoneRounded from "./icons/PhoneRounded";
 import MailOutlineRounded from "./icons/MailOutlineRounded";
-import BadgeRounded from "./icons/BadgeRounded";
 import AccessTimeRounded from "./icons/AccessTimeRounded";
 import CalendarTodayRounded from "./icons/CalendarTodayRounded";
 import PersonOffRounded from "./icons/PersonOffRounded";
 import LocalShippingRounded from "./icons/LocalShippingRounded";
 import TaskAltRounded from "./icons/TaskAltRounded";
-import ExpiredPill from "./ExpiredPill";
+import LicenseCard from "./LicenseCard";
 import { MONO, PersonRow, Stat, StatusPill, TripProgress, fleetStatus } from "./fleetCard";
 import { useDataStore } from "../lib/store";
 import { byId } from "../lib/selectors";
 import { truckTypeLabel } from "../lib/constants";
-import { formatDate, formatDateTime, isExpired } from "../lib/format";
+import { formatDateTime, isExpired } from "../lib/format";
 import { VEHICLE_TILE_IMAGES } from "../lib/truckImages";
 import type { Driver } from "../lib/types";
 
 /**
- * Fleet card for one driver: contact details and live status, a licence card,
+ * Fleet card for one driver: contact details and live status, the licence drawn as the printed card,
  * the truck they are driving, progress of the current trip, and a footer of
  * trips done, hours driven and trips coming up.
  */
@@ -67,25 +66,8 @@ export default function DriverCard({ driver, interactive = true }: { driver: Dri
         <StatusPill status={fleetStatus(driver.active, trip)} />
       </div>
 
-      <div className="mx-4 mt-3 rounded-2xl p-3" style={{ backgroundColor: "#F5F5F3" }}>
-        <div className="rounded-xl bg-white p-3.5 flex items-center gap-3.5" style={{ boxShadow: "0 1px 6px rgba(0,0,0,0.05)" }}>
-          <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #040033, #0A0070)" }}>
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", color: "white" }}>{driver.name[0]}</span>
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-1.5">
-              <BadgeRounded sx={{ fontSize: 13, color: "#626A76" }} />
-              <span style={{ fontFamily: MONO, fontSize: "10px", color: "#626A76", letterSpacing: "0.08em", textTransform: "uppercase" }}>Driver license</span>
-            </div>
-            <p className="truncate" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "17px", color: "#040033", marginTop: "2px" }}>{driver.licenseNumber}</p>
-            <div className="flex items-center gap-2 mt-0.5">
-              <span style={{ fontFamily: MONO, fontSize: "11px", color: expired ? "#DC2626" : "#626A76" }}>
-                {expired ? "Expired" : "Valid until"} {formatDate(driver.licenseExpiry)}
-              </span>
-              {expired && <ExpiredPill />}
-            </div>
-          </div>
-        </div>
+      <div className="mx-4 mt-3">
+        <LicenseCard driver={driver} />
       </div>
 
       <PersonRow

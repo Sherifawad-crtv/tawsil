@@ -9,14 +9,8 @@ import { useDataStore } from "../lib/store";
 import { byId } from "../lib/selectors";
 import { formatEGP, formatDate, formatTime } from "../lib/format";
 import { truckTypeLabel } from "../lib/constants";
-import type { Order, OrderStatus } from "../lib/types";
-
-/** Trip-lifecycle progress, same gradient bar as the client app's Active Trip card on its Home screen. */
-const TRIP_PROGRESS: Partial<Record<OrderStatus, { pct: number; label: string }>> = {
-  Assigned: { pct: 0.2, label: "Driver Assigned" },
-  "In Progress": { pct: 0.65, label: "In Transit" },
-  Completed: { pct: 1, label: "Delivered" },
-};
+import { TRIP_PROGRESS } from "../lib/tripProgress";
+import type { Order } from "../lib/types";
 
 /** Same route dot-timeline + meta-chip grammar as the client app's ActivityScreen trip card. */
 export default function TripCard({ order }: { order: Order }) {

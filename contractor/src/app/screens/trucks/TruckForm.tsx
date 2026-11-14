@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import LocalShippingRounded from "../../components/icons/LocalShippingRounded";
 import ScreenHeader from "../../components/ScreenHeader";
 import { TextField, SelectField } from "../../components/FormField";
 import { Button } from "../../components/Button";
-import ActiveStatusBadge from "../../components/ActiveStatusBadge";
+import TruckCard from "../../components/TruckCard";
 import { useDataStore } from "../../lib/store";
 import { byId } from "../../lib/selectors";
 import { TRUCK_TYPE_OPTIONS, truckTypeLabel } from "../../lib/constants";
@@ -49,16 +48,8 @@ export default function TruckForm({ mode }: { mode: "create" | "edit" }) {
 
       <div className="w-full max-w-lg mx-auto px-4 pt-5 pb-8">
         {mode === "edit" && existing && (
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #040033, #0A0070)" }}>
-              <LocalShippingRounded sx={{ fontSize: 28, color: "white" }} />
-            </div>
-            <div className="min-w-0">
-              <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>{existing.plateNumber}</h2>
-              <div className="mt-2">
-                <ActiveStatusBadge active={existing.active} />
-              </div>
-            </div>
+          <div className="mb-6">
+            <TruckCard truck={existing} interactive={false} />
           </div>
         )}
 

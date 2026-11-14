@@ -13,7 +13,7 @@ import { TRIP_PROGRESS } from "../lib/tripProgress";
 import type { Order } from "../lib/types";
 
 /** Same route dot-timeline + meta-chip grammar as the client app's ActivityScreen trip card. */
-export default function TripCard({ order, compact = false }: { order: Order; compact?: boolean }) {
+export default function TripCard({ order }: { order: Order }) {
   const navigate = useNavigate();
   const { drivers, trucks } = useDataStore();
   const driver = byId(drivers, order.driverId);
@@ -35,38 +35,18 @@ export default function TripCard({ order, compact = false }: { order: Order; com
       className="w-full text-left rounded-[20px] overflow-hidden bg-white cursor-pointer active:scale-[0.99] transition-transform"
       style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}
     >
-      {/* Header */}
-      {compact ? (
-        <div className="px-5 pt-4 pb-3">
-          <div className="flex items-center justify-between gap-2">
-            <StatusBadge status={order.status} size="sm" />
-            <span className="flex-shrink-0" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>
-              {formatEGP(order.priceEGP)}
-            </span>
-          </div>
-          <span
-            className="inline-block mt-2 px-2.5 py-1 rounded-xl"
-            style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "11px", color: "#040033", backgroundColor: "#F0F0EE" }}
-          >
-            #{order.id}
-          </span>
-        </div>
-      ) : (
-        <div className="flex items-center justify-between gap-2 px-5 pt-4 pb-3">
-          <div className="flex items-center gap-2 min-w-0">
-            <span
-              className="px-2.5 py-1 rounded-xl truncate"
-              style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "11px", color: "#040033", backgroundColor: "#F0F0EE" }}
-            >
-              #{order.id}
-            </span>
-            <StatusBadge status={order.status} size="sm" />
-          </div>
-          <span className="flex-shrink-0" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>
-            {formatEGP(order.priceEGP)}
-          </span>
-        </div>
-      )}
+      {/* Header: id and price, one line */}
+      <div className="flex items-center justify-between gap-2 px-5 pt-4 pb-3">
+        <span
+          className="px-2.5 py-1 rounded-xl truncate min-w-0"
+          style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "11px", color: "#040033", backgroundColor: "#F0F0EE" }}
+        >
+          #{order.id}
+        </span>
+        <span className="flex-shrink-0" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>
+          {formatEGP(order.priceEGP)}
+        </span>
+      </div>
 
       {/* Route */}
       {pickup && dropoff && (
@@ -116,22 +96,29 @@ export default function TripCard({ order, compact = false }: { order: Order; com
         </div>
       )}
 
-      {/* Meta row */}
-      <div className="flex items-center gap-3 px-5 py-3 flex-wrap" style={{ borderTop: "1px solid #F0F0EE" }}>
-        <div className="flex items-center gap-1.5">
-          <CalendarTodayRounded sx={{ fontSize: 12, color: "#626A76" }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{formatDate(order.pickupAt)}</span>
+      {/* Meta: two fixed lines (when, then status and tags) so the card is the same height whatever the text */}
+      <div className="flex flex-col gap-2 px-5 py-3" style={{ borderTop: "1px solid #F0F0EE" }}>
+        <div className="flex items-center gap-3 whitespace-nowrap">
+          <div className="flex items-center gap-1.5">
+            <CalendarTodayRounded sx={{ fontSize: 12, color: "#626A76" }} />
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{formatDate(order.pickupAt)}</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <AccessTimeRounded sx={{ fontSize: 12, color: "#626A76" }} />
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{formatTime(order.pickupAt)}</span>
+          </div>
         </div>
-        <div className="flex items-center gap-1.5">
-          <AccessTimeRounded sx={{ fontSize: 12, color: "#626A76" }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{formatTime(order.pickupAt)}</span>
+        <div className="flex items-center gap-2 min-w-0 whitespace-nowrap">
+          <span className="flex-shrink-0">
+            <StatusBadge status={order.status} size="sm" />
+          </span>
+          <span className="px-2 py-0.5 rounded-lg flex-shrink-0" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
+            {order.tripType}
+          </span>
+          <span className="px-2 py-0.5 rounded-lg truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE" }}>
+            {truckTypeLabel(order)}
+          </span>
         </div>
-        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
-          {order.tripType}
-        </span>
-        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE" }}>
-          {truckTypeLabel(order)}
-        </span>
       </div>
 
       {/* Driver + truck */}

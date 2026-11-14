@@ -70,7 +70,7 @@ export default function HomeScreen() {
           </SectionLabel>
           <Carousel>
             {needsDispatch.map((o) => (
-              <TripCard key={o.id} order={o} compact />
+              <TripCard key={o.id} order={o} />
             ))}
           </Carousel>
         </div>
@@ -94,7 +94,7 @@ export default function HomeScreen() {
         ) : (
           <Carousel>
             {inProgress.map((o) => (
-              <TripCard key={o.id} order={o} compact />
+              <TripCard key={o.id} order={o} />
             ))}
           </Carousel>
         )}

@@ -8,7 +8,7 @@ export default function Carousel({ children }: { children: ReactNode[] }) {
       style={{ scrollSnapType: "x mandatory", scrollPaddingLeft: "16px", scrollPaddingRight: "16px", WebkitOverflowScrolling: "touch" }}
     >
       {children.map((child, i) => (
-        <div key={i} className="flex flex-shrink-0" style={{ width: children.length === 1 ? "100%" : "86%", scrollSnapAlign: "start" }}>
+        <div key={i} className="flex flex-shrink-0" style={{ width: children.length === 1 ? "100%" : "90%", scrollSnapAlign: "start" }}>
           {child}
         </div>
       ))}

@@ -5,13 +5,12 @@ import ChevronLeftRounded from "./icons/ChevronLeftRounded";
 import CloseRounded from "./icons/CloseRounded";
 import SearchField from "./SearchField";
 import { Button } from "./Button";
+import IconButton from "./IconButton";
 import { useDataStore } from "../lib/store";
 import { dispatchableTrucks, dispatchableDrivers } from "../lib/selectors";
 import { truckTypeLabel } from "../lib/constants";
 import { VEHICLE_TILE_IMAGES } from "../lib/truckImages";
 import type { Truck, Driver, Order } from "../lib/types";
-
-const AVATAR_COLORS = ["#1253FA", "#0A0070", "#16803C", "#B45309"];
 
 function VehicleTile({ truck, selected, onSelect }: { truck: Truck; selected: boolean; onSelect: () => void }) {
   return (
@@ -44,7 +43,6 @@ function VehicleTile({ truck, selected, onSelect }: { truck: Truck; selected: bo
 }
 
 function DriverRow({ driver, selected, onSelect }: { driver: Driver; selected: boolean; onSelect: () => void }) {
-  const color = AVATAR_COLORS[driver.name.charCodeAt(0) % AVATAR_COLORS.length];
   return (
     <button
       onClick={onSelect}
@@ -54,7 +52,7 @@ function DriverRow({ driver, selected, onSelect }: { driver: Driver; selected: b
         boxShadow: selected ? "0 2px 14px rgba(18,83,250,0.12)" : "0 2px 14px rgba(0,0,0,0.04)",
       }}
     >
-      <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: color }}>
+      <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #040033, #0A0070)" }}>
         <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "white" }}>{driver.name[0]}</span>
       </div>
       <div className="flex-1 min-w-0">
@@ -71,11 +69,7 @@ function DriverRow({ driver, selected, onSelect }: { driver: Driver; selected: b
   );
 }
 
-/**
- * Two-step dispatch flow for an unassigned order: pick a vehicle (big photo
- * tiles, side-scroll), then a driver - each step has its own search bar.
- * Same bottom-sheet chrome (grabber handle, rounded-t-28) as the rest of the app.
- */
+/** Two-step dispatch sheet for an unassigned order: pick a vehicle, then a driver. */
 export default function DispatchSheet({ order, onClose }: { order: Order; onClose: () => void }) {
   const { trucks, drivers, orders, assignOrder } = useDataStore();
   const [step, setStep] = useState<"vehicle" | "driver">("vehicle");
@@ -104,11 +98,7 @@ export default function DispatchSheet({ order, onClose }: { order: Order; onClos
     onClose();
   }
 
-  // Portaled straight to <body> - nested inside TripCard's own active:scale
-  // press-state, this sheet's `position: fixed` would re-anchor to that
-  // scaled ancestor (any transformed ancestor becomes the containing block
-  // for a fixed descendant) instead of the viewport, making it visibly
-  // drift/scale on every tap inside it.
+  // Portaled to <body>: inside TripCard's scaled press state, a fixed sheet would anchor to the card instead of the screen.
   return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-end justify-center"
@@ -131,14 +121,9 @@ export default function DispatchSheet({ order, onClose }: { order: Order; onClos
         <div className="flex items-center justify-between gap-2 px-5 pt-2 pb-4 flex-shrink-0">
           <div className="flex items-center gap-2 min-w-0">
             {step === "driver" && (
-              <button
-                onClick={() => setStep("vehicle")}
-                className="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer active:scale-90 transition-transform flex-shrink-0"
-                style={{ backgroundColor: "#F0F0EE" }}
-                aria-label="Back"
-              >
-                <ChevronLeftRounded sx={{ fontSize: 18, color: "#040033" }} />
-              </button>
+              <IconButton label="Back" onClick={() => setStep("vehicle")}>
+                <ChevronLeftRounded sx={{ fontSize: 20, color: "#040033" }} />
+              </IconButton>
             )}
             <div className="min-w-0">
               <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "#040033" }}>
@@ -149,14 +134,9 @@ export default function DispatchSheet({ order, onClose }: { order: Order; onClos
               </p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer active:scale-90 transition-transform flex-shrink-0"
-            style={{ backgroundColor: "#F0F0EE" }}
-            aria-label="Close"
-          >
-            <CloseRounded sx={{ fontSize: 15, color: "#040033" }} />
-          </button>
+          <IconButton label="Close" onClick={onClose}>
+            <CloseRounded sx={{ fontSize: 17, color: "#040033" }} />
+          </IconButton>
         </div>
 
         <div className="flex-1 overflow-y-auto min-h-0">

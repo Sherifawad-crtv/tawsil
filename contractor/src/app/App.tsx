@@ -8,6 +8,7 @@ import TabLayout from "./layout/TabLayout";
 import HomeScreen from "./screens/home/HomeScreen";
 import AvailableOrdersList from "./screens/home/AvailableOrdersList";
 import ActiveTripsList from "./screens/home/ActiveTripsList";
+import NeedsDispatchList from "./screens/home/NeedsDispatchList";
 import OrderDetails from "./screens/orders/OrderDetails";
 import TrucksList from "./screens/trucks/TrucksList";
 import TruckForm from "./screens/trucks/TruckForm";
@@ -37,6 +38,7 @@ export default function App() {
 
         <Route path="/home/available" element={<AvailableOrdersList />} />
         <Route path="/home/active" element={<ActiveTripsList />} />
+        <Route path="/home/dispatch" element={<NeedsDispatchList />} />
         <Route path="/orders/:orderId" element={<OrderDetails />} />
 
         <Route path="/trucks/new" element={<TruckForm mode="create" />} />

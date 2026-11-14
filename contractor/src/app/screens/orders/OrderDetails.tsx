@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import RefreshRounded from "../../components/icons/RefreshRounded";
 import AccessTimeRounded from "../../components/icons/AccessTimeRounded";
 import PinDropRounded from "../../components/icons/PinDropRounded";
+import PaymentsRounded from "../../components/icons/PaymentsRounded";
+import GroupsRounded from "../../components/icons/GroupsRounded";
 import TaskAltRounded from "../../components/icons/TaskAltRounded";
 import PersonRounded from "../../components/icons/PersonRounded";
 import LocalShippingRounded from "../../components/icons/LocalShippingRounded";
@@ -11,6 +12,7 @@ import CheckCircleRounded from "../../components/icons/CheckCircleRounded";
 import RadioButtonUncheckedRounded from "../../components/icons/RadioButtonUncheckedRounded";
 import HourglassEmptyRounded from "../../components/icons/HourglassEmptyRounded";
 import ScreenHeader from "../../components/ScreenHeader";
+import { Button } from "../../components/Button";
 import MapSnippet from "../../components/MapSnippet";
 import DispatchSheet from "../../components/DispatchSheet";
 import { STATUS_STYLE } from "../../components/StatusBadge";
@@ -45,11 +47,10 @@ export default function OrderDetails() {
 
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
-      <ScreenHeader title="Order Details" onBack={() => navigate(-1)} />
+      <ScreenHeader title="Order Details" subtitle={`#${order.id}`} onBack={() => navigate(-1)} />
 
       <MapSnippet />
 
-      {/* Visually a bottom sheet (rounded top, grabber handle, overlaps the map) - scrolls with the page rather than a physically-draggable sheet. */}
       <div className="relative -mt-5 rounded-t-[28px] pt-2" style={{ backgroundColor: "#F5F5F3" }}>
         <div className="flex justify-center py-2">
           <div className="w-10 h-1.5 rounded-full" style={{ backgroundColor: "#D8D9D4" }} />
@@ -59,39 +60,26 @@ export default function OrderDetails() {
           className="w-full max-w-lg mx-auto px-4 flex flex-col gap-4"
           style={{ paddingBottom: unassigned ? "calc(env(safe-area-inset-bottom, 16px) + 88px)" : "40px" }}
         >
-          {/* 1. Status + fare - the two facts that matter most at a glance, together up top. */}
           <div className="rounded-[20px] p-4" style={{ backgroundColor: hero.bg }}>
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5 min-w-0">
                 <hero.icon sx={{ fontSize: 20, color: hero.fg, flexShrink: 0 }} />
                 <div className="min-w-0">
-                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "13px", color: hero.fg }}>{order.status}</p>
-                  <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: hero.fg, opacity: 0.85 }}>
-                    #{order.id}
-                  </p>
+                  <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: hero.fg }}>{order.status}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2.5 flex-shrink-0">
                 <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: hero.fg }}>
                   {formatEGP(order.priceEGP)}
                 </span>
-                <button
-                  aria-label="Reorder"
-                  className="w-9 h-9 rounded-full flex items-center justify-center cursor-pointer active:scale-90 transition-transform flex-shrink-0"
-                  style={{ backgroundColor: "rgba(255,255,255,0.6)" }}
-                >
-                  <RefreshRounded sx={{ fontSize: 17, color: hero.fg }} />
-                </button>
               </div>
             </div>
           </div>
 
-          {/* 2. Status stepper - secondary to the hero above, compact progress reference. */}
           <div className="rounded-[20px] bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
             <StatusStepper status={order.status} />
           </div>
 
-          {/* 3. Driver & Vehicle - the single most important fact once a trip is in motion, promoted right under status. One card, no title chrome. */}
           <div className="rounded-[20px] bg-white overflow-hidden" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
             {driver ? (
               <div className="p-4">
@@ -123,8 +111,7 @@ export default function OrderDetails() {
             )}
           </div>
 
-          {/* 4. Trip - schedule anchor first, then the route as a single scannable list (no separate map-duplicating section). */}
-          <Section title="Trip">
+          <Section title="Trip" icon={<PinDropRounded sx={{ fontSize: 15, color: "#1253FA" }} />}>
             <InfoRow icon={<AccessTimeRounded sx={{ fontSize: 15, color: "#626A76" }} />} label="Pickup Time" value={formatDateTime(order.pickupAt)} />
             <InfoRow icon={<TaskAltRounded sx={{ fontSize: 15, color: "#626A76" }} />} label="POD Required" value={order.podRequired ? "Yes" : "No"} />
             {order.waypoints.length > 0 && (
@@ -147,8 +134,7 @@ export default function OrderDetails() {
             )}
           </Section>
 
-          {/* 5. Fare Breakdown - plain label/value receipt rows, ending in the same total shown in the hero above. */}
-          <Section title="Fare Breakdown">
+          <Section title="Fare" icon={<PaymentsRounded sx={{ fontSize: 15, color: "#1253FA" }} />}>
             <InfoRow label="Trip Type" value={order.tripType} />
             <InfoRow label="Truck Type" value={truckTypeLabel(order)} />
             {order.truckTempC !== undefined && <InfoRow label="Truck Temperature" value={`${order.truckTempC}°C`} />}
@@ -161,23 +147,20 @@ export default function OrderDetails() {
             </div>
           </Section>
 
-          {/* 6. Contacts - secondary to Driver & Vehicle, tucked below the fare. */}
-          <Section title="Contacts">
+          <Section title="Contacts" icon={<GroupsRounded sx={{ fontSize: 15, color: "#1253FA" }} />}>
             <div className="flex flex-col gap-2.5">
               <PersonCard title="Client" name={order.clientName} subtitle={order.clientPhone} avatarColor="#16803C" />
               <PersonCard title="Contractor" name={profile.fullName} subtitle={profile.phone} avatarColor="#040033" />
             </div>
           </Section>
 
-          {/* 7. Trip files & images - read-only for Contractor: view-only status, no upload affordance (the Driver app owns submitting these). Collapsed - administrative detail, not glanceable info. */}
-          <CollapsibleSection icon={<PhotoCameraRounded sx={{ fontSize: 16, color: "#1253FA" }} />} title="Trip Files & Images">
+          <CollapsibleSection icon={<PhotoCameraRounded sx={{ fontSize: 15, color: "#1253FA" }} />} title="Trip Files & Images">
             <FileRow label="Truck's odometer before start" available={!!order.files.odometerBeforeUrl} />
             <FileRow label="Truck's odometer at end" available={!!order.files.odometerAfterUrl} />
             <FileRow label="Additional images" available={order.files.additionalImages.length > 0} />
           </CollapsibleSection>
 
-          {/* 8. Timeline - collapsed by default, same as Files: a log you check, not something to scan by default. */}
-          <CollapsibleSection icon={<HourglassEmptyRounded sx={{ fontSize: 16, color: "#1253FA" }} />} title="Timeline">
+          <CollapsibleSection icon={<HourglassEmptyRounded sx={{ fontSize: 15, color: "#1253FA" }} />} title="Timeline">
             <div className="flex flex-col">
               {order.statusHistory.map((h, i) => (
                 <div key={h.id} className="flex gap-3">
@@ -197,7 +180,6 @@ export default function OrderDetails() {
         </div>
       </div>
 
-      {/* Sticky dispatch bar - only for an unassigned order, always pinned to the bottom of this screen. */}
       {unassigned && (
         <div
           className="fixed left-0 right-0 bottom-0 z-40"
@@ -209,16 +191,7 @@ export default function OrderDetails() {
           }}
         >
           <div className="w-full max-w-lg mx-auto">
-            <button
-              onClick={() => setDispatchOpen(true)}
-              className="w-full py-3 rounded-2xl flex items-center justify-center gap-2 cursor-pointer active:scale-[0.97] transition-transform"
-              style={{ backgroundColor: "#040033", border: "none" }}
-            >
-              <LocalShippingRounded sx={{ fontSize: 14, color: "white" }} />
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "white" }}>
-                Dispatch Now
-              </span>
-            </button>
+            <Button onClick={() => setDispatchOpen(true)}>Dispatch Now</Button>
           </div>
         </div>
       )}
@@ -228,10 +201,15 @@ export default function OrderDetails() {
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ title, icon, children }: { title: string; icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="rounded-[20px] bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
-      <h3 className="mb-1" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "14px", color: "#040033" }}>{title}</h3>
+    <div className="rounded-3xl bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(4,0,51,0.05)" }}>
+      <div className="flex items-center gap-2 mb-2">
+        <div className="w-7 h-7 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(18,83,250,0.08)" }}>
+          {icon}
+        </div>
+        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#040033", letterSpacing: "0.02em" }}>{title}</span>
+      </div>
       {children}
     </div>
   );

@@ -1,11 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import PersonRounded from "../../components/icons/PersonRounded";
-import BadgeRounded from "../../components/icons/BadgeRounded";
-import PersonAddRounded from "../../components/icons/PersonAddRounded";
-import InfoRounded from "../../components/icons/InfoRounded";
 import ScreenHeader from "../../components/ScreenHeader";
-import SectionHeading from "../../components/SectionHeading";
 import { TextField } from "../../components/FormField";
 import { Button } from "../../components/Button";
 import ActiveStatusBadge from "../../components/ActiveStatusBadge";
@@ -55,65 +50,36 @@ export default function DriverForm({ mode }: { mode: "create" | "edit" }) {
 
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
-      <ScreenHeader
-        title={mode === "edit" ? "Edit Driver" : "Add New Driver"}
-        onBack={() => navigate("/drivers")}
-        trailing={mode === "edit" && existing ? <ActiveStatusBadge active={existing.active} /> : undefined}
-      />
+      <ScreenHeader title={mode === "edit" ? "Edit Driver" : "Add Driver"} onBack={() => navigate("/drivers")} />
 
-      <div className="w-full max-w-lg mx-auto px-4 pb-8 flex flex-col gap-6">
-        {mode === "edit" && existing ? (
-          <div className="flex flex-col items-center gap-2 py-2">
-            <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: "#0A0070" }}>
-              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "white" }}>{existing.name[0]}</span>
+      <div className="w-full max-w-lg mx-auto px-4 pt-5 pb-8">
+        {mode === "edit" && existing && (
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #040033, #0A0070)" }}>
+              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", color: "white" }}>{existing.name[0]}</span>
             </div>
-            <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>{existing.name}</p>
-          </div>
-        ) : (
-          <div className="rounded-[22px] p-5 flex flex-col items-center text-center gap-2" style={{ backgroundColor: "white", boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
-              <PersonAddRounded sx={{ fontSize: 26, color: "#1253FA" }} />
+            <div className="min-w-0">
+              <h2 className="truncate" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>{existing.name}</h2>
+              <div className="mt-2">
+                <ActiveStatusBadge active={existing.active} />
+              </div>
             </div>
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "16px", color: "#040033" }}>Create New Driver Profile</p>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>
-              Fill in the details below to add a new driver
-            </p>
           </div>
         )}
 
-        <div>
-          {/* Standardized on the icon-in-box heading style used everywhere else (Add Driver, Edit/Add Truck) -
-              Edit Driver previously used a different colored-bar treatment for this same concept. */}
-          <SectionHeading icon={<PersonRounded sx={{ fontSize: 16, color: "#1253FA" }} />}>Personal Information</SectionHeading>
-          <div className="flex flex-col gap-3">
-            <TextField label="Driver Name" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" />
-            <TextField label="Email" required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com" />
-            <TextField label="Phone Number" required type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+20 1xx xxx xxxx" />
-          </div>
+        <div className="flex flex-col gap-4 mb-8">
+          <TextField label="Driver Name" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" />
+          <TextField label="Email" required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@example.com" />
+          <TextField label="Phone Number" required type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+20 1xx xxx xxxx" />
+          <TextField label="License Number" required value={licenseNumber} onChange={(e) => setLicenseNumber(e.target.value)} placeholder="e.g. DL-12345" />
+          <TextField label="License Expiry Date" required type="date" value={licenseExpiry} onChange={(e) => setLicenseExpiry(e.target.value)} />
         </div>
 
-        <div>
-          <SectionHeading icon={<BadgeRounded sx={{ fontSize: 16, color: "#1253FA" }} />}>License Information</SectionHeading>
-          <div className="flex flex-col gap-3">
-            <TextField label="License Number" required value={licenseNumber} onChange={(e) => setLicenseNumber(e.target.value)} />
-            <TextField label="License Expiry Date" required type="date" value={licenseExpiry} onChange={(e) => setLicenseExpiry(e.target.value)} />
-          </div>
-        </div>
-
-        {mode === "create" && (
-          <div className="flex items-start gap-2 rounded-2xl p-3" style={{ backgroundColor: "#EAF0FE" }}>
-            <InfoRounded sx={{ fontSize: 17, color: "#1253FA", flexShrink: 0, marginTop: "1px" }} />
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "12.5px", color: "#1253FA", lineHeight: 1.5 }}>
-              Make sure all information is accurate before creating the driver profile
-            </p>
-          </div>
-        )}
-
-        <div className="flex flex-col gap-2.5 mt-2">
-          <Button onClick={handleSubmit} disabled={!canSubmit}>
-            {mode === "edit" ? "Save Changes" : "Create Driver"}
-          </Button>
-          <Button variant="outline" onClick={() => navigate("/drivers")}>
+        <Button onClick={handleSubmit} disabled={!canSubmit}>
+          {mode === "edit" ? "Save Changes" : "Create Driver"}
+        </Button>
+        <div className="mt-1">
+          <Button variant="ghost" onClick={() => navigate("/drivers")}>
             Cancel
           </Button>
         </div>

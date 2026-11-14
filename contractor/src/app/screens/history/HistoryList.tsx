@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
-import InventoryRounded from "../../components/icons/InventoryRounded";
+import InboxRounded from "../../components/icons/InboxRounded";
+import PageTitle from "../../components/PageTitle";
+import SegmentedControl from "../../components/SegmentedControl";
 import TripCard from "../../components/TripCard";
 import EmptyState from "../../components/EmptyState";
 import { useDataStore } from "../../lib/store";
@@ -15,52 +17,25 @@ export default function HistoryList() {
   const shown = tab === "Completed" ? completed : cancelled;
 
   return (
-    <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 12px), 12px)", paddingBottom: "8px" }}>
-      <h1 className="mb-4" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033" }}>
-        History Orders
-      </h1>
+    <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 20px), 20px)" }}>
+      <PageTitle title="History" subtitle="Completed and cancelled orders" />
 
-      {/* Pill-segmented tabs with count badges - same grammar as the client app's Activity tabs. */}
-      <div className="flex rounded-2xl p-1 mb-6" style={{ backgroundColor: "#E8E8E5" }}>
-        {(["Completed", "Cancelled"] as const).map((t) => {
-          const active = tab === t;
-          const count = t === "Completed" ? completed.length : cancelled.length;
-          return (
-            <button
-              key={t}
-              onClick={() => setTab(t)}
-              className="flex-1 py-2.5 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-all"
-              style={{
-                backgroundColor: active ? "white" : "transparent",
-                boxShadow: active ? "0 2px 8px rgba(0,0,0,0.06)" : "none",
-                border: "none",
-              }}
-            >
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: active ? 700 : 500, fontSize: "13px", color: active ? "#040033" : "#6B7280", transition: "color 0.3s" }}>
-                {t}
-              </span>
-              <span
-                className="w-5 h-5 rounded-md flex items-center justify-center"
-                style={{
-                  fontFamily: "'Archivo', sans-serif",
-                  fontWeight: 700,
-                  fontSize: "10px",
-                  color: active ? "#1253FA" : "#626A76",
-                  backgroundColor: active ? "rgba(18,83,250,0.08)" : "rgba(107,114,128,0.06)",
-                  transition: "all 0.3s",
-                }}
-              >
-                {count}
-              </span>
-            </button>
-          );
-        })}
+      <div className="mb-5">
+        <SegmentedControl
+          ariaLabel="Order history"
+          value={tab}
+          onChange={setTab}
+          options={[
+            { value: "Completed", label: "Completed", count: completed.length },
+            { value: "Cancelled", label: "Cancelled", count: cancelled.length },
+          ]}
+        />
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         {shown.length === 0 ? (
           <EmptyState
-            icon={<InventoryRounded sx={{ fontSize: 24, color: "#626A76" }} />}
+            icon={<InboxRounded sx={{ fontSize: 28, color: "#D8D9D4" }} />}
             title={`No ${tab.toLowerCase()} orders`}
             subtitle="Orders will show up here once they're finished."
           />

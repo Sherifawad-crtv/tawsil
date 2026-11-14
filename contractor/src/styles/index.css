@@ -77,3 +77,8 @@ body {
   border-color: #DC2626 !important;
   box-shadow: 0 0 0 2px #DC2626, 0 0 0 5px rgba(220, 38, 38, 0.14) !important;
 }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

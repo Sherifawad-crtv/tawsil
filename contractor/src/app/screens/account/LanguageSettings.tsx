@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import TranslateRounded from "../../components/icons/TranslateRounded";
 import ScreenHeader from "../../components/ScreenHeader";
 import { Button } from "../../components/Button";
 import { useDataStore } from "../../lib/store";
@@ -18,22 +17,9 @@ export default function LanguageSettings() {
 
   return (
     <div className="min-h-screen w-full flex flex-col" style={{ backgroundColor: "#F5F5F3" }}>
-      <ScreenHeader title="" onBack={() => navigate("/account")} />
+      <ScreenHeader title="Language" onBack={() => navigate("/account")} />
 
-      <div className="w-full max-w-lg mx-auto px-6 pb-8 flex-1 flex flex-col">
-        <div className="flex flex-col items-center text-center gap-3 mb-8">
-          <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
-            <TranslateRounded sx={{ fontSize: 26, color: "#1253FA" }} />
-          </div>
-          <div>
-            <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>Select Language</h1>
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "16px", color: "#040033", marginTop: "2px" }} dir="rtl">
-              اختر اللغة
-            </p>
-          </div>
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>Choose your language to continue</p>
-        </div>
-
+      <div className="w-full max-w-lg mx-auto px-4 pt-5 pb-8 flex-1 flex flex-col">
         <div className="flex flex-col gap-3">
           {OPTIONS.map((opt) => {
             const active = selected === opt.value;
@@ -41,18 +27,17 @@ export default function LanguageSettings() {
               <button
                 key={opt.value}
                 onClick={() => setSelected(opt.value)}
-                className="w-full flex items-center gap-3 rounded-[20px] bg-white p-4 cursor-pointer active:scale-[0.99] transition-transform"
+                className="w-full flex items-center gap-3.5 rounded-[22px] bg-white p-4 cursor-pointer active:scale-[0.99] transition-transform"
                 style={{
                   border: active ? "2px solid #1253FA" : "2px solid transparent",
-                  boxShadow: active ? "0 2px 14px rgba(18,83,250,0.12)" : "0 2px 14px rgba(0,0,0,0.04)",
+                  boxShadow: active ? "0 2px 14px rgba(18,83,250,0.12)" : "0 2px 16px rgba(0,0,0,0.04)",
                 }}
               >
                 <span style={{ fontSize: "26px" }}>{opt.flag}</span>
                 <div className="flex-1 text-left" dir={opt.dir}>
-                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "15px", color: "#040033" }}>{opt.title}</p>
-                  <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "12px", color: "#626A76" }}>{opt.subtitle}</p>
+                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>{opt.title}</p>
+                  <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "1px" }}>{opt.subtitle}</p>
                 </div>
-                {/* Radio stays on the same side for every row - only the text above reflects each language's own script direction. */}
                 <div
                   className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
                   style={{ border: active ? "none" : "2px solid #D8D9D4", backgroundColor: active ? "#1253FA" : "transparent" }}
@@ -66,22 +51,15 @@ export default function LanguageSettings() {
 
         <div className="flex-1" />
 
-        <div className="flex flex-col items-center gap-3 mt-8">
+        <div className="mt-8">
           <Button
             onClick={() => {
               setLanguage(selected);
               navigate("/account");
             }}
           >
-            Continue
+            Save
           </Button>
-          <button
-            onClick={() => navigate("/account")}
-            className="cursor-pointer"
-            style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#626A76" }}
-          >
-            Skip for now
-          </button>
         </div>
       </div>
     </div>

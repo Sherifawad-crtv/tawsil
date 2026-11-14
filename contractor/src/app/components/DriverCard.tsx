@@ -4,23 +4,25 @@ import BadgeRounded from "./icons/BadgeRounded";
 import EventRounded from "./icons/EventRounded";
 import ChevronRightRounded from "./icons/ChevronRightRounded";
 import PersonOffRounded from "./icons/PersonOffRounded";
-import { formatDate, formatDateTime } from "../lib/format";
+import { formatDate, formatDateTime, isExpired } from "../lib/format";
+import ExpiredPill from "./ExpiredPill";
 import type { Driver } from "../lib/types";
-
-const AVATAR_COLORS = ["#1253FA", "#0A0070", "#16803C", "#B45309"];
 
 export default function DriverCard({ driver }: { driver: Driver }) {
   const navigate = useNavigate();
-  const color = AVATAR_COLORS[driver.name.charCodeAt(0) % AVATAR_COLORS.length];
+  const expired = isExpired(driver.licenseExpiry);
 
   return (
     <button
       onClick={() => navigate(`/drivers/${driver.id}`)}
       className="w-full text-left rounded-[20px] bg-white p-4 flex flex-col gap-2.5 cursor-pointer active:scale-[0.99] transition-transform"
-      style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}
+      style={{
+        border: expired ? "1.5px solid #DC2626" : "1.5px solid transparent",
+        boxShadow: expired ? "none" : "0 2px 14px rgba(0,0,0,0.04)",
+      }}
     >
       <div className="flex items-center gap-3">
-        <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: color }}>
+        <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #040033, #0A0070)" }}>
           <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "white" }}>{driver.name[0]}</span>
         </div>
         <div className="flex-1 min-w-0">
@@ -41,6 +43,7 @@ export default function DriverCard({ driver }: { driver: Driver }) {
         <div className="flex items-center gap-1.5">
           <EventRounded sx={{ fontSize: 14, color: "#626A76" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11.5px", color: "#6B7280" }}>Expires: {formatDate(driver.licenseExpiry)}</span>
+          {expired && <ExpiredPill />}
         </div>
       </div>
 

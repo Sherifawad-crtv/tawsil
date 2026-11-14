@@ -1,4 +1,5 @@
 import type { InputHTMLAttributes, SelectHTMLAttributes } from "react";
+import ExpandMoreRounded from "./icons/ExpandMoreRounded";
 
 const LABEL_STYLE = {
   fontFamily: "'Courier Prime', monospace",
@@ -9,7 +10,6 @@ const LABEL_STYLE = {
 };
 const FIELD_STYLE = { fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" };
 
-/** Same white-card/soft-shadow input as the client app's AuthTextField, with an error state shown as a red ring. */
 export function TextField({
   label,
   required,
@@ -53,6 +53,7 @@ export function SelectField({
         <select {...props} className="flex-1 border-none outline-none bg-transparent w-full appearance-none" style={FIELD_STYLE}>
           {children}
         </select>
+        <ExpandMoreRounded sx={{ fontSize: 20, color: "#626A76", flexShrink: 0, pointerEvents: "none" }} />
       </div>
       {error && <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#DC2626" }}>{error}</span>}
     </label>

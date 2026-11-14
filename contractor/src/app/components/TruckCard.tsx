@@ -4,6 +4,7 @@ import EventRounded from "./icons/EventRounded";
 import ChevronRightRounded from "./icons/ChevronRightRounded";
 import { truckTypeLabel } from "../lib/constants";
 import { formatDate, isExpired } from "../lib/format";
+import ExpiredPill from "./ExpiredPill";
 import type { Truck } from "../lib/types";
 
 export default function TruckCard({ truck }: { truck: Truck }) {
@@ -36,12 +37,7 @@ export default function TruckCard({ truck }: { truck: Truck }) {
           Expires: {formatDate(truck.licenseExpiry)}
         </span>
         {expired && (
-          <span
-            className="rounded-full px-2 py-0.5"
-            style={{ backgroundColor: "#FDECEC", color: "#DC2626", fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "10px" }}
-          >
-            EXPIRED
-          </span>
+          <ExpiredPill />
         )}
       </div>
     </button>

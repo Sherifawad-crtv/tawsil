@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import LocalShippingRounded from "../../components/icons/LocalShippingRounded";
-import DescriptionRounded from "../../components/icons/DescriptionRounded";
-import EventRounded from "../../components/icons/EventRounded";
-import AddCircleRounded from "../../components/icons/AddCircleRounded";
 import ScreenHeader from "../../components/ScreenHeader";
-import SectionHeading from "../../components/SectionHeading";
 import { TextField, SelectField } from "../../components/FormField";
 import { Button } from "../../components/Button";
-import StatusBadge from "../../components/ActiveStatusBadge";
+import ActiveStatusBadge from "../../components/ActiveStatusBadge";
 import { useDataStore } from "../../lib/store";
 import { byId } from "../../lib/selectors";
 import { TRUCK_TYPE_OPTIONS, truckTypeLabel } from "../../lib/constants";
@@ -49,59 +45,43 @@ export default function TruckForm({ mode }: { mode: "create" | "edit" }) {
 
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
-      <ScreenHeader
-        title={mode === "edit" ? "Edit Truck" : "Add New Truck"}
-        onBack={() => navigate("/trucks")}
-        trailing={mode === "edit" && existing ? <StatusBadge active={existing.active} /> : undefined}
-      />
+      <ScreenHeader title={mode === "edit" ? "Edit Truck" : "Add Truck"} onBack={() => navigate("/trucks")} />
 
-      <div className="w-full max-w-lg mx-auto px-4 pb-8 flex flex-col gap-6">
-        {mode === "edit" && existing ? (
-          <div className="flex flex-col items-center gap-2 py-2">
-            <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
-              <LocalShippingRounded sx={{ fontSize: 34, color: "#1253FA" }} />
+      <div className="w-full max-w-lg mx-auto px-4 pt-5 pb-8">
+        {mode === "edit" && existing && (
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #040033, #0A0070)" }}>
+              <LocalShippingRounded sx={{ fontSize: 28, color: "white" }} />
             </div>
-            <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>{existing.plateNumber}</p>
-          </div>
-        ) : (
-          <div className="rounded-[22px] p-5 flex flex-col items-center text-center gap-2" style={{ backgroundColor: "white", boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
-              <AddCircleRounded sx={{ fontSize: 26, color: "#1253FA" }} />
+            <div className="min-w-0">
+              <h2 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "20px", color: "#040033" }}>{existing.plateNumber}</h2>
+              <div className="mt-2">
+                <ActiveStatusBadge active={existing.active} />
+              </div>
             </div>
-            <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "16px", color: "#040033" }}>Register New Truck</p>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76" }}>
-              Add a new truck to your fleet management system
-            </p>
           </div>
         )}
 
-        <div>
-          <SectionHeading icon={<DescriptionRounded sx={{ fontSize: 16, color: "#1253FA" }} />}>Truck Information</SectionHeading>
-          <div className="flex flex-col gap-3">
-            <TextField label="Plate Number" required value={plateNumber} onChange={(e) => setPlateNumber(e.target.value)} placeholder="e.g. ABC-1234" />
-            <SelectField label="Truck Type" required value={typeKey} onChange={(e) => setTypeKey(e.target.value)}>
-              <option value="" disabled>
-                Select truck type
+        <div className="flex flex-col gap-4 mb-8">
+          <TextField label="Plate Number" required value={plateNumber} onChange={(e) => setPlateNumber(e.target.value)} placeholder="e.g. ABC-1234" />
+          <SelectField label="Truck Type" required value={typeKey} onChange={(e) => setTypeKey(e.target.value)}>
+            <option value="" disabled>
+              Select truck type
+            </option>
+            {TRUCK_TYPE_OPTIONS.map((t) => (
+              <option key={`${t.baseClass}|${t.config}`} value={`${t.baseClass}|${t.config}`}>
+                {truckTypeLabel(t)}
               </option>
-              {TRUCK_TYPE_OPTIONS.map((t) => (
-                <option key={`${t.baseClass}|${t.config}`} value={`${t.baseClass}|${t.config}`}>
-                  {truckTypeLabel(t)}
-                </option>
-              ))}
-            </SelectField>
-          </div>
-        </div>
-
-        <div>
-          <SectionHeading icon={<EventRounded sx={{ fontSize: 16, color: "#1253FA" }} />}>License Information</SectionHeading>
+            ))}
+          </SelectField>
           <TextField label="License Expiry Date" required type="date" value={licenseExpiry} onChange={(e) => setLicenseExpiry(e.target.value)} />
         </div>
 
-        <div className="flex flex-col gap-2.5 mt-2">
-          <Button onClick={handleSubmit} disabled={!canSubmit}>
-            {mode === "edit" ? "Save Changes" : "Create Truck"}
-          </Button>
-          <Button variant="outline" onClick={() => navigate("/trucks")}>
+        <Button onClick={handleSubmit} disabled={!canSubmit}>
+          {mode === "edit" ? "Save Changes" : "Create Truck"}
+        </Button>
+        <div className="mt-1">
+          <Button variant="ghost" onClick={() => navigate("/trucks")}>
             Cancel
           </Button>
         </div>

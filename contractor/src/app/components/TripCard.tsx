@@ -13,7 +13,7 @@ import { TRIP_PROGRESS } from "../lib/tripProgress";
 import type { Order } from "../lib/types";
 
 /** Same route dot-timeline + meta-chip grammar as the client app's ActivityScreen trip card. */
-export default function TripCard({ order }: { order: Order }) {
+export default function TripCard({ order, compact = false }: { order: Order; compact?: boolean }) {
   const navigate = useNavigate();
   const { drivers, trucks } = useDataStore();
   const driver = byId(drivers, order.driverId);
@@ -36,20 +36,37 @@ export default function TripCard({ order }: { order: Order }) {
       style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between gap-2 px-5 pt-4 pb-3">
-        <div className="flex items-center gap-2 min-w-0">
+      {compact ? (
+        <div className="px-5 pt-4 pb-3">
+          <div className="flex items-center justify-between gap-2">
+            <StatusBadge status={order.status} size="sm" />
+            <span className="flex-shrink-0" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>
+              {formatEGP(order.priceEGP)}
+            </span>
+          </div>
           <span
-            className="px-2.5 py-1 rounded-xl truncate"
+            className="inline-block mt-2 px-2.5 py-1 rounded-xl"
             style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "11px", color: "#040033", backgroundColor: "#F0F0EE" }}
           >
             #{order.id}
           </span>
-          <StatusBadge status={order.status} size="sm" />
         </div>
-        <span className="flex-shrink-0" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>
-          {formatEGP(order.priceEGP)}
-        </span>
-      </div>
+      ) : (
+        <div className="flex items-center justify-between gap-2 px-5 pt-4 pb-3">
+          <div className="flex items-center gap-2 min-w-0">
+            <span
+              className="px-2.5 py-1 rounded-xl truncate"
+              style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "11px", color: "#040033", backgroundColor: "#F0F0EE" }}
+            >
+              #{order.id}
+            </span>
+            <StatusBadge status={order.status} size="sm" />
+          </div>
+          <span className="flex-shrink-0" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>
+            {formatEGP(order.priceEGP)}
+          </span>
+        </div>
+      )}
 
       {/* Route */}
       {pickup && dropoff && (

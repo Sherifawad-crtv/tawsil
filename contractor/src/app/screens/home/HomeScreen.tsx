@@ -10,6 +10,7 @@ import PageTitle from "../../components/PageTitle";
 import SectionLabel from "../../components/SectionLabel";
 import SegmentedControl from "../../components/SegmentedControl";
 import TripCard from "../../components/TripCard";
+import Carousel from "../../components/Carousel";
 import EmptyState from "../../components/EmptyState";
 import { useDataStore } from "../../lib/store";
 import { activeDrivers, activeTrucks, getAvailableOrders, getInProgressOrders, getUnassignedOrders } from "../../lib/selectors";
@@ -63,15 +64,15 @@ export default function HomeScreen() {
           <SectionLabel
             dot
             color="#B45309"
-            action={needsDispatch.length > PREVIEW_COUNT ? { label: "View All", onClick: () => navigate("/home/dispatch") } : undefined}
+            action={needsDispatch.length > 1 ? { label: "View All", onClick: () => navigate("/home/dispatch") } : undefined}
           >
             Needs Dispatch · {needsDispatch.length}
           </SectionLabel>
-          <div className="flex flex-col gap-3">
-            {needsDispatch.slice(0, PREVIEW_COUNT).map((o) => (
-              <TripCard key={o.id} order={o} />
+          <Carousel>
+            {needsDispatch.map((o) => (
+              <TripCard key={o.id} order={o} compact />
             ))}
-          </div>
+          </Carousel>
         </div>
       )}
 
@@ -80,7 +81,7 @@ export default function HomeScreen() {
           dot
           pulse
           color="#1253FA"
-          action={inProgress.length > PREVIEW_COUNT ? { label: "View All", onClick: () => navigate("/home/active") } : undefined}
+          action={inProgress.length > 1 ? { label: "View All", onClick: () => navigate("/home/active") } : undefined}
         >
           Active Trips · {inProgress.length}
         </SectionLabel>
@@ -91,11 +92,11 @@ export default function HomeScreen() {
             subtitle="Dispatched orders will appear here once they're on their way."
           />
         ) : (
-          <div className="flex flex-col gap-3">
-            {inProgress.slice(0, PREVIEW_COUNT).map((o) => (
-              <TripCard key={o.id} order={o} />
+          <Carousel>
+            {inProgress.map((o) => (
+              <TripCard key={o.id} order={o} compact />
             ))}
-          </div>
+          </Carousel>
         )}
       </div>
 

@@ -55,8 +55,14 @@ export default function TruckCard({ truck, interactive = true }: { truck: Truck;
         <StatusPill status={fleetStatus(truck.active, trip)} />
       </div>
 
-      <div className="mx-4 mt-3 rounded-2xl flex items-center justify-center" style={{ backgroundColor: "#F5F5F3", height: "128px" }}>
-        <img src={VEHICLE_TILE_IMAGES[truck.baseClass]} alt="" draggable={false} className="max-w-[88%] max-h-[100px] object-contain" />
+      <div className="mx-5 mt-2 flex items-center justify-center" style={{ height: "112px" }}>
+        <img
+          src={VEHICLE_TILE_IMAGES[truck.baseClass]}
+          alt=""
+          draggable={false}
+          className="max-w-full max-h-full object-contain"
+          style={{ filter: "drop-shadow(0 6px 7px rgba(4,0,51,0.16))" }}
+        />
       </div>
 
       <PersonRow

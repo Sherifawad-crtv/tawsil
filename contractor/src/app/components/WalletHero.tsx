@@ -64,7 +64,6 @@ export default function WalletHero({
       style={{
         background: "linear-gradient(160deg, #040033 0%, #0A0070 62%, #1239B8 100%)",
         borderRadius: "0 0 32px 32px",
-        boxShadow: "0 12px 36px rgba(4,0,51,0.22)",
       }}
     >
       <div aria-hidden className="absolute rounded-full" style={{ width: 260, height: 260, right: -90, top: -110, border: "1px solid rgba(255,255,255,0.09)" }} />

@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import SettingsRounded from "../../components/icons/SettingsRounded";
+import LocalShippingRounded from "../../components/icons/LocalShippingRounded";
+import AddRounded from "../../components/icons/AddRounded";
+import PersonAddRounded from "../../components/icons/PersonAddRounded";
 import InboxRounded from "../../components/icons/InboxRounded";
-import IconButton from "../../components/IconButton";
-import PageTitle from "../../components/PageTitle";
 import SectionLabel from "../../components/SectionLabel";
 import SegmentedControl from "../../components/SegmentedControl";
 import TripCard from "../../components/TripCard";
 import Carousel from "../../components/Carousel";
-import WalletCard from "../../components/WalletCard";
+import WalletHero from "../../components/WalletHero";
 import EmptyState from "../../components/EmptyState";
 import { useDataStore } from "../../lib/store";
 import { activeDrivers, activeTrucks, getAvailableOrders, getInProgressOrders, getUnassignedOrders, revenueSummary } from "../../lib/selectors";
@@ -41,21 +41,20 @@ export default function HomeScreen() {
   const firstName = profile.fullName.split(" ")[0];
 
   return (
-    <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 20px), 20px)", paddingBottom: "24px" }}>
-      <PageTitle
+    <div>
+      <WalletHero
         title={greeting}
         subtitle={`Welcome back, ${firstName}`}
-        trailing={
-          <IconButton label="Account" onClick={() => navigate("/account")}>
-            <SettingsRounded sx={{ fontSize: 19, color: "#040033" }} />
-          </IconButton>
-        }
+        summary={revenue}
+        onSettings={() => navigate("/account")}
+        actions={[
+          { label: "Dispatch", icon: LocalShippingRounded, badge: needsDispatch.length, onClick: () => navigate("/home/dispatch") },
+          { label: "Add truck", icon: AddRounded, onClick: () => navigate("/trucks/new") },
+          { label: "Add driver", icon: PersonAddRounded, onClick: () => navigate("/drivers/new") },
+        ]}
       />
 
-      <div className="mb-4">
-        <WalletCard summary={revenue} />
-      </div>
-
+      <div className="w-full max-w-lg mx-auto px-4 pt-5" style={{ paddingBottom: "24px" }}>
       <div className="grid grid-cols-3 rounded-[22px] bg-white mb-6" style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
         <Figure label="Trucks" value={activeTrucks(trucks).length} onClick={() => navigate("/trucks")} />
         <Figure label="Drivers" value={activeDrivers(drivers).length} onClick={() => navigate("/drivers")} divider />
@@ -133,6 +132,7 @@ export default function HomeScreen() {
             ))}
           </div>
         )}
+      </div>
       </div>
     </div>
   );

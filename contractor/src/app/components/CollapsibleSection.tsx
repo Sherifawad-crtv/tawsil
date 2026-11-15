@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import ExpandMoreRounded from "./icons/ExpandMoreRounded";
 
-/** Card with a header that expands and collapses its content. Collapsed by default. */
+/** Flat section whose header expands and collapses its content. Collapsed by default. */
 export default function CollapsibleSection({
   icon,
   title,
@@ -15,17 +15,17 @@ export default function CollapsibleSection({
 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="rounded-3xl bg-white overflow-hidden" style={{ boxShadow: "0 2px 14px rgba(4,0,51,0.05)" }}>
-      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center gap-2 p-4 cursor-pointer" aria-expanded={open} style={{ border: "none", background: "none" }}>
-        <div className="w-7 h-7 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(18,83,250,0.08)" }}>
+    <div>
+      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center gap-3 px-5 py-4 cursor-pointer" aria-expanded={open} style={{ border: "none", background: "none" }}>
+        <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F5F5F3" }}>
           {icon}
         </div>
-        <span className="flex-1 text-left" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "#040033", letterSpacing: "0.02em" }}>
+        <span className="flex-1 text-left" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>
           {title}
         </span>
-        <ExpandMoreRounded sx={{ fontSize: 20, color: "#626A76", transform: open ? "rotate(180deg)" : "none", transition: "transform 0.2s" }} />
+        <ExpandMoreRounded sx={{ fontSize: 22, color: "#626A76", transform: open ? "rotate(180deg)" : "none", transition: "transform 0.2s" }} />
       </button>
-      {open && <div className="px-4 pb-4">{children}</div>}
+      {open && <div className="px-5 pb-4">{children}</div>}
     </div>
   );
 }

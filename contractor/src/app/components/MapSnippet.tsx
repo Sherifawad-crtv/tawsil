@@ -1,45 +1,32 @@
-import { useState } from "react";
-import AddRounded from "./icons/AddRounded";
-import LocationOnRounded from "./icons/LocationOnRounded";
+import orderMap from "../../assets/order-map.svg";
 
-/** Static map snippet - decorative route between the order's first and last stop, no live map data. */
-export default function MapSnippet() {
-  const [bumped, setBumped] = useState(false);
-
+/**
+ * Decorative route map for the top of Order Details: a quiet street-map backdrop
+ * with a route from the first stop (round pin) to the last (square pin). It is
+ * not live map data.
+ */
+export default function MapSnippet({ stops = 2 }: { stops?: number }) {
   return (
-    <div className="relative w-full" style={{ height: "220px" }}>
-      <svg viewBox="0 0 400 220" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
-        <rect width="400" height="220" fill="#E8ECE3" />
-        {Array.from({ length: 10 }).map((_, i) => (
-          <line key={`v${i}`} x1={i * 40} y1={0} x2={i * 40} y2={220} stroke="#D8D9D4" strokeWidth={1} />
-        ))}
-        {Array.from({ length: 6 }).map((_, i) => (
-          <line key={`h${i}`} x1={0} y1={i * 40} x2={400} y2={i * 40} stroke="#D8D9D4" strokeWidth={1} />
-        ))}
-        <path d="M 70 170 C 140 60, 260 190, 330 70" stroke="#1253FA" strokeWidth={3} strokeDasharray="2 8" strokeLinecap="round" fill="none" />
+    <div className="relative w-full overflow-hidden" style={{ height: "300px", backgroundColor: "#FFFFFF" }}>
+      <img src={orderMap} alt="" draggable={false} className="absolute inset-0 w-full h-full object-cover" />
+      <svg viewBox="0 0 400 300" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" aria-hidden>
+        <path d="M 78 232 C 120 150, 150 200, 205 150 S 300 120, 322 82" stroke="#FFFFFF" strokeWidth={9} strokeLinecap="round" fill="none" />
+        <path d="M 78 232 C 120 150, 150 200, 205 150 S 300 120, 322 82" stroke="#1253FA" strokeWidth={4} strokeLinecap="round" fill="none" />
+        {stops > 2 &&
+          Array.from({ length: stops - 2 }).map((_, i) => (
+            <circle key={i} cx={150 + i * 60} cy={190 - i * 28} r={5} fill="#FFFFFF" stroke="#1253FA" strokeWidth={3} />
+          ))}
       </svg>
-
-      <LocationOnRounded sx={{ fontSize: 30, color: "#0A0070", position: "absolute", left: "58px", top: "150px" }} />
-      <LocationOnRounded sx={{ fontSize: 30, color: "#DC2626", position: "absolute", left: "318px", top: "44px" }} />
-
-      {/* Clearance above the sheet's rounded top edge, so it's never cut like the previous build's overlap bug. */}
-      <button
-        onClick={() => setBumped((b) => !b)}
-        aria-label="Expand map"
-        className="absolute flex items-center justify-center cursor-pointer active:scale-90 transition-transform"
-        style={{
-          right: "16px",
-          bottom: "34px",
-          width: "40px",
-          height: "40px",
-          borderRadius: "14px",
-          backgroundColor: "white",
-          boxShadow: "0 2px 10px rgba(4,0,51,0.16)",
-          border: "none",
-        }}
-      >
-        <AddRounded sx={{ fontSize: 20, color: "#040033", transform: bumped ? "rotate(90deg)" : "none", transition: "transform 0.2s" }} />
-      </button>
+      <div
+        aria-hidden
+        className="absolute rounded-full"
+        style={{ left: "66px", top: "220px", width: "24px", height: "24px", backgroundColor: "#040033", border: "4px solid white", boxShadow: "0 2px 8px rgba(4,0,51,0.3)" }}
+      />
+      <div
+        aria-hidden
+        className="absolute"
+        style={{ left: "310px", top: "70px", width: "24px", height: "24px", backgroundColor: "#1253FA", border: "4px solid white", borderRadius: "6px", boxShadow: "0 2px 8px rgba(18,83,250,0.35)" }}
+      />
     </div>
   );
 }

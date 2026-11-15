@@ -1,9 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import SettingsRounded from "../../components/icons/SettingsRounded";
-import LocalShippingRounded from "../../components/icons/LocalShippingRounded";
-import GroupsRounded from "../../components/icons/GroupsRounded";
-import BoltRounded from "../../components/icons/BoltRounded";
 import InboxRounded from "../../components/icons/InboxRounded";
 import IconButton from "../../components/IconButton";
 import PageTitle from "../../components/PageTitle";
@@ -11,9 +8,10 @@ import SectionLabel from "../../components/SectionLabel";
 import SegmentedControl from "../../components/SegmentedControl";
 import TripCard from "../../components/TripCard";
 import Carousel from "../../components/Carousel";
+import WalletCard from "../../components/WalletCard";
 import EmptyState from "../../components/EmptyState";
 import { useDataStore } from "../../lib/store";
-import { activeDrivers, activeTrucks, getAvailableOrders, getInProgressOrders, getUnassignedOrders } from "../../lib/selectors";
+import { activeDrivers, activeTrucks, getAvailableOrders, getInProgressOrders, getUnassignedOrders, revenueSummary } from "../../lib/selectors";
 
 const PREVIEW_COUNT = 3;
 
@@ -39,6 +37,7 @@ export default function HomeScreen() {
   const availableFiltered = useMemo(() => available.filter((o) => o.tripType === availableFilter), [available, availableFilter]);
   const countOf = (type: "On Demand" | "Monthly") => available.filter((o) => o.tripType === type).length;
 
+  const revenue = useMemo(() => revenueSummary(orders), [orders]);
   const firstName = profile.fullName.split(" ")[0];
 
   return (
@@ -53,10 +52,14 @@ export default function HomeScreen() {
         }
       />
 
-      <div className="grid grid-cols-3 gap-2.5 mb-6">
-        <StatTile icon={LocalShippingRounded} label="Trucks" value={activeTrucks(trucks).length} onClick={() => navigate("/trucks")} />
-        <StatTile icon={GroupsRounded} label="Drivers" value={activeDrivers(drivers).length} onClick={() => navigate("/drivers")} />
-        <StatTile icon={BoltRounded} label="Active" value={inProgress.length} onClick={() => navigate("/home/active")} />
+      <div className="mb-4">
+        <WalletCard summary={revenue} />
+      </div>
+
+      <div className="grid grid-cols-3 rounded-[22px] bg-white mb-6" style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
+        <Figure label="Trucks" value={activeTrucks(trucks).length} onClick={() => navigate("/trucks")} />
+        <Figure label="Drivers" value={activeDrivers(drivers).length} onClick={() => navigate("/drivers")} divider />
+        <Figure label="On the road" value={inProgress.length} onClick={() => navigate("/home/active")} divider />
       </div>
 
       {needsDispatch.length > 0 && (
@@ -135,18 +138,15 @@ export default function HomeScreen() {
   );
 }
 
-function StatTile({ icon: Icon, label, value, onClick }: { icon: React.ElementType; label: string; value: number; onClick: () => void }) {
+function Figure({ label, value, onClick, divider }: { label: string; value: number; onClick: () => void; divider?: boolean }) {
   return (
     <button
       onClick={onClick}
-      className="rounded-[18px] bg-white p-3.5 flex flex-col items-center gap-1.5 cursor-pointer active:scale-[0.97] transition-transform"
-      style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)", border: "none" }}
+      className="py-4 px-4 text-left cursor-pointer active:bg-[#F5F5F3] transition-colors first:rounded-l-[22px] last:rounded-r-[22px]"
+      style={{ border: "none", background: "none", borderLeft: divider ? "1px solid #F0F0EE" : "none" }}
     >
-      <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(18,83,250,0.08)" }}>
-        <Icon sx={{ fontSize: 16, color: "#1253FA" }} />
-      </div>
-      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "17px", color: "#040033" }}>{value}</span>
-      <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>{label}</span>
+      <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", lineHeight: 1.1, color: "#040033" }}>{value}</p>
+      <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "2px" }}>{label}</p>
     </button>
   );
 }

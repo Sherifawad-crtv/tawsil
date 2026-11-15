@@ -1,4 +1,6 @@
 import { useLocation, useNavigate } from "react-router";
+import { useDataStore } from "../lib/store";
+import { getAvailableOrders } from "../lib/selectors";
 import HomeRounded from "./icons/HomeRounded";
 import HomeRoundedBold from "./icons/HomeRoundedBold";
 import ReceiptLongRounded from "./icons/ReceiptLongRounded";
@@ -44,6 +46,8 @@ const DURATION_MS = 380;
 export default function BottomTabBar() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const { orders } = useDataStore();
+  const pendingOrders = getAvailableOrders(orders).length;
   const activeIndex = Math.max(0, TABS.findIndex((tab) => pathname.startsWith(tab.to)));
   const indicatorLeft = CONTAINER_PADDING + activeIndex * SLOT;
 
@@ -85,11 +89,12 @@ export default function BottomTabBar() {
       {TABS.map((tab) => {
         const active = pathname.startsWith(tab.to);
         const Icon = active ? tab.iconActive : tab.icon;
+        const badge = tab.to === "/orders" && !active ? pendingOrders : 0;
         return (
           <button
             key={tab.to}
             onClick={() => navigate(tab.to)}
-            aria-label={tab.label}
+            aria-label={badge ? `${tab.label}, ${badge} pending` : tab.label}
             aria-current={active ? "page" : undefined}
             className="relative flex items-center justify-center cursor-pointer active:scale-95"
             style={{
@@ -103,7 +108,29 @@ export default function BottomTabBar() {
               transition: `width ${DURATION_MS}ms ${EASE}`,
             }}
           >
-            <Icon sx={{ fontSize: 22, color: active ? "white" : "#626A76", flexShrink: 0, transition: "color 0.3s ease" }} />
+            <span className="relative flex flex-shrink-0">
+              <Icon sx={{ fontSize: 22, color: active ? "white" : "#626A76", flexShrink: 0, transition: "color 0.3s ease" }} />
+              {badge > 0 && (
+                <span
+                  className="absolute flex items-center justify-center rounded-full"
+                  style={{
+                    top: "-6px",
+                    right: "-8px",
+                    minWidth: "17px",
+                    height: "17px",
+                    padding: "0 4px",
+                    backgroundColor: "#B45309",
+                    color: "white",
+                    fontFamily: "'Archivo', sans-serif",
+                    fontWeight: 700,
+                    fontSize: "10px",
+                    boxShadow: "0 0 0 2px white",
+                  }}
+                >
+                  {badge > 9 ? "9+" : badge}
+                </span>
+              )}
+            </span>
             <span
               style={{
                 fontFamily: "'Archivo', sans-serif",

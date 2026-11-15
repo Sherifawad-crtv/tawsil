@@ -1,6 +1,8 @@
 import { useLocation, useNavigate } from "react-router";
 import HomeRounded from "./icons/HomeRounded";
 import HomeRoundedBold from "./icons/HomeRoundedBold";
+import ReceiptLongRounded from "./icons/ReceiptLongRounded";
+import ReceiptLongRoundedBold from "./icons/ReceiptLongRoundedBold";
 import LocalShippingRounded from "./icons/LocalShippingRounded";
 import LocalShippingRoundedBold from "./icons/LocalShippingRoundedBold";
 import GroupsRounded from "./icons/GroupsRounded";
@@ -15,6 +17,7 @@ type IconComponent = typeof HomeRounded;
 // (SF Symbols: line for unselected, filled for the active tab).
 const TABS: { to: string; label: string; icon: IconComponent; iconActive: IconComponent }[] = [
   { to: "/home", label: "Home", icon: HomeRounded, iconActive: HomeRoundedBold },
+  { to: "/orders", label: "Orders", icon: ReceiptLongRounded, iconActive: ReceiptLongRoundedBold },
   { to: "/trucks", label: "Trucks", icon: LocalShippingRounded, iconActive: LocalShippingRoundedBold },
   { to: "/drivers", label: "Drivers", icon: GroupsRounded, iconActive: GroupsRoundedBold },
   { to: "/history", label: "History", icon: AccessTimeRounded, iconActive: AccessTimeRoundedBold },
@@ -27,7 +30,7 @@ const TABS: { to: string; label: string; icon: IconComponent; iconActive: IconCo
 const CONTAINER_PADDING = 6;
 const GAP = 4;
 const INACTIVE_WIDTH = 44;
-const ACTIVE_WIDTH = 118;
+const ACTIVE_WIDTH = 108;
 const SLOT = INACTIVE_WIDTH + GAP;
 
 const EASE = "cubic-bezier(0.32, 0.72, 0, 1)"; // smooth deceleration, no overshoot

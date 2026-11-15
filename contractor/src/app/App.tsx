@@ -6,10 +6,10 @@ import MobileOnlyGate from "./components/MobileOnlyGate";
 import TabLayout from "./layout/TabLayout";
 
 import HomeScreen from "./screens/home/HomeScreen";
-import AvailableOrdersList from "./screens/home/AvailableOrdersList";
 import ActiveTripsList from "./screens/home/ActiveTripsList";
 import NeedsDispatchList from "./screens/home/NeedsDispatchList";
 import OrderDetails from "./screens/orders/OrderDetails";
+import OrdersList from "./screens/orders/OrdersList";
 import TrucksList from "./screens/trucks/TrucksList";
 import TruckForm from "./screens/trucks/TruckForm";
 import DriversList from "./screens/drivers/DriversList";
@@ -31,12 +31,12 @@ export default function App() {
       <Routes>
         <Route element={<TabLayout />}>
           <Route path="/home" element={<HomeScreen />} />
+          <Route path="/orders" element={<OrdersList />} />
           <Route path="/trucks" element={<TrucksList />} />
           <Route path="/drivers" element={<DriversList />} />
           <Route path="/history" element={<HistoryList />} />
         </Route>
 
-        <Route path="/home/available" element={<AvailableOrdersList />} />
         <Route path="/home/active" element={<ActiveTripsList />} />
         <Route path="/home/dispatch" element={<NeedsDispatchList />} />
         <Route path="/orders/:orderId" element={<OrderDetails />} />

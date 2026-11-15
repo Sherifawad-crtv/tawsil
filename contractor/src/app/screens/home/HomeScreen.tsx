@@ -5,15 +5,12 @@ import AddRounded from "../../components/icons/AddRounded";
 import PersonAddRounded from "../../components/icons/PersonAddRounded";
 import InboxRounded from "../../components/icons/InboxRounded";
 import SectionLabel from "../../components/SectionLabel";
-import SegmentedControl from "../../components/SegmentedControl";
 import TripCard from "../../components/TripCard";
 import Carousel from "../../components/Carousel";
 import WalletHero from "../../components/WalletHero";
 import EmptyState from "../../components/EmptyState";
 import { useDataStore } from "../../lib/store";
-import { activeDrivers, activeTrucks, getAvailableOrders, getInProgressOrders, getUnassignedOrders, revenueSummary } from "../../lib/selectors";
-
-const PREVIEW_COUNT = 3;
+import { activeDrivers, activeTrucks, getInProgressOrders, getUnassignedOrders, revenueSummary } from "../../lib/selectors";
 
 function greetingFor(hour: number) {
   if (hour < 12) return "Good morning";
@@ -24,7 +21,6 @@ function greetingFor(hour: number) {
 export default function HomeScreen() {
   const navigate = useNavigate();
   const { trucks, drivers, orders, profile } = useDataStore();
-  const [availableFilter, setAvailableFilter] = useState<"On Demand" | "Monthly">("On Demand");
   const [greeting, setGreeting] = useState(() => greetingFor(new Date().getHours()));
 
   useEffect(() => {
@@ -33,9 +29,6 @@ export default function HomeScreen() {
 
   const needsDispatch = useMemo(() => getUnassignedOrders(orders), [orders]);
   const inProgress = useMemo(() => getInProgressOrders(orders), [orders]);
-  const available = useMemo(() => getAvailableOrders(orders), [orders]);
-  const availableFiltered = useMemo(() => available.filter((o) => o.tripType === availableFilter), [available, availableFilter]);
-  const countOf = (type: "On Demand" | "Monthly") => available.filter((o) => o.tripType === type).length;
 
   const revenue = useMemo(() => revenueSummary(orders), [orders]);
   const firstName = profile.fullName.split(" ")[0];
@@ -78,7 +71,7 @@ export default function HomeScreen() {
         </div>
       )}
 
-      <div className="mb-6">
+      <div>
         <SectionLabel
           dot
           pulse
@@ -102,37 +95,6 @@ export default function HomeScreen() {
         )}
       </div>
 
-      <div>
-        <SectionLabel
-          action={availableFiltered.length > PREVIEW_COUNT ? { label: "View All", onClick: () => navigate("/home/available") } : undefined}
-        >
-          Available Orders
-        </SectionLabel>
-        <div className="mb-3">
-          <SegmentedControl
-            ariaLabel="Available order type"
-            value={availableFilter}
-            onChange={setAvailableFilter}
-            options={[
-              { value: "On Demand", label: "On Demand", count: countOf("On Demand") },
-              { value: "Monthly", label: "Monthly", count: countOf("Monthly") },
-            ]}
-          />
-        </div>
-        {availableFiltered.length === 0 ? (
-          <EmptyState
-            icon={<InboxRounded sx={{ fontSize: 28, color: "#D8D9D4" }} />}
-            title="No available orders"
-            subtitle="New orders will appear here automatically."
-          />
-        ) : (
-          <div className="flex flex-col gap-3">
-            {availableFiltered.slice(0, PREVIEW_COUNT).map((o) => (
-              <TripCard key={o.id} order={o} />
-            ))}
-          </div>
-        )}
-      </div>
       </div>
     </div>
   );

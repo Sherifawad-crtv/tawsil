@@ -29,6 +29,9 @@ export interface Waypoint {
   id: string;
   label: string;
   address: string;
+  /** Position of the stop, when the order carries one. */
+  lat?: number;
+  lng?: number;
 }
 
 export interface Order {

@@ -48,7 +48,7 @@ export default function OrderDetails() {
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
       <div className="relative">
-        <MapSnippet stops={order.waypoints.length} />
+        <MapSnippet stops={order.waypoints} />
         <button
           onClick={() => navigate(-1)}
           aria-label="Back"

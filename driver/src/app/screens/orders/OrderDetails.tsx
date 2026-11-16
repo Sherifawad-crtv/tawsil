@@ -37,7 +37,7 @@ export default function OrderDetails() {
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
       <ScreenHeader title="Order Details" onBack={() => navigate(-1)} />
-      <MapSnippet />
+      <MapSnippet stops={order.waypoints} />
 
       <div className="relative -mt-5 rounded-t-[28px] pt-2" style={{ backgroundColor: "#F5F5F3" }}>
         <div className="flex justify-center py-2">

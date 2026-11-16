@@ -1,13 +1,22 @@
 import orderMap from "../../assets/order-map.svg";
+import RouteMap from "./RouteMap";
+import type { Waypoint } from "../lib/types";
 
 /**
- * Decorative route map for the top of Order Details: a quiet street-map backdrop
- * with a route from the first stop (round pin) to the last (square pin). It is
- * not live map data.
+ * Map for the top of Order Details: the Google map of the route, over a static
+ * street-map backdrop that stays if the Google map can't load.
  */
-export default function MapSnippet({ stops = 2 }: { stops?: number }) {
+export default function MapSnippet({ stops }: { stops: Waypoint[] }) {
   return (
     <div className="relative w-full overflow-hidden" style={{ height: "300px", backgroundColor: "#FFFFFF" }}>
+      <RouteMap stops={stops} fallback={<StaticMap stops={stops.length} />} />
+    </div>
+  );
+}
+
+function StaticMap({ stops }: { stops: number }) {
+  return (
+    <div className="relative w-full h-full">
       <img src={orderMap} alt="" draggable={false} className="absolute inset-0 w-full h-full object-cover" />
       <svg viewBox="0 0 400 300" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" aria-hidden>
         <path d="M 78 232 C 120 150, 150 200, 205 150 S 300 120, 322 82" stroke="#FFFFFF" strokeWidth={9} strokeLinecap="round" fill="none" />

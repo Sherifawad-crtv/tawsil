@@ -4,10 +4,12 @@ import AccessTimeRounded from "./icons/AccessTimeRounded";
 import ReplayRounded from "./icons/ReplayRounded";
 import InboxRounded from "./icons/InboxRounded";
 import { VEHICLES } from "./VehicleCarouselSelectable";
+import ChevronRightRounded from "./icons/ChevronRightRounded";
+import TripDetailsScreen from "./TripDetailsScreen";
 
 type TabId = "active" | "completed" | "cancelled";
 
-interface Trip {
+export interface Trip {
   id: string;
   orderId: string;
   from: string;
@@ -64,10 +66,15 @@ function StatusBadge({ status }: { status: Trip["status"] }) {
   );
 }
 
-function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
+function TripCard({ trip, onReorder, onOpen }: { trip: Trip; onReorder: () => void; onOpen: () => void }) {
   return (
     <div
-      className="rounded-[20px] overflow-hidden"
+      role="button"
+      tabIndex={0}
+      onClick={onOpen}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") onOpen(); }}
+      aria-label={`Open trip ${trip.orderId}`}
+      className="rounded-[20px] overflow-hidden cursor-pointer active:scale-[0.99] transition-transform"
       style={{ backgroundColor: "white" }}
     >
       {/* Header */}
@@ -81,8 +88,9 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
           </span>
           <StatusBadge status={trip.status} />
         </div>
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>
+        <span className="flex items-center gap-1" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>
           {trip.price}
+          <ChevronRightRounded sx={{ fontSize: 18, color: "#626A76" }} />
         </span>
       </div>
 
@@ -167,7 +175,7 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
       {(trip.status === "completed" || trip.status === "cancelled") && (
         <div className="px-5 pb-4 pt-1">
           <button
-            onClick={onReorder}
+            onClick={(e) => { e.stopPropagation(); onReorder(); }}
             className="w-full py-3 rounded-2xl flex items-center justify-center gap-2 cursor-pointer active:scale-[0.97] transition-transform"
             style={{
               backgroundColor: "#040033",
@@ -187,6 +195,7 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
 
 export default function ActivityScreen() {
   const [activeTab, setActiveTab] = useState<TabId>("active");
+  const [openTrip, setOpenTrip] = useState<Trip | null>(null);
 
   const filtered = TRIPS.filter((t) => {
     if (activeTab === "active") return t.status === "active";
@@ -262,7 +271,7 @@ export default function ActivityScreen() {
         <div className="flex flex-col gap-4">
           {filtered.length > 0 ? (
             filtered.map((trip) => (
-              <TripCard key={trip.id} trip={trip} onReorder={() => {}} />
+              <TripCard key={trip.id} trip={trip} onReorder={() => {}} onOpen={() => setOpenTrip(trip)} />
             ))
           ) : (
             <div className="flex flex-col items-center justify-center py-16 gap-4">
@@ -282,6 +291,8 @@ export default function ActivityScreen() {
           )}
         </div>
       </div>
+
+      {openTrip && <TripDetailsScreen trip={openTrip} onClose={() => setOpenTrip(null)} onReorder={() => setOpenTrip(null)} />}
 
       <style>{`
         @keyframes pulse {

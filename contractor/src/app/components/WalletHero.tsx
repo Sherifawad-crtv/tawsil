@@ -4,6 +4,7 @@ import VisibilityOffRounded from "./icons/VisibilityOffRounded";
 import TrendingUpRounded from "./icons/TrendingUpRounded";
 import SettingsRounded from "./icons/SettingsRounded";
 import type { RevenueSummary } from "../lib/selectors";
+import heroMap from "../../assets/hero-map.svg";
 
 const STORAGE_KEY = "contractor.walletHidden";
 
@@ -66,8 +67,7 @@ export default function WalletHero({
         borderRadius: "0 0 32px 32px",
       }}
     >
-      <div aria-hidden className="absolute rounded-full" style={{ width: 260, height: 260, right: -90, top: -110, border: "1px solid rgba(255,255,255,0.09)" }} />
-      <div aria-hidden className="absolute rounded-full" style={{ width: 160, height: 160, right: -40, top: -60, border: "1px solid rgba(255,255,255,0.09)" }} />
+      <img src={heroMap} alt="" aria-hidden draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" style={{ opacity: 0.06 }} />
 
       <div className="relative w-full max-w-lg mx-auto px-4 pb-6" style={{ paddingTop: "max(env(safe-area-inset-top, 20px), 20px)" }}>
         <div className="flex items-start justify-between gap-3">

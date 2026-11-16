@@ -19,13 +19,25 @@ const MAP_STYLE: google.maps.MapTypeStyle[] = [
 
 type PinSpec = { position: LatLng; html: string; size: number };
 
-const dot = (color: string, size = 14) => ({
-  size,
-  html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:3px solid white;box-sizing:border-box;box-shadow:0 2px 8px rgba(0,0,0,0.25)"></div>`,
+const BORDER = "3px solid white";
+const SHADOW = "0 2px 8px rgba(0,0,0,0.25)";
+/** Start of the route: a round dot. */
+const startDot = () => ({
+  size: 16,
+  html: `<div style="width:16px;height:16px;border-radius:50%;background:${NAVY};border:${BORDER};box-sizing:border-box;box-shadow:${SHADOW}"></div>`,
 });
-const numbered = (n: number, filled: boolean) => ({
+/** Arrival: a square block, so it reads differently from the start at a glance. */
+const endSquare = () => ({
+  size: 16,
+  html: `<div style="width:16px;height:16px;border-radius:4px;background:${BLUE};border:${BORDER};box-sizing:border-box;box-shadow:${SHADOW}"></div>`,
+});
+const startNumbered = () => ({
   size: 28,
-  html: `<div style="width:28px;height:28px;border-radius:50%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;background:${filled ? BLUE : "white"};border:3px solid ${filled ? "white" : NAVY};box-shadow:0 2px 10px rgba(0,0,0,0.2);font-family:'Archivo Black',sans-serif;font-size:11px;color:${filled ? "white" : NAVY}">${n}</div>`,
+  html: `<div style="width:28px;height:28px;border-radius:50%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;background:white;border:3px solid ${NAVY};box-shadow:0 2px 10px rgba(0,0,0,0.2);font-family:'Archivo Black',sans-serif;font-size:11px;color:${NAVY}">1</div>`,
+});
+const endNumbered = () => ({
+  size: 28,
+  html: `<div style="width:28px;height:28px;border-radius:8px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;background:${BLUE};border:3px solid white;box-shadow:0 2px 10px rgba(0,0,0,0.2);font-family:'Archivo Black',sans-serif;font-size:11px;color:white">2</div>`,
 });
 const vehicleDot = () => ({
   size: 18,
@@ -41,7 +53,7 @@ function createPin(maps: typeof google.maps, map: google.maps.Map, spec: PinSpec
       el.style.pointerEvents = "none";
       el.innerHTML = spec.html;
       this.el = el;
-      this.getPanes()?.overlayLayer.appendChild(el);
+      this.getPanes()?.markerLayer.appendChild(el);
     }
     draw() {
       const point = this.getProjection()?.fromLatLngToDivPixel(new maps.LatLng(spec.position));
@@ -134,8 +146,8 @@ export default function GoogleMap({
           );
         }
 
-        const startPin = pins === "numbered" ? numbered(1, false) : dot(NAVY);
-        const endPin = pins === "numbered" ? numbered(2, true) : dot(BLUE);
+        const startPin = pins === "numbered" ? startNumbered() : startDot();
+        const endPin = pins === "numbered" ? endNumbered() : endSquare();
         overlays.push(createPin(maps, map, { position: start, ...startPin }), createPin(maps, map, { position: end, ...endPin }));
         if (vehicle) overlays.push(createPin(maps, map, { position: vehicle, ...vehicleDot() }));
 

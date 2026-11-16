@@ -37,7 +37,7 @@ function createPin(maps: typeof google.maps, map: google.maps.Map, position: goo
         pointerEvents: "none",
       });
       this.el = el;
-      this.getPanes()?.overlayLayer.appendChild(el);
+      this.getPanes()?.markerLayer.appendChild(el);
     }
     draw() {
       const point = this.getProjection()?.fromLatLngToDivPixel(new maps.LatLng(position));

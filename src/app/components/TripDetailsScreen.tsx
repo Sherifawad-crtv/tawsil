@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import { useState, type ReactNode } from "react";
+import GoogleMap, { toLatLng } from "./GoogleMap";
 import ArrowBackIosNewRounded from "./icons/ArrowBackIosNewRounded";
 import ReceiptLongRounded from "./icons/ReceiptLongRounded";
 import ReplayRounded from "./icons/ReplayRounded";
@@ -36,23 +35,6 @@ const STATUS: Record<Trip["status"], { color: string; bg: string; label: string 
   completed: { color: "#059669", bg: "rgba(5,150,105,0.08)", label: "Completed" },
   cancelled: { color: "#6B7280", bg: "rgba(107,114,128,0.08)", label: "Cancelled" },
 };
-
-function RouteMap({ from, to }: { from: [number, number]; to: [number, number] }) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!ref.current) return;
-    const map = L.map(ref.current, { zoomControl: false, attributionControl: false, scrollWheelZoom: false });
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png").addTo(map);
-    L.polyline([from, to], { color: "#1253FA", weight: 4, opacity: 0.9, dashArray: "1, 8", lineCap: "round" }).addTo(map);
-    L.circleMarker(from, { radius: 8, color: "#FFFFFF", weight: 3, fillColor: "#040033", fillOpacity: 1 }).addTo(map);
-    L.circleMarker(to, { radius: 8, color: "#FFFFFF", weight: 3, fillColor: "#1253FA", fillOpacity: 1 }).addTo(map);
-    map.fitBounds([from, to], { padding: [44, 44] });
-    return () => {
-      map.remove();
-    };
-  }, [from, to]);
-  return <div ref={ref} style={{ width: "100%", height: "100%", background: "#F0F0EE" }} />;
-}
 
 function Card({ title, icon, right, children }: { title?: string; icon?: ReactNode; right?: ReactNode; children: ReactNode }) {
   return (
@@ -122,7 +104,7 @@ export default function TripDetailsScreen({ trip, onClose, onReorder }: { trip: 
 
       {from && to && (
         <div style={{ height: "220px" }}>
-          <RouteMap from={from} to={to} />
+          <GoogleMap start={toLatLng(from)} end={toLatLng(to)} />
         </div>
       )}
 

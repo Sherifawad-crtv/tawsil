@@ -16,57 +16,16 @@ import BiddingScreen from "./BiddingScreen";
 import type { Offer } from "./BiddingScreen";
 import IndividualSignup from "./onboarding/IndividualSignup";
 import { useState, useEffect, useRef } from "react";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import GoogleMap, { toLatLng } from "./GoogleMap";
 import ArrowBackIosNewRounded from "./icons/ArrowBackIosNewRounded";
 import NavigationRounded from "./icons/NavigationRounded";
 import CheckCircleRounded from "./icons/CheckCircleRounded";
 import { useAuth } from "../lib/AuthContext";
 
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-});
-
-const pickupIcon = L.divIcon({
-  className: "",
-  html: `<div style="width:14px;height:14px;border-radius:50%;background:#040033;border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,0.25);"></div>`,
-  iconSize: [14, 14],
-  iconAnchor: [7, 7],
-});
-const dropoffIcon = L.divIcon({
-  className: "",
-  html: `<div style="width:14px;height:14px;border-radius:50%;background:#1253FA;border:3px solid white;box-shadow:0 2px 8px rgba(18,83,250,0.35);"></div>`,
-  iconSize: [14, 14],
-  iconAnchor: [7, 7],
-});
-
 const PICKUP: [number, number] = [25.204849, 55.270783];
 const DROPOFF: [number, number] = [25.117664, 55.200371];
-const ROUTE: [number, number][] = [
-  PICKUP, [25.198, 55.26], [25.185, 55.245], [25.17, 55.228], [25.155, 55.218], DROPOFF,
-];
-
-function LeafletMap() {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstance = useRef<L.Map | null>(null);
-  useEffect(() => {
-    if (!mapRef.current || mapInstance.current) return;
-    const map = L.map(mapRef.current, { center: [25.165, 55.238], zoom: 13, zoomControl: false, attributionControl: false });
-    mapInstance.current = map;
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png").addTo(map);
-    L.marker(PICKUP, { icon: pickupIcon }).addTo(map);
-    L.marker(DROPOFF, { icon: dropoffIcon }).addTo(map);
-    L.polyline(ROUTE, { color: "#040033", weight: 4, opacity: 0.8 }).addTo(map);
-    map.fitBounds([PICKUP, DROPOFF], { padding: [60, 60] });
-    return () => {
-      try { map.remove(); } catch (_) {}
-      mapInstance.current = null;
-    };
-  }, []);
-  return <div ref={mapRef} style={{ width: "100%", height: "100%" }} />;
+function BookingMap() {
+  return <GoogleMap start={toLatLng(PICKUP)} end={toLatLng(DROPOFF)} padding={{ top: 110, right: 50, bottom: 300, left: 50 }} />;
 }
 
 /* ───────────────────────────────────────────────
@@ -573,7 +532,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
 
   return (
     <div className="relative w-full overflow-hidden" style={{ height: "100dvh", backgroundColor: "#F5F5F3" }}>
-      <div className="absolute inset-0 z-0"><LeafletMap /></div>
+      <div className="absolute inset-0 z-0"><BookingMap /></div>
       <TopBar onBack={onBack} />
       <LocationFAB bottomOffset={fabBottom} />
 

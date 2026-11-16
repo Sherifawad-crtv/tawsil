@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import GoogleMap, { toLatLng } from "./GoogleMap";
 import ArrowBackIosNewRounded from "./icons/ArrowBackIosNewRounded";
 import MoreVertRounded from "./icons/MoreVertRounded";
 import AcUnitRounded from "./icons/AcUnitRounded";
@@ -86,45 +85,17 @@ const STATUS_ORDER: OrderStatus[] = ["Pending", "Accepted", "Assigned", "In Prog
 const TEMP_SPARK = [-17.8, -17.9, -18.1, -18.0, -17.7, -17.5, -17.6, -17.4, -17.5, -17.4, -17.3, -17.4, -17.6, -17.5, -17.4, -17.3, -17.4, -17.5, -17.4, -17.4, -17.3, -17.4, -17.5, -17.4];
 
 /* ─────────── Map ─────────── */
-const pickupIcon = L.divIcon({
-  className: "",
-  html: `<div style="width:28px;height:28px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;border:3px solid #040033;box-shadow:0 2px 10px rgba(0,0,0,0.18);font-family:'Archivo Black',sans-serif;font-size:11px;color:#040033">1</div>`,
-  iconSize: [28, 28],
-  iconAnchor: [14, 14],
-});
-const dropoffIcon = L.divIcon({
-  className: "",
-  html: `<div style="width:28px;height:28px;border-radius:50%;background:#1253FA;display:flex;align-items:center;justify-content:center;border:3px solid white;box-shadow:0 2px 12px rgba(18,83,250,0.4);font-family:'Archivo Black',sans-serif;font-size:11px;color:white">2</div>`,
-  iconSize: [28, 28],
-  iconAnchor: [14, 14],
-});
-const truckIcon = L.divIcon({
-  className: "",
-  html: `<div style="width:18px;height:18px;border-radius:50%;background:#1253FA;border:4px solid white;box-shadow:0 0 0 4px rgba(18,83,250,0.25),0 2px 12px rgba(18,83,250,0.5);"></div>`,
-  iconSize: [18, 18],
-  iconAnchor: [9, 9],
-});
-
 function MapHero({ expanded }: { expanded: boolean }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inst = useRef<L.Map | null>(null);
-  useEffect(() => {
-    if (!ref.current || inst.current) return;
-    const map = L.map(ref.current, { zoomControl: false, attributionControl: false, dragging: expanded, touchZoom: expanded, scrollWheelZoom: false });
-    inst.current = map;
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png").addTo(map);
-    L.marker(ORDER.pickup.coords, { icon: pickupIcon }).addTo(map);
-    L.marker(ORDER.dropoff.coords, { icon: dropoffIcon }).addTo(map);
-    L.marker(ORDER.truckPos, { icon: truckIcon }).addTo(map);
-    L.polyline([ORDER.pickup.coords, ORDER.truckPos, ORDER.dropoff.coords], { color: "#040033", weight: 4, opacity: 0.85, dashArray: "1, 8", lineCap: "round" }).addTo(map);
-    map.fitBounds([ORDER.pickup.coords, ORDER.dropoff.coords], { padding: [50, 50] });
-    return () => { try { map.remove(); } catch (_) {} inst.current = null; };
-  }, [expanded]);
-  useEffect(() => {
-    if (!inst.current) return;
-    inst.current.invalidateSize();
-  }, [expanded]);
-  return <div ref={ref} style={{ width: "100%", height: "100%" }} />;
+  return (
+    <GoogleMap
+      start={toLatLng(ORDER.pickup.coords)}
+      end={toLatLng(ORDER.dropoff.coords)}
+      vehicle={toLatLng(ORDER.truckPos)}
+      pins="numbered"
+      interactive={expanded}
+      padding={{ top: 50, right: 50, bottom: 50, left: 50 }}
+    />
+  );
 }
 
 /* ─────────── Small components ─────────── */

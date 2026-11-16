@@ -3,6 +3,7 @@ import CalendarMonthRounded from "./icons/CalendarMonthRounded";
 import AccessTimeRounded from "./icons/AccessTimeRounded";
 import ReplayRounded from "./icons/ReplayRounded";
 import InboxRounded from "./icons/InboxRounded";
+import { VEHICLES } from "./VehicleCarouselSelectable";
 
 type TabId = "active" | "completed" | "cancelled";
 
@@ -85,6 +86,26 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
         </span>
       </div>
 
+      {/* Truck used */}
+      <div className="flex items-center gap-3 px-5 pb-1">
+        <div className="flex items-center justify-center flex-shrink-0" style={{ width: "104px", height: "88px" }}>
+          {VEHICLES.find((v) => v.name === trip.vehicle) && (
+            <img
+              src={VEHICLES.find((v) => v.name === trip.vehicle)!.image}
+              alt={`${trip.vehicle} truck`}
+              draggable={false}
+              className="object-contain"
+              style={{ width: "104px", height: "104px", filter: "drop-shadow(0 4px 5px rgba(4,0,51,0.14))" }}
+            />
+          )}
+        </div>
+        <div className="min-w-0">
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>Truck used</p>
+          <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033", marginTop: "1px" }}>{trip.vehicle}</p>
+          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>{trip.config} · {trip.weight}</p>
+        </div>
+      </div>
+
       {/* Route */}
       <div className="px-5 pb-4">
         <div className="flex gap-3">
@@ -122,12 +143,6 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
           <AccessTimeRounded sx={{ fontSize: 12, color: "#626A76" }} />
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{trip.time}</span>
         </div>
-        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
-          {trip.vehicle}
-        </span>
-        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE" }}>
-          {trip.weight}
-        </span>
       </div>
 
       {/* Active trip: driver + ETA */}

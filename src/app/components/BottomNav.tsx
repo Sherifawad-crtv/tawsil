@@ -1,7 +1,7 @@
 import HomeRounded from "./icons/HomeRounded";
 import HomeRoundedBold from "./icons/HomeRoundedBold";
-import CalendarMonthRounded from "./icons/CalendarMonthRounded";
-import CalendarMonthRoundedBold from "./icons/CalendarMonthRoundedBold";
+import ReceiptLongRounded from "./icons/ReceiptLongRounded";
+import ReceiptLongRoundedBold from "./icons/ReceiptLongRoundedBold";
 import BarChartRounded from "./icons/BarChartRounded";
 import BarChartRoundedBold from "./icons/BarChartRoundedBold";
 import PersonRounded from "./icons/PersonRounded";
@@ -21,7 +21,7 @@ type IconComponent = typeof HomeRounded;
 // (SF Symbols: line for unselected, filled for the active tab).
 const NAV_ITEMS: { id: NavScreen; label: string; icon: IconComponent; iconActive: IconComponent }[] = [
   { id: "home", label: "Home", icon: HomeRounded, iconActive: HomeRoundedBold },
-  { id: "activity", label: "Activity", icon: CalendarMonthRounded, iconActive: CalendarMonthRoundedBold },
+  { id: "activity", label: "Activity", icon: ReceiptLongRounded, iconActive: ReceiptLongRoundedBold },
   { id: "insights", label: "Insights", icon: BarChartRounded, iconActive: BarChartRoundedBold },
   { id: "profile", label: "Profile", icon: PersonRounded, iconActive: PersonRoundedBold },
 ];

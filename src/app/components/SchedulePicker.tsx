@@ -375,7 +375,6 @@ export function ScheduleModal({
             className="w-full rounded-2xl flex items-center justify-center gap-2 active:scale-[0.97] cursor-pointer"
             style={{
               backgroundColor: "#1253FA",
-              boxShadow: "0 4px 20px rgba(18,83,250,0.3)",
               padding: "16px",
               transition: "transform 0.2s ease",
             }}

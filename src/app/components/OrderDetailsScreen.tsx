@@ -205,7 +205,6 @@ function ContextualCTA({ status, onAction }: { status: OrderStatus; onAction: ()
       className="w-full rounded-2xl flex items-center justify-center active:scale-[0.97] cursor-pointer disabled:cursor-not-allowed"
       style={{
         backgroundColor: disabled ? "#D8D9D4" : "#1253FA",
-        boxShadow: disabled ? "none" : "0 4px 18px rgba(18,83,250,0.28)",
         padding: "14px",
         border: "none",
         transition: "transform 0.2s ease",

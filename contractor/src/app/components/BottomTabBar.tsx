@@ -78,7 +78,6 @@ export default function BottomTabBar() {
           width: `${ACTIVE_WIDTH}px`,
           borderRadius: "999px",
           backgroundColor: "#1253FA",
-          boxShadow: "0 4px 14px rgba(18,83,250,0.35)",
           transform: `translateX(${indicatorLeft}px)`,
           transition: `transform ${DURATION_MS}ms ${EASE}`,
           willChange: "transform",

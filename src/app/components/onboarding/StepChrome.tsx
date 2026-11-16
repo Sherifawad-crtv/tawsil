@@ -69,7 +69,6 @@ export function PrimaryButton({
       className="w-full rounded-2xl flex items-center justify-center gap-2 active:scale-[0.97] cursor-pointer disabled:cursor-not-allowed flex-shrink-0"
       style={{
         backgroundColor: disabled ? "#D8D9D4" : "#1253FA",
-        boxShadow: disabled ? "none" : "0 4px 20px rgba(18,83,250,0.3)",
         padding: "16px",
         border: "none",
         transition: "background-color 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease",

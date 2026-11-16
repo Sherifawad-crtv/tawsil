@@ -346,7 +346,6 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
                 borderRadius: "16px",
                 backgroundColor: "#1253FA",
                 border: "none",
-                boxShadow: "0 2px 10px rgba(18,83,250,0.25)",
                 transition: "transform 0.2s ease",
               }}
               aria-label="Increase offer"

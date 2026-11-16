@@ -143,7 +143,7 @@ export default function TripCard({ order }: { order: Order }) {
           <button
             onClick={(e) => { e.stopPropagation(); setDispatchOpen(true); }}
             className="h-8 px-3 rounded-xl flex items-center gap-1.5 flex-shrink-0 cursor-pointer active:scale-[0.97] transition-transform"
-            style={{ backgroundColor: "#1253FA", boxShadow: "0 4px 14px rgba(18,83,250,0.3)", border: "none" }}
+            style={{ backgroundColor: "#1253FA", border: "none" }}
           >
             <LocalShippingRounded sx={{ fontSize: 13, color: "white" }} />
             <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "12px", color: "white" }}>Dispatch Now</span>

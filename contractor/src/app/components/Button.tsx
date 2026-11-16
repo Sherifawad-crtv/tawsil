@@ -26,7 +26,7 @@ export function Button({
   }
 
   const styles: Record<Exclude<Variant, "ghost">, { bg: string; fg: string; shadow: string }> = {
-    primary: { bg: disabled ? "#D8D9D4" : "#1253FA", fg: "white", shadow: disabled ? "none" : "0 4px 20px rgba(18,83,250,0.3)" },
+    primary: { bg: disabled ? "#D8D9D4" : "#1253FA", fg: "white", shadow: "none" },
     destructive: { bg: "#DC2626", fg: "white", shadow: "none" },
     secondary: { bg: "#F5F5F3", fg: "#040033", shadow: "none" },
   };

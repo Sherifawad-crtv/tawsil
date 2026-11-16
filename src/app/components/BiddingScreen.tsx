@@ -386,7 +386,6 @@ function OfferCard({
           backgroundColor: isCheapest ? "#1253FA" : "#040033",
           padding: "11px",
           transition: "transform 0.2s ease",
-          boxShadow: isCheapest ? "0 4px 16px rgba(18,83,250,0.25)" : "none",
         }}
       >
         <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "13px", color: "white", letterSpacing: "0.04em" }}>
@@ -497,7 +496,6 @@ function CounterOfferModal({
           style={{
             backgroundColor: "#1253FA",
             padding: "16px",
-            boxShadow: "0 4px 20px rgba(18,83,250,0.3)",
             transition: "transform 0.2s ease",
             border: "none",
           }}

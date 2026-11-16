@@ -69,7 +69,6 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
           className="w-full rounded-[22px] p-5 flex items-center gap-4 cursor-pointer active:scale-[0.98] transition-transform mb-6"
           style={{
             background: "linear-gradient(135deg, #040033 0%, #0A0070 50%, #1253FA 100%)",
-            boxShadow: "0 8px 32px rgba(18,83,250,0.25)",
             border: "none",
             textAlign: "left",
           }}

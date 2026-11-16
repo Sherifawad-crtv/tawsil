@@ -63,7 +63,6 @@ export default function BottomTabBar() {
         backgroundColor: "rgba(255,255,255,0.75)",
         backdropFilter: "blur(24px) saturate(180%)",
         WebkitBackdropFilter: "blur(24px) saturate(180%)",
-        boxShadow: "0 10px 36px rgba(4,0,51,0.16), inset 0 1px 0 rgba(255,255,255,0.7)",
         border: "1px solid rgba(255,255,255,0.6)",
       }}
     >

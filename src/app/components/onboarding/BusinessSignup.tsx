@@ -157,7 +157,7 @@ export default function BusinessSignup({ onBack, onComplete }: { onBack: () => v
           <>
             <StepHeader title="Review & confirm" subtitle="Make sure everything looks right before we set up your account." />
             <div className="flex flex-col gap-3 flex-1">
-              <div className="rounded-2xl p-4" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
+              <div className="rounded-2xl p-4" style={{ backgroundColor: "white" }}>
                 <ReviewRow label="Business name" value={form.businessName} />
                 <ReviewRow label="Phone" value={form.phone} />
                 <ReviewRow label="Contact person" value={form.contactName} />

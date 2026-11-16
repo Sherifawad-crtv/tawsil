@@ -18,7 +18,7 @@ export default function ProfileSettings() {
       <ScreenHeader title="Profile Settings" onBack={() => navigate("/account")} />
 
       <div className="w-full max-w-lg mx-auto px-4 pt-5 pb-8">
-        <div className="rounded-[22px] p-5 mb-6" style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
+        <div className="rounded-[22px] p-5 mb-6" style={{ backgroundColor: "white" }}>
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #040033, #0A0070)" }}>
               <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", color: "white" }}>{initials}</span>
@@ -42,7 +42,7 @@ export default function ProfileSettings() {
         </div>
 
         <SectionLabel>Details</SectionLabel>
-        <div className="rounded-[22px] overflow-hidden mb-6" style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
+        <div className="rounded-[22px] overflow-hidden mb-6" style={{ backgroundColor: "white" }}>
           <CopyableField label="Full Name" value={profile.fullName} />
           {divider}
           <CopyableField label="National ID" value={profile.nationalId} />

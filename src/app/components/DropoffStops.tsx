@@ -90,7 +90,7 @@ function StopCard({
             ? "0 12px 40px rgba(4,0,51,0.15), 0 0 0 2px #1253FA"
             : isActive
               ? "0 4px 20px rgba(18,83,250,0.12), 0 0 0 2px #1253FA"
-              : "0 2px 10px rgba(0,0,0,0.04)",
+              : "none",
           overflow: "hidden",
           transition: "box-shadow 0.3s cubic-bezier(0.4,0,0.2,1)",
           transform: isDragging ? "scale(1.03)" : "scale(1)",

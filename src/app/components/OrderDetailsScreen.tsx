@@ -144,7 +144,7 @@ function SectionHeader({ icon, label, accent, right }: { icon: React.ReactNode; 
 
 function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`rounded-3xl p-4 ${className}`} style={{ backgroundColor: "white", boxShadow: "0 2px 14px rgba(4,0,51,0.05)" }}>
+    <div className={`rounded-3xl p-4 ${className}`} style={{ backgroundColor: "white" }}>
       {children}
     </div>
   );
@@ -521,14 +521,14 @@ export default function OrderDetailsScreen({ onBack }: { onBack: () => void }) {
           borderBottom: "1px solid rgba(232,232,229,0.6)",
         }}
       >
-        <button onClick={onBack} aria-label="Back" className="w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.05)", border: "none" }}>
+        <button onClick={onBack} aria-label="Back" className="w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "white", border: "none" }}>
           <ArrowBackIosNewRounded sx={{ fontSize: 16, color: "#040033" }} />
         </button>
         <div className="flex flex-col items-center">
           <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>Order Details</span>
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280", letterSpacing: "0.04em" }}>{ORDER.id}</span>
         </div>
-        <button onClick={() => setMenuOpen(true)} aria-label="More options" className="w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.05)", border: "none" }}>
+        <button onClick={() => setMenuOpen(true)} aria-label="More options" className="w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer active:scale-90" style={{ backgroundColor: "white", border: "none" }}>
           <MoreVertRounded sx={{ fontSize: 18, color: "#040033" }} />
         </button>
       </div>

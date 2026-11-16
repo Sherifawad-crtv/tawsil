@@ -104,7 +104,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
               onClick={onOpenOrder}
               aria-label={`Open order ${ACTIVE_TRIP.orderId}`}
               className="w-full text-left rounded-[22px] p-5 mb-6 cursor-pointer active:scale-[0.99] transition-transform"
-              style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)", border: "none" }}
+              style={{ backgroundColor: "white", border: "none" }}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
@@ -208,7 +208,6 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
               style={{
                 width: "130px",
                 backgroundColor: "white",
-                boxShadow: "0 2px 12px rgba(0,0,0,0.04)",
                 border: "none",
                 scrollSnapAlign: "start",
                 textAlign: "center",
@@ -243,7 +242,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
             <div
               key={trip.id}
               className="rounded-[18px] p-4 flex items-center gap-3.5"
-              style={{ backgroundColor: "white", boxShadow: "0 2px 10px rgba(0,0,0,0.03)" }}
+              style={{ backgroundColor: "white" }}
             >
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"

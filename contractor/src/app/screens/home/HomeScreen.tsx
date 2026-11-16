@@ -48,7 +48,7 @@ export default function HomeScreen() {
       />
 
       <div className="w-full max-w-lg mx-auto px-4 pt-5" style={{ paddingBottom: "24px" }}>
-      <div className="grid grid-cols-3 rounded-[22px] bg-white mb-6" style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
+      <div className="grid grid-cols-3 rounded-[22px] bg-white mb-6" >
         <Figure label="Trucks" value={activeTrucks(trucks).length} onClick={() => navigate("/trucks")} />
         <Figure label="Drivers" value={activeDrivers(drivers).length} onClick={() => navigate("/drivers")} divider />
         <Figure label="On the road" value={inProgress.length} onClick={() => navigate("/home/active")} divider />

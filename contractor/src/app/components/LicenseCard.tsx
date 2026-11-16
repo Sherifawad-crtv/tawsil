@@ -54,7 +54,7 @@ export default function LicenseCard({ driver }: { driver: Driver }) {
       style={{
         aspectRatio: "1.62",
         background: "linear-gradient(135deg, #F8F2DF 0%, #F1E9CB 55%, #E9F0DE 100%)",
-        boxShadow: "0 3px 14px rgba(80,60,20,0.18), inset 0 0 0 1px rgba(160,130,70,0.25)",
+        boxShadow: "inset 0 0 0 1px rgba(160,130,70,0.25)",
       }}
     >
       {/* security pattern: concentric rings and fine diagonal lines, plus a faint seal */}

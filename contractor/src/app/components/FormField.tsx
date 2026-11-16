@@ -24,7 +24,7 @@ export function TextField({
       <div
         className="field flex items-center rounded-2xl px-4"
         data-invalid={error ? "true" : undefined}
-        style={{ backgroundColor: "white", boxShadow: error ? "0 0 0 1.5px #DC2626" : "0 1px 6px rgba(0,0,0,0.04)", height: "52px" }}
+        style={{ backgroundColor: "white", boxShadow: error ? "0 0 0 1.5px #DC2626" : "none", height: "52px" }}
       >
         <input {...props} className="flex-1 border-none outline-none bg-transparent w-full" style={{ ...FIELD_STYLE, caretColor: "#1253FA" }} />
       </div>
@@ -48,7 +48,7 @@ export function SelectField({
       <div
         className="field flex items-center rounded-2xl px-4"
         data-invalid={error ? "true" : undefined}
-        style={{ backgroundColor: "white", boxShadow: error ? "0 0 0 1.5px #DC2626" : "0 1px 6px rgba(0,0,0,0.04)", height: "52px" }}
+        style={{ backgroundColor: "white", boxShadow: error ? "0 0 0 1.5px #DC2626" : "none", height: "52px" }}
       >
         <select {...props} className="flex-1 border-none outline-none bg-transparent w-full appearance-none" style={FIELD_STYLE}>
           {children}

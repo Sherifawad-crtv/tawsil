@@ -61,12 +61,12 @@ export default function OrderDetails() {
           </div>
 
           {/* 2. Status stepper - secondary to the hero above, compact progress reference. */}
-          <div className="rounded-[20px] bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
+          <div className="rounded-[20px] bg-white p-4" >
             <StatusStepper status={order.status} />
           </div>
 
           {/* 3. Client - who the driver is actually en route to meet, promoted right under status (Contractor's screen promotes Driver & Vehicle here for the same reason: the most operationally relevant "who"). */}
-          <div className="rounded-[20px] bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
+          <div className="rounded-[20px] bg-white p-4" >
             <PersonCard title="Client" name={order.clientName} subtitle={order.clientPhone} avatarColor="#16803C" />
           </div>
 
@@ -143,7 +143,7 @@ export default function OrderDetails() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-[20px] bg-white p-4" style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}>
+    <div className="rounded-[20px] bg-white p-4" >
       <h3 className="mb-1" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "14px", color: "#040033" }}>{title}</h3>
       {children}
     </div>

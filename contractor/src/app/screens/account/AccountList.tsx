@@ -22,7 +22,7 @@ export default function AccountList() {
 
       <div className="w-full max-w-lg mx-auto px-4 pt-5 pb-8">
         <SectionLabel>Settings</SectionLabel>
-        <div className="rounded-[22px] overflow-hidden mb-6" style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
+        <div className="rounded-[22px] overflow-hidden mb-6" style={{ backgroundColor: "white" }}>
           <AccountRow
             icon={<ManageAccountsRounded sx={{ fontSize: 19, color: "#1253FA" }} />}
             label="Profile Settings"
@@ -45,7 +45,7 @@ export default function AccountList() {
           />
         </div>
 
-        <div className="rounded-[22px] overflow-hidden mb-6" style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
+        <div className="rounded-[22px] overflow-hidden mb-6" style={{ backgroundColor: "white" }}>
           <AccountRow
             icon={<LogoutRounded sx={{ fontSize: 19, color: "#DC2626" }} />}
             label="Log out"

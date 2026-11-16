@@ -29,7 +29,7 @@ function VehicleCard({
       style={{
         scrollSnapAlign: "start",
         border: isSelected ? "2.5px solid #1253FA" : "2.5px solid transparent",
-        boxShadow: isSelected ? "0 4px 20px rgba(18,83,250,0.15)" : "0 1px 6px rgba(0,0,0,0.04)",
+        boxShadow: isSelected ? "0 4px 20px rgba(18,83,250,0.15)" : "none",
       }}
     >
       <div className="flex items-center gap-2 px-2 size-full">

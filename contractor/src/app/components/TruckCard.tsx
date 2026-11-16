@@ -44,7 +44,7 @@ export default function TruckCard({ truck, interactive = true }: { truck: Truck;
       className={`w-full text-left rounded-[20px] overflow-hidden bg-white ${interactive ? "cursor-pointer active:scale-[0.99] transition-transform" : ""}`}
       style={{
         border: expired ? "1.5px solid #DC2626" : "1.5px solid transparent",
-        boxShadow: expired ? "none" : "0 2px 14px rgba(0,0,0,0.04)",
+        boxShadow: expired ? "none" : "none",
       }}
     >
       <div className="flex items-start justify-between gap-3 px-5 pt-4">

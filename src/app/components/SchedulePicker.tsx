@@ -89,7 +89,7 @@ export function ScheduleToggle({
       {mode === "now" && (
         <div
           className="flex items-center gap-4 px-5 py-4 rounded-2xl mt-3"
-          style={{ backgroundColor: "white", boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}
+          style={{ backgroundColor: "white" }}
         >
           <div
             className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
@@ -234,7 +234,7 @@ export function ScheduleModal({
           {/* Calendar card */}
           <div
             className="rounded-2xl mb-4 overflow-hidden"
-            style={{ backgroundColor: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}
+            style={{ backgroundColor: "white" }}
           >
             {/* Month nav */}
             <div className="flex items-center justify-between px-5 pt-4 pb-2">
@@ -323,7 +323,7 @@ export function ScheduleModal({
           {/* Time picker card */}
           <div
             className="rounded-2xl overflow-hidden mb-4"
-            style={{ backgroundColor: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}
+            style={{ backgroundColor: "white" }}
           >
             <div className="px-5 pt-4 pb-2 flex items-center gap-2">
               <AccessTimeRounded sx={{ fontSize: 14, color: "#040033" }} />

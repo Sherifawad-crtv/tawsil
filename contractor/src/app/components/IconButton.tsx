@@ -11,7 +11,7 @@ export default function IconButton({
       {...props}
       aria-label={label}
       className="w-10 h-10 rounded-xl flex items-center justify-center cursor-pointer active:scale-90 transition-transform flex-shrink-0"
-      style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.05)", border: "none" }}
+      style={{ backgroundColor: "white", border: "none" }}
     >
       {children}
     </button>

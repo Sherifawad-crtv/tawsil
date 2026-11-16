@@ -99,7 +99,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
     <div className="flex flex-col gap-0">
       {/* ── Vehicle ── */}
       <SectionLabel>Vehicle</SectionLabel>
-      <div className="flex items-center gap-3 p-3 rounded-2xl" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
+      <div className="flex items-center gap-3 p-3 rounded-2xl" style={{ backgroundColor: "white" }}>
         <div className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F8F8F6" }}>
           <img src={truck.image} alt={truck.name} className="w-11 h-11 object-contain" />
         </div>
@@ -122,14 +122,14 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
           <div className="grid grid-cols-2 gap-2.5">
             <div>
               <SectionLabel>Configuration</SectionLabel>
-              <div className="p-3 rounded-2xl" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
+              <div className="p-3 rounded-2xl" style={{ backgroundColor: "white" }}>
                 <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>{config.name}</span>
                 <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "1px" }}>{config.detail}</p>
               </div>
             </div>
             <div>
               <SectionLabel>Weight</SectionLabel>
-              <div className="p-3 rounded-2xl" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
+              <div className="p-3 rounded-2xl" style={{ backgroundColor: "white" }}>
                 <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "#040033" }}>{weightKg > 0 ? weightKg.toLocaleString() : "—"}</span>
                 <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginLeft: "3px" }}>kg</span>
               </div>
@@ -142,7 +142,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
 
       {/* ── Route ── */}
       <SectionLabel>Route</SectionLabel>
-      <div className="p-3 rounded-2xl" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
+      <div className="p-3 rounded-2xl" style={{ backgroundColor: "white" }}>
         {/* Pickup */}
         <div className="flex items-start gap-2.5">
           <div className="flex flex-col items-center">
@@ -178,7 +178,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
 
       {/* ── Schedule ── */}
       <SectionLabel>Schedule</SectionLabel>
-      <div className="p-3 rounded-2xl" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
+      <div className="p-3 rounded-2xl" style={{ backgroundColor: "white" }}>
         {schedule.mode === "now" ? (
           <div className="flex items-center justify-between">
             <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>ASAP</span>
@@ -196,7 +196,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
 
       {/* ── Delivery & POD ── */}
       <SectionLabel>Proof of Delivery</SectionLabel>
-      <div className="p-3 rounded-2xl flex items-center gap-3" style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
+      <div className="p-3 rounded-2xl flex items-center gap-3" style={{ backgroundColor: "white" }}>
         <StatusPill active={deliverySettings} label="Photo POD" />
         <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>
           {deliverySettings ? "Enabled — photo required at drop‑off" : "Disabled"}
@@ -268,7 +268,7 @@ export default function ReviewStepInline(props: ReviewStepInlineProps) {
           </span>
         </div>
 
-        <div className="rounded-2xl p-4" style={{ backgroundColor: "white", boxShadow: "0 2px 14px rgba(0,0,0,0.05)", border: "1.5px solid rgba(18,83,250,0.15)" }}>
+        <div className="rounded-2xl p-4" style={{ backgroundColor: "white", border: "1.5px solid rgba(18,83,250,0.15)" }}>
           {/* Recommended */}
           <div className="flex items-center justify-between mb-3 pb-3" style={{ borderBottom: "1px dashed #E8E8E5" }}>
             <div className="flex flex-col">

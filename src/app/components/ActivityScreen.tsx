@@ -67,7 +67,7 @@ function TripCard({ trip, onReorder }: { trip: Trip; onReorder: () => void }) {
   return (
     <div
       className="rounded-[20px] overflow-hidden"
-      style={{ backgroundColor: "white", boxShadow: "0 2px 14px rgba(0,0,0,0.04)" }}
+      style={{ backgroundColor: "white" }}
     >
       {/* Header */}
       <div className="flex items-center justify-between px-5 pt-4 pb-3">

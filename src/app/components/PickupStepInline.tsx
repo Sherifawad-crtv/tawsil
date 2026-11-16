@@ -92,7 +92,7 @@ function PickupCard({
           borderRadius: "18px",
           boxShadow: isDragging
             ? "0 12px 40px rgba(4,0,51,0.15), 0 0 0 2px #1253FA"
-            : "0 2px 10px rgba(0,0,0,0.04)",
+            : "none",
           overflow: "hidden",
           transition: "box-shadow 0.3s cubic-bezier(0.4,0,0.2,1)",
         }}
@@ -322,7 +322,7 @@ export default function PickupStepInline({
       {/* Search input */}
       <div
         className="field flex items-center gap-3 rounded-2xl px-4"
-        style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)", height: "48px" }}
+        style={{ backgroundColor: "white", height: "48px" }}
       >
         <SearchRounded sx={{ fontSize: 16, color: "#626A76" }} />
         <input
@@ -424,7 +424,7 @@ export default function PickupStepInline({
       <button
         onClick={useCurrentLocation}
         className="flex items-center gap-2.5 w-full px-4 py-3 rounded-2xl cursor-pointer active:scale-[0.98] transition-transform"
-        style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}
+        style={{ backgroundColor: "white" }}
       >
         <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(18,83,250,0.08)" }}>
           <MyLocationRounded sx={{ fontSize: 16, color: "#1253FA" }} />
@@ -454,7 +454,7 @@ export default function PickupStepInline({
               key={loc.id}
               onClick={() => addFromSaved(loc)}
               className="flex items-center gap-3 w-full px-4 py-3 rounded-2xl cursor-pointer active:scale-[0.98] transition-transform text-left"
-              style={{ backgroundColor: "white", boxShadow: "0 1px 4px rgba(0,0,0,0.03)" }}
+              style={{ backgroundColor: "white" }}
             >
               <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F5F5F3" }}>
                 <LocationIcon type={loc.icon} />

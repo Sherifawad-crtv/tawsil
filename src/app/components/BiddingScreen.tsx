@@ -281,7 +281,7 @@ function OfferCard({
       style={{
         backgroundColor: "white",
         border: isCheapest ? "1.5px solid #1253FA" : "1px solid #E8E8E5",
-        boxShadow: isCheapest ? "0 4px 20px rgba(18,83,250,0.12)" : "0 2px 12px rgba(0,0,0,0.04)",
+        boxShadow: isCheapest ? "0 4px 20px rgba(18,83,250,0.12)" : "none",
         animation: isNew ? "slideIn 0.5s cubic-bezier(0.16,1,0.3,1), flashBorder 1s ease-out" : "slideIn 0.5s cubic-bezier(0.16,1,0.3,1)",
       }}
     >

@@ -57,7 +57,7 @@ export default function OtpInput({ value, onChange }: { value: string; onChange:
             height: "56px",
             borderRadius: "16px",
             backgroundColor: "white",
-            boxShadow: value[i] ? "0 0 0 1.5px #1253FA" : "0 1px 6px rgba(0,0,0,0.04)",
+            boxShadow: value[i] ? "0 0 0 1.5px #1253FA" : "none",
             fontFamily: "'Archivo Black', sans-serif",
             fontSize: "20px",
             color: "#040033",

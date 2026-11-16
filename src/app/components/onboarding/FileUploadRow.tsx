@@ -85,7 +85,7 @@ export default function FileUploadRow({
           height: "136px",
           padding: "16px",
           backgroundColor: "white",
-          boxShadow: isDone ? "0 0 0 1.5px #1253FA" : "0 1px 6px rgba(0,0,0,0.04)",
+          boxShadow: isDone ? "0 0 0 1.5px #1253FA" : "none",
           border: isDone || uploading ? "none" : "1.5px dashed #D8D9D4",
         }}
       >

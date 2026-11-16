@@ -6,7 +6,6 @@ export default function ProofOfDeliveryToggle({ value, onChange }: { value: bool
       className="flex items-center gap-4 p-4 rounded-2xl active:bg-black/[0.02] cursor-pointer flex-shrink-0"
       style={{
         backgroundColor: "white",
-        boxShadow: "0 2px 12px rgba(0,0,0,0.04)",
         transition: "background-color 0.3s ease",
       }}
       onClick={() => onChange(!value)}

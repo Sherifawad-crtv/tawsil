@@ -12,7 +12,7 @@ export default function SearchField({
   return (
     <div
       className="field flex items-center gap-3 rounded-2xl px-4"
-      style={{ backgroundColor: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.04)", height: "48px" }}
+      style={{ backgroundColor: "white", height: "48px" }}
     >
       <SearchRounded sx={{ fontSize: 16, color: "#626A76", flexShrink: 0 }} />
       <input

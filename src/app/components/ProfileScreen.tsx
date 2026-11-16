@@ -100,7 +100,7 @@ export default function ProfileScreen() {
   if (!user) {
     return (
       <div className="min-h-screen w-full flex flex-col items-center justify-center px-5" style={{ backgroundColor: "#F5F5F3" }}>
-        <div className="w-full max-w-lg rounded-[22px] p-6 text-center" style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
+        <div className="w-full max-w-lg rounded-[22px] p-6 text-center" style={{ backgroundColor: "white" }}>
           <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: "rgba(18,83,250,0.08)" }}>
             <PersonRounded sx={{ fontSize: 26, color: "#1253FA" }} />
           </div>
@@ -151,7 +151,7 @@ export default function ProfileScreen() {
         {/* ── Profile Card ── */}
         <div
           className="rounded-[22px] p-5 mb-6"
-          style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
+          style={{ backgroundColor: "white" }}
         >
           <div className="flex items-center gap-4 mb-4">
             <div
@@ -234,7 +234,7 @@ export default function ProfileScreen() {
         </div>
         <div
           className="rounded-[22px] overflow-hidden mb-6"
-          style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
+          style={{ backgroundColor: "white" }}
         >
           {SETTINGS.map((setting, i) => (
             <div key={setting.id}>
@@ -267,7 +267,7 @@ export default function ProfileScreen() {
         </div>
         <div
           className="rounded-[22px] overflow-hidden mb-6"
-          style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
+          style={{ backgroundColor: "white" }}
         >
           {MENU_ITEMS.map((item, i) => (
             <div key={item.label}>
@@ -300,7 +300,6 @@ export default function ProfileScreen() {
           className="w-full py-3.5 rounded-2xl flex items-center justify-center gap-2 cursor-pointer active:scale-[0.97] transition-transform"
           style={{
             backgroundColor: "white",
-            boxShadow: "0 2px 10px rgba(0,0,0,0.03)",
             border: "none",
           }}
         >

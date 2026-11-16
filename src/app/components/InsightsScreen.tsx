@@ -107,7 +107,7 @@ function StatCard({ label, value, color, icon }: { label: string; value: number;
     <div
       ref={ref}
       className="rounded-[18px] p-4 flex flex-col gap-2"
-      style={{ backgroundColor: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.03)" }}
+      style={{ backgroundColor: "white" }}
     >
       <div className="flex items-center justify-between">
         <div
@@ -182,7 +182,7 @@ export default function InsightsScreen() {
         {/* ── Completion Rate Ring ── */}
         <div
           className="rounded-[22px] p-6 flex flex-col items-center gap-4 mb-6"
-          style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
+          style={{ backgroundColor: "white" }}
         >
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", textTransform: "uppercase", letterSpacing: "0.08em" }}>
             Completion Rate
@@ -229,7 +229,7 @@ export default function InsightsScreen() {
         {/* ── Monthly Trend ── */}
         <div
           className="rounded-[22px] p-5 mb-6"
-          style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
+          style={{ backgroundColor: "white" }}
         >
           <div className="flex items-center justify-between mb-4">
             <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", textTransform: "uppercase", letterSpacing: "0.08em" }}>
@@ -245,7 +245,7 @@ export default function InsightsScreen() {
         {/* ── Quick Stats Row ── */}
         <div
           className="rounded-[22px] p-5"
-          style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
+          style={{ backgroundColor: "white" }}
         >
           <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", textTransform: "uppercase", letterSpacing: "0.08em" }}>
             Performance

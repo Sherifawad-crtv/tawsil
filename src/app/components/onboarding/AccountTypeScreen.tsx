@@ -26,7 +26,7 @@ function TypeCard({
     <button
       onClick={onClick}
       className="w-full rounded-[22px] p-5 flex items-center gap-4 cursor-pointer active:scale-[0.98] transition-transform text-left"
-      style={{ backgroundColor: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.04)", border: "none" }}
+      style={{ backgroundColor: "white", border: "1px solid #E8E8E5" }}
     >
       <div className="w-16 h-16 flex items-center justify-center flex-shrink-0">{icon}</div>
       <div className="flex-1 min-w-0">

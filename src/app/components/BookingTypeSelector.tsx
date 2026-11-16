@@ -392,7 +392,7 @@ function DailyRentalPicker({
       {/* Calendar */}
       <div
         className="rounded-2xl overflow-hidden"
-        style={{ backgroundColor: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}
+        style={{ backgroundColor: "white" }}
       >
         {/* Month nav */}
         <div className="flex items-center justify-between px-4 pt-4 pb-2">
@@ -482,7 +482,7 @@ function DailyRentalPicker({
       {selectedDay && (
         <div
           className="rounded-2xl overflow-hidden"
-          style={{ backgroundColor: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}
+          style={{ backgroundColor: "white" }}
         >
           <div className="px-4 pt-4 pb-2 flex items-center gap-2">
             <SpeedRounded sx={{ fontSize: 16, color: "#040033" }} />
@@ -821,7 +821,7 @@ function MonthDayPicker({
   return (
     <div
       className="rounded-2xl overflow-hidden"
-      style={{ backgroundColor: "white", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}
+      style={{ backgroundColor: "white" }}
     >
       {/* Header with month + bulk actions */}
       <div className="flex items-center justify-between px-4 pt-4 pb-2">

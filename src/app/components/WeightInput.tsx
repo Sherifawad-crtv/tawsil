@@ -200,7 +200,7 @@ export default function WeightInput({
           border: focused ? "2.5px solid #1253FA" : "2.5px solid transparent",
           boxShadow: focused
             ? "0 0 0 4px rgba(18,83,250,0.1), 0 4px 20px rgba(18,83,250,0.08)"
-            : "0 2px 10px rgba(0,0,0,0.04)",
+            : "none",
           padding: "20px 24px",
         }}
         onClick={() => inputRef.current?.focus()}
@@ -297,7 +297,7 @@ export default function WeightInput({
                   backgroundColor: isActive ? "#1253FA" : "white",
                   boxShadow: isActive
                     ? "0 4px 16px rgba(18,83,250,0.25)"
-                    : "0 1px 6px rgba(0,0,0,0.04)",
+                    : "none",
                   border: isActive ? "none" : "1px solid rgba(0,0,0,0.05)",
                 }}
               >

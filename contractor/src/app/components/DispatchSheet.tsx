@@ -21,7 +21,7 @@ function VehicleTile({ truck, selected, onSelect }: { truck: Truck; selected: bo
         scrollSnapAlign: "start",
         width: "220px",
         border: selected ? "2.5px solid #1253FA" : "2.5px solid transparent",
-        boxShadow: selected ? "0 4px 20px rgba(18,83,250,0.18)" : "0 2px 14px rgba(0,0,0,0.04)",
+        boxShadow: selected ? "0 4px 20px rgba(18,83,250,0.18)" : "none",
       }}
     >
       <div className="w-full overflow-hidden flex items-center justify-center" style={{ height: "128px", backgroundColor: "#F0F0EE" }}>
@@ -49,7 +49,7 @@ function DriverRow({ driver, selected, onSelect }: { driver: Driver; selected: b
       className="w-full flex items-center gap-3 rounded-[20px] bg-white p-3.5 cursor-pointer active:scale-[0.99] transition-transform text-left"
       style={{
         border: selected ? "2px solid #1253FA" : "2px solid transparent",
-        boxShadow: selected ? "0 2px 14px rgba(18,83,250,0.12)" : "0 2px 14px rgba(0,0,0,0.04)",
+        boxShadow: selected ? "0 2px 14px rgba(18,83,250,0.12)" : "none",
       }}
     >
       <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #040033, #0A0070)" }}>

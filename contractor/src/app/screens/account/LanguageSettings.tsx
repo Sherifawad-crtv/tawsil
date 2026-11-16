@@ -30,7 +30,7 @@ export default function LanguageSettings() {
                 className="w-full flex items-center gap-3.5 rounded-[22px] bg-white p-4 cursor-pointer active:scale-[0.99] transition-transform"
                 style={{
                   border: active ? "2px solid #1253FA" : "2px solid transparent",
-                  boxShadow: active ? "0 2px 14px rgba(18,83,250,0.12)" : "0 2px 16px rgba(0,0,0,0.04)",
+                  boxShadow: active ? "0 2px 14px rgba(18,83,250,0.12)" : "none",
                 }}
               >
                 <span style={{ fontSize: "26px" }}>{opt.flag}</span>

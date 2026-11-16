@@ -21,7 +21,7 @@ export default function AuthTextField({ label, error, id, ...inputProps }: AuthT
         data-invalid={error ? "true" : undefined}
         style={{
           backgroundColor: "white",
-          boxShadow: error ? "0 0 0 1.5px #DC2626" : "0 1px 6px rgba(0,0,0,0.04)",
+          boxShadow: error ? "0 0 0 1.5px #DC2626" : "none",
           height: "52px",
         }}
       >

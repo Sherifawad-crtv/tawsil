@@ -8,7 +8,7 @@ import type { Waypoint } from "../lib/types";
  */
 export default function MapSnippet({ stops }: { stops: Waypoint[] }) {
   return (
-    <div className="relative w-full overflow-hidden" style={{ height: "260px", backgroundColor: "#E8ECE3" }}>
+    <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: "#E8ECE3" }}>
       <RouteMap stops={stops} fallback={<StaticMap />} padding={{ top: 50, right: 40, bottom: 60, left: 40 }} />
     </div>
   );

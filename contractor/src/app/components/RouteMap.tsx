@@ -93,7 +93,7 @@ export default function RouteMap({
           zoom: 11,
           disableDefaultUI: true,
           zoomControl: true,
-          gestureHandling: "cooperative",
+          gestureHandling: "greedy",
           clickableIcons: false,
           styles: MAP_STYLE,
         });

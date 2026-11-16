@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { hasMapsKey, loadGoogleMaps, mapsRejected, onMapsRejected } from "../lib/googleMaps";
 import { resolveStops } from "../lib/stopCoords";
+import { drivingPath } from "../lib/routePath";
 import type { Waypoint } from "../lib/types";
 
 const NAVY = "#040033";
@@ -98,13 +99,31 @@ export default function RouteMap({
           styles: MAP_STYLE,
         });
 
+        // The road route when Google can compute it; otherwise a faint dashed line between the stops
+        const road = await drivingPath(maps, points);
+        if (cancelled) return;
+        const path = road ?? points;
+
         const bounds = new maps.LatLngBounds();
+        path.forEach((p) => bounds.extend(p));
         points.forEach((p) => bounds.extend(p));
 
-        overlays.push(
-          new maps.Polyline({ map, path: points, strokeColor: "#FFFFFF", strokeOpacity: 1, strokeWeight: 9, zIndex: 1 }),
-          new maps.Polyline({ map, path: points, strokeColor: BLUE, strokeOpacity: 1, strokeWeight: 5, zIndex: 2 }),
-        );
+        if (road) {
+          overlays.push(
+            new maps.Polyline({ map, path, strokeColor: "#FFFFFF", strokeOpacity: 1, strokeWeight: 9, zIndex: 1 }),
+            new maps.Polyline({ map, path, strokeColor: BLUE, strokeOpacity: 1, strokeWeight: 5, zIndex: 2 }),
+          );
+        } else {
+          overlays.push(
+            new maps.Polyline({
+              map,
+              path,
+              strokeOpacity: 0,
+              zIndex: 2,
+              icons: [{ icon: { path: "M 0,-1 0,1", strokeColor: BLUE, strokeOpacity: 0.8, scale: 3 }, offset: "0", repeat: "14px" }],
+            }),
+          );
+        }
         points.forEach((p, i) => {
           const kind: PinKind = i === 0 ? "first" : i === points.length - 1 ? "last" : "stop";
           overlays.push(createPin(maps, map, p, kind));

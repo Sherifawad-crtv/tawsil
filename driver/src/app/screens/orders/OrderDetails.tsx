@@ -35,14 +35,17 @@ export default function OrderDetails() {
   const hero = STATUS_STYLE[order.status];
 
   return (
-    <div className="w-full flex flex-col overflow-hidden" style={{ height: "100dvh", backgroundColor: "#F5F5F3" }}>
+    <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
       <ScreenHeader title="Order Details" onBack={() => navigate(-1)} />
-      {/* The map stays put; only the details below it scroll */}
-      <div className="relative flex-shrink-0" style={{ height: "30dvh", minHeight: "190px", maxHeight: "260px" }}>
+      {/* The map stays pinned under the header; the details scroll up over it */}
+      <div
+        className="sticky z-0"
+        style={{ top: "calc(max(env(safe-area-inset-top, 16px), 16px) + 53px)", height: "30dvh", minHeight: "190px", maxHeight: "260px" }}
+      >
         <MapSnippet stops={order.waypoints} />
       </div>
 
-      <div className="relative z-10 -mt-5 flex-1 min-h-0 overflow-y-auto rounded-t-[28px] pt-2" style={{ backgroundColor: "#F5F5F3", overscrollBehavior: "contain" }}>
+      <div className="relative z-10 -mt-5 rounded-t-[28px] pt-2" style={{ backgroundColor: "#F5F5F3", minHeight: "70dvh" }}>
         <div className="flex justify-center py-2">
           <div className="w-10 h-1.5 rounded-full" style={{ backgroundColor: "#D8D9D4" }} />
         </div>

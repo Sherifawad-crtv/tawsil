@@ -46,20 +46,21 @@ export default function OrderDetails() {
   const unassigned = order.status === "Accepted" && !order.driverId;
 
   return (
-    <div className="w-full flex flex-col overflow-hidden" style={{ height: "100dvh", backgroundColor: "#F5F5F3" }}>
-      <div className="relative flex-shrink-0" style={{ height: "36dvh", minHeight: "230px", maxHeight: "320px" }}>
+    <div className="min-h-screen w-full" style={{ backgroundColor: "#F5F5F3" }}>
+      {/* The map stays pinned behind; the details scroll up over it */}
+      <div className="sticky top-0 z-0" style={{ height: "36dvh", minHeight: "230px", maxHeight: "320px" }}>
         <MapSnippet stops={order.waypoints} />
         <button
           onClick={() => navigate(-1)}
           aria-label="Back"
-          className="absolute z-40 w-11 h-11 rounded-full flex items-center justify-center cursor-pointer active:scale-90 transition-transform"
+          className="fixed z-40 w-11 h-11 rounded-full flex items-center justify-center cursor-pointer active:scale-90 transition-transform"
           style={{ top: "max(env(safe-area-inset-top, 16px), 16px)", left: "16px", backgroundColor: "white", boxShadow: "0 2px 12px rgba(4,0,51,0.18)", border: "none" }}
         >
           <ArrowBackIosNewRounded sx={{ fontSize: 17, color: "#040033", marginLeft: "-1px" }} />
         </button>
       </div>
 
-      <div className="relative z-10 -mt-6 flex-1 min-h-0 rounded-t-[28px] bg-white overflow-y-auto" style={{ paddingBottom: unassigned ? "calc(env(safe-area-inset-bottom, 16px) + 96px)" : "40px", overscrollBehavior: "contain" }}>
+      <div className="relative z-10 -mt-6 rounded-t-[28px] bg-white overflow-hidden" style={{ minHeight: "70dvh", paddingBottom: unassigned ? "calc(env(safe-area-inset-bottom, 16px) + 96px)" : "40px" }}>
         <div className="flex justify-center pt-2.5 pb-1">
           <div className="w-10 h-1.5 rounded-full" style={{ backgroundColor: "#D8D9D4" }} />
         </div>

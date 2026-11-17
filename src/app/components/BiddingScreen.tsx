@@ -7,7 +7,12 @@ import AccessTimeRounded from "./icons/AccessTimeRounded";
 import CloseRounded from "./icons/CloseRounded";
 import TrendingDownRounded from "./icons/TrendingDownRounded";
 import GavelRounded from "./icons/GavelRounded";
+import AddRounded from "./icons/AddRounded";
+import RemoveRounded from "./icons/RemoveRounded";
+import BoltRounded from "./icons/BoltRounded";
 import ConfirmSheet from "./ConfirmSheet";
+import GoogleMap, { type LatLng } from "./GoogleMap";
+import { VEHICLES } from "./VehicleCarouselSelectable";
 
 export type Offer = {
   id: string;
@@ -31,25 +36,46 @@ const SEED_OFFERS: Offer[] = [
 ];
 
 const RECOMMENDED_PRICE = 310;
+const FARE_STEP = 10;
+const FARE_MIN = 200;
+const FARE_MAX = 500;
+
+const cardStyle = { backgroundColor: "white", border: "1px solid #E8E8E5" } as const;
 
 export default function BiddingScreen({
   onAccept,
   onCancel,
   initialOffer,
+  vehicleId,
+  start,
+  end,
 }: {
   onAccept: (offer: Offer) => void;
   onCancel: () => void;
   initialOffer?: number;
+  /** The truck picked in the booking, shown at the top of the sheet. */
+  vehicleId?: string;
+  start: LatLng;
+  end: LatLng;
 }) {
-  const [offers, setOffers] = useState<Offer[]>([SEED_OFFERS[0]]);
+  // Two phases, like a ride-hailing bid screen: set your fare first, then search and watch offers arrive.
+  const [phase, setPhase] = useState<"setup" | "searching">("setup");
+  const [offers, setOffers] = useState<Offer[]>([]);
   const [yourOffer, setYourOffer] = useState<number>(initialOffer ?? RECOMMENDED_PRICE);
+  const [autoAccept, setAutoAccept] = useState(false);
   const [counterOpen, setCounterOpen] = useState(false);
   const [confirmingCancel, setConfirmingCancel] = useState(false);
   const [pulseId, setPulseId] = useState<string | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const idx = useRef(1);
+  const vehicle = VEHICLES.find((v) => v.id === vehicleId) ?? VEHICLES[0];
+  const searching = phase === "searching";
 
   useEffect(() => {
+    if (!searching) return;
+    idx.current = 1;
+    setOffers([SEED_OFFERS[0]]);
+    setElapsed(0);
     const t = setInterval(() => {
       if (idx.current < SEED_OFFERS.length) {
         const next = SEED_OFFERS[idx.current];
@@ -59,162 +85,230 @@ export default function BiddingScreen({
         setTimeout(() => setPulseId(null), 700);
       }
     }, 1800);
-    return () => clearInterval(t);
-  }, []);
+    const clock = setInterval(() => setElapsed((e) => e + 1), 1000);
+    return () => {
+      clearInterval(t);
+      clearInterval(clock);
+    };
+  }, [searching]);
 
+  // Auto-accept: book the first driver whose price is at or under your fare.
   useEffect(() => {
-    const t = setInterval(() => setElapsed((e) => e + 1), 1000);
-    return () => clearInterval(t);
-  }, []);
+    if (!searching || !autoAccept) return;
+    const hit = offers.find((o) => o.price <= yourOffer);
+    if (!hit) return;
+    const t = setTimeout(() => onAccept(hit), 700);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searching, autoAccept, offers, yourOffer]);
 
   const sorted = [...offers].sort((a, b) => a.price - b.price);
   const cheapest = sorted[0]?.price ?? RECOMMENDED_PRICE;
+  const bump = (d: number) => setYourOffer((v) => Math.min(FARE_MAX, Math.max(FARE_MIN, v + d)));
+  const handleBack = () => (searching ? setConfirmingCancel(true) : onCancel());
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex flex-col"
-      style={{ backgroundColor: "#F5F5F3" }}
-    >
-      {/* Top bar */}
-      <div
-        className="flex items-center justify-between px-4 flex-shrink-0"
-        style={{
-          paddingTop: "max(env(safe-area-inset-top, 16px), 16px)",
-          paddingBottom: "12px",
-          backgroundColor: "#040033",
-        }}
+    <div className="fixed inset-0 z-50 overflow-hidden" style={{ backgroundColor: "#F5F5F3" }}>
+      {/* Route map */}
+      <div className="absolute inset-0">
+        <GoogleMap start={start} end={end} padding={{ top: 110, right: 50, bottom: searching ? 470 : 400, left: 50 }} />
+      </div>
+
+      <button
+        onClick={handleBack}
+        aria-label="Back"
+        className="absolute z-10 flex items-center justify-center cursor-pointer active:scale-90 transition-transform"
+        style={{ top: "max(env(safe-area-inset-top, 16px), 16px)", left: "16px", width: "44px", height: "44px", borderRadius: "16px", backgroundColor: "white", border: "none" }}
       >
-        <button
-          onClick={() => setConfirmingCancel(true)}
-          className="flex items-center justify-center cursor-pointer active:scale-90 transition-transform"
-          style={{ width: "40px", height: "40px", borderRadius: "14px", backgroundColor: "rgba(255,255,255,0.08)", border: "none" }}
-        >
-          <ArrowBackIosNewRounded sx={{ fontSize: 16, color: "white" }} />
-        </button>
-        <div className="flex flex-col items-center">
-          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "white", letterSpacing: "0.04em" }}>
-            LIVE BIDDING
-          </span>
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.1em" }}>
-            {String(Math.floor(elapsed / 60)).padStart(2, "0")}:{String(elapsed % 60).padStart(2, "0")} elapsed
-          </span>
-        </div>
-        <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl" style={{ backgroundColor: "rgba(18,83,250,0.18)" }}>
-          <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#1253FA", boxShadow: "0 0 8px #1253FA", animation: "pulse 1.4s ease-in-out infinite" }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA", letterSpacing: "0.08em" }}>LIVE</span>
-        </div>
-      </div>
+        <ArrowBackIosNewRounded sx={{ fontSize: 18, color: "#040033" }} />
+      </button>
 
-      {/* Your offer summary */}
-      <div className="px-4 pt-4 pb-3 flex-shrink-0" style={{ backgroundColor: "#040033" }}>
-        <div
-          className="rounded-2xl p-4"
-          style={{
-            background: "linear-gradient(135deg, rgba(18,83,250,0.18), rgba(10,0,112,0.4))",
-            border: "1px solid rgba(18,83,250,0.35)",
-          }}
-        >
-          <div className="flex items-center justify-between mb-2">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#9CA3AF", letterSpacing: "0.12em", textTransform: "uppercase" }}>
-              Your Offer
-            </span>
-            <button
-              onClick={() => setCounterOpen(true)}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-lg cursor-pointer active:opacity-70"
-              style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
-            >
-              <GavelRounded sx={{ fontSize: 12, color: "white" }} />
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "11px", color: "white" }}>Adjust</span>
-            </button>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "32px", color: "white", lineHeight: 1 }}>
-              EGP {yourOffer}
-            </span>
-            {cheapest < yourOffer && (
-              <div className="flex items-center gap-0.5">
-                <TrendingDownRounded sx={{ fontSize: 14, color: "#1253FA" }} />
-                <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#1253FA" }}>
-                  -{yourOffer - cheapest}
-                </span>
-              </div>
-            )}
-          </div>
-          <p className="mt-1.5" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#9CA3AF" }}>
-            {offers.length} driver{offers.length !== 1 ? "s" : ""} responding · Avg EGP {Math.round(offers.reduce((s, o) => s + o.price, 0) / offers.length)}
-          </p>
-        </div>
-      </div>
-
-      {/* Section header */}
-      <div className="flex items-center justify-between px-4 pt-5 pb-3 flex-shrink-0">
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>
-          Offers Coming In
-        </span>
-        <span
-          className="px-2 py-1 rounded-lg"
-          style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.08)", letterSpacing: "0.08em" }}
-        >
-          {offers.length} ACTIVE
-        </span>
-      </div>
-
-      {/* Offers list */}
-      <div className="flex-1 overflow-y-auto px-4 pb-4" style={{ minHeight: 0 }}>
-        <div className="flex flex-col gap-2.5">
-          {sorted.map((offer, i) => (
-            <OfferCard
-              key={offer.id}
-              offer={offer}
-              isCheapest={offer.price === cheapest && i === 0}
-              isNew={pulseId === offer.id}
-              onAccept={() => onAccept(offer)}
-            />
-          ))}
-        </div>
-
-        {/* Skeleton loader for incoming */}
-        {offers.length < SEED_OFFERS.length && (
-          <div
-            className="mt-2.5 rounded-2xl p-4 flex items-center gap-3"
-            style={{ backgroundColor: "white", border: "1px dashed #D8D9D4" }}
-          >
-            <div className="w-11 h-11 rounded-full" style={{ backgroundColor: "#F0F0EE", animation: "shimmer 1.5s ease-in-out infinite" }} />
-            <div className="flex-1">
-              <div className="h-3 rounded mb-2" style={{ width: "55%", backgroundColor: "#F0F0EE", animation: "shimmer 1.5s ease-in-out infinite" }} />
-              <div className="h-2.5 rounded" style={{ width: "35%", backgroundColor: "#F0F0EE", animation: "shimmer 1.5s ease-in-out infinite 0.2s" }} />
-            </div>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.08em" }}>
-              SEARCHING…
-            </span>
-          </div>
-        )}
-      </div>
-
-      {/* Cancel bar */}
+      {/* Bottom sheet */}
       <div
-        className="flex-shrink-0 px-4 pt-3"
+        className="absolute left-0 right-0 bottom-0 z-20 flex flex-col"
         style={{
-          paddingBottom: "max(env(safe-area-inset-bottom, 16px), 16px)",
-          borderTop: "1px solid rgba(232,232,229,0.6)",
+          height: searching ? "68dvh" : "auto",
+          maxHeight: "85dvh",
+          borderRadius: "24px 24px 0 0",
           backgroundColor: "#F5F5F3",
+          transition: "height 0.35s cubic-bezier(0.4,0,0.2,1)",
         }}
       >
-        <button
-          onClick={() => setConfirmingCancel(true)}
-          className="w-full rounded-2xl flex items-center justify-center gap-2 active:scale-[0.97] cursor-pointer"
-          style={{
-            backgroundColor: "white",
-            border: "1px solid #E8E8E5",
-            padding: "14px",
-            transition: "transform 0.2s ease",
-          }}
-        >
-          <CloseRounded sx={{ fontSize: 16, color: "#DC2626" }} />
-          <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "#DC2626", letterSpacing: "0.02em" }}>
-            Cancel Bidding
-          </span>
-        </button>
+        <div className="flex justify-center pt-3 pb-2 flex-shrink-0">
+          <div className="w-9 h-1 rounded-full" style={{ backgroundColor: "#C8C8C5" }} />
+        </div>
+
+        {!searching ? (
+          <>
+            <div className="px-4 flex flex-col gap-3">
+              {/* Selected vehicle */}
+              <div className="rounded-[22px] p-3 flex items-center gap-3" style={cardStyle}>
+                <img src={vehicle.image} alt="" draggable={false} className="object-contain flex-shrink-0" style={{ width: "72px", height: "52px" }} />
+                <div className="flex-1 min-w-0">
+                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "16px", color: "#040033" }}>{vehicle.name}</p>
+                  <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "#626A76", marginTop: "2px" }}>
+                    Nearest driver · {SEED_OFFERS[0].etaMin} min away
+                  </p>
+                </div>
+              </div>
+
+              {/* Fare stepper */}
+              <div className="rounded-[22px] p-3 flex items-center gap-3" style={cardStyle}>
+                <button
+                  onClick={() => bump(-FARE_STEP)}
+                  disabled={yourOffer <= FARE_MIN}
+                  aria-label="Lower your fare"
+                  className="flex items-center justify-center flex-shrink-0 cursor-pointer active:scale-90 transition-transform disabled:opacity-40"
+                  style={{ width: "52px", height: "52px", borderRadius: "16px", backgroundColor: "#F5F5F3", border: "none" }}
+                >
+                  <RemoveRounded sx={{ fontSize: 24, color: "#040033" }} />
+                </button>
+                <div className="flex-1 text-center">
+                  <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: 1.1 }}>EGP {yourOffer}</p>
+                  <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: yourOffer === RECOMMENDED_PRICE ? "#626A76" : "#1253FA", marginTop: "2px" }}>
+                    {yourOffer === RECOMMENDED_PRICE ? "Recommended fare" : `Recommended: EGP ${RECOMMENDED_PRICE}`}
+                  </p>
+                </div>
+                <button
+                  onClick={() => bump(FARE_STEP)}
+                  disabled={yourOffer >= FARE_MAX}
+                  aria-label="Raise your fare"
+                  className="flex items-center justify-center flex-shrink-0 cursor-pointer active:scale-90 transition-transform disabled:opacity-40"
+                  style={{ width: "52px", height: "52px", borderRadius: "16px", backgroundColor: "#F5F5F3", border: "none" }}
+                >
+                  <AddRounded sx={{ fontSize: 24, color: "#040033" }} />
+                </button>
+              </div>
+
+              {/* Auto-accept */}
+              <div className="rounded-[22px] p-3 flex items-center gap-3" style={cardStyle}>
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(18,83,250,0.08)" }}>
+                  <BoltRounded sx={{ fontSize: 20, color: "#1253FA" }} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>Auto-accept offer of EGP {yourOffer}</p>
+                  <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "1px" }}>
+                    Books the first driver at or under your fare
+                  </p>
+                </div>
+                <button
+                  role="switch"
+                  aria-checked={autoAccept}
+                  aria-label="Auto-accept"
+                  onClick={() => setAutoAccept((v) => !v)}
+                  className="relative flex-shrink-0 cursor-pointer"
+                  style={{ width: "48px", height: "28px", borderRadius: "14px", border: "none", backgroundColor: autoAccept ? "#1253FA" : "#D8D9D4", transition: "background-color 0.2s ease" }}
+                >
+                  <span
+                    className="absolute rounded-full"
+                    style={{ top: "3px", left: autoAccept ? "23px" : "3px", width: "22px", height: "22px", backgroundColor: "white", transition: "left 0.2s ease" }}
+                  />
+                </button>
+              </div>
+            </div>
+
+            <div
+              className="flex-shrink-0 px-4 pt-3 mt-3"
+              style={{ paddingBottom: "max(env(safe-area-inset-bottom, 0px), 12px)", borderTop: "1px solid rgba(232,232,229,0.6)" }}
+            >
+              <button
+                onClick={() => setPhase("searching")}
+                className="w-full rounded-2xl flex items-center justify-center active:scale-[0.97] cursor-pointer"
+                style={{ backgroundColor: "#1253FA", padding: "16px", border: "none", transition: "transform 0.2s ease" }}
+              >
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "white", letterSpacing: "0.02em" }}>Find drivers</span>
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            {/* Your offer */}
+            <div className="px-4 flex-shrink-0">
+              <div className="rounded-[22px] p-4" style={cardStyle}>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                    Your Offer
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg" style={{ backgroundColor: "rgba(18,83,250,0.08)" }}>
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#1253FA", animation: "pulse 1.4s ease-in-out infinite" }} />
+                      <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA", letterSpacing: "0.08em" }}>
+                        LIVE {String(Math.floor(elapsed / 60)).padStart(2, "0")}:{String(elapsed % 60).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => setCounterOpen(true)}
+                      className="flex items-center gap-1 px-2.5 py-1 rounded-lg cursor-pointer active:opacity-70"
+                      style={{ backgroundColor: "#F5F5F3", border: "none" }}
+                    >
+                      <GavelRounded sx={{ fontSize: 12, color: "#040033" }} />
+                      <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "11px", color: "#040033" }}>Adjust</span>
+                    </button>
+                  </div>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: 1 }}>EGP {yourOffer}</span>
+                  {cheapest < yourOffer && (
+                    <div className="flex items-center gap-0.5">
+                      <TrendingDownRounded sx={{ fontSize: 14, color: "#1253FA" }} />
+                      <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#1253FA" }}>-{yourOffer - cheapest}</span>
+                    </div>
+                  )}
+                </div>
+                <p className="mt-1" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76" }}>
+                  {offers.length} driver{offers.length !== 1 ? "s" : ""} responding · Avg EGP {Math.round(offers.reduce((s, o) => s + o.price, 0) / Math.max(1, offers.length))}
+                  {autoAccept ? " · Auto-accept on" : ""}
+                </p>
+              </div>
+            </div>
+
+            {/* Offers header */}
+            <div className="flex items-center justify-between px-4 pt-4 pb-3 flex-shrink-0">
+              <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#040033" }}>Offers Coming In</span>
+              <span
+                className="px-2 py-1 rounded-lg"
+                style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA", backgroundColor: "rgba(18,83,250,0.08)", letterSpacing: "0.08em" }}
+              >
+                {offers.length} ACTIVE
+              </span>
+            </div>
+
+            {/* Offers list */}
+            <div className="flex-1 overflow-y-auto px-4 pb-4" style={{ minHeight: 0 }}>
+              <div className="flex flex-col gap-2.5">
+                {sorted.map((offer, i) => (
+                  <OfferCard key={offer.id} offer={offer} isCheapest={offer.price === cheapest && i === 0} isNew={pulseId === offer.id} onAccept={() => onAccept(offer)} />
+                ))}
+              </div>
+
+              {offers.length < SEED_OFFERS.length && (
+                <div className="mt-2.5 rounded-2xl p-4 flex items-center gap-3" style={{ backgroundColor: "white", border: "1px dashed #D8D9D4" }}>
+                  <div className="w-11 h-11 rounded-full" style={{ backgroundColor: "#F0F0EE", animation: "shimmer 1.5s ease-in-out infinite" }} />
+                  <div className="flex-1">
+                    <div className="h-3 rounded mb-2" style={{ width: "55%", backgroundColor: "#F0F0EE", animation: "shimmer 1.5s ease-in-out infinite" }} />
+                    <div className="h-2.5 rounded" style={{ width: "35%", backgroundColor: "#F0F0EE", animation: "shimmer 1.5s ease-in-out infinite 0.2s" }} />
+                  </div>
+                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", letterSpacing: "0.08em" }}>SEARCHING…</span>
+                </div>
+              )}
+            </div>
+
+            {/* Cancel bar */}
+            <div
+              className="flex-shrink-0 px-4 pt-3"
+              style={{ paddingBottom: "max(env(safe-area-inset-bottom, 0px), 12px)", borderTop: "1px solid rgba(232,232,229,0.6)", backgroundColor: "#F5F5F3" }}
+            >
+              <button
+                onClick={() => setConfirmingCancel(true)}
+                className="w-full rounded-2xl flex items-center justify-center gap-2 active:scale-[0.97] cursor-pointer"
+                style={{ backgroundColor: "white", border: "1px solid #E8E8E5", padding: "14px", transition: "transform 0.2s ease" }}
+              >
+                <CloseRounded sx={{ fontSize: 16, color: "#DC2626" }} />
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "14px", color: "#DC2626", letterSpacing: "0.02em" }}>Cancel Bidding</span>
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
       {confirmingCancel && (

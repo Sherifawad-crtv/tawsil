@@ -627,6 +627,9 @@ export function TruckSelectorMap({ onBack, preset }: { onBack?: () => void; pres
 
       {showBidding && (
         <BiddingScreen
+          vehicleId={selected}
+          start={toLatLng(PICKUP)}
+          end={toLatLng(DROPOFF)}
           initialOffer={clientOffer ?? undefined}
           onCancel={() => setShowBidding(false)}
           onAccept={(offer) => {

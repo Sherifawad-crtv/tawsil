@@ -4,6 +4,10 @@ import LocalShippingRounded from "../../components/icons/LocalShippingRounded";
 import AddRounded from "../../components/icons/AddRounded";
 import PersonAddRounded from "../../components/icons/PersonAddRounded";
 import InboxRounded from "../../components/icons/InboxRounded";
+import ChevronRightRounded from "../../components/icons/ChevronRightRounded";
+import routeArt from "../../../assets/stat-route.webp";
+import truckArt from "../../../assets/stat-truck.webp";
+import driversArt from "../../../assets/stat-drivers.webp";
 import SectionLabel from "../../components/SectionLabel";
 import TripCard from "../../components/TripCard";
 import Carousel from "../../components/Carousel";
@@ -48,10 +52,10 @@ export default function HomeScreen() {
       />
 
       <div className="w-full max-w-lg mx-auto px-4 pt-5" style={{ paddingBottom: "24px" }}>
-      <div className="grid grid-cols-3 rounded-[22px] bg-white mb-6" >
-        <Figure label="Trucks" value={activeTrucks(trucks).length} onClick={() => navigate("/trucks")} />
-        <Figure label="Drivers" value={activeDrivers(drivers).length} onClick={() => navigate("/drivers")} divider />
-        <Figure label="On the road" value={inProgress.length} onClick={() => navigate("/home/active")} divider />
+      <div className="grid grid-cols-3 gap-3 mb-6">
+        <StatCard art={routeArt} label="On the road" value={inProgress.length} onClick={() => navigate("/home/active")} />
+        <StatCard art={truckArt} label="Trucks" value={activeTrucks(trucks).length} onClick={() => navigate("/trucks")} />
+        <StatCard art={driversArt} label="Drivers" value={activeDrivers(drivers).length} onClick={() => navigate("/drivers")} />
       </div>
 
       {needsDispatch.length > 0 && (
@@ -100,14 +104,17 @@ export default function HomeScreen() {
   );
 }
 
-function Figure({ label, value, onClick, divider }: { label: string; value: number; onClick: () => void; divider?: boolean }) {
+function StatCard({ art, label, value, onClick }: { art: string; label: string; value: number; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="py-4 px-4 text-left cursor-pointer active:bg-[#F5F5F3] transition-colors first:rounded-l-[22px] last:rounded-r-[22px]"
-      style={{ border: "none", background: "none", borderLeft: divider ? "1px solid #F0F0EE" : "none" }}
+      aria-label={`${label}: ${value}`}
+      className="relative rounded-[22px] bg-white p-3 text-left cursor-pointer active:scale-[0.97] transition-transform"
+      style={{ border: "none" }}
     >
-      <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", lineHeight: 1.1, color: "#040033" }}>{value}</p>
+      <ChevronRightRounded sx={{ fontSize: 16, color: "#8A919C", position: "absolute", top: "12px", right: "10px" }} />
+      <img src={art} alt="" draggable={false} width={48} height={48} style={{ width: 48, height: 48, objectFit: "contain", mixBlendMode: "multiply" }} />
+      <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", lineHeight: 1.1, color: "#040033", marginTop: "8px" }}>{value}</p>
       <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "2px" }}>{label}</p>
     </button>
   );

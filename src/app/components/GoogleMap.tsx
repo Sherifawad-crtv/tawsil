@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import mapBackdrop from "../../assets/map-backdrop.svg";
+import mapBuffer from "../../assets/map-buffer.svg";
 import { hasMapsKey, loadGoogleMaps, mapsRejected, onMapsRejected } from "../lib/googleMaps";
 import { drivingPath } from "../lib/routePath";
 
@@ -169,9 +169,9 @@ export default function GoogleMap({
   }, [key, failed]);
 
   return (
-    <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: "#F0F0EE" }}>
+    <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: "#ECECE8" }}>
       <div className="absolute inset-0">
-        {fallback ?? <img src={mapBackdrop} alt="" draggable={false} className="w-full h-full object-cover" />}
+        {fallback ?? <img src={mapBuffer} alt="" draggable={false} className="w-full h-full object-cover" />}
       </div>
       {!failed && <div ref={ref} className="absolute inset-0" style={{ opacity: ready ? 1 : 0, transition: "opacity 0.3s ease" }} />}
     </div>

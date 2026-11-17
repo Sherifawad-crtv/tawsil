@@ -2,27 +2,27 @@ import { useLayoutEffect, useSyncExternalStore } from "react";
 
 /**
  * Status-bar blending. In the installed app the page runs edge-to-edge under
- * the system status bar (iOS "black-translucent"), whose clock and battery are
- * always white. So the top of every screen gets a gradient: brand navy behind
- * the status bar so the white text stays readable, easing into whatever
- * background the screen has. Each screen states its background with
- * useStatusBar(); the topmost screen wins, and it falls back to the page
- * default when it unmounts. Browsers with no safe area (desktop, Android,
- * plain Safari tabs) get no overlay at all.
+ * the system status bar (iOS "black-translucent"). The strip behind the clock
+ * and battery is always painted in the screen's own background colour, so the
+ * status bar is never a different colour from the content beneath it; a short
+ * fade at its lower edge keeps scrolled content from meeting it in a hard line.
+ * Each screen states its background with useStatusBar(); the topmost screen
+ * wins, and it falls back to the page default when it unmounts. Browsers with
+ * no safe area (desktop, Android, plain Safari tabs) get no overlay at all.
  */
 
 export const STATUS_NAVY = "#040033";
 export const PAGE_BG = "#F5F5F3";
 
-type Entry = { id: number; bg: string; top: string };
+type Entry = { id: number; bg: string };
 
 let stack: Entry[] = [];
 let nextId = 1;
-let snapshot: Entry = { id: 0, bg: PAGE_BG, top: STATUS_NAVY };
+let snapshot: Entry = { id: 0, bg: PAGE_BG };
 const listeners = new Set<() => void>();
 
 function publish() {
-  snapshot = stack[stack.length - 1] ?? { id: 0, bg: PAGE_BG, top: STATUS_NAVY };
+  snapshot = stack[stack.length - 1] ?? { id: 0, bg: PAGE_BG };
   setThemeColor(snapshot.bg);
   listeners.forEach((l) => l());
 }
@@ -33,17 +33,17 @@ function setThemeColor(color: string) {
   document.querySelector('meta[name="theme-color"]')?.setAttribute("content", color);
 }
 
-/** Declare this screen's background (and optionally a different colour behind the clock). */
-export function useStatusBar(bg: string = PAGE_BG, top: string = STATUS_NAVY) {
+/** Declare this screen's background colour; the status bar strip is painted in it. */
+export function useStatusBar(bg: string = PAGE_BG) {
   useLayoutEffect(() => {
-    const entry: Entry = { id: nextId++, bg, top };
+    const entry: Entry = { id: nextId++, bg };
     stack = [...stack, entry];
     publish();
     return () => {
       stack = stack.filter((e) => e.id !== entry.id);
       publish();
     };
-  }, [bg, top]);
+  }, [bg]);
 }
 
 // Preview aid: open the app with ?sat=47 to see the status-bar blend in a desktop
@@ -60,10 +60,9 @@ const subscribe = (l: () => void) => {
 
 /** The overlay itself - mount once at the app root. */
 export function StatusBarFade() {
-  const { bg, top } = useSyncExternalStore(subscribe, () => snapshot);
+  const { bg } = useSyncExternalStore(subscribe, () => snapshot);
   const sat = "var(--sat)";
   const fade = "min(calc(var(--sat) * 100), 12px)";
-  const mix = (pct: number) => `color-mix(in srgb, ${top} ${pct}%, ${bg})`;
   return (
     <div
       aria-hidden
@@ -71,8 +70,8 @@ export function StatusBarFade() {
       style={{
         zIndex: 66,
         height: `calc(${sat} + ${fade})`,
-        // Eased stops so there is no visible edge: solid behind the clock, then a long soft landing.
-        background: `linear-gradient(to bottom, ${top} 0, ${top} calc(${sat} * 0.4), ${mix(60)} calc(${sat} * 0.7), ${mix(22)} calc(${sat} * 0.85), ${bg} ${sat}, transparent calc(${sat} + ${fade}))`,
+        // Solid in the screen's colour behind the clock, then a soft landing into the content.
+        background: `linear-gradient(to bottom, ${bg} 0, ${bg} ${sat}, transparent calc(${sat} + ${fade}))`,
       }}
     />
   );

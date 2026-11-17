@@ -50,80 +50,92 @@ export default function BottomNav({ activeScreen, onNavigate }: BottomNavProps) 
   const indicatorLeft = CONTAINER_PADDING + activeIndex * SLOT;
 
   return (
-    <nav
-      className="fixed left-1/2 z-40 flex items-center"
-      style={{
-        bottom: "max(env(safe-area-inset-bottom, 16px), 16px)",
-        transform: "translateX(-50%)",
-        gap: `${GAP}px`,
-        padding: `${CONTAINER_PADDING}px`,
-        borderRadius: "999px",
-        backgroundColor: "rgba(255,255,255,0.75)",
-        backdropFilter: "blur(24px) saturate(180%)",
-        WebkitBackdropFilter: "blur(24px) saturate(180%)",
-        border: "1px solid rgba(255,255,255,0.6)",
-      }}
-    >
-      {/* Sliding selector - constant size, always visible, walks between slots */}
+    <>
+      {/* Page-colour fade behind the bar, so content dissolves under it instead of being cut off */}
       <div
         aria-hidden
+        className="fixed left-0 right-0 bottom-0 pointer-events-none"
         style={{
-          position: "absolute",
-          top: `${CONTAINER_PADDING}px`,
-          bottom: `${CONTAINER_PADDING}px`,
-          left: 0,
-          width: `${ACTIVE_WIDTH}px`,
-          borderRadius: "999px",
-          backgroundColor: "#040033",
-          transform: `translateX(${indicatorLeft}px)`,
-          transition: `transform ${DURATION_MS}ms ${EASE}`,
-          willChange: "transform",
-          zIndex: 0,
+          zIndex: 39,
+          height: "calc(env(safe-area-inset-bottom, 0px) + 120px)",
+          background: "linear-gradient(to top, rgba(245,245,243,0.98) 0%, rgba(245,245,243,0.92) 35%, rgba(245,245,243,0) 100%)",
         }}
       />
+      <nav
+        className="fixed left-1/2 z-40 flex items-center"
+        style={{
+          bottom: "max(calc(env(safe-area-inset-bottom, 0px) - 8px), 12px)",
+          transform: "translateX(-50%)",
+          gap: `${GAP}px`,
+          padding: `${CONTAINER_PADDING}px`,
+          borderRadius: "999px",
+          backgroundColor: "rgba(255,255,255,0.75)",
+          backdropFilter: "blur(24px) saturate(180%)",
+          WebkitBackdropFilter: "blur(24px) saturate(180%)",
+          border: "1px solid rgba(255,255,255,0.6)",
+        }}
+      >
+        {/* Sliding selector - constant size, always visible, walks between slots */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: `${CONTAINER_PADDING}px`,
+            bottom: `${CONTAINER_PADDING}px`,
+            left: 0,
+            width: `${ACTIVE_WIDTH}px`,
+            borderRadius: "999px",
+            backgroundColor: "#040033",
+            transform: `translateX(${indicatorLeft}px)`,
+            transition: `transform ${DURATION_MS}ms ${EASE}`,
+            willChange: "transform",
+            zIndex: 0,
+          }}
+        />
 
-      {NAV_ITEMS.map((item) => {
-        const active = activeScreen === item.id;
-        const Icon = active ? item.iconActive : item.icon;
-        return (
-          <button
-            key={item.id}
-            onClick={() => onNavigate(item.id)}
-            aria-label={item.label}
-            aria-current={active ? "page" : undefined}
-            className="relative flex items-center justify-center cursor-pointer active:scale-95"
-            style={{
-              flexShrink: 0,
-              border: "none",
-              background: "none",
-              height: "44px",
-              width: active ? `${ACTIVE_WIDTH}px` : `${INACTIVE_WIDTH}px`,
-              borderRadius: "999px",
-              zIndex: 1,
-              transition: `width ${DURATION_MS}ms ${EASE}`,
-            }}
-          >
-            <Icon sx={{ fontSize: 22, color: active ? "white" : "#626A76", flexShrink: 0, transition: "color 0.3s ease" }} />
-            <span
+        {NAV_ITEMS.map((item) => {
+          const active = activeScreen === item.id;
+          const Icon = active ? item.iconActive : item.icon;
+          return (
+            <button
+              key={item.id}
+              onClick={() => onNavigate(item.id)}
+              aria-label={item.label}
+              aria-current={active ? "page" : undefined}
+              className="relative flex items-center justify-center cursor-pointer active:scale-95"
               style={{
-                fontFamily: "'Archivo', sans-serif",
-                fontWeight: 600,
-                fontSize: "13px",
-                color: "white",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                display: "inline-block",
-                marginLeft: active ? "7px" : "0px",
-                maxWidth: active ? "84px" : "0px",
-                opacity: active ? 1 : 0,
-                transition: `max-width ${DURATION_MS}ms ${EASE}, margin-left ${DURATION_MS}ms ${EASE}, opacity ${DURATION_MS}ms ${EASE}`,
+                flexShrink: 0,
+                border: "none",
+                background: "none",
+                height: "44px",
+                width: active ? `${ACTIVE_WIDTH}px` : `${INACTIVE_WIDTH}px`,
+                borderRadius: "999px",
+                zIndex: 1,
+                transition: `width ${DURATION_MS}ms ${EASE}`,
               }}
             >
-              {item.label}
-            </span>
-          </button>
-        );
-      })}
-    </nav>
+              <Icon sx={{ fontSize: 22, color: active ? "white" : "#626A76", flexShrink: 0, transition: "color 0.3s ease" }} />
+              <span
+                style={{
+                  fontFamily: "'Archivo', sans-serif",
+                  fontWeight: 600,
+                  fontSize: "13px",
+                  color: "white",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  display: "inline-block",
+                  marginLeft: active ? "7px" : "0px",
+                  maxWidth: active ? "84px" : "0px",
+                  opacity: active ? 1 : 0,
+                  transition: `max-width ${DURATION_MS}ms ${EASE}, margin-left ${DURATION_MS}ms ${EASE}, opacity ${DURATION_MS}ms ${EASE}`,
+                }}
+              >
+                {item.label}
+              </span>
+            </button>
+          );
+        })}
+      </nav>
+    </>
   );
 }

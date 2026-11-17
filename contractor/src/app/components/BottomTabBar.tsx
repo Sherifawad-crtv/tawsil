@@ -52,103 +52,115 @@ export default function BottomTabBar() {
   const indicatorLeft = CONTAINER_PADDING + activeIndex * SLOT;
 
   return (
-    <nav
-      className="fixed left-1/2 z-40 flex items-center"
-      style={{
-        bottom: "max(env(safe-area-inset-bottom, 16px), 16px)",
-        transform: "translateX(-50%)",
-        gap: `${GAP}px`,
-        padding: `${CONTAINER_PADDING}px`,
-        borderRadius: "999px",
-        backgroundColor: "rgba(255,255,255,0.75)",
-        backdropFilter: "blur(24px) saturate(180%)",
-        WebkitBackdropFilter: "blur(24px) saturate(180%)",
-        border: "1px solid rgba(255,255,255,0.6)",
-      }}
-    >
-      {/* Sliding selector - constant size, always visible, walks between slots */}
+    <>
+      {/* Page-colour fade behind the bar, so content dissolves under it instead of being cut off */}
       <div
         aria-hidden
+        className="fixed left-0 right-0 bottom-0 pointer-events-none"
         style={{
-          position: "absolute",
-          top: `${CONTAINER_PADDING}px`,
-          bottom: `${CONTAINER_PADDING}px`,
-          left: 0,
-          width: `${ACTIVE_WIDTH}px`,
-          borderRadius: "999px",
-          backgroundColor: "#1253FA",
-          transform: `translateX(${indicatorLeft}px)`,
-          transition: `transform ${DURATION_MS}ms ${EASE}`,
-          willChange: "transform",
-          zIndex: 0,
+          zIndex: 39,
+          height: "calc(env(safe-area-inset-bottom, 0px) + 120px)",
+          background: "linear-gradient(to top, rgba(245,245,243,0.98) 0%, rgba(245,245,243,0.92) 35%, rgba(245,245,243,0) 100%)",
         }}
       />
+      <nav
+        className="fixed left-1/2 z-40 flex items-center"
+        style={{
+          bottom: "max(calc(env(safe-area-inset-bottom, 0px) - 8px), 12px)",
+          transform: "translateX(-50%)",
+          gap: `${GAP}px`,
+          padding: `${CONTAINER_PADDING}px`,
+          borderRadius: "999px",
+          backgroundColor: "rgba(255,255,255,0.75)",
+          backdropFilter: "blur(24px) saturate(180%)",
+          WebkitBackdropFilter: "blur(24px) saturate(180%)",
+          border: "1px solid rgba(255,255,255,0.6)",
+        }}
+      >
+        {/* Sliding selector - constant size, always visible, walks between slots */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: `${CONTAINER_PADDING}px`,
+            bottom: `${CONTAINER_PADDING}px`,
+            left: 0,
+            width: `${ACTIVE_WIDTH}px`,
+            borderRadius: "999px",
+            backgroundColor: "#1253FA",
+            transform: `translateX(${indicatorLeft}px)`,
+            transition: `transform ${DURATION_MS}ms ${EASE}`,
+            willChange: "transform",
+            zIndex: 0,
+          }}
+        />
 
-      {TABS.map((tab) => {
-        const active = pathname.startsWith(tab.to);
-        const Icon = active ? tab.iconActive : tab.icon;
-        const badge = tab.to === "/orders" && !active ? pendingOrders : 0;
-        return (
-          <button
-            key={tab.to}
-            onClick={() => navigate(tab.to)}
-            aria-label={badge ? `${tab.label}, ${badge} pending` : tab.label}
-            aria-current={active ? "page" : undefined}
-            className="relative flex items-center justify-center cursor-pointer active:scale-95"
-            style={{
-              flexShrink: 0,
-              border: "none",
-              background: "none",
-              height: "44px",
-              width: active ? `${ACTIVE_WIDTH}px` : `${INACTIVE_WIDTH}px`,
-              borderRadius: "999px",
-              zIndex: 1,
-              transition: `width ${DURATION_MS}ms ${EASE}`,
-            }}
-          >
-            <span className="relative flex flex-shrink-0">
-              <Icon sx={{ fontSize: 22, color: active ? "white" : "#626A76", flexShrink: 0, transition: "color 0.3s ease" }} />
-              {badge > 0 && (
-                <span
-                  className="absolute flex items-center justify-center rounded-full"
-                  style={{
-                    top: "-6px",
-                    right: "-8px",
-                    minWidth: "17px",
-                    height: "17px",
-                    padding: "0 4px",
-                    backgroundColor: "#B45309",
-                    color: "white",
-                    fontFamily: "'Archivo', sans-serif",
-                    fontWeight: 700,
-                    fontSize: "10px",
-                    boxShadow: "0 0 0 2px white",
-                  }}
-                >
-                  {badge > 9 ? "9+" : badge}
-                </span>
-              )}
-            </span>
-            <span
+        {TABS.map((tab) => {
+          const active = pathname.startsWith(tab.to);
+          const Icon = active ? tab.iconActive : tab.icon;
+          const badge = tab.to === "/orders" && !active ? pendingOrders : 0;
+          return (
+            <button
+              key={tab.to}
+              onClick={() => navigate(tab.to)}
+              aria-label={badge ? `${tab.label}, ${badge} pending` : tab.label}
+              aria-current={active ? "page" : undefined}
+              className="relative flex items-center justify-center cursor-pointer active:scale-95"
               style={{
-                fontFamily: "'Archivo', sans-serif",
-                fontWeight: 600,
-                fontSize: "13px",
-                color: "white",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                display: "inline-block",
-                marginLeft: active ? "7px" : "0px",
-                maxWidth: active ? "84px" : "0px",
-                opacity: active ? 1 : 0,
-                transition: `max-width ${DURATION_MS}ms ${EASE}, margin-left ${DURATION_MS}ms ${EASE}, opacity ${DURATION_MS}ms ${EASE}`,
+                flexShrink: 0,
+                border: "none",
+                background: "none",
+                height: "44px",
+                width: active ? `${ACTIVE_WIDTH}px` : `${INACTIVE_WIDTH}px`,
+                borderRadius: "999px",
+                zIndex: 1,
+                transition: `width ${DURATION_MS}ms ${EASE}`,
               }}
             >
-              {tab.label}
-            </span>
-          </button>
-        );
-      })}
-    </nav>
+              <span className="relative flex flex-shrink-0">
+                <Icon sx={{ fontSize: 22, color: active ? "white" : "#626A76", flexShrink: 0, transition: "color 0.3s ease" }} />
+                {badge > 0 && (
+                  <span
+                    className="absolute flex items-center justify-center rounded-full"
+                    style={{
+                      top: "-6px",
+                      right: "-8px",
+                      minWidth: "17px",
+                      height: "17px",
+                      padding: "0 4px",
+                      backgroundColor: "#B45309",
+                      color: "white",
+                      fontFamily: "'Archivo', sans-serif",
+                      fontWeight: 700,
+                      fontSize: "10px",
+                      boxShadow: "0 0 0 2px white",
+                    }}
+                  >
+                    {badge > 9 ? "9+" : badge}
+                  </span>
+                )}
+              </span>
+              <span
+                style={{
+                  fontFamily: "'Archivo', sans-serif",
+                  fontWeight: 600,
+                  fontSize: "13px",
+                  color: "white",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  display: "inline-block",
+                  marginLeft: active ? "7px" : "0px",
+                  maxWidth: active ? "84px" : "0px",
+                  opacity: active ? 1 : 0,
+                  transition: `max-width ${DURATION_MS}ms ${EASE}, margin-left ${DURATION_MS}ms ${EASE}, opacity ${DURATION_MS}ms ${EASE}`,
+                }}
+              >
+                {tab.label}
+              </span>
+            </button>
+          );
+        })}
+      </nav>
+    </>
   );
 }

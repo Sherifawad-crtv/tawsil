@@ -1,6 +1,6 @@
 import "../styles/fonts.css";
 import { useState } from "react";
-import { TruckSelectorMap } from "./components/TruckSelectorMap";
+import { TruckSelectorMap, type BookingPreset } from "./components/TruckSelectorMap";
 import BottomNav from "./components/BottomNav";
 import type { NavScreen } from "./components/BottomNav";
 import HomeScreen from "./components/HomeScreen";
@@ -27,7 +27,9 @@ export default function App() {
   // for the rest of the session.
   const needsEmailPrompt = user?.type === "individual" && !user.email && !emailPromptDismissed;
 
-  const handleStartBooking = () => {
+  const [bookingPreset, setBookingPreset] = useState<BookingPreset | undefined>(undefined);
+  const handleStartBooking = (preset?: BookingPreset) => {
+    setBookingPreset(preset);
     if (needsEmailPrompt) {
       setShowEmailPrompt(true);
       return;
@@ -65,7 +67,7 @@ export default function App() {
       {screen === "insights" && <InsightsScreen />}
       {screen === "profile" && <ProfileScreen />}
       {screen === "booking" && (
-        <TruckSelectorMap onBack={() => setScreen("home")} />
+        <TruckSelectorMap onBack={() => setScreen("home")} preset={bookingPreset} />
       )}
 
       {/* Bottom tab bar - hidden during booking and the full-screen order details drill-in */}

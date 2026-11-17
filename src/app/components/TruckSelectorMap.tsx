@@ -1,6 +1,6 @@
 import CheckRounded from "./icons/CheckRounded";
 import BookingTypeSelector from "./BookingTypeSelector";
-import type { BookingTypeState } from "./BookingTypeSelector";
+import type { BookingTypeState, BookingCategory } from "./BookingTypeSelector";
 import { INITIAL_BOOKING_STATE } from "./BookingTypeSelector";
 import VehicleCarouselSelectable from "./VehicleCarouselSelectable";
 import TruckConfigGrid from "./TruckConfigGrid";
@@ -90,15 +90,15 @@ function useBottomSheet() {
    Individual skips both and goes straight from picking a vehicle to
    pickup/drop-off - Uber-style, one step shorter. */
 const STEP_TITLES_BUSINESS: { title: string; subtitle: string }[] = [
+  { title: "Pickup & Drop-off", subtitle: "Set your pickup and delivery locations." },
   { title: "Vehicle & Config", subtitle: "Select your truck type and cargo configuration." },
   { title: "Cargo Weight", subtitle: "Enter your cargo weight and delivery proof." },
-  { title: "Pickup & Drop-off", subtitle: "Set your pickup and delivery locations." },
   { title: "Review Booking", subtitle: "Verify all details before confirming." },
 ];
 
 const STEP_TITLES_INDIVIDUAL: { title: string; subtitle: string }[] = [
-  { title: "Choose a Ride", subtitle: "Pick the vehicle that fits your delivery." },
   { title: "Pickup & Drop-off", subtitle: "Set your pickup and delivery locations." },
+  { title: "Choose a Ride", subtitle: "Pick the vehicle that fits your delivery." },
   { title: "Review Booking", subtitle: "Verify all details before confirming." },
 ];
 
@@ -298,7 +298,16 @@ function ConfirmationOverlay({ onDone, offer }: { onDone: () => void; offer?: Of
 /* ═════════════════════════════════════════��══════
    MAIN COMPONENT
    ════════════════════════════════════════════════ */
-export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
+export interface BookingPreset {
+  /** On-demand or rental, picked on Home. */
+  category: BookingCategory;
+  /** The "Later" pill was tapped: open the date and time picker straight away. */
+  openSchedule?: boolean;
+  /** A vehicle tapped on Home. */
+  vehicle?: string;
+}
+
+export function TruckSelectorMap({ onBack, preset }: { onBack?: () => void; preset?: BookingPreset }) {
   const { user, isGuest } = useAuth();
   // A guest (no user yet) is the non-B2B path by definition, so it gets the
   // same shorter individual flow - not just for the right copy, but because
@@ -312,7 +321,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
 
   const [step, setStep] = useState(1);
   const [prevStep, setPrevStep] = useState(1);
-  const [selected, setSelected] = useState<string>("pickup");
+  const [selected, setSelected] = useState<string>(preset?.vehicle ?? "pickup");
   const [config, setConfig] = useState<string>("closed");
   const [weightKg, setWeightKg] = useState(0);
   const [schedule, setSchedule] = useState<{ mode: "now" | "schedule"; date?: Date; time?: string }>({ mode: "now" });
@@ -324,9 +333,20 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
   const [showRegisterGate, setShowRegisterGate] = useState(false);
   const [acceptedOffer, setAcceptedOffer] = useState<Offer | null>(null);
   const [clientOffer, setClientOffer] = useState<number | null>(null);
-  const [showScheduleModal, setShowScheduleModal] = useState(false);
-  const [bookingType, setBookingType] = useState<BookingTypeState>(INITIAL_BOOKING_STATE);
+  const startsLater = !!preset?.openSchedule && preset.category === "on-demand";
+  const [showScheduleModal, setShowScheduleModal] = useState(startsLater);
+  const [bookingType, setBookingType] = useState<BookingTypeState>({
+    ...INITIAL_BOOKING_STATE,
+    category: preset?.category ?? INITIAL_BOOKING_STATE.category,
+    onDemandMode: startsLater ? "schedule" : "now",
+  });
   const { snapFraction, sheetEl, onPointerDown, onPointerMove, onPointerUp, expandTo } = useBottomSheet();
+
+  // Booking starts at "where to", which needs room: open the sheet part-way.
+  useEffect(() => {
+    expandTo(SNAP_MID);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const currentStep = STEP_TITLES[step - 1];
 
@@ -367,6 +387,7 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
     <>
       {/* ── Booking Type Selector ── */}
       <BookingTypeSelector
+        simple={!!preset}
         state={bookingType}
         onChange={(newState) => {
           setBookingType(newState);
@@ -483,11 +504,11 @@ export function TruckSelectorMap({ onBack }: { onBack?: () => void }) {
   const renderStepContent = () => {
     switch (step) {
       case 1:
-        return vehicleStepContent;
+        return pickupDropoffContent;
       case 2:
-        return isIndividual ? pickupDropoffContent : weightStepContent;
+        return vehicleStepContent;
       case 3:
-        return isIndividual ? reviewContent : pickupDropoffContent;
+        return isIndividual ? reviewContent : weightStepContent;
       case 4:
         return reviewContent;
       default:

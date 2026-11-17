@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { VEHICLES } from "./VehicleCarouselSelectable";
-import AddRounded from "./icons/AddRounded";
+import SearchRounded from "./icons/SearchRounded";
+import BoltRounded from "./icons/BoltRounded";
+import DateRangeRounded from "./icons/DateRangeRounded";
+import CalendarMonthRounded from "./icons/CalendarMonthRounded";
+import type { BookingPreset } from "./TruckSelectorMap";
 import ChevronRightRounded from "./icons/ChevronRightRounded";
 import AccessTimeRounded from "./icons/AccessTimeRounded";
 import PhoneRounded from "./icons/PhoneRounded";
@@ -28,7 +32,7 @@ const ACTIVE_TRIP = {
 };
 
 interface HomeScreenProps {
-  onStartBooking: () => void;
+  onStartBooking: (preset?: BookingPreset) => void;
   onViewActivity: () => void;
   onOpenOrder?: () => void;
 }
@@ -37,6 +41,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
   const { user } = useAuth();
   const [hasActiveTrip] = useState(true);
   const [greeting, setGreeting] = useState("Good morning");
+  const [category, setCategory] = useState<"on-demand" | "rental">("on-demand");
 
   useEffect(() => {
     const h = new Date().getHours();
@@ -63,32 +68,57 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
           </p>
         </div>
 
-        {/* ── Quick Book CTA ── */}
-        <button
-          onClick={onStartBooking}
-          className="w-full rounded-[22px] p-5 flex items-center gap-4 cursor-pointer active:scale-[0.98] transition-transform mb-6"
-          style={{
-            background: "linear-gradient(135deg, #040033 0%, #0A0070 50%, #1253FA 100%)",
-            border: "none",
-            textAlign: "left",
-          }}
-        >
+        {/* ── Booking: type tabs and a "where to" bar with scheduling inside it ── */}
+        <div className="mb-6">
+          <div className="flex" style={{ borderBottom: "1px solid #E8E8E5" }} role="tablist" aria-label="Booking type">
+            {([
+              { id: "on-demand" as const, label: "On-Demand", icon: BoltRounded },
+              { id: "rental" as const, label: "Rental", icon: DateRangeRounded },
+            ]).map(({ id, label, icon: Icon }) => {
+              const active = category === id;
+              return (
+                <button
+                  key={id}
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setCategory(id)}
+                  className="flex-1 flex items-center justify-center gap-2 pt-1 pb-3 cursor-pointer relative"
+                  style={{ border: "none", background: "none" }}
+                >
+                  <Icon sx={{ fontSize: 20, color: active ? "#040033" : "#8A919C" }} />
+                  <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: active ? 700 : 500, fontSize: "15px", color: active ? "#040033" : "#8A919C" }}>
+                    {label}
+                  </span>
+                  {active && <span className="absolute left-6 right-6 bottom-[-1px] rounded-t-full" style={{ height: "3px", backgroundColor: "#040033" }} />}
+                </button>
+              );
+            })}
+          </div>
+
           <div
-            className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
-            style={{ backgroundColor: "rgba(255,255,255,0.12)" }}
+            className="mt-4 flex items-center rounded-full"
+            style={{ backgroundColor: "white", border: "1.5px solid #E8E8E5", height: "56px", padding: "0 8px 0 0" }}
           >
-            <AddRounded sx={{ fontSize: 26, color: "white" }} />
+            <button
+              onClick={() => onStartBooking({ category })}
+              className="flex-1 flex items-center gap-3 h-full cursor-pointer active:opacity-70 transition-opacity text-left"
+              style={{ border: "none", background: "none", paddingLeft: "18px" }}
+            >
+              <SearchRounded sx={{ fontSize: 22, color: "#040033" }} />
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "17px", color: "#626A76" }}>Where to?</span>
+            </button>
+            <button
+              onClick={() => onStartBooking({ category, openSchedule: true })}
+              className="flex items-center gap-1.5 rounded-full cursor-pointer active:scale-95 transition-transform"
+              style={{ backgroundColor: "#F5F5F3", border: "none", height: "40px", padding: "0 14px" }}
+            >
+              <CalendarMonthRounded sx={{ fontSize: 17, color: "#040033" }} />
+              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>
+                {category === "rental" ? "Dates" : "Later"}
+              </span>
+            </button>
           </div>
-          <div className="flex-1">
-            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "white" }}>
-              Book a Truck
-            </span>
-            <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "12px", color: "rgba(255,255,255,0.6)", marginTop: "4px" }}>
-              Start a new delivery booking
-            </p>
-          </div>
-          <ChevronRightRounded sx={{ fontSize: 22, color: "rgba(255,255,255,0.5)" }} />
-        </button>
+        </div>
 
         {/* ── Active Trip (conditional) ── */}
         {hasActiveTrip && (
@@ -203,7 +233,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
           {VEHICLES.map((v) => (
             <button
               key={v.id}
-              onClick={onStartBooking}
+              onClick={() => onStartBooking({ category, vehicle: v.id })}
               className="flex-shrink-0 rounded-[18px] overflow-hidden cursor-pointer active:scale-[0.96] transition-transform"
               style={{
                 width: "130px",

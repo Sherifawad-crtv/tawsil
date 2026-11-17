@@ -100,7 +100,7 @@ export default function BottomTabBar() {
               <span
                 style={{
                   fontFamily: "'Archivo', sans-serif",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   fontSize: "13px",
                   color: "white",
                   whiteSpace: "nowrap",

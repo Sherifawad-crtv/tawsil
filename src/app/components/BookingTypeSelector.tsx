@@ -45,6 +45,8 @@ interface Props {
   onChange: (state: BookingTypeState) => void;
   onOpenScheduleModal: () => void;
   scheduleSummary?: string | null;
+  /** The category and on-demand timing were chosen on Home, so show a one-line summary instead of the full selector. */
+  simple?: boolean;
 }
 
 /* ── Helpers ── */
@@ -66,8 +68,57 @@ function isSameDay(a: Date, b: Date) {
 /* ══════════════════════════════════════════
    MAIN COMPONENT
    ══════════════════════════════════════════ */
-export default function BookingTypeSelector({ state, onChange, onOpenScheduleModal, scheduleSummary }: Props) {
+export default function BookingTypeSelector({ state, onChange, onOpenScheduleModal, scheduleSummary, simple }: Props) {
   const update = (partial: Partial<BookingTypeState>) => onChange({ ...state, ...partial });
+
+  if (simple) {
+    return (
+      <div className="flex flex-col gap-4 w-full">
+        {state.category === "on-demand" ? (
+          <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white" style={{ border: "1.5px solid #E8E8E5" }}>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(18,83,250,0.08)" }}>
+              {state.onDemandMode === "now" ? (
+                <AccessTimeRounded sx={{ fontSize: 18, color: "#1253FA" }} />
+              ) : (
+                <CalendarMonthRounded sx={{ fontSize: 18, color: "#1253FA" }} />
+              )}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>
+                {state.onDemandMode === "now" ? "Now" : "Later"}
+              </p>
+              <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "1px" }}>
+                {state.onDemandMode === "now" ? "Instant dispatch" : scheduleSummary ?? "Pick a date and time"}
+              </p>
+            </div>
+            <div className="flex items-center gap-3 flex-shrink-0">
+              {state.onDemandMode === "schedule" && (
+                <button onClick={() => update({ onDemandMode: "now" })} className="cursor-pointer active:opacity-70" style={{ border: "none", background: "none", fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "12px", color: "#626A76" }}>
+                  Now
+                </button>
+              )}
+              <button onClick={onOpenScheduleModal} className="cursor-pointer active:opacity-70" style={{ border: "none", background: "none", fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "12px", color: "#1253FA" }}>
+                {state.onDemandMode === "now" ? "Schedule" : "Change"}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <RentalSection
+            mode={state.rentalMode}
+            onModeChange={(m) => update({ rentalMode: m })}
+            rentalDay={state.rentalDay}
+            onRentalDayChange={(d) => update({ rentalDay: d })}
+            dailyKm={state.dailyKm}
+            onDailyKmChange={(km) => update({ dailyKm: km })}
+            rentalMonth={state.rentalMonth}
+            onRentalMonthChange={(m) => update({ rentalMonth: m })}
+            monthlyDays={state.monthlyDays}
+            onMonthlyDaysChange={(d) => update({ monthlyDays: d })}
+          />
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-4 w-full">

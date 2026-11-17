@@ -22,11 +22,11 @@ export default function ScreenShell({
       {background && (
         <div aria-hidden className="absolute inset-0 pointer-events-none">
           {background}
-          {/* Where the system draws its own status bar above the page, the map would
-              otherwise start in a hard edge right under it. */}
+          {/* The map starts in the page tone (the same colour the status bar shows)
+              and eases into the artwork, so there is no edge under the system bar. */}
           <div
             className="absolute top-0 left-0 right-0 h-16"
-            style={{ background: "linear-gradient(to bottom, #FFFFFF, rgba(255,255,255,0))" }}
+            style={{ background: "linear-gradient(to bottom, #F5F5F3 0%, rgba(245,245,243,0.75) 35%, rgba(245,245,243,0.3) 70%, rgba(245,245,243,0) 100%)" }}
           />
         </div>
       )}

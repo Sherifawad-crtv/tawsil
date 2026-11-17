@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { VEHICLES } from "./VehicleCarouselSelectable";
 import SearchRounded from "./icons/SearchRounded";
-import BoltRounded from "./icons/BoltRounded";
-import DateRangeRounded from "./icons/DateRangeRounded";
+import onDemandArt from "../../assets/tab-ondemand.webp";
+import rentalArt from "../../assets/tab-rental.webp";
 import CalendarMonthRounded from "./icons/CalendarMonthRounded";
 import type { BookingPreset } from "./TruckSelectorMap";
 import ChevronRightRounded from "./icons/ChevronRightRounded";
@@ -73,9 +73,9 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
         <div className="mb-6">
           <div className="flex" style={{ borderBottom: "1px solid #E8E8E5" }} role="tablist" aria-label="Booking type">
             {([
-              { id: "on-demand" as const, label: "On-Demand", icon: BoltRounded },
-              { id: "rental" as const, label: "Rental", icon: DateRangeRounded },
-            ]).map(({ id, label, icon: Icon }) => {
+              { id: "on-demand" as const, label: "On-Demand", art: onDemandArt },
+              { id: "rental" as const, label: "Rental", art: rentalArt },
+            ]).map(({ id, label, art }) => {
               const active = id === "on-demand";
               return (
                 <button
@@ -86,7 +86,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
                   className="flex-1 flex items-center justify-center gap-2 pt-1 pb-3 cursor-pointer relative"
                   style={{ border: "none", background: "none" }}
                 >
-                  <Icon sx={{ fontSize: 20, color: active ? "#040033" : "#8A919C" }} />
+                  <img src={art} alt="" draggable={false} width={20} height={20} style={{ width: 20, height: 20, objectFit: "contain", mixBlendMode: "multiply" }} />
                   <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: active ? 700 : 500, fontSize: "15px", color: active ? "#040033" : "#8A919C" }}>
                     {label}
                   </span>

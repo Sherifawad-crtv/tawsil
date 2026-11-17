@@ -319,8 +319,10 @@ export function TruckSelectorMap({ onBack, preset }: { onBack?: () => void; pres
   const TOTAL_STEPS = isIndividual ? 3 : 4;
   const STEP_TITLES = isIndividual ? STEP_TITLES_INDIVIDUAL : STEP_TITLES_BUSINESS;
 
-  const [step, setStep] = useState(1);
-  const [prevStep, setPrevStep] = useState(1);
+  // Rental opens straight on the step that holds its scheduling (day / month pickers).
+  const firstStep = preset?.category === "rental" ? 2 : 1;
+  const [step, setStep] = useState(firstStep);
+  const [prevStep, setPrevStep] = useState(firstStep);
   const [selected, setSelected] = useState<string>(preset?.vehicle ?? "pickup");
   const [config, setConfig] = useState<string>("closed");
   const [weightKg, setWeightKg] = useState(0);
@@ -344,7 +346,7 @@ export function TruckSelectorMap({ onBack, preset }: { onBack?: () => void; pres
 
   // Booking starts at "where to", which needs room: open the sheet part-way.
   useEffect(() => {
-    expandTo(SNAP_MID);
+    expandTo(preset?.category === "rental" ? SNAP_FULL : SNAP_MID);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

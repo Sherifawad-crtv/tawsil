@@ -41,7 +41,8 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
   const { user } = useAuth();
   const [hasActiveTrip] = useState(true);
   const [greeting, setGreeting] = useState("Good morning");
-  const [category, setCategory] = useState<"on-demand" | "rental">("on-demand");
+  // Home is always the on-demand entry; the Rental tab opens the rental scheduling in the booking flow.
+  const category = "on-demand" as const;
 
   useEffect(() => {
     const h = new Date().getHours();
@@ -75,13 +76,13 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
               { id: "on-demand" as const, label: "On-Demand", icon: BoltRounded },
               { id: "rental" as const, label: "Rental", icon: DateRangeRounded },
             ]).map(({ id, label, icon: Icon }) => {
-              const active = category === id;
+              const active = id === "on-demand";
               return (
                 <button
                   key={id}
                   role="tab"
                   aria-selected={active}
-                  onClick={() => setCategory(id)}
+                  onClick={() => (id === "rental" ? onStartBooking({ category: "rental" }) : undefined)}
                   className="flex-1 flex items-center justify-center gap-2 pt-1 pb-3 cursor-pointer relative"
                   style={{ border: "none", background: "none" }}
                 >
@@ -114,7 +115,7 @@ export default function HomeScreen({ onStartBooking, onViewActivity, onOpenOrder
             >
               <CalendarMonthRounded sx={{ fontSize: 17, color: "#040033" }} />
               <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>
-                {category === "rental" ? "Dates" : "Later"}
+                Later
               </span>
             </button>
           </div>

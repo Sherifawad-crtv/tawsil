@@ -230,67 +230,123 @@ function StepTransition({ stepKey, children }: { stepKey: number; children: Reac
 /* ── Confirmation Overlay ── */
 function ConfirmationOverlay({ onDone, offer }: { onDone: () => void; offer?: Offer | null }) {
   const [entered, setEntered] = useState(false);
+  // The booking is first sent to the chosen driver and only confirmed once they accept.
+  const [stage, setStage] = useState<"confirming" | "confirmed">("confirming");
+  const [orderId] = useState(() => `FLT-${Math.floor(Math.random() * 9000 + 1000)}`);
+  const confirmed = stage === "confirmed";
 
   useEffect(() => {
     const t0 = requestAnimationFrame(() => {
       requestAnimationFrame(() => setEntered(true));
     });
-    const t = setTimeout(onDone, 2400);
+    const t = setTimeout(() => setStage("confirmed"), 2800);
     return () => { cancelAnimationFrame(t0); clearTimeout(t); };
-  }, [onDone]);
+  }, []);
+
+  const fade = (delay: number) => ({
+    opacity: entered ? 1 : 0,
+    transform: entered ? "translateY(0)" : "translateY(10px)",
+    transition: `opacity 0.5s ease ${delay}s, transform 0.5s cubic-bezier(0.16,1,0.3,1) ${delay}s`,
+  });
+  const steps = [
+    { label: "Booking sent", done: true },
+    { label: "Driver confirming", done: confirmed },
+    { label: "Dispatch", done: confirmed },
+  ];
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 px-6"
       style={{
         backgroundColor: entered ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0)",
         backdropFilter: entered ? "blur(20px)" : "blur(0px)",
         transition: "background-color 0.6s cubic-bezier(0.16,1,0.3,1), backdrop-filter 0.6s ease-out",
       }}
     >
-      <div
-        className="w-20 h-20 rounded-full flex items-center justify-center"
-        style={{
-          backgroundColor: "rgba(18,83,250,0.1)",
-          opacity: entered ? 1 : 0,
-          transform: entered ? "scale(1)" : "scale(0.5)",
-          transition: "opacity 0.6s cubic-bezier(0.16,1,0.3,1) 0.15s, transform 0.6s cubic-bezier(0.16,1,0.3,1) 0.15s",
-        }}
-      >
-        <CheckRounded
-          sx={{
-            fontSize: 36,
-            color: "#1253FA",
-            opacity: entered ? 1 : 0,
-            transform: entered ? "scale(1)" : "scale(0.5)",
-            transition: "opacity 0.5s cubic-bezier(0.16,1,0.3,1) 0.4s, transform 0.5s cubic-bezier(0.16,1,0.3,1) 0.4s",
-          }}
-        />
+      <div className="relative w-24 h-24 flex items-center justify-center" style={fade(0.1)}>
+        {!confirmed && (
+          <span
+            className="absolute inset-0 rounded-full"
+            style={{ border: "3px solid rgba(18,83,250,0.15)", borderTopColor: "#1253FA", animation: "confirmSpin 0.9s linear infinite" }}
+          />
+        )}
+        <div
+          className="w-20 h-20 rounded-full flex items-center justify-center"
+          style={{ backgroundColor: confirmed ? "rgba(18,83,250,0.1)" : "#040033", transition: "background-color 0.4s ease" }}
+        >
+          {confirmed ? (
+            <CheckRounded sx={{ fontSize: 36, color: "#1253FA" }} />
+          ) : (
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "24px", color: "white", letterSpacing: "0.04em" }}>
+              {offer?.initials ?? "…"}
+            </span>
+          )}
+        </div>
       </div>
-      <h1 style={{
-        fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033",
-        opacity: entered ? 1 : 0,
-        transform: entered ? "translateY(0)" : "translateY(12px)",
-        transition: "opacity 0.5s ease 0.35s, transform 0.5s cubic-bezier(0.16,1,0.3,1) 0.35s",
-      }}>Booking Confirmed</h1>
-      <p style={{
-        fontFamily: "'Courier Prime', monospace", fontSize: "14px", color: "#6B7280",
-        opacity: entered ? 1 : 0,
-        transform: entered ? "translateY(0)" : "translateY(10px)",
-        transition: "opacity 0.5s ease 0.5s, transform 0.5s cubic-bezier(0.16,1,0.3,1) 0.5s",
-      }}>
-        {offer ? `${offer.driverName} is on the way · ${offer.etaMin} min` : "Your truck is being dispatched."}
+
+      <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033", textAlign: "center", ...fade(0.2) }}>
+        {confirmed ? "Booking Confirmed" : offer ? `Confirming with ${offer.driverName}` : "Confirming your booking"}
+      </h1>
+      <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "14px", color: "#6B7280", textAlign: "center", ...fade(0.3) }}>
+        {confirmed
+          ? offer ? `${offer.driverName} is on the way · ${offer.etaMin} min` : "Your truck is being dispatched."
+          : "Waiting for the driver to accept your booking."}
       </p>
-      <div className="px-5 py-2.5 rounded-2xl" style={{
-        backgroundColor: "rgba(18,83,250,0.08)",
-        opacity: entered ? 1 : 0,
-        transform: entered ? "translateY(0)" : "translateY(10px)",
-        transition: "opacity 0.5s ease 0.65s, transform 0.5s cubic-bezier(0.16,1,0.3,1) 0.65s",
-      }}>
-        <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#1253FA" }}>
-          Order #FLT-{Math.floor(Math.random() * 9000 + 1000)}
-        </span>
-      </div>
+
+      {confirmed ? (
+        <>
+          {offer && (
+            <div className="w-full max-w-sm rounded-[22px] p-4 flex items-center gap-3" style={{ backgroundColor: "white", border: "1px solid #E8E8E5", animation: "confirmIn 0.5s cubic-bezier(0.16,1,0.3,1)" }}>
+              <div className="flex items-center justify-center flex-shrink-0" style={{ width: "48px", height: "48px", borderRadius: "16px", backgroundColor: "#040033" }}>
+                <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "white", letterSpacing: "0.04em" }}>{offer.initials}</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "15px", color: "#040033" }}>{offer.driverName}</p>
+                <p className="truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "2px" }}>
+                  {offer.rating} ★ · {offer.vehicle}
+                </p>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "18px", color: "#040033", lineHeight: 1 }}>EGP {offer.price}</p>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", marginTop: "3px" }}>{offer.etaMin} min away</p>
+              </div>
+            </div>
+          )}
+          <div className="px-5 py-2.5 rounded-2xl" style={{ backgroundColor: "rgba(18,83,250,0.08)", animation: "confirmIn 0.5s cubic-bezier(0.16,1,0.3,1) 0.1s both" }}>
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "16px", color: "#1253FA" }}>Order #{orderId}</span>
+          </div>
+          <button
+            onClick={onDone}
+            className="w-full max-w-sm rounded-2xl flex items-center justify-center active:scale-[0.97] cursor-pointer"
+            style={{ backgroundColor: "#1253FA", padding: "16px", border: "none", marginTop: "8px", animation: "confirmIn 0.5s cubic-bezier(0.16,1,0.3,1) 0.2s both", transition: "transform 0.2s ease" }}
+          >
+            <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "white", letterSpacing: "0.02em" }}>Done</span>
+          </button>
+        </>
+      ) : (
+        <div className="w-full max-w-sm flex flex-col gap-3 mt-2" style={fade(0.4)}>
+          {steps.map((st, i) => {
+            const current = !st.done && steps.slice(0, i).every((x) => x.done);
+            return (
+              <div key={st.label} className="flex items-center gap-3">
+                <div
+                  className="flex items-center justify-center flex-shrink-0 rounded-full"
+                  style={{ width: "22px", height: "22px", backgroundColor: st.done ? "#1253FA" : "transparent", border: st.done ? "none" : `2px solid ${current ? "#1253FA" : "#D8D9D4"}` }}
+                >
+                  {st.done ? <CheckRounded sx={{ fontSize: 14, color: "white" }} /> : current ? <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#1253FA", animation: "confirmPulse 1.2s ease-in-out infinite" }} /> : null}
+                </div>
+                <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: st.done || current ? 600 : 500, fontSize: "14px", color: st.done || current ? "#040033" : "#8A919C" }}>{st.label}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      <style>{`
+        @keyframes confirmSpin { to { transform: rotate(360deg); } }
+        @keyframes confirmPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.4); } }
+        @keyframes confirmIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+      `}</style>
     </div>
   );
 }
@@ -643,7 +699,7 @@ export function TruckSelectorMap({ onBack, preset }: { onBack?: () => void; pres
       {showConfirmation && (
         <ConfirmationOverlay
           offer={acceptedOffer}
-          onDone={() => { setShowConfirmation(false); setAcceptedOffer(null); goTo(1); }}
+          onDone={() => { setShowConfirmation(false); setAcceptedOffer(null); goTo(1); onBack?.(); }}
         />
       )}
 

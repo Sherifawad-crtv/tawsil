@@ -124,8 +124,14 @@
     @apply border-border outline-ring/50;
   }
 
+  /* The page tone, not the white component token: it is what shows behind the
+     status bar and in the overscroll area, so it must match the screens. */
+  html, body {
+    background-color: #F5F5F3;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
 
   /**

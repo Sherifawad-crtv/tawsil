@@ -333,16 +333,14 @@ function RentalSection({
           {
             id: "daily" as const,
             label: "Daily",
-            desc: "Rent for a single day",
             icon: (a: boolean) => <CalendarTodayRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#626A76" }} />,
           },
           {
             id: "monthly" as const,
             label: "Monthly",
-            desc: "10+ days per month",
             icon: (a: boolean) => <AutorenewRounded sx={{ fontSize: 18, color: a ? "#1253FA" : "#626A76" }} />,
           },
-        ]).map(({ id, label, desc, icon }) => {
+        ]).map(({ id, label, icon }) => {
           const active = mode === id;
           return (
             <button
@@ -365,9 +363,6 @@ function RentalSection({
               <div>
                 <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: active ? "#040033" : "#6B7280" }}>
                   {label}
-                </p>
-                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76", marginTop: "1px" }}>
-                  {desc}
                 </p>
               </div>
             </button>

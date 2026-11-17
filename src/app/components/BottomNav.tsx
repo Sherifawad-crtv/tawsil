@@ -73,6 +73,7 @@ export default function BottomNav({ activeScreen, onNavigate }: BottomNavProps) 
           backdropFilter: "blur(24px) saturate(180%)",
           WebkitBackdropFilter: "blur(24px) saturate(180%)",
           border: "1px solid rgba(255,255,255,0.6)",
+          boxShadow: "0 6px 22px rgba(4,0,51,0.10), 0 1px 4px rgba(4,0,51,0.06)",
         }}
       >
         {/* Sliding selector - constant size, always visible, walks between slots */}

@@ -7,7 +7,6 @@ import LocalShippingRounded from "./icons/LocalShippingRounded";
 import RouteRounded from "./icons/RouteRounded";
 import PersonRounded from "./icons/PersonRounded";
 import { VEHICLES } from "./VehicleCarouselSelectable";
-import { useStatusBar } from "../lib/statusBar";
 import type { Trip } from "./ActivityScreen";
 
 const MONO = "'Courier Prime', monospace";
@@ -71,7 +70,6 @@ function Row({ label, value, strong }: { label: string; value: string; strong?: 
  * receipt, the stops, the truck used, the driver, and a reorder button.
  */
 export default function TripDetailsScreen({ trip, onClose, onReorder }: { trip: Trip; onClose: () => void; onReorder: () => void }) {
-  useStatusBar();
   const [receiptOpen, setReceiptOpen] = useState(false);
   const status = STATUS[trip.status];
   const vehicle = VEHICLES.find((v) => v.name === trip.vehicle);

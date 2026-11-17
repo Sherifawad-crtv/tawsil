@@ -8,7 +8,6 @@ import CloseRounded from "./icons/CloseRounded";
 import TrendingDownRounded from "./icons/TrendingDownRounded";
 import GavelRounded from "./icons/GavelRounded";
 import ConfirmSheet from "./ConfirmSheet";
-import { STATUS_NAVY, useStatusBar } from "../lib/statusBar";
 
 export type Offer = {
   id: string;
@@ -42,7 +41,6 @@ export default function BiddingScreen({
   onCancel: () => void;
   initialOffer?: number;
 }) {
-  useStatusBar(STATUS_NAVY);
   const [offers, setOffers] = useState<Offer[]>([SEED_OFFERS[0]]);
   const [yourOffer, setYourOffer] = useState<number>(initialOffer ?? RECOMMENDED_PRICE);
   const [counterOpen, setCounterOpen] = useState(false);

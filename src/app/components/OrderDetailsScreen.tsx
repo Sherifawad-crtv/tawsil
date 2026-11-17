@@ -23,7 +23,6 @@ import ReportProblemRounded from "./icons/ReportProblemRounded";
 import CloseRounded from "./icons/CloseRounded";
 import RefreshRounded from "./icons/RefreshRounded";
 import VerticalAlignTopRounded from "./icons/VerticalAlignTopRounded";
-import { useStatusBar } from "../lib/statusBar";
 
 /* ─────────── Mock data ─────────── */
 const ORDER = {
@@ -742,7 +741,6 @@ function PersonRow({ role, name, contact }: { role: string; name: string; contac
 }
 
 function FullscreenMap({ onClose }: { onClose: () => void }) {
-  useStatusBar("#FFFFFF");
   return (
     <div className="fixed inset-0 z-[65]" style={{ backgroundColor: "white" }}>
       <div className="absolute inset-0">

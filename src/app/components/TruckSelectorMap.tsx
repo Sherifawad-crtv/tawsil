@@ -554,7 +554,7 @@ export function TruckSelectorMap({ onBack, preset }: { onBack?: () => void; pres
   const fabBottom = `calc(${snapFraction * 100}dvh + 16px)`;
 
   return (
-    <div className="relative w-full overflow-hidden" style={{ height: "100dvh", backgroundColor: "#F5F5F3" }}>
+    <div className="fixed inset-0 w-full overflow-hidden" style={{ backgroundColor: "#F5F5F3" }}>
       <div className="absolute inset-0 z-0"><BookingMap /></div>
       <TopBar onBack={onBack} />
       <LocationFAB bottomOffset={fabBottom} />
@@ -603,9 +603,9 @@ export function TruckSelectorMap({ onBack, preset }: { onBack?: () => void; pres
 
         {/* Sticky CTA */}
         <div
-          className="flex-shrink-0 px-4 pt-3"
+          className="flex-shrink-0 px-4 pt-2.5"
           style={{
-            paddingBottom: "max(env(safe-area-inset-bottom, 20px), 20px)",
+            paddingBottom: "max(env(safe-area-inset-bottom, 0px), 12px)",
             borderTop: "1px solid rgba(232,232,229,0.6)",
             backgroundColor: "#F5F5F3",
           }}

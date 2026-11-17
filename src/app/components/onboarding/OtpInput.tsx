@@ -51,13 +51,15 @@ export default function OtpInput({ value, onChange }: { value: string; onChange:
           inputMode="numeric"
           maxLength={1}
           aria-label={`Digit ${i + 1} of ${LENGTH}`}
-          className="field-input text-center border-none outline-none"
+          className="field-input flex-1 min-w-0 text-center outline-none"
           style={{
-            width: "44px",
-            height: "56px",
+            maxWidth: "56px",
+            aspectRatio: "1 / 1",
+            boxSizing: "border-box",
+            padding: 0,
             borderRadius: "16px",
             backgroundColor: "white",
-            boxShadow: value[i] ? "0 0 0 1.5px #1253FA" : "none",
+            border: `1.5px solid ${value[i] ? "#1253FA" : "#E8E8E5"}`,
             fontFamily: "'Archivo Black', sans-serif",
             fontSize: "20px",
             color: "#040033",

@@ -1,8 +1,9 @@
-import { useState, type ElementType } from "react";
+import { useState } from "react";
 import VisibilityRounded from "./icons/VisibilityRounded";
 import VisibilityOffRounded from "./icons/VisibilityOffRounded";
 import TrendingUpRounded from "./icons/TrendingUpRounded";
 import SettingsRounded from "./icons/SettingsRounded";
+import ChevronRightRounded from "./icons/ChevronRightRounded";
 import type { RevenueSummary } from "../lib/selectors";
 import heroMap from "../../assets/hero-map.svg";
 
@@ -18,31 +19,31 @@ function readHidden() {
 
 const money = (n: number) => Math.round(n).toLocaleString("en-US");
 
-export interface HeroAction {
+export interface HeroStat {
   label: string;
-  icon: ElementType;
+  value: number;
+  /** 3D illustration shown on the card. */
+  art: string;
   onClick: () => void;
-  /** Small count shown on the tile, e.g. orders waiting for dispatch. */
-  badge?: number;
 }
 
 /**
  * Hero of the Home screen: a full-width navy panel with rounded bottom corners
  * holding the greeting, the revenue "wallet" (total, this month, upcoming) and
- * three quick actions. The eye hides every amount; the choice is remembered on
+ * three tappable count cards (trips on the road, trucks, drivers). The eye hides every amount; the choice is remembered on
  * the device.
  */
 export default function WalletHero({
   title,
   subtitle,
   summary,
-  actions,
+  stats,
   onSettings,
 }: {
   title: string;
   subtitle: string;
   summary: RevenueSummary;
-  actions: HeroAction[];
+  stats: HeroStat[];
   onSettings: () => void;
 }) {
   const [hidden, setHidden] = useState(readHidden);
@@ -115,23 +116,18 @@ export default function WalletHero({
         </div>
 
         <div className="grid grid-cols-3 gap-3 mt-6">
-          {actions.map((a) => (
+          {stats.map((st) => (
             <button
-              key={a.label}
-              onClick={a.onClick}
-              className="relative rounded-2xl flex flex-col items-center justify-center gap-1.5 cursor-pointer active:scale-[0.96] transition-transform"
-              style={{ backgroundColor: "#EAF0FE", border: "none", height: "84px" }}
+              key={st.label}
+              onClick={st.onClick}
+              aria-label={`${st.label}: ${st.value}`}
+              className="relative rounded-[22px] bg-white p-3 text-left cursor-pointer active:scale-[0.97] transition-transform"
+              style={{ border: "none" }}
             >
-              <a.icon sx={{ fontSize: 24, color: "#040033" }} />
-              <span style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>{a.label}</span>
-              {a.badge ? (
-                <span
-                  className="absolute flex items-center justify-center rounded-full"
-                  style={{ top: "8px", right: "8px", minWidth: "20px", height: "20px", padding: "0 5px", backgroundColor: "#B45309", color: "white", fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "11px" }}
-                >
-                  {a.badge}
-                </span>
-              ) : null}
+              <ChevronRightRounded sx={{ fontSize: 16, color: "#8A919C", position: "absolute", top: "12px", right: "10px" }} />
+              <img src={st.art} alt="" draggable={false} width={48} height={48} style={{ width: 48, height: 48, objectFit: "contain", mixBlendMode: "multiply" }} />
+              <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", lineHeight: 1.1, color: "#040033", marginTop: "8px" }}>{st.value}</p>
+              <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "2px" }}>{st.label}</p>
             </button>
           ))}
         </div>

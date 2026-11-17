@@ -1,10 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import LocalShippingRounded from "../../components/icons/LocalShippingRounded";
-import AddRounded from "../../components/icons/AddRounded";
-import PersonAddRounded from "../../components/icons/PersonAddRounded";
 import InboxRounded from "../../components/icons/InboxRounded";
-import ChevronRightRounded from "../../components/icons/ChevronRightRounded";
 import routeArt from "../../../assets/stat-route.webp";
 import truckArt from "../../../assets/stat-truck.webp";
 import driversArt from "../../../assets/stat-drivers.webp";
@@ -44,20 +40,14 @@ export default function HomeScreen() {
         subtitle={`Welcome back, ${firstName}`}
         summary={revenue}
         onSettings={() => navigate("/account")}
-        actions={[
-          { label: "Dispatch", icon: LocalShippingRounded, badge: needsDispatch.length, onClick: () => navigate("/home/dispatch") },
-          { label: "Add truck", icon: AddRounded, onClick: () => navigate("/trucks/new") },
-          { label: "Add driver", icon: PersonAddRounded, onClick: () => navigate("/drivers/new") },
+        stats={[
+          { label: "On the road", value: inProgress.length, art: routeArt, onClick: () => navigate("/home/active") },
+          { label: "Trucks", value: activeTrucks(trucks).length, art: truckArt, onClick: () => navigate("/trucks") },
+          { label: "Drivers", value: activeDrivers(drivers).length, art: driversArt, onClick: () => navigate("/drivers") },
         ]}
       />
 
       <div className="w-full max-w-lg mx-auto px-4 pt-5" style={{ paddingBottom: "24px" }}>
-      <div className="grid grid-cols-3 gap-3 mb-6">
-        <StatCard art={routeArt} label="On the road" value={inProgress.length} onClick={() => navigate("/home/active")} />
-        <StatCard art={truckArt} label="Trucks" value={activeTrucks(trucks).length} onClick={() => navigate("/trucks")} />
-        <StatCard art={driversArt} label="Drivers" value={activeDrivers(drivers).length} onClick={() => navigate("/drivers")} />
-      </div>
-
       {needsDispatch.length > 0 && (
         <div className="mb-6">
           <SectionLabel
@@ -101,21 +91,5 @@ export default function HomeScreen() {
 
       </div>
     </div>
-  );
-}
-
-function StatCard({ art, label, value, onClick }: { art: string; label: string; value: number; onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      aria-label={`${label}: ${value}`}
-      className="relative rounded-[22px] bg-white p-3 text-left cursor-pointer active:scale-[0.97] transition-transform"
-      style={{ border: "none" }}
-    >
-      <ChevronRightRounded sx={{ fontSize: 16, color: "#8A919C", position: "absolute", top: "12px", right: "10px" }} />
-      <img src={art} alt="" draggable={false} width={48} height={48} style={{ width: 48, height: 48, objectFit: "contain", mixBlendMode: "multiply" }} />
-      <p style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "22px", lineHeight: 1.1, color: "#040033", marginTop: "8px" }}>{value}</p>
-      <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", marginTop: "2px" }}>{label}</p>
-    </button>
   );
 }

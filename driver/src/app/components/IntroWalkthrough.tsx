@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { haptic } from "./haptics";
 
 /**
  * Three-step intro told as one journey. A long, gently zig-zagging road runs
@@ -143,6 +144,10 @@ export default function IntroWalkthrough({
   const reduced = useRef(false);
 
   const [step, setStep] = useState(0);
+  const timers = useRef<number[]>([]);
+  const later = useCallback((fn: () => void, ms: number) => {
+    timers.current.push(window.setTimeout(fn, ms));
+  }, []);
 
   const paint = useCallback(
     (len: number, cam: number) => {
@@ -258,8 +263,12 @@ export default function IntroWalkthrough({
   // Opening: the arrow drives in from the left edge to the first stop.
   useEffect(() => {
     const t = window.setTimeout(() => travel(stopsRef.current[0] ?? 0, 0, ENTER_MS), 200);
+    // The arrow reaching the first stop.
+    const tick = window.setTimeout(() => haptic("step"), 200 + ENTER_MS - 60);
     return () => {
       clearTimeout(t);
+      clearTimeout(tick);
+      timers.current.forEach(clearTimeout);
       cancelAnimationFrame(rafRef.current);
       cancelAnimationFrame(morphRaf.current);
     };
@@ -275,7 +284,13 @@ export default function IntroWalkthrough({
     const n = step + 1;
     setStep(n);
     travel(stopsRef.current[n] ?? 0, n * w, TRAVEL_MS);
-    if (n === count - 1) window.setTimeout(arrive, reduced.current ? 0 : TRAVEL_MS - 80);
+    if (n === count - 1) {
+      later(arrive, reduced.current ? 0 : TRAVEL_MS - 80);
+      // The pin pops just after the arrow lands, so the double tap goes with it.
+      later(() => haptic("arrive"), reduced.current ? 0 : TRAVEL_MS + 120);
+    } else {
+      later(() => haptic("step"), reduced.current ? 0 : TRAVEL_MS - 60);
+    }
   }
 
   return (

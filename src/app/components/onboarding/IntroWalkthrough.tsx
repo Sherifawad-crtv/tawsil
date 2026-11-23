@@ -25,6 +25,39 @@ const ENTER_MS = 1000;
 
 type Pt = { x: number; y: number };
 
+/**
+ * The arrow and the destination pin are drawn with the same four curve segments, so one
+ * can flow into the other. Both are listed as [anchor, control, control] per segment,
+ * nose to nose: arrow nose -> pin tip, arrow tail corners -> pin shoulders, arrow notch -> pin top.
+ * The arrow is stored turned a quarter so that the pin stands upright when the turn is undone.
+ */
+const line = (a: [number, number], b: [number, number]): number[] => [a[0] + (b[0] - a[0]) / 3, a[1] + (b[1] - a[1]) / 3, a[0] + ((b[0] - a[0]) * 2) / 3, a[1] + ((b[1] - a[1]) * 2) / 3];
+const ARROW_A: [number, number][] = [[0, 21], [15, -17], [0, -9], [-15, -17]];
+const ARROW_SEGS = ARROW_A.map((a, i) => [...line(a, ARROW_A[(i + 1) % 4])]);
+const PIN_A: [number, number][] = [[0, 0], [15, -26], [0, -41], [-15, -26]];
+const PIN_SEGS: number[][] = [
+  [4, -9, 15, -16],
+  [15, -34.28, 8.28, -41],
+  [-8.28, -41, -15, -34.28],
+  [-15, -16, -4, -9],
+];
+const mix = (a: number, b: number, m: number) => a + (b - a) * m;
+/** Path of the arrow (m = 0) through to the pin (m = 1); m may overshoot 1 for the bounce. */
+function shapeAt(m: number) {
+  const f = (n: number) => n.toFixed(2);
+  let d = `M ${f(mix(ARROW_A[0][0], PIN_A[0][0], m))} ${f(mix(ARROW_A[0][1], PIN_A[0][1], m))}`;
+  for (let i = 0; i < 4; i++) {
+    const a = ARROW_SEGS[i];
+    const b = PIN_SEGS[i];
+    const end = (i + 1) % 4;
+    d += ` C ${f(mix(a[0], b[0], m))} ${f(mix(a[1], b[1], m))} ${f(mix(a[2], b[2], m))} ${f(mix(a[3], b[3], m))} ${f(mix(ARROW_A[end][0], PIN_A[end][0], m))} ${f(mix(ARROW_A[end][1], PIN_A[end][1], m))}`;
+  }
+  return d + " Z";
+}
+/** Springy settle with a small overshoot: starts at 0, swings past 1, rests at 1. */
+const spring = (t: number) => (t >= 1 ? 1 : 1 - Math.exp(-4 * t) * Math.cos(7 * t));
+const MORPH_MS = 1700;
+
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 
@@ -94,6 +127,11 @@ export default function IntroWalkthrough({
   const worldRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const arrowRef = useRef<SVGGElement>(null);
+  const shapeRef = useRef<SVGPathElement>(null);
+  const dotRef = useRef<SVGCircleElement>(null);
+  const ringRef = useRef<SVGCircleElement>(null);
+  const morphRef = useRef(0);
+  const morphRaf = useRef<number>(0);
   const litRef = useRef<SVGPathElement>(null);
   const litMaskRef = useRef<SVGPathElement>(null);
   const pageRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -116,7 +154,14 @@ export default function IntroWalkthrough({
       const q = path.getPointAtLength(Math.min(total, len + 2));
       const back = path.getPointAtLength(Math.max(0, len - 2));
       const angle = (Math.atan2(q.y - back.y, q.x - back.x) * 180) / Math.PI;
-      arrow.setAttribute("transform", `translate(${p.x} ${p.y}) rotate(${angle}) scale(1.8)`);
+      const m = morphRef.current;
+      arrow.setAttribute("transform", `translate(${p.x} ${p.y}) rotate(${mix(angle - 90, 0, m)}) scale(${mix(1.8, 1.5, m)})`);
+      shapeRef.current?.setAttribute("d", shapeAt(m));
+      dotRef.current?.setAttribute("opacity", String(clamp01((m - 0.55) * 2.2)));
+      if (ringRef.current) {
+        ringRef.current.setAttribute("cx", String(p.x));
+        ringRef.current.setAttribute("cy", String(p.y));
+      }
       const dash = `${len} ${total + 10}`;
       litRef.current?.setAttribute("stroke-dasharray", dash);
       litMaskRef.current?.setAttribute("stroke-dasharray", dash);
@@ -156,6 +201,30 @@ export default function IntroWalkthrough({
     [paint],
   );
 
+  /** Reaching the last stop: the arrow turns upright and springs into a location pin, with a ripple under it. */
+  const arrive = useCallback(() => {
+    cancelAnimationFrame(morphRaf.current);
+    if (reduced.current) {
+      morphRef.current = 1;
+      paint(lenRef.current, camRef.current);
+      return;
+    }
+    const t0 = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - t0) / MORPH_MS);
+      morphRef.current = spring(t);
+      paint(lenRef.current, camRef.current);
+      const ring = ringRef.current;
+      if (ring) {
+        const rt = clamp01((now - t0 - 350) / 1000);
+        ring.setAttribute("r", String(8 + 62 * (1 - Math.pow(1 - rt, 3))));
+        ring.setAttribute("opacity", String(rt > 0 && rt < 1 ? 0.45 * (1 - rt) : 0));
+      }
+      if (t < 1 || now - t0 < MORPH_MS) morphRaf.current = requestAnimationFrame(tick);
+    };
+    morphRaf.current = requestAnimationFrame(tick);
+  }, [paint]);
+
   // Measure the road and where each stop sits along it. Runs again when the screen size changes.
   useLayoutEffect(() => {
     const path = pathRef.current;
@@ -192,6 +261,7 @@ export default function IntroWalkthrough({
     return () => {
       clearTimeout(t);
       cancelAnimationFrame(rafRef.current);
+      cancelAnimationFrame(morphRaf.current);
     };
   }, [travel]);
 
@@ -205,6 +275,7 @@ export default function IntroWalkthrough({
     const n = step + 1;
     setStep(n);
     travel(stopsRef.current[n] ?? 0, n * w, TRAVEL_MS);
+    if (n === count - 1) window.setTimeout(arrive, reduced.current ? 0 : TRAVEL_MS - 80);
   }
 
   return (
@@ -235,9 +306,11 @@ export default function IntroWalkthrough({
           <path ref={litRef} d={road.d} fill="none" stroke={BLUE} strokeWidth={ROAD_WIDTH} strokeLinecap="butt" strokeLinejoin="round" strokeDasharray="0 99999" />
           <path d={road.d} fill="none" stroke="white" strokeOpacity={0.9} strokeWidth={2.5} strokeDasharray="11 10" mask="url(#intro-lit)" />
           <path ref={pathRef} d={road.d} fill="none" stroke="none" />
+          <circle ref={ringRef} r="0" fill="none" stroke={BLUE} strokeWidth={3} opacity="0" />
           <g ref={arrowRef} transform="translate(-300 -300)">
             <path
-              d="M -17 -15 L 21 0 L -17 15 L -9 0 Z"
+              ref={shapeRef}
+              d={shapeAt(0)}
               fill={BLUE}
               stroke="white"
               strokeWidth={6}
@@ -245,6 +318,7 @@ export default function IntroWalkthrough({
               paintOrder="stroke"
               style={{ filter: "drop-shadow(0 4px 10px rgba(18,83,250,0.35))" }}
             />
+            <circle ref={dotRef} cx="0" cy="-26" r="5.5" fill="white" opacity="0" />
           </g>
         </svg>
 

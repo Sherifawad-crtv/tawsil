@@ -116,7 +116,7 @@ export default function IntroWalkthrough({
       const q = path.getPointAtLength(Math.min(total, len + 2));
       const back = path.getPointAtLength(Math.max(0, len - 2));
       const angle = (Math.atan2(q.y - back.y, q.x - back.x) * 180) / Math.PI;
-      arrow.setAttribute("transform", `translate(${p.x} ${p.y}) rotate(${angle}) scale(1.3)`);
+      arrow.setAttribute("transform", `translate(${p.x} ${p.y}) rotate(${angle}) scale(1.8)`);
       const dash = `${len} ${total + 10}`;
       litRef.current?.setAttribute("stroke-dasharray", dash);
       litMaskRef.current?.setAttribute("stroke-dasharray", dash);

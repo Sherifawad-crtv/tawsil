@@ -1,29 +1,31 @@
-import { useEffect, useMemo } from "react";
-import { CircleMarker, MapContainer, TileLayer, ZoomControl, useMap } from "react-leaflet";
-import L from "leaflet";
-import { HeatLayer } from "leaflet.heat";
-import "leaflet/dist/leaflet.css";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { hasMapsKey, loadGoogleMaps, mapsRejected, onMapsRejected } from "../../lib/googleMaps";
+import { createHeatOverlay } from "./heatLayer";
 import type { AreaCoverage, CoveragePoint } from "../../lib/coverage";
 
 /**
- * Operations' coverage view: a light map with a heat layer over everywhere
+ * Operations' coverage view: a light Google map with a heat layer over everywhere
  * this period's orders touched, a dot at each stop, and a side panel with the
  * zones-covered count, the colour legend and the busiest zones. No money and
  * no per-zone counts - Operations sees where work went, not what it was worth.
- *
- * Tiles are CARTO's Positron, fetched at render time from their CDN - the
- * same basemap as the order map.
  */
-
-const TILES = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
-const ATTRIBUTION =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 const SURFACE = "#f0f0ee";
 const PANEL = "#ffffff";
 const LINE = "#e8e8e5";
 const DIM = "#626a76";
 const ACCENT = "#1253fa";
+
+/** Quiet basemap, so the heat is what you read. */
+const MAP_STYLE: google.maps.MapTypeStyle[] = [
+  { featureType: "poi", stylers: [{ visibility: "off" }] },
+  { featureType: "transit", stylers: [{ visibility: "off" }] },
+  { featureType: "road", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+  { featureType: "road", elementType: "geometry", stylers: [{ color: "#ffffff" }] },
+  { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#F5F5F3" }] },
+  { featureType: "water", elementType: "geometry", stylers: [{ color: "#DCE6F2" }] },
+  { featureType: "administrative", elementType: "geometry.stroke", stylers: [{ color: "#d3d6dc" }] },
+];
 
 /** Low to high, same stops on the map and in the legend. */
 const HEAT_GRADIENT: Record<number, string> = {
@@ -39,35 +41,109 @@ const LEGEND_BAR = `linear-gradient(90deg, ${Object.entries(HEAT_GRADIENT)
   .map(([stop, colour]) => `${colour} ${Number(stop) * 100}%`)
   .join(", ")})`;
 
-const EGYPT_CENTER: [number, number] = [27, 30.8];
+const EGYPT_CENTER = { lat: 27, lng: 30.8 };
 
-function HeatOverlay({ points }: { points: CoveragePoint[] }) {
-  const map = useMap();
+/** The Google map with the heat layer and a small blue dot at each stop. */
+function CoverageMap({ footprint }: { footprint: CoveragePoint[] }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(!hasMapsKey || mapsRejected());
 
   const heat = useMemo(() => {
-    const max = Math.max(1, ...points.map((p) => p.weight));
+    const max = Math.max(1, ...footprint.map((p) => p.weight));
     // sqrt keeps the quiet corners visible next to Cairo's traffic.
-    return points.map((p) => [p.lat, p.lng, Math.sqrt(p.weight / max)] as [number, number, number]);
-  }, [points]);
+    return footprint.map((p) => ({ lat: p.lat, lng: p.lng, intensity: Math.sqrt(p.weight / max) }));
+  }, [footprint]);
+
+  useEffect(() => onMapsRejected(() => setFailed(true)), []);
 
   useEffect(() => {
-    const layer = new HeatLayer(heat, { radius: 34, blur: 26, maxZoom: 9, minOpacity: 0.35, gradient: HEAT_GRADIENT });
-    // leaflet.heat's bundled types are written against a different copy of
-    // Leaflet's types than ours, so the class doesn't read as an L.Layer.
-    const asLayer = layer as unknown as L.Layer;
-    map.addLayer(asLayer);
+    if (failed || !ref.current) return;
+    let cancelled = false;
+    const overlays: { setMap(map: google.maps.Map | null): void }[] = [];
+
+    (async () => {
+      try {
+        const maps = await loadGoogleMaps();
+        if (cancelled || !ref.current) return;
+        const map = new maps.Map(ref.current, {
+          center: EGYPT_CENTER,
+          zoom: 6,
+          disableDefaultUI: true,
+          zoomControl: true,
+          zoomControlOptions: { position: maps.ControlPosition.RIGHT_BOTTOM },
+          gestureHandling: "cooperative",
+          clickableIcons: false,
+          styles: MAP_STYLE,
+        });
+
+        overlays.push(createHeatOverlay(maps, map, heat, HEAT_GRADIENT));
+
+        class Dot extends maps.OverlayView {
+          private el?: HTMLDivElement;
+          constructor(private at: google.maps.LatLngLiteral) {
+            super();
+          }
+          onAdd() {
+            const el = document.createElement("div");
+            Object.assign(el.style, {
+              position: "absolute",
+              width: "10px",
+              height: "10px",
+              boxSizing: "border-box",
+              borderRadius: "999px",
+              backgroundColor: ACCENT,
+              border: "1.5px solid #ffffff",
+              pointerEvents: "none",
+            });
+            this.el = el;
+            this.getPanes()?.markerLayer.appendChild(el);
+          }
+          draw() {
+            const pt = this.getProjection()?.fromLatLngToDivPixel(new maps.LatLng(this.at));
+            if (!pt || !this.el) return;
+            this.el.style.left = pt.x - 5 + "px";
+            this.el.style.top = pt.y - 5 + "px";
+          }
+          onRemove() {
+            this.el?.remove();
+            this.el = undefined;
+          }
+        }
+        footprint.forEach((p) => {
+          const dot = new Dot({ lat: p.lat, lng: p.lng });
+          dot.setMap(map);
+          overlays.push(dot);
+        });
+
+        if (footprint.length > 0) {
+          const bounds = new maps.LatLngBounds();
+          footprint.forEach((p) => bounds.extend({ lat: p.lat, lng: p.lng }));
+          map.fitBounds(bounds, 48);
+          maps.event.addListenerOnce(map, "idle", () => {
+            if ((map.getZoom() ?? 0) > 8) map.setZoom(8);
+          });
+        }
+        setReady(true);
+      } catch {
+        if (!cancelled) setFailed(true);
+      }
+    })();
+
     return () => {
-      map.removeLayer(asLayer);
+      cancelled = true;
+      overlays.forEach((o) => o.setMap(null));
+      setReady(false);
     };
-  }, [map, heat]);
+  }, [heat, footprint, failed]);
 
-  useEffect(() => {
-    if (points.length === 0) return;
-    const bounds = L.latLngBounds(points.map((p) => [p.lat, p.lng] as [number, number]));
-    map.fitBounds(bounds, { padding: [48, 48], maxZoom: 8 });
-  }, [map, points]);
-
-  return null;
+  return failed ? (
+    <div className="absolute inset-0 flex items-center justify-center text-caption-1-regular" style={{ color: DIM, fontFamily: "var(--font-mono)", backgroundColor: SURFACE }}>
+      Map unavailable
+    </div>
+  ) : (
+    <div ref={ref} className="absolute inset-0" style={{ backgroundColor: SURFACE, opacity: ready ? 1 : 0, transition: "opacity 0.3s ease" }} />
+  );
 }
 
 export default function OpsCoverageMap({
@@ -88,26 +164,7 @@ export default function OpsCoverageMap({
       style={{ backgroundColor: SURFACE, border: `1px solid ${LINE}` }}
     >
       <div className="relative h-[360px] md:h-auto md:min-h-[540px]">
-        <MapContainer
-          center={EGYPT_CENTER}
-          zoom={6}
-          zoomControl={false}
-          scrollWheelZoom={false}
-          className="absolute inset-0"
-          style={{ background: SURFACE }}
-        >
-          <TileLayer url={TILES} attribution={ATTRIBUTION} subdomains="abcd" maxZoom={19} />
-          <ZoomControl position="bottomright" />
-          <HeatOverlay points={footprint} />
-          {footprint.map((p, i) => (
-            <CircleMarker
-              key={i}
-              center={[p.lat, p.lng]}
-              radius={4}
-              pathOptions={{ color: "#ffffff", weight: 1.5, fillColor: ACCENT, fillOpacity: 1 }}
-            />
-          ))}
-        </MapContainer>
+        <CoverageMap footprint={footprint} />
       </div>
 
       <aside className="flex flex-col gap-5 p-5" style={{ backgroundColor: PANEL, borderLeft: `1px solid ${LINE}` }}>

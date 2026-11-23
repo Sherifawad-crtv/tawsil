@@ -1,9 +1,13 @@
 import "../styles/fonts.css";
+import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router";
 import { DataStoreProvider } from "./lib/store";
 import { useIsMobileViewport } from "./hooks/useIsMobileViewport";
 import MobileOnlyGate from "./components/MobileOnlyGate";
 import TabLayout from "./layout/TabLayout";
+import IntroWalkthrough from "./components/IntroWalkthrough";
+import { INTRO_STEPS } from "./components/introSteps";
+import { hasSeenIntro, markIntroSeen } from "./lib/introSeen";
 
 import HomeScreen from "./screens/home/HomeScreen";
 import ActiveTripsList from "./screens/home/ActiveTripsList";
@@ -21,9 +25,23 @@ import LanguageSettings from "./screens/account/LanguageSettings";
 
 export default function App() {
   const isMobileViewport = useIsMobileViewport();
+  const [introSeen, setIntroSeen] = useState(hasSeenIntro);
 
   if (!isMobileViewport) {
     return <MobileOnlyGate />;
+  }
+
+  // First launch only: the three-step intro comes before the app itself.
+  if (!introSeen) {
+    return (
+      <IntroWalkthrough
+        steps={INTRO_STEPS}
+        onDone={() => {
+          markIntroSeen();
+          setIntroSeen(true);
+        }}
+      />
+    );
   }
 
   return (

@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import type { AuthUser, BusinessProfile, IndividualProfile } from "./authTypes";
+import { resetIntro } from "./introSeen";
 
 const STORAGE_KEY = "tawsil-auth-user";
 const GUEST_STORAGE_KEY = "tawsil-auth-guest";
@@ -89,6 +90,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signOut = useCallback(() => {
+    // The account is gone from this device, so the intro walkthrough starts over for whoever uses it next.
+    resetIntro();
     setUser(null);
     persistUser(null);
     setIsGuest(false);

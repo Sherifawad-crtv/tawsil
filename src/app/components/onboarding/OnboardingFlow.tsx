@@ -3,28 +3,26 @@ import AccountTypeScreen from "./AccountTypeScreen";
 import IndividualSignup from "./IndividualSignup";
 import BusinessSignup from "./BusinessSignup";
 import IntroWalkthrough, { type IntroStep } from "./IntroWalkthrough";
-import LocalShippingRounded from "../icons/LocalShippingRounded";
-import GavelRounded from "../icons/GavelRounded";
-import RouteRounded from "../icons/RouteRounded";
+import truckArt from "../../../assets/intro-truck.webp";
+import gavelArt from "../../../assets/intro-gavel.webp";
+import routeArt from "../../../assets/intro-route.webp";
 import { useAuth } from "../../lib/AuthContext";
 import { hasSeenIntro, markIntroSeen } from "../../lib/introSeen";
 import type { AccountType } from "../../lib/authTypes";
 
-const icon = (Icon: typeof LocalShippingRounded) => <Icon sx={{ fontSize: 26, color: "#1253FA" }} />;
-
 const INTRO: IntroStep[] = [
   {
-    icon: icon(LocalShippingRounded),
+    art: truckArt,
     title: "Book a truck in minutes",
     body: "Set your pickup and drop-offs, pick the truck that fits your load, and book on demand or as a rental.",
   },
   {
-    icon: icon(GavelRounded),
+    art: gavelArt,
     title: "Choose the offer you like",
     body: "Set your fare and nearby drivers send offers. You pick the one that suits you.",
   },
   {
-    icon: icon(RouteRounded),
+    art: routeArt,
     title: "Follow every trip",
     body: "Track your truck on the map, then find past trips and their receipts in Activity.",
   },

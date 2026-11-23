@@ -12,7 +12,10 @@ import { haptic } from "./haptics";
  */
 
 export interface IntroStep {
-  icon: ReactNode;
+  /** A 3D illustration, shown on its own; takes the place of the icon tile. */
+  art?: string;
+  /** A small icon in a tile, for a step with no illustration. */
+  icon?: ReactNode;
   title: string;
   body: string;
 }
@@ -357,9 +360,13 @@ export default function IntroWalkthrough({
               }}
             >
               <div className="w-full max-w-lg mx-auto px-4 py-2">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4" style={{ backgroundColor: "#EAF0FE" }}>
-                  {s.icon}
-                </div>
+                {s.art ? (
+                  <img src={s.art} alt="" draggable={false} width={80} height={80} style={{ width: 80, height: 80, objectFit: "contain", marginLeft: -6, marginBottom: 8 }} />
+                ) : (
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4" style={{ backgroundColor: "#EAF0FE" }}>
+                    {s.icon}
+                  </div>
+                )}
                 <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: 1.15 }}>{s.title}</h1>
                 <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#626A76", marginTop: "10px", lineHeight: 1.55 }}>{s.body}</p>
               </div>

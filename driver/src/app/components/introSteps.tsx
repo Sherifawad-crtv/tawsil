@@ -1,7 +1,7 @@
 import type { IntroStep } from "./IntroWalkthrough";
 import Inventory2Rounded from "./icons/Inventory2Rounded";
-import RouteRounded from "./icons/RouteRounded";
-import PhotoCameraRounded from "./icons/PhotoCameraRounded";
+import routeArt from "../../assets/intro-route.webp";
+import cameraArt from "../../assets/intro-camera.webp";
 
 const blue = { fontSize: 26, color: "#1253FA" };
 
@@ -13,12 +13,12 @@ export const INTRO_STEPS: IntroStep[] = [
     body: "Orders from your contractor wait under Pending, with the route and pickup time on each card.",
   },
   {
-    icon: <RouteRounded sx={blue} />,
+    art: routeArt,
     title: "Know the job",
     body: "Open an order for the map, the stops, the load details and your client's phone number.",
   },
   {
-    icon: <PhotoCameraRounded sx={blue} />,
+    art: cameraArt,
     title: "Prove it",
     body: "Capture the odometer before and after, and add photos, right from the order.",
   },

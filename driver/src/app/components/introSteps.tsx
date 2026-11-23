@@ -1,14 +1,12 @@
 import type { IntroStep } from "./IntroWalkthrough";
-import Inventory2Rounded from "./icons/Inventory2Rounded";
+import boxArt from "../../assets/intro-box.webp";
 import routeArt from "../../assets/intro-route.webp";
 import cameraArt from "../../assets/intro-camera.webp";
-
-const blue = { fontSize: 26, color: "#1253FA" };
 
 /** What the driver does in this app: see assigned trips, read the job, capture the proof files. */
 export const INTRO_STEPS: IntroStep[] = [
   {
-    icon: <Inventory2Rounded sx={blue} />,
+    art: boxArt,
     title: "Your trips, assigned",
     body: "Orders from your contractor wait under Pending, with the route and pickup time on each card.",
   },

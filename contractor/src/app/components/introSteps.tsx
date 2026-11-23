@@ -1,14 +1,12 @@
 import type { IntroStep } from "./IntroWalkthrough";
-import ReceiptLongRounded from "./icons/ReceiptLongRounded";
+import ordersArt from "../../assets/intro-orders.webp";
 import truckArt from "../../assets/intro-truck.webp";
 import peopleArt from "../../assets/intro-people.webp";
-
-const blue = { fontSize: 26, color: "#1253FA" };
 
 /** What the contractor does in this app: take orders, dispatch them, keep the fleet and income in view. */
 export const INTRO_STEPS: IntroStep[] = [
   {
-    icon: <ReceiptLongRounded sx={blue} />,
+    art: ordersArt,
     title: "Orders come to you",
     body: "New On Demand and Monthly orders land in the Orders tab, with the route and fare on every card.",
   },

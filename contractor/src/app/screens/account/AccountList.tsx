@@ -9,6 +9,7 @@ import SectionLabel from "../../components/SectionLabel";
 import AccountRow from "../../components/AccountRow";
 import ConfirmSheet from "../../components/ConfirmSheet";
 import { useDataStore } from "../../lib/store";
+import { logOut } from "../../lib/session";
 
 export default function AccountList() {
   const navigate = useNavigate();
@@ -62,9 +63,9 @@ export default function AccountList() {
       {confirmingLogout && (
         <ConfirmSheet
           title="Log out?"
-          body="You'll need to sign back in to manage your fleet and orders."
+          body="You'll be taken back to the start of the app."
           confirmLabel="Log Out"
-          onConfirm={() => setConfirmingLogout(false)}
+          onConfirm={logOut}
           onCancel={() => setConfirmingLogout(false)}
         />
       )}

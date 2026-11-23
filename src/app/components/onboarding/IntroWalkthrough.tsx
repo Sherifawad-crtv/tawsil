@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 /**
- * Three-step intro. One continuous road runs across the screen; a navigation
- * arrow rides along it and moves to the next stop when the person taps Next.
- * The road behind the arrow lights up in brand blue, the arrow turns with the
- * bends, and the stops alternate between the top and the bottom of the screen
- * while the text flips to the opposite side so the two never meet.
+ * Three-step intro told as one journey. A long, gently zig-zagging road runs
+ * through all three screens and a navigation arrow rides it. Tapping Next
+ * drives the arrow to the next stop while the camera travels with it: the
+ * road, the grid behind it and the next screen's words slide past, so it
+ * feels like moving from one place to the next rather than switching pages.
+ * Stops alternate between the top and the bottom of the screen, with the
+ * words on the opposite side.
  */
 
 export interface IntroStep {
@@ -17,26 +19,27 @@ export interface IntroStep {
 const BLUE = "#1253FA";
 const ROAD = "#D5DEFA";
 const PAGE = "#F5F5F3";
-const ROAD_WIDTH = 46;
-const TRAVEL_MS = 1100;
-/** The new text waits until the arrow has left that side of the screen. */
-const TEXT_IN_DELAY = 0.5;
-const TEXT_OUT_MS = 200;
+const ROAD_WIDTH = 52;
+const TRAVEL_MS = 1400;
+const ENTER_MS = 1000;
 
 type Pt = { x: number; y: number };
 
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 
-/** Hairpin road: in from the left, up to a top stop, down to a bottom stop, up to a top stop, out to the right. Corners are softened with quadratic curves. */
-function buildRoad(w: number, h: number) {
-  const pts: Pt[] = [
-    { x: -0.3 * w, y: 0.68 * h },
-    { x: 0.14 * w, y: 0.35 * h },
-    { x: 0.5 * w, y: 0.685 * h },
-    { x: 0.86 * w, y: 0.35 * h },
-    { x: 1.3 * w, y: 0.68 * h },
-  ];
-  const soft = Math.min(130, w * 0.3);
+/**
+ * The road in world coordinates: screen i spans x from i*w to (i+1)*w and its
+ * stop sits at the middle of it. Stops alternate high and low; between them the
+ * road runs straight, and only the tip at each stop is softened.
+ */
+function buildRoad(w: number, h: number, count: number) {
+  const high = 0.36 * h;
+  const low = 0.64 * h;
+  const pts: Pt[] = [{ x: -0.5 * w, y: low }];
+  for (let i = 0; i < count; i++) pts.push({ x: (i + 0.5) * w, y: i % 2 === 0 ? high : low });
+  pts.push({ x: (count + 0.5) * w, y: count % 2 === 0 ? high : low });
+  const soft = Math.min(190, w * 0.42);
   let d = `M ${pts[0].x} ${pts[0].y}`;
   const apexes: Pt[] = [];
   for (let i = 1; i < pts.length - 1; i++) {
@@ -52,7 +55,8 @@ function buildRoad(w: number, h: number) {
     d += ` L ${start.x} ${start.y} Q ${p.x} ${p.y} ${end.x} ${end.y}`;
     apexes.push({ x: 0.25 * start.x + 0.5 * p.x + 0.25 * end.x, y: 0.25 * start.y + 0.5 * p.y + 0.25 * end.y });
   }
-  d += ` L ${pts[pts.length - 1].x} ${pts[pts.length - 1].y}`;
+  const last = pts[pts.length - 1];
+  d += ` L ${last.x} ${last.y}`;
   return { d, apexes };
 }
 
@@ -79,63 +83,80 @@ export default function IntroWalkthrough({
   onDone: () => void;
   finishLabel?: string;
 }) {
+  const count = steps.length;
   const rootRef = useRef<HTMLDivElement>(null);
   const { w, h } = useSize(rootRef);
-  const road = useMemo(() => buildRoad(w, h), [w, h]);
+  const road = useMemo(() => buildRoad(w, h, count), [w, h, count]);
+  const offset = 0.7 * w;
+  const worldW = (count + 1) * w;
 
   const pathRef = useRef<SVGPathElement>(null);
+  const worldRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const arrowRef = useRef<SVGGElement>(null);
   const litRef = useRef<SVGPathElement>(null);
   const litMaskRef = useRef<SVGPathElement>(null);
+  const pageRefs = useRef<(HTMLDivElement | null)[]>([]);
   const stopsRef = useRef<number[]>([]);
   const totalRef = useRef(0);
-  const curRef = useRef(0);
+  const lenRef = useRef(0);
+  const camRef = useRef(0);
   const rafRef = useRef<number>(0);
   const reduced = useRef(false);
 
   const [step, setStep] = useState(0);
-  const [textStep, setTextStep] = useState(0);
-  const [textVisible, setTextVisible] = useState(false);
-  const timers = useRef<number[]>([]);
 
-  const paint = useCallback((len: number) => {
-    const path = pathRef.current;
-    const arrow = arrowRef.current;
-    if (!path || !arrow) return;
-    const total = totalRef.current;
-    const p = path.getPointAtLength(len);
-    const q = path.getPointAtLength(Math.min(total, len + 2));
-    const back = path.getPointAtLength(Math.max(0, len - 2));
-    const angle = (Math.atan2(q.y - back.y, q.x - back.x) * 180) / Math.PI;
-    arrow.setAttribute("transform", `translate(${p.x} ${p.y}) rotate(${angle})`);
-    const dash = `${len} ${total + 10}`;
-    litRef.current?.setAttribute("stroke-dasharray", dash);
-    litMaskRef.current?.setAttribute("stroke-dasharray", dash);
-  }, []);
+  const paint = useCallback(
+    (len: number, cam: number) => {
+      const path = pathRef.current;
+      const arrow = arrowRef.current;
+      if (!path || !arrow) return;
+      const total = totalRef.current;
+      const p = path.getPointAtLength(len);
+      const q = path.getPointAtLength(Math.min(total, len + 2));
+      const back = path.getPointAtLength(Math.max(0, len - 2));
+      const angle = (Math.atan2(q.y - back.y, q.x - back.x) * 180) / Math.PI;
+      arrow.setAttribute("transform", `translate(${p.x} ${p.y}) rotate(${angle}) scale(1.3)`);
+      const dash = `${len} ${total + 10}`;
+      litRef.current?.setAttribute("stroke-dasharray", dash);
+      litMaskRef.current?.setAttribute("stroke-dasharray", dash);
+      // The camera: the whole world slides, the grid behind it slides slower.
+      if (worldRef.current) worldRef.current.style.transform = `translate3d(${-cam}px,0,0)`;
+      if (gridRef.current) gridRef.current.style.backgroundPosition = `${-cam * 0.45}px 0, ${-cam * 0.45}px 0`;
+      // Words fade out as their screen leaves and in as the next one arrives.
+      const pos = w > 0 ? cam / w : 0;
+      pageRefs.current.forEach((el, i) => {
+        if (el) el.style.opacity = String(clamp01(1.25 - Math.abs(pos - i) * 1.9));
+      });
+    },
+    [w],
+  );
 
-  const travelTo = useCallback(
-    (target: number, ms: number) => {
+  const travel = useCallback(
+    (toLen: number, toCam: number, ms: number) => {
       cancelAnimationFrame(rafRef.current);
-      const from = curRef.current;
-      if (reduced.current || ms <= 0 || from === target) {
-        curRef.current = target;
-        paint(target);
+      const fromLen = lenRef.current;
+      const fromCam = camRef.current;
+      if (reduced.current || ms <= 0 || (fromLen === toLen && fromCam === toCam)) {
+        lenRef.current = toLen;
+        camRef.current = toCam;
+        paint(toLen, toCam);
         return;
       }
       const t0 = performance.now();
       const tick = (now: number) => {
-        const k = Math.min(1, (now - t0) / ms);
-        const len = from + (target - from) * ease(k);
-        curRef.current = len;
-        paint(len);
-        if (k < 1) rafRef.current = requestAnimationFrame(tick);
+        const k = ease(Math.min(1, (now - t0) / ms));
+        lenRef.current = fromLen + (toLen - fromLen) * k;
+        camRef.current = fromCam + (toCam - fromCam) * k;
+        paint(lenRef.current, camRef.current);
+        if (now - t0 < ms) rafRef.current = requestAnimationFrame(tick);
       };
       rafRef.current = requestAnimationFrame(tick);
     },
     [paint],
   );
 
-  // Measure the road and where each stop sits along it. Re-run when the screen size changes.
+  // Measure the road and where each stop sits along it. Runs again when the screen size changes.
   useLayoutEffect(() => {
     const path = pathRef.current;
     if (!path) return;
@@ -155,32 +176,26 @@ export default function IntroWalkthrough({
       }
       return best;
     });
-    // Keep the arrow where it was (a resize or rotation must not leave it behind).
-    const first = curRef.current === 0;
-    if (first) {
-      paint(0);
+    if (lenRef.current === 0) {
+      paint(0, 0);
     } else {
-      const target = stopsRef.current[step] ?? 0;
-      curRef.current = target;
-      paint(target);
+      lenRef.current = stopsRef.current[step] ?? 0;
+      camRef.current = step * w;
+      paint(lenRef.current, camRef.current);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [road, paint]);
 
-  // Opening: the arrow drives in from the left edge to the first stop while the first text fades in.
+  // Opening: the arrow drives in from the left edge to the first stop.
   useEffect(() => {
-    const t = window.setTimeout(() => {
-      travelTo(stopsRef.current[0] ?? 0, 1000);
-      setTextVisible(true);
-    }, 200);
-    timers.current.push(t);
+    const t = window.setTimeout(() => travel(stopsRef.current[0] ?? 0, 0, ENTER_MS), 200);
     return () => {
-      timers.current.forEach(clearTimeout);
+      clearTimeout(t);
       cancelAnimationFrame(rafRef.current);
     };
-  }, [travelTo]);
+  }, [travel]);
 
-  const last = step === steps.length - 1;
+  const last = step === count - 1;
 
   function next() {
     if (last) {
@@ -189,53 +204,85 @@ export default function IntroWalkthrough({
     }
     const n = step + 1;
     setStep(n);
-    setTextVisible(false);
-    travelTo(stopsRef.current[n] ?? 0, TRAVEL_MS);
-    const swap = window.setTimeout(() => {
-      setTextStep(n);
-      setTextVisible(true);
-    }, Math.max(TEXT_OUT_MS, TRAVEL_MS * TEXT_IN_DELAY));
-    timers.current.push(swap);
+    travel(stopsRef.current[n] ?? 0, n * w, TRAVEL_MS);
   }
-
-  // Steps 1 and 3 sit the arrow at the top, so the text goes to the bottom; step 2 flips it.
-  const textAtBottom = textStep % 2 === 0;
-  const s = steps[textStep];
 
   return (
     <div ref={rootRef} className="relative w-full h-dvh overflow-hidden" style={{ backgroundColor: PAGE }}>
-      <svg aria-hidden className="absolute inset-0 w-full h-full" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none">
-        <defs>
-          <mask id="intro-lit" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width={w + 2000} height={h + 2000}>
-            <path ref={litMaskRef} d={road.d} fill="none" stroke="white" strokeWidth={ROAD_WIDTH + 8} strokeLinecap="round" strokeLinejoin="round" strokeDasharray="0 99999" />
-          </mask>
-        </defs>
-        {/* the road */}
-        <path d={road.d} fill="none" stroke={ROAD} strokeWidth={ROAD_WIDTH} strokeLinecap="round" strokeLinejoin="round" />
-        <path d={road.d} fill="none" stroke={BLUE} strokeOpacity={0.4} strokeWidth={2.5} strokeDasharray="11 10" />
-        {/* the part already driven */}
-        <path ref={litRef} d={road.d} fill="none" stroke={BLUE} strokeWidth={ROAD_WIDTH} strokeLinecap="butt" strokeLinejoin="round" strokeDasharray="0 99999" />
-        <path d={road.d} fill="none" stroke="white" strokeOpacity={0.9} strokeWidth={2.5} strokeDasharray="11 10" mask="url(#intro-lit)" />
-        {/* measuring path, never painted */}
-        <path ref={pathRef} d={road.d} fill="none" stroke="none" />
-        {/* the arrow */}
-        <g ref={arrowRef} transform="translate(-100 -100)">
-          <path
-            d="M -17 -15 L 21 0 L -17 15 L -9 0 Z"
-            fill={BLUE}
-            stroke="white"
-            strokeWidth={6}
-            strokeLinejoin="round"
-            paintOrder="stroke"
-            style={{ filter: "drop-shadow(0 4px 10px rgba(18,83,250,0.35))" }}
-          />
-        </g>
-      </svg>
+      {/* a faint grid that slides slower than the road, for depth */}
+      <div
+        ref={gridRef}
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "linear-gradient(to bottom, #E8E8E4 1px, transparent 1px), linear-gradient(to right, #E8E8E4 1px, transparent 1px)",
+          backgroundSize: "112px 112px",
+          WebkitMaskImage: "radial-gradient(ellipse at 50% 50%, black 30%, transparent 78%)",
+          maskImage: "radial-gradient(ellipse at 50% 50%, black 30%, transparent 78%)",
+        }}
+      />
+
+      {/* the world: road, arrow and every screen's words, side by side */}
+      <div ref={worldRef} className="absolute top-0 bottom-0 left-0" style={{ width: worldW, willChange: "transform" }}>
+        <svg aria-hidden className="absolute top-0" style={{ left: -offset }} width={worldW + offset} height={h} viewBox={`${-offset} 0 ${worldW + offset} ${h}`}>
+          <defs>
+            <mask id="intro-lit" maskUnits="userSpaceOnUse" x={-offset - 1000} y={-1000} width={worldW + offset + 2000} height={h + 2000}>
+              <path ref={litMaskRef} d={road.d} fill="none" stroke="white" strokeWidth={ROAD_WIDTH + 8} strokeLinecap="round" strokeLinejoin="round" strokeDasharray="0 99999" />
+            </mask>
+          </defs>
+          <path d={road.d} fill="none" stroke={ROAD} strokeWidth={ROAD_WIDTH} strokeLinecap="round" strokeLinejoin="round" />
+          <path d={road.d} fill="none" stroke={BLUE} strokeOpacity={0.4} strokeWidth={2.5} strokeDasharray="11 10" />
+          <path ref={litRef} d={road.d} fill="none" stroke={BLUE} strokeWidth={ROAD_WIDTH} strokeLinecap="butt" strokeLinejoin="round" strokeDasharray="0 99999" />
+          <path d={road.d} fill="none" stroke="white" strokeOpacity={0.9} strokeWidth={2.5} strokeDasharray="11 10" mask="url(#intro-lit)" />
+          <path ref={pathRef} d={road.d} fill="none" stroke="none" />
+          <g ref={arrowRef} transform="translate(-300 -300)">
+            <path
+              d="M -17 -15 L 21 0 L -17 15 L -9 0 Z"
+              fill={BLUE}
+              stroke="white"
+              strokeWidth={6}
+              strokeLinejoin="round"
+              paintOrder="stroke"
+              style={{ filter: "drop-shadow(0 4px 10px rgba(18,83,250,0.35))" }}
+            />
+          </g>
+        </svg>
+
+        {steps.map((s, i) => {
+          const atBottom = i % 2 === 0; // the arrow is up at this stop, so the words go down
+          return (
+            <div
+              key={i}
+              ref={(el) => {
+                pageRefs.current[i] = el;
+              }}
+              aria-hidden={i !== step}
+              className="absolute"
+              style={{
+                left: i * w,
+                width: w,
+                opacity: 0,
+                ...(atBottom
+                  ? { bottom: "calc(max(env(safe-area-inset-bottom, 16px), 16px) + 88px)" }
+                  : { top: "calc(max(env(safe-area-inset-top, 16px), 16px) + 56px)" }),
+              }}
+            >
+              <div className="w-full max-w-lg mx-auto px-4 py-2">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4" style={{ backgroundColor: "#EAF0FE" }}>
+                  {s.icon}
+                </div>
+                <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: 1.15 }}>{s.title}</h1>
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#626A76", marginTop: "10px", lineHeight: 1.55 }}>{s.body}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
 
       {/* top bar: progress and skip */}
       <div className="absolute left-0 right-0 top-0 z-10" style={{ paddingTop: "max(env(safe-area-inset-top, 16px), 16px)" }}>
         <div className="w-full max-w-lg mx-auto px-4 flex items-center justify-between" style={{ height: "44px" }}>
-          <div className="flex items-center gap-1.5" aria-label={`Step ${step + 1} of ${steps.length}`}>
+          <div className="flex items-center gap-1.5" aria-label={`Step ${step + 1} of ${count}`}>
             {steps.map((_, i) => (
               <div
                 key={i}
@@ -269,33 +316,6 @@ export default function IntroWalkthrough({
           >
             Skip
           </button>
-        </div>
-      </div>
-
-      {/* the words: always on the side of the screen the arrow is not on */}
-      <div
-        className="absolute left-0 right-0 z-10"
-        style={textAtBottom ? { bottom: "calc(max(env(safe-area-inset-bottom, 16px), 16px) + 88px)" } : { top: "calc(max(env(safe-area-inset-top, 16px), 16px) + 56px)" }}
-      >
-        <div
-          className="w-full max-w-lg mx-auto px-4"
-          style={{
-            paddingTop: textAtBottom ? "56px" : "8px",
-            paddingBottom: textAtBottom ? "8px" : "56px",
-            background: textAtBottom
-              ? `linear-gradient(to bottom, rgba(245,245,243,0) 0%, ${PAGE} 40px)`
-              : `linear-gradient(to bottom, ${PAGE} calc(100% - 40px), rgba(245,245,243,0) 100%)`,
-            opacity: textVisible ? 1 : 0,
-            transform: textVisible ? "translateY(0)" : `translateY(${textAtBottom ? 14 : -14}px)`,
-            transition: textVisible ? "opacity 0.45s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1)" : `opacity ${TEXT_OUT_MS}ms ease, transform ${TEXT_OUT_MS}ms ease`,
-          }}
-          aria-live="polite"
-        >
-          <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4" style={{ backgroundColor: "#EAF0FE" }}>
-            {s.icon}
-          </div>
-          <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "28px", color: "#040033", lineHeight: 1.15 }}>{s.title}</h1>
-          <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "13px", color: "#626A76", marginTop: "10px", lineHeight: 1.55 }}>{s.body}</p>
         </div>
       </div>
 

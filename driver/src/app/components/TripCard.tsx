@@ -1,19 +1,21 @@
 import { useNavigate } from "react-router";
 import CalendarTodayRounded from "./icons/CalendarTodayRounded";
+import AccessTimeRounded from "./icons/AccessTimeRounded";
 import ChevronRightRounded from "./icons/ChevronRightRounded";
 import StatusBadge from "./StatusBadge";
-import { formatDate } from "../lib/format";
+import { formatDate, formatTime } from "../lib/format";
 import { truckTypeLabel } from "../lib/constants";
 import type { Order, OrderStatus } from "../lib/types";
 
 /** Same trip-lifecycle bar as the client and contractor apps. */
 const TRIP_PROGRESS: Partial<Record<OrderStatus, { pct: number; label: string }>> = {
+  Cancelled: { pct: 0, label: "Cancelled" },
   Assigned: { pct: 0.2, label: "Order Assigned" },
   "In Progress": { pct: 0.65, label: "In Transit" },
   Completed: { pct: 1, label: "Delivered" },
 };
 
-/** Same route dot-timeline + meta-chip grammar as the client and contractor apps' trip cards. */
+/** Same route dot-timeline + meta-chip grammar as the client and contractor apps' trip cards. Every section is always drawn at a fixed height, so all cards are the same size. */
 export default function TripCard({ order }: { order: Order }) {
   const navigate = useNavigate();
   const pending = order.status === "Assigned";
@@ -37,12 +39,12 @@ export default function TripCard({ order }: { order: Order }) {
         >
           #{order.id}
         </span>
-        <StatusBadge status={order.status} size="sm" />
+        <span className="flex-shrink-0"><StatusBadge status={order.status} size="sm" /></span>
       </div>
 
       {/* Route */}
       {pickup && dropoff && (
-        <div className="px-5 pb-4">
+        <div className="px-5 pb-3">
           <div className="flex gap-3">
             <div className="flex flex-col items-center pt-0.5">
               <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#040033", border: "2px solid white", boxShadow: "0 0 0 1.5px #040033" }} />
@@ -57,52 +59,58 @@ export default function TripCard({ order }: { order: Order }) {
                 <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#040033" }}>
                   {dropoff.address}
                 </p>
-                {extraStops > 0 && (
-                  <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>
-                    +{extraStops} stop{extraStops > 1 ? "s" : ""}
-                  </span>
-                )}
+                <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", lineHeight: "14px", color: "#626A76" }}>
+                  {extraStops > 0 ? `+${extraStops} stop${extraStops > 1 ? "s" : ""}` : "Direct"}
+                </p>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Trip progress */}
-      {stage && (
+      {/* Trip progress: every status has a stage, so this is always drawn */}
+      {(
         <div className="px-5 pb-4">
           <div className="w-full h-2 rounded-full overflow-hidden" style={{ backgroundColor: "#F0F0EE" }}>
             <div
               className="h-full rounded-full"
               style={{
-                width: `${stage.pct * 100}%`,
+                width: `${(stage?.pct ?? 0) * 100}%`,
                 background: "linear-gradient(90deg, #040033, #1253FA)",
                 transition: "width 1s ease",
               }}
             />
           </div>
-          <div className="flex justify-between mt-1.5">
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>{stage.label}</span>
-            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA" }}>{Math.round(stage.pct * 100)}%</span>
+          <div className="flex justify-between mt-1.5" style={{ lineHeight: "14px" }}>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#626A76" }}>{stage?.label ?? order.status}</span>
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#1253FA" }}>{Math.round((stage?.pct ?? 0) * 100)}%</span>
           </div>
         </div>
       )}
 
-      {/* Meta row */}
-      <div className="flex items-center gap-3 px-5 py-3 flex-wrap" style={{ borderTop: "1px solid #F0F0EE" }}>
-        <div className="flex items-center gap-1.5">
-          <CalendarTodayRounded sx={{ fontSize: 12, color: "#626A76" }} />
-          <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{formatDate(order.pickupAt)}</span>
+      {/* Meta: two fixed lines (date and time; then the tags) so the card height never depends on the text */}
+      <div className="flex flex-col gap-2 px-5 py-3" style={{ borderTop: "1px solid #F0F0EE" }}>
+        <div className="flex items-center gap-2 whitespace-nowrap">
+          <div className="flex items-center gap-1.5">
+            <CalendarTodayRounded sx={{ fontSize: 12, color: "#626A76" }} />
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{formatDate(order.pickupAt)}</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <AccessTimeRounded sx={{ fontSize: 12, color: "#626A76" }} />
+            <span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280" }}>{formatTime(order.pickupAt)}</span>
+          </div>
         </div>
-        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
-          {order.tripType}
-        </span>
-        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE" }}>
-          {truckTypeLabel(order)}
-        </span>
-        <span className="px-2 py-0.5 rounded-lg" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", fontWeight: 700, color: "#040033", backgroundColor: "#F0F0EE" }}>
-          {order.truckPlate}
-        </span>
+        <div className="flex items-center gap-2 min-w-0 whitespace-nowrap">
+          <span className="px-2 py-0.5 rounded-lg flex-shrink-0" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE", textTransform: "uppercase" }}>
+            {order.tripType}
+          </span>
+          <span className="px-2 py-0.5 rounded-lg truncate" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", color: "#6B7280", backgroundColor: "#F0F0EE" }}>
+            {truckTypeLabel(order)}
+          </span>
+          <span className="px-2 py-0.5 rounded-lg flex-shrink-0 ml-auto" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "9px", fontWeight: 700, color: "#040033", backgroundColor: "#F0F0EE" }}>
+            {order.truckPlate}
+          </span>
+        </div>
       </div>
 
       {/* CTA - visual only, the whole card already navigates on tap. */}

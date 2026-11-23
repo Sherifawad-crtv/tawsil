@@ -81,9 +81,9 @@ function StatTile({
   return (
     <button
       onClick={onClick}
-      className="rounded-[18px] bg-white p-3.5 flex flex-col items-center gap-1.5 cursor-pointer active:scale-[0.97] transition-transform"
-      
+      className="relative rounded-[18px] bg-white p-3.5 flex flex-col items-center gap-1.5 cursor-pointer active:scale-[0.97] transition-transform"
     >
+      <ChevronRightRounded sx={{ fontSize: 16, color: "#626A76" }} className="absolute" style={{ top: "10px", right: "8px" }} />
       <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
         <Icon sx={{ fontSize: 16, color: "#1253FA" }} />
       </div>

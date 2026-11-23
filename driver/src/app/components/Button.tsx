@@ -1,31 +1,50 @@
 import type { ButtonHTMLAttributes } from "react";
 
-type Variant = "filled" | "outline" | "destructive";
+type Variant = "primary" | "secondary" | "destructive" | "ghost";
 
+/**
+ * Same buttons as the client app: blue primary CTA with a glow (grey when
+ * disabled), red destructive, soft secondary, and a text-only ghost action.
+ */
 export function Button({
-  variant = "filled",
-  className,
+  variant = "primary",
   children,
+  disabled,
   ...props
 }: { variant?: Variant } & ButtonHTMLAttributes<HTMLButtonElement>) {
-  const styles: Record<Variant, React.CSSProperties> = {
-    filled: { backgroundColor: "#040033", color: "white", border: "none" },
-    outline: { backgroundColor: "transparent", color: "#040033", border: "1.5px solid #E8E8E5" },
-    destructive: { backgroundColor: "#FDECEC", color: "#DC2626", border: "none" },
+  if (variant === "ghost") {
+    return (
+      <button
+        {...props}
+        disabled={disabled}
+        className="w-full text-center cursor-pointer active:opacity-70 transition-opacity"
+        style={{ border: "none", background: "none", padding: "10px", fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13px", color: "#6B7280" }}
+      >
+        {children}
+      </button>
+    );
+  }
+
+  const styles: Record<Exclude<Variant, "ghost">, { bg: string; fg: string; shadow: string }> = {
+    primary: { bg: disabled ? "#D8D9D4" : "#1253FA", fg: "white", shadow: "none" },
+    destructive: { bg: "#DC2626", fg: "white", shadow: "none" },
+    secondary: { bg: "#F5F5F3", fg: "#040033", shadow: "none" },
   };
+  const s = styles[variant];
   return (
     <button
       {...props}
-      className={`w-full rounded-2xl cursor-pointer active:scale-[0.98] transition-transform disabled:opacity-40 disabled:active:scale-100 ${className ?? ""}`}
+      disabled={disabled}
+      className="w-full rounded-2xl flex items-center justify-center gap-2 cursor-pointer active:scale-[0.97] disabled:cursor-not-allowed"
       style={{
-        ...styles[variant],
-        height: "52px",
-        fontFamily: "'Archivo', sans-serif",
-        fontWeight: 700,
-        fontSize: "15px",
+        backgroundColor: s.bg,
+        boxShadow: s.shadow,
+        padding: "16px",
+        border: "none",
+        transition: "background-color 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease",
       }}
     >
-      {children}
+      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: s.fg, letterSpacing: "0.02em" }}>{children}</span>
     </button>
   );
 }

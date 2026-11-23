@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useLocation } from "react-router";
 import InboxRounded from "../../components/icons/InboxRounded";
+import PageTitle from "../../components/PageTitle";
 import SegmentedControl from "../../components/SegmentedControl";
 import TripCard from "../../components/TripCard";
 import EmptyState from "../../components/EmptyState";
@@ -19,19 +20,17 @@ export default function OrdersTab() {
   const shown = tab === "pending" ? pending : active;
 
   return (
-    <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 12px), 12px)", paddingBottom: "8px" }}>
-      <h1 className="mb-4" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033" }}>
-        Orders
-      </h1>
+    <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 20px), 20px)", paddingBottom: "8px" }}>
+      <PageTitle title="Orders" subtitle={`${pending.length + active.length} open ${pending.length + active.length === 1 ? "order" : "orders"}`} />
 
-      <div className="mb-4">
+      <div className="mb-5">
         <SegmentedControl
           ariaLabel="Orders view"
           value={tab}
           onChange={setTab}
           options={[
-            { value: "pending", label: `Pending (${pending.length})` },
-            { value: "active", label: `Active (${active.length})` },
+            { value: "pending", label: "Pending", count: pending.length },
+            { value: "active", label: "Active", count: active.length },
           ]}
         />
       </div>

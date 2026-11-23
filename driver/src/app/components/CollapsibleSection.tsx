@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import ExpandMoreRounded from "./icons/ExpandMoreRounded";
 
+/** Flat section whose header expands and collapses its content. Collapsed by default. */
 export default function CollapsibleSection({
   icon,
   title,
@@ -14,17 +15,17 @@ export default function CollapsibleSection({
 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="rounded-[20px] bg-white overflow-hidden" >
-      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center gap-2.5 p-4 cursor-pointer" aria-expanded={open} style={{ minHeight: "44px" }}>
-        <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#EAF0FE" }}>
+    <div>
+      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center gap-3 px-5 py-4 cursor-pointer" aria-expanded={open} style={{ border: "none", background: "none" }}>
+        <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F5F5F3" }}>
           {icon}
         </div>
-        <h3 className="flex-1 text-left" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontSize: "14px", color: "#040033" }}>
+        <span className="flex-1 text-left" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: "#040033" }}>
           {title}
-        </h3>
-        <ExpandMoreRounded sx={{ fontSize: 20, color: "#626A76", transform: open ? "rotate(180deg)" : "none", transition: "transform 0.2s" }} />
+        </span>
+        <ExpandMoreRounded sx={{ fontSize: 22, color: "#626A76", transform: open ? "rotate(180deg)" : "none", transition: "transform 0.2s" }} />
       </button>
-      {open && <div className="px-4 pb-4">{children}</div>}
+      {open && <div className="px-5 pb-4">{children}</div>}
     </div>
   );
 }

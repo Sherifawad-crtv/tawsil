@@ -9,8 +9,8 @@ function ActionButton({ onClick, ariaLabel, children }: { onClick: () => void; a
     <button
       onClick={onClick}
       aria-label={ariaLabel}
-      className="w-11 h-11 rounded-lg flex items-center justify-center cursor-pointer flex-shrink-0"
-      style={{ backgroundColor: "#F0F0EE" }}
+      className="w-11 h-11 rounded-xl flex items-center justify-center cursor-pointer active:scale-90 transition-transform flex-shrink-0"
+      style={{ backgroundColor: "#F5F5F3", border: "none" }}
     >
       {children}
     </button>
@@ -38,17 +38,17 @@ export default function ActionField({ label, value, message = false }: { label: 
   }
 
   return (
-    <div className="flex items-center justify-between gap-3 py-2.5">
+    <div className="flex items-center justify-between gap-3 px-5 py-3.5">
       <div className="min-w-0">
-        <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "11.5px", color: "#626A76" }}>{label}</p>
-        <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "13.5px", color: value ? "#040033" : "#626A76" }}>
+        <p style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", color: "#626A76", letterSpacing: "0.06em", textTransform: "uppercase" }}>{label}</p>
+        <p className="truncate" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 600, fontSize: "14px", color: value ? "#040033" : "#626A76", marginTop: "2px" }}>
           {value || "Not set"}
         </p>
       </div>
       {value && (
         <div className="flex items-center gap-1.5 flex-shrink-0">
           {message && (
-            <a href={`sms:${value}`} aria-label={`Message ${label}`} className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F0F0EE" }}>
+            <a href={`sms:${value}`} aria-label={`Message ${label}`} className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F5F5F3" }}>
               <ChatBubbleOutlineRounded sx={{ fontSize: 15, color: "#6B7280" }} />
             </a>
           )}

@@ -1,38 +1,34 @@
 import { useNavigate } from "react-router";
 import ArrowBackIosNewRounded from "./icons/ArrowBackIosNewRounded";
-import type { ReactNode } from "react";
+import IconButton from "./IconButton";
 
-/** Native large-title header with a back chevron, for every stack screen below the tab roots. */
-export default function ScreenHeader({
-  title,
-  onBack,
-  trailing,
-}: {
-  title: string;
-  onBack?: () => void;
-  trailing?: ReactNode;
-}) {
+/** Header for screens pushed on top of the tabs: back button, centred title with an optional monospace subtitle. */
+export default function ScreenHeader({ title, subtitle, onBack }: { title: string; subtitle?: string; onBack?: () => void }) {
   const navigate = useNavigate();
   return (
     <div
-      className="flex items-center gap-3 flex-shrink-0"
-      style={{ padding: "max(calc(env(safe-area-inset-top, 0px) + 14px), 14px) 16px 12px 16px" }}
+      className="sticky top-0 z-30 flex items-center justify-between gap-3 px-4"
+      style={{
+        paddingTop: "max(env(safe-area-inset-top, 16px), 16px)",
+        paddingBottom: "12px",
+        backgroundColor: "rgba(245,245,243,0.92)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        borderBottom: "1px solid rgba(232,232,229,0.6)",
+      }}
     >
-      <button
-        onClick={() => (onBack ? onBack() : navigate(-1))}
-        className="w-9 h-9 rounded-full flex items-center justify-center cursor-pointer active:scale-90 transition-transform flex-shrink-0"
-        style={{ backgroundColor: "#F0F0EE" }}
-        aria-label="Back"
-      >
-        <ArrowBackIosNewRounded sx={{ fontSize: 15, color: "#040033", marginLeft: "2px" }} />
-      </button>
-      <h1
-        className="flex-1 truncate"
-        style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "19px", color: "#040033" }}
-      >
-        {title}
-      </h1>
-      {trailing}
+      <IconButton label="Back" onClick={() => (onBack ? onBack() : navigate(-1))}>
+        <ArrowBackIosNewRounded sx={{ fontSize: 16, color: "#040033" }} />
+      </IconButton>
+      <div className="flex flex-col items-center min-w-0">
+        <span className="truncate max-w-full" style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "15px", color: "#040033" }}>{title}</span>
+        {subtitle && (
+          <span className="truncate max-w-full" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", color: "#6B7280", letterSpacing: "0.04em" }}>
+            {subtitle}
+          </span>
+        )}
+      </div>
+      <div className="w-10 flex-shrink-0" />
     </div>
   );
 }

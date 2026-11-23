@@ -6,6 +6,10 @@ export function formatDateTime(iso: string) {
   return new Date(iso).toLocaleString("en-US", { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" });
 }
 
+export function formatTime(iso: string) {
+  return new Date(iso).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+}
+
 export function isExpired(iso: string) {
   return new Date(iso).getTime() < Date.now();
 }

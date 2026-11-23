@@ -1,9 +1,10 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import ClockCircleRounded from "../../components/icons/AccessTimeRounded";
-import RouteRounded from "../../components/icons/RouteRounded";
 import ChevronRightRounded from "../../components/icons/ChevronRightRounded";
 import InboxRounded from "../../components/icons/InboxRounded";
+import routeArt from "../../../assets/stat-route.webp";
+import truckArt from "../../../assets/stat-truck.webp";
+import HomeHero from "../../components/HomeHero";
 import TripCard from "../../components/TripCard";
 import EmptyState from "../../components/EmptyState";
 import { useDataStore } from "../../lib/store";
@@ -11,85 +12,69 @@ import { getPendingOrders, getActiveOrders } from "../../lib/selectors";
 
 const PREVIEW_COUNT = 3;
 
+function greetingFor(hour: number) {
+  if (hour < 12) return "Good morning";
+  if (hour < 17) return "Good afternoon";
+  return "Good evening";
+}
+
 export default function HomeScreen() {
   const navigate = useNavigate();
   const { orders, profile } = useDataStore();
   const pending = useMemo(() => getPendingOrders(orders), [orders]);
   const active = useMemo(() => getActiveOrders(orders), [orders]);
   const firstName = profile.fullName.split(" ")[0];
+  const [greeting, setGreeting] = useState(() => greetingFor(new Date().getHours()));
+
+  useEffect(() => {
+    setGreeting(greetingFor(new Date().getHours()));
+  }, []);
 
   return (
-    <div className="w-full max-w-lg mx-auto px-4" style={{ paddingTop: "max(env(safe-area-inset-top, 12px), 12px)", paddingBottom: "24px" }}>
-      {/* Greeting fixed: no license-number parenthetical appended - "Welcome Back Driver" stands alone. */}
-      <div className="mb-5">
-        <p style={{ fontFamily: "'Archivo', sans-serif", fontSize: "13px", color: "#626A76" }}>Welcome back, {firstName}</p>
-        <h1 style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "26px", color: "#040033", lineHeight: 1.15, marginTop: "2px" }}>Dashboard</h1>
+    <div>
+      <HomeHero
+        title={greeting}
+        subtitle={`Welcome back, ${firstName}`}
+        stats={[
+          { label: "Pending", value: pending.length, art: truckArt, onClick: () => navigate("/orders", { state: { tab: "pending" } }) },
+          { label: "Active", value: active.length, art: routeArt, onClick: () => navigate("/orders", { state: { tab: "active" } }) },
+        ]}
+      />
+
+      <div className="w-full max-w-lg mx-auto px-4 pt-5" style={{ paddingBottom: "24px" }}>
+        <Section
+          title="Pending Orders"
+          count={pending.length}
+          onViewAll={() => navigate("/orders", { state: { tab: "pending" } })}
+        >
+          {pending.length === 0 ? (
+            <EmptyState icon={<InboxRounded sx={{ fontSize: 24, color: "#626A76" }} />} title="No pending orders" subtitle="Newly assigned orders will appear here." />
+          ) : (
+            <div className="flex flex-col gap-3">
+              {pending.slice(0, PREVIEW_COUNT).map((o) => (
+                <TripCard key={o.id} order={o} />
+              ))}
+            </div>
+          )}
+        </Section>
+
+        <Section
+          title="Active Orders"
+          count={active.length}
+          onViewAll={() => navigate("/orders", { state: { tab: "active" } })}
+        >
+          {active.length === 0 ? (
+            <EmptyState icon={<InboxRounded sx={{ fontSize: 24, color: "#626A76" }} />} title="No active orders" subtitle="Trips you've started will appear here." />
+          ) : (
+            <div className="flex flex-col gap-3">
+              {active.slice(0, PREVIEW_COUNT).map((o) => (
+                <TripCard key={o.id} order={o} />
+              ))}
+            </div>
+          )}
+        </Section>
       </div>
-
-      {/* Stat tiles - light, tappable, same treatment as the contractor app's Home: 2 metrics, correctly simpler than Contractor's 3. */}
-      <div className="grid grid-cols-2 gap-2.5 mb-6">
-        <StatTile icon={ClockCircleRounded} label="Pending" value={pending.length} onClick={() => navigate("/orders", { state: { tab: "pending" } })} />
-        <StatTile icon={RouteRounded} label="Active" value={active.length} onClick={() => navigate("/orders", { state: { tab: "active" } })} />
-      </div>
-
-      <Section
-        title="Pending Orders"
-        count={pending.length}
-        onViewAll={() => navigate("/orders", { state: { tab: "pending" } })}
-      >
-        {pending.length === 0 ? (
-          <EmptyState icon={<InboxRounded sx={{ fontSize: 24, color: "#626A76" }} />} title="No pending orders" subtitle="Newly assigned orders will appear here." />
-        ) : (
-          <div className="flex flex-col gap-3">
-            {pending.slice(0, PREVIEW_COUNT).map((o) => (
-              <TripCard key={o.id} order={o} />
-            ))}
-          </div>
-        )}
-      </Section>
-
-      <Section
-        title="Active Orders"
-        count={active.length}
-        onViewAll={() => navigate("/orders", { state: { tab: "active" } })}
-      >
-        {active.length === 0 ? (
-          <EmptyState icon={<InboxRounded sx={{ fontSize: 24, color: "#626A76" }} />} title="No active orders" subtitle="Trips you've started will appear here." />
-        ) : (
-          <div className="flex flex-col gap-3">
-            {active.slice(0, PREVIEW_COUNT).map((o) => (
-              <TripCard key={o.id} order={o} />
-            ))}
-          </div>
-        )}
-      </Section>
     </div>
-  );
-}
-
-function StatTile({
-  icon: Icon,
-  label,
-  value,
-  onClick,
-}: {
-  icon: React.ElementType;
-  label: string;
-  value: number;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className="relative rounded-[18px] bg-white p-3.5 flex flex-col items-center gap-1.5 cursor-pointer active:scale-[0.97] transition-transform"
-    >
-      <ChevronRightRounded sx={{ fontSize: 16, color: "#626A76" }} className="absolute" style={{ top: "10px", right: "8px" }} />
-      <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#EAF0FE" }}>
-        <Icon sx={{ fontSize: 16, color: "#1253FA" }} />
-      </div>
-      <span style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "17px", color: "#040033" }}>{value}</span>
-      <span style={{ fontFamily: "'Archivo', sans-serif", fontSize: "10.5px", color: "#626A76" }}>{label}</span>
-    </button>
   );
 }
 
